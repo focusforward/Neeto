@@ -4,7 +4,298 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Practice — NEETO</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B1A;
+    --orange-light: #FF8C4A;
+    --orange-pale: #FFF0E6;
+    --orange-deep: #E85500;
+    --white: #FFFFFF;
+    --off-white: #FAFAF8;
+    --ink: #1A1208;
+    --ink-muted: #6B5C45;
+    --border: #F0E8DE;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav, .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    background: rgba(255,255,255,0.92) !important;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: var(--orange) !important;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-muted) !important;
+    transition: color 0.2s;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .nav-links a:hover { color: var(--orange) !important; }
+  .nav-links a.active { color: var(--orange) !important; font-weight: 600; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8f3 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 5% 2.5rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .page-header p {
+    margin-top: 0.5rem;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ── FILTERS ── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem 5%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filters select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+  }
+
+  .filters select:focus,
+  .filters select:hover {
+    border-color: var(--orange);
+  }
+
+  /* ── QUESTION COUNT ── */
+  .question-count, #q-count {
+    padding: 0.9rem 5%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    background: var(--off-white);
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── QUESTIONS LIST ── */
+  .questions-list, #questions-container {
+    max-width: 820px;
+    margin: 2rem auto;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* ── QUESTION CARD ── */
+  .question-card, .q-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .question-card:hover, .q-card:hover {
+    border-color: rgba(255,107,26,0.3);
+    box-shadow: 0 4px 20px rgba(255,107,26,0.08);
+  }
+
+  .q-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+  }
+
+  .q-tag, .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tag-bio, .tag-biology { background: #DCFCE7; color: #15803D; }
+  .tag-chem, .tag-chemistry { background: #DBEAFE; color: #1D4ED8; }
+  .tag-phys, .tag-physics { background: #FEF3C7; color: #B45309; }
+  .tag-pattern { background: var(--orange-pale); color: var(--orange-deep); }
+  .tag-l1 { background: #DCFCE7; color: #15803D; }
+  .tag-l2 { background: #FEF3C7; color: #B45309; }
+  .tag-l3 { background: #FEE2E2; color: #B91C1C; }
+
+  .q-text, .question-text {
+    font-size: 0.97rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .q-options, .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .q-option, .option-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: white;
+    transition: all 0.15s;
+    text-align: left;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .q-option:hover, .option-item:hover {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+    color: var(--orange-deep);
+  }
+
+  .q-option.correct, .option-item.correct {
+    border-color: #22C55E;
+    background: #F0FDF4;
+    color: #15803D;
+  }
+
+  .q-option.wrong, .option-item.wrong {
+    border-color: #EF4444;
+    background: #FEF2F2;
+    color: #B91C1C;
+  }
+
+  .q-option.selected, .option-item.selected {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+  }
+
+  .option-label {
+    font-weight: 700;
+    color: var(--orange);
+    min-width: 1.2rem;
+  }
+
+  .show-answer-btn, .reveal-btn {
+    margin-top: 0.9rem;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .show-answer-btn:hover, .reveal-btn:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  .answer-block, .explanation {
+    margin-top: 0.9rem;
+    background: var(--orange-pale);
+    border: 1px solid rgba(255,107,26,0.2);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .answer-block strong, .explanation strong {
+    color: var(--orange-deep);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.8rem 5%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin-top: 3rem;
+    background: white;
+  }
+
+  /* Loading state */
+  #questions-container p, #units-grid p {
+    color: var(--ink-muted) !important;
+    padding: 3rem;
+    text-align: center;
+  }
+</style>
 </head>
 <body>
 
@@ -20,6 +311,7 @@
 
 <div class="page-header">
   <h1>Practice Questions</h1>
+  <p>Filter by subject, pattern, or difficulty and start solving</p>
 </div>
 
 <div class="filters">
@@ -51,7 +343,7 @@
 <div class="question-count" id="q-count">Loading...</div>
 
 <div class="questions-list" id="questions-container">
-  <p style="color:#666; padding:40px; text-align:center;">Loading questions...</p>
+  <p style="color:#6B5C45; padding:40px; text-align:center;">Loading questions...</p>
 </div>
 
 <footer>

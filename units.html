@@ -4,7 +4,236 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Units — NEETO</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B1A;
+    --orange-light: #FF8C4A;
+    --orange-pale: #FFF0E6;
+    --orange-deep: #E85500;
+    --white: #FFFFFF;
+    --off-white: #FAFAF8;
+    --ink: #1A1208;
+    --ink-muted: #6B5C45;
+    --border: #F0E8DE;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav, .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    background: rgba(255,255,255,0.92) !important;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: var(--orange) !important;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-muted) !important;
+    transition: color 0.2s;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .nav-links a:hover { color: var(--orange) !important; }
+  .nav-links a.active { color: var(--orange) !important; font-weight: 600; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8f3 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 5% 2.5rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .page-header p {
+    margin-top: 0.5rem;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ── FILTERS ── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem 5%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filters select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+  }
+
+  .filters select:focus,
+  .filters select:hover { border-color: var(--orange); }
+
+  /* ── UNITS GRID ── */
+  #units-grid, .units-grid {
+    max-width: 1100px;
+    margin: 2rem auto;
+    padding: 0 5% 4rem;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
+  }
+
+  /* ── UNIT CARD ── */
+  .unit-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 1.5rem 1.6rem;
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: all 0.22s;
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .unit-card::after {
+    content: '→';
+    position: absolute;
+    right: 1.4rem;
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    opacity: 0;
+    color: var(--orange);
+    font-size: 1.1rem;
+    font-weight: 700;
+    transition: all 0.2s;
+  }
+
+  .unit-card:hover {
+    border-color: var(--orange);
+    box-shadow: 0 6px 24px rgba(255,107,26,0.12);
+    transform: translateY(-3px);
+    padding-right: 2.8rem;
+  }
+
+  .unit-card:hover::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+
+  .unit-subject {
+    font-size: 0.72rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    display: inline-block;
+    padding: 0.2rem 0.6rem;
+    border-radius: 100px;
+    margin-bottom: 0.2rem;
+  }
+
+  .unit-subject-bio { background: #DCFCE7; color: #15803D; }
+  .unit-subject-chem { background: #DBEAFE; color: #1D4ED8; }
+  .unit-subject-phys { background: #FEF3C7; color: #B45309; }
+
+  /* fallback for dynamically set subject text */
+  .unit-card .unit-subject:not(.unit-subject-bio):not(.unit-subject-chem):not(.unit-subject-phys) {
+    background: var(--orange-pale);
+    color: var(--orange-deep);
+  }
+
+  .unit-name {
+    font-family: 'Fraunces', serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+    line-height: 1.3;
+  }
+
+  .unit-count {
+    font-size: 0.82rem;
+    font-weight: 500;
+    color: var(--ink-muted);
+    margin-top: 0.1rem;
+  }
+
+  /* loading state */
+  #units-grid p {
+    color: var(--ink-muted) !important;
+    grid-column: 1 / -1;
+    padding: 3rem;
+    text-align: center;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.8rem 5%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    background: white;
+  }
+
+  @media (max-width: 600px) {
+    #units-grid, .units-grid { grid-template-columns: 1fr; }
+    .nav-links a:not(.active) { display: none; }
+  }
+</style>
 </head>
 <body>
 
@@ -20,7 +249,7 @@
 
 <div class="page-header">
   <h1>Practice by Unit</h1>
-  <p style="color:#888; margin-top:8px; font-size:14px;">Click any unit to practice only those questions</p>
+  <p>Click any unit to practise only those questions</p>
 </div>
 
 <div class="filters" style="gap:12px;">
@@ -33,7 +262,7 @@
 </div>
 
 <div id="units-grid" class="units-grid">
-  <p style="color:#666; padding:40px; text-align:center;">Loading units...</p>
+  <p style="color:#6B5C45; padding:40px; text-align:center;">Loading units...</p>
 </div>
 
 <footer>
@@ -42,11 +271,26 @@
 
 <script src="js/app.js"></script>
 <script>
+  // Color unit-subject tags based on text content after app.js renders them
+  function colorSubjectTags() {
+    document.querySelectorAll('.unit-subject').forEach(el => {
+      const t = el.textContent.trim().toLowerCase();
+      el.classList.remove('unit-subject-bio','unit-subject-chem','unit-subject-phys');
+      if (t === 'biology') el.classList.add('unit-subject-bio');
+      else if (t === 'chemistry') el.classList.add('unit-subject-chem');
+      else if (t === 'physics') el.classList.add('unit-subject-phys');
+    });
+  }
+
+  // Re-run after a short delay to catch dynamically rendered cards
+  setTimeout(colorSubjectTags, 800);
+  setTimeout(colorSubjectTags, 2000);
+
   document.getElementById('filter-subject').addEventListener('change', function() {
     const subj = this.value;
     document.querySelectorAll('.unit-card').forEach(card => {
-      if (!subj || card.querySelector('.unit-subject').textContent === subj) {
-        card.style.display = 'block';
+      if (!subj || card.querySelector('.unit-subject').textContent.trim() === subj) {
+        card.style.display = '';
       } else {
         card.style.display = 'none';
       }
