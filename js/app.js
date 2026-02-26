@@ -1,232 +1,281 @@
-// NEETO — Main App JS
+// NEETO — Main App JS (split-file version)
 
 let ALL_QUESTIONS = [];
+let LOADED_SUBJECTS = {};
 
 const UNIT_NAMES = {
-  "UNIT1_DiversityLivingWorld":             "Diversity in Living World",
-  "UNIT2_StructuralOrganisation":           "Structural Organisation",
-  "UNIT3_CellStructureFunction":            "Cell Structure & Function",
-  "UNIT4_PlantPhysiology":                  "Plant Physiology",
-  "UNIT5_HumanPhysiology":                  "Human Physiology",
-  "UNIT6_Reproduction":                     "Reproduction",
-  "UNIT7_GeneticsEvolution":                "Genetics & Evolution",
-  "UNIT8_BiologyHumanWelfare":              "Biology & Human Welfare",
-  "UNIT9_BiotechnologyApplications":        "Biotechnology",
-  "UNIT10_EcologyEnvironment":              "Ecology & Environment",
-  "UNIT1_PhysicsWorld":                     "Physical World & Kinematics",
-  "UNIT2_KinematicsLaws":                   "Laws of Motion",
-  "UNIT3_WorkEnergyPower":                  "Work, Energy & Power",
-  "UNIT4_RotationalMotion":                 "Rotational Motion",
-  "UNIT5_Gravitation":                      "Gravitation",
-  "UNIT6_PropertiesMatter":                 "Properties of Matter",
-  "UNIT7_ThermalProperties":                "Thermal Properties",
-  "UNIT8_Thermodynamics":                   "Thermodynamics",
-  "UNIT9_KineticTheory":                    "Kinetic Theory",
-  "UNIT10_Oscillations":                    "Oscillations & Waves",
-  "UNIT11_Electrostatics":                  "Electrostatics",
-  "UNIT12_CurrentElectricity":              "Current Electricity",
-  "UNIT13_MagnetismCurrents":               "Magnetism & EMI",
-  "UNIT14_AlternatingCurrent":              "Alternating Current",
-  "UNIT15_ElectromagneticWaves":            "Electromagnetic Waves",
-  "UNIT16_Optics":                          "Optics",
-  "UNIT17_DualNature":                      "Dual Nature of Radiation",
-  "UNIT18_AtomsNuclei":                     "Atoms & Nuclei",
-  "UNIT19_Semiconductors":                  "Semiconductors",
-  "UNIT2_AtomicStructure":                  "Atomic Structure",
-  "UNIT3_ChemicalBondingMolecularStructure":"Chemical Bonding",
-  "UNIT4_ChemicalThermodynamics":           "Thermodynamics (Chem)",
-  "UNIT5_Solutions":                        "Solutions",
-  "UNIT6_Equilibrium":                      "Equilibrium",
-  "UNIT7_RedoxElectrochemistry":            "Electrochemistry",
-  "UNIT8_ChemicalKinetics":                 "Chemical Kinetics",
-  "UNIT9_ClassificationElementsPeriodicity":"Periodic Table",
-  "UNIT10_pBlockElements":                  "p-Block Elements",
-  "UNIT11_dAndFBlockElements":              "d & f-Block Elements",
-  "UNIT12_CoordinationCompounds":           "Coordination Compounds",
-  "UNIT13_PurificationCharacterisation":    "Organic Analysis",
+  "UNIT1_DiversityLivingWorld":    "Diversity in Living World",
+  "UNIT2_StructuralOrganisation":  "Structural Organisation",
+  "UNIT3_CellStructureFunction":   "Cell Structure & Function",
+  "UNIT4_PlantPhysiology":         "Plant Physiology",
+  "UNIT5_HumanPhysiology":         "Human Physiology",
+  "UNIT6_Reproduction":            "Reproduction",
+  "UNIT7_GeneticsEvolution":       "Genetics & Evolution",
+  "UNIT8_BiologyHumanWelfare":     "Biology & Human Welfare",
+  "UNIT9_BiotechnologyApplications":"Biotechnology",
+  "UNIT10_EcologyEnvironment":     "Ecology & Environment",
+  "UNIT1_PhysicsWorld":            "Physical World & Kinematics",
+  "UNIT2_KinematicsLaws":          "Laws of Motion",
+  "UNIT3_WorkEnergyPower":         "Work, Energy & Power",
+  "UNIT4_RotationalMotion":        "Rotational Motion",
+  "UNIT5_Gravitation":             "Gravitation",
+  "UNIT6_PropertiesMatter":        "Properties of Matter",
+  "UNIT7_ThermalProperties":       "Thermal Properties",
+  "UNIT8_Thermodynamics":          "Thermodynamics",
+  "UNIT9_KineticTheory":           "Kinetic Theory",
+  "UNIT10_Oscillations":           "Oscillations & Waves",
+  "UNIT11_Electrostatics":         "Electrostatics",
+  "UNIT12_CurrentElectricity":     "Current Electricity",
+  "UNIT13_MagnetismCurrents":      "Magnetism & EMI",
+  "UNIT14_AlternatingCurrent":     "Alternating Current",
+  "UNIT15_ElectromagneticWaves":   "Electromagnetic Waves",
+  "UNIT16_Optics":                 "Optics",
+  "UNIT17_DualNature":             "Dual Nature",
+  "UNIT18_AtomsNuclei":            "Atoms & Nuclei",
+  "UNIT19_Semiconductors":         "Semiconductors",
+  "UNIT20_CommunicationSystems":   "Communication Systems",
+  "UNIT2_AtomicStructure":         "Atomic Structure",
+  "UNIT3_ChemicalBondingMolecularStructure": "Chemical Bonding",
+  "UNIT4_ChemicalThermodynamics":  "Thermodynamics",
+  "UNIT5_Solutions":               "Solutions",
+  "UNIT6_Equilibrium":             "Equilibrium",
+  "UNIT7_RedoxElectrochemistry":   "Electrochemistry",
+  "UNIT8_ChemicalKinetics":        "Chemical Kinetics",
+  "UNIT8_sBlockElements":          "s-Block Elements",
+  "UNIT9_ClassificationElementsPeriodicity": "Periodic Table",
+  "UNIT10_pBlockElements":         "p-Block Elements",
+  "UNIT11_dAndFBlockElements":     "d & f Block Elements",
+  "UNIT12_CoordinationCompounds":  "Coordination Compounds",
+  "UNIT13_OrganometallicChemistry":"Organometallics",
   "UNIT14_BasicPrinciplesOrganicChemistry": "Basic Organic Chemistry",
-  "UNIT15_Hydrocarbons":                    "Hydrocarbons",
-  "UNIT16_OrganicHalogens":                 "Haloalkanes & Haloarenes",
-  "UNIT17_OrganicOxygen":                   "Alcohols, Phenols & Carbonyls",
-  "UNIT18_OrganicNitrogen":                 "Amines",
-  "UNIT19_Biomolecules":                    "Biomolecules",
-  "UNIT20_Polymers":                        "Polymers",
+  "UNIT15_Hydrocarbons":           "Hydrocarbons",
+  "UNIT16_OrganicHalogens":        "Haloalkanes & Haloarenes",
+  "UNIT17_OrganicOxygen":          "Alcohols, Aldehydes & Acids",
+  "UNIT18_OrganicNitrogen":        "Amines",
+  "UNIT19_Biomolecules":           "Biomolecules",
+  "UNIT20_Polymers":               "Polymers",
+  "UNIT21_Chemistry_Environment":  "Chemistry in Everyday Life",
+  "UNCLASSIFIED":                  "General",
 };
 
-function subjectFromUnit(unit_code, fallback) {
-  if (!unit_code || unit_code === "UNCLASSIFIED") return fallback;
-  const bioStarts  = ["UNIT1_D","UNIT2_S","UNIT3_C","UNIT4_P","UNIT5_H",
-                      "UNIT6_R","UNIT7_G","UNIT8_B","UNIT9_B","UNIT10_E"];
-  const chemStarts = ["UNIT2_A","UNIT3_Ch","UNIT4_Ch","UNIT5_S","UNIT6_E",
-                      "UNIT7_R","UNIT8_K","UNIT9_C","UNIT10_p","UNIT11_d",
-                      "UNIT12_Co","UNIT13_P","UNIT14_B","UNIT15_H",
-                      "UNIT16_O","UNIT17_O","UNIT18_O","UNIT19_B","UNIT20_P"];
-  for (const p of bioStarts)  if (unit_code.startsWith(p)) return "Biology";
-  for (const p of chemStarts) if (unit_code.startsWith(p)) return "Chemistry";
-  return fallback || "Physics";
+function subjectFromUnit(unit_code) {
+  const bioStarts  = ['UNIT1_D','UNIT2_S','UNIT3_C','UNIT4_P','UNIT5_H','UNIT6_R','UNIT7_G','UNIT8_B','UNIT9_B','UNIT10_E'];
+  const chemStarts = ['UNIT2_A','UNIT3_Ch','UNIT4_Ch','UNIT5_S','UNIT6_E','UNIT7_R','UNIT8_Ch','UNIT8_s','UNIT9_Cl','UNIT10_p','UNIT11_d','UNIT12_C','UNIT13_O','UNIT14_B','UNIT15_H','UNIT16_O','UNIT17_O','UNIT18_O','UNIT19_B','UNIT20_P','UNIT21_C'];
+  for (const p of bioStarts)  if (unit_code.startsWith(p)) return 'Biology';
+  for (const p of chemStarts) if (unit_code.startsWith(p)) return 'Chemistry';
+  return 'Physics';
 }
 
-async function loadQuestions() {
-  // Show loading state
-  const containers = ['questions-container','units-grid'];
-  containers.forEach(id => {
-    const el = document.getElementById(id);
-    if (el) el.innerHTML = '<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ Loading questions...</div>';
-  });
+function showLoader(containerId, msg) {
+  const el = document.getElementById(containerId);
+  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
+}
+
+// Load a single subject file (cached)
+async function loadSubject(subject) {
+  if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
+  const file = `data/api_${subject.toLowerCase()}.json`;
   try {
-    const res  = await fetch('data/api_bank.json');
+    const res  = await fetch(file);
     const data = await res.json();
-    ALL_QUESTIONS = data.questions || [];
-    return ALL_QUESTIONS;
+    LOADED_SUBJECTS[subject] = data.questions || [];
+    return LOADED_SUBJECTS[subject];
   } catch(e) {
-    const containers = ['questions-container','units-grid'];
-    containers.forEach(id => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = '<div style="text-align:center;padding:60px;color:#e05555;">⚠️ Could not load questions. Please refresh.</div>';
-    });
+    console.error('Failed to load', file, e);
     return [];
   }
+}
+
+// Load all 3 subjects (for units page and mock)
+async function loadAllQuestions() {
+  const [bio, chem, phys] = await Promise.all([
+    loadSubject('Biology'),
+    loadSubject('Chemistry'),
+    loadSubject('Physics')
+  ]);
+  ALL_QUESTIONS = [...bio, ...chem, ...phys];
+  return ALL_QUESTIONS;
 }
 
 function getParam(key) {
   return new URLSearchParams(window.location.search).get(key);
 }
 
+function cleanNcert(q) {
+  if (!q.ncert_ref || q.ncert_ref === 'undefined') return '';
+  if (!q.ncert_line || !q.ncert_line.trim() || q.ncert_line.includes('To be added')) {
+    return `<div class="ncert-line">📖 ${q.ncert_ref}</div>`;
+  }
+  return `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
+}
+
 // ── PRACTICE PAGE ─────────────────────────────────────────────────────
 function initPractice() {
   if (!document.getElementById('questions-container')) return;
-  loadQuestions().then(qs => {
-    const subjectFilter = document.getElementById('filter-subject');
-    const patternFilter = document.getElementById('filter-pattern');
-    const diffFilter    = document.getElementById('filter-diff');
-    const countEl       = document.getElementById('q-count');
 
-    const urlSubject = getParam('subject');
-    const urlUnit    = getParam('unit');
-    if (urlSubject) subjectFilter.value = urlSubject;
+  const subjectFilter = document.getElementById('filter-subject');
+  const patternFilter = document.getElementById('filter-pattern');
+  const diffFilter    = document.getElementById('filter-diff');
+  const countEl       = document.getElementById('q-count');
 
-    function render() {
-      let filtered = qs.filter(q => !q.diagram_required);
-      if (subjectFilter.value) filtered = filtered.filter(q => q.subject   === subjectFilter.value);
-      if (patternFilter.value) filtered = filtered.filter(q => q.pattern   === patternFilter.value);
-      if (diffFilter.value)    filtered = filtered.filter(q => q.difficulty === diffFilter.value);
-      if (urlUnit)             filtered = filtered.filter(q => q.unit_code  === urlUnit);
+  const urlSubject = getParam('subject');
+  const urlUnit    = getParam('unit');
 
-      countEl.textContent = `Showing ${filtered.length} questions`;
-      const container = document.getElementById('questions-container');
-      container.innerHTML = '';
-      filtered.forEach((q, i) => { container.innerHTML += buildQCard(q, i); });
+  if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
 
-      document.querySelectorAll('.option').forEach(btn => btn.addEventListener('click', handleOptionClick));
-      document.querySelectorAll('.show-answer-btn').forEach(btn => btn.addEventListener('click', handleShowAnswer));
+  showLoader('questions-container', 'Loading questions...');
+
+  // Load only the subject needed, or all if no filter
+  const subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
+  const loadPromise = subjectToLoad
+    ? loadSubject(subjectToLoad).then(qs => { ALL_QUESTIONS = qs; return qs; })
+    : loadAllQuestions();
+
+  loadPromise.then(() => {
+    renderFiltered();
+
+    if (subjectFilter) subjectFilter.addEventListener('change', () => {
+      const sel = subjectFilter.value;
+      if (sel && !LOADED_SUBJECTS[sel]) {
+        showLoader('questions-container', 'Loading...');
+        loadSubject(sel).then(qs => {
+          ALL_QUESTIONS = qs;
+          renderFiltered();
+        });
+      } else {
+        ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel] || []) : Object.values(LOADED_SUBJECTS).flat();
+        renderFiltered();
+      }
+    });
+    if (patternFilter) patternFilter.addEventListener('change', renderFiltered);
+    if (diffFilter)    diffFilter.addEventListener('change', renderFiltered);
+  });
+
+  function renderFiltered() {
+    let filtered = [...ALL_QUESTIONS];
+    if (urlUnit) filtered = filtered.filter(q => q.unit_code === urlUnit);
+    const sf = subjectFilter ? subjectFilter.value : '';
+    const pf = patternFilter ? patternFilter.value : '';
+    const df = diffFilter    ? diffFilter.value    : '';
+    if (sf) filtered = filtered.filter(q => q.subject  === sf);
+    if (pf) filtered = filtered.filter(q => q.pattern  === pf);
+    if (df) filtered = filtered.filter(q => q.difficulty === df);
+
+    if (countEl) countEl.textContent = `${filtered.length} questions`;
+    renderQuestions(filtered.slice(0, 50)); // render max 50 at a time
+  }
+}
+
+function renderQuestions(qs) {
+  const container = document.getElementById('questions-container');
+  if (!container) return;
+  if (!qs.length) { container.innerHTML = '<p style="color:#888;padding:40px;text-align:center;">No questions match your filters.</p>'; return; }
+
+  container.innerHTML = qs.map((q, i) => `
+    <div class="q-card" id="qc-${i}">
+      <div class="q-meta">
+        <span class="tag tag-subject">${q.subject}</span>
+        <span class="tag tag-pattern">${q.pattern || ''}</span>
+        <span class="tag tag-diff">${q.difficulty || ''}</span>
+        ${q.year ? `<span class="tag">NEET ${q.year}</span>` : ''}
+      </div>
+      <div class="q-text">${q.question}</div>
+      <div class="options" data-index="${i}">
+        ${['A','B','C','D'].map(k => `
+          <button class="option" data-key="${k}" data-index="${i}" onclick="selectOption(${i},'${k}')">${k}. ${(q.options && q.options[k]) || ''}</button>
+        `).join('')}
+      </div>
+      <button class="show-btn" onclick="revealAnswer(${i})">Show Answer</button>
+      <div class="explanation" id="exp-${i}" style="display:none;">
+        <strong>✅ Correct Answer: ${q.correct_answer}</strong><br/>
+        ${q.explanation || ''}
+        ${cleanNcert(q)}
+      </div>
+    </div>`).join('');
+
+  // Store questions for reveal
+  window._currentQs = qs;
+}
+
+function selectOption(idx, key) {
+  const q    = window._currentQs[idx];
+  const opts = document.querySelectorAll(`[data-index="${idx}"].option`);
+  opts.forEach(b => {
+    b.style.borderColor = '';
+    b.style.background  = '';
+    b.style.color       = '';
+  });
+  const btn = document.querySelector(`[data-index="${idx}"][data-key="${key}"]`);
+  if (btn) {
+    btn.style.borderColor = '#7c6af7';
+    btn.style.background  = '#2a1a4a';
+    btn.style.color       = '#fff';
+  }
+}
+
+function revealAnswer(idx) {
+  const q    = window._currentQs[idx];
+  const opts = document.querySelectorAll(`[data-index="${idx}"].option`);
+  opts.forEach(b => {
+    const k = b.dataset.key;
+    if (k === q.correct_answer) {
+      b.style.background  = '#1a4a2a';
+      b.style.borderColor = '#6abf6a';
+      b.style.color       = '#6abf6a';
+    } else {
+      b.style.opacity = '0.4';
     }
-
-    subjectFilter.addEventListener('change', render);
-    patternFilter.addEventListener('change', render);
-    diffFilter.addEventListener('change', render);
-    render();
   });
-}
-
-function buildQCard(q, i) {
-  const yearTag = q.year ? `<span class="tag tag-year">NEET ${q.year}</span>` : `<span class="tag tag-year">Generated</span>`;
-  return `
-  <div class="q-card" id="qcard-${i}">
-    <div class="q-meta">
-      <span class="tag tag-subject">${q.subject}</span>
-      <span class="tag tag-pattern">${q.pattern}</span>
-      ${yearTag}
-      <span class="tag tag-diff">${q.difficulty}</span>
-    </div>
-    <div class="q-text">${q.question}</div>
-    <div class="options" data-correct="${q.correct_answer}" data-index="${i}">
-      ${['A','B','C','D'].map(k => `
-        <button class="option" data-key="${k}">${k}. ${q.options[k] || ''}</button>
-      `).join('')}
-    </div>
-    <button class="show-answer-btn" data-index="${i}">Show Answer</button>
-    <div class="explanation" id="exp-${i}">
-      <strong>Correct answer: ${q.correct_answer}</strong><br/>
-      ${q.explanation || ''}
-      ${(q.ncert_line && q.ncert_line.trim() && !q.ncert_line.includes('To be added') && q.ncert_ref && q.ncert_ref !== 'undefined') ? `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>` : (q.ncert_ref && q.ncert_ref !== 'undefined' && !q.ncert_ref.startsWith('NCERT ') ? `<div class="ncert-line">📖 ${q.ncert_ref}</div>` : "")}
-    </div>
-  </div>`;
-}
-
-function handleOptionClick(e) {
-  const btn     = e.currentTarget;
-  const options = btn.closest('.options');
-  if (options.dataset.answered) return;
-  const correct = options.dataset.correct;
-  const chosen  = btn.dataset.key;
-  const idx     = options.dataset.index;
-  options.dataset.answered = '1';
-  options.querySelectorAll('.option').forEach(b => {
-    if (b.dataset.key === correct) b.classList.add('correct');
-    else if (b.dataset.key === chosen) b.classList.add('wrong');
-  });
-  document.getElementById(`exp-${idx}`).classList.add('visible');
-}
-
-function handleShowAnswer(e) {
-  const idx     = e.currentTarget.dataset.index;
-  const qcard   = document.getElementById(`qcard-${idx}`);
-  const options = qcard.querySelector('.options');
-  const correct = options.dataset.correct;
-  options.dataset.answered = '1';
-  options.querySelectorAll('.option').forEach(b => {
-    if (b.dataset.key === correct) b.classList.add('reveal');
-  });
-  document.getElementById(`exp-${idx}`).classList.add('visible');
+  const exp = document.getElementById(`exp-${idx}`);
+  if (exp) exp.style.display = 'block';
 }
 
 // ── UNITS PAGE ────────────────────────────────────────────────────────
 function initUnits() {
   if (!document.getElementById('units-grid')) return;
-  loadQuestions().then(qs => {
-    const byUnit = {};
-    qs.forEach(q => {
-      const code = q.unit_code || 'UNCLASSIFIED';
-      if (code === 'UNCLASSIFIED') return;
-      if (!byUnit[code]) {
-        byUnit[code] = {
-          name:    UNIT_NAMES[code] || code,
-          subject: q.subject,
-          count:   0
-        };
-      }
-      byUnit[code].count++;
+  showLoader('units-grid', 'Loading units...');
+
+  loadAllQuestions().then(qs => {
+    const subjectFilter = document.getElementById('filter-subject');
+    renderUnits(qs);
+    if (subjectFilter) subjectFilter.addEventListener('change', () => {
+      const sf = subjectFilter.value;
+      const filtered = sf ? qs.filter(q => q.subject === sf) : qs;
+      renderUnits(filtered);
     });
-
-    const max  = Math.max(...Object.values(byUnit).map(u => u.count));
-    const grid = document.getElementById('units-grid');
-    grid.innerHTML = '';
-
-    Object.entries(byUnit)
-      .sort((a,b) => b[1].count - a[1].count)
-      .forEach(([code, u]) => {
-        const pct = Math.round(u.count / max * 100);
-        grid.innerHTML += `
-        <a class="unit-card" href="practice.html?unit=${encodeURIComponent(code)}" data-subject="${u.subject}">
-          <div class="unit-subject">${u.subject}</div>
-          <div class="unit-name">${u.name}</div>
-          <div class="unit-count">${u.count} questions</div>
-          <div class="unit-bar"><div class="unit-bar-fill" style="width:${pct}%"></div></div>
-        </a>`;
-      });
-
-    const sf = document.getElementById('filter-subject');
-    if (sf) {
-      sf.addEventListener('change', function() {
-        document.querySelectorAll('.unit-card').forEach(card => {
-          card.style.display = (!this.value || card.dataset.subject === this.value) ? 'block' : 'none';
-        });
-      });
-    }
   });
 }
 
-// ── ROUTER ────────────────────────────────────────────────────────────
+function renderUnits(qs) {
+  const grid = document.getElementById('units-grid');
+  if (!grid) return;
+
+  const unitMap = {};
+  qs.forEach(q => {
+    const u = q.unit_code || 'UNCLASSIFIED';
+    if (!unitMap[u]) unitMap[u] = { count: 0, subject: q.subject };
+    unitMap[u].count++;
+  });
+
+  const sorted = Object.entries(unitMap).sort((a,b) => b[1].count - a[1].count);
+  const max    = sorted[0]?.[1].count || 1;
+
+  grid.innerHTML = sorted.map(([code, info]) => {
+    const name = UNIT_NAMES[code] || code;
+    const pct  = Math.round((info.count / max) * 100);
+    const subj = info.subject || subjectFromUnit(code);
+    const cls  = subj === 'Biology' ? 'bio' : subj === 'Chemistry' ? 'chem' : 'phys';
+    return `
+      <div class="unit-card ${cls}" onclick="location.href='practice.html?unit=${code}'">
+        <div class="unit-name">${name}</div>
+        <div class="unit-subject">${subj}</div>
+        <div class="unit-bar"><div class="unit-bar-fill" style="width:${pct}%"></div></div>
+        <div class="unit-count">${info.count} questions</div>
+      </div>`;
+  }).join('');
+}
+
+// Init on load
 document.addEventListener('DOMContentLoaded', () => {
   initPractice();
   initUnits();
