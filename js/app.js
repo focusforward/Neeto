@@ -67,10 +67,25 @@ function subjectFromUnit(unit_code, fallback) {
 }
 
 async function loadQuestions() {
-  const res  = await fetch('data/api_bank.json');
-  const data = await res.json();
-  ALL_QUESTIONS = data.questions;
-  return ALL_QUESTIONS;
+  // Show loading state
+  const containers = ['questions-container','units-grid'];
+  containers.forEach(id => {
+    const el = document.getElementById(id);
+    if (el) el.innerHTML = '<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ Loading questions...</div>';
+  });
+  try {
+    const res  = await fetch('data/api_bank.json');
+    const data = await res.json();
+    ALL_QUESTIONS = data.questions || [];
+    return ALL_QUESTIONS;
+  } catch(e) {
+    const containers = ['questions-container','units-grid'];
+    containers.forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.innerHTML = '<div style="text-align:center;padding:60px;color:#e05555;">⚠️ Could not load questions. Please refresh.</div>';
+    });
+    return [];
+  }
 }
 
 function getParam(key) {
@@ -133,7 +148,7 @@ function buildQCard(q, i) {
     <div class="explanation" id="exp-${i}">
       <strong>Correct answer: ${q.correct_answer}</strong><br/>
       ${q.explanation || ''}
-      ${q.ncert_line ? `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>` : ''}
+      ${(q.ncert_line && q.ncert_line.trim() && !q.ncert_line.includes('To be added') && q.ncert_ref && q.ncert_ref !== 'undefined') ? `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>` : (q.ncert_ref && q.ncert_ref !== 'undefined' && !q.ncert_ref.startsWith('NCERT ') ? `<div class="ncert-line">📖 ${q.ncert_ref}</div>` : "")}
     </div>
   </div>`;
 }

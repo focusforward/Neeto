@@ -3,7 +3,7 @@
 let mockQuestions = [];
 let userAnswers   = {};
 let timerInterval = null;
-let timeLeft      = 200 * 60; // 200 minutes in seconds
+let timeLeft      = 200 * 60;
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -13,13 +13,29 @@ function shuffle(arr) {
   return arr;
 }
 
+function cleanNcert(q) {
+  if (!q.ncert_line || !q.ncert_line.trim()) return '';
+  if (q.ncert_line.includes('To be added')) return '';
+  if (!q.ncert_ref || q.ncert_ref === 'undefined') return '';
+  return `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
+}
+
 async function startMock() {
   document.getElementById('start-screen').style.display = 'none';
   document.getElementById('test-screen').style.display  = 'block';
+  document.getElementById('mock-questions').innerHTML = '<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ Preparing your test...</div>';
 
-  const qs = await loadQuestions();
+  let qs;
+  try {
+    const res = await fetch('data/api_bank.json');
+    const data = await res.json();
+    qs = data.questions || [];
+  } catch(e) {
+    document.getElementById('mock-questions').innerHTML = '<div style="text-align:center;padding:60px;color:#e05555;">⚠️ Could not load questions. Please refresh.</div>';
+    return;
+  }
+
   const clean = qs.filter(q => !q.diagram_required);
-
   const physics   = shuffle(clean.filter(q => q.subject === 'Physics')).slice(0, 50);
   const chemistry = shuffle(clean.filter(q => q.subject === 'Chemistry')).slice(0, 50);
   const biology   = shuffle(clean.filter(q => q.subject === 'Biology')).slice(0, 100);
@@ -60,16 +76,12 @@ function renderMockQuestions() {
 
 function selectAnswer(idx, key) {
   userAnswers[idx] = key;
-
-  // Update option styles
   const opts = document.querySelectorAll(`[data-index="${idx}"].mock-opt`);
   opts.forEach(b => {
     b.style.borderColor = b.dataset.key === key ? '#7c6af7' : '';
     b.style.color       = b.dataset.key === key ? '#fff'    : '';
     b.style.background  = b.dataset.key === key ? '#2a1a4a' : '';
   });
-
-  // Update palette
   const pBtn = document.getElementById(`pb-${idx}`);
   if (pBtn) pBtn.classList.add('answered');
 }
@@ -105,53 +117,44 @@ function submitMock() {
   document.getElementById('result-screen').style.display = 'block';
 
   let score = 0, correct = 0, wrong = 0, skip = 0;
-  const subj = { Physics: {c:0,w:0,s:0}, Chemistry: {c:0,w:0,s:0}, Biology: {c:0,w:0,s:0} };
+  const subj = { Physics:{c:0,w:0,s:0}, Chemistry:{c:0,w:0,s:0}, Biology:{c:0,w:0,s:0} };
   const wrongQs = [];
 
   mockQuestions.forEach((q, i) => {
     const s = i < 50 ? 'Physics' : i < 100 ? 'Chemistry' : 'Biology';
     const ans = userAnswers[i];
-    if (!ans) {
-      skip++; subj[s].s++;
-    } else if (ans === q.correct_answer) {
-      score += 4; correct++; subj[s].c++;
-    } else {
-      score -= 1; wrong++; subj[s].w++;
-      wrongQs.push({ q, chosen: ans, idx: i });
-    }
+    if (!ans) { skip++; subj[s].s++; }
+    else if (ans === q.correct_answer) { score += 4; correct++; subj[s].c++; }
+    else { score -= 1; wrong++; subj[s].w++; wrongQs.push({q, chosen: ans}); }
   });
 
-  document.getElementById('result-score').textContent    = score;
-  document.getElementById('r-correct').textContent       = correct;
-  document.getElementById('r-wrong').textContent         = wrong;
-  document.getElementById('r-skip').textContent          = skip;
-  document.getElementById('r-accuracy').textContent      = correct + wrong > 0
+  document.getElementById('result-score').textContent = score;
+  document.getElementById('r-correct').textContent    = correct;
+  document.getElementById('r-wrong').textContent      = wrong;
+  document.getElementById('r-skip').textContent       = skip;
+  document.getElementById('r-accuracy').textContent   = correct + wrong > 0
     ? Math.round(correct / (correct + wrong) * 100) + '%' : '0%';
 
-  // Subject breakdown
   const bd = document.getElementById('subject-breakdown');
   bd.innerHTML = ['Physics','Chemistry','Biology'].map(s => `
     <div class="result-box">
       <div class="num" style="color:#7c6af7">${subj[s].c * 4 - subj[s].w}</div>
       <div class="lbl">${s}</div>
-      <div style="font-size:11px; color:#666; margin-top:4px;">✅${subj[s].c} ❌${subj[s].w} ⬜${subj[s].s}</div>
+      <div style="font-size:11px;color:#666;margin-top:4px;">✅${subj[s].c} ❌${subj[s].w} ⬜${subj[s].s}</div>
     </div>`).join('');
 
-  // Review wrong answers
   const rc = document.getElementById('review-container');
-  rc.innerHTML = wrongQs.length === 0 ? '<p style="color:#6abf6a">Perfect score on attempted questions! 🎉</p>' :
-    wrongQs.map(({q, chosen}) => `
+  rc.innerHTML = wrongQs.length === 0
+    ? '<p style="color:#6abf6a">All attempted questions correct! 🎉</p>'
+    : wrongQs.map(({q, chosen}) => `
     <div class="q-card">
       <div class="q-text">${q.question}</div>
       <div class="options">
         ${['A','B','C','D'].map(k => `
-          <div class="option ${k === q.correct_answer ? 'correct' : k === chosen ? 'wrong' : ''}"
-               style="cursor:default">
-            ${k}. ${q.options[k] || ''}
+          <div class="option ${k===q.correct_answer?'correct':k===chosen?'wrong':''}" style="cursor:default">
+            ${k}. ${q.options[k]||''}
           </div>`).join('')}
       </div>
-      ${q.ncert_line ? `<div class="explanation visible" style="display:block">
-        📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em>
-      </div>` : ''}
+      ${cleanNcert(q)}
     </div>`).join('');
 }
