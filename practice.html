@@ -6,6 +6,7 @@
 <title>Practice — NEETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/theme-override.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -351,5 +352,68 @@
 </footer>
 
 <script src="js/app.js"></script>
+<script>
+// Fix dark backgrounds injected dynamically by app.js
+(function() {
+  const DARK = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
+  const LIGHT_TEXT = /^#(?:[e-f]{3,6}|(?:cc|dd|ee|ff){2,3}|fff|ccc|ddd|eee|888|999|666)/i;
+
+  function fixEl(el) {
+    if (!(el instanceof HTMLElement)) return;
+    const s = el.style;
+
+    // Fix dark backgrounds
+    if (s.background && DARK.test(s.background.trim())) {
+      s.background = '#ffffff';
+    }
+    if (s.backgroundColor && DARK.test(s.backgroundColor.trim())) {
+      s.backgroundColor = '#ffffff';
+    }
+
+    // Fix light (unreadable on white) text colours
+    if (s.color && LIGHT_TEXT.test(s.color.trim())) {
+      s.color = '#1A1208';
+    }
+
+    // Fix dark border colours
+    if (s.borderColor && DARK.test(s.borderColor.trim())) {
+      s.borderColor = '#F0E8DE';
+    }
+  }
+
+  function fixAll(root) {
+    (root || document).querySelectorAll('*').forEach(fixEl);
+  }
+
+  // Run once after app.js loads
+  window.addEventListener('load', () => fixAll());
+  setTimeout(() => fixAll(), 300);
+  setTimeout(() => fixAll(), 800);
+  setTimeout(() => fixAll(), 1500);
+
+  // Watch for future DOM changes
+  const obs = new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(n => {
+        if (n.nodeType === 1) {
+          fixEl(n);
+          n.querySelectorAll && n.querySelectorAll('*').forEach(fixEl);
+        }
+      });
+      // Also fix attribute changes (style attr updates)
+      if (m.type === 'attributes' && m.attributeName === 'style') {
+        fixEl(m.target);
+      }
+    });
+  });
+
+  obs.observe(document.body, {
+    childList: true,
+    subtree: true,
+    attributes: true,
+    attributeFilter: ['style']
+  });
+})();
+</script>
 </body>
 </html>

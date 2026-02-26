@@ -6,6 +6,7 @@
 <title>Mock Test — NEETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/theme-override.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -262,12 +263,72 @@
     font-family: 'DM Sans', sans-serif;
   }
 
-  .q-option:hover { border-color: var(--orange); background: var(--orange-pale); }
-  .q-option.selected { border-color: var(--orange); background: var(--orange-pale); color: var(--orange-deep); }
-  .q-option.correct { border-color: #22C55E; background: #F0FDF4; color: #15803D; }
-  .q-option.wrong { border-color: #EF4444; background: #FEF2F2; color: #B91C1C; }
+  .q-option:hover { border-color: var(--orange) !important; background: var(--orange-pale) !important; color: var(--orange-deep) !important; }
+  .q-option.selected { border-color: var(--orange) !important; background: var(--orange-pale) !important; color: var(--orange-deep) !important; }
+  .q-option.correct { border-color: #22C55E !important; background: #F0FDF4 !important; color: #15803D !important; }
+  .q-option.wrong { border-color: #EF4444 !important; background: #FEF2F2 !important; color: #B91C1C !important; }
 
   .option-label { font-weight: 700; color: var(--orange); min-width: 1.1rem; }
+
+  /* ── NUCLEAR OVERRIDE — kill all dark backgrounds from style.css ── */
+  * {
+    --old-bg: unset;
+  }
+
+  /* Option buttons — any element acting as an answer choice */
+  .option, .opt, [class*="option"]:not(.mock-palette):not(#palette),
+  .choice, .answer-option, .answer-choice,
+  .q-option, .q-opt,
+  li.option, button.option {
+    background: white !important;
+    background-color: white !important;
+    color: var(--ink) !important;
+    border: 1.5px solid var(--border) !important;
+    border-radius: 10px !important;
+  }
+
+  /* Kill any dark card/panel backgrounds */
+  .card:not(.unit-card):not(.subject-card):not(.stat-card):not(.result-box):not(.start-info-card),
+  .panel, .box:not(.result-box),
+  [style*="background:#1a1a2e"],
+  [style*="background: #1a1a2e"],
+  [style*="background:#0f0f"],
+  [style*="background:#111"],
+  [style*="background:#222"],
+  [style*="background:#333"],
+  [style*="background: rgb(0"],
+  [style*="background-color:#1a"],
+  [style*="background-color: #1a"] {
+    background: white !important;
+    background-color: white !important;
+    color: var(--ink) !important;
+    border-color: var(--border) !important;
+  }
+
+  /* Force white text areas */
+  [style*="color:#fff"], [style*="color: #fff"],
+  [style*="color:#ccc"], [style*="color: #ccc"],
+  [style*="color:#888"], [style*="color: #888"],
+  [style*="color:#666"], [style*="color: #666"] {
+    color: var(--ink-muted) !important;
+  }
+
+  /* Subject / section tags */
+  .tag, .badge, .label, .pill,
+  [class*="tag-"], [class*="badge-"],
+  .section-tag-pill, .q-tag, .q-label {
+    border-radius: 100px !important;
+  }
+
+  /* Palette buttons */
+  .pal-btn, #palette button, .palette-btn {
+    background: white !important;
+    color: var(--ink-muted) !important;
+    border: 1.5px solid var(--border) !important;
+  }
+
+  .pal-btn.answered, #palette button.answered { background: #DCFCE7 !important; border-color: #22C55E !important; color: #15803D !important; }
+  .pal-btn.current, #palette button.current { background: var(--orange-pale) !important; border-color: var(--orange) !important; color: var(--orange-deep) !important; }
 
   /* ── PALETTE ── */
   .mock-palette {
@@ -528,5 +589,37 @@
 
 <script src="js/app.js"></script>
 <script src="js/mock.js"></script>
+<script>
+// Fix dark backgrounds injected dynamically by app.js / mock.js
+(function() {
+  const DARK = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
+  const LIGHT_TEXT = /^#(?:[e-f]{3,6}|(?:cc|dd|ee|ff){2,3}|fff|ccc|ddd|eee|888|999|666)/i;
+
+  function fixEl(el) {
+    if (!(el instanceof HTMLElement)) return;
+    const s = el.style;
+    if (s.background && DARK.test(s.background.trim()))          s.background = '#ffffff';
+    if (s.backgroundColor && DARK.test(s.backgroundColor.trim())) s.backgroundColor = '#ffffff';
+    if (s.color && LIGHT_TEXT.test(s.color.trim()))               s.color = '#1A1208';
+    if (s.borderColor && DARK.test(s.borderColor.trim()))         s.borderColor = '#F0E8DE';
+  }
+
+  function fixAll() {
+    document.querySelectorAll('*').forEach(fixEl);
+  }
+
+  window.addEventListener('load', fixAll);
+  [300, 800, 1500, 3000].forEach(t => setTimeout(fixAll, t));
+
+  new MutationObserver(mutations => {
+    mutations.forEach(m => {
+      m.addedNodes.forEach(n => {
+        if (n.nodeType === 1) { fixEl(n); n.querySelectorAll && n.querySelectorAll('*').forEach(fixEl); }
+      });
+      if (m.type === 'attributes' && m.attributeName === 'style') fixEl(m.target);
+    });
+  }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+})();
+</script>
 </body>
 </html>

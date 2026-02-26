@@ -6,6 +6,7 @@
 <title>Units — NEETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/theme-override.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -282,7 +283,6 @@
     });
   }
 
-  // Re-run after a short delay to catch dynamically rendered cards
   setTimeout(colorSubjectTags, 800);
   setTimeout(colorSubjectTags, 2000);
 
@@ -296,6 +296,28 @@
       }
     });
   });
+
+  // Fix any dark inline styles injected by app.js
+  (function() {
+    const DARK = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
+    const LIGHT_TEXT = /^#(?:[e-f]{3,6}|fff|ccc|ddd|eee|888|999|666)/i;
+    function fixEl(el) {
+      if (!(el instanceof HTMLElement)) return;
+      const s = el.style;
+      if (s.background && DARK.test(s.background.trim()))           s.background = '#ffffff';
+      if (s.backgroundColor && DARK.test(s.backgroundColor.trim())) s.backgroundColor = '#ffffff';
+      if (s.color && LIGHT_TEXT.test(s.color.trim()))               s.color = '#1A1208';
+      if (s.borderColor && DARK.test(s.borderColor.trim()))         s.borderColor = '#F0E8DE';
+    }
+    function fixAll() { document.querySelectorAll('*').forEach(fixEl); colorSubjectTags(); }
+    [400, 1000, 2000].forEach(t => setTimeout(fixAll, t));
+    new MutationObserver(m => {
+      m.forEach(mut => {
+        mut.addedNodes.forEach(n => { if (n.nodeType===1) { fixEl(n); n.querySelectorAll&&n.querySelectorAll('*').forEach(fixEl); } });
+        if (mut.type==='attributes'&&mut.attributeName==='style') fixEl(mut.target);
+      });
+    }).observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['style'] });
+  })();
 </script>
 </body>
 </html>
