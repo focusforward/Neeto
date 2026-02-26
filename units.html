@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Units — NEETO</title>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">NEETO</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="units.html" class="active">Units</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Practice by Unit</h1>
+  <p style="color:#888; margin-top:8px; font-size:14px;">Click any unit to practice only those questions</p>
+</div>
+
+<div class="filters" style="gap:12px;">
+  <select id="filter-subject">
+    <option value="">All Subjects</option>
+    <option value="Biology">Biology</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Physics">Physics</option>
+  </select>
+</div>
+
+<div id="units-grid" class="units-grid">
+  <p style="color:#666; padding:40px; text-align:center;">Loading units...</p>
+</div>
+
+<footer>
+  <p>NEETO — Built for NEET aspirants</p>
+</footer>
+
+<script src="js/app.js"></script>
+<script>
+  document.getElementById('filter-subject').addEventListener('change', function() {
+    const subj = this.value;
+    document.querySelectorAll('.unit-card').forEach(card => {
+      if (!subj || card.querySelector('.unit-subject').textContent === subj) {
+        card.style.display = 'block';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  });
+</script>
+</body>
+</html>

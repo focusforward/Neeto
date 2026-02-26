@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Mock Test — NEETO</title>
+<link rel="stylesheet" href="css/style.css"/>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">NEETO</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html" class="active">Mock Test</a>
+    <a href="units.html">Units</a>
+  </div>
+</nav>
+
+<!-- START SCREEN -->
+<div id="start-screen" style="text-align:center; padding:80px 20px;">
+  <h1 style="font-size:40px; color:#fff; margin-bottom:16px;">Full Mock Test</h1>
+  <p style="color:#888; font-size:16px; margin-bottom:8px;">200 Questions &nbsp;|&nbsp; 200 Minutes &nbsp;|&nbsp; 720 Marks</p>
+  <p style="color:#666; font-size:13px; margin-bottom:40px;">Physics 50 &nbsp;+&nbsp; Chemistry 50 &nbsp;+&nbsp; Biology 100</p>
+  <div style="background:#1a1a2e; border:1px solid #2a2a4a; border-radius:12px; display:inline-block; padding:24px 40px; margin-bottom:40px; text-align:left;">
+    <div style="color:#ccc; font-size:14px; line-height:2;">
+      ✅ &nbsp;+4 for correct answer<br/>
+      ❌ &nbsp;−1 for wrong answer<br/>
+      ⬜ &nbsp;0 for unattempted<br/>
+      📝 &nbsp;Section B: attempt any 10 of 15
+    </div>
+  </div>
+  <br/>
+  <button class="btn-primary" onclick="startMock()" style="font-size:18px; padding:16px 48px;">Start Test</button>
+</div>
+
+<!-- TEST SCREEN -->
+<div id="test-screen" style="display:none;">
+  <div class="mock-header">
+    <h2 id="section-label">Physics — Section A</h2>
+    <div class="timer" id="timer">3:20:00</div>
+    <button class="submit-btn" onclick="submitMock()">Submit Test</button>
+  </div>
+
+  <div class="mock-body">
+    <div class="mock-questions" id="mock-questions"></div>
+    <div class="mock-palette">
+      <h3>Question Palette</h3>
+      <div style="display:flex; gap:8px; margin-bottom:12px; font-size:11px; color:#666;">
+        <span style="background:#2a4a2a; padding:2px 8px; border-radius:4px; color:#8adf8a;">Answered</span>
+        <span style="background:#0f0f1a; border:1px solid #2a2a4a; padding:2px 8px; border-radius:4px;">Not answered</span>
+      </div>
+      <div class="palette-grid" id="palette"></div>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT SCREEN -->
+<div id="result-screen" style="display:none;">
+  <nav class="navbar">
+    <div class="logo">NEETO</div>
+    <div class="nav-links">
+      <a href="mock.html">Retake Test</a>
+      <a href="practice.html">Practice</a>
+    </div>
+  </nav>
+  <div class="result-hero">
+    <div style="color:#888; font-size:16px; margin-bottom:8px;">Your Score</div>
+    <div class="result-score" id="result-score">0</div>
+    <div class="result-max">/ 720</div>
+  </div>
+  <div class="result-grid">
+    <div class="result-box"><div class="num correct-num" id="r-correct">0</div><div class="lbl">Correct</div></div>
+    <div class="result-box"><div class="num wrong-num"   id="r-wrong">0</div><div class="lbl">Wrong</div></div>
+    <div class="result-box"><div class="num skip-num"    id="r-skip">0</div><div class="lbl">Skipped</div></div>
+    <div class="result-box"><div class="num"             id="r-accuracy" style="color:#7c6af7;">0%</div><div class="lbl">Accuracy</div></div>
+  </div>
+  <div class="result-grid" id="subject-breakdown"></div>
+  <div class="review-section">
+    <h2>Review Wrong Answers</h2>
+    <div id="review-container"></div>
+  </div>
+</div>
+
+<script src="js/app.js"></script>
+<script src="js/mock.js"></script>
+</body>
+</html>
