@@ -1,0 +1,201 @@
+/* ════════════════════════════════════════════════════════
+   NEETO — theme-override.css
+   Loaded LAST to override old style.css and any dark
+   inline styles injected by app.js / mock.js
+════════════════════════════════════════════════════════ */
+
+:root {
+  --orange: #FF6B1A;
+  --orange-light: #FF8C4A;
+  --orange-pale: #FFF0E6;
+  --orange-deep: #E85500;
+  --off-white: #FAFAF8;
+  --ink: #1A1208;
+  --ink-muted: #6B5C45;
+  --border: #F0E8DE;
+}
+
+/* ── BASE ── */
+body {
+  background: var(--off-white) !important;
+  background-color: var(--off-white) !important;
+  color: var(--ink) !important;
+  font-family: 'DM Sans', sans-serif !important;
+}
+
+/* ── ANSWER OPTIONS (the main dark culprit) ── */
+.option, .opt,
+label.option, li.option, div.option, button.option,
+.answer-option, .answer-btn, .ans-btn,
+.choice, .q-choice,
+[class*="option"]:not(.mock-palette):not(#palette):not(.q-options),
+.q-option, .q-opt,
+/* catch dynamically created elements */
+.questions-list button,
+#questions-container button,
+.mock-questions button,
+#mock-questions button {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: 10px !important;
+}
+
+.option:hover, .q-option:hover, button.option:hover, div.option:hover, li.option:hover {
+  background: var(--orange-pale) !important;
+  border-color: var(--orange) !important;
+  color: var(--orange-deep) !important;
+}
+
+.option.selected, .q-option.selected, .option.active, .option.chosen {
+  background: var(--orange-pale) !important;
+  border-color: var(--orange) !important;
+  color: var(--orange-deep) !important;
+}
+
+.option.correct, .q-option.correct {
+  background: #F0FDF4 !important;
+  border-color: #22C55E !important;
+  color: #15803D !important;
+}
+
+.option.wrong, .q-option.wrong {
+  background: #FEF2F2 !important;
+  border-color: #EF4444 !important;
+  color: #B91C1C !important;
+}
+
+/* ── QUESTION CARDS / CONTAINERS ── */
+.question-card, .q-card, .question-block, .q-block,
+.question-wrap, .q-wrap, .mock-question, .mock-q-card,
+[class*="question-card"], [class*="q-card"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: 18px !important;
+  color: var(--ink) !important;
+}
+
+/* ── UNIT CARDS ── */
+.unit-card {
+  background: #ffffff !important;
+  color: var(--ink) !important;
+  border: 1.5px solid var(--border) !important;
+}
+
+/* ── INLINE DARK BACKGROUND OVERRIDES ──
+   app.js injects elements with style="background:#1a1a2e" etc.
+   We catch them with attribute selectors. */
+[style*="background:#0"],
+[style*="background: #0"],
+[style*="background:#1a1a"],
+[style*="background: #1a1a"],
+[style*="background:#111"],
+[style*="background: #111"],
+[style*="background:#222"],
+[style*="background: #222"],
+[style*="background:#333"],
+[style*="background: #333"],
+[style*="background-color:#0"],
+[style*="background-color: #0"],
+[style*="background-color:#1"],
+[style*="background-color: #1"],
+[style*="background-color:#2"],
+[style*="background-color: #2"],
+[style*="background-color:#3"],
+[style*="background-color: #3"] {
+  background: #ffffff !important;
+  background-color: #ffffff !important;
+}
+
+/* ── INLINE DARK TEXT OVERRIDES ── */
+[style*="color:#fff"],
+[style*="color: #fff"],
+[style*="color:white"],
+[style*="color: white"],
+[style*="color:#eee"],
+[style*="color: #eee"],
+[style*="color:#ddd"],
+[style*="color: #ddd"],
+[style*="color:#ccc"],
+[style*="color: #ccc"] {
+  color: var(--ink) !important;
+}
+
+[style*="color:#888"],
+[style*="color: #888"],
+[style*="color:#999"],
+[style*="color: #999"],
+[style*="color:#aaa"],
+[style*="color: #aaa"],
+[style*="color:#666"],
+[style*="color: #666"],
+[style*="color:#555"],
+[style*="color: #555"] {
+  color: var(--ink-muted) !important;
+}
+
+/* ── PALETTE BUTTONS ── */
+.pal-btn, #palette button, .palette-btn, [class*="palette"] button {
+  background: #ffffff !important;
+  color: var(--ink-muted) !important;
+  border: 1.5px solid var(--border) !important;
+  border-radius: 8px !important;
+}
+
+.pal-btn.answered, #palette button.answered,
+[class*="palette"] button.answered {
+  background: #DCFCE7 !important;
+  border-color: #22C55E !important;
+  color: #15803D !important;
+}
+
+.pal-btn.current, #palette button.current,
+[class*="palette"] button.current {
+  background: var(--orange-pale) !important;
+  border-color: var(--orange) !important;
+  color: var(--orange-deep) !important;
+}
+
+/* ── DARK BORDERS ── */
+[style*="border:1px solid #2"],
+[style*="border: 1px solid #2"],
+[style*="border-color:#2"],
+[style*="border-color: #2"] {
+  border-color: var(--border) !important;
+}
+
+/* ── EXPLANATION / ANSWER BLOCKS ── */
+.explanation, .answer-block, .answer-reveal,
+[class*="explanation"], [class*="answer-block"] {
+  background: var(--orange-pale) !important;
+  border: 1px solid rgba(255,107,26,0.2) !important;
+  border-radius: 10px !important;
+  color: var(--ink) !important;
+}
+
+/* ── TAGS & BADGES ── */
+.tag-physics, [class*="physics-tag"] { background: #FEF3C7 !important; color: #B45309 !important; border-radius: 100px !important; }
+.tag-biology, [class*="biology-tag"] { background: #DCFCE7 !important; color: #15803D !important; border-radius: 100px !important; }
+.tag-chemistry,[class*="chem-tag"]   { background: #DBEAFE !important; color: #1D4ED8 !important; border-radius: 100px !important; }
+
+/* ── MOCK HEADER & TIMER ── */
+.mock-header {
+  background: #ffffff !important;
+  border-bottom: 1px solid var(--border) !important;
+}
+
+.timer {
+  color: var(--orange) !important;
+  background: var(--orange-pale) !important;
+  border: none !important;
+  border-radius: 100px !important;
+  font-family: 'Fraunces', serif !important;
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar { width: 6px; height: 6px; }
+::-webkit-scrollbar-track { background: var(--off-white); }
+::-webkit-scrollbar-thumb { background: #F0E8DE; border-radius: 100px; }
+::-webkit-scrollbar-thumb:hover { background: var(--orange-light); }
