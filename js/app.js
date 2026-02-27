@@ -273,7 +273,7 @@ function showQuestion(idx) {
         <div id="exp-0" style="display:none;margin-top:1rem;background:#FFF7F0;
              border:1px solid rgba(255,107,26,0.2);border-radius:12px;
              padding:1rem 1.2rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">
-          <strong style="color:#E85500;">✅ Correct Answer: ${q.correct_answer}</strong><br/>
+          <strong style="color:#E85500;">✅ Correct Answer: ${(q.correct_answer||'').toString().trim().toUpperCase()}</strong><br/>
           ${q.explanation || ''}
           ${cleanNcert(q)}
         </div>
@@ -333,8 +333,11 @@ function selectOption(idx, key) {
   if (card && card.dataset.done) return;
   if (card) card.dataset.done = '1';
 
-  const correctKey  = q.correct_answer;
+  // Normalise: trim whitespace + uppercase so "a ", "A", "a" all match
+  const correctKey  = (q.correct_answer || '').toString().trim().toUpperCase();
+  const chosenKey   = (key || '').toString().trim().toUpperCase();
   const timeSpentMs = Date.now() - _questionStart;
+  const isCorrect   = chosenKey === correctKey;
 
   // ── LOG ATTEMPT ──
   ANALYTICS.saveAttempt({
@@ -344,30 +347,42 @@ function selectOption(idx, key) {
     chapter:     q.unit_code || '',
     chapterName: UNIT_NAMES[q.unit_code] || q.unit_code || '',
     difficulty:  q.difficulty || 'L1',
-    userAnswer:  key,
+    userAnswer:  chosenKey,
     correctAnswer: correctKey,
-    isCorrect:   key === correctKey,
+    isCorrect,
     timeSpentMs,
     year:        q.year || null,
   });
 
   document.querySelectorAll('#options-wrap button').forEach(btn => {
-    const k = btn.dataset.key;
+    const k = (btn.dataset.key || '').trim().toUpperCase();
     btn.style.pointerEvents = 'none';
     btn.style.cursor        = 'default';
-    if (k === correctKey) {
+
+    if (isCorrect && k === correctKey) {
+      // User picked correctly — show green on their choice only
       btn.style.background = '#F0FDF4';
       btn.style.border     = '2px solid #22C55E';
       btn.style.color      = '#15803D';
       btn.style.fontWeight = '600';
       btn.style.opacity    = '1';
-    } else if (k === key) {
+    } else if (!isCorrect && k === chosenKey) {
+      // User picked wrong — show red on their wrong choice
       btn.style.background = '#FEF2F2';
       btn.style.border     = '2px solid #EF4444';
       btn.style.color      = '#B91C1C';
+      btn.style.fontWeight = '600';
+      btn.style.opacity    = '1';
+    } else if (!isCorrect && k === correctKey) {
+      // Reveal the correct answer in green
+      btn.style.background = '#F0FDF4';
+      btn.style.border     = '2px solid #22C55E';
+      btn.style.color      = '#15803D';
+      btn.style.fontWeight = '600';
       btn.style.opacity    = '1';
     } else {
-      btn.style.opacity = '0.38';
+      // Everything else — dim
+      btn.style.opacity = '0.35';
     }
   });
 
@@ -376,7 +391,7 @@ function selectOption(idx, key) {
   const sb = document.getElementById('show-ans-btn');
   if (sb) sb.style.display = 'none';
 
-  if (key === correctKey) {
+  if (isCorrect) {
     const nextBtn = document.getElementById('next-btn');
     if (nextBtn && _practiceIdx < _practiceQs.length - 1) {
       nextBtn.style.background = '#22C55E';
@@ -402,16 +417,17 @@ function revealAnswer(idx) {
     chapterName: UNIT_NAMES[q.unit_code] || q.unit_code || '',
     difficulty:  q.difficulty || 'L1',
     userAnswer:  null,
-    correctAnswer: q.correct_answer,
+    correctAnswer: (q.correct_answer || '').toString().trim().toUpperCase(),
     isCorrect:   false,
     revealed:    true,
     timeSpentMs: Date.now() - _questionStart,
   });
 
+  const correctKey = (q.correct_answer || '').toString().trim().toUpperCase();
   document.querySelectorAll('#options-wrap button').forEach(btn => {
     btn.style.pointerEvents = 'none';
     btn.style.cursor        = 'default';
-    if (btn.dataset.key === q.correct_answer) {
+    if ((btn.dataset.key || '').trim().toUpperCase() === correctKey) {
       btn.style.background = '#F0FDF4';
       btn.style.border     = '2px solid #22C55E';
       btn.style.color      = '#15803D';
