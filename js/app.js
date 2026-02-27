@@ -1,4 +1,4 @@
-// NEETO — app.js
+// NEETO — Main App JS (split-file version)
 
 let ALL_QUESTIONS = [];
 let LOADED_SUBJECTS = {};
@@ -55,7 +55,7 @@ const UNIT_NAMES = {
   "UNIT19_Biomolecules":           "Biomolecules",
   "UNIT20_Polymers":               "Polymers",
   "UNIT21_Chemistry_Environment":  "Chemistry in Everyday Life",
-  "UNCLASSIFIED": "General",
+  "UNCLASSIFIED":                  "General",
 };
 
 function subjectFromUnit(unit_code) {
@@ -68,22 +68,30 @@ function subjectFromUnit(unit_code) {
 
 function showLoader(containerId, msg) {
   const el = document.getElementById(containerId);
-  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#FF6B1A;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
+  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
 }
 
+// Load a single subject file (cached)
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
+  const file = `data/api_${subject.toLowerCase()}.json`;
   try {
-    const res  = await fetch(`data/api_${subject.toLowerCase()}.json`);
+    const res  = await fetch(file);
     const data = await res.json();
     LOADED_SUBJECTS[subject] = data.questions || [];
     return LOADED_SUBJECTS[subject];
-  } catch(e) { return []; }
+  } catch(e) {
+    console.error('Failed to load', file, e);
+    return [];
+  }
 }
 
+// Load all 3 subjects (for units page and mock)
 async function loadAllQuestions() {
   const [bio, chem, phys] = await Promise.all([
-    loadSubject('Biology'), loadSubject('Chemistry'), loadSubject('Physics')
+    loadSubject('Biology'),
+    loadSubject('Chemistry'),
+    loadSubject('Physics')
   ]);
   ALL_QUESTIONS = [...bio, ...chem, ...phys];
   return ALL_QUESTIONS;
@@ -95,122 +103,13 @@ function getParam(key) {
 
 function cleanNcert(q) {
   if (!q.ncert_ref || q.ncert_ref === 'undefined') return '';
-  if (!q.ncert_line || !q.ncert_line.trim() || q.ncert_line.includes('To be added'))
-    return `<div class="ncert-line" style="margin-top:0.6rem;font-size:0.8rem;color:#6B5C45;">📖 ${q.ncert_ref}</div>`;
-  return `<div class="ncert-line" style="margin-top:0.6rem;font-size:0.8rem;color:#6B5C45;">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
-}
-
-// ── COLOUR HELPERS ────────────────────────────────────────────────────
-function optionBaseStyle(btn) {
-  Object.assign(btn.style, {
-    background:'#ffffff', border:'1.5px solid #F0E8DE', color:'#1A1208',
-    borderRadius:'10px', padding:'0.65rem 1rem', width:'100%',
-    textAlign:'left', fontSize:'0.9rem', cursor:'pointer',
-    fontFamily:'inherit', transition:'all 0.15s', display:'block', marginBottom:'0.5rem',
-    opacity:'1', fontWeight:'400'
-  });
-}
-
-function applyPracticeColours(idx, chosenKey) {
-  const q = (window._currentQs || [])[idx];
-  if (!q) return;
-  const correct = q.correct_answer;
-
-  document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
-    const k = btn.dataset.key;
-    optionBaseStyle(btn);
-    btn.style.pointerEvents = 'none';
-    btn.style.cursor = 'default';
-
-    if (k === correct) {
-      btn.style.background = '#F0FDF4';
-      btn.style.border     = '2px solid #22C55E';
-      btn.style.color      = '#15803D';
-      btn.style.fontWeight = '600';
-    } else if (chosenKey && k === chosenKey) {
-      btn.style.background = '#FEF2F2';
-      btn.style.border     = '2px solid #EF4444';
-      btn.style.color      = '#B91C1C';
-    } else {
-      btn.style.opacity = '0.4';
-    }
-  });
-
-  // Show explanation
-  const exp = document.getElementById('exp-' + idx);
-  if (exp) {
-    Object.assign(exp.style, {
-      display:'block', background:'#FFF7F0', border:'1px solid rgba(255,107,26,0.2)',
-      borderRadius:'12px', padding:'1rem 1.2rem', marginTop:'1rem',
-      color:'#1A1208', fontSize:'0.875rem', lineHeight:'1.6'
-    });
+  if (!q.ncert_line || !q.ncert_line.trim() || q.ncert_line.includes('To be added')) {
+    return `<div class="ncert-line">📖 ${q.ncert_ref}</div>`;
   }
-  // Hide show-answer button
-  const card = document.getElementById('qc-' + idx);
-  if (card) {
-    const sb = card.querySelector('.show-btn');
-    if (sb) sb.style.display = 'none';
-  }
+  return `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
 }
 
-// ── PRACTICE: selectOption + revealAnswer ─────────────────────────────
-function selectOption(idx, key) {
-  const card = document.getElementById('qc-' + idx);
-  if (card && card.dataset.done) return;
-  if (card) card.dataset.done = '1';
-  applyPracticeColours(idx, key);
-}
-
-function revealAnswer(idx) {
-  const card = document.getElementById('qc-' + idx);
-  if (card && card.dataset.done) return;
-  if (card) card.dataset.done = '1';
-  applyPracticeColours(idx, null);
-}
-
-// ── RENDER QUESTIONS (practice) ───────────────────────────────────────
-function renderQuestions(qs) {
-  const container = document.getElementById('questions-container');
-  if (!container) return;
-  if (!qs.length) {
-    container.innerHTML = '<p style="color:#6B5C45;padding:40px;text-align:center;">No questions match your filters.</p>';
-    return;
-  }
-
-  container.innerHTML = qs.map((q, i) => {
-    const subjCls = q.subject === 'Biology' ? 'tag-biology' : q.subject === 'Chemistry' ? 'tag-chemistry' : 'tag-physics';
-    const diffCls = q.difficulty === 'L1' ? 'tag-l1' : q.difficulty === 'L2' ? 'tag-l2' : 'tag-l3';
-    return `
-    <div class="question-card q-card" id="qc-${i}">
-      <div class="q-meta">
-        <span class="q-tag tag-subject ${subjCls}">${q.subject}</span>
-        <span class="q-tag tag-pattern">${q.pattern || ''}</span>
-        <span class="q-tag tag-diff ${diffCls}">${q.difficulty || ''}</span>
-        ${q.year ? `<span class="q-tag">NEET ${q.year}</span>` : ''}
-      </div>
-      <div class="q-text">${q.question}</div>
-      <div class="q-options options">
-        ${['A','B','C','D'].map(k => `
-          <button class="q-option option" data-key="${k}" data-index="${i}"
-            onclick="selectOption(${i},'${k}')"
-            onmouseover="if(!this.closest('.q-card').dataset.done){this.style.borderColor='#FF6B1A';this.style.background='#FFF0E6';this.style.color='#E85500';}"
-            onmouseout="if(!this.closest('.q-card').dataset.done){this.style.borderColor='#F0E8DE';this.style.background='#ffffff';this.style.color='#1A1208';}"
-          ><span class="option-label">${k}</span> ${(q.options && q.options[k]) || ''}</button>
-        `).join('')}
-      </div>
-      <button class="show-answer-btn show-btn" onclick="revealAnswer(${i})">Show Answer</button>
-      <div class="answer-block explanation" id="exp-${i}" style="display:none;">
-        <strong>✅ Correct: ${q.correct_answer}</strong><br/>
-        ${q.explanation || ''}
-        ${cleanNcert(q)}
-      </div>
-    </div>`;
-  }).join('');
-
-  window._currentQs = qs;
-}
-
-// ── PRACTICE PAGE INIT ────────────────────────────────────────────────
+// ── PRACTICE PAGE ─────────────────────────────────────────────────────
 function initPractice() {
   if (!document.getElementById('questions-container')) return;
 
@@ -218,24 +117,31 @@ function initPractice() {
   const patternFilter = document.getElementById('filter-pattern');
   const diffFilter    = document.getElementById('filter-diff');
   const countEl       = document.getElementById('q-count');
-  const urlSubject    = getParam('subject');
-  const urlUnit       = getParam('unit');
+
+  const urlSubject = getParam('subject');
+  const urlUnit    = getParam('unit');
 
   if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
+
   showLoader('questions-container', 'Loading questions...');
 
+  // Load only the subject needed, or all if no filter
   const subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
-  const loadPromise   = subjectToLoad
+  const loadPromise = subjectToLoad
     ? loadSubject(subjectToLoad).then(qs => { ALL_QUESTIONS = qs; return qs; })
     : loadAllQuestions();
 
   loadPromise.then(() => {
     renderFiltered();
+
     if (subjectFilter) subjectFilter.addEventListener('change', () => {
       const sel = subjectFilter.value;
       if (sel && !LOADED_SUBJECTS[sel]) {
         showLoader('questions-container', 'Loading...');
-        loadSubject(sel).then(qs => { ALL_QUESTIONS = qs; renderFiltered(); });
+        loadSubject(sel).then(qs => {
+          ALL_QUESTIONS = qs;
+          renderFiltered();
+        });
       } else {
         ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel] || []) : Object.values(LOADED_SUBJECTS).flat();
         renderFiltered();
@@ -251,12 +157,221 @@ function initPractice() {
     const sf = subjectFilter ? subjectFilter.value : '';
     const pf = patternFilter ? patternFilter.value : '';
     const df = diffFilter    ? diffFilter.value    : '';
-    if (sf) filtered = filtered.filter(q => q.subject    === sf);
-    if (pf) filtered = filtered.filter(q => q.pattern    === pf);
+    if (sf) filtered = filtered.filter(q => q.subject  === sf);
+    if (pf) filtered = filtered.filter(q => q.pattern  === pf);
     if (df) filtered = filtered.filter(q => q.difficulty === df);
+
     if (countEl) countEl.textContent = `${filtered.length} questions`;
-    renderQuestions(filtered.slice(0, 50));
+    renderQuestions(filtered.slice(0, 50)); // render max 50 at a time
   }
+}
+
+/* ── ONE-AT-A-TIME PRACTICE ── */
+let _practiceQs  = [];
+let _practiceIdx = 0;
+
+function renderQuestions(qs) {
+  _practiceQs  = qs;
+  _practiceIdx = 0;
+  window._currentQs = qs;
+  showQuestion(0);
+}
+
+function showQuestion(idx) {
+  const container = document.getElementById('questions-container');
+  if (!container) return;
+
+  if (!_practiceQs.length) {
+    container.innerHTML = '<p style="padding:40px;text-align:center;color:#6B5C45;">No questions match your filters.</p>';
+    return;
+  }
+
+  _practiceIdx = idx;
+  const q      = _practiceQs[idx];
+  const total  = _practiceQs.length;
+  const isLast = idx === total - 1;
+
+  container.innerHTML = `
+    <div style="max-width:680px;margin:0 auto;">
+
+      <!-- Progress bar -->
+      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;">
+        <div style="flex:1;height:6px;background:#F0E8DE;border-radius:100px;overflow:hidden;">
+          <div style="width:${Math.round(((idx+1)/total)*100)}%;height:100%;background:#FF6B1A;border-radius:100px;transition:width 0.3s;"></div>
+        </div>
+        <span style="font-size:0.82rem;font-weight:600;color:#6B5C45;white-space:nowrap;">
+          ${idx+1} / ${total}
+        </span>
+      </div>
+
+      <!-- Question card -->
+      <div class="q-card" id="qc-0" style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:2rem 2rem 1.5rem;">
+
+        <!-- Tags -->
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.2rem;">
+          <span style="${tagStyle(q.subject, 'subject')}">${q.subject}</span>
+          ${q.difficulty ? `<span style="${tagStyle(q.difficulty, 'diff')}">${q.difficulty}</span>` : ''}
+          ${q.pattern    ? `<span style="${tagStyle('','pattern')}">${q.pattern}</span>` : ''}
+          ${q.year       ? `<span style="${tagStyle('','year')}">NEET ${q.year}</span>` : ''}
+        </div>
+
+        <!-- Question text -->
+        <div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">${q.question}</div>
+
+        <!-- Options -->
+        <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
+          ${['A','B','C','D'].map(k => `
+            <button
+              data-key="${k}"
+              onclick="selectOption(0,'${k}')"
+              style="background:#fff;border:1.5px solid #F0E8DE;border-radius:10px;padding:0.75rem 1.1rem;
+                     width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;
+                     color:#1A1208;transition:all 0.15s;display:flex;align-items:center;gap:10px;">
+              <span style="font-weight:700;color:#FF6B1A;min-width:1.1rem;">${k}.</span>
+              ${(q.options && q.options[k]) || ''}
+            </button>
+          `).join('')}
+        </div>
+
+        <!-- Show Answer -->
+        <button id="show-ans-btn" onclick="revealAnswer(0)"
+          style="margin-top:1.1rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;
+                 padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;
+                 cursor:pointer;font-family:inherit;">
+          Show Answer
+        </button>
+
+        <!-- Explanation (hidden until answered) -->
+        <div id="exp-0" style="display:none;margin-top:1rem;background:#FFF7F0;
+             border:1px solid rgba(255,107,26,0.2);border-radius:12px;
+             padding:1rem 1.2rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">
+          <strong style="color:#E85500;">✅ Correct Answer: ${q.correct_answer}</strong><br/>
+          ${q.explanation || ''}
+          ${cleanNcert(q)}
+        </div>
+
+        <!-- Navigation -->
+        <div id="nav-row" style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:12px;">
+          <button onclick="goQuestion(${idx - 1})"
+            ${idx === 0 ? 'disabled' : ''}
+            style="background:none;border:1.5px solid #F0E8DE;border-radius:100px;
+                   padding:0.55rem 1.2rem;font-size:0.875rem;font-weight:600;
+                   color:${idx === 0 ? '#D1C8BE' : '#6B5C45'};cursor:${idx === 0 ? 'default' : 'pointer'};
+                   font-family:inherit;">
+            ← Prev
+          </button>
+
+          <button id="next-btn" onclick="goQuestion(${idx + 1})"
+            ${isLast ? 'disabled' : ''}
+            style="background:${isLast ? '#F0E8DE' : '#FF6B1A'};border:none;border-radius:100px;
+                   padding:0.6rem 1.6rem;font-size:0.875rem;font-weight:700;
+                   color:${isLast ? '#A09080' : '#fff'};cursor:${isLast ? 'default' : 'pointer'};
+                   font-family:inherit;box-shadow:${isLast ? 'none' : '0 4px 14px rgba(255,107,26,0.3)'};">
+            ${isLast ? 'Last Question' : 'Next →'}
+          </button>
+        </div>
+
+      </div>
+    </div>`;
+}
+
+function tagStyle(val, type) {
+  const base = 'display:inline-block;border-radius:100px;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border:none;text-transform:uppercase;letter-spacing:0.04em;';
+  if (type === 'subject') {
+    if (val === 'Biology')   return base + 'background:#DCFCE7;color:#15803D;';
+    if (val === 'Chemistry') return base + 'background:#DBEAFE;color:#1D4ED8;';
+    return base + 'background:#FEF3C7;color:#B45309;';
+  }
+  if (type === 'diff') {
+    if (val === 'L1') return base + 'background:#DCFCE7;color:#15803D;';
+    if (val === 'L2') return base + 'background:#FEF3C7;color:#B45309;';
+    if (val === 'L3') return base + 'background:#FEE2E2;color:#B91C1C;';
+  }
+  return base + 'background:#FFF0E6;color:#E85500;font-weight:600;text-transform:none;';
+}
+
+function goQuestion(idx) {
+  if (idx < 0 || idx >= _practiceQs.length) return;
+  showQuestion(idx);
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function selectOption(idx, key) {
+  const q = _practiceQs[idx] || (window._currentQs || [])[idx];
+  if (!q) return;
+
+  const card = document.getElementById('qc-0');
+  if (card && card.dataset.done) return;
+  if (card) card.dataset.done = '1';
+
+  const correctKey = q.correct_answer;
+
+  document.querySelectorAll('#options-wrap button').forEach(btn => {
+    const k = btn.dataset.key;
+    btn.style.pointerEvents = 'none';
+    btn.style.cursor        = 'default';
+
+    if (k === correctKey) {
+      btn.style.background = '#F0FDF4';
+      btn.style.border     = '2px solid #22C55E';
+      btn.style.color      = '#15803D';
+      btn.style.fontWeight = '600';
+      btn.style.opacity    = '1';
+    } else if (k === key) {
+      btn.style.background = '#FEF2F2';
+      btn.style.border     = '2px solid #EF4444';
+      btn.style.color      = '#B91C1C';
+      btn.style.opacity    = '1';
+    } else {
+      btn.style.opacity    = '0.38';
+    }
+  });
+
+  // Show explanation
+  const exp = document.getElementById('exp-0');
+  if (exp) exp.style.display = 'block';
+
+  // Hide show-answer button
+  const sb = document.getElementById('show-ans-btn');
+  if (sb) sb.style.display = 'none';
+
+  // Auto-advance to next after 1.5s if correct, keep visible if wrong
+  if (key === correctKey) {
+    const nextBtn = document.getElementById('next-btn');
+    if (nextBtn && _practiceIdx < _practiceQs.length - 1) {
+      nextBtn.style.background  = '#22C55E';
+      nextBtn.style.boxShadow   = '0 4px 14px rgba(34,197,94,0.35)';
+      nextBtn.textContent       = 'Next →';
+    }
+  }
+}
+
+function revealAnswer(idx) {
+  const q = _practiceQs[idx] || (window._currentQs || [])[idx];
+  if (!q) return;
+  const card = document.getElementById('qc-0');
+  if (card && card.dataset.done) return;
+  if (card) card.dataset.done = '1';
+
+  document.querySelectorAll('#options-wrap button').forEach(btn => {
+    const k = btn.dataset.key;
+    btn.style.pointerEvents = 'none';
+    btn.style.cursor        = 'default';
+    if (k === q.correct_answer) {
+      btn.style.background = '#F0FDF4';
+      btn.style.border     = '2px solid #22C55E';
+      btn.style.color      = '#15803D';
+      btn.style.fontWeight = '600';
+      btn.style.opacity    = '1';
+    } else {
+      btn.style.opacity = '0.38';
+    }
+  });
+
+  const exp = document.getElementById('exp-0');
+  if (exp) exp.style.display = 'block';
+  const sb = document.getElementById('show-ans-btn');
+  if (sb) sb.style.display = 'none';
 }
 
 // ── UNITS PAGE ────────────────────────────────────────────────────────
@@ -269,7 +384,8 @@ function initUnits() {
     renderUnits(qs);
     if (subjectFilter) subjectFilter.addEventListener('change', () => {
       const sf = subjectFilter.value;
-      renderUnits(sf ? qs.filter(q => q.subject === sf) : qs);
+      const filtered = sf ? qs.filter(q => q.subject === sf) : qs;
+      renderUnits(filtered);
     });
   });
 }
@@ -277,14 +393,17 @@ function initUnits() {
 function renderUnits(qs) {
   const grid = document.getElementById('units-grid');
   if (!grid) return;
+
   const unitMap = {};
   qs.forEach(q => {
     const u = q.unit_code || 'UNCLASSIFIED';
     if (!unitMap[u]) unitMap[u] = { count: 0, subject: q.subject };
     unitMap[u].count++;
   });
+
   const sorted = Object.entries(unitMap).sort((a,b) => b[1].count - a[1].count);
   const max    = sorted[0]?.[1].count || 1;
+
   grid.innerHTML = sorted.map(([code, info]) => {
     const name = UNIT_NAMES[code] || code;
     const pct  = Math.round((info.count / max) * 100);
@@ -300,6 +419,7 @@ function renderUnits(qs) {
   }).join('');
 }
 
+// Init on load
 document.addEventListener('DOMContentLoaded', () => {
   initPractice();
   initUnits();
