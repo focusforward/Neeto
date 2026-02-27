@@ -589,226 +589,37 @@
 
 <script src="js/app.js"></script>
 <script src="js/mock.js"></script>
-<script src="js/mock.js"></script>
 <script>
-(function () {
-  /* ═══════════════════════════════════════════════════════
-     NEETO MOCK — definitive fix using app.js source
-     
-     selectOption(idx, key) is defined in app.js with purple styles.
-     We override it after DOMContentLoaded.
-     
-     During test  → orange (selected, can change mind)
-     After submit → green correct / red wrong / dimmed others
-     Palette      → green when answered, green/red after submit
-  ═══════════════════════════════════════════════════════ */
-
-  const selected = {}; /* cardIndex → chosenKey */
-
-  /* ── TAG STYLING ── */
+// Apply light/warm card styling after mock.js renders cards
+(function() {
   function styleCard(card) {
-    card.querySelectorAll('.tag-subject').forEach(el => {
-      const t = el.textContent.trim().toLowerCase();
-      el.removeAttribute('style');
-      if      (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
-      else if (t === 'chemistry') { el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8'; }
-      else if (t === 'physics')   { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
-      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
-        padding:'0.25rem 0.7rem',textTransform:'uppercase',border:'none'});
-    });
-    card.querySelectorAll('.tag-diff').forEach(el => {
-      const t = el.textContent.trim().toUpperCase();
-      el.removeAttribute('style');
-      if      (t === 'L1') { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
-      else if (t === 'L2') { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
-      else if (t === 'L3') { el.style.background = '#FEE2E2'; el.style.color = '#B91C1C'; }
-      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
-        padding:'0.25rem 0.7rem',textTransform:'uppercase',border:'none'});
-    });
-    card.querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
-      if (!el.textContent.trim()) return;
-      el.removeAttribute('style');
-      Object.assign(el.style, {background:'#FFF0E6',color:'#E85500',borderRadius:'100px',
-        fontWeight:'600',fontSize:'0.72rem',padding:'0.25rem 0.7rem',border:'none'});
-    });
-    card.querySelectorAll('button.option').forEach(btn => {
-      if (btn.dataset.mockStyled) return;
-      btn.removeAttribute('style');
-      Object.assign(btn.style, {background:'#ffffff',border:'1.5px solid #F0E8DE',
-        color:'#1A1208',borderRadius:'10px',padding:'0.65rem 1rem',width:'100%',
-        textAlign:'left',fontSize:'0.9rem',cursor:'pointer',fontFamily:'inherit',
-        transition:'all 0.15s',display:'block',marginBottom:'0.5rem'});
-    });
     card.style.background   = '#ffffff';
     card.style.border       = '1.5px solid #F0E8DE';
     card.style.borderRadius = '18px';
     card.style.padding      = '1.6rem 1.8rem';
     card.style.marginBottom = '1rem';
-  }
-
-  function styleAllCards() {
-    document.querySelectorAll('.q-card').forEach(styleCard);
-  }
-
-  /* ── OVERRIDE selectOption ── */
-  function installOverrides() {
-    window.selectOption = function(idx, key) {
-      key = String(key).toUpperCase();
-      selected[idx] = key;
-
-      const card = document.getElementById('qc-' + idx);
-      if (!card) return;
-
-      card.querySelectorAll('button.option').forEach(btn => {
-        const k = btn.dataset.key;
-        btn.removeAttribute('style');
-        btn.style.transition   = 'all 0.15s';
-        btn.style.borderRadius = '10px';
-        btn.style.padding      = '0.65rem 1rem';
-        btn.style.width        = '100%';
-        btn.style.textAlign    = 'left';
-        btn.style.fontSize     = '0.9rem';
-        btn.style.fontFamily   = 'inherit';
-        btn.style.display      = 'block';
-        btn.style.marginBottom = '0.5rem';
-        btn.style.cursor       = 'pointer';
-
-        if (k === key) {
-          btn.style.background = '#FFF0E6';
-          btn.style.border     = '2px solid #FF6B1A';
-          btn.style.color      = '#E85500';
-          btn.style.fontWeight = '600';
-        } else {
-          btn.style.background = '#ffffff';
-          btn.style.border     = '1.5px solid #F0E8DE';
-          btn.style.color      = '#1A1208';
-          btn.style.opacity    = '0.65';
-        }
-      });
-
-      /* Palette → green */
-      const palBtn = document.querySelector(`#palette button:nth-child(${idx + 1})`);
-      if (palBtn) {
-        palBtn.style.background  = '#DCFCE7';
-        palBtn.style.border      = '1.5px solid #22C55E';
-        palBtn.style.color       = '#15803D';
-      }
-    };
-
-    /* ── OVERRIDE submitMock ── */
-    const _origSubmit = window.submitMock;
-    if (_origSubmit && !_origSubmit._neeto) {
-      window.submitMock = function() {
-        if (_origSubmit) _origSubmit.apply(this, arguments);
-        setTimeout(colourAfterSubmit, 400);
-        setTimeout(colourAfterSubmit, 1200);
-        setTimeout(colourAfterSubmit, 2500);
-      };
-      window.submitMock._neeto = true;
-    }
-  }
-
-  function colourAfterSubmit() {
-    document.querySelectorAll('.q-card').forEach(card => {
-      const m = (card.id || '').match(/qc-(\d+)/);
-      if (!m) return;
-      const idx        = parseInt(m[1]);
-      const chosenKey  = selected[idx] || null;
-      const q          = (window._mockQs || window._currentQs || [])[idx];
-      const correctKey = q ? q.correct_answer : null;
-
-      card.querySelectorAll('button.option').forEach(btn => {
-        const k = btn.dataset.key;
-        btn.removeAttribute('style');
-        btn.style.pointerEvents = 'none';
-        btn.style.cursor        = 'default';
-        btn.style.transition    = 'all 0.18s';
-        btn.style.borderRadius  = '10px';
-        btn.style.padding       = '0.65rem 1rem';
-        btn.style.width         = '100%';
-        btn.style.textAlign     = 'left';
-        btn.style.fontSize      = '0.9rem';
-        btn.style.fontFamily    = 'inherit';
-        btn.style.display       = 'block';
-        btn.style.marginBottom  = '0.5rem';
-
-        if (k === correctKey) {
-          btn.style.background = '#F0FDF4';
-          btn.style.border     = '2px solid #22C55E';
-          btn.style.color      = '#15803D';
-          btn.style.fontWeight = '600';
-        } else if (k === chosenKey) {
-          btn.style.background = '#FEF2F2';
-          btn.style.border     = '2px solid #EF4444';
-          btn.style.color      = '#B91C1C';
-        } else {
-          btn.style.background = '#ffffff';
-          btn.style.border     = '1.5px solid #F0E8DE';
-          btn.style.color      = '#1A1208';
-          btn.style.opacity    = '0.4';
-        }
-      });
-
-      /* Show explanation */
-      const exp = document.getElementById('exp-' + idx);
-      if (exp) {
-        exp.style.display      = 'block';
-        exp.style.background   = '#FFF7F0';
-        exp.style.border       = '1px solid rgba(255,107,26,0.2)';
-        exp.style.borderRadius = '12px';
-        exp.style.padding      = '1rem 1.2rem';
-        exp.style.marginTop    = '1rem';
-        exp.style.color        = '#1A1208';
-        exp.style.fontSize     = '0.875rem';
-      }
-
-      /* Palette colour */
-      const palBtn = document.querySelector(`#palette button:nth-child(${idx + 1})`);
-      if (palBtn) {
-        palBtn.style.cssText = '';
-        if (!chosenKey) {
-          palBtn.style.background = '#F3F4F6'; palBtn.style.border = '1.5px solid #D1D5DB'; palBtn.style.color = '#6B7280';
-        } else if (chosenKey === correctKey) {
-          palBtn.style.background = '#DCFCE7'; palBtn.style.border = '1.5px solid #22C55E'; palBtn.style.color = '#15803D';
-        } else {
-          palBtn.style.background = '#FEE2E2'; palBtn.style.border = '1.5px solid #EF4444'; palBtn.style.color = '#B91C1C';
-        }
-      }
+    card.querySelectorAll('.tag-subject').forEach(el => {
+      const t = el.textContent.trim().toLowerCase();
+      el.style.borderRadius = '100px';
+      el.style.fontWeight   = '700';
+      el.style.fontSize     = '0.72rem';
+      el.style.padding      = '0.25rem 0.7rem';
+      el.style.border       = 'none';
+      el.style.textTransform= 'uppercase';
+      if      (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      else if (t === 'chemistry') { el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8'; }
+      else                        { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
     });
   }
-
-  /* ── PALETTE JUMP ── */
-  document.addEventListener('click', function(e) {
-    const palBtn = e.target.closest('#palette button');
-    if (!palBtn) return;
-    const idx  = Array.from(palBtn.parentElement.children).indexOf(palBtn);
-    const card = document.getElementById('qc-' + idx);
-    if (card) {
-      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      card.style.outline      = '3px solid #FF6B1A';
-      card.style.borderRadius = '18px';
-      setTimeout(() => { card.style.outline = ''; }, 1200);
-    }
-  });
-
-  /* ── WATCH FOR NEW CARDS (mock.js may render them) ── */
   new MutationObserver(muts => {
     muts.forEach(m => m.addedNodes.forEach(n => {
       if (n.nodeType !== 1) return;
-      if (n.classList && n.classList.contains('q-card')) { styleCard(n); return; }
-      n.querySelectorAll && n.querySelectorAll('.q-card').forEach(styleCard);
+      if (n.classList && n.classList.contains('q-card')) styleCard(n);
+      else n.querySelectorAll && n.querySelectorAll('.q-card').forEach(styleCard);
     }));
   }).observe(document.body, { childList: true, subtree: true });
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', installOverrides);
-  } else {
-    installOverrides();
-  }
-  setTimeout(installOverrides, 50);
-  setTimeout(styleAllCards, 500);
-
 })();
 </script>
+
 </body>
 </html>
