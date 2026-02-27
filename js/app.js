@@ -198,35 +198,80 @@ function renderQuestions(qs) {
 }
 
 function selectOption(idx, key) {
-  const q    = window._currentQs[idx];
-  const opts = document.querySelectorAll(`[data-index="${idx}"].option`);
-  opts.forEach(b => {
-    b.style.borderColor = '';
-    b.style.background  = '';
-    b.style.color       = '';
+  const q = window._currentQs[idx];
+  if (!q) return;
+
+  // Prevent re-answering
+  const card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  if (card) card.dataset.done = '1';
+
+  const correctKey = q.correct_answer;
+
+  document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
+    const k = btn.dataset.key;
+    btn.style.pointerEvents = 'none';
+    btn.style.cursor        = 'default';
+    btn.style.transition    = 'all 0.18s';
+
+    if (k === correctKey) {
+      btn.style.background = '#F0FDF4';
+      btn.style.border     = '2px solid #22C55E';
+      btn.style.color      = '#15803D';
+      btn.style.fontWeight = '600';
+      btn.style.opacity    = '1';
+    } else if (k === key) {
+      btn.style.background = '#FEF2F2';
+      btn.style.border     = '2px solid #EF4444';
+      btn.style.color      = '#B91C1C';
+      btn.style.opacity    = '1';
+    } else {
+      btn.style.background = '#ffffff';
+      btn.style.border     = '1.5px solid #F0E8DE';
+      btn.style.color      = '#1A1208';
+      btn.style.opacity    = '0.4';
+    }
   });
-  const btn = document.querySelector(`[data-index="${idx}"][data-key="${key}"]`);
-  if (btn) {
-    btn.style.borderColor = '#7c6af7';
-    btn.style.background  = '#2a1a4a';
-    btn.style.color       = '#fff';
+
+  // Show explanation
+  const exp = document.getElementById('exp-' + idx);
+  if (exp) exp.style.display = 'block';
+
+  // Hide "Show Answer" button
+  if (card) {
+    const sb = card.querySelector('.show-btn');
+    if (sb) sb.style.display = 'none';
   }
 }
 
 function revealAnswer(idx) {
-  const q    = window._currentQs[idx];
-  const opts = document.querySelectorAll(`[data-index="${idx}"].option`);
-  opts.forEach(b => {
-    const k = b.dataset.key;
+  const q = window._currentQs[idx];
+  if (!q) return;
+  const card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  if (card) card.dataset.done = '1';
+
+  document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
+    const k = btn.dataset.key;
+    btn.style.pointerEvents = 'none';
+    btn.style.cursor        = 'default';
+    btn.style.transition    = 'all 0.18s';
+
     if (k === q.correct_answer) {
-      b.style.background  = '#1a4a2a';
-      b.style.borderColor = '#6abf6a';
-      b.style.color       = '#6abf6a';
+      btn.style.background = '#F0FDF4';
+      btn.style.border     = '2px solid #22C55E';
+      btn.style.color      = '#15803D';
+      btn.style.fontWeight = '600';
+      btn.style.opacity    = '1';
     } else {
-      b.style.opacity = '0.4';
+      btn.style.background = '#ffffff';
+      btn.style.border     = '1.5px solid #F0E8DE';
+      btn.style.color      = '#1A1208';
+      btn.style.opacity    = '0.4';
     }
   });
-  const exp = document.getElementById(`exp-${idx}`);
+
+  const exp = document.getElementById('exp-' + idx);
   if (exp) exp.style.display = 'block';
 }
 
