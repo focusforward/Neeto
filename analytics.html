@@ -105,6 +105,14 @@
   /* CLEAR DATA */
   .clear-btn { background: none; border: 1.5px solid #F0E8DE; border-radius: 100px; padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 600; color: var(--ink-muted); cursor: pointer; font-family: inherit; }
   .clear-btn:hover { border-color: #EF4444; color: #EF4444; }
+
+  @media (max-width: 480px) {
+    .page { padding: 1rem 1rem 5rem; }
+    .stats-row { grid-template-columns: repeat(2, 1fr); gap: 0.6rem; }
+    .section { padding: 1rem 1rem; }
+    .weakness-item .bar-wrap { display: none; }
+    .subject-bars { grid-template-columns: repeat(3, 1fr); gap: 0.4rem; }
+  }
 </style>
 </head>
 <body>
@@ -120,7 +128,17 @@
       <a href="analytics.html" style="font-size:0.85rem;font-weight:600;color:#FF6B1A;text-decoration:none;">Progress</a>
     </div>
   </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="units.html">Units</a>
+  <a href="analytics.html" class="active">Progress</a>
+</div>
 
 <div class="page">
 

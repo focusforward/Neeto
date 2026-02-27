@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="css/theme-override.css"/>
+<link rel="stylesheet" href="css/nav.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -232,7 +233,7 @@
 
   @media (max-width: 600px) {
     #units-grid, .units-grid { grid-template-columns: 1fr; }
-    .nav-links a:not(.active) { display: none; }
+    /* mobile handled by hamburger */
   }
 </style>
 </head>
@@ -247,7 +248,17 @@
     <a href="units.html" class="active">Units</a>
     <a href="analytics.html">Progress</a>
   </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="units.html" class="active">Units</a>
+  <a href="analytics.html">Progress</a>
+</div>
 
 <div class="page-header">
   <h1>Practice by Unit</h1>

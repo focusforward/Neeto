@@ -7,6 +7,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
 <link rel="stylesheet" href="css/theme-override.css"/>
+<link rel="stylesheet" href="css/nav.css"/>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -505,7 +506,7 @@
     .mock-body { flex-direction: column; }
     .mock-palette { width: 100%; position: static; border-left: none; border-top: 1px solid var(--border); }
     .result-grid { grid-template-columns: repeat(2, 1fr); }
-    .nav-links a:not(.active) { display: none; }
+    /* mobile handled by hamburger */
   }
 </style>
 </head>
@@ -520,7 +521,17 @@
     <a href="units.html">Units</a>
     <a href="analytics.html">Progress</a>
   </div>
+  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
+<div class="nav-mobile-menu" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html" class="active">Mock Test</a>
+  <a href="units.html">Units</a>
+  <a href="analytics.html">Progress</a>
+</div>
 
 <!-- START SCREEN -->
 <div id="start-screen">
@@ -569,7 +580,17 @@
       <a href="mock.html">Retake Test</a>
       <a href="practice.html">Practice</a>
     </div>
-  </nav>
+    <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mobile-nav">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html" class="active">Mock Test</a>
+  <a href="units.html">Units</a>
+  <a href="analytics.html">Progress</a>
+</div>
   <div class="result-hero">
     <div style="color:#6B5C45; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Your Score</div>
     <div class="result-score" id="result-score">0</div>
