@@ -264,7 +264,7 @@
   }
 
   .q-option:hover { border-color: var(--orange) !important; background: var(--orange-pale) !important; color: var(--orange-deep) !important; }
-  .q-option.selected { border-color: #2563EB !important; background: #EFF6FF !important; color: #1D4ED8 !important; }
+  .q-option.selected { border-color: var(--orange) !important; background: var(--orange-pale) !important; color: var(--orange-deep) !important; }
   .q-option.correct { border-color: #22C55E !important; background: #F0FDF4 !important; color: #15803D !important; }
   .q-option.wrong { border-color: #EF4444 !important; background: #FEF2F2 !important; color: #B91C1C !important; }
 
@@ -518,6 +518,7 @@
     <a href="practice.html">Practice</a>
     <a href="mock.html" class="active">Mock Test</a>
     <a href="units.html">Units</a>
+    <a href="analytics.html">Progress</a>
   </div>
 </nav>
 
@@ -697,10 +698,12 @@ function renderMockQuestions() {
         btn.className = 'neeto-opt';
         btn.setAttribute('data-key', keys[ki]);
         // Base style — CSS classes will override on state change
-        btn.style.cssText = '';
+        btn.style.cssText = 'background:#fff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;';
         btn.innerHTML = '<span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">'+keys[ki]+'</span>'+(q.options[keys[ki]]||'');
         (function(qi,k,b){
-          b.onclick = function(){ mockSelect(qi,k); };
+          b.onclick     = function(){ mockSelect(qi,k); };
+          b.onmouseover = function(){ if(!testDone && userAnswers[qi]!==k){ b.style.borderColor='#FF6B1A'; b.style.background='#FFF0E6'; b.style.color='#E85500'; }};
+          b.onmouseout  = function(){ if(!testDone && userAnswers[qi]!==k){ b.style.borderColor='#F0E8DE'; b.style.background='#ffffff'; b.style.color='#1A1208'; }};
         })(i, keys[ki], btn);
         optsDiv.appendChild(btn);
       }
@@ -733,8 +736,6 @@ function mockSelect(qidx, key) {
     var k   = keys[i];
     var btn = document.getElementById('opt-'+qidx+'-'+k);
     if (!btn) continue;
-    // Wipe ALL inline styles so CSS classes take full control
-    btn.removeAttribute('style');
     btn.classList.remove('neeto-selected','neeto-faded','neeto-correct','neeto-wrong','neeto-dim');
     if (k === key) {
       btn.classList.add('neeto-selected');
@@ -743,7 +744,7 @@ function mockSelect(qidx, key) {
     }
   }
 
-  // Palette → green (answered during test)
+  // Palette → green immediately
   var pb = document.getElementById('pb-'+qidx);
   if (pb) {
     pb.classList.remove('pb-green','pb-red','pb-grey');

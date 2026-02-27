@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>My Progress — NEETO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/theme-override.css">
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+<style>
+  :root {
+    --orange: #FF6B1A; --orange-pale: #FFF7F0; --orange-deep: #E85500;
+    --off-white: #FAFAF8; --ink: #1A1208; --ink-muted: #6B5C45;
+    --border: #F0E8DE; --green: #15803D; --green-pale: #F0FDF4;
+    --red: #B91C1C; --red-pale: #FEF2F2; --blue: #1D4ED8; --blue-pale: #EFF6FF;
+  }
+  * { box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--off-white); color: var(--ink); margin: 0; min-height: 100vh; }
+
+  .page { max-width: 900px; margin: 0 auto; padding: 2rem 1.2rem 6rem; }
+
+  .hero { margin-bottom: 2rem; }
+  .hero h1 { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 900; color: var(--ink); letter-spacing: -0.03em; margin-bottom: 0.25rem; }
+  .hero h1 span { color: var(--orange); }
+  .hero p { color: var(--ink-muted); font-size: 0.88rem; }
+
+  /* DAYS TO NEET BANNER */
+  .countdown-bar {
+    background: linear-gradient(135deg, #FF6B1A 0%, #E85500 100%);
+    border-radius: 14px; padding: 1rem 1.4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    margin-bottom: 1.5rem; color: #fff;
+  }
+  .countdown-bar .days { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900; line-height: 1; }
+  .countdown-bar .label { font-size: 0.75rem; font-weight: 600; opacity: 0.85; text-transform: uppercase; letter-spacing: 0.05em; margin-top: 2px; }
+  .countdown-bar .right { text-align: right; font-size: 0.8rem; opacity: 0.9; }
+
+  /* STAT CARDS */
+  .stats-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.8rem; margin-bottom: 1.5rem; }
+  @media (max-width: 600px) { .stats-row { grid-template-columns: repeat(2, 1fr); } }
+  .stat-card { background: #fff; border: 1.5px solid var(--border); border-radius: 14px; padding: 1rem 1.1rem; }
+  .stat-card .num { font-family: 'Fraunces', serif; font-size: 1.7rem; font-weight: 900; color: var(--ink); line-height: 1; }
+  .stat-card .lbl { font-size: 0.72rem; font-weight: 600; color: var(--ink-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.25rem; }
+  .stat-card.accent .num { color: var(--orange); }
+  .stat-card.green  .num { color: var(--green); }
+  .stat-card.red    .num { color: var(--red); }
+
+  /* SECTION */
+  .section { background: #fff; border: 1.5px solid var(--border); border-radius: 18px; padding: 1.4rem 1.6rem; margin-bottom: 1.2rem; }
+  .section-title { font-size: 0.8rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink-muted); margin-bottom: 1.1rem; display: flex; align-items: center; gap: 8px; }
+  .section-title .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--orange); }
+
+  /* SCORE HISTORY */
+  .chart-wrap { position: relative; height: 200px; }
+
+  /* EMPTY STATE */
+  .empty { text-align: center; padding: 2.5rem 1rem; color: var(--ink-muted); }
+  .empty .icon { font-size: 2.5rem; margin-bottom: 0.6rem; }
+  .empty p { font-size: 0.88rem; line-height: 1.6; }
+  .empty a { color: var(--orange); font-weight: 600; text-decoration: none; }
+
+  /* WEAKNESS CARDS */
+  .weakness-list { display: flex; flex-direction: column; gap: 0.7rem; }
+  .weakness-item { display: flex; align-items: center; gap: 12px; padding: 0.75rem 1rem; background: var(--off-white); border-radius: 12px; border: 1.5px solid var(--border); }
+  .weakness-item .rank { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 900; color: var(--orange); min-width: 1.6rem; text-align: center; }
+  .weakness-item .info { flex: 1; min-width: 0; }
+  .weakness-item .ch-name { font-size: 0.88rem; font-weight: 600; color: var(--ink); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .weakness-item .ch-sub  { font-size: 0.75rem; color: var(--ink-muted); margin-top: 1px; }
+  .weakness-item .bar-wrap { width: 90px; flex-shrink: 0; }
+  .weakness-item .bar-bg { height: 6px; background: #F0E8DE; border-radius: 100px; overflow: hidden; }
+  .weakness-item .bar-fill { height: 100%; border-radius: 100px; background: #EF4444; }
+  .weakness-item .pct { font-size: 0.78rem; font-weight: 700; color: var(--red); text-align: right; margin-top: 3px; }
+  .subj-tag { display: inline-block; padding: 0.12rem 0.5rem; border-radius: 100px; font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-right: 4px; }
+  .bio  { background: #DCFCE7; color: #15803D; }
+  .chem { background: #DBEAFE; color: #1D4ED8; }
+  .phys { background: #FEF3C7; color: #B45309; }
+
+  /* SESSION HISTORY */
+  .session-list { display: flex; flex-direction: column; gap: 0.6rem; }
+  .session-item { display: flex; align-items: center; gap: 12px; padding: 0.8rem 1rem; border-radius: 12px; border: 1.5px solid var(--border); background: var(--off-white); }
+  .session-score { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 900; color: var(--ink); min-width: 48px; text-align: center; }
+  .session-score.hi { color: var(--green); }
+  .session-score.lo { color: var(--red); }
+  .session-meta { flex: 1; }
+  .session-meta .date { font-size: 0.8rem; font-weight: 600; color: var(--ink); }
+  .session-meta .detail { font-size: 0.73rem; color: var(--ink-muted); margin-top: 2px; }
+  .session-bar { width: 100px; flex-shrink: 0; }
+  .session-bar .bar-bg { height: 6px; background: #F0E8DE; border-radius: 100px; overflow: hidden; margin-bottom: 3px; }
+  .session-bar .bar-fill { height: 100%; border-radius: 100px; }
+  .session-bar .acc { font-size: 0.72rem; font-weight: 700; text-align: right; }
+
+  /* SUBJECT BREAKDOWN */
+  .subject-bars { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0.8rem; }
+  @media (max-width: 500px) { .subject-bars { grid-template-columns: 1fr; } }
+  .subj-bar-card { text-align: center; }
+  .subj-bar-card .subj-name { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 0.5rem; }
+  .subj-bar-card .ring-wrap { position: relative; width: 72px; height: 72px; margin: 0 auto 0.4rem; }
+  .subj-bar-card .ring-wrap canvas { width: 72px !important; height: 72px !important; }
+  .subj-bar-card .ring-pct { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'Fraunces', serif; font-size: 0.95rem; font-weight: 900; }
+  .subj-bar-card .subj-detail { font-size: 0.72rem; color: var(--ink-muted); }
+
+  /* CLEAR DATA */
+  .clear-btn { background: none; border: 1.5px solid #F0E8DE; border-radius: 100px; padding: 0.35rem 0.9rem; font-size: 0.75rem; font-weight: 600; color: var(--ink-muted); cursor: pointer; font-family: inherit; }
+  .clear-btn:hover { border-color: #EF4444; color: #EF4444; }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div style="display:flex;align-items:center;gap:1.5rem;">
+    <a href="index.html" style="font-family:'Fraunces',serif;font-weight:900;color:#FF6B1A;font-size:1.2rem;text-decoration:none;">NEETO</a>
+    <div style="display:flex;gap:1rem;">
+      <a href="index.html" style="font-size:0.85rem;font-weight:600;color:#6B5C45;text-decoration:none;">Home</a>
+      <a href="practice.html" style="font-size:0.85rem;font-weight:600;color:#6B5C45;text-decoration:none;">Practice</a>
+      <a href="mock.html" style="font-size:0.85rem;font-weight:600;color:#6B5C45;text-decoration:none;">Mock Test</a>
+      <a href="units.html" style="font-size:0.85rem;font-weight:600;color:#6B5C45;text-decoration:none;">Units</a>
+      <a href="analytics.html" style="font-size:0.85rem;font-weight:600;color:#FF6B1A;text-decoration:none;">Progress</a>
+    </div>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="hero">
+    <h1>Your <span>Progress</span></h1>
+    <p>Everything you've done on NEETO, tracked locally on this device.</p>
+  </div>
+
+  <!-- DAYS TO NEET -->
+  <div class="countdown-bar" id="countdown-bar">
+    <div>
+      <div class="days" id="days-left">—</div>
+      <div class="label">Days to NEET 2026</div>
+    </div>
+    <div class="right">
+      <div style="font-weight:700;font-size:1rem;">May 6, 2026</div>
+      <div style="font-size:0.75rem;opacity:0.8;margin-top:2px;">Use every day.</div>
+    </div>
+  </div>
+
+  <!-- STAT CARDS -->
+  <div class="stats-row">
+    <div class="stat-card accent">
+      <div class="num" id="stat-mocks">0</div>
+      <div class="lbl">Mocks Taken</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-practiced">0</div>
+      <div class="lbl">Questions Practiced</div>
+    </div>
+    <div class="stat-card green">
+      <div class="num" id="stat-accuracy">—</div>
+      <div class="lbl">Practice Accuracy</div>
+    </div>
+    <div class="stat-card">
+      <div class="num" id="stat-best">—</div>
+      <div class="lbl">Best Mock Score</div>
+    </div>
+  </div>
+
+  <!-- SCORE HISTORY GRAPH -->
+  <div class="section" id="score-section">
+    <div class="section-title"><div class="dot"></div> Mock Score History <button class="clear-btn" onclick="clearData()" style="margin-left:auto;">Clear all data</button></div>
+    <div id="score-chart-wrap">
+      <div class="empty" id="score-empty">
+        <div class="icon">📊</div>
+        <p>No mock tests yet.<br><a href="mock.html">Take your first mock →</a></p>
+      </div>
+      <div class="chart-wrap" id="score-chart-container" style="display:none;">
+        <canvas id="score-chart"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <!-- SUBJECT BREAKDOWN (last mock) -->
+  <div class="section" id="subject-section">
+    <div class="section-title"><div class="dot"></div> Subject Accuracy — Last Mock</div>
+    <div id="subject-wrap">
+      <div class="empty" id="subject-empty">
+        <div class="icon">🎯</div>
+        <p>Take a mock test to see your subject breakdown.<br><a href="mock.html">Start mock →</a></p>
+      </div>
+      <div class="subject-bars" id="subject-bars" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- WEAKNESS CHAPTERS -->
+  <div class="section">
+    <div class="section-title"><div class="dot"></div> Chapters to Fix — Top 5</div>
+    <div id="weakness-wrap">
+      <div class="empty" id="weakness-empty">
+        <div class="icon">🔥</div>
+        <p>Answer at least 5 questions per chapter to see your weak spots.<br><a href="practice.html">Start practicing →</a></p>
+      </div>
+      <div class="weakness-list" id="weakness-list" style="display:none;"></div>
+    </div>
+  </div>
+
+  <!-- MOCK SESSION LOG -->
+  <div class="section">
+    <div class="section-title"><div class="dot"></div> Mock History</div>
+    <div id="history-wrap">
+      <div class="empty" id="history-empty">
+        <div class="icon">📋</div>
+        <p>No mocks yet. <a href="mock.html">Take your first mock →</a></p>
+      </div>
+      <div class="session-list" id="session-list" style="display:none;"></div>
+    </div>
+  </div>
+
+</div>
+
+<script src="js/app.js"></script>
+<script>
+(function () {
+
+  // ── COUNTDOWN ──
+  const neet = new Date('2026-05-06T00:00:00');
+  const today = new Date(); today.setHours(0,0,0,0);
+  const days  = Math.ceil((neet - today) / 86400000);
+  document.getElementById('days-left').textContent = days > 0 ? days : '🎓';
+
+  // ── LOAD DATA ──
+  const attempts = JSON.parse(localStorage.getItem('neeto_attempts') || '[]');
+  const sessions = JSON.parse(localStorage.getItem('neeto_sessions') || '[]');
+
+  // ── STAT CARDS ──
+  const practiced = attempts.filter(a => a.type === 'practice').length;
+  const answered  = attempts.filter(a => a.type === 'practice' && a.userAnswer);
+  const correct   = answered.filter(a => a.isCorrect).length;
+  const accuracy  = answered.length > 0 ? Math.round(correct / answered.length * 100) : null;
+  const mockSessions = sessions.filter(s => s.type === 'mock');
+  const bestScore    = mockSessions.length ? Math.max(...mockSessions.map(s => s.score)) : null;
+
+  document.getElementById('stat-mocks').textContent     = mockSessions.length;
+  document.getElementById('stat-practiced').textContent = practiced;
+  document.getElementById('stat-accuracy').textContent  = accuracy !== null ? accuracy + '%' : '—';
+  document.getElementById('stat-best').textContent      = bestScore !== null ? bestScore : '—';
+
+  // ── SCORE HISTORY CHART ──
+  if (mockSessions.length > 0) {
+    document.getElementById('score-empty').style.display     = 'none';
+    document.getElementById('score-chart-container').style.display = 'block';
+
+    const sorted = [...mockSessions].sort((a, b) => a.ts - b.ts);
+    const labels = sorted.map((s, i) => `Mock ${i + 1}`);
+    const scores = sorted.map(s => s.score);
+    const avg    = Math.round(scores.reduce((a,b) => a+b, 0) / scores.length);
+
+    const ctx = document.getElementById('score-chart').getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels,
+        datasets: [
+          {
+            label: 'Score',
+            data: scores,
+            borderColor: '#FF6B1A',
+            backgroundColor: 'rgba(255,107,26,0.08)',
+            borderWidth: 2.5,
+            pointBackgroundColor: '#FF6B1A',
+            pointRadius: 5,
+            pointHoverRadius: 7,
+            tension: 0.35,
+            fill: true,
+          },
+          {
+            label: 'Average',
+            data: scores.map(() => avg),
+            borderColor: '#F0E8DE',
+            borderWidth: 1.5,
+            borderDash: [5, 5],
+            pointRadius: 0,
+            tension: 0,
+          }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: ctx => ctx.datasetIndex === 0
+                ? ` Score: ${ctx.raw} / 800`
+                : ` Avg: ${ctx.raw}`
+            }
+          }
+        },
+        scales: {
+          x: { grid: { display: false }, ticks: { font: { size: 11 }, color: '#6B5C45' } },
+          y: {
+            min: 0, max: 800,
+            grid: { color: '#F0E8DE' },
+            ticks: { font: { size: 11 }, color: '#6B5C45', stepSize: 200 }
+          }
+        }
+      }
+    });
+  }
+
+  // ── SUBJECT BREAKDOWN (last mock) ──
+  if (mockSessions.length > 0) {
+    document.getElementById('subject-empty').style.display = 'none';
+    document.getElementById('subject-bars').style.display  = 'grid';
+
+    const last = [...mockSessions].sort((a, b) => b.ts - a.ts)[0];
+    const maxes = { Physics: 200, Chemistry: 200, Biology: 400 };
+    const subjData = [
+      { name: 'Physics',   score: last.physics   || 0, cls: 'phys', color: '#B45309', bg: '#FEF3C7' },
+      { name: 'Chemistry', score: last.chemistry || 0, cls: 'chem', color: '#1D4ED8', bg: '#DBEAFE' },
+      { name: 'Biology',   score: last.biology   || 0, cls: 'bio',  color: '#15803D', bg: '#DCFCE7' },
+    ];
+
+    document.getElementById('subject-bars').innerHTML = subjData.map((s, i) => {
+      const pct = Math.max(0, Math.round(s.score / maxes[s.name] * 100));
+      return `
+        <div class="subj-bar-card">
+          <div class="subj-name" style="color:${s.color};">${s.name}</div>
+          <div class="ring-wrap">
+            <canvas id="ring-${i}"></canvas>
+            <div class="ring-pct" style="color:${s.color};">${pct}%</div>
+          </div>
+          <div class="subj-detail">${Math.max(0,s.score)} / ${maxes[s.name]}</div>
+        </div>`;
+    }).join('');
+
+    subjData.forEach((s, i) => {
+      const pct = Math.max(0, Math.round(s.score / maxes[s.name] * 100));
+      const ctx = document.getElementById(`ring-${i}`).getContext('2d');
+      new Chart(ctx, {
+        type: 'doughnut',
+        data: {
+          datasets: [{
+            data: [pct, 100 - pct],
+            backgroundColor: [s.color, '#F0E8DE'],
+            borderWidth: 0,
+          }]
+        },
+        options: {
+          cutout: '72%', responsive: false,
+          plugins: { legend: { display: false }, tooltip: { enabled: false } }
+        }
+      });
+    });
+  }
+
+  // ── CHAPTER WEAKNESS ──
+  // Aggregate all practice attempts by chapter, min 3 attempts
+  const chapterMap = {};
+  attempts.filter(a => a.chapterName).forEach(a => {
+    const key = a.chapterName;
+    if (!chapterMap[key]) chapterMap[key] = { name: key, subject: a.subject, total: 0, wrong: 0 };
+    chapterMap[key].total++;
+    if (!a.isCorrect && a.userAnswer) chapterMap[key].wrong++;
+  });
+
+  const weakChapters = Object.values(chapterMap)
+    .filter(c => c.total >= 3)
+    .map(c => ({ ...c, failRate: c.wrong / c.total }))
+    .filter(c => c.failRate > 0)
+    .sort((a, b) => b.failRate - a.failRate)
+    .slice(0, 5);
+
+  if (weakChapters.length > 0) {
+    document.getElementById('weakness-empty').style.display = 'none';
+    document.getElementById('weakness-list').style.display  = 'flex';
+
+    document.getElementById('weakness-list').innerHTML = weakChapters.map((c, i) => {
+      const cls = c.subject === 'Biology' ? 'bio' : c.subject === 'Chemistry' ? 'chem' : 'phys';
+      const pct = Math.round(c.failRate * 100);
+      return `
+        <div class="weakness-item">
+          <div class="rank">${i + 1}</div>
+          <div class="info">
+            <div class="ch-name">${c.name}</div>
+            <div class="ch-sub">
+              <span class="subj-tag ${cls}">${c.subject}</span>
+              ${c.wrong}/${c.total} wrong
+            </div>
+          </div>
+          <div class="bar-wrap">
+            <div class="bar-bg"><div class="bar-fill" style="width:${pct}%;"></div></div>
+            <div class="pct">${pct}% fail rate</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── SESSION HISTORY ──
+  if (mockSessions.length > 0) {
+    document.getElementById('history-empty').style.display = 'none';
+    document.getElementById('session-list').style.display  = 'flex';
+
+    const sorted = [...mockSessions].sort((a, b) => b.ts - a.ts);
+    const maxS   = Math.max(...sorted.map(s => s.score));
+    document.getElementById('session-list').innerHTML = sorted.map((s, i) => {
+      const dateStr = s.date || new Date(s.ts).toLocaleDateString('en-IN', { day:'numeric', month:'short' });
+      const scoreCls = s.score >= 500 ? 'hi' : s.score < 300 ? 'lo' : '';
+      const barPct   = Math.round(s.score / 800 * 100);
+      const barColor = s.score >= 500 ? '#22C55E' : s.score >= 300 ? '#FF6B1A' : '#EF4444';
+      const acc      = s.accuracy || 0;
+      return `
+        <div class="session-item">
+          <div class="session-score ${scoreCls}">${s.score}</div>
+          <div class="session-meta">
+            <div class="date">Mock ${sorted.length - i} &nbsp;·&nbsp; ${dateStr}</div>
+            <div class="detail">✅ ${s.correct} correct &nbsp; ❌ ${s.wrong} wrong &nbsp; ⬜ ${s.skip} skipped</div>
+          </div>
+          <div class="session-bar">
+            <div class="bar-bg"><div class="bar-fill" style="width:${barPct}%;background:${barColor};"></div></div>
+            <div class="acc" style="color:${barColor};">${acc}% acc</div>
+          </div>
+        </div>`;
+    }).join('');
+  }
+
+  // ── CLEAR DATA ──
+  window.clearData = function() {
+    if (!confirm('Clear all your progress data? This cannot be undone.')) return;
+    localStorage.removeItem('neeto_attempts');
+    localStorage.removeItem('neeto_sessions');
+    location.reload();
+  };
+
+})();
+</script>
+</body>
+</html>

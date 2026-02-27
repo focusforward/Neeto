@@ -307,6 +307,7 @@
     <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock Test</a>
     <a href="units.html">Units</a>
+    <a href="analytics.html">Progress</a>
   </div>
 </nav>
 
@@ -351,6 +352,196 @@
   <p>NEETO — Built for NEET aspirants</p>
 </footer>
 
-<script src="js/app.js"></script>
+
+
+<script>
+// NEETO PRACTICE — self-contained, class-based colouring
+
+var ALL_QUESTIONS = [];
+var LOADED_SUBJECTS = {};
+
+async function loadSubject(subject) {
+  if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
+  try {
+    var res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
+    var data = await res.json();
+    LOADED_SUBJECTS[subject] = data.questions || [];
+    return LOADED_SUBJECTS[subject];
+  } catch(e) { return []; }
+}
+
+async function loadAllQuestions() {
+  var results = await Promise.all([
+    loadSubject('Biology'), loadSubject('Chemistry'), loadSubject('Physics')
+  ]);
+  ALL_QUESTIONS = results[0].concat(results[1]).concat(results[2]);
+  return ALL_QUESTIONS;
+}
+
+function getParam(key) {
+  return new URLSearchParams(window.location.search).get(key);
+}
+
+// ── COLOUR via CSS classes (beats theme-override.css !important) ──────
+function lockAndColour(idx, chosenKey) {
+  var q = (window._currentQs || [])[idx];
+  if (!q) return;
+  var correct = q.correct_answer;
+  var keys = ['A','B','C','D'];
+
+  for (var i=0; i<4; i++) {
+    var k   = keys[i];
+    var btn = document.getElementById('opt-' + idx + '-' + k);
+    if (!btn) continue;
+    // Remove all state classes
+    btn.classList.remove('neeto-correct','neeto-wrong','neeto-dim','neeto-selected','neeto-faded');
+    // Add correct class
+    if (k === correct) {
+      btn.classList.add('neeto-correct');
+    } else if (chosenKey && k === chosenKey) {
+      btn.classList.add('neeto-wrong');
+    } else {
+      btn.classList.add('neeto-dim');
+    }
+  }
+
+  // Show explanation
+  var exp = document.getElementById('exp-' + idx);
+  if (exp) {
+    exp.style.display      = 'block';
+    exp.style.background   = '#FFF7F0';
+    exp.style.border       = '1px solid rgba(255,107,26,0.2)';
+    exp.style.borderRadius = '12px';
+    exp.style.padding      = '1rem 1.2rem';
+    exp.style.marginTop    = '1rem';
+    exp.style.color        = '#1A1208';
+    exp.style.fontSize     = '0.875rem';
+    exp.style.lineHeight   = '1.6';
+  }
+
+  var card = document.getElementById('qc-' + idx);
+  if (card) {
+    var sb = card.querySelector('.neeto-show-btn');
+    if (sb) sb.style.display = 'none';
+    card.dataset.done = '1';
+  }
+}
+
+function neetoSelect(idx, key) {
+  var card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  lockAndColour(idx, key);
+}
+
+function neetoReveal(idx) {
+  var card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  lockAndColour(idx, null);
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────
+function renderQuestions(qs) {
+  var container = document.getElementById('questions-container');
+  if (!container) return;
+  if (!qs.length) {
+    container.innerHTML = '<p style="color:#6B5C45;padding:40px;text-align:center;">No questions match your filters.</p>';
+    return;
+  }
+  window._currentQs = qs;
+
+  var tagBase = 'display:inline-block;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;border:none;margin-right:0.4rem;text-transform:uppercase;letter-spacing:0.04em;';
+  var html = '';
+
+  for (var i=0; i<qs.length; i++) {
+    var q = qs[i];
+    var subjBg  = q.subject==='Biology'?'#DCFCE7':q.subject==='Chemistry'?'#DBEAFE':'#FEF3C7';
+    var subjCol = q.subject==='Biology'?'#15803D':q.subject==='Chemistry'?'#1D4ED8':'#B45309';
+    var diffBg  = q.difficulty==='L1'?'#DCFCE7':q.difficulty==='L2'?'#FEF3C7':'#FEE2E2';
+    var diffCol = q.difficulty==='L1'?'#15803D':q.difficulty==='L2'?'#B45309':'#B91C1C';
+
+    var opts = '';
+    var keys = ['A','B','C','D'];
+    for (var ki=0; ki<4; ki++) {
+      var k       = keys[ki];
+      var optText = (q.options && q.options[k]) ? q.options[k] : '';
+      // Use neeto-opt class — CSS will control colours via .neeto-correct/.neeto-wrong etc
+      opts += '<button id="opt-' + i + '-' + k + '" class="neeto-opt"'
+            + ' data-key="' + k + '" data-index="' + i + '"'
+            + ' onclick="neetoSelect(' + i + ',\'' + k + '\')"'
+            + ' onmouseover="if(!document.getElementById(\'qc-' + i + '\').dataset.done){this.style.borderColor=\'#FF6B1A\';this.style.background=\'#FFF0E6\';this.style.color=\'#E85500\';}"'
+            + ' onmouseout="if(!document.getElementById(\'qc-' + i + '\').dataset.done){this.style.borderColor=\'#F0E8DE\';this.style.background=\'#ffffff\';this.style.color=\'#1A1208\';}"'
+            + ' style="background:#ffffff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;">'
+            + '<span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">' + k + '</span>'
+            + optText + '</button>';
+    }
+
+    var ncert = (q.ncert_ref && q.ncert_ref !== 'undefined')
+      ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">&#x1F4D6; ' + q.ncert_ref + '</div>' : '';
+    var yearTag = q.year ? '<span style="' + tagBase + 'background:#F3F4F6;color:#6B7280;">NEET ' + q.year + '</span>' : '';
+
+    html += '<div class="question-card q-card" id="qc-' + i + '" style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">'
+          + '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;">'
+          + '<span style="' + tagBase + 'background:' + subjBg + ';color:' + subjCol + ';">' + (q.subject||'') + '</span>'
+          + (q.pattern ? '<span style="' + tagBase + 'background:#FFF0E6;color:#E85500;">' + q.pattern + '</span>' : '')
+          + (q.difficulty ? '<span style="' + tagBase + 'background:' + diffBg + ';color:' + diffCol + ';">' + q.difficulty + '</span>' : '')
+          + yearTag + '</div>'
+          + '<div style="font-size:0.97rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">' + q.question + '</div>'
+          + opts
+          + '<button class="neeto-show-btn" onclick="neetoReveal(' + i + ')" style="margin-top:0.6rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;cursor:pointer;font-family:inherit;">Show Answer</button>'
+          + '<div id="exp-' + i + '" style="display:none;"><strong style="color:#E85500;">Correct: ' + q.correct_answer + '</strong><br>' + (q.explanation||'') + ncert + '</div>'
+          + '</div>';
+  }
+  container.innerHTML = html;
+}
+
+// ── FILTERS ───────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var subjectFilter = document.getElementById('filter-subject');
+  var patternFilter = document.getElementById('filter-pattern');
+  var diffFilter    = document.getElementById('filter-diff');
+  var countEl       = document.getElementById('q-count');
+  var container     = document.getElementById('questions-container');
+  var urlSubject    = getParam('subject');
+  var urlUnit       = getParam('unit');
+
+  if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
+  if (container) container.innerHTML = '<div style="text-align:center;padding:60px;color:#FF6B1A;">Loading questions...</div>';
+
+  var subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
+  var loadPromise = subjectToLoad
+    ? loadSubject(subjectToLoad).then(function(qs) { ALL_QUESTIONS = qs; })
+    : loadAllQuestions();
+
+  loadPromise.then(function() {
+    renderFiltered();
+    if (subjectFilter) subjectFilter.addEventListener('change', function() {
+      var sel = subjectFilter.value;
+      if (sel && !LOADED_SUBJECTS[sel]) {
+        if (container) container.innerHTML = '<div style="text-align:center;padding:60px;color:#FF6B1A;">Loading...</div>';
+        loadSubject(sel).then(function(qs) { ALL_QUESTIONS = qs; renderFiltered(); });
+      } else {
+        ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel]||[]) : Object.values(LOADED_SUBJECTS).reduce(function(a,b){return a.concat(b);}, []);
+        renderFiltered();
+      }
+    });
+    if (patternFilter) patternFilter.addEventListener('change', renderFiltered);
+    if (diffFilter)    diffFilter.addEventListener('change', renderFiltered);
+  });
+
+  function renderFiltered() {
+    var filtered = ALL_QUESTIONS.slice();
+    if (urlUnit) filtered = filtered.filter(function(q){ return q.unit_code === urlUnit; });
+    var sf = subjectFilter ? subjectFilter.value : '';
+    var pf = patternFilter ? patternFilter.value : '';
+    var df = diffFilter    ? diffFilter.value    : '';
+    if (sf) filtered = filtered.filter(function(q){ return q.subject    === sf; });
+    if (pf) filtered = filtered.filter(function(q){ return q.pattern    === pf; });
+    if (df) filtered = filtered.filter(function(q){ return q.difficulty === df; });
+    if (countEl) countEl.textContent = filtered.length + ' questions';
+    renderQuestions(filtered.slice(0,50));
+  }
+});
+
+</script>
 </body>
 </html>
