@@ -589,253 +589,224 @@
 
 <script src="js/app.js"></script>
 <script src="js/mock.js"></script>
+<script src="js/mock.js"></script>
 <script>
 (function () {
-  /* ═══════════════════════════════════════════════════════════
-     NEETO MOCK — patches selectOption + submitMock
+  /* ═══════════════════════════════════════════════════════
+     NEETO MOCK — definitive fix using app.js source
+     
+     selectOption(idx, key) is defined in app.js with purple styles.
+     We override it after DOMContentLoaded.
+     
+     During test  → orange (selected, can change mind)
+     After submit → green correct / red wrong / dimmed others
+     Palette      → green when answered, green/red after submit
+  ═══════════════════════════════════════════════════════ */
 
-     app.js / mock.js structure (same as practice):
-       Cards:   .q-card  id="qc-{index}"
-       Options: button.option  data-key="A/B/C/D"  data-index="{i}"
-                onclick="selectOption(index, key)"
-       Answer:  .explanation  id="exp-{index}"
-                text: "✅ Correct Answer: A"
-       Submit:  window.submitMock()
-       Palette: #palette  buttons with question numbers
-  ═══════════════════════════════════════════════════════════ */
+  const selected = {}; /* cardIndex → chosenKey */
 
-  /* Track selected answers: { cardIndex: chosenKey } */
-  const selected = {};
-
-  /* ── 1. TAG COLOURS (runs on new DOM nodes) ── */
-  function colourTags(root) {
-    (root || document).querySelectorAll('.tag-subject').forEach(el => {
+  /* ── TAG STYLING ── */
+  function styleCard(card) {
+    card.querySelectorAll('.tag-subject').forEach(el => {
       const t = el.textContent.trim().toLowerCase();
-      el.style.cssText = '';
-      if (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      el.removeAttribute('style');
+      if      (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
       else if (t === 'chemistry') { el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8'; }
       else if (t === 'physics')   { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
-      el.style.borderRadius = '100px'; el.style.fontWeight = '700';
-      el.style.fontSize = '0.72rem'; el.style.padding = '0.25rem 0.65rem';
-      el.style.textTransform = 'uppercase'; el.style.border = 'none';
+      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
+        padding:'0.25rem 0.7rem',textTransform:'uppercase',border:'none'});
     });
-
-    (root || document).querySelectorAll('.tag-diff').forEach(el => {
+    card.querySelectorAll('.tag-diff').forEach(el => {
       const t = el.textContent.trim().toUpperCase();
-      el.style.cssText = '';
-      if (t === 'L1')      { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      el.removeAttribute('style');
+      if      (t === 'L1') { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
       else if (t === 'L2') { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
       else if (t === 'L3') { el.style.background = '#FEE2E2'; el.style.color = '#B91C1C'; }
-      el.style.borderRadius = '100px'; el.style.fontWeight = '700';
-      el.style.fontSize = '0.72rem'; el.style.padding = '0.25rem 0.65rem';
-      el.style.textTransform = 'uppercase'; el.style.border = 'none';
+      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
+        padding:'0.25rem 0.7rem',textTransform:'uppercase',border:'none'});
     });
-
-    (root || document).querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
+    card.querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
       if (!el.textContent.trim()) return;
-      el.style.cssText = '';
-      el.style.background = '#FFF0E6'; el.style.color = '#E85500';
-      el.style.borderRadius = '100px'; el.style.fontWeight = '600';
-      el.style.fontSize = '0.72rem'; el.style.padding = '0.25rem 0.65rem';
-      el.style.border = 'none';
+      el.removeAttribute('style');
+      Object.assign(el.style, {background:'#FFF0E6',color:'#E85500',borderRadius:'100px',
+        fontWeight:'600',fontSize:'0.72rem',padding:'0.25rem 0.7rem',border:'none'});
     });
-
-    /* Option buttons — white until answered */
-    (root || document).querySelectorAll('button.option').forEach(btn => {
-      if (btn.dataset.mockAnswered) return;
-      btn.style.background  = '#ffffff';
-      btn.style.color       = '#1A1208';
-      btn.style.borderColor = '#F0E8DE';
-      btn.style.opacity     = '1';
+    card.querySelectorAll('button.option').forEach(btn => {
+      if (btn.dataset.mockStyled) return;
+      btn.removeAttribute('style');
+      Object.assign(btn.style, {background:'#ffffff',border:'1.5px solid #F0E8DE',
+        color:'#1A1208',borderRadius:'10px',padding:'0.65rem 1rem',width:'100%',
+        textAlign:'left',fontSize:'0.9rem',cursor:'pointer',fontFamily:'inherit',
+        transition:'all 0.15s',display:'block',marginBottom:'0.5rem'});
     });
+    card.style.background   = '#ffffff';
+    card.style.border       = '1.5px solid #F0E8DE';
+    card.style.borderRadius = '18px';
+    card.style.padding      = '1.6rem 1.8rem';
+    card.style.marginBottom = '1rem';
   }
 
-  new MutationObserver(muts => {
-    muts.forEach(m => m.addedNodes.forEach(n => {
-      if (n.nodeType === 1) setTimeout(() => colourTags(n), 0);
-    }));
-  }).observe(document.body, { childList: true, subtree: true });
-  [100, 400, 900].forEach(t => setTimeout(() => colourTags(), t));
+  function styleAllCards() {
+    document.querySelectorAll('.q-card').forEach(styleCard);
+  }
 
+  /* ── OVERRIDE selectOption ── */
+  function installOverrides() {
+    window.selectOption = function(idx, key) {
+      key = String(key).toUpperCase();
+      selected[idx] = key;
 
-  /* ── 2. DOM-LEVEL onclick HIJACK for option buttons ──
-     app.js keeps overwriting window.selectOption so we strip
-     the onclick attribute from every button and own the click.
-  ── */
-  function handleMockAnswer(cardIndex, chosenKey) {
-    chosenKey = String(chosenKey).toUpperCase();
-    selected[cardIndex] = chosenKey;
+      const card = document.getElementById('qc-' + idx);
+      if (!card) return;
 
-    const card = document.getElementById('qc-' + cardIndex);
-    if (!card) return;
+      card.querySelectorAll('button.option').forEach(btn => {
+        const k = btn.dataset.key;
+        btn.removeAttribute('style');
+        btn.style.transition   = 'all 0.15s';
+        btn.style.borderRadius = '10px';
+        btn.style.padding      = '0.65rem 1rem';
+        btn.style.width        = '100%';
+        btn.style.textAlign    = 'left';
+        btn.style.fontSize     = '0.9rem';
+        btn.style.fontFamily   = 'inherit';
+        btn.style.display      = 'block';
+        btn.style.marginBottom = '0.5rem';
+        btn.style.cursor       = 'pointer';
 
-    // Allow re-selection: clear previous selection on this card
-    card.querySelectorAll('button.option').forEach(btn => {
-      const key = (btn.dataset.key || '').toUpperCase();
-      btn.removeAttribute('style');
-      btn.style.borderRadius  = '10px';
-      btn.style.padding       = '0.65rem 1rem';
-      btn.style.width         = '100%';
-      btn.style.textAlign     = 'left';
-      btn.style.fontSize      = '0.9rem';
-      btn.style.transition    = 'all 0.15s';
-      if (key === chosenKey) {
-        btn.style.background  = '#FFF0E6';
-        btn.style.border      = '2px solid #FF6B1A';
-        btn.style.color       = '#E85500';
-        btn.style.fontWeight  = '600';
-      } else {
-        btn.style.background  = '#ffffff';
-        btn.style.border      = '1.5px solid #F0E8DE';
-        btn.style.color       = '#1A1208';
-        btn.style.opacity     = '0.65';
+        if (k === key) {
+          btn.style.background = '#FFF0E6';
+          btn.style.border     = '2px solid #FF6B1A';
+          btn.style.color      = '#E85500';
+          btn.style.fontWeight = '600';
+        } else {
+          btn.style.background = '#ffffff';
+          btn.style.border     = '1.5px solid #F0E8DE';
+          btn.style.color      = '#1A1208';
+          btn.style.opacity    = '0.65';
+        }
+      });
+
+      /* Palette → green */
+      const palBtn = document.querySelector(`#palette button:nth-child(${idx + 1})`);
+      if (palBtn) {
+        palBtn.style.background  = '#DCFCE7';
+        palBtn.style.border      = '1.5px solid #22C55E';
+        palBtn.style.color       = '#15803D';
       }
-    });
+    };
 
-    // Update palette button → green (answered)
-    const palBtn = document.querySelector(`#palette button:nth-child(${cardIndex + 1})`);
-    if (palBtn) {
-      palBtn.style.background  = '#DCFCE7';
-      palBtn.style.border      = '1.5px solid #22C55E';
-      palBtn.style.color       = '#15803D';
+    /* ── OVERRIDE submitMock ── */
+    const _origSubmit = window.submitMock;
+    if (_origSubmit && !_origSubmit._neeto) {
+      window.submitMock = function() {
+        if (_origSubmit) _origSubmit.apply(this, arguments);
+        setTimeout(colourAfterSubmit, 400);
+        setTimeout(colourAfterSubmit, 1200);
+        setTimeout(colourAfterSubmit, 2500);
+      };
+      window.submitMock._neeto = true;
     }
   }
 
-  function hijackMockBtn(btn) {
-    if (btn._neetoHijacked) return;
-    btn._neetoHijacked = true;
-    const onclickVal = btn.getAttribute('onclick') || '';
-    const m = onclickVal.match(/selectOption\s*\(\s*(\d+)\s*,\s*['"]([A-D])['"]\s*\)/i);
-    if (!m) return;
-    const cardIndex = parseInt(m[1]);
-    const key       = m[2];
-    btn.removeAttribute('onclick');
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      handleMockAnswer(cardIndex, key);
-    });
-  }
-
-  function hijackAllMock() {
-    document.querySelectorAll('button.option').forEach(hijackMockBtn);
-  }
-
-  new MutationObserver(muts => {
-    muts.forEach(m => m.addedNodes.forEach(n => {
-      if (n.nodeType !== 1) return;
-      if (n.matches && n.matches('button.option')) hijackMockBtn(n);
-      n.querySelectorAll && n.querySelectorAll('button.option').forEach(hijackMockBtn);
-    }));
-  }).observe(document.body, { childList: true, subtree: true });
-
-  [0, 100, 400, 1000, 2000].forEach(t => setTimeout(hijackAllMock, t));
-
-
-  /* ── 3. OWN submitMock — call original then force colours ── */
-  function installSubmitMock() {
-    const _origSubmit = window.submitMock;
-    window.submitMock = function () {
-      // Call original so mock.js can calculate scores & show result screen
-      if (_origSubmit) _origSubmit.apply(this, arguments);
-      // Then force our colours — use multiple passes in case render is async
-      setTimeout(colourAfterSubmit, 300);
-      setTimeout(colourAfterSubmit, 800);
-      setTimeout(colourAfterSubmit, 2000);
-    };
-  }
-  installSubmitMock();
-  setTimeout(installSubmitMock, 200);
-
-
   function colourAfterSubmit() {
-    /* Colour cards in both test area and review container */
     document.querySelectorAll('.q-card').forEach(card => {
-      const idMatch = card.id && card.id.match(/qc-(\d+)/);
-      if (!idMatch) return;
-      const idx = parseInt(idMatch[1]);
-
-      /* Get correct key from explanation */
-      const exp = document.getElementById('exp-' + idx);
-      let correctKey = null;
-      if (exp) {
-        const m = exp.innerHTML.match(/Correct Answer[^A-D]*([A-D])/i);
-        if (m) correctKey = m[1].toUpperCase();
-      }
-
-      const chosenKey = selected[idx] || null;
+      const m = (card.id || '').match(/qc-(\d+)/);
+      if (!m) return;
+      const idx        = parseInt(m[1]);
+      const chosenKey  = selected[idx] || null;
+      const q          = (window._mockQs || window._currentQs || [])[idx];
+      const correctKey = q ? q.correct_answer : null;
 
       card.querySelectorAll('button.option').forEach(btn => {
-        const key = (btn.dataset.key || '').toUpperCase();
+        const k = btn.dataset.key;
         btn.removeAttribute('style');
         btn.style.pointerEvents = 'none';
         btn.style.cursor        = 'default';
-        btn.style.transition    = 'all 0.2s';
+        btn.style.transition    = 'all 0.18s';
+        btn.style.borderRadius  = '10px';
+        btn.style.padding       = '0.65rem 1rem';
+        btn.style.width         = '100%';
+        btn.style.textAlign     = 'left';
+        btn.style.fontSize      = '0.9rem';
+        btn.style.fontFamily    = 'inherit';
+        btn.style.display       = 'block';
+        btn.style.marginBottom  = '0.5rem';
 
-        if (key === correctKey) {
-          btn.style.background  = '#F0FDF4';
-          btn.style.border      = '2px solid #22C55E';
-          btn.style.color       = '#15803D';
-          btn.style.fontWeight  = '600';
-        } else if (key === chosenKey && key !== correctKey) {
-          btn.style.background  = '#FEF2F2';
-          btn.style.border      = '2px solid #EF4444';
-          btn.style.color       = '#B91C1C';
+        if (k === correctKey) {
+          btn.style.background = '#F0FDF4';
+          btn.style.border     = '2px solid #22C55E';
+          btn.style.color      = '#15803D';
+          btn.style.fontWeight = '600';
+        } else if (k === chosenKey) {
+          btn.style.background = '#FEF2F2';
+          btn.style.border     = '2px solid #EF4444';
+          btn.style.color      = '#B91C1C';
         } else {
-          btn.style.background  = '#ffffff';
-          btn.style.border      = '1.5px solid #F0E8DE';
-          btn.style.color       = '#1A1208';
-          btn.style.opacity     = '0.45';
+          btn.style.background = '#ffffff';
+          btn.style.border     = '1.5px solid #F0E8DE';
+          btn.style.color      = '#1A1208';
+          btn.style.opacity    = '0.4';
         }
       });
 
       /* Show explanation */
+      const exp = document.getElementById('exp-' + idx);
       if (exp) {
-        exp.style.display         = 'block';
-        exp.style.background      = '#FFF0E6';
-        exp.style.backgroundColor = '#FFF0E6';
-        exp.style.border          = '1px solid rgba(255,107,26,0.25)';
-        exp.style.borderRadius    = '10px';
-        exp.style.padding         = '0.9rem 1.1rem';
-        exp.style.color           = '#1A1208';
-        exp.style.marginTop       = '0.9rem';
+        exp.style.display      = 'block';
+        exp.style.background   = '#FFF7F0';
+        exp.style.border       = '1px solid rgba(255,107,26,0.2)';
+        exp.style.borderRadius = '12px';
+        exp.style.padding      = '1rem 1.2rem';
+        exp.style.marginTop    = '1rem';
+        exp.style.color        = '#1A1208';
+        exp.style.fontSize     = '0.875rem';
       }
 
-      /* Colour palette button: green=correct, red=wrong, grey=skipped */
+      /* Palette colour */
       const palBtn = document.querySelector(`#palette button:nth-child(${idx + 1})`);
       if (palBtn) {
         palBtn.style.cssText = '';
         if (!chosenKey) {
-          palBtn.style.background  = '#F5F5F5';
-          palBtn.style.borderColor = '#D1D5DB';
-          palBtn.style.color       = '#6B7280';
+          palBtn.style.background = '#F3F4F6'; palBtn.style.border = '1.5px solid #D1D5DB'; palBtn.style.color = '#6B7280';
         } else if (chosenKey === correctKey) {
-          palBtn.style.background  = '#DCFCE7';
-          palBtn.style.borderColor = '#22C55E';
-          palBtn.style.color       = '#15803D';
+          palBtn.style.background = '#DCFCE7'; palBtn.style.border = '1.5px solid #22C55E'; palBtn.style.color = '#15803D';
         } else {
-          palBtn.style.background  = '#FEE2E2';
-          palBtn.style.borderColor = '#EF4444';
-          palBtn.style.color       = '#B91C1C';
+          palBtn.style.background = '#FEE2E2'; palBtn.style.border = '1.5px solid #EF4444'; palBtn.style.color = '#B91C1C';
         }
       }
     });
   }
 
-
-  /* ── 4. PALETTE JUMP — click number → scroll to question ── */
-  document.addEventListener('click', function (e) {
+  /* ── PALETTE JUMP ── */
+  document.addEventListener('click', function(e) {
     const palBtn = e.target.closest('#palette button');
     if (!palBtn) return;
-    const idx = Array.from(palBtn.parentElement.children).indexOf(palBtn);
+    const idx  = Array.from(palBtn.parentElement.children).indexOf(palBtn);
     const card = document.getElementById('qc-' + idx);
     if (card) {
       card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      const prev = card.style.outline;
       card.style.outline      = '3px solid #FF6B1A';
       card.style.borderRadius = '18px';
-      setTimeout(() => { card.style.outline = prev || ''; }, 1200);
+      setTimeout(() => { card.style.outline = ''; }, 1200);
     }
   });
+
+  /* ── WATCH FOR NEW CARDS (mock.js may render them) ── */
+  new MutationObserver(muts => {
+    muts.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType !== 1) return;
+      if (n.classList && n.classList.contains('q-card')) { styleCard(n); return; }
+      n.querySelectorAll && n.querySelectorAll('.q-card').forEach(styleCard);
+    }));
+  }).observe(document.body, { childList: true, subtree: true });
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', installOverrides);
+  } else {
+    installOverrides();
+  }
+  setTimeout(installOverrides, 50);
+  setTimeout(styleAllCards, 500);
 
 })();
 </script>

@@ -356,48 +356,48 @@
 <script src="js/app.js"></script>
 <script>
 (function () {
-  /* ═══════════════════════════════════════════════════════════
-     NEETO PRACTICE — DOM-level onclick hijack
 
-     app.js keeps re-defining window.selectOption so we can't
-     patch that reliably. Instead we:
-       1. Strip onclick="" from every button.option
-       2. Add our own addEventListener directly on the element
-     This fires BEFORE app.js can do anything because the onclick
-     attribute is gone.
+  /* ═══════════════════════════════════════════════════════════
+     NEETO PRACTICE — definitive fix
+     
+     Now that we have app.js source, we know:
+       1. renderQuestions() blows away innerHTML each time
+          → hijacking onclick is useless, DOM gets replaced
+       2. selectOption() sets dark purple styles
+       3. revealAnswer() sets dark green styles
+       4. window._currentQs holds the current question array
+     
+     Strategy: override selectOption + revealAnswer AFTER
+     app.js defines them, and override renderQuestions to
+     re-apply tag colours after each render.
   ═══════════════════════════════════════════════════════════ */
 
-  function handleAnswer(cardIndex, chosenKey) {
-    chosenKey = String(chosenKey).toUpperCase();
-    const card = document.getElementById('qc-' + cardIndex);
-    if (!card || card.dataset.done) return;
-    card.dataset.done = '1';
+  /* ── ANSWER COLOURS ── */
+  function applyAnswerColours(idx, chosenKey) {
+    const q = (window._currentQs || [])[idx];
+    if (!q) return;
 
-    const exp = document.getElementById('exp-' + cardIndex);
-    let correctKey = null;
-    if (exp) {
-      const m = exp.innerHTML.match(/Correct Answer[^A-D]*([A-D])/i);
-      if (m) correctKey = m[1].toUpperCase();
-    }
+    const correctKey = q.correct_answer;
 
-    card.querySelectorAll('button.option').forEach(btn => {
-      const key = (btn.dataset.key || '').toUpperCase();
+    document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
+      const k = btn.dataset.key;
       btn.removeAttribute('style');
       btn.style.transition    = 'all 0.18s';
       btn.style.pointerEvents = 'none';
       btn.style.cursor        = 'default';
-      btn.style.borderRadius  = '10px';
-      btn.style.padding       = '0.65rem 1rem';
       btn.style.width         = '100%';
       btn.style.textAlign     = 'left';
+      btn.style.borderRadius  = '10px';
+      btn.style.padding       = '0.65rem 1rem';
       btn.style.fontSize      = '0.9rem';
+      btn.style.fontFamily    = 'inherit';
 
-      if (key === correctKey) {
+      if (k === correctKey) {
         btn.style.background = '#F0FDF4';
         btn.style.border     = '2px solid #22C55E';
         btn.style.color      = '#15803D';
         btn.style.fontWeight = '600';
-      } else if (key === chosenKey) {
+      } else if (k === chosenKey) {
         btn.style.background = '#FEF2F2';
         btn.style.border     = '2px solid #EF4444';
         btn.style.color      = '#B91C1C';
@@ -405,12 +405,13 @@
         btn.style.background = '#ffffff';
         btn.style.border     = '1.5px solid #F0E8DE';
         btn.style.color      = '#1A1208';
-        btn.style.opacity    = '0.45';
+        btn.style.opacity    = '0.4';
       }
     });
 
+    /* Show explanation */
+    const exp = document.getElementById('exp-' + idx);
     if (exp) {
-      exp.removeAttribute('style');
       exp.style.display      = 'block';
       exp.style.background   = '#FFF7F0';
       exp.style.border       = '1px solid rgba(255,107,26,0.2)';
@@ -418,89 +419,126 @@
       exp.style.padding      = '1rem 1.2rem';
       exp.style.marginTop    = '1rem';
       exp.style.color        = '#1A1208';
-      exp.style.fontSize     = '0.88rem';
+      exp.style.fontSize     = '0.875rem';
       exp.style.lineHeight   = '1.6';
     }
 
-    const showBtn = card.querySelector('.show-btn');
-    if (showBtn) showBtn.style.display = 'none';
+    /* Hide "Show Answer" */
+    const card = document.getElementById('qc-' + idx);
+    if (card) {
+      const sb = card.querySelector('.show-btn');
+      if (sb) sb.style.display = 'none';
+    }
   }
 
-  function hijackBtn(btn) {
-    if (btn._neetoHijacked) return;
-    btn._neetoHijacked = true;
-
-    const onclickVal = btn.getAttribute('onclick') || '';
-    const m = onclickVal.match(/selectOption\s*\(\s*(\d+)\s*,\s*['"]([A-D])['"]\s*\)/i);
-    if (!m) return;
-
-    const cardIndex = parseInt(m[1]);
-    const key       = m[2];
-
-    btn.removeAttribute('onclick');
-    btn.addEventListener('click', function(e) {
-      e.stopPropagation();
-      handleAnswer(cardIndex, key);
-    });
-  }
-
-  function hijackAll() {
-    document.querySelectorAll('button.option').forEach(hijackBtn);
-  }
-
-  new MutationObserver(muts => {
-    muts.forEach(m => m.addedNodes.forEach(n => {
-      if (n.nodeType !== 1) return;
-      if (n.matches && n.matches('button.option')) hijackBtn(n);
-      n.querySelectorAll && n.querySelectorAll('button.option').forEach(hijackBtn);
-    }));
-  }).observe(document.body, { childList: true, subtree: true });
-
-  [0, 100, 400, 1000, 2000].forEach(t => setTimeout(hijackAll, t));
-
-  /* ── TAG COLOURS ── */
-  function colourTags() {
-    document.querySelectorAll('.tag-subject').forEach(el => {
+  /* ── TAG + BUTTON STYLING ── */
+  function styleCard(card) {
+    /* Subject tag */
+    card.querySelectorAll('.tag-subject').forEach(el => {
       const t = el.textContent.trim().toLowerCase();
       el.removeAttribute('style');
-      if (t === 'biology')        { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      if      (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
       else if (t === 'chemistry') { el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8'; }
       else if (t === 'physics')   { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
-      Object.assign(el.style, { borderRadius:'100px', fontWeight:'700', fontSize:'0.72rem',
-        padding:'0.25rem 0.65rem', textTransform:'uppercase', letterSpacing:'0.05em', border:'none' });
+      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
+        padding:'0.25rem 0.7rem',textTransform:'uppercase',letterSpacing:'0.04em',border:'none'});
     });
 
-    document.querySelectorAll('.tag-diff').forEach(el => {
+    /* Diff tag */
+    card.querySelectorAll('.tag-diff').forEach(el => {
       const t = el.textContent.trim().toUpperCase();
       el.removeAttribute('style');
-      if (t === 'L1')      { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      if      (t === 'L1') { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
       else if (t === 'L2') { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
       else if (t === 'L3') { el.style.background = '#FEE2E2'; el.style.color = '#B91C1C'; }
-      Object.assign(el.style, { borderRadius:'100px', fontWeight:'700', fontSize:'0.72rem',
-        padding:'0.25rem 0.65rem', textTransform:'uppercase', border:'none' });
+      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
+        padding:'0.25rem 0.7rem',textTransform:'uppercase',border:'none'});
     });
 
-    document.querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
+    /* Other tags (pattern, year) */
+    card.querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
       if (!el.textContent.trim()) return;
       el.removeAttribute('style');
-      Object.assign(el.style, { background:'#FFF0E6', color:'#E85500', borderRadius:'100px',
-        fontWeight:'600', fontSize:'0.72rem', padding:'0.25rem 0.65rem', border:'none' });
+      Object.assign(el.style, {background:'#FFF0E6',color:'#E85500',borderRadius:'100px',
+        fontWeight:'600',fontSize:'0.72rem',padding:'0.25rem 0.7rem',border:'none'});
     });
 
-    document.querySelectorAll('.show-btn').forEach(btn => {
-      Object.assign(btn.style, { background:'none', border:'1.5px solid #F0E8DE',
-        borderRadius:'100px', padding:'0.45rem 1.1rem', fontSize:'0.8rem',
-        fontWeight:'600', color:'#6B5C45', cursor:'pointer', marginTop:'0.9rem', display:'inline-block' });
+    /* Option buttons — white until clicked */
+    card.querySelectorAll('button.option').forEach(btn => {
+      btn.removeAttribute('style');
+      Object.assign(btn.style, {background:'#ffffff',border:'1.5px solid #F0E8DE',
+        color:'#1A1208',borderRadius:'10px',padding:'0.65rem 1rem',width:'100%',
+        textAlign:'left',fontSize:'0.9rem',cursor:'pointer',fontFamily:'inherit',
+        transition:'all 0.15s',display:'block',marginBottom:'0.5rem'});
     });
+
+    /* Show Answer button */
+    card.querySelectorAll('.show-btn').forEach(btn => {
+      btn.removeAttribute('style');
+      Object.assign(btn.style, {background:'none',border:'1.5px solid #F0E8DE',
+        borderRadius:'100px',padding:'0.45rem 1.1rem',fontSize:'0.8rem',
+        fontWeight:'600',color:'#6B5C45',cursor:'pointer',marginTop:'0.9rem',
+        fontFamily:'inherit'});
+    });
+
+    /* Card itself */
+    card.style.background   = '#ffffff';
+    card.style.border       = '1.5px solid #F0E8DE';
+    card.style.borderRadius = '18px';
+    card.style.padding      = '1.6rem 1.8rem';
+    card.style.marginBottom = '1rem';
   }
 
-  new MutationObserver(muts => {
-    muts.forEach(m => m.addedNodes.forEach(n => {
-      if (n.nodeType === 1) { setTimeout(colourTags, 0); setTimeout(hijackAll, 0); }
-    }));
-  }).observe(document.body, { childList: true, subtree: true });
+  function styleAllCards() {
+    document.querySelectorAll('.q-card').forEach(styleCard);
+  }
 
-  [0, 100, 400, 900, 1800].forEach(t => setTimeout(colourTags, t));
+  /* ── OVERRIDE app.js functions ─────────────────────────────
+     We wait for DOMContentLoaded (app.js runs its init then),
+     then overwrite selectOption + revealAnswer + renderQuestions.
+  ────────────────────────────────────────────────────────── */
+  function installOverrides() {
+    /* 1. selectOption — called when user clicks an option */
+    window.selectOption = function(idx, key) {
+      /* Guard: don't re-answer */
+      const card = document.getElementById('qc-' + idx);
+      if (card && card.dataset.done) return;
+      if (card) card.dataset.done = '1';
+      applyAnswerColours(idx, key);
+    };
+
+    /* 2. revealAnswer — called by "Show Answer" button */
+    window.revealAnswer = function(idx) {
+      const card = document.getElementById('qc-' + idx);
+      if (card && card.dataset.done) return;
+      if (card) card.dataset.done = '1';
+      /* chosenKey = null means no choice was made, just reveal */
+      applyAnswerColours(idx, null);
+    };
+
+    /* 3. renderQuestions — called after each filter change.
+          Run the original, then immediately style the new cards. */
+    const _origRender = window.renderQuestions;
+    if (_origRender && !_origRender._neeto) {
+      window.renderQuestions = function(qs) {
+        _origRender.call(this, qs);        /* let app.js build the HTML */
+        setTimeout(styleAllCards, 0);       /* style on next tick */
+      };
+      window.renderQuestions._neeto = true;
+    }
+  }
+
+  /* Run after DOMContentLoaded so app.js has defined its functions */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', installOverrides);
+  } else {
+    installOverrides();
+  }
+
+  /* Also run a few ms later as belt-and-suspenders */
+  setTimeout(installOverrides, 50);
+  setTimeout(styleAllCards, 500);
+  setTimeout(styleAllCards, 1500);
 
 })();
 </script>
