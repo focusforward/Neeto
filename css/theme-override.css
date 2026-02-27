@@ -87,3 +87,20 @@ nav, .navbar {
 ::-webkit-scrollbar-track { background: var(--off-white); }
 ::-webkit-scrollbar-thumb { background: #F0E8DE; border-radius: 100px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--orange-light); }
+
+/* ── MOCK OPTION HOVER (no inline onmouseover needed) ── */
+button.mock-opt:hover {
+  border-color: #FF6B1A !important;
+  background: #FFF0E6 !important;
+  color: #E85500 !important;
+}
+
+/* Don't apply hover if already selected */
+button.mock-opt[data-selected="1"],
+button.mock-opt[data-selected="1"]:hover {
+  background: #FFF0E6 !important;
+  border: 2px solid #FF6B1A !important;
+  color: #E85500 !important;
+  font-weight: 600 !important;
+  cursor: pointer !important;
+}
