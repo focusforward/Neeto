@@ -658,62 +658,62 @@
   [100, 400, 900].forEach(t => setTimeout(() => colourTags(), t));
 
 
-  /* ── 2. PATCH selectOption → ORANGE during test ── */
-  function patchSelectOption() {
-    if (typeof window.selectOption !== 'function') { setTimeout(patchSelectOption, 50); return; }
-    const _orig = window.selectOption;
-
+  /* ── 2. OWN selectOption entirely (no _orig call) ── */
+  function installSelectOption() {
     window.selectOption = function (cardIndex, chosenKey) {
-      _orig.call(this, cardIndex, chosenKey);
-
-      selected[cardIndex] = chosenKey.toUpperCase();
+      chosenKey = chosenKey.toUpperCase();
+      selected[cardIndex] = chosenKey;
 
       const card = document.getElementById('qc-' + cardIndex);
       if (!card) return;
 
+      // Allow re-selection during test (student can change mind)
       card.querySelectorAll('button.option').forEach(btn => {
         const key = (btn.dataset.key || '').toUpperCase();
-        btn.style.cssText = '';
-        if (key === chosenKey.toUpperCase()) {
-          /* Selected → orange */
+        btn.removeAttribute('style');
+        if (key === chosenKey) {
           btn.style.background  = '#FFF0E6';
-          btn.style.borderColor = '#FF6B1A';
+          btn.style.border      = '2px solid #FF6B1A';
           btn.style.color       = '#E85500';
           btn.style.fontWeight  = '600';
         } else {
           btn.style.background  = '#ffffff';
-          btn.style.borderColor = '#F0E8DE';
+          btn.style.border      = '1.5px solid #F0E8DE';
           btn.style.color       = '#1A1208';
-          btn.style.opacity     = '0.6';
+          btn.style.opacity     = '0.65';
         }
       });
 
-      /* Update palette button → green (answered) */
+      // Update palette button → green (answered)
       const palBtn = document.querySelector(`#palette button:nth-child(${cardIndex + 1})`);
       if (palBtn) {
         palBtn.style.background  = '#DCFCE7';
         palBtn.style.borderColor = '#22C55E';
         palBtn.style.color       = '#15803D';
-        palBtn.dataset.answered  = '1';
       }
     };
   }
-  patchSelectOption();
+
+  // Install now (app.js already loaded) and re-install to be safe
+  installSelectOption();
+  setTimeout(installSelectOption, 100);
+  setTimeout(installSelectOption, 500);
 
 
-  /* ── 3. PATCH submitMock → reveal green/red after submit ── */
-  function patchSubmitMock() {
-    if (typeof window.submitMock !== 'function') { setTimeout(patchSubmitMock, 50); return; }
+  /* ── 3. OWN submitMock — call original then force colours ── */
+  function installSubmitMock() {
     const _origSubmit = window.submitMock;
-
     window.submitMock = function () {
-      _origSubmit.apply(this, arguments);
-      /* Small delay so mock.js can render result screen first */
-      setTimeout(colourAfterSubmit, 400);
-      setTimeout(colourAfterSubmit, 1200);
+      // Call original so mock.js can calculate scores & show result screen
+      if (_origSubmit) _origSubmit.apply(this, arguments);
+      // Then force our colours — use multiple passes in case render is async
+      setTimeout(colourAfterSubmit, 300);
+      setTimeout(colourAfterSubmit, 800);
+      setTimeout(colourAfterSubmit, 2000);
     };
   }
-  patchSubmitMock();
+  installSubmitMock();
+  setTimeout(installSubmitMock, 200);
 
 
   function colourAfterSubmit() {
@@ -727,7 +727,7 @@
       const exp = document.getElementById('exp-' + idx);
       let correctKey = null;
       if (exp) {
-        const m = exp.textContent.match(/Correct Answer[:\s]+([A-D])/i);
+        const m = exp.innerHTML.match(/Correct Answer[^A-D]*([A-D])/i);
         if (m) correctKey = m[1].toUpperCase();
       }
 
@@ -735,25 +735,25 @@
 
       card.querySelectorAll('button.option').forEach(btn => {
         const key = (btn.dataset.key || '').toUpperCase();
-        btn.style.cssText      = '';
+        btn.removeAttribute('style');
         btn.style.pointerEvents = 'none';
         btn.style.cursor        = 'default';
-        btn.dataset.mockAnswered = '1';
+        btn.style.transition    = 'all 0.2s';
 
         if (key === correctKey) {
           btn.style.background  = '#F0FDF4';
-          btn.style.borderColor = '#22C55E';
+          btn.style.border      = '2px solid #22C55E';
           btn.style.color       = '#15803D';
           btn.style.fontWeight  = '600';
         } else if (key === chosenKey && key !== correctKey) {
           btn.style.background  = '#FEF2F2';
-          btn.style.borderColor = '#EF4444';
+          btn.style.border      = '2px solid #EF4444';
           btn.style.color       = '#B91C1C';
         } else {
           btn.style.background  = '#ffffff';
-          btn.style.borderColor = '#F0E8DE';
+          btn.style.border      = '1.5px solid #F0E8DE';
           btn.style.color       = '#1A1208';
-          btn.style.opacity     = '0.5';
+          btn.style.opacity     = '0.45';
         }
       });
 

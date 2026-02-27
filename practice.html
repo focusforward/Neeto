@@ -367,82 +367,89 @@
        - Show btn: button.show-btn  onclick="revealAnswer(index)"
   ═══════════════════════════════════════════════════════════ */
 
-  /* ── Wait for app.js to define selectOption, then patch it ── */
-  function patchWhenReady() {
-    if (typeof window.selectOption !== 'function') {
-      setTimeout(patchWhenReady, 50);
-      return;
-    }
+  /* ── COMPLETELY REPLACE selectOption ──────────────────────
+     We do NOT call the original. app.js's version sets dark
+     inline styles we cannot reliably override after the fact.
+     We replicate all needed side effects ourselves:
+       - mark correct/wrong colours
+       - show explanation
+       - lock buttons
+     The only thing we lose is app.js's internal state tracking,
+     which only matters for the Show Answer button (we handle that too).
+  ──────────────────────────────────────────────────────────── */
 
-    const _orig = window.selectOption;
+  // Store answers so revealAnswer() still works
+  window._neetoAnswers = {};
 
+  function installSelectOption() {
     window.selectOption = function (cardIndex, chosenKey) {
-      /* 1. Let app.js do its thing first */
-      _orig.call(this, cardIndex, chosenKey);
-
-      /* 2. Now fix up the colours it just set */
       const card = document.getElementById('qc-' + cardIndex);
       if (!card) return;
 
-      /* Read the correct answer from the explanation block */
+      // Prevent double-answering
+      if (card.dataset.done) return;
+      card.dataset.done = '1';
+
+      chosenKey = chosenKey.toUpperCase();
+      window._neetoAnswers[cardIndex] = chosenKey;
+
+      // Read correct answer from explanation HTML
       const exp = document.getElementById('exp-' + cardIndex);
       let correctKey = null;
       if (exp) {
-        const m = exp.textContent.match(/Correct Answer[:\s]+([A-D])/i);
+        const m = exp.innerHTML.match(/Correct Answer[^A-D]*([A-D])/i);
         if (m) correctKey = m[1].toUpperCase();
       }
 
       const opts = card.querySelectorAll('button.option');
-
       opts.forEach(btn => {
         const key = (btn.dataset.key || '').toUpperCase();
-
-        /* Clear whatever dark styles app.js set */
-        btn.style.cssText = '';
-        btn.style.opacity = '';
-        btn.classList.remove('neeto-correct', 'neeto-wrong', 'neeto-selected');
+        // Nuke all inline styles app.js may have pre-set
+        btn.removeAttribute('style');
 
         if (key === correctKey) {
-          /* ✅ Correct answer — always green */
           btn.style.background   = '#F0FDF4';
-          btn.style.borderColor  = '#22C55E';
+          btn.style.border       = '2px solid #22C55E';
           btn.style.color        = '#15803D';
           btn.style.fontWeight   = '600';
-          btn.classList.add('neeto-correct');
-        } else if (key === chosenKey.toUpperCase()) {
-          /* ❌ Wrong choice — red */
+        } else if (key === chosenKey && key !== correctKey) {
           btn.style.background   = '#FEF2F2';
-          btn.style.borderColor  = '#EF4444';
+          btn.style.border       = '2px solid #EF4444';
           btn.style.color        = '#B91C1C';
-          btn.classList.add('neeto-wrong');
         } else {
-          /* Other options — dim slightly */
-          btn.style.opacity      = '0.55';
-          btn.style.background   = '#ffffff';
-          btn.style.borderColor  = '#F0E8DE';
-          btn.style.color        = '#1A1208';
+          btn.style.opacity      = '0.45';
         }
-
-        /* Lock — no re-clicking */
-        btn.style.pointerEvents = 'none';
-        btn.style.cursor        = 'default';
+        btn.style.pointerEvents  = 'none';
+        btn.style.cursor         = 'default';
+        btn.style.transition     = 'all 0.2s';
       });
 
-      /* Show explanation with our styling */
+      // Show explanation
       if (exp) {
+        exp.removeAttribute('style');
         exp.style.display         = 'block';
-        exp.style.background      = '#FFF0E6';
-        exp.style.backgroundColor = '#FFF0E6';
-        exp.style.border          = '1px solid rgba(255,107,26,0.25)';
-        exp.style.borderRadius    = '10px';
-        exp.style.padding         = '0.9rem 1.1rem';
+        exp.style.background      = '#FFF7F0';
+        exp.style.border          = '1px solid rgba(255,107,26,0.2)';
+        exp.style.borderRadius    = '12px';
+        exp.style.padding         = '1rem 1.2rem';
+        exp.style.marginTop       = '1rem';
         exp.style.color           = '#1A1208';
-        exp.style.marginTop       = '0.9rem';
+        exp.style.fontSize        = '0.88rem';
+        exp.style.lineHeight      = '1.6';
       }
+
+      // Hide "Show Answer" button since answer is now visible
+      const showBtn = card.querySelector('.show-btn');
+      if (showBtn) showBtn.style.display = 'none';
     };
   }
 
-  patchWhenReady();
+  // Install immediately — app.js is already loaded above us
+  installSelectOption();
+
+  // Also re-install after any script that might overwrite it
+  setTimeout(installSelectOption, 100);
+  setTimeout(installSelectOption, 500);
 
   /* ── TAG COLOURS ─────────────────────────────────────────
      app.js renders:
