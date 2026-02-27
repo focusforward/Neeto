@@ -254,7 +254,7 @@ function showQuestion(idx) {
 
         <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
           ${['A','B','C','D'].map(k => `
-            <button data-key="${k}" onclick="selectOption(0,'${k}')"
+            <button data-key="${k}" onclick="selectOption(${idx},'${k}')"
               style="background:#fff;border:1.5px solid #F0E8DE;border-radius:10px;padding:0.75rem 1.1rem;
                      width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;
                      color:#1A1208;transition:all 0.15s;display:flex;align-items:center;gap:10px;">
@@ -263,7 +263,7 @@ function showQuestion(idx) {
             </button>`).join('')}
         </div>
 
-        <button id="show-ans-btn" onclick="revealAnswer(0)"
+        <button id="show-ans-btn" onclick="revealAnswer(${idx})"
           style="margin-top:1.1rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;
                  padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;
                  cursor:pointer;font-family:inherit;">
@@ -326,7 +326,9 @@ function goQuestion(idx) {
 }
 
 function selectOption(idx, key) {
-  const q = _practiceQs[idx] || (window._currentQs || [])[idx];
+  // Always use _practiceIdx as authoritative — idx passed from onclick matches it
+  const i = (idx === _practiceIdx) ? _practiceIdx : idx;
+  const q = _practiceQs[i];
   if (!q) return;
 
   const card = document.getElementById('qc-0');
@@ -402,7 +404,7 @@ function selectOption(idx, key) {
 }
 
 function revealAnswer(idx) {
-  const q = _practiceQs[idx] || (window._currentQs || [])[idx];
+  const q = _practiceQs[_practiceIdx];
   if (!q) return;
   const card = document.getElementById('qc-0');
   if (card && card.dataset.done) return;
