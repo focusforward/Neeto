@@ -1,7 +1,5 @@
 /* ════════════════════════════════════════════════════════
-   NEETO — theme-override.css  (clean version)
-   Only overrides STRUCTURAL dark styles from old style.css.
-   Does NOT touch answer-state colours — app.js owns those.
+   NEETO — theme-override.css
 ════════════════════════════════════════════════════════ */
 
 :root {
@@ -46,13 +44,6 @@ nav, .navbar {
   box-shadow: none !important;
 }
 
-.filters select {
-  background: #ffffff !important;
-  color: var(--ink) !important;
-  border: 1.5px solid var(--border) !important;
-  border-radius: 100px !important;
-}
-
 .mock-header {
   background: #ffffff !important;
   border-bottom: 1px solid var(--border) !important;
@@ -65,6 +56,92 @@ nav, .navbar {
   border-radius: 100px !important;
 }
 
+/* ── MOCK OPTION BUTTONS — base + states via CSS classes ── */
+.neeto-opt {
+  background: #ffffff;
+  border: 1.5px solid #F0E8DE;
+  color: #1A1208;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
+  margin-bottom: 0.5rem;
+  transition: all 0.15s;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.neeto-opt:hover {
+  border-color: #2563EB;
+  background: #EFF6FF;
+  color: #1D4ED8;
+}
+
+/* SELECTED — blue (during test, before submit) */
+.neeto-opt.neeto-selected,
+.neeto-opt.neeto-selected:hover {
+  background: #EFF6FF !important;
+  border: 2px solid #2563EB !important;
+  color: #1D4ED8 !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  cursor: pointer !important;
+}
+
+/* FADED — other options when one is selected */
+.neeto-opt.neeto-faded {
+  opacity: 0.55 !important;
+  background: #ffffff !important;
+  border: 1.5px solid #F0E8DE !important;
+  color: #1A1208 !important;
+}
+.neeto-opt.neeto-faded:hover {
+  opacity: 0.8 !important;
+  border-color: #2563EB !important;
+  background: #EFF6FF !important;
+  color: #1D4ED8 !important;
+}
+
+/* CORRECT — green (after submit) */
+.neeto-opt.neeto-correct,
+.neeto-opt.neeto-correct:hover {
+  background: #F0FDF4 !important;
+  border: 2px solid #22C55E !important;
+  color: #15803D !important;
+  font-weight: 600 !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* WRONG — red (after submit, only the one you chose) */
+.neeto-opt.neeto-wrong,
+.neeto-opt.neeto-wrong:hover {
+  background: #FEF2F2 !important;
+  border: 2px solid #EF4444 !important;
+  color: #B91C1C !important;
+  font-weight: 400 !important;
+  opacity: 1 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* DIMMED — unchosen wrong options after submit */
+.neeto-opt.neeto-dim,
+.neeto-opt.neeto-dim:hover {
+  background: #ffffff !important;
+  border: 1.5px solid #F0E8DE !important;
+  color: #1A1208 !important;
+  opacity: 0.35 !important;
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* ── PALETTE ── */
 #palette button {
   background: #ffffff !important;
   color: var(--ink-muted) !important;
@@ -72,10 +149,25 @@ nav, .navbar {
   border-radius: 8px !important;
 }
 
-#palette button.pb-green { background: #DCFCE7 !important; border-color: #22C55E !important; color: #15803D !important; font-weight: 700 !important; }
-#palette button.pb-red   { background: #FEE2E2 !important; border-color: #EF4444 !important; color: #B91C1C !important; font-weight: 700 !important; }
-#palette button.pb-grey  { background: #F3F4F6 !important; border-color: #D1D5DB !important; color: #9CA3AF !important; }
+#palette button.pb-green {
+  background: #DCFCE7 !important;
+  border-color: #22C55E !important;
+  color: #15803D !important;
+  font-weight: 700 !important;
+}
+#palette button.pb-red {
+  background: #FEE2E2 !important;
+  border-color: #EF4444 !important;
+  color: #B91C1C !important;
+  font-weight: 700 !important;
+}
+#palette button.pb-grey {
+  background: #F3F4F6 !important;
+  border-color: #D1D5DB !important;
+  color: #9CA3AF !important;
+}
 
+/* ── EXPLANATION ── */
 .explanation {
   background: #FFF7F0 !important;
   border: 1px solid rgba(255,107,26,0.2) !important;
@@ -83,24 +175,8 @@ nav, .navbar {
   color: var(--ink) !important;
 }
 
+/* ── SCROLLBAR ── */
 ::-webkit-scrollbar { width: 6px; height: 6px; }
 ::-webkit-scrollbar-track { background: var(--off-white); }
 ::-webkit-scrollbar-thumb { background: #F0E8DE; border-radius: 100px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--orange-light); }
-
-/* ── MOCK OPTION HOVER (no inline onmouseover needed) ── */
-button.mock-opt:hover {
-  border-color: #FF6B1A !important;
-  background: #FFF0E6 !important;
-  color: #E85500 !important;
-}
-
-/* Don't apply hover if already selected */
-button.mock-opt[data-selected="1"],
-button.mock-opt[data-selected="1"]:hover {
-  background: #FFF0E6 !important;
-  border: 2px solid #FF6B1A !important;
-  color: #E85500 !important;
-  font-weight: 600 !important;
-  cursor: pointer !important;
-}
