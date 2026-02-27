@@ -353,194 +353,228 @@
 
 
 
-<script src="js/app.js"></script>
 <script>
-(function () {
+// ═══════════════════════════════════════════════════
+// NEETO PRACTICE — Complete self-contained JS
+// ═══════════════════════════════════════════════════
 
-  /* ═══════════════════════════════════════════════════════════
-     NEETO PRACTICE — definitive fix
-     
-     Now that we have app.js source, we know:
-       1. renderQuestions() blows away innerHTML each time
-          → hijacking onclick is useless, DOM gets replaced
-       2. selectOption() sets dark purple styles
-       3. revealAnswer() sets dark green styles
-       4. window._currentQs holds the current question array
-     
-     Strategy: override selectOption + revealAnswer AFTER
-     app.js defines them, and override renderQuestions to
-     re-apply tag colours after each render.
-  ═══════════════════════════════════════════════════════════ */
+let ALL_QUESTIONS = [];
+let LOADED_SUBJECTS = {};
 
-  /* ── ANSWER COLOURS ── */
-  function applyAnswerColours(idx, chosenKey) {
-    const q = (window._currentQs || [])[idx];
-    if (!q) return;
+async function loadSubject(subject) {
+  if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
+  try {
+    const res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
+    const data = await res.json();
+    LOADED_SUBJECTS[subject] = data.questions || [];
+    return LOADED_SUBJECTS[subject];
+  } catch(e) { return []; }
+}
 
-    const correctKey = q.correct_answer;
+async function loadAllQuestions() {
+  const [bio, chem, phys] = await Promise.all([
+    loadSubject('Biology'), loadSubject('Chemistry'), loadSubject('Physics')
+  ]);
+  ALL_QUESTIONS = [...bio, ...chem, ...phys];
+  return ALL_QUESTIONS;
+}
 
-    document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
-      const k = btn.dataset.key;
-      btn.removeAttribute('style');
-      btn.style.transition    = 'all 0.18s';
-      btn.style.pointerEvents = 'none';
-      btn.style.cursor        = 'default';
-      btn.style.width         = '100%';
-      btn.style.textAlign     = 'left';
-      btn.style.borderRadius  = '10px';
-      btn.style.padding       = '0.65rem 1rem';
-      btn.style.fontSize      = '0.9rem';
-      btn.style.fontFamily    = 'inherit';
+function getParam(key) {
+  return new URLSearchParams(window.location.search).get(key);
+}
 
-      if (k === correctKey) {
-        btn.style.background = '#F0FDF4';
-        btn.style.border     = '2px solid #22C55E';
-        btn.style.color      = '#15803D';
-        btn.style.fontWeight = '600';
-      } else if (k === chosenKey) {
-        btn.style.background = '#FEF2F2';
-        btn.style.border     = '2px solid #EF4444';
-        btn.style.color      = '#B91C1C';
+// ── COLOUR LOGIC ──────────────────────────────────────────────────────
+function lockAndColour(idx, chosenKey) {
+  const q = (window._currentQs || [])[idx];
+  if (!q) return;
+  const correct = q.correct_answer;
+
+  document.querySelectorAll('[data-index="' + idx + '"].neeto-opt').forEach(function(btn) {
+    var k = btn.dataset.key;
+    // Reset all inline styles first
+    btn.style.cssText = [
+      'border-radius:10px',
+      'padding:0.65rem 1rem',
+      'width:100%',
+      'text-align:left',
+      'font-size:0.9rem',
+      'font-family:inherit',
+      'display:block',
+      'margin-bottom:0.5rem',
+      'transition:all 0.18s',
+      'pointer-events:none',
+      'cursor:default',
+      'border:1.5px solid #F0E8DE',
+      'background:#ffffff',
+      'color:#1A1208',
+      'font-weight:400',
+      'opacity:0.38'
+    ].join(';');
+
+    if (k === correct) {
+      btn.style.background  = '#F0FDF4';
+      btn.style.border      = '2px solid #22C55E';
+      btn.style.color       = '#15803D';
+      btn.style.fontWeight  = '700';
+      btn.style.opacity     = '1';
+    } else if (chosenKey && k === chosenKey) {
+      btn.style.background  = '#FEF2F2';
+      btn.style.border      = '2px solid #EF4444';
+      btn.style.color       = '#B91C1C';
+      btn.style.opacity     = '1';
+    }
+  });
+
+  // Show explanation
+  var exp = document.getElementById('exp-' + idx);
+  if (exp) {
+    exp.style.display      = 'block';
+    exp.style.background   = '#FFF7F0';
+    exp.style.border       = '1px solid rgba(255,107,26,0.2)';
+    exp.style.borderRadius = '12px';
+    exp.style.padding      = '1rem 1.2rem';
+    exp.style.marginTop    = '1rem';
+    exp.style.color        = '#1A1208';
+    exp.style.fontSize     = '0.875rem';
+    exp.style.lineHeight   = '1.6';
+  }
+
+  // Hide show-answer button
+  var card = document.getElementById('qc-' + idx);
+  if (card) {
+    var sb = card.querySelector('.neeto-show-btn');
+    if (sb) sb.style.display = 'none';
+    card.dataset.done = '1';
+  }
+}
+
+// Called by option click
+window.neetoSelect = function(idx, key) {
+  var card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  lockAndColour(idx, key);
+};
+
+// Called by Show Answer button
+window.neetoReveal = function(idx) {
+  var card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  lockAndColour(idx, null);
+};
+
+// ── RENDER ────────────────────────────────────────────────────────────
+function cleanNcert(q) {
+  if (!q.ncert_ref || q.ncert_ref === 'undefined') return '';
+  var line = q.ncert_line && q.ncert_line.trim() && !q.ncert_line.includes('To be added')
+    ? '<br><em>' + q.ncert_line.substring(0,200) + '...</em>' : '';
+  return '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">\u{1F4D6} ' + q.ncert_ref + line + '</div>';
+}
+
+function subjectStyle(subj) {
+  if (subj === 'Biology')   return 'background:#DCFCE7;color:#15803D;';
+  if (subj === 'Chemistry') return 'background:#DBEAFE;color:#1D4ED8;';
+  return 'background:#FEF3C7;color:#B45309;';
+}
+
+function diffStyle(diff) {
+  if (diff === 'L1') return 'background:#DCFCE7;color:#15803D;';
+  if (diff === 'L2') return 'background:#FEF3C7;color:#B45309;';
+  return 'background:#FEE2E2;color:#B91C1C;';
+}
+
+function tagStyle() {
+  return 'display:inline-block;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;border:none;letter-spacing:0.04em;text-transform:uppercase;';
+}
+
+function renderQuestions(qs) {
+  var container = document.getElementById('questions-container');
+  if (!container) return;
+  if (!qs.length) {
+    container.innerHTML = '<p style="color:#6B5C45;padding:40px;text-align:center;">No questions match your filters.</p>';
+    return;
+  }
+
+  window._currentQs = qs;
+
+  container.innerHTML = qs.map(function(q, i) {
+    var opts = ['A','B','C','D'].map(function(k) {
+      return '<button class="neeto-opt" data-key="' + k + '" data-index="' + i + '" ' +
+        'onclick="neetoSelect(' + i + ','' + k + '')" ' +
+        'onmouseover="if(!document.getElementById('qc-' + i + '').dataset.done){this.style.borderColor='#FF6B1A';this.style.background='#FFF0E6';this.style.color='#E85500';}" ' +
+        'onmouseout="if(!document.getElementById('qc-' + i + '').dataset.done){this.style.borderColor='#F0E8DE';this.style.background='#ffffff';this.style.color='#1A1208';}" ' +
+        'style="background:#ffffff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;">' +
+        '<span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">' + k + '</span>' +
+        ((q.options && q.options[k]) || '') + '</button>';
+    }).join('');
+
+    var expHtml = '<strong style="color:#E85500;">✅ Correct: ' + q.correct_answer + '</strong><br>' +
+      (q.explanation || '') + cleanNcert(q);
+
+    return '<div class="question-card q-card" id="qc-' + i + '" style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">' +
+      '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;">' +
+      '<span style="' + tagStyle() + subjectStyle(q.subject) + '">' + (q.subject||'') + '</span>' +
+      (q.pattern ? '<span style="' + tagStyle() + 'background:#FFF0E6;color:#E85500;">' + q.pattern + '</span>' : '') +
+      (q.difficulty ? '<span style="' + tagStyle() + diffStyle(q.difficulty) + '">' + q.difficulty + '</span>' : '') +
+      (q.year ? '<span style="' + tagStyle() + 'background:#F3F4F6;color:#6B7280;">NEET ' + q.year + '</span>' : '') +
+      '</div>' +
+      '<div style="font-size:0.97rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">' + q.question + '</div>' +
+      opts +
+      '<button class="neeto-show-btn" onclick="neetoReveal(' + i + ')" ' +
+      'style="margin-top:0.6rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;cursor:pointer;font-family:inherit;transition:all 0.2s;">' +
+      'Show Answer</button>' +
+      '<div id="exp-' + i + '" style="display:none;">' + expHtml + '</div>' +
+      '</div>';
+  }).join('');
+}
+
+// ── FILTERS & INIT ────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var subjectFilter = document.getElementById('filter-subject');
+  var patternFilter = document.getElementById('filter-pattern');
+  var diffFilter    = document.getElementById('filter-diff');
+  var countEl       = document.getElementById('q-count');
+  var container     = document.getElementById('questions-container');
+  var urlSubject    = getParam('subject');
+  var urlUnit       = getParam('unit');
+
+  if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
+  if (container) container.innerHTML = '<div style="text-align:center;padding:60px;color:#FF6B1A;">⏳ Loading questions...</div>';
+
+  var subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
+  var loadPromise = subjectToLoad
+    ? loadSubject(subjectToLoad).then(function(qs) { ALL_QUESTIONS = qs; })
+    : loadAllQuestions();
+
+  loadPromise.then(function() {
+    renderFiltered();
+
+    if (subjectFilter) subjectFilter.addEventListener('change', function() {
+      var sel = subjectFilter.value;
+      if (sel && !LOADED_SUBJECTS[sel]) {
+        if (container) container.innerHTML = '<div style="text-align:center;padding:60px;color:#FF6B1A;">⏳ Loading...</div>';
+        loadSubject(sel).then(function(qs) { ALL_QUESTIONS = qs; renderFiltered(); });
       } else {
-        btn.style.background = '#ffffff';
-        btn.style.border     = '1.5px solid #F0E8DE';
-        btn.style.color      = '#1A1208';
-        btn.style.opacity    = '0.4';
+        ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel] || []) : Object.values(LOADED_SUBJECTS).flat();
+        renderFiltered();
       }
     });
+    if (patternFilter) patternFilter.addEventListener('change', renderFiltered);
+    if (diffFilter)    diffFilter.addEventListener('change', renderFiltered);
+  });
 
-    /* Show explanation */
-    const exp = document.getElementById('exp-' + idx);
-    if (exp) {
-      exp.style.display      = 'block';
-      exp.style.background   = '#FFF7F0';
-      exp.style.border       = '1px solid rgba(255,107,26,0.2)';
-      exp.style.borderRadius = '12px';
-      exp.style.padding      = '1rem 1.2rem';
-      exp.style.marginTop    = '1rem';
-      exp.style.color        = '#1A1208';
-      exp.style.fontSize     = '0.875rem';
-      exp.style.lineHeight   = '1.6';
-    }
-
-    /* Hide "Show Answer" */
-    const card = document.getElementById('qc-' + idx);
-    if (card) {
-      const sb = card.querySelector('.show-btn');
-      if (sb) sb.style.display = 'none';
-    }
+  function renderFiltered() {
+    var filtered = ALL_QUESTIONS.slice();
+    if (urlUnit) filtered = filtered.filter(function(q) { return q.unit_code === urlUnit; });
+    var sf = subjectFilter ? subjectFilter.value : '';
+    var pf = patternFilter ? patternFilter.value : '';
+    var df = diffFilter    ? diffFilter.value    : '';
+    if (sf) filtered = filtered.filter(function(q) { return q.subject    === sf; });
+    if (pf) filtered = filtered.filter(function(q) { return q.pattern    === pf; });
+    if (df) filtered = filtered.filter(function(q) { return q.difficulty === df; });
+    if (countEl) countEl.textContent = filtered.length + ' questions';
+    renderQuestions(filtered.slice(0, 50));
   }
-
-  /* ── TAG + BUTTON STYLING ── */
-  function styleCard(card) {
-    /* Subject tag */
-    card.querySelectorAll('.tag-subject').forEach(el => {
-      const t = el.textContent.trim().toLowerCase();
-      el.removeAttribute('style');
-      if      (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
-      else if (t === 'chemistry') { el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8'; }
-      else if (t === 'physics')   { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
-      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
-        padding:'0.25rem 0.7rem',textTransform:'uppercase',letterSpacing:'0.04em',border:'none'});
-    });
-
-    /* Diff tag */
-    card.querySelectorAll('.tag-diff').forEach(el => {
-      const t = el.textContent.trim().toUpperCase();
-      el.removeAttribute('style');
-      if      (t === 'L1') { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
-      else if (t === 'L2') { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
-      else if (t === 'L3') { el.style.background = '#FEE2E2'; el.style.color = '#B91C1C'; }
-      Object.assign(el.style, {borderRadius:'100px',fontWeight:'700',fontSize:'0.72rem',
-        padding:'0.25rem 0.7rem',textTransform:'uppercase',border:'none'});
-    });
-
-    /* Other tags (pattern, year) */
-    card.querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
-      if (!el.textContent.trim()) return;
-      el.removeAttribute('style');
-      Object.assign(el.style, {background:'#FFF0E6',color:'#E85500',borderRadius:'100px',
-        fontWeight:'600',fontSize:'0.72rem',padding:'0.25rem 0.7rem',border:'none'});
-    });
-
-    /* Option buttons — white until clicked */
-    card.querySelectorAll('button.option').forEach(btn => {
-      btn.removeAttribute('style');
-      Object.assign(btn.style, {background:'#ffffff',border:'1.5px solid #F0E8DE',
-        color:'#1A1208',borderRadius:'10px',padding:'0.65rem 1rem',width:'100%',
-        textAlign:'left',fontSize:'0.9rem',cursor:'pointer',fontFamily:'inherit',
-        transition:'all 0.15s',display:'block',marginBottom:'0.5rem'});
-    });
-
-    /* Show Answer button */
-    card.querySelectorAll('.show-btn').forEach(btn => {
-      btn.removeAttribute('style');
-      Object.assign(btn.style, {background:'none',border:'1.5px solid #F0E8DE',
-        borderRadius:'100px',padding:'0.45rem 1.1rem',fontSize:'0.8rem',
-        fontWeight:'600',color:'#6B5C45',cursor:'pointer',marginTop:'0.9rem',
-        fontFamily:'inherit'});
-    });
-
-    /* Card itself */
-    card.style.background   = '#ffffff';
-    card.style.border       = '1.5px solid #F0E8DE';
-    card.style.borderRadius = '18px';
-    card.style.padding      = '1.6rem 1.8rem';
-    card.style.marginBottom = '1rem';
-  }
-
-  function styleAllCards() {
-    document.querySelectorAll('.q-card').forEach(styleCard);
-  }
-
-  /* ── OVERRIDE app.js functions ─────────────────────────────
-     We wait for DOMContentLoaded (app.js runs its init then),
-     then overwrite selectOption + revealAnswer + renderQuestions.
-  ────────────────────────────────────────────────────────── */
-  function installOverrides() {
-    /* 1. selectOption — called when user clicks an option */
-    window.selectOption = function(idx, key) {
-      /* Guard: don't re-answer */
-      const card = document.getElementById('qc-' + idx);
-      if (card && card.dataset.done) return;
-      if (card) card.dataset.done = '1';
-      applyAnswerColours(idx, key);
-    };
-
-    /* 2. revealAnswer — called by "Show Answer" button */
-    window.revealAnswer = function(idx) {
-      const card = document.getElementById('qc-' + idx);
-      if (card && card.dataset.done) return;
-      if (card) card.dataset.done = '1';
-      /* chosenKey = null means no choice was made, just reveal */
-      applyAnswerColours(idx, null);
-    };
-
-    /* 3. renderQuestions — called after each filter change.
-          Run the original, then immediately style the new cards. */
-    const _origRender = window.renderQuestions;
-    if (_origRender && !_origRender._neeto) {
-      window.renderQuestions = function(qs) {
-        _origRender.call(this, qs);        /* let app.js build the HTML */
-        setTimeout(styleAllCards, 0);       /* style on next tick */
-      };
-      window.renderQuestions._neeto = true;
-    }
-  }
-
-  /* Run after DOMContentLoaded so app.js has defined its functions */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', installOverrides);
-  } else {
-    installOverrides();
-  }
-
-  /* Also run a few ms later as belt-and-suspenders */
-  setTimeout(installOverrides, 50);
-  setTimeout(styleAllCards, 500);
-  setTimeout(styleAllCards, 1500);
-
-})();
+});
 </script>
 </body>
 </html>
