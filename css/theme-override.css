@@ -199,3 +199,59 @@ label.option, li.option, div.option, button.option,
 ::-webkit-scrollbar-track { background: var(--off-white); }
 ::-webkit-scrollbar-thumb { background: #F0E8DE; border-radius: 100px; }
 ::-webkit-scrollbar-thumb:hover { background: var(--orange-light); }
+
+/* ── NEETO ANSWER STATE CLASSES (set by our scripts) ── */
+
+/* Practice: immediate right/wrong feedback */
+.neeto-correct,
+.neeto-correct:hover {
+  background: #F0FDF4 !important;
+  background-color: #F0FDF4 !important;
+  border-color: #22C55E !important;
+  color: #15803D !important;
+  pointer-events: none !important;
+}
+
+.neeto-wrong,
+.neeto-wrong:hover {
+  background: #FEF2F2 !important;
+  background-color: #FEF2F2 !important;
+  border-color: #EF4444 !important;
+  color: #B91C1C !important;
+  pointer-events: none !important;
+}
+
+/* Mock: selected (during test) */
+.neeto-selected,
+.neeto-selected:hover {
+  background: #FFF0E6 !important;
+  background-color: #FFF0E6 !important;
+  border-color: #FF6B1A !important;
+  color: #E85500 !important;
+}
+
+/* Lock all options in an answered practice card */
+[data-answered] .option,
+[data-answered] .q-option,
+[data-answered] [class*="option-btn"],
+[data-answered] .choice {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* Lock all options after mock submit */
+[data-mock-answered] .option,
+[data-mock-answered] .q-option,
+[data-mock-answered] [class*="option-btn"],
+[data-mock-answered] .choice {
+  pointer-events: none !important;
+  cursor: default !important;
+}
+
+/* Palette button states */
+#palette button.neeto-answered,
+.palette-grid button.neeto-answered {
+  background: #DCFCE7 !important;
+  border-color: #22C55E !important;
+  color: #15803D !important;
+}
