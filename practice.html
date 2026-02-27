@@ -1,0 +1,546 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Practice — NEETO</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/style.css"/>
+<link rel="stylesheet" href="css/theme-override.css"/>
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --orange: #FF6B1A;
+    --orange-light: #FF8C4A;
+    --orange-pale: #FFF0E6;
+    --orange-deep: #E85500;
+    --white: #FFFFFF;
+    --off-white: #FAFAF8;
+    --ink: #1A1208;
+    --ink-muted: #6B5C45;
+    --border: #F0E8DE;
+  }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--off-white);
+    color: var(--ink);
+    min-height: 100vh;
+  }
+
+  /* ── NAV ── */
+  nav, .navbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex !important;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 5%;
+    height: 68px;
+    background: rgba(255,255,255,0.92) !important;
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--border) !important;
+    box-shadow: none !important;
+  }
+
+  .logo {
+    font-family: 'Fraunces', serif !important;
+    font-size: 1.5rem !important;
+    font-weight: 900 !important;
+    color: var(--orange) !important;
+    letter-spacing: -0.02em;
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2rem; align-items: center; }
+
+  .nav-links a {
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--ink-muted) !important;
+    transition: color 0.2s;
+    background: none !important;
+    border: none !important;
+    padding: 0 !important;
+  }
+
+  .nav-links a:hover { color: var(--orange) !important; }
+  .nav-links a.active { color: var(--orange) !important; font-weight: 600; }
+
+  /* ── PAGE HEADER ── */
+  .page-header {
+    background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8f3 100%);
+    border-bottom: 1px solid var(--border);
+    padding: 3rem 5% 2.5rem;
+  }
+
+  .page-header h1 {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 900;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+  }
+
+  .page-header p {
+    margin-top: 0.5rem;
+    color: var(--ink-muted);
+    font-size: 0.95rem;
+  }
+
+  /* ── FILTERS ── */
+  .filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    padding: 1.5rem 5%;
+    background: white;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .filters select {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 0.5rem 1.1rem;
+    cursor: pointer;
+    outline: none;
+    transition: border-color 0.2s;
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 0.9rem center;
+    padding-right: 2.2rem;
+  }
+
+  .filters select:focus,
+  .filters select:hover {
+    border-color: var(--orange);
+  }
+
+  /* ── QUESTION COUNT ── */
+  .question-count, #q-count {
+    padding: 0.9rem 5%;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    background: var(--off-white);
+    border-bottom: 1px solid var(--border);
+    letter-spacing: 0.02em;
+  }
+
+  /* ── QUESTIONS LIST ── */
+  .questions-list, #questions-container {
+    max-width: 820px;
+    margin: 2rem auto;
+    padding: 0 5%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  /* ── QUESTION CARD ── */
+  .question-card, .q-card {
+    background: white;
+    border: 1.5px solid var(--border);
+    border-radius: 18px;
+    padding: 1.6rem 1.8rem;
+    transition: box-shadow 0.2s, border-color 0.2s;
+  }
+
+  .question-card:hover, .q-card:hover {
+    border-color: rgba(255,107,26,0.3);
+    box-shadow: 0 4px 20px rgba(255,107,26,0.08);
+  }
+
+  .q-meta {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.9rem;
+  }
+
+  .q-tag, .tag {
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.25rem 0.65rem;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+
+  .tag-bio, .tag-biology { background: #DCFCE7; color: #15803D; }
+  .tag-chem, .tag-chemistry { background: #DBEAFE; color: #1D4ED8; }
+  .tag-phys, .tag-physics { background: #FEF3C7; color: #B45309; }
+  .tag-pattern { background: var(--orange-pale); color: var(--orange-deep); }
+  .tag-l1 { background: #DCFCE7; color: #15803D; }
+  .tag-l2 { background: #FEF3C7; color: #B45309; }
+  .tag-l3 { background: #FEE2E2; color: #B91C1C; }
+
+  .q-text, .question-text {
+    font-size: 0.97rem;
+    line-height: 1.65;
+    color: var(--ink);
+    margin-bottom: 1rem;
+    font-weight: 400;
+  }
+
+  .q-options, .options-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .q-option, .option-item {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 0.65rem 1rem;
+    border: 1.5px solid var(--border);
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: var(--ink);
+    background: white;
+    transition: all 0.15s;
+    text-align: left;
+    width: 100%;
+    font-family: 'DM Sans', sans-serif;
+  }
+
+  .q-option:hover, .option-item:hover {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+    color: var(--orange-deep);
+  }
+
+  .q-option.correct, .option-item.correct {
+    border-color: #22C55E;
+    background: #F0FDF4;
+    color: #15803D;
+  }
+
+  .q-option.wrong, .option-item.wrong {
+    border-color: #EF4444;
+    background: #FEF2F2;
+    color: #B91C1C;
+  }
+
+  .q-option.selected, .option-item.selected {
+    border-color: var(--orange);
+    background: var(--orange-pale);
+  }
+
+  .option-label {
+    font-weight: 700;
+    color: var(--orange);
+    min-width: 1.2rem;
+  }
+
+  .show-answer-btn, .reveal-btn {
+    margin-top: 0.9rem;
+    background: none;
+    border: 1.5px solid var(--border);
+    border-radius: 100px;
+    padding: 0.45rem 1.1rem;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: var(--ink-muted);
+    cursor: pointer;
+    font-family: 'DM Sans', sans-serif;
+    transition: all 0.2s;
+  }
+
+  .show-answer-btn:hover, .reveal-btn:hover {
+    border-color: var(--orange);
+    color: var(--orange);
+  }
+
+  .answer-block, .explanation {
+    margin-top: 0.9rem;
+    background: var(--orange-pale);
+    border: 1px solid rgba(255,107,26,0.2);
+    border-radius: 10px;
+    padding: 0.9rem 1.1rem;
+    font-size: 0.875rem;
+    color: var(--ink);
+    line-height: 1.6;
+  }
+
+  .answer-block strong, .explanation strong {
+    color: var(--orange-deep);
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid var(--border);
+    padding: 1.8rem 5%;
+    text-align: center;
+    font-size: 0.85rem;
+    color: var(--ink-muted);
+    margin-top: 3rem;
+    background: white;
+  }
+
+  /* Loading state */
+  #questions-container p, #units-grid p {
+    color: var(--ink-muted) !important;
+    padding: 3rem;
+    text-align: center;
+  }
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <div class="logo">NEETO</div>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html" class="active">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="units.html">Units</a>
+  </div>
+</nav>
+
+<div class="page-header">
+  <h1>Practice Questions</h1>
+  <p>Filter by subject, pattern, or difficulty and start solving</p>
+</div>
+
+<div class="filters">
+  <select id="filter-subject">
+    <option value="">All Subjects</option>
+    <option value="Biology">Biology</option>
+    <option value="Chemistry">Chemistry</option>
+    <option value="Physics">Physics</option>
+  </select>
+
+  <select id="filter-pattern">
+    <option value="">All Patterns</option>
+    <option value="DIRECT_HIT">Direct Hit</option>
+    <option value="GOOGLY">Googly (EXCEPT/NOT)</option>
+    <option value="SPEED_BREAKER">Speed Breaker</option>
+    <option value="MAGIC_TRICK">Assertion-Reason</option>
+    <option value="SILLY_SLIP">Silly Slip</option>
+    <option value="OVER_SMART">Over Smart</option>
+  </select>
+
+  <select id="filter-diff">
+    <option value="">All Levels</option>
+    <option value="L1">L1 — Easy</option>
+    <option value="L2">L2 — Medium</option>
+    <option value="L3">L3 — Hard</option>
+  </select>
+</div>
+
+<div class="question-count" id="q-count">Loading...</div>
+
+<div class="questions-list" id="questions-container">
+  <p style="color:#6B5C45; padding:40px; text-align:center;">Loading questions...</p>
+</div>
+
+<footer>
+  <p>NEETO — Built for NEET aspirants</p>
+</footer>
+
+
+
+<script>
+// NEETO PRACTICE — self-contained, class-based colouring
+
+var ALL_QUESTIONS = [];
+var LOADED_SUBJECTS = {};
+
+async function loadSubject(subject) {
+  if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
+  try {
+    var res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
+    var data = await res.json();
+    LOADED_SUBJECTS[subject] = data.questions || [];
+    return LOADED_SUBJECTS[subject];
+  } catch(e) { return []; }
+}
+
+async function loadAllQuestions() {
+  var results = await Promise.all([
+    loadSubject('Biology'), loadSubject('Chemistry'), loadSubject('Physics')
+  ]);
+  ALL_QUESTIONS = results[0].concat(results[1]).concat(results[2]);
+  return ALL_QUESTIONS;
+}
+
+function getParam(key) {
+  return new URLSearchParams(window.location.search).get(key);
+}
+
+// ── COLOUR via CSS classes (beats theme-override.css !important) ──────
+function lockAndColour(idx, chosenKey) {
+  var q = (window._currentQs || [])[idx];
+  if (!q) return;
+  var correct = q.correct_answer;
+  var keys = ['A','B','C','D'];
+
+  for (var i=0; i<4; i++) {
+    var k   = keys[i];
+    var btn = document.getElementById('opt-' + idx + '-' + k);
+    if (!btn) continue;
+    // Remove all state classes
+    btn.classList.remove('neeto-correct','neeto-wrong','neeto-dim','neeto-selected','neeto-faded');
+    // Add correct class
+    if (k === correct) {
+      btn.classList.add('neeto-correct');
+    } else if (chosenKey && k === chosenKey) {
+      btn.classList.add('neeto-wrong');
+    } else {
+      btn.classList.add('neeto-dim');
+    }
+  }
+
+  // Show explanation
+  var exp = document.getElementById('exp-' + idx);
+  if (exp) {
+    exp.style.display      = 'block';
+    exp.style.background   = '#FFF7F0';
+    exp.style.border       = '1px solid rgba(255,107,26,0.2)';
+    exp.style.borderRadius = '12px';
+    exp.style.padding      = '1rem 1.2rem';
+    exp.style.marginTop    = '1rem';
+    exp.style.color        = '#1A1208';
+    exp.style.fontSize     = '0.875rem';
+    exp.style.lineHeight   = '1.6';
+  }
+
+  var card = document.getElementById('qc-' + idx);
+  if (card) {
+    var sb = card.querySelector('.neeto-show-btn');
+    if (sb) sb.style.display = 'none';
+    card.dataset.done = '1';
+  }
+}
+
+function neetoSelect(idx, key) {
+  var card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  lockAndColour(idx, key);
+}
+
+function neetoReveal(idx) {
+  var card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  lockAndColour(idx, null);
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────
+function renderQuestions(qs) {
+  var container = document.getElementById('questions-container');
+  if (!container) return;
+  if (!qs.length) {
+    container.innerHTML = '<p style="color:#6B5C45;padding:40px;text-align:center;">No questions match your filters.</p>';
+    return;
+  }
+  window._currentQs = qs;
+
+  var tagBase = 'display:inline-block;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;border:none;margin-right:0.4rem;text-transform:uppercase;letter-spacing:0.04em;';
+  var html = '';
+
+  for (var i=0; i<qs.length; i++) {
+    var q = qs[i];
+    var subjBg  = q.subject==='Biology'?'#DCFCE7':q.subject==='Chemistry'?'#DBEAFE':'#FEF3C7';
+    var subjCol = q.subject==='Biology'?'#15803D':q.subject==='Chemistry'?'#1D4ED8':'#B45309';
+    var diffBg  = q.difficulty==='L1'?'#DCFCE7':q.difficulty==='L2'?'#FEF3C7':'#FEE2E2';
+    var diffCol = q.difficulty==='L1'?'#15803D':q.difficulty==='L2'?'#B45309':'#B91C1C';
+
+    var opts = '';
+    var keys = ['A','B','C','D'];
+    for (var ki=0; ki<4; ki++) {
+      var k       = keys[ki];
+      var optText = (q.options && q.options[k]) ? q.options[k] : '';
+      // Use neeto-opt class — CSS will control colours via .neeto-correct/.neeto-wrong etc
+      opts += '<button id="opt-' + i + '-' + k + '" class="neeto-opt"'
+            + ' data-key="' + k + '" data-index="' + i + '"'
+            + ' onclick="neetoSelect(' + i + ',\'' + k + '\')"'
+            + ' onmouseover="if(!document.getElementById(\'qc-' + i + '\').dataset.done){this.style.borderColor=\'#FF6B1A\';this.style.background=\'#FFF0E6\';this.style.color=\'#E85500\';}"'
+            + ' onmouseout="if(!document.getElementById(\'qc-' + i + '\').dataset.done){this.style.borderColor=\'#F0E8DE\';this.style.background=\'#ffffff\';this.style.color=\'#1A1208\';}"'
+            + ' style="background:#ffffff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;">'
+            + '<span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">' + k + '</span>'
+            + optText + '</button>';
+    }
+
+    var ncert = (q.ncert_ref && q.ncert_ref !== 'undefined')
+      ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">&#x1F4D6; ' + q.ncert_ref + '</div>' : '';
+    var yearTag = q.year ? '<span style="' + tagBase + 'background:#F3F4F6;color:#6B7280;">NEET ' + q.year + '</span>' : '';
+
+    html += '<div class="question-card q-card" id="qc-' + i + '" style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">'
+          + '<div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;">'
+          + '<span style="' + tagBase + 'background:' + subjBg + ';color:' + subjCol + ';">' + (q.subject||'') + '</span>'
+          + (q.pattern ? '<span style="' + tagBase + 'background:#FFF0E6;color:#E85500;">' + q.pattern + '</span>' : '')
+          + (q.difficulty ? '<span style="' + tagBase + 'background:' + diffBg + ';color:' + diffCol + ';">' + q.difficulty + '</span>' : '')
+          + yearTag + '</div>'
+          + '<div style="font-size:0.97rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">' + q.question + '</div>'
+          + opts
+          + '<button class="neeto-show-btn" onclick="neetoReveal(' + i + ')" style="margin-top:0.6rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;cursor:pointer;font-family:inherit;">Show Answer</button>'
+          + '<div id="exp-' + i + '" style="display:none;"><strong style="color:#E85500;">Correct: ' + q.correct_answer + '</strong><br>' + (q.explanation||'') + ncert + '</div>'
+          + '</div>';
+  }
+  container.innerHTML = html;
+}
+
+// ── FILTERS ───────────────────────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function() {
+  var subjectFilter = document.getElementById('filter-subject');
+  var patternFilter = document.getElementById('filter-pattern');
+  var diffFilter    = document.getElementById('filter-diff');
+  var countEl       = document.getElementById('q-count');
+  var container     = document.getElementById('questions-container');
+  var urlSubject    = getParam('subject');
+  var urlUnit       = getParam('unit');
+
+  if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
+  if (container) container.innerHTML = '<div style="text-align:center;padding:60px;color:#FF6B1A;">Loading questions...</div>';
+
+  var subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
+  var loadPromise = subjectToLoad
+    ? loadSubject(subjectToLoad).then(function(qs) { ALL_QUESTIONS = qs; })
+    : loadAllQuestions();
+
+  loadPromise.then(function() {
+    renderFiltered();
+    if (subjectFilter) subjectFilter.addEventListener('change', function() {
+      var sel = subjectFilter.value;
+      if (sel && !LOADED_SUBJECTS[sel]) {
+        if (container) container.innerHTML = '<div style="text-align:center;padding:60px;color:#FF6B1A;">Loading...</div>';
+        loadSubject(sel).then(function(qs) { ALL_QUESTIONS = qs; renderFiltered(); });
+      } else {
+        ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel]||[]) : Object.values(LOADED_SUBJECTS).reduce(function(a,b){return a.concat(b);}, []);
+        renderFiltered();
+      }
+    });
+    if (patternFilter) patternFilter.addEventListener('change', renderFiltered);
+    if (diffFilter)    diffFilter.addEventListener('change', renderFiltered);
+  });
+
+  function renderFiltered() {
+    var filtered = ALL_QUESTIONS.slice();
+    if (urlUnit) filtered = filtered.filter(function(q){ return q.unit_code === urlUnit; });
+    var sf = subjectFilter ? subjectFilter.value : '';
+    var pf = patternFilter ? patternFilter.value : '';
+    var df = diffFilter    ? diffFilter.value    : '';
+    if (sf) filtered = filtered.filter(function(q){ return q.subject    === sf; });
+    if (pf) filtered = filtered.filter(function(q){ return q.pattern    === pf; });
+    if (df) filtered = filtered.filter(function(q){ return q.difficulty === df; });
+    if (countEl) countEl.textContent = filtered.length + ' questions';
+    renderQuestions(filtered.slice(0,50));
+  }
+});
+
+</script>
+</body>
+</html>
