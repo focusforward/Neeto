@@ -1,4 +1,4 @@
-// NEETO — Main App JS (split-file version)
+// NEETO — app.js
 
 let ALL_QUESTIONS = [];
 let LOADED_SUBJECTS = {};
@@ -55,7 +55,7 @@ const UNIT_NAMES = {
   "UNIT19_Biomolecules":           "Biomolecules",
   "UNIT20_Polymers":               "Polymers",
   "UNIT21_Chemistry_Environment":  "Chemistry in Everyday Life",
-  "UNCLASSIFIED":                  "General",
+  "UNCLASSIFIED": "General",
 };
 
 function subjectFromUnit(unit_code) {
@@ -68,30 +68,22 @@ function subjectFromUnit(unit_code) {
 
 function showLoader(containerId, msg) {
   const el = document.getElementById(containerId);
-  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
+  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#FF6B1A;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
 }
 
-// Load a single subject file (cached)
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
-  const file = `data/api_${subject.toLowerCase()}.json`;
   try {
-    const res  = await fetch(file);
+    const res  = await fetch(`data/api_${subject.toLowerCase()}.json`);
     const data = await res.json();
     LOADED_SUBJECTS[subject] = data.questions || [];
     return LOADED_SUBJECTS[subject];
-  } catch(e) {
-    console.error('Failed to load', file, e);
-    return [];
-  }
+  } catch(e) { return []; }
 }
 
-// Load all 3 subjects (for units page and mock)
 async function loadAllQuestions() {
   const [bio, chem, phys] = await Promise.all([
-    loadSubject('Biology'),
-    loadSubject('Chemistry'),
-    loadSubject('Physics')
+    loadSubject('Biology'), loadSubject('Chemistry'), loadSubject('Physics')
   ]);
   ALL_QUESTIONS = [...bio, ...chem, ...phys];
   return ALL_QUESTIONS;
@@ -103,13 +95,122 @@ function getParam(key) {
 
 function cleanNcert(q) {
   if (!q.ncert_ref || q.ncert_ref === 'undefined') return '';
-  if (!q.ncert_line || !q.ncert_line.trim() || q.ncert_line.includes('To be added')) {
-    return `<div class="ncert-line">📖 ${q.ncert_ref}</div>`;
-  }
-  return `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
+  if (!q.ncert_line || !q.ncert_line.trim() || q.ncert_line.includes('To be added'))
+    return `<div class="ncert-line" style="margin-top:0.6rem;font-size:0.8rem;color:#6B5C45;">📖 ${q.ncert_ref}</div>`;
+  return `<div class="ncert-line" style="margin-top:0.6rem;font-size:0.8rem;color:#6B5C45;">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
 }
 
-// ── PRACTICE PAGE ─────────────────────────────────────────────────────
+// ── COLOUR HELPERS ────────────────────────────────────────────────────
+function optionBaseStyle(btn) {
+  Object.assign(btn.style, {
+    background:'#ffffff', border:'1.5px solid #F0E8DE', color:'#1A1208',
+    borderRadius:'10px', padding:'0.65rem 1rem', width:'100%',
+    textAlign:'left', fontSize:'0.9rem', cursor:'pointer',
+    fontFamily:'inherit', transition:'all 0.15s', display:'block', marginBottom:'0.5rem',
+    opacity:'1', fontWeight:'400'
+  });
+}
+
+function applyPracticeColours(idx, chosenKey) {
+  const q = (window._currentQs || [])[idx];
+  if (!q) return;
+  const correct = q.correct_answer;
+
+  document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
+    const k = btn.dataset.key;
+    optionBaseStyle(btn);
+    btn.style.pointerEvents = 'none';
+    btn.style.cursor = 'default';
+
+    if (k === correct) {
+      btn.style.background = '#F0FDF4';
+      btn.style.border     = '2px solid #22C55E';
+      btn.style.color      = '#15803D';
+      btn.style.fontWeight = '600';
+    } else if (chosenKey && k === chosenKey) {
+      btn.style.background = '#FEF2F2';
+      btn.style.border     = '2px solid #EF4444';
+      btn.style.color      = '#B91C1C';
+    } else {
+      btn.style.opacity = '0.4';
+    }
+  });
+
+  // Show explanation
+  const exp = document.getElementById('exp-' + idx);
+  if (exp) {
+    Object.assign(exp.style, {
+      display:'block', background:'#FFF7F0', border:'1px solid rgba(255,107,26,0.2)',
+      borderRadius:'12px', padding:'1rem 1.2rem', marginTop:'1rem',
+      color:'#1A1208', fontSize:'0.875rem', lineHeight:'1.6'
+    });
+  }
+  // Hide show-answer button
+  const card = document.getElementById('qc-' + idx);
+  if (card) {
+    const sb = card.querySelector('.show-btn');
+    if (sb) sb.style.display = 'none';
+  }
+}
+
+// ── PRACTICE: selectOption + revealAnswer ─────────────────────────────
+function selectOption(idx, key) {
+  const card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  if (card) card.dataset.done = '1';
+  applyPracticeColours(idx, key);
+}
+
+function revealAnswer(idx) {
+  const card = document.getElementById('qc-' + idx);
+  if (card && card.dataset.done) return;
+  if (card) card.dataset.done = '1';
+  applyPracticeColours(idx, null);
+}
+
+// ── RENDER QUESTIONS (practice) ───────────────────────────────────────
+function renderQuestions(qs) {
+  const container = document.getElementById('questions-container');
+  if (!container) return;
+  if (!qs.length) {
+    container.innerHTML = '<p style="color:#6B5C45;padding:40px;text-align:center;">No questions match your filters.</p>';
+    return;
+  }
+
+  container.innerHTML = qs.map((q, i) => {
+    const subjCls = q.subject === 'Biology' ? 'tag-biology' : q.subject === 'Chemistry' ? 'tag-chemistry' : 'tag-physics';
+    const diffCls = q.difficulty === 'L1' ? 'tag-l1' : q.difficulty === 'L2' ? 'tag-l2' : 'tag-l3';
+    return `
+    <div class="question-card q-card" id="qc-${i}">
+      <div class="q-meta">
+        <span class="q-tag tag-subject ${subjCls}">${q.subject}</span>
+        <span class="q-tag tag-pattern">${q.pattern || ''}</span>
+        <span class="q-tag tag-diff ${diffCls}">${q.difficulty || ''}</span>
+        ${q.year ? `<span class="q-tag">NEET ${q.year}</span>` : ''}
+      </div>
+      <div class="q-text">${q.question}</div>
+      <div class="q-options options">
+        ${['A','B','C','D'].map(k => `
+          <button class="q-option option" data-key="${k}" data-index="${i}"
+            onclick="selectOption(${i},'${k}')"
+            onmouseover="if(!this.closest('.q-card').dataset.done){this.style.borderColor='#FF6B1A';this.style.background='#FFF0E6';this.style.color='#E85500';}"
+            onmouseout="if(!this.closest('.q-card').dataset.done){this.style.borderColor='#F0E8DE';this.style.background='#ffffff';this.style.color='#1A1208';}"
+          ><span class="option-label">${k}</span> ${(q.options && q.options[k]) || ''}</button>
+        `).join('')}
+      </div>
+      <button class="show-answer-btn show-btn" onclick="revealAnswer(${i})">Show Answer</button>
+      <div class="answer-block explanation" id="exp-${i}" style="display:none;">
+        <strong>✅ Correct: ${q.correct_answer}</strong><br/>
+        ${q.explanation || ''}
+        ${cleanNcert(q)}
+      </div>
+    </div>`;
+  }).join('');
+
+  window._currentQs = qs;
+}
+
+// ── PRACTICE PAGE INIT ────────────────────────────────────────────────
 function initPractice() {
   if (!document.getElementById('questions-container')) return;
 
@@ -117,31 +218,24 @@ function initPractice() {
   const patternFilter = document.getElementById('filter-pattern');
   const diffFilter    = document.getElementById('filter-diff');
   const countEl       = document.getElementById('q-count');
-
-  const urlSubject = getParam('subject');
-  const urlUnit    = getParam('unit');
+  const urlSubject    = getParam('subject');
+  const urlUnit       = getParam('unit');
 
   if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
-
   showLoader('questions-container', 'Loading questions...');
 
-  // Load only the subject needed, or all if no filter
   const subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
-  const loadPromise = subjectToLoad
+  const loadPromise   = subjectToLoad
     ? loadSubject(subjectToLoad).then(qs => { ALL_QUESTIONS = qs; return qs; })
     : loadAllQuestions();
 
   loadPromise.then(() => {
     renderFiltered();
-
     if (subjectFilter) subjectFilter.addEventListener('change', () => {
       const sel = subjectFilter.value;
       if (sel && !LOADED_SUBJECTS[sel]) {
         showLoader('questions-container', 'Loading...');
-        loadSubject(sel).then(qs => {
-          ALL_QUESTIONS = qs;
-          renderFiltered();
-        });
+        loadSubject(sel).then(qs => { ALL_QUESTIONS = qs; renderFiltered(); });
       } else {
         ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel] || []) : Object.values(LOADED_SUBJECTS).flat();
         renderFiltered();
@@ -157,122 +251,12 @@ function initPractice() {
     const sf = subjectFilter ? subjectFilter.value : '';
     const pf = patternFilter ? patternFilter.value : '';
     const df = diffFilter    ? diffFilter.value    : '';
-    if (sf) filtered = filtered.filter(q => q.subject  === sf);
-    if (pf) filtered = filtered.filter(q => q.pattern  === pf);
+    if (sf) filtered = filtered.filter(q => q.subject    === sf);
+    if (pf) filtered = filtered.filter(q => q.pattern    === pf);
     if (df) filtered = filtered.filter(q => q.difficulty === df);
-
     if (countEl) countEl.textContent = `${filtered.length} questions`;
-    renderQuestions(filtered.slice(0, 50)); // render max 50 at a time
+    renderQuestions(filtered.slice(0, 50));
   }
-}
-
-function renderQuestions(qs) {
-  const container = document.getElementById('questions-container');
-  if (!container) return;
-  if (!qs.length) { container.innerHTML = '<p style="color:#888;padding:40px;text-align:center;">No questions match your filters.</p>'; return; }
-
-  container.innerHTML = qs.map((q, i) => `
-    <div class="q-card" id="qc-${i}">
-      <div class="q-meta">
-        <span class="tag tag-subject">${q.subject}</span>
-        <span class="tag tag-pattern">${q.pattern || ''}</span>
-        <span class="tag tag-diff">${q.difficulty || ''}</span>
-        ${q.year ? `<span class="tag">NEET ${q.year}</span>` : ''}
-      </div>
-      <div class="q-text">${q.question}</div>
-      <div class="options" data-index="${i}">
-        ${['A','B','C','D'].map(k => `
-          <button class="option" data-key="${k}" data-index="${i}" onclick="selectOption(${i},'${k}')">${k}. ${(q.options && q.options[k]) || ''}</button>
-        `).join('')}
-      </div>
-      <button class="show-btn" onclick="revealAnswer(${i})">Show Answer</button>
-      <div class="explanation" id="exp-${i}" style="display:none;">
-        <strong>✅ Correct Answer: ${q.correct_answer}</strong><br/>
-        ${q.explanation || ''}
-        ${cleanNcert(q)}
-      </div>
-    </div>`).join('');
-
-  // Store questions for reveal
-  window._currentQs = qs;
-}
-
-function selectOption(idx, key) {
-  const q = window._currentQs[idx];
-  if (!q) return;
-
-  // Prevent re-answering
-  const card = document.getElementById('qc-' + idx);
-  if (card && card.dataset.done) return;
-  if (card) card.dataset.done = '1';
-
-  const correctKey = q.correct_answer;
-
-  document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
-    const k = btn.dataset.key;
-    btn.style.pointerEvents = 'none';
-    btn.style.cursor        = 'default';
-    btn.style.transition    = 'all 0.18s';
-
-    if (k === correctKey) {
-      btn.style.background = '#F0FDF4';
-      btn.style.border     = '2px solid #22C55E';
-      btn.style.color      = '#15803D';
-      btn.style.fontWeight = '600';
-      btn.style.opacity    = '1';
-    } else if (k === key) {
-      btn.style.background = '#FEF2F2';
-      btn.style.border     = '2px solid #EF4444';
-      btn.style.color      = '#B91C1C';
-      btn.style.opacity    = '1';
-    } else {
-      btn.style.background = '#ffffff';
-      btn.style.border     = '1.5px solid #F0E8DE';
-      btn.style.color      = '#1A1208';
-      btn.style.opacity    = '0.4';
-    }
-  });
-
-  // Show explanation
-  const exp = document.getElementById('exp-' + idx);
-  if (exp) exp.style.display = 'block';
-
-  // Hide "Show Answer" button
-  if (card) {
-    const sb = card.querySelector('.show-btn');
-    if (sb) sb.style.display = 'none';
-  }
-}
-
-function revealAnswer(idx) {
-  const q = window._currentQs[idx];
-  if (!q) return;
-  const card = document.getElementById('qc-' + idx);
-  if (card && card.dataset.done) return;
-  if (card) card.dataset.done = '1';
-
-  document.querySelectorAll(`[data-index="${idx}"].option`).forEach(btn => {
-    const k = btn.dataset.key;
-    btn.style.pointerEvents = 'none';
-    btn.style.cursor        = 'default';
-    btn.style.transition    = 'all 0.18s';
-
-    if (k === q.correct_answer) {
-      btn.style.background = '#F0FDF4';
-      btn.style.border     = '2px solid #22C55E';
-      btn.style.color      = '#15803D';
-      btn.style.fontWeight = '600';
-      btn.style.opacity    = '1';
-    } else {
-      btn.style.background = '#ffffff';
-      btn.style.border     = '1.5px solid #F0E8DE';
-      btn.style.color      = '#1A1208';
-      btn.style.opacity    = '0.4';
-    }
-  });
-
-  const exp = document.getElementById('exp-' + idx);
-  if (exp) exp.style.display = 'block';
 }
 
 // ── UNITS PAGE ────────────────────────────────────────────────────────
@@ -285,8 +269,7 @@ function initUnits() {
     renderUnits(qs);
     if (subjectFilter) subjectFilter.addEventListener('change', () => {
       const sf = subjectFilter.value;
-      const filtered = sf ? qs.filter(q => q.subject === sf) : qs;
-      renderUnits(filtered);
+      renderUnits(sf ? qs.filter(q => q.subject === sf) : qs);
     });
   });
 }
@@ -294,17 +277,14 @@ function initUnits() {
 function renderUnits(qs) {
   const grid = document.getElementById('units-grid');
   if (!grid) return;
-
   const unitMap = {};
   qs.forEach(q => {
     const u = q.unit_code || 'UNCLASSIFIED';
     if (!unitMap[u]) unitMap[u] = { count: 0, subject: q.subject };
     unitMap[u].count++;
   });
-
   const sorted = Object.entries(unitMap).sort((a,b) => b[1].count - a[1].count);
   const max    = sorted[0]?.[1].count || 1;
-
   grid.innerHTML = sorted.map(([code, info]) => {
     const name = UNIT_NAMES[code] || code;
     const pct  = Math.round((info.count / max) * 100);
@@ -320,7 +300,6 @@ function renderUnits(qs) {
   }).join('');
 }
 
-// Init on load
 document.addEventListener('DOMContentLoaded', () => {
   initPractice();
   initUnits();
