@@ -1,7 +1,35 @@
-// NEETO — Main App JS (split-file version)
+// NEETO — app.js  (with localStorage caching + attempt analytics)
 
 let ALL_QUESTIONS = [];
 let LOADED_SUBJECTS = {};
+
+// ── ANALYTICS STORE ──────────────────────────────────────────────────
+// All data lives in localStorage under these keys:
+//   neeto_attempts   → array of attempt objects (practice + mock)
+//   neeto_sessions   → array of session summaries (mock only)
+//   neeto_q_cache_*  → cached JSON question files
+
+const ANALYTICS = {
+  saveAttempt(obj) {
+    try {
+      const arr = JSON.parse(localStorage.getItem('neeto_attempts') || '[]');
+      arr.push({ ...obj, ts: Date.now() });
+      // Keep last 2000 attempts to avoid storage bloat
+      if (arr.length > 2000) arr.splice(0, arr.length - 2000);
+      localStorage.setItem('neeto_attempts', JSON.stringify(arr));
+    } catch(e) {}
+  },
+  saveSession(obj) {
+    try {
+      const arr = JSON.parse(localStorage.getItem('neeto_sessions') || '[]');
+      arr.push({ ...obj, ts: Date.now() });
+      if (arr.length > 50) arr.splice(0, arr.length - 50);
+      localStorage.setItem('neeto_sessions', JSON.stringify(arr));
+    } catch(e) {}
+  },
+  getAttempts()  { try { return JSON.parse(localStorage.getItem('neeto_attempts') || '[]'); } catch(e) { return []; } },
+  getSessions()  { try { return JSON.parse(localStorage.getItem('neeto_sessions') || '[]'); } catch(e) { return []; } },
+};
 
 const UNIT_NAMES = {
   "UNIT1_DiversityLivingWorld":    "Diversity in Living World",
@@ -68,25 +96,43 @@ function subjectFromUnit(unit_code) {
 
 function showLoader(containerId, msg) {
   const el = document.getElementById(containerId);
-  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#7c6af7;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
+  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#FF6B1A;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
 }
 
-// Load a single subject file (cached)
+// ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
+
+  // Check localStorage cache (valid for 24 hours)
+  const cacheKey = `neeto_q_cache_${subject}`;
+  const tsKey    = `neeto_q_ts_${subject}`;
+  try {
+    const cached = localStorage.getItem(cacheKey);
+    const ts     = parseInt(localStorage.getItem(tsKey) || '0');
+    if (cached && Date.now() - ts < 24 * 60 * 60 * 1000) {
+      LOADED_SUBJECTS[subject] = JSON.parse(cached);
+      return LOADED_SUBJECTS[subject];
+    }
+  } catch(e) {}
+
   const file = `data/api_${subject.toLowerCase()}.json`;
   try {
     const res  = await fetch(file);
     const data = await res.json();
-    LOADED_SUBJECTS[subject] = data.questions || [];
-    return LOADED_SUBJECTS[subject];
+    const qs   = data.questions || [];
+    LOADED_SUBJECTS[subject] = qs;
+    // Save to cache
+    try {
+      localStorage.setItem(cacheKey, JSON.stringify(qs));
+      localStorage.setItem(tsKey, String(Date.now()));
+    } catch(e) {}
+    return qs;
   } catch(e) {
     console.error('Failed to load', file, e);
     return [];
   }
 }
 
-// Load all 3 subjects (for units page and mock)
 async function loadAllQuestions() {
   const [bio, chem, phys] = await Promise.all([
     loadSubject('Biology'),
@@ -125,7 +171,6 @@ function initPractice() {
 
   showLoader('questions-container', 'Loading questions...');
 
-  // Load only the subject needed, or all if no filter
   const subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
   const loadPromise = subjectToLoad
     ? loadSubject(subjectToLoad).then(qs => { ALL_QUESTIONS = qs; return qs; })
@@ -133,15 +178,11 @@ function initPractice() {
 
   loadPromise.then(() => {
     renderFiltered();
-
     if (subjectFilter) subjectFilter.addEventListener('change', () => {
       const sel = subjectFilter.value;
       if (sel && !LOADED_SUBJECTS[sel]) {
         showLoader('questions-container', 'Loading...');
-        loadSubject(sel).then(qs => {
-          ALL_QUESTIONS = qs;
-          renderFiltered();
-        });
+        loadSubject(sel).then(qs => { ALL_QUESTIONS = qs; renderFiltered(); });
       } else {
         ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel] || []) : Object.values(LOADED_SUBJECTS).flat();
         renderFiltered();
@@ -157,18 +198,18 @@ function initPractice() {
     const sf = subjectFilter ? subjectFilter.value : '';
     const pf = patternFilter ? patternFilter.value : '';
     const df = diffFilter    ? diffFilter.value    : '';
-    if (sf) filtered = filtered.filter(q => q.subject  === sf);
-    if (pf) filtered = filtered.filter(q => q.pattern  === pf);
+    if (sf) filtered = filtered.filter(q => q.subject    === sf);
+    if (pf) filtered = filtered.filter(q => q.pattern    === pf);
     if (df) filtered = filtered.filter(q => q.difficulty === df);
-
     if (countEl) countEl.textContent = `${filtered.length} questions`;
-    renderQuestions(filtered.slice(0, 50)); // render max 50 at a time
+    renderQuestions(filtered.slice(0, 50));
   }
 }
 
-/* ── ONE-AT-A-TIME PRACTICE ── */
-let _practiceQs  = [];
-let _practiceIdx = 0;
+// ── ONE-AT-A-TIME PRACTICE ────────────────────────────────────────────
+let _practiceQs   = [];
+let _practiceIdx  = 0;
+let _questionStart = 0;  // timestamp when current question was shown
 
 function renderQuestions(qs) {
   _practiceQs  = qs;
@@ -186,54 +227,42 @@ function showQuestion(idx) {
     return;
   }
 
-  _practiceIdx = idx;
-  const q      = _practiceQs[idx];
-  const total  = _practiceQs.length;
-  const isLast = idx === total - 1;
+  _practiceIdx   = idx;
+  _questionStart = Date.now();
+  const q        = _practiceQs[idx];
+  const total    = _practiceQs.length;
+  const isLast   = idx === total - 1;
 
   container.innerHTML = `
     <div style="max-width:680px;margin:0 auto;">
-
-      <!-- Progress bar -->
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;">
         <div style="flex:1;height:6px;background:#F0E8DE;border-radius:100px;overflow:hidden;">
           <div style="width:${Math.round(((idx+1)/total)*100)}%;height:100%;background:#FF6B1A;border-radius:100px;transition:width 0.3s;"></div>
         </div>
-        <span style="font-size:0.82rem;font-weight:600;color:#6B5C45;white-space:nowrap;">
-          ${idx+1} / ${total}
-        </span>
+        <span style="font-size:0.82rem;font-weight:600;color:#6B5C45;white-space:nowrap;">${idx+1} / ${total}</span>
       </div>
 
-      <!-- Question card -->
       <div class="q-card" id="qc-0" style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:2rem 2rem 1.5rem;">
-
-        <!-- Tags -->
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.2rem;">
-          <span style="${tagStyle(q.subject, 'subject')}">${q.subject}</span>
-          ${q.difficulty ? `<span style="${tagStyle(q.difficulty, 'diff')}">${q.difficulty}</span>` : ''}
+          <span style="${tagStyle(q.subject,'subject')}">${q.subject}</span>
+          ${q.difficulty ? `<span style="${tagStyle(q.difficulty,'diff')}">${q.difficulty}</span>` : ''}
           ${q.pattern    ? `<span style="${tagStyle('','pattern')}">${q.pattern}</span>` : ''}
           ${q.year       ? `<span style="${tagStyle('','year')}">NEET ${q.year}</span>` : ''}
         </div>
 
-        <!-- Question text -->
         <div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">${q.question}</div>
 
-        <!-- Options -->
         <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
           ${['A','B','C','D'].map(k => `
-            <button
-              data-key="${k}"
-              onclick="selectOption(0,'${k}')"
+            <button data-key="${k}" onclick="selectOption(0,'${k}')"
               style="background:#fff;border:1.5px solid #F0E8DE;border-radius:10px;padding:0.75rem 1.1rem;
                      width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;
                      color:#1A1208;transition:all 0.15s;display:flex;align-items:center;gap:10px;">
               <span style="font-weight:700;color:#FF6B1A;min-width:1.1rem;">${k}.</span>
               ${(q.options && q.options[k]) || ''}
-            </button>
-          `).join('')}
+            </button>`).join('')}
         </div>
 
-        <!-- Show Answer -->
         <button id="show-ans-btn" onclick="revealAnswer(0)"
           style="margin-top:1.1rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;
                  padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;
@@ -241,7 +270,6 @@ function showQuestion(idx) {
           Show Answer
         </button>
 
-        <!-- Explanation (hidden until answered) -->
         <div id="exp-0" style="display:none;margin-top:1rem;background:#FFF7F0;
              border:1px solid rgba(255,107,26,0.2);border-radius:12px;
              padding:1rem 1.2rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">
@@ -250,27 +278,21 @@ function showQuestion(idx) {
           ${cleanNcert(q)}
         </div>
 
-        <!-- Navigation -->
         <div id="nav-row" style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:12px;">
-          <button onclick="goQuestion(${idx - 1})"
-            ${idx === 0 ? 'disabled' : ''}
+          <button onclick="goQuestion(${idx-1})" ${idx===0?'disabled':''}
             style="background:none;border:1.5px solid #F0E8DE;border-radius:100px;
                    padding:0.55rem 1.2rem;font-size:0.875rem;font-weight:600;
-                   color:${idx === 0 ? '#D1C8BE' : '#6B5C45'};cursor:${idx === 0 ? 'default' : 'pointer'};
-                   font-family:inherit;">
+                   color:${idx===0?'#D1C8BE':'#6B5C45'};cursor:${idx===0?'default':'pointer'};font-family:inherit;">
             ← Prev
           </button>
-
-          <button id="next-btn" onclick="goQuestion(${idx + 1})"
-            ${isLast ? 'disabled' : ''}
-            style="background:${isLast ? '#F0E8DE' : '#FF6B1A'};border:none;border-radius:100px;
+          <button id="next-btn" onclick="goQuestion(${idx+1})" ${isLast?'disabled':''}
+            style="background:${isLast?'#F0E8DE':'#FF6B1A'};border:none;border-radius:100px;
                    padding:0.6rem 1.6rem;font-size:0.875rem;font-weight:700;
-                   color:${isLast ? '#A09080' : '#fff'};cursor:${isLast ? 'default' : 'pointer'};
-                   font-family:inherit;box-shadow:${isLast ? 'none' : '0 4px 14px rgba(255,107,26,0.3)'};">
+                   color:${isLast?'#A09080':'#fff'};cursor:${isLast?'default':'pointer'};
+                   font-family:inherit;box-shadow:${isLast?'none':'0 4px 14px rgba(255,107,26,0.3)'};">
             ${isLast ? 'Last Question' : 'Next →'}
           </button>
         </div>
-
       </div>
     </div>`;
 }
@@ -293,7 +315,6 @@ function tagStyle(val, type) {
 function goQuestion(idx) {
   if (idx < 0 || idx >= _practiceQs.length) return;
   showQuestion(idx);
-  // Double rAF: first waits for DOM update, second waits for layout/paint
   requestAnimationFrame(() => requestAnimationFrame(() => {
     const card = document.getElementById('qc-0');
     if (!card) return;
@@ -312,13 +333,28 @@ function selectOption(idx, key) {
   if (card && card.dataset.done) return;
   if (card) card.dataset.done = '1';
 
-  const correctKey = q.correct_answer;
+  const correctKey  = q.correct_answer;
+  const timeSpentMs = Date.now() - _questionStart;
+
+  // ── LOG ATTEMPT ──
+  ANALYTICS.saveAttempt({
+    type:        'practice',
+    questionId:  q.id || q.question_id || `${q.subject}_${idx}`,
+    subject:     q.subject,
+    chapter:     q.unit_code || '',
+    chapterName: UNIT_NAMES[q.unit_code] || q.unit_code || '',
+    difficulty:  q.difficulty || 'L1',
+    userAnswer:  key,
+    correctAnswer: correctKey,
+    isCorrect:   key === correctKey,
+    timeSpentMs,
+    year:        q.year || null,
+  });
 
   document.querySelectorAll('#options-wrap button').forEach(btn => {
     const k = btn.dataset.key;
     btn.style.pointerEvents = 'none';
     btn.style.cursor        = 'default';
-
     if (k === correctKey) {
       btn.style.background = '#F0FDF4';
       btn.style.border     = '2px solid #22C55E';
@@ -331,25 +367,21 @@ function selectOption(idx, key) {
       btn.style.color      = '#B91C1C';
       btn.style.opacity    = '1';
     } else {
-      btn.style.opacity    = '0.38';
+      btn.style.opacity = '0.38';
     }
   });
 
-  // Show explanation
   const exp = document.getElementById('exp-0');
   if (exp) exp.style.display = 'block';
-
-  // Hide show-answer button
   const sb = document.getElementById('show-ans-btn');
   if (sb) sb.style.display = 'none';
 
-  // Auto-advance to next after 1.5s if correct, keep visible if wrong
   if (key === correctKey) {
     const nextBtn = document.getElementById('next-btn');
     if (nextBtn && _practiceIdx < _practiceQs.length - 1) {
-      nextBtn.style.background  = '#22C55E';
-      nextBtn.style.boxShadow   = '0 4px 14px rgba(34,197,94,0.35)';
-      nextBtn.textContent       = 'Next →';
+      nextBtn.style.background = '#22C55E';
+      nextBtn.style.boxShadow  = '0 4px 14px rgba(34,197,94,0.35)';
+      nextBtn.textContent      = 'Next →';
     }
   }
 }
@@ -361,11 +393,25 @@ function revealAnswer(idx) {
   if (card && card.dataset.done) return;
   if (card) card.dataset.done = '1';
 
+  // Log as skipped/revealed
+  ANALYTICS.saveAttempt({
+    type:        'practice',
+    questionId:  q.id || q.question_id || `${q.subject}_${idx}`,
+    subject:     q.subject,
+    chapter:     q.unit_code || '',
+    chapterName: UNIT_NAMES[q.unit_code] || q.unit_code || '',
+    difficulty:  q.difficulty || 'L1',
+    userAnswer:  null,
+    correctAnswer: q.correct_answer,
+    isCorrect:   false,
+    revealed:    true,
+    timeSpentMs: Date.now() - _questionStart,
+  });
+
   document.querySelectorAll('#options-wrap button').forEach(btn => {
-    const k = btn.dataset.key;
     btn.style.pointerEvents = 'none';
     btn.style.cursor        = 'default';
-    if (k === q.correct_answer) {
+    if (btn.dataset.key === q.correct_answer) {
       btn.style.background = '#F0FDF4';
       btn.style.border     = '2px solid #22C55E';
       btn.style.color      = '#15803D';
@@ -386,14 +432,12 @@ function revealAnswer(idx) {
 function initUnits() {
   if (!document.getElementById('units-grid')) return;
   showLoader('units-grid', 'Loading units...');
-
   loadAllQuestions().then(qs => {
     const subjectFilter = document.getElementById('filter-subject');
     renderUnits(qs);
     if (subjectFilter) subjectFilter.addEventListener('change', () => {
       const sf = subjectFilter.value;
-      const filtered = sf ? qs.filter(q => q.subject === sf) : qs;
-      renderUnits(filtered);
+      renderUnits(sf ? qs.filter(q => q.subject === sf) : qs);
     });
   });
 }
@@ -401,20 +445,16 @@ function initUnits() {
 function renderUnits(qs) {
   const grid = document.getElementById('units-grid');
   if (!grid) return;
-
   const unitMap = {};
   qs.forEach(q => {
     const u = q.unit_code || 'UNCLASSIFIED';
     if (!unitMap[u]) unitMap[u] = { count: 0, subject: q.subject };
     unitMap[u].count++;
   });
-
   const sorted = Object.entries(unitMap).sort((a,b) => b[1].count - a[1].count);
   const max    = sorted[0]?.[1].count || 1;
-
   grid.innerHTML = sorted.map(([code, info]) => {
-    // Strip UNIT##_ prefix if not in map
-  const name = UNIT_NAMES[code] || code.replace(/^UNIT\d+_/, '').replace(/([A-Z])/g, ' $1').trim();
+    const name = UNIT_NAMES[code] || code.replace(/^UNIT\d+_/, '').replace(/([A-Z])/g, ' $1').trim();
     const pct  = Math.round((info.count / max) * 100);
     const subj = info.subject || subjectFromUnit(code);
     const cls  = subj === 'Biology' ? 'bio' : subj === 'Chemistry' ? 'chem' : 'phys';
