@@ -6,8 +6,11 @@
 <title>Units — NEETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
-<link rel="stylesheet" href="css/theme-override.css"/>
-<link rel="stylesheet" href="css/nav.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme-override.css">
+<link rel="stylesheet" href="css/nav.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -233,14 +236,17 @@
 
   @media (max-width: 600px) {
     #units-grid, .units-grid { grid-template-columns: 1fr; }
-    /* mobile handled by hamburger */
+    /* see nav.css for mobile */
   }
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <div class="logo">NEETO</div>
+  <a href="index.html" class="nav-brand">
+    <img src="neeto-logo.png" alt="NEETO logo">
+    <span>NEETO</span>
+  </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
@@ -259,7 +265,6 @@
   <a href="units.html" class="active">Units</a>
   <a href="analytics.html">Progress</a>
 </div>
-
 <div class="page-header">
   <h1>Practice by Unit</h1>
   <p>Click any unit to practise only those questions</p>
@@ -278,8 +283,12 @@
   <p style="color:#6B5C45; padding:40px; text-align:center;">Loading units...</p>
 </div>
 
-<footer>
-  <p>NEETO — Built for NEET aspirants</p>
+<footer class="neeto-footer">
+  <div class="footer-brand">
+    <img src="neeto-logo.png" alt="NEETO logo">
+    <span>NEETO</span>
+  </div>
+  <p>© 2026 NEETO. All rights reserved. Built for NEET aspirants.</p>
 </footer>
 
 <script src="js/app.js"></script>

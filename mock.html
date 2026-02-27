@@ -6,8 +6,11 @@
 <title>Mock Test — NEETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/style.css"/>
-<link rel="stylesheet" href="css/theme-override.css"/>
-<link rel="stylesheet" href="css/nav.css"/>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/theme-override.css">
+<link rel="stylesheet" href="css/nav.css">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -506,14 +509,17 @@
     .mock-body { flex-direction: column; }
     .mock-palette { width: 100%; position: static; border-left: none; border-top: 1px solid var(--border); }
     .result-grid { grid-template-columns: repeat(2, 1fr); }
-    /* mobile handled by hamburger */
+    /* see nav.css for mobile */
   }
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <div class="logo">NEETO</div>
+  <a href="index.html" class="nav-brand">
+    <img src="neeto-logo.png" alt="NEETO logo">
+    <span>NEETO</span>
+  </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
@@ -532,7 +538,6 @@
   <a href="units.html">Units</a>
   <a href="analytics.html">Progress</a>
 </div>
-
 <!-- START SCREEN -->
 <div id="start-screen">
   <h1>Full Mock Test</h1>
@@ -580,17 +585,7 @@
       <a href="mock.html">Retake Test</a>
       <a href="practice.html">Practice</a>
     </div>
-    <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-</nav>
-<div class="nav-mobile-menu" id="mobile-nav">
-  <a href="index.html">Home</a>
-  <a href="practice.html">Practice</a>
-  <a href="mock.html" class="active">Mock Test</a>
-  <a href="units.html">Units</a>
-  <a href="analytics.html">Progress</a>
-</div>
+  </nav>
   <div class="result-hero">
     <div style="color:#6B5C45; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Your Score</div>
     <div class="result-score" id="result-score">0</div>
@@ -920,5 +915,12 @@ function goToQuestion(idx) {
 }
 
 </script>
+<footer class="neeto-footer">
+  <div class="footer-brand">
+    <img src="neeto-logo.png" alt="NEETO logo">
+    <span>NEETO</span>
+  </div>
+  <p>© 2026 NEETO. All rights reserved. Built for NEET aspirants.</p>
+</footer>
 </body>
 </html>

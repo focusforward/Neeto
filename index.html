@@ -7,220 +7,127 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/theme-override.css"/>
-<link rel="stylesheet" href="css/nav.css"/>
+<link rel="stylesheet" href="css/theme-override.css">
+<link rel="stylesheet" href="css/nav.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; min-height: 100vh; }
 
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #FAFAF8;
-  color: #1A1208;
-  min-height: 100vh;
+/* COUNTDOWN STRIP */
+.countdown-strip {
+  background: linear-gradient(135deg, #FF6B1A 0%, #E85500 100%);
+  color: #fff; text-align: center; padding: 0.7rem 5%;
+  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.01em;
 }
+.countdown-strip strong { font-family: 'Fraunces', serif; font-size: 1.05rem; }
 
-/* ── HERO ── */
+/* HERO */
 .hero {
-  padding: 4rem 5% 3.5rem;
-  text-align: center;
-  max-width: 700px;
-  margin: 0 auto;
+  padding: 3.5rem 5% 3rem; text-align: center;
+  max-width: 720px; margin: 0 auto;
 }
 .hero h1 {
   font-family: 'Fraunces', serif;
-  font-size: clamp(2rem, 6vw, 3.2rem);
-  font-weight: 900;
-  letter-spacing: -0.03em;
-  line-height: 1.15;
-  color: #1A1208;
-  margin-bottom: 1rem;
+  font-size: clamp(2rem, 5.5vw, 3rem);
+  font-weight: 900; letter-spacing: -0.03em; line-height: 1.15;
+  color: #1A1208; margin-bottom: 0.9rem;
 }
 .hero h1 span { color: #FF6B1A; }
-.hero p {
-  font-size: clamp(0.95rem, 2.5vw, 1.1rem);
-  color: #6B5C45;
-  margin-bottom: 2rem;
-  line-height: 1.6;
-}
-.hero-buttons {
-  display: flex;
-  gap: 12px;
-  justify-content: center;
-  flex-wrap: wrap;
-}
+.hero p { font-size: clamp(0.92rem, 2.2vw, 1.05rem); color: #6B5C45; margin-bottom: 2rem; line-height: 1.65; }
+.hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+
 .btn-primary {
-  background: #FF6B1A;
-  color: #fff;
-  padding: 0.75rem 2rem;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
+  background: #FF6B1A; color: #fff;
+  padding: 0.75rem 2rem; border-radius: 100px;
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
   box-shadow: 0 6px 20px rgba(255,107,26,0.35);
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
+  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
+  display: inline-block;
 }
 .btn-primary:hover { background: #E85500; transform: translateY(-2px); }
+
 .btn-secondary {
-  background: #fff;
-  color: #FF6B1A;
-  padding: 0.75rem 2rem;
-  border-radius: 100px;
-  font-weight: 700;
-  font-size: 0.95rem;
-  text-decoration: none;
-  border: 2px solid #FF6B1A;
-  transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif;
+  background: #fff; color: #FF6B1A;
+  padding: 0.75rem 2rem; border-radius: 100px;
+  font-weight: 700; font-size: 0.95rem; text-decoration: none;
+  border: 2px solid #FF6B1A; transition: all 0.2s;
+  font-family: 'DM Sans', sans-serif; display: inline-block;
 }
 .btn-secondary:hover { background: #FFF0E6; }
 
-/* ── COUNTDOWN ── */
-.countdown-strip {
-  background: linear-gradient(135deg, #FF6B1A 0%, #E85500 100%);
-  color: #fff;
-  text-align: center;
-  padding: 0.8rem 5%;
-  font-size: 0.88rem;
-  font-weight: 600;
-  letter-spacing: 0.02em;
-}
-.countdown-strip span { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 900; }
-
-/* ── STATS ROW ── */
+/* STATS */
 .stats-row {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background: #F0E8DE;
-  border-top: 1.5px solid #F0E8DE;
-  border-bottom: 1.5px solid #F0E8DE;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: #F0E8DE;
+  border-top: 1.5px solid #F0E8DE; border-bottom: 1.5px solid #F0E8DE;
 }
-.stat-card {
-  background: #fff;
-  padding: 1.5rem 1rem;
-  text-align: center;
-}
+.stat-card { background: #fff; padding: 1.4rem 1rem; text-align: center; }
 .stat-number {
-  font-family: 'Fraunces', serif;
-  font-size: 2rem;
-  font-weight: 900;
-  color: #FF6B1A;
-  line-height: 1;
+  font-family: 'Fraunces', serif; font-size: 2rem;
+  font-weight: 900; color: #FF6B1A; line-height: 1;
 }
 .stat-label {
-  font-size: 0.75rem;
-  font-weight: 600;
-  color: #6B5C45;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  margin-top: 0.3rem;
+  font-size: 0.72rem; font-weight: 600; color: #6B5C45;
+  text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.3rem;
 }
 
-/* ── SUBJECT CARDS ── */
-.subject-cards {
-  max-width: 900px;
-  margin: 0 auto;
-  padding: 3rem 5%;
+/* SUBJECT CARDS */
+.subject-section { max-width: 900px; margin: 0 auto; padding: 2.5rem 5%; }
+.subject-section h2 {
+  font-family: 'Fraunces', serif; font-size: 1.4rem;
+  font-weight: 900; letter-spacing: -0.02em; margin-bottom: 1.1rem;
 }
-.subject-cards h2 {
-  font-family: 'Fraunces', serif;
-  font-size: 1.5rem;
-  font-weight: 900;
-  color: #1A1208;
-  letter-spacing: -0.02em;
-  margin-bottom: 1.2rem;
-}
-.cards-row {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1rem;
-}
+.cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
 .subject-card {
-  background: #fff;
-  border: 1.5px solid #F0E8DE;
-  border-radius: 18px;
-  padding: 1.8rem 1.4rem;
-  text-decoration: none;
-  display: flex;
-  flex-direction: column;
-  gap: 0.4rem;
-  transition: all 0.2s;
-  cursor: pointer;
+  background: #fff; border: 1.5px solid #F0E8DE; border-radius: 18px;
+  padding: 1.8rem 1.4rem; text-decoration: none;
+  display: flex; flex-direction: column; gap: 0.35rem;
+  transition: all 0.2s; cursor: pointer;
 }
-.subject-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 32px rgba(255,107,26,0.12);
-  border-color: #FF6B1A;
-}
-.subject-icon { font-size: 2rem; margin-bottom: 0.4rem; }
-.subject-name { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 900; color: #1A1208; }
+.subject-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,107,26,0.1); border-color: #FF6B1A; }
+.subject-icon { font-size: 2rem; margin-bottom: 0.3rem; }
+.subject-name { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 900; color: #1A1208; }
 .subject-count { font-size: 0.8rem; font-weight: 500; color: #6B5C45; }
 .subject-card.bio  { border-top: 3px solid #22C55E; }
 .subject-card.chem { border-top: 3px solid #2563EB; }
 .subject-card.phys { border-top: 3px solid #F59E0B; }
 
-/* ── FEATURES ── */
-.features {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 0.8rem;
-  max-width: 700px;
-  margin: 0 auto;
-  padding: 0 5% 4rem;
+/* PROGRESS TEASER */
+.progress-band {
+  background: #FFF7F0; border-top: 1.5px solid #F0E8DE; border-bottom: 1.5px solid #F0E8DE;
+  padding: 1.5rem 5%; display: flex; align-items: center;
+  justify-content: space-between; gap: 1rem; flex-wrap: wrap;
+}
+.progress-band h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 900; }
+.progress-band p  { font-size: 0.82rem; color: #6B5C45; margin-top: 3px; }
+
+/* FEATURES */
+.features-section { max-width: 760px; margin: 0 auto; padding: 0 5% 3rem; }
+.features-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;
 }
 .feature {
-  background: #fff;
-  border: 1.5px solid #F0E8DE;
-  border-radius: 12px;
-  padding: 0.9rem 1.1rem;
-  font-size: 0.88rem;
-  font-weight: 500;
-  color: #1A1208;
+  background: #fff; border: 1.5px solid #F0E8DE; border-radius: 12px;
+  padding: 0.9rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #1A1208;
 }
 
-/* ── PROGRESS TEASER ── */
-.progress-teaser {
-  background: linear-gradient(135deg, #FFF7F0 0%, #fff 100%);
-  border: 1.5px solid #F0E8DE;
-  border-radius: 18px;
-  padding: 1.5rem 1.8rem;
-  max-width: 700px;
-  margin: 0 auto 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  margin-left: 5%;
-  margin-right: 5%;
-}
-.progress-teaser h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 900; color: #1A1208; }
-.progress-teaser p  { font-size: 0.82rem; color: #6B5C45; margin-top: 2px; }
-
-/* ── FOOTER ── */
-footer {
-  border-top: 1.5px solid #F0E8DE;
-  padding: 1.5rem 5%;
-  text-align: center;
-  font-size: 0.82rem;
-  color: #6B5C45;
-  background: #fff;
-}
-
-/* ── MOBILE ── */
+/* MOBILE */
 @media (max-width: 680px) {
-  .stats-row     { grid-template-columns: repeat(2, 1fr); }
-  .cards-row     { grid-template-columns: 1fr; }
-  .features      { grid-template-columns: 1fr; }
-  .hero          { padding: 2.5rem 5% 2rem; }
+  .stats-row { grid-template-columns: repeat(2, 1fr); }
+  .cards-row { grid-template-columns: 1fr; }
+  .features-grid { grid-template-columns: 1fr; }
+  .hero { padding: 2rem 5% 1.8rem; }
+  .progress-band { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
 }
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <a href="index.html" class="logo">NEETO</a>
+  <a href="index.html" class="nav-brand">
+    <img src="neeto-logo.png" alt="NEETO logo">
+    <span>NEETO</span>
+  </a>
   <div class="nav-links">
     <a href="index.html" class="active">Home</a>
     <a href="practice.html">Practice</a>
@@ -241,12 +148,12 @@ footer {
 </div>
 
 <div class="countdown-strip">
-  🎯 NEET 2026 in <span id="days-hero">—</span> days &nbsp;·&nbsp; May 6, 2026
+  🎯 NEET 2026 in <strong id="days-hero">—</strong> days &nbsp;·&nbsp; May 6, 2026
 </div>
 
 <section class="hero">
   <h1>Crack NEET with <span>verified questions</span></h1>
-  <p>804 questions from NEET 2023, 2024, 2025 + NCERT-cited originals. Track your progress, fix your weak spots.</p>
+  <p>804 questions from NEET 2023, 2024, 2025 + NCERT-cited originals. Practice smart, track your progress, fix weak spots.</p>
   <div class="hero-buttons">
     <a href="practice.html" class="btn-primary">Start Practice</a>
     <a href="mock.html" class="btn-secondary">Take Mock Test</a>
@@ -260,7 +167,7 @@ footer {
   <div class="stat-card"><div class="stat-number">48</div><div class="stat-label">Units Covered</div></div>
 </div>
 
-<section class="subject-cards">
+<section class="subject-section">
   <h2>Practice by Subject</h2>
   <div class="cards-row">
     <a href="practice.html?subject=Biology" class="subject-card bio">
@@ -281,28 +188,33 @@ footer {
   </div>
 </section>
 
-<div class="progress-teaser">
+<div class="progress-band">
   <div>
     <h3>📊 Track your progress</h3>
-    <p>Your scores, weak chapters, and accuracy — all saved locally.</p>
+    <p>Scores, weak chapters, accuracy — saved right in your browser.</p>
   </div>
-  <a href="analytics.html" class="btn-primary" style="white-space:nowrap;font-size:0.85rem;padding:0.6rem 1.4rem;">View Progress →</a>
+  <a href="analytics.html" class="btn-primary" style="font-size:0.85rem;padding:0.6rem 1.4rem;white-space:nowrap;">View Progress →</a>
 </div>
 
-<section class="features">
-  <div class="feature">✅ Official NEET 2023–2025 questions</div>
-  <div class="feature">📖 Every question linked to NCERT</div>
-  <div class="feature">🎯 6 question patterns + GOOGLY traps</div>
-  <div class="feature">📝 Full 200-question mock test</div>
+<section class="features-section" style="padding-top:2rem;">
+  <div class="features-grid">
+    <div class="feature">✅ Official NEET 2023–2025 questions</div>
+    <div class="feature">📖 Every question linked to NCERT</div>
+    <div class="feature">🎯 6 question patterns + GOOGLY traps</div>
+    <div class="feature">📝 Full 200-question mock test</div>
+  </div>
 </section>
 
-<footer>
-  <p>NEETO — Built for NEET aspirants</p>
+<footer class="neeto-footer">
+  <div class="footer-brand">
+    <img src="neeto-logo.png" alt="NEETO logo">
+    <span>NEETO</span>
+  </div>
+  <p>© 2026 NEETO. All rights reserved. Built for NEET aspirants.</p>
 </footer>
 
 <script src="js/app.js"></script>
 <script>
-// Countdown
 (function() {
   var neet = new Date('2026-05-06T00:00:00');
   var today = new Date(); today.setHours(0,0,0,0);
@@ -311,15 +223,13 @@ footer {
   if (el) el.textContent = days > 0 ? days : '🎓';
 })();
 function toggleMobileNav() {
-  var m = document.getElementById('mobile-nav');
-  if (m) m.classList.toggle('open');
+  document.getElementById('mobile-nav').classList.toggle('open');
 }
 document.addEventListener('click', function(e) {
   var m = document.getElementById('mobile-nav');
   var btn = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && btn && !m.contains(e.target) && !btn.contains(e.target)) {
+  if (m && m.classList.contains('open') && !m.contains(e.target) && btn && !btn.contains(e.target))
     m.classList.remove('open');
-  }
 });
 </script>
 </body>
