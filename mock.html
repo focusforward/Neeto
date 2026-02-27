@@ -590,35 +590,212 @@
 <script src="js/app.js"></script>
 <script src="js/mock.js"></script>
 <script>
-// Fix dark backgrounds injected dynamically by app.js / mock.js
-(function() {
-  const DARK = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
-  const LIGHT_TEXT = /^#(?:[e-f]{3,6}|(?:cc|dd|ee|ff){2,3}|fff|ccc|ddd|eee|888|999|666)/i;
+/* ═══════════════════════════════════════════════════════
+   NEETO MOCK — theme fix + answer marking
+   ═══════════════════════════════════════════════════════
+   During test  → clicked option turns ORANGE (selected)
+   After submit → correct = GREEN, wrong chosen = RED,
+                  unattempted correct = green outline
+   Review panel → clicking palette number scrolls to
+                  that question and flashes it
+   ═══════════════════════════════════════════════════════ */
+(function () {
 
-  function fixEl(el) {
+  /* ── 1. DARK-BG SANITISER (no attribute watching) ── */
+  const DARK_BG   = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
+  const LIGHT_COL = /^#(?:fff|eee|ddd|ccc|bbb|aaa|999|888|777)/i;
+
+  function sanitiseEl(el) {
     if (!(el instanceof HTMLElement)) return;
+    if (el.closest('[data-mock-answered]')) return; // never touch answered opts
     const s = el.style;
-    if (s.background && DARK.test(s.background.trim()))          s.background = '#ffffff';
-    if (s.backgroundColor && DARK.test(s.backgroundColor.trim())) s.backgroundColor = '#ffffff';
-    if (s.color && LIGHT_TEXT.test(s.color.trim()))               s.color = '#1A1208';
-    if (s.borderColor && DARK.test(s.borderColor.trim()))         s.borderColor = '#F0E8DE';
+    if (s.background      && DARK_BG.test(s.background.trim()))      s.background      = '';
+    if (s.backgroundColor && DARK_BG.test(s.backgroundColor.trim())) s.backgroundColor = '';
+    if (s.color           && LIGHT_COL.test(s.color.trim()))          s.color           = '';
+    if (s.borderColor     && DARK_BG.test(s.borderColor.trim()))      s.borderColor     = '';
   }
 
-  function fixAll() {
-    document.querySelectorAll('*').forEach(fixEl);
+  function sanitiseTree(root) {
+    sanitiseEl(root);
+    root.querySelectorAll && root.querySelectorAll('*').forEach(sanitiseEl);
   }
 
-  window.addEventListener('load', fixAll);
-  [300, 800, 1500, 3000].forEach(t => setTimeout(fixAll, t));
+  // Watch only newly added nodes — NOT attribute changes
+  new MutationObserver(muts => {
+    muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) sanitiseTree(n); }));
+  }).observe(document.body, { childList: true, subtree: true });
 
-  new MutationObserver(mutations => {
-    mutations.forEach(m => {
-      m.addedNodes.forEach(n => {
-        if (n.nodeType === 1) { fixEl(n); n.querySelectorAll && n.querySelectorAll('*').forEach(fixEl); }
+  [200, 600, 1200].forEach(t => setTimeout(() => sanitiseTree(document.body), t));
+
+
+  /* ── 2. OPTION SELECTOR helper ── */
+  const OPT_SEL =
+    '[data-option], [data-correct], .option, .opt, ' +
+    'li.q-option, div.q-option, button.q-option, ' +
+    '.answer-option, .choice, [class*="option-btn"]';
+
+  const CARD_SEL =
+    '[data-answer], [data-correct-index], [data-key], ' +
+    '.question-card, .q-card, .question-block, [class*="q-wrap"], .mock-question';
+
+  function getOptions(card) {
+    return Array.from(card.querySelectorAll(OPT_SEL));
+  }
+
+  function getCorrectOpt(card, opts) {
+    // a) explicit data-correct attr on option
+    let c = opts.find(o => o.dataset.correct === 'true' || o.dataset.correct === '1');
+    if (c) return c;
+    // b) card data-answer = "A"/"B"/"0"/"1"
+    if (card.dataset.answer !== undefined) {
+      const ans = card.dataset.answer.trim().toLowerCase();
+      c = opts.find((o, i) => {
+        const key = (o.dataset.option || o.dataset.key || String.fromCharCode(65 + i)).toLowerCase();
+        return key === ans || String(i) === ans;
       });
-      if (m.type === 'attributes' && m.attributeName === 'style') fixEl(m.target);
+      if (c) return c;
+    }
+    // c) card data-correct-index
+    if (card.dataset.correctIndex !== undefined) return opts[+card.dataset.correctIndex] || null;
+    // d) app.js may have already classed it .correct
+    return opts.find(o => o.classList.contains('correct') || o.classList.contains('right')) || null;
+  }
+
+
+  /* ── 3. DURING-TEST click → mark ORANGE ── */
+  const mockQs = document.getElementById('mock-questions');
+  if (mockQs) {
+    mockQs.addEventListener('click', function (e) {
+      const opt  = e.target.closest(OPT_SEL);  if (!opt)  return;
+      const card = opt.closest(CARD_SEL);       if (!card) return;
+      if (card.hasAttribute('data-mock-answered')) return; // locked after submit
+
+      const opts = getOptions(card);
+
+      // Clear previous selection on this card
+      opts.forEach(o => {
+        o.style.background      = '';
+        o.style.backgroundColor = '';
+        o.style.color           = '';
+        o.style.borderColor     = '';
+        o.classList.remove('neeto-selected');
+        o.removeAttribute('data-chosen');
+      });
+
+      // Mark clicked option orange
+      opt.style.background      = '#FFF0E6';
+      opt.style.backgroundColor = '#FFF0E6';
+      opt.style.borderColor     = '#FF6B1A';
+      opt.style.color           = '#E85500';
+      opt.classList.add('neeto-selected');
+      opt.setAttribute('data-chosen', '1');
+      card.setAttribute('data-selected', opts.indexOf(opt));
+
+      // Update palette button → answered (green)
+      const qNum = card.dataset.qnum || card.dataset.index;
+      if (qNum !== undefined) {
+        const palBtn = document.querySelector(`#palette [data-qnum="${qNum}"], #palette button:nth-child(${+qNum + 1})`);
+        if (palBtn) {
+          palBtn.style.background   = '#DCFCE7';
+          palBtn.style.borderColor  = '#22C55E';
+          palBtn.style.color        = '#15803D';
+        }
+      }
     });
-  }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ['style'] });
+  }
+
+
+  /* ── 4. POST-SUBMIT review colouring ── */
+  // We hook into the existing submitMock / window.submitMock if present,
+  // or watch for the result screen becoming visible.
+
+  function colourReviewCards() {
+    const reviewContainer = document.getElementById('review-container');
+    if (!reviewContainer) return;
+
+    // Also colour cards still in mock-questions (full review mode)
+    [mockQs, reviewContainer].forEach(container => {
+      if (!container) return;
+      container.querySelectorAll(CARD_SEL).forEach(card => {
+        card.setAttribute('data-mock-answered', '1');
+        const opts      = getOptions(card);
+        const correctOpt = getCorrectOpt(card, opts);
+        const chosenIdx  = card.dataset.selected !== undefined ? +card.dataset.selected : -1;
+        const chosenOpt  = chosenIdx >= 0 ? opts[chosenIdx] : null;
+
+        opts.forEach(o => {
+          o.style.background = ''; o.style.backgroundColor = '';
+          o.style.color = ''; o.style.borderColor = '';
+        });
+
+        if (correctOpt) {
+          correctOpt.style.background      = '#F0FDF4';
+          correctOpt.style.backgroundColor = '#F0FDF4';
+          correctOpt.style.borderColor     = '#22C55E';
+          correctOpt.style.color           = '#15803D';
+        }
+        if (chosenOpt && chosenOpt !== correctOpt) {
+          chosenOpt.style.background      = '#FEF2F2';
+          chosenOpt.style.backgroundColor = '#FEF2F2';
+          chosenOpt.style.borderColor     = '#EF4444';
+          chosenOpt.style.color           = '#B91C1C';
+        }
+
+        // Show explanation
+        const exp = card.querySelector('.explanation, .answer-block, [class*="explain"]');
+        if (exp) { exp.style.display = 'block'; exp.style.background = ''; exp.style.color = ''; }
+      });
+    });
+  }
+
+  // Watch for result-screen becoming visible
+  const resultScreen = document.getElementById('result-screen');
+  if (resultScreen) {
+    new MutationObserver(() => {
+      if (resultScreen.style.display !== 'none' && resultScreen.offsetParent !== null) {
+        setTimeout(colourReviewCards, 300);
+      }
+    }).observe(resultScreen, { attributes: true, attributeFilter: ['style'] });
+  }
+
+  // Also patch window.submitMock if app defines it
+  const _origSubmit = window.submitMock;
+  window.submitMock = function () {
+    if (_origSubmit) _origSubmit.apply(this, arguments);
+    setTimeout(colourReviewCards, 500);
+    setTimeout(colourReviewCards, 1500); // second pass after render
+  };
+
+
+  /* ── 5. PALETTE JUMP — click palette btn → scroll to question ── */
+  const palette = document.getElementById('palette');
+  if (palette) {
+    palette.addEventListener('click', function (e) {
+      const btn = e.target.closest('button, [data-qnum], .pal-btn');
+      if (!btn) return;
+
+      // Find question number from button text or data attr
+      const qnum = btn.dataset.qnum || btn.textContent.trim();
+      if (!qnum) return;
+
+      // Find card by data-qnum or by nth-child position
+      let card = document.querySelector(`[data-qnum="${qnum}"]`);
+      if (!card && mockQs) {
+        const cards = mockQs.querySelectorAll(CARD_SEL);
+        card = cards[+qnum - 1] || null;
+      }
+
+      if (card) {
+        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        // Flash highlight
+        const orig = card.style.outline;
+        card.style.outline = '3px solid #FF6B1A';
+        card.style.borderRadius = '18px';
+        setTimeout(() => { card.style.outline = orig; }, 1200);
+      }
+    });
+  }
+
 })();
 </script>
 </body>

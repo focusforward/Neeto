@@ -353,66 +353,174 @@
 
 <script src="js/app.js"></script>
 <script>
-// Fix dark backgrounds injected dynamically by app.js
-(function() {
-  const DARK = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
-  const LIGHT_TEXT = /^#(?:[e-f]{3,6}|(?:cc|dd|ee|ff){2,3}|fff|ccc|ddd|eee|888|999|666)/i;
+(function () {
+  /* ─────────────────────────────────────────────
+     NEETO PRACTICE — answer marking + theme fix
+     Strategy:
+       1. One-time dark-bg sweep when new cards are
+          injected by app.js (no attribute watching —
+          that was killing answer colours).
+       2. Delegated click listener on #questions-container
+          that marks correct / wrong immediately.
+  ───────────────────────────────────────────── */
 
-  function fixEl(el) {
+  const DARK_BG   = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
+  const LIGHT_COL = /^#(?:fff|eee|ddd|ccc|bbb|aaa|999|888|777)/i;
+
+  /* Strip dark inline styles from a freshly-injected element
+     but SKIP elements that already have answer state */
+  function sanitiseEl(el) {
     if (!(el instanceof HTMLElement)) return;
+    // Don't touch anything that's been answered
+    if (el.closest('[data-answered]')) return;
     const s = el.style;
-
-    // Fix dark backgrounds
-    if (s.background && DARK.test(s.background.trim())) {
-      s.background = '#ffffff';
-    }
-    if (s.backgroundColor && DARK.test(s.backgroundColor.trim())) {
-      s.backgroundColor = '#ffffff';
-    }
-
-    // Fix light (unreadable on white) text colours
-    if (s.color && LIGHT_TEXT.test(s.color.trim())) {
-      s.color = '#1A1208';
-    }
-
-    // Fix dark border colours
-    if (s.borderColor && DARK.test(s.borderColor.trim())) {
-      s.borderColor = '#F0E8DE';
-    }
+    if (s.background    && DARK_BG.test(s.background.trim()))    s.background    = '';
+    if (s.backgroundColor && DARK_BG.test(s.backgroundColor.trim())) s.backgroundColor = '';
+    if (s.color         && LIGHT_COL.test(s.color.trim()))       s.color         = '';
+    if (s.borderColor   && DARK_BG.test(s.borderColor.trim()))   s.borderColor   = '';
   }
 
-  function fixAll(root) {
-    (root || document).querySelectorAll('*').forEach(fixEl);
+  function sanitiseTree(root) {
+    sanitiseEl(root);
+    root.querySelectorAll && root.querySelectorAll('*').forEach(sanitiseEl);
   }
 
-  // Run once after app.js loads
-  window.addEventListener('load', () => fixAll());
-  setTimeout(() => fixAll(), 300);
-  setTimeout(() => fixAll(), 800);
-  setTimeout(() => fixAll(), 1500);
-
-  // Watch for future DOM changes
-  const obs = new MutationObserver(mutations => {
+  /* Watch only for NEW nodes being added (no attribute watching) */
+  new MutationObserver(mutations => {
     mutations.forEach(m => {
       m.addedNodes.forEach(n => {
-        if (n.nodeType === 1) {
-          fixEl(n);
-          n.querySelectorAll && n.querySelectorAll('*').forEach(fixEl);
-        }
+        if (n.nodeType === 1) sanitiseTree(n);
       });
-      // Also fix attribute changes (style attr updates)
-      if (m.type === 'attributes' && m.attributeName === 'style') {
-        fixEl(m.target);
-      }
     });
+  }).observe(document.body, { childList: true, subtree: true });
+
+  /* Also run a couple of sweeps after page load for initial render */
+  [200, 600, 1200].forEach(t => setTimeout(() => sanitiseTree(document.body), t));
+
+  /* ── ANSWER MARKING ──────────────────────────
+     We use event delegation so it works for cards
+     rendered at any time by app.js.
+
+     We look for the correct answer in two ways:
+       a) data-correct attribute on the option element
+       b) data-answer attribute on the card/container
+          holding the index/key of the correct option
+  ─────────────────────────────────────────────── */
+
+  const container = document.getElementById('questions-container');
+  if (!container) return;
+
+  container.addEventListener('click', function (e) {
+    /* Find the clicked option — support divs, buttons, li */
+    const opt = e.target.closest(
+      '[data-correct], [data-option], .option, .opt, ' +
+      'li.q-option, div.q-option, button.q-option, ' +
+      '.answer-option, .choice, [class*="option-btn"]'
+    );
+    if (!opt) return;
+
+    /* Find the parent question card */
+    const card = opt.closest(
+      '[data-answer], [data-correct-index], [data-key], ' +
+      '.question-card, .q-card, .question-block, [class*="q-wrap"]'
+    );
+    if (!card) return;
+
+    /* Don't re-mark an already answered question */
+    if (card.hasAttribute('data-answered')) return;
+    card.setAttribute('data-answered', '1');
+
+    /* ── Determine which option is correct ── */
+    let correctOpt = null;
+
+    // Method A: one of the options has data-correct="true"
+    const allOpts = card.querySelectorAll(
+      '[data-correct], [data-option], .option, .opt, ' +
+      'li.q-option, div.q-option, button.q-option, ' +
+      '.answer-option, .choice, [class*="option-btn"]'
+    );
+
+    // Try data-correct attr first
+    allOpts.forEach(o => {
+      if (o.dataset.correct === 'true' || o.dataset.correct === '1') correctOpt = o;
+    });
+
+    // Method B: card has data-answer="A" / "0" / "1" etc.
+    if (!correctOpt && card.dataset.answer !== undefined) {
+      const ans = card.dataset.answer.trim().toLowerCase();
+      allOpts.forEach((o, i) => {
+        const key = (o.dataset.option || o.dataset.key || String.fromCharCode(65 + i)).toLowerCase();
+        if (key === ans || String(i) === ans) correctOpt = o;
+      });
+    }
+
+    // Method C: card has data-correct-index
+    if (!correctOpt && card.dataset.correctIndex !== undefined) {
+      correctOpt = allOpts[parseInt(card.dataset.correctIndex)];
+    }
+
+    // Method D: app.js may have already added a class like .correct / .right
+    // to the option *before* we get here — find it
+    if (!correctOpt) {
+      allOpts.forEach(o => {
+        if (o.classList.contains('correct') || o.classList.contains('right')) correctOpt = o;
+      });
+    }
+
+    /* ── Apply colours ── */
+    const isCorrect = correctOpt && (opt === correctOpt);
+
+    // Clear any inline styles app.js may have set on all options
+    allOpts.forEach(o => {
+      o.style.background = '';
+      o.style.backgroundColor = '';
+      o.style.color = '';
+      o.style.borderColor = '';
+      o.classList.remove('selected', 'active', 'chosen');
+    });
+
+    // Mark the chosen option
+    if (isCorrect) {
+      applyCorrect(opt);
+    } else {
+      applyWrong(opt);
+      if (correctOpt) applyCorrect(correctOpt); // reveal the right answer
+    }
+
+    // Lock all options (no more clicking)
+    allOpts.forEach(o => { o.style.pointerEvents = 'none'; o.style.cursor = 'default'; });
+
+    // Scroll the correct answer into view if it's off-screen
+    if (correctOpt && !isCorrect) {
+      correctOpt.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Show explanation if app.js has one hidden
+    const exp = card.querySelector('.explanation, .answer-block, [class*="explain"], [class*="answer-block"]');
+    if (exp) {
+      exp.style.display = 'block';
+      exp.style.background = '';
+      exp.style.backgroundColor = '';
+      exp.style.color = '';
+    }
   });
 
-  obs.observe(document.body, {
-    childList: true,
-    subtree: true,
-    attributes: true,
-    attributeFilter: ['style']
-  });
+  function applyCorrect(el) {
+    el.style.background      = '#F0FDF4';
+    el.style.backgroundColor = '#F0FDF4';
+    el.style.borderColor     = '#22C55E';
+    el.style.color           = '#15803D';
+    el.classList.add('neeto-correct');
+  }
+
+  function applyWrong(el) {
+    el.style.background      = '#FEF2F2';
+    el.style.backgroundColor = '#FEF2F2';
+    el.style.borderColor     = '#EF4444';
+    el.style.color           = '#B91C1C';
+    el.classList.add('neeto-wrong');
+  }
+
 })();
 </script>
 </body>
