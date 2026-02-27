@@ -100,11 +100,9 @@ function renderMockQuestions() {
         <div class="q-text" style="font-size:0.97rem;line-height:1.7;color:#1A1208;margin-bottom:1rem;">${q.question}</div>
         <div class="q-options options" id="opts-${i}">
           ${['A','B','C','D'].map(k => `
-            <button class="q-option option" data-key="${k}" data-index="${i}"
+            <button class="q-option option mock-opt" data-key="${k}" data-index="${i}"
               style="background:#fff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;"
               onclick="mockSelectAnswer(${i},'${k}')"
-              onmouseover="if(!window.testSubmitted && window.userAnswers[${i}]!=='${k}'){this.style.borderColor='#FF6B1A';this.style.background='#FFF0E6';this.style.color='#E85500';}"
-              onmouseout="if(!window.testSubmitted && window.userAnswers[${i}]!=='${k}'){this.style.borderColor='#F0E8DE';this.style.background='#fff';this.style.color='#1A1208';}"
             ><span style="font-weight:700;color:#FF6B1A;margin-right:0.4rem;">${k}</span> ${q.options[k] || ''}</button>
           `).join('')}
         </div>
@@ -123,19 +121,38 @@ function renderMockQuestions() {
 function mockSelectAnswer(idx, key) {
   if (testSubmitted) return;
   key = String(key).toUpperCase();
-  const prev = userAnswers[idx];
   userAnswers[idx] = key;
+  window.userAnswers = userAnswers; // keep global in sync
 
-  document.querySelectorAll(`#opts-${idx} .option`).forEach(btn => {
+  // Clear all options in this question, mark only the chosen one
+  document.querySelectorAll(`#opts-${idx} .mock-opt`).forEach(btn => {
     const k = btn.dataset.key;
-    btn.style.background  = k === key ? '#FFF0E6' : '#ffffff';
-    btn.style.borderColor = k === key ? '#FF6B1A' : '#F0E8DE';
-    btn.style.color       = k === key ? '#E85500' : '#1A1208';
-    btn.style.fontWeight  = k === key ? '600'    : '400';
-    btn.style.opacity     = k === key ? '1'      : '0.7';
+    btn.removeAttribute('style');
+    btn.style.background   = '#fff';
+    btn.style.border       = '1.5px solid #F0E8DE';
+    btn.style.color        = '#1A1208';
+    btn.style.borderRadius = '10px';
+    btn.style.padding      = '0.65rem 1rem';
+    btn.style.width        = '100%';
+    btn.style.textAlign    = 'left';
+    btn.style.fontSize     = '0.9rem';
+    btn.style.cursor       = 'pointer';
+    btn.style.fontFamily   = 'inherit';
+    btn.style.display      = 'block';
+    btn.style.marginBottom = '0.5rem';
+    btn.style.transition   = 'all 0.15s';
+    btn.style.fontWeight   = '400';
+    btn.style.opacity      = '1';
+
+    if (k === key) {
+      btn.style.background  = '#FFF0E6';
+      btn.style.border      = '2px solid #FF6B1A';
+      btn.style.color       = '#E85500';
+      btn.style.fontWeight  = '600';
+    }
+    btn.dataset.selected = (k === key) ? '1' : '';
   });
 
-  // Update palette
   updatePaletteBtn(idx, 'answered');
 }
 
