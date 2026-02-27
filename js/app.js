@@ -413,7 +413,8 @@ function renderUnits(qs) {
   const max    = sorted[0]?.[1].count || 1;
 
   grid.innerHTML = sorted.map(([code, info]) => {
-    const name = UNIT_NAMES[code] || code;
+    // Strip UNIT##_ prefix if not in map
+  const name = UNIT_NAMES[code] || code.replace(/^UNIT\d+_/, '').replace(/([A-Z])/g, ' $1').trim();
     const pct  = Math.round((info.count / max) * 100);
     const subj = info.subject || subjectFromUnit(code);
     const cls  = subj === 'Biology' ? 'bio' : subj === 'Chemistry' ? 'chem' : 'phys';
