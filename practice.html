@@ -351,175 +351,184 @@
   <p>NEETO — Built for NEET aspirants</p>
 </footer>
 
+
 <script src="js/app.js"></script>
 <script>
 (function () {
-  /* ─────────────────────────────────────────────
-     NEETO PRACTICE — answer marking + theme fix
-     Strategy:
-       1. One-time dark-bg sweep when new cards are
-          injected by app.js (no attribute watching —
-          that was killing answer colours).
-       2. Delegated click listener on #questions-container
-          that marks correct / wrong immediately.
-  ───────────────────────────────────────────── */
+  /* ═══════════════════════════════════════════════════════════
+     NEETO PRACTICE — patches window.selectOption (which app.js
+     defines and calls via onclick="selectOption(index, key)")
 
-  const DARK_BG   = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
-  const LIGHT_COL = /^#(?:fff|eee|ddd|ccc|bbb|aaa|999|888|777)/i;
+     app.js structure (confirmed from DOM):
+       - Cards:   .q-card  id="qc-{index}"
+       - Options: button.option  data-key="A/B/C/D"  data-index="{cardIndex}"
+       - Answer:  .explanation  id="exp-{index}"
+                  text contains "✅ Correct Answer: A"
+       - Show btn: button.show-btn  onclick="revealAnswer(index)"
+  ═══════════════════════════════════════════════════════════ */
 
-  /* Strip dark inline styles from a freshly-injected element
-     but SKIP elements that already have answer state */
-  function sanitiseEl(el) {
-    if (!(el instanceof HTMLElement)) return;
-    // Don't touch anything that's been answered
-    if (el.closest('[data-answered]')) return;
-    const s = el.style;
-    if (s.background    && DARK_BG.test(s.background.trim()))    s.background    = '';
-    if (s.backgroundColor && DARK_BG.test(s.backgroundColor.trim())) s.backgroundColor = '';
-    if (s.color         && LIGHT_COL.test(s.color.trim()))       s.color         = '';
-    if (s.borderColor   && DARK_BG.test(s.borderColor.trim()))   s.borderColor   = '';
-  }
+  /* ── Wait for app.js to define selectOption, then patch it ── */
+  function patchWhenReady() {
+    if (typeof window.selectOption !== 'function') {
+      setTimeout(patchWhenReady, 50);
+      return;
+    }
 
-  function sanitiseTree(root) {
-    sanitiseEl(root);
-    root.querySelectorAll && root.querySelectorAll('*').forEach(sanitiseEl);
-  }
+    const _orig = window.selectOption;
 
-  /* Watch only for NEW nodes being added (no attribute watching) */
-  new MutationObserver(mutations => {
-    mutations.forEach(m => {
-      m.addedNodes.forEach(n => {
-        if (n.nodeType === 1) sanitiseTree(n);
+    window.selectOption = function (cardIndex, chosenKey) {
+      /* 1. Let app.js do its thing first */
+      _orig.call(this, cardIndex, chosenKey);
+
+      /* 2. Now fix up the colours it just set */
+      const card = document.getElementById('qc-' + cardIndex);
+      if (!card) return;
+
+      /* Read the correct answer from the explanation block */
+      const exp = document.getElementById('exp-' + cardIndex);
+      let correctKey = null;
+      if (exp) {
+        const m = exp.textContent.match(/Correct Answer[:\s]+([A-D])/i);
+        if (m) correctKey = m[1].toUpperCase();
+      }
+
+      const opts = card.querySelectorAll('button.option');
+
+      opts.forEach(btn => {
+        const key = (btn.dataset.key || '').toUpperCase();
+
+        /* Clear whatever dark styles app.js set */
+        btn.style.cssText = '';
+        btn.style.opacity = '';
+        btn.classList.remove('neeto-correct', 'neeto-wrong', 'neeto-selected');
+
+        if (key === correctKey) {
+          /* ✅ Correct answer — always green */
+          btn.style.background   = '#F0FDF4';
+          btn.style.borderColor  = '#22C55E';
+          btn.style.color        = '#15803D';
+          btn.style.fontWeight   = '600';
+          btn.classList.add('neeto-correct');
+        } else if (key === chosenKey.toUpperCase()) {
+          /* ❌ Wrong choice — red */
+          btn.style.background   = '#FEF2F2';
+          btn.style.borderColor  = '#EF4444';
+          btn.style.color        = '#B91C1C';
+          btn.classList.add('neeto-wrong');
+        } else {
+          /* Other options — dim slightly */
+          btn.style.opacity      = '0.55';
+          btn.style.background   = '#ffffff';
+          btn.style.borderColor  = '#F0E8DE';
+          btn.style.color        = '#1A1208';
+        }
+
+        /* Lock — no re-clicking */
+        btn.style.pointerEvents = 'none';
+        btn.style.cursor        = 'default';
       });
+
+      /* Show explanation with our styling */
+      if (exp) {
+        exp.style.display         = 'block';
+        exp.style.background      = '#FFF0E6';
+        exp.style.backgroundColor = '#FFF0E6';
+        exp.style.border          = '1px solid rgba(255,107,26,0.25)';
+        exp.style.borderRadius    = '10px';
+        exp.style.padding         = '0.9rem 1.1rem';
+        exp.style.color           = '#1A1208';
+        exp.style.marginTop       = '0.9rem';
+      }
+    };
+  }
+
+  patchWhenReady();
+
+  /* ── TAG COLOURS ─────────────────────────────────────────
+     app.js renders:
+       <span class="tag tag-subject">Biology</span>
+       <span class="tag tag-diff">L1</span>
+  ────────────────────────────────────────────────────────── */
+  function colourTags() {
+    /* Subject tags */
+    document.querySelectorAll('.tag-subject, .tag.tag-subject').forEach(el => {
+      const t = el.textContent.trim().toLowerCase();
+      el.style.cssText = ''; /* clear dark inline */
+      if (t === 'biology') {
+        el.style.background = '#DCFCE7'; el.style.color = '#15803D';
+      } else if (t === 'chemistry') {
+        el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8';
+      } else if (t === 'physics') {
+        el.style.background = '#FEF3C7'; el.style.color = '#B45309';
+      }
+      el.style.borderRadius  = '100px';
+      el.style.fontWeight    = '700';
+      el.style.fontSize      = '0.72rem';
+      el.style.padding       = '0.25rem 0.65rem';
+      el.style.textTransform = 'uppercase';
+      el.style.letterSpacing = '0.05em';
+      el.style.border        = 'none';
     });
+
+    /* Difficulty tags */
+    document.querySelectorAll('.tag-diff, .tag.tag-diff').forEach(el => {
+      const t = el.textContent.trim().toUpperCase();
+      el.style.cssText = '';
+      if (t === 'L1')      { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      else if (t === 'L2') { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
+      else if (t === 'L3') { el.style.background = '#FEE2E2'; el.style.color = '#B91C1C'; }
+      el.style.borderRadius  = '100px';
+      el.style.fontWeight    = '700';
+      el.style.fontSize      = '0.72rem';
+      el.style.padding       = '0.25rem 0.65rem';
+      el.style.textTransform = 'uppercase';
+      el.style.border        = 'none';
+    });
+
+    /* Pattern tag and year tag — neutral orange */
+    document.querySelectorAll('.tag-pattern, .tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
+      if (!el.textContent.trim()) return;
+      el.style.cssText       = '';
+      el.style.background    = '#FFF0E6';
+      el.style.color         = '#E85500';
+      el.style.borderRadius  = '100px';
+      el.style.fontWeight    = '600';
+      el.style.fontSize      = '0.72rem';
+      el.style.padding       = '0.25rem 0.65rem';
+      el.style.border        = 'none';
+    });
+
+    /* Option buttons — ensure white background until answered */
+    document.querySelectorAll('button.option:not(.neeto-correct):not(.neeto-wrong)').forEach(btn => {
+      if (btn.style.pointerEvents === 'none') return; /* already answered */
+      btn.style.background   = '#ffffff';
+      btn.style.color        = '#1A1208';
+      btn.style.borderColor  = '#F0E8DE';
+      btn.style.opacity      = '1';
+    });
+
+    /* Show Answer button */
+    document.querySelectorAll('.show-btn').forEach(btn => {
+      btn.style.background   = 'none';
+      btn.style.border       = '1.5px solid #F0E8DE';
+      btn.style.borderRadius = '100px';
+      btn.style.padding      = '0.45rem 1.1rem';
+      btn.style.fontSize     = '0.8rem';
+      btn.style.fontWeight   = '600';
+      btn.style.color        = '#6B5C45';
+      btn.style.cursor       = 'pointer';
+      btn.style.marginTop    = '0.9rem';
+    });
+  }
+
+  /* Run on new nodes only */
+  new MutationObserver(muts => {
+    muts.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType === 1) setTimeout(colourTags, 0);
+    }));
   }).observe(document.body, { childList: true, subtree: true });
 
-  /* Also run a couple of sweeps after page load for initial render */
-  [200, 600, 1200].forEach(t => setTimeout(() => sanitiseTree(document.body), t));
-
-  /* ── ANSWER MARKING ──────────────────────────
-     We use event delegation so it works for cards
-     rendered at any time by app.js.
-
-     We look for the correct answer in two ways:
-       a) data-correct attribute on the option element
-       b) data-answer attribute on the card/container
-          holding the index/key of the correct option
-  ─────────────────────────────────────────────── */
-
-  const container = document.getElementById('questions-container');
-  if (!container) return;
-
-  container.addEventListener('click', function (e) {
-    /* Find the clicked option — support divs, buttons, li */
-    const opt = e.target.closest(
-      '[data-correct], [data-option], .option, .opt, ' +
-      'li.q-option, div.q-option, button.q-option, ' +
-      '.answer-option, .choice, [class*="option-btn"]'
-    );
-    if (!opt) return;
-
-    /* Find the parent question card */
-    const card = opt.closest(
-      '[data-answer], [data-correct-index], [data-key], ' +
-      '.question-card, .q-card, .question-block, [class*="q-wrap"]'
-    );
-    if (!card) return;
-
-    /* Don't re-mark an already answered question */
-    if (card.hasAttribute('data-answered')) return;
-    card.setAttribute('data-answered', '1');
-
-    /* ── Determine which option is correct ── */
-    let correctOpt = null;
-
-    // Method A: one of the options has data-correct="true"
-    const allOpts = card.querySelectorAll(
-      '[data-correct], [data-option], .option, .opt, ' +
-      'li.q-option, div.q-option, button.q-option, ' +
-      '.answer-option, .choice, [class*="option-btn"]'
-    );
-
-    // Try data-correct attr first
-    allOpts.forEach(o => {
-      if (o.dataset.correct === 'true' || o.dataset.correct === '1') correctOpt = o;
-    });
-
-    // Method B: card has data-answer="A" / "0" / "1" etc.
-    if (!correctOpt && card.dataset.answer !== undefined) {
-      const ans = card.dataset.answer.trim().toLowerCase();
-      allOpts.forEach((o, i) => {
-        const key = (o.dataset.option || o.dataset.key || String.fromCharCode(65 + i)).toLowerCase();
-        if (key === ans || String(i) === ans) correctOpt = o;
-      });
-    }
-
-    // Method C: card has data-correct-index
-    if (!correctOpt && card.dataset.correctIndex !== undefined) {
-      correctOpt = allOpts[parseInt(card.dataset.correctIndex)];
-    }
-
-    // Method D: app.js may have already added a class like .correct / .right
-    // to the option *before* we get here — find it
-    if (!correctOpt) {
-      allOpts.forEach(o => {
-        if (o.classList.contains('correct') || o.classList.contains('right')) correctOpt = o;
-      });
-    }
-
-    /* ── Apply colours ── */
-    const isCorrect = correctOpt && (opt === correctOpt);
-
-    // Clear any inline styles app.js may have set on all options
-    allOpts.forEach(o => {
-      o.style.background = '';
-      o.style.backgroundColor = '';
-      o.style.color = '';
-      o.style.borderColor = '';
-      o.classList.remove('selected', 'active', 'chosen');
-    });
-
-    // Mark the chosen option
-    if (isCorrect) {
-      applyCorrect(opt);
-    } else {
-      applyWrong(opt);
-      if (correctOpt) applyCorrect(correctOpt); // reveal the right answer
-    }
-
-    // Lock all options (no more clicking)
-    allOpts.forEach(o => { o.style.pointerEvents = 'none'; o.style.cursor = 'default'; });
-
-    // Scroll the correct answer into view if it's off-screen
-    if (correctOpt && !isCorrect) {
-      correctOpt.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    // Show explanation if app.js has one hidden
-    const exp = card.querySelector('.explanation, .answer-block, [class*="explain"], [class*="answer-block"]');
-    if (exp) {
-      exp.style.display = 'block';
-      exp.style.background = '';
-      exp.style.backgroundColor = '';
-      exp.style.color = '';
-    }
-  });
-
-  function applyCorrect(el) {
-    el.style.background      = '#F0FDF4';
-    el.style.backgroundColor = '#F0FDF4';
-    el.style.borderColor     = '#22C55E';
-    el.style.color           = '#15803D';
-    el.classList.add('neeto-correct');
-  }
-
-  function applyWrong(el) {
-    el.style.background      = '#FEF2F2';
-    el.style.backgroundColor = '#FEF2F2';
-    el.style.borderColor     = '#EF4444';
-    el.style.color           = '#B91C1C';
-    el.classList.add('neeto-wrong');
-  }
+  [100, 400, 900, 1800].forEach(t => setTimeout(colourTags, t));
 
 })();
 </script>

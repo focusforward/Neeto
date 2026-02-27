@@ -590,211 +590,221 @@
 <script src="js/app.js"></script>
 <script src="js/mock.js"></script>
 <script>
-/* ═══════════════════════════════════════════════════════
-   NEETO MOCK — theme fix + answer marking
-   ═══════════════════════════════════════════════════════
-   During test  → clicked option turns ORANGE (selected)
-   After submit → correct = GREEN, wrong chosen = RED,
-                  unattempted correct = green outline
-   Review panel → clicking palette number scrolls to
-                  that question and flashes it
-   ═══════════════════════════════════════════════════════ */
 (function () {
+  /* ═══════════════════════════════════════════════════════════
+     NEETO MOCK — patches selectOption + submitMock
 
-  /* ── 1. DARK-BG SANITISER (no attribute watching) ── */
-  const DARK_BG   = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
-  const LIGHT_COL = /^#(?:fff|eee|ddd|ccc|bbb|aaa|999|888|777)/i;
+     app.js / mock.js structure (same as practice):
+       Cards:   .q-card  id="qc-{index}"
+       Options: button.option  data-key="A/B/C/D"  data-index="{i}"
+                onclick="selectOption(index, key)"
+       Answer:  .explanation  id="exp-{index}"
+                text: "✅ Correct Answer: A"
+       Submit:  window.submitMock()
+       Palette: #palette  buttons with question numbers
+  ═══════════════════════════════════════════════════════════ */
 
-  function sanitiseEl(el) {
-    if (!(el instanceof HTMLElement)) return;
-    if (el.closest('[data-mock-answered]')) return; // never touch answered opts
-    const s = el.style;
-    if (s.background      && DARK_BG.test(s.background.trim()))      s.background      = '';
-    if (s.backgroundColor && DARK_BG.test(s.backgroundColor.trim())) s.backgroundColor = '';
-    if (s.color           && LIGHT_COL.test(s.color.trim()))          s.color           = '';
-    if (s.borderColor     && DARK_BG.test(s.borderColor.trim()))      s.borderColor     = '';
+  /* Track selected answers: { cardIndex: chosenKey } */
+  const selected = {};
+
+  /* ── 1. TAG COLOURS (runs on new DOM nodes) ── */
+  function colourTags(root) {
+    (root || document).querySelectorAll('.tag-subject').forEach(el => {
+      const t = el.textContent.trim().toLowerCase();
+      el.style.cssText = '';
+      if (t === 'biology')   { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      else if (t === 'chemistry') { el.style.background = '#DBEAFE'; el.style.color = '#1D4ED8'; }
+      else if (t === 'physics')   { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
+      el.style.borderRadius = '100px'; el.style.fontWeight = '700';
+      el.style.fontSize = '0.72rem'; el.style.padding = '0.25rem 0.65rem';
+      el.style.textTransform = 'uppercase'; el.style.border = 'none';
+    });
+
+    (root || document).querySelectorAll('.tag-diff').forEach(el => {
+      const t = el.textContent.trim().toUpperCase();
+      el.style.cssText = '';
+      if (t === 'L1')      { el.style.background = '#DCFCE7'; el.style.color = '#15803D'; }
+      else if (t === 'L2') { el.style.background = '#FEF3C7'; el.style.color = '#B45309'; }
+      else if (t === 'L3') { el.style.background = '#FEE2E2'; el.style.color = '#B91C1C'; }
+      el.style.borderRadius = '100px'; el.style.fontWeight = '700';
+      el.style.fontSize = '0.72rem'; el.style.padding = '0.25rem 0.65rem';
+      el.style.textTransform = 'uppercase'; el.style.border = 'none';
+    });
+
+    (root || document).querySelectorAll('.tag:not(.tag-subject):not(.tag-diff)').forEach(el => {
+      if (!el.textContent.trim()) return;
+      el.style.cssText = '';
+      el.style.background = '#FFF0E6'; el.style.color = '#E85500';
+      el.style.borderRadius = '100px'; el.style.fontWeight = '600';
+      el.style.fontSize = '0.72rem'; el.style.padding = '0.25rem 0.65rem';
+      el.style.border = 'none';
+    });
+
+    /* Option buttons — white until answered */
+    (root || document).querySelectorAll('button.option').forEach(btn => {
+      if (btn.dataset.mockAnswered) return;
+      btn.style.background  = '#ffffff';
+      btn.style.color       = '#1A1208';
+      btn.style.borderColor = '#F0E8DE';
+      btn.style.opacity     = '1';
+    });
   }
 
-  function sanitiseTree(root) {
-    sanitiseEl(root);
-    root.querySelectorAll && root.querySelectorAll('*').forEach(sanitiseEl);
-  }
-
-  // Watch only newly added nodes — NOT attribute changes
   new MutationObserver(muts => {
-    muts.forEach(m => m.addedNodes.forEach(n => { if (n.nodeType === 1) sanitiseTree(n); }));
+    muts.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType === 1) setTimeout(() => colourTags(n), 0);
+    }));
   }).observe(document.body, { childList: true, subtree: true });
+  [100, 400, 900].forEach(t => setTimeout(() => colourTags(), t));
 
-  [200, 600, 1200].forEach(t => setTimeout(() => sanitiseTree(document.body), t));
+
+  /* ── 2. PATCH selectOption → ORANGE during test ── */
+  function patchSelectOption() {
+    if (typeof window.selectOption !== 'function') { setTimeout(patchSelectOption, 50); return; }
+    const _orig = window.selectOption;
+
+    window.selectOption = function (cardIndex, chosenKey) {
+      _orig.call(this, cardIndex, chosenKey);
+
+      selected[cardIndex] = chosenKey.toUpperCase();
+
+      const card = document.getElementById('qc-' + cardIndex);
+      if (!card) return;
+
+      card.querySelectorAll('button.option').forEach(btn => {
+        const key = (btn.dataset.key || '').toUpperCase();
+        btn.style.cssText = '';
+        if (key === chosenKey.toUpperCase()) {
+          /* Selected → orange */
+          btn.style.background  = '#FFF0E6';
+          btn.style.borderColor = '#FF6B1A';
+          btn.style.color       = '#E85500';
+          btn.style.fontWeight  = '600';
+        } else {
+          btn.style.background  = '#ffffff';
+          btn.style.borderColor = '#F0E8DE';
+          btn.style.color       = '#1A1208';
+          btn.style.opacity     = '0.6';
+        }
+      });
+
+      /* Update palette button → green (answered) */
+      const palBtn = document.querySelector(`#palette button:nth-child(${cardIndex + 1})`);
+      if (palBtn) {
+        palBtn.style.background  = '#DCFCE7';
+        palBtn.style.borderColor = '#22C55E';
+        palBtn.style.color       = '#15803D';
+        palBtn.dataset.answered  = '1';
+      }
+    };
+  }
+  patchSelectOption();
 
 
-  /* ── 2. OPTION SELECTOR helper ── */
-  const OPT_SEL =
-    '[data-option], [data-correct], .option, .opt, ' +
-    'li.q-option, div.q-option, button.q-option, ' +
-    '.answer-option, .choice, [class*="option-btn"]';
+  /* ── 3. PATCH submitMock → reveal green/red after submit ── */
+  function patchSubmitMock() {
+    if (typeof window.submitMock !== 'function') { setTimeout(patchSubmitMock, 50); return; }
+    const _origSubmit = window.submitMock;
 
-  const CARD_SEL =
-    '[data-answer], [data-correct-index], [data-key], ' +
-    '.question-card, .q-card, .question-block, [class*="q-wrap"], .mock-question';
+    window.submitMock = function () {
+      _origSubmit.apply(this, arguments);
+      /* Small delay so mock.js can render result screen first */
+      setTimeout(colourAfterSubmit, 400);
+      setTimeout(colourAfterSubmit, 1200);
+    };
+  }
+  patchSubmitMock();
 
-  function getOptions(card) {
-    return Array.from(card.querySelectorAll(OPT_SEL));
+
+  function colourAfterSubmit() {
+    /* Colour cards in both test area and review container */
+    document.querySelectorAll('.q-card').forEach(card => {
+      const idMatch = card.id && card.id.match(/qc-(\d+)/);
+      if (!idMatch) return;
+      const idx = parseInt(idMatch[1]);
+
+      /* Get correct key from explanation */
+      const exp = document.getElementById('exp-' + idx);
+      let correctKey = null;
+      if (exp) {
+        const m = exp.textContent.match(/Correct Answer[:\s]+([A-D])/i);
+        if (m) correctKey = m[1].toUpperCase();
+      }
+
+      const chosenKey = selected[idx] || null;
+
+      card.querySelectorAll('button.option').forEach(btn => {
+        const key = (btn.dataset.key || '').toUpperCase();
+        btn.style.cssText      = '';
+        btn.style.pointerEvents = 'none';
+        btn.style.cursor        = 'default';
+        btn.dataset.mockAnswered = '1';
+
+        if (key === correctKey) {
+          btn.style.background  = '#F0FDF4';
+          btn.style.borderColor = '#22C55E';
+          btn.style.color       = '#15803D';
+          btn.style.fontWeight  = '600';
+        } else if (key === chosenKey && key !== correctKey) {
+          btn.style.background  = '#FEF2F2';
+          btn.style.borderColor = '#EF4444';
+          btn.style.color       = '#B91C1C';
+        } else {
+          btn.style.background  = '#ffffff';
+          btn.style.borderColor = '#F0E8DE';
+          btn.style.color       = '#1A1208';
+          btn.style.opacity     = '0.5';
+        }
+      });
+
+      /* Show explanation */
+      if (exp) {
+        exp.style.display         = 'block';
+        exp.style.background      = '#FFF0E6';
+        exp.style.backgroundColor = '#FFF0E6';
+        exp.style.border          = '1px solid rgba(255,107,26,0.25)';
+        exp.style.borderRadius    = '10px';
+        exp.style.padding         = '0.9rem 1.1rem';
+        exp.style.color           = '#1A1208';
+        exp.style.marginTop       = '0.9rem';
+      }
+
+      /* Colour palette button: green=correct, red=wrong, grey=skipped */
+      const palBtn = document.querySelector(`#palette button:nth-child(${idx + 1})`);
+      if (palBtn) {
+        palBtn.style.cssText = '';
+        if (!chosenKey) {
+          palBtn.style.background  = '#F5F5F5';
+          palBtn.style.borderColor = '#D1D5DB';
+          palBtn.style.color       = '#6B7280';
+        } else if (chosenKey === correctKey) {
+          palBtn.style.background  = '#DCFCE7';
+          palBtn.style.borderColor = '#22C55E';
+          palBtn.style.color       = '#15803D';
+        } else {
+          palBtn.style.background  = '#FEE2E2';
+          palBtn.style.borderColor = '#EF4444';
+          palBtn.style.color       = '#B91C1C';
+        }
+      }
+    });
   }
 
-  function getCorrectOpt(card, opts) {
-    // a) explicit data-correct attr on option
-    let c = opts.find(o => o.dataset.correct === 'true' || o.dataset.correct === '1');
-    if (c) return c;
-    // b) card data-answer = "A"/"B"/"0"/"1"
-    if (card.dataset.answer !== undefined) {
-      const ans = card.dataset.answer.trim().toLowerCase();
-      c = opts.find((o, i) => {
-        const key = (o.dataset.option || o.dataset.key || String.fromCharCode(65 + i)).toLowerCase();
-        return key === ans || String(i) === ans;
-      });
-      if (c) return c;
+
+  /* ── 4. PALETTE JUMP — click number → scroll to question ── */
+  document.addEventListener('click', function (e) {
+    const palBtn = e.target.closest('#palette button');
+    if (!palBtn) return;
+    const idx = Array.from(palBtn.parentElement.children).indexOf(palBtn);
+    const card = document.getElementById('qc-' + idx);
+    if (card) {
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      const prev = card.style.outline;
+      card.style.outline      = '3px solid #FF6B1A';
+      card.style.borderRadius = '18px';
+      setTimeout(() => { card.style.outline = prev || ''; }, 1200);
     }
-    // c) card data-correct-index
-    if (card.dataset.correctIndex !== undefined) return opts[+card.dataset.correctIndex] || null;
-    // d) app.js may have already classed it .correct
-    return opts.find(o => o.classList.contains('correct') || o.classList.contains('right')) || null;
-  }
-
-
-  /* ── 3. DURING-TEST click → mark ORANGE ── */
-  const mockQs = document.getElementById('mock-questions');
-  if (mockQs) {
-    mockQs.addEventListener('click', function (e) {
-      const opt  = e.target.closest(OPT_SEL);  if (!opt)  return;
-      const card = opt.closest(CARD_SEL);       if (!card) return;
-      if (card.hasAttribute('data-mock-answered')) return; // locked after submit
-
-      const opts = getOptions(card);
-
-      // Clear previous selection on this card
-      opts.forEach(o => {
-        o.style.background      = '';
-        o.style.backgroundColor = '';
-        o.style.color           = '';
-        o.style.borderColor     = '';
-        o.classList.remove('neeto-selected');
-        o.removeAttribute('data-chosen');
-      });
-
-      // Mark clicked option orange
-      opt.style.background      = '#FFF0E6';
-      opt.style.backgroundColor = '#FFF0E6';
-      opt.style.borderColor     = '#FF6B1A';
-      opt.style.color           = '#E85500';
-      opt.classList.add('neeto-selected');
-      opt.setAttribute('data-chosen', '1');
-      card.setAttribute('data-selected', opts.indexOf(opt));
-
-      // Update palette button → answered (green)
-      const qNum = card.dataset.qnum || card.dataset.index;
-      if (qNum !== undefined) {
-        const palBtn = document.querySelector(`#palette [data-qnum="${qNum}"], #palette button:nth-child(${+qNum + 1})`);
-        if (palBtn) {
-          palBtn.style.background   = '#DCFCE7';
-          palBtn.style.borderColor  = '#22C55E';
-          palBtn.style.color        = '#15803D';
-        }
-      }
-    });
-  }
-
-
-  /* ── 4. POST-SUBMIT review colouring ── */
-  // We hook into the existing submitMock / window.submitMock if present,
-  // or watch for the result screen becoming visible.
-
-  function colourReviewCards() {
-    const reviewContainer = document.getElementById('review-container');
-    if (!reviewContainer) return;
-
-    // Also colour cards still in mock-questions (full review mode)
-    [mockQs, reviewContainer].forEach(container => {
-      if (!container) return;
-      container.querySelectorAll(CARD_SEL).forEach(card => {
-        card.setAttribute('data-mock-answered', '1');
-        const opts      = getOptions(card);
-        const correctOpt = getCorrectOpt(card, opts);
-        const chosenIdx  = card.dataset.selected !== undefined ? +card.dataset.selected : -1;
-        const chosenOpt  = chosenIdx >= 0 ? opts[chosenIdx] : null;
-
-        opts.forEach(o => {
-          o.style.background = ''; o.style.backgroundColor = '';
-          o.style.color = ''; o.style.borderColor = '';
-        });
-
-        if (correctOpt) {
-          correctOpt.style.background      = '#F0FDF4';
-          correctOpt.style.backgroundColor = '#F0FDF4';
-          correctOpt.style.borderColor     = '#22C55E';
-          correctOpt.style.color           = '#15803D';
-        }
-        if (chosenOpt && chosenOpt !== correctOpt) {
-          chosenOpt.style.background      = '#FEF2F2';
-          chosenOpt.style.backgroundColor = '#FEF2F2';
-          chosenOpt.style.borderColor     = '#EF4444';
-          chosenOpt.style.color           = '#B91C1C';
-        }
-
-        // Show explanation
-        const exp = card.querySelector('.explanation, .answer-block, [class*="explain"]');
-        if (exp) { exp.style.display = 'block'; exp.style.background = ''; exp.style.color = ''; }
-      });
-    });
-  }
-
-  // Watch for result-screen becoming visible
-  const resultScreen = document.getElementById('result-screen');
-  if (resultScreen) {
-    new MutationObserver(() => {
-      if (resultScreen.style.display !== 'none' && resultScreen.offsetParent !== null) {
-        setTimeout(colourReviewCards, 300);
-      }
-    }).observe(resultScreen, { attributes: true, attributeFilter: ['style'] });
-  }
-
-  // Also patch window.submitMock if app defines it
-  const _origSubmit = window.submitMock;
-  window.submitMock = function () {
-    if (_origSubmit) _origSubmit.apply(this, arguments);
-    setTimeout(colourReviewCards, 500);
-    setTimeout(colourReviewCards, 1500); // second pass after render
-  };
-
-
-  /* ── 5. PALETTE JUMP — click palette btn → scroll to question ── */
-  const palette = document.getElementById('palette');
-  if (palette) {
-    palette.addEventListener('click', function (e) {
-      const btn = e.target.closest('button, [data-qnum], .pal-btn');
-      if (!btn) return;
-
-      // Find question number from button text or data attr
-      const qnum = btn.dataset.qnum || btn.textContent.trim();
-      if (!qnum) return;
-
-      // Find card by data-qnum or by nth-child position
-      let card = document.querySelector(`[data-qnum="${qnum}"]`);
-      if (!card && mockQs) {
-        const cards = mockQs.querySelectorAll(CARD_SEL);
-        card = cards[+qnum - 1] || null;
-      }
-
-      if (card) {
-        card.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        // Flash highlight
-        const orig = card.style.outline;
-        card.style.outline = '3px solid #FF6B1A';
-        card.style.borderRadius = '18px';
-        setTimeout(() => { card.style.outline = orig; }, 1200);
-      }
-    });
-  }
+  });
 
 })();
 </script>
