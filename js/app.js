@@ -293,7 +293,15 @@ function tagStyle(val, type) {
 function goQuestion(idx) {
   if (idx < 0 || idx >= _practiceQs.length) return;
   showQuestion(idx);
-  window.scrollTo({ top: 0, behavior: 'smooth' });
+  // Double rAF: first waits for DOM update, second waits for layout/paint
+  requestAnimationFrame(() => requestAnimationFrame(() => {
+    const card = document.getElementById('qc-0');
+    if (!card) return;
+    const nav  = document.querySelector('nav') || document.querySelector('.navbar');
+    const navH = nav ? nav.offsetHeight : 68;
+    const cardTop = card.getBoundingClientRect().top + window.scrollY;
+    window.scrollTo({ top: cardTop - navH - 20, behavior: 'smooth' });
+  }));
 }
 
 function selectOption(idx, key) {
