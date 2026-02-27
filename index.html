@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="css/nav.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; min-height: 100vh; }
+html,body{overflow-x:hidden;max-width:100%;width:100%; font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; min-height: 100vh; }
 
 /* COUNTDOWN STRIP */
 .countdown-strip {
@@ -125,7 +125,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; 
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neeto-logo.png" alt="NEETO logo">
+    <img src="neeto-logo.png" alt="NEETO">
     <span>NEETO</span>
   </a>
   <div class="nav-links">
@@ -135,17 +135,18 @@ body { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; 
     <a href="units.html">Units</a>
     <a href="analytics.html">Progress</a>
   </div>
-  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="nav-mobile-menu" id="mobile-nav">
+<div class="nav-mobile-menu" id="mob-nav">
   <a href="index.html" class="active">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
   <a href="units.html">Units</a>
   <a href="analytics.html">Progress</a>
 </div>
+
 
 <div class="countdown-strip">
   🎯 NEET 2026 in <strong id="days-hero">—</strong> days &nbsp;·&nbsp; May 6, 2026
@@ -207,10 +208,10 @@ body { font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; 
 
 <footer class="neeto-footer">
   <div class="footer-brand">
-    <img src="neeto-logo.png" alt="NEETO logo">
+    <img src="neeto-logo.png" alt="NEETO">
     <span>NEETO</span>
   </div>
-  <p>© 2026 NEETO. All rights reserved. Built for NEET aspirants.</p>
+  <p>© 2026 NEETO. All rights reserved.</p>
 </footer>
 
 <script src="js/app.js"></script>
@@ -229,6 +230,17 @@ document.addEventListener('click', function(e) {
   var m = document.getElementById('mobile-nav');
   var btn = document.querySelector('.nav-hamburger');
   if (m && m.classList.contains('open') && !m.contains(e.target) && btn && !btn.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
+<script>
+function toggleNav() {
+  document.getElementById('mob-nav').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mob-nav');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
     m.classList.remove('open');
 });
 </script>

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Mock Test — NEETO</title>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-<link rel="stylesheet" href="css/style.css"/>
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -26,7 +26,7 @@
     --border: #F0E8DE;
   }
 
-  body {
+  html,body{overflow-x:hidden;max-width:100%;width:100%;
     font-family: 'DM Sans', sans-serif;
     background: var(--off-white);
     color: var(--ink);
@@ -517,7 +517,7 @@
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neeto-logo.png" alt="NEETO logo">
+    <img src="neeto-logo.png" alt="NEETO">
     <span>NEETO</span>
   </a>
   <div class="nav-links">
@@ -527,17 +527,18 @@
     <a href="units.html">Units</a>
     <a href="analytics.html">Progress</a>
   </div>
-  <button class="nav-hamburger" onclick="toggleMobileNav()" aria-label="Menu">
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="nav-mobile-menu" id="mobile-nav">
+<div class="nav-mobile-menu" id="mob-nav">
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock Test</a>
   <a href="units.html">Units</a>
   <a href="analytics.html">Progress</a>
 </div>
+
 <!-- START SCREEN -->
 <div id="start-screen">
   <h1>Full Mock Test</h1>
@@ -917,10 +918,21 @@ function goToQuestion(idx) {
 </script>
 <footer class="neeto-footer">
   <div class="footer-brand">
-    <img src="neeto-logo.png" alt="NEETO logo">
+    <img src="neeto-logo.png" alt="NEETO">
     <span>NEETO</span>
   </div>
-  <p>© 2026 NEETO. All rights reserved. Built for NEET aspirants.</p>
+  <p>© 2026 NEETO. All rights reserved.</p>
 </footer>
+<script>
+function toggleNav() {
+  document.getElementById('mob-nav').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mob-nav');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
 </body>
 </html>
