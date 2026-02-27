@@ -23,14 +23,29 @@ body {
   font-family: 'DM Sans', sans-serif !important;
 }
 
-/* ── ANSWER OPTIONS (the main dark culprit) ── */
+/* ── BASE STYLE FOR NEETO PRACTICE OPTIONS (NEW FIX) ── */
+button.neeto-opt {
+  background: #ffffff;
+  border: 1.5px solid #F0E8DE;
+  color: #1A1208;
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+  width: 100%;
+  text-align: left;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+/* ── ANSWER OPTIONS (legacy support) ── */
 .option, .opt,
 label.option, li.option, div.option, button.option,
 .answer-option, .answer-btn, .ans-btn,
 .choice, .q-choice,
 [class*="option"]:not(.mock-palette):not(#palette):not(.q-options),
 .q-option, .q-opt,
-/* catch dynamically created elements */
 .questions-list button,
 #questions-container button,
 .mock-questions button,
@@ -42,225 +57,7 @@ label.option, li.option, div.option, button.option,
   border-radius: 10px !important;
 }
 
-.option:hover, .q-option:hover, button.option:hover, div.option:hover, li.option:hover {
-  background: var(--orange-pale) !important;
-  border-color: var(--orange) !important;
-  color: var(--orange-deep) !important;
-}
-
-.option.selected, .q-option.selected, .option.active, .option.chosen {
-  background: var(--orange-pale) !important;
-  border-color: var(--orange) !important;
-  color: var(--orange-deep) !important;
-}
-
-.option.correct, .q-option.correct {
-  background: #F0FDF4 !important;
-  border-color: #22C55E !important;
-  color: #15803D !important;
-}
-
-.option.wrong, .q-option.wrong {
-  background: #FEF2F2 !important;
-  border-color: #EF4444 !important;
-  color: #B91C1C !important;
-}
-
-/* ── QUESTION CARDS / CONTAINERS ── */
-.question-card, .q-card, .question-block, .q-block,
-.question-wrap, .q-wrap, .mock-question, .mock-q-card,
-[class*="question-card"], [class*="q-card"] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-  border: 1.5px solid var(--border) !important;
-  border-radius: 18px !important;
-  color: var(--ink) !important;
-}
-
-/* ── UNIT CARDS ── */
-.unit-card {
-  background: #ffffff !important;
-  color: var(--ink) !important;
-  border: 1.5px solid var(--border) !important;
-}
-
-/* ── INLINE DARK BACKGROUND OVERRIDES ──
-   app.js injects elements with style="background:#1a1a2e" etc.
-   We catch them with attribute selectors. */
-[style*="background:#0"],
-[style*="background: #0"],
-[style*="background:#1a1a"],
-[style*="background: #1a1a"],
-[style*="background:#111"],
-[style*="background: #111"],
-[style*="background:#222"],
-[style*="background: #222"],
-[style*="background:#333"],
-[style*="background: #333"],
-[style*="background-color:#0"],
-[style*="background-color: #0"],
-[style*="background-color:#1"],
-[style*="background-color: #1"],
-[style*="background-color:#2"],
-[style*="background-color: #2"],
-[style*="background-color:#3"],
-[style*="background-color: #3"] {
-  background: #ffffff !important;
-  background-color: #ffffff !important;
-}
-
-/* ── INLINE DARK TEXT OVERRIDES ── */
-[style*="color:#fff"],
-[style*="color: #fff"],
-[style*="color:white"],
-[style*="color: white"],
-[style*="color:#eee"],
-[style*="color: #eee"],
-[style*="color:#ddd"],
-[style*="color: #ddd"],
-[style*="color:#ccc"],
-[style*="color: #ccc"] {
-  color: var(--ink) !important;
-}
-
-[style*="color:#888"],
-[style*="color: #888"],
-[style*="color:#999"],
-[style*="color: #999"],
-[style*="color:#aaa"],
-[style*="color: #aaa"],
-[style*="color:#666"],
-[style*="color: #666"],
-[style*="color:#555"],
-[style*="color: #555"] {
-  color: var(--ink-muted) !important;
-}
-
-/* ── PALETTE BUTTONS ── */
-.pal-btn, #palette button, .palette-btn, [class*="palette"] button {
-  background: #ffffff !important;
-  color: var(--ink-muted) !important;
-  border: 1.5px solid var(--border) !important;
-  border-radius: 8px !important;
-}
-
-.pal-btn.answered, #palette button.answered,
-[class*="palette"] button.answered {
-  background: #DCFCE7 !important;
-  border-color: #22C55E !important;
-  color: #15803D !important;
-}
-
-.pal-btn.current, #palette button.current,
-[class*="palette"] button.current {
-  background: var(--orange-pale) !important;
-  border-color: var(--orange) !important;
-  color: var(--orange-deep) !important;
-}
-
-/* ── DARK BORDERS ── */
-[style*="border:1px solid #2"],
-[style*="border: 1px solid #2"],
-[style*="border-color:#2"],
-[style*="border-color: #2"] {
-  border-color: var(--border) !important;
-}
-
-/* ── EXPLANATION / ANSWER BLOCKS ── */
-.explanation, .answer-block, .answer-reveal,
-[class*="explanation"], [class*="answer-block"] {
-  background: var(--orange-pale) !important;
-  border: 1px solid rgba(255,107,26,0.2) !important;
-  border-radius: 10px !important;
-  color: var(--ink) !important;
-}
-
-/* ── TAGS & BADGES ── */
-.tag-physics, [class*="physics-tag"] { background: #FEF3C7 !important; color: #B45309 !important; border-radius: 100px !important; }
-.tag-biology, [class*="biology-tag"] { background: #DCFCE7 !important; color: #15803D !important; border-radius: 100px !important; }
-.tag-chemistry,[class*="chem-tag"]   { background: #DBEAFE !important; color: #1D4ED8 !important; border-radius: 100px !important; }
-
-/* ── MOCK HEADER & TIMER ── */
-.mock-header {
-  background: #ffffff !important;
-  border-bottom: 1px solid var(--border) !important;
-}
-
-.timer {
-  color: var(--orange) !important;
-  background: var(--orange-pale) !important;
-  border: none !important;
-  border-radius: 100px !important;
-  font-family: 'Fraunces', serif !important;
-}
-
-/* ── SCROLLBAR ── */
-::-webkit-scrollbar { width: 6px; height: 6px; }
-::-webkit-scrollbar-track { background: var(--off-white); }
-::-webkit-scrollbar-thumb { background: #F0E8DE; border-radius: 100px; }
-::-webkit-scrollbar-thumb:hover { background: var(--orange-light); }
-
-/* ── NEETO ANSWER STATE CLASSES (set by our scripts) ── */
-
-/* Practice: immediate right/wrong feedback */
-.neeto-correct,
-.neeto-correct:hover {
-  background: #F0FDF4 !important;
-  background-color: #F0FDF4 !important;
-  border-color: #22C55E !important;
-  color: #15803D !important;
-  pointer-events: none !important;
-}
-
-.neeto-wrong,
-.neeto-wrong:hover {
-  background: #FEF2F2 !important;
-  background-color: #FEF2F2 !important;
-  border-color: #EF4444 !important;
-  color: #B91C1C !important;
-  pointer-events: none !important;
-}
-
-/* Mock: selected (during test) */
-.neeto-selected,
-.neeto-selected:hover {
-  background: #FFF0E6 !important;
-  background-color: #FFF0E6 !important;
-  border-color: #FF6B1A !important;
-  color: #E85500 !important;
-}
-
-/* Lock all options in an answered practice card */
-[data-answered] .option,
-[data-answered] .q-option,
-[data-answered] [class*="option-btn"],
-[data-answered] .choice {
-  pointer-events: none !important;
-  cursor: default !important;
-}
-
-/* Lock all options after mock submit */
-[data-mock-answered] .option,
-[data-mock-answered] .q-option,
-[data-mock-answered] [class*="option-btn"],
-[data-mock-answered] .choice {
-  pointer-events: none !important;
-  cursor: default !important;
-}
-
-/* Palette button states */
-#palette button.neeto-answered,
-.palette-grid button.neeto-answered {
-  background: #DCFCE7 !important;
-  border-color: #22C55E !important;
-  color: #15803D !important;
-}
-
-
-/* ══════════════════════════════════════════════
-   NEETO ANSWER STATES — highest specificity wins
-   These MUST come after all other rules
-══════════════════════════════════════════════ */
+/* ── NEETO ANSWER STATE CLASSES ── */
 
 /* Correct answer — green */
 button.neeto-opt.neeto-correct,
@@ -296,7 +93,7 @@ button[id^="opt-"].neeto-dim {
   cursor: default !important;
 }
 
-/* Mock selected (orange, during test) */
+/* Selected (during mock or before reveal) */
 button.neeto-opt.neeto-selected,
 button[id^="opt-"].neeto-selected {
   background: #FFF0E6 !important;
@@ -306,7 +103,7 @@ button[id^="opt-"].neeto-selected {
   opacity: 1 !important;
 }
 
-/* Mock unselected-but-answered (faded) */
+/* Faded (mock mode unselected) */
 button.neeto-opt.neeto-faded,
 button[id^="opt-"].neeto-faded {
   background: #ffffff !important;
@@ -316,6 +113,22 @@ button[id^="opt-"].neeto-faded {
 }
 
 /* Palette states */
-#palette button.pb-green { background: #DCFCE7 !important; border-color: #22C55E !important; color: #15803D !important; font-weight: 700 !important; }
-#palette button.pb-red   { background: #FEE2E2 !important; border-color: #EF4444 !important; color: #B91C1C !important; font-weight: 700 !important; }
-#palette button.pb-grey  { background: #F3F4F6 !important; border-color: #D1D5DB !important; color: #9CA3AF !important; }
+#palette button.pb-green {
+  background: #DCFCE7 !important;
+  border-color: #22C55E !important;
+  color: #15803D !important;
+  font-weight: 700 !important;
+}
+
+#palette button.pb-red {
+  background: #FEE2E2 !important;
+  border-color: #EF4444 !important;
+  color: #B91C1C !important;
+  font-weight: 700 !important;
+}
+
+#palette button.pb-grey {
+  background: #F3F4F6 !important;
+  border-color: #E5E7EB !important;
+  color: #6B7280 !important;
+}
