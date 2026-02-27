@@ -588,126 +588,175 @@
 </div>
 
 <script>
-// ═══════════════════════════════════════════════════════════════════
-// NEETO MOCK — Complete self-contained JS
-// ═══════════════════════════════════════════════════════════════════
+// NEETO MOCK — self-contained
 
-let mockQuestions = [];
-let userAnswers   = {};
-let timerInterval = null;
-let timeLeft      = 200 * 60;
-let testDone      = false;
+var mockQuestions = [];
+var userAnswers   = {};
+var timerInterval = null;
+var timeLeft      = 200 * 60;
+var testDone      = false;
 
 function shuffle(arr) {
-  const a = [...arr];
-  for (let i = a.length-1; i>0; i--) {
-    const j = Math.floor(Math.random()*(i+1));
-    [a[i],a[j]] = [a[j],a[i]];
+  var a = arr.slice();
+  for (var i = a.length-1; i>0; i--) {
+    var j = Math.floor(Math.random()*(i+1));
+    var t = a[i]; a[i]=a[j]; a[j]=t;
   }
   return a;
 }
 
-// ── LOAD DATA ────────────────────────────────────────────────────────
 async function loadSubjectFile(subject) {
-  const res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
-  const data = await res.json();
+  var res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
+  var data = await res.json();
   return data.questions || [];
 }
 
-// ── START ─────────────────────────────────────────────────────────────
 async function startMock() {
   document.getElementById('start-screen').style.display = 'none';
   document.getElementById('test-screen').style.display  = 'block';
   document.getElementById('mock-questions').innerHTML =
-    '<div style="text-align:center;padding:80px;color:#FF6B1A;font-size:1.1rem;">⏳ Building your test paper...</div>';
+    '<div style="text-align:center;padding:80px;color:#FF6B1A;font-size:1.1rem;">Building your test...</div>';
 
-  let bio=[], chem=[], phys=[];
+  var bio=[], chem=[], phys=[];
   try {
-    [bio, chem, phys] = await Promise.all([
+    var results = await Promise.all([
       loadSubjectFile('Biology'), loadSubjectFile('Chemistry'), loadSubjectFile('Physics')
     ]);
+    bio=results[0]; chem=results[1]; phys=results[2];
   } catch(e) {
     document.getElementById('mock-questions').innerHTML =
-      '<div style="text-align:center;padding:60px;color:#EF4444;">⚠️ Could not load. Please refresh.</div>';
+      '<div style="text-align:center;padding:60px;color:#EF4444;">Could not load. Please refresh.</div>';
     return;
   }
 
-  const clean = q => !q.diagram_required;
-  const pSel  = shuffle(phys.filter(clean)).slice(0,50);
-  const cSel  = shuffle(chem.filter(clean)).slice(0,50);
-  const bSel  = shuffle(bio.filter(clean)).slice(0,100);
+  var clean = function(q) { return !q.diagram_required; };
+  var pSel  = shuffle(phys.filter(clean)).slice(0,50);
+  var cSel  = shuffle(chem.filter(clean)).slice(0,50);
+  var bSel  = shuffle(bio.filter(clean)).slice(0,100);
 
-  mockQuestions = [...pSel,...cSel,...bSel].map((q,i) => ({
-    ...q, _num: i+1,
-    _subj: i<50?'Physics':i<100?'Chemistry':'Biology',
-    _sec:  (i<35||(i>=50&&i<85)||(i>=100&&i<170)) ? 'A' : 'B'
-  }));
+  mockQuestions = pSel.concat(cSel).concat(bSel).map(function(q, i) {
+    return Object.assign({}, q, {
+      _num: i+1,
+      _subj: i<50?'Physics':i<100?'Chemistry':'Biology',
+      _sec: (i<35||(i>=50&&i<85)||(i>=100&&i<170)) ? 'A' : 'B'
+    });
+  });
 
   renderMockQuestions();
   buildPalette();
   startTimer();
 }
 
-// ── RENDER QUESTIONS ──────────────────────────────────────────────────
 function renderMockQuestions() {
-  const container = document.getElementById('mock-questions');
+  var container = document.getElementById('mock-questions');
   container.innerHTML = '';
 
-  // Section headers
-  const secHeaders = {0:'Physics',50:'Chemistry',100:'Biology'};
-
-  const CHUNK = 40;
-  let idx = 0;
+  var CHUNK = 40;
+  var idx = 0;
+  var secDone = {0:false, 50:false, 100:false};
+  var secNames = {0:'Physics', 50:'Chemistry', 100:'Biology'};
 
   function renderChunk() {
-    const frag = document.createDocumentFragment();
+    var frag = document.createDocumentFragment();
 
-    if (secHeaders[idx] !== undefined) {
-      const hdr = document.createElement('div');
-      hdr.style.cssText = 'font-family:Fraunces,serif;font-size:1.15rem;font-weight:900;color:#1A1208;padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #F0E8DE;margin-bottom:1.2rem;letter-spacing:-0.01em;';
-      hdr.textContent = secHeaders[idx];
+    if (!secDone[idx] && secNames[idx]) {
+      secDone[idx] = true;
+      var hdr = document.createElement('div');
+      hdr.style.fontFamily   = 'Fraunces,serif';
+      hdr.style.fontSize     = '1.15rem';
+      hdr.style.fontWeight   = '900';
+      hdr.style.color        = '#1A1208';
+      hdr.style.padding      = '1.5rem 0 0.75rem';
+      hdr.style.borderBottom = '1.5px solid #F0E8DE';
+      hdr.style.marginBottom = '1.2rem';
+      hdr.textContent = secNames[idx];
       frag.appendChild(hdr);
     }
 
-    const end = Math.min(idx + CHUNK, mockQuestions.length);
-    for (let i = idx; i < end; i++) {
-      const q = mockQuestions[i];
+    var end = Math.min(idx + CHUNK, mockQuestions.length);
+    for (var i = idx; i < end; i++) {
+      var q = mockQuestions[i];
 
-      const card = document.createElement('div');
-      card.id = 'mq-' + i;
-      card.style.cssText = 'background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1.2rem;scroll-margin-top:130px;';
-
-      const tagBase = 'display:inline-block;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;border:none;letter-spacing:0.04em;text-transform:uppercase;margin-right:0.4rem;';
-      const secTagCol = q._sec==='A' ? 'background:#DBEAFE;color:#1D4ED8;' : 'background:#FEF3C7;color:#B45309;';
-
-      const opts = ['A','B','C','D'].map(k => `
-        <button id="opt-${i}-${k}"
-          data-key="${k}" data-qidx="${i}"
-          onclick="mockSelect(${i},'${k}')"
-          onmouseover="mockHover(this,${i},'${k}',true)"
-          onmouseout="mockHover(this,${i},'${k}',false)"
-          style="background:#fff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;">
-          <span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">${k}</span>${q.options[k]||''}
-        </button>`).join('');
-
-      card.innerHTML = `
-        <div style="display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;align-items:center;">
-          <span style="${tagBase}background:#F0E8DE;color:#6B5C45;">Q${q._num}</span>
-          <span style="${tagBase}${secTagCol}">Sec ${q._sec}</span>
-        </div>
-        <div style="font-size:0.97rem;line-height:1.7;color:#1A1208;margin-bottom:1rem;">${q.question}</div>
-        <div id="opts-${i}">${opts}</div>
-        <div id="exp-${i}" style="display:none;margin-top:1rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:12px;padding:1rem 1.2rem;font-size:0.875rem;line-height:1.6;color:#1A1208;"></div>`;
-
-      frag.appendChild(card);
-
-      // Add section header mid-loop if needed
-      if (i+1 === 50 || i+1 === 100) {
-        const h = document.createElement('div');
-        h.style.cssText = 'font-family:Fraunces,serif;font-size:1.15rem;font-weight:900;color:#1A1208;padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #F0E8DE;margin-bottom:1.2rem;letter-spacing:-0.01em;';
-        h.textContent = i+1===50 ? 'Chemistry' : 'Biology';
-        frag.appendChild(h);
+      // Section header mid-render
+      if ((i===50||i===100) && !secDone[i]) {
+        secDone[i] = true;
+        var sh = document.createElement('div');
+        sh.style.fontFamily   = 'Fraunces,serif';
+        sh.style.fontSize     = '1.15rem';
+        sh.style.fontWeight   = '900';
+        sh.style.color        = '#1A1208';
+        sh.style.padding      = '1.5rem 0 0.75rem';
+        sh.style.borderBottom = '1.5px solid #F0E8DE';
+        sh.style.marginBottom = '1.2rem';
+        sh.textContent = secNames[i];
+        frag.appendChild(sh);
       }
+
+      var card = document.createElement('div');
+      card.id = 'mq-' + i;
+      card.style.background    = '#fff';
+      card.style.border        = '1.5px solid #F0E8DE';
+      card.style.borderRadius  = '18px';
+      card.style.padding       = '1.6rem 1.8rem';
+      card.style.marginBottom  = '1.2rem';
+      card.style.scrollMarginTop = '130px';
+
+      // Build options html via DOM to avoid any escaping
+      var tagBase = 'display:inline-block;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;border:none;margin-right:0.4rem;text-transform:uppercase;letter-spacing:0.04em;';
+
+      var metaDiv = document.createElement('div');
+      metaDiv.style.cssText = 'display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;';
+      metaDiv.innerHTML = '<span style="' + tagBase + 'background:#F0E8DE;color:#6B5C45;">Q' + q._num + '</span>'
+                        + '<span style="' + tagBase + 'background:#FFF0E6;color:#E85500;">Sec ' + q._sec + '</span>';
+
+      var qDiv = document.createElement('div');
+      qDiv.style.cssText = 'font-size:0.97rem;line-height:1.7;color:#1A1208;margin-bottom:1rem;';
+      qDiv.innerHTML = q.question;
+
+      var optsDiv = document.createElement('div');
+      optsDiv.id = 'opts-' + i;
+
+      var keys = ['A','B','C','D'];
+      for (var ki=0; ki<4; ki++) {
+        var k = keys[ki];
+        var btn = document.createElement('button');
+        btn.id = 'opt-' + i + '-' + k;
+        btn.setAttribute('data-key', k);
+        btn.setAttribute('data-qidx', i);
+        btn.style.cssText = 'background:#fff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;';
+        btn.innerHTML = '<span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">' + k + '</span>' + (q.options[k]||'');
+
+        // Use closure-safe event binding
+        (function(qi, bk, b) {
+          b.onclick = function() { mockSelect(qi, bk); };
+          b.onmouseover = function() {
+            if (!testDone && userAnswers[qi] !== bk) {
+              b.style.borderColor = '#FF6B1A';
+              b.style.background  = '#FFF0E6';
+              b.style.color       = '#E85500';
+            }
+          };
+          b.onmouseout = function() {
+            if (!testDone && userAnswers[qi] !== bk) {
+              b.style.borderColor = '#F0E8DE';
+              b.style.background  = '#ffffff';
+              b.style.color       = '#1A1208';
+            }
+          };
+        })(i, k, btn);
+
+        optsDiv.appendChild(btn);
+      }
+
+      var expDiv = document.createElement('div');
+      expDiv.id = 'exp-' + i;
+      expDiv.style.display = 'none';
+
+      card.appendChild(metaDiv);
+      card.appendChild(qDiv);
+      card.appendChild(optsDiv);
+      card.appendChild(expDiv);
+      frag.appendChild(card);
     }
 
     container.appendChild(frag);
@@ -717,32 +766,16 @@ function renderMockQuestions() {
   renderChunk();
 }
 
-// ── OPTION HOVER (only when not submitted) ────────────────────────────
-function mockHover(btn, qidx, key, on) {
-  if (testDone) return;
-  const chosen = userAnswers[qidx];
-  if (chosen === key) return; // don't un-style selected
-  if (on) {
-    btn.style.borderColor = '#FF6B1A';
-    btn.style.background  = '#FFF0E6';
-    btn.style.color       = '#E85500';
-  } else {
-    btn.style.borderColor = '#F0E8DE';
-    btn.style.background  = '#ffffff';
-    btn.style.color       = '#1A1208';
-  }
-}
-
-// ── SELECT ANSWER (during test) ───────────────────────────────────────
 function mockSelect(qidx, key) {
   if (testDone) return;
-  const prev = userAnswers[qidx];
   userAnswers[qidx] = key;
 
-  // Update all 4 buttons for this question
-  ['A','B','C','D'].forEach(k => {
-    const btn = document.getElementById('opt-' + qidx + '-' + k);
-    if (!btn) return;
+  // Colour options
+  var keys = ['A','B','C','D'];
+  for (var i=0; i<4; i++) {
+    var k = keys[i];
+    var btn = document.getElementById('opt-' + qidx + '-' + k);
+    if (!btn) continue;
     if (k === key) {
       btn.style.background  = '#FFF0E6';
       btn.style.borderColor = '#FF6B1A';
@@ -754,12 +787,12 @@ function mockSelect(qidx, key) {
       btn.style.borderColor = '#F0E8DE';
       btn.style.color       = '#1A1208';
       btn.style.fontWeight  = '400';
-      btn.style.opacity     = '0.7';
+      btn.style.opacity     = '0.65';
     }
-  });
+  }
 
-  // ── PALETTE: turn green immediately ──────────────────────────────
-  const pb = document.getElementById('pb-' + qidx);
+  // Palette — turn green immediately
+  var pb = document.getElementById('pb-' + qidx);
   if (pb) {
     pb.style.background  = '#DCFCE7';
     pb.style.borderColor = '#22C55E';
@@ -768,62 +801,61 @@ function mockSelect(qidx, key) {
   }
 }
 
-// ── BUILD PALETTE ─────────────────────────────────────────────────────
 function buildPalette() {
-  const grid = document.getElementById('palette');
+  var grid = document.getElementById('palette');
   if (!grid) return;
   grid.innerHTML = '';
-  mockQuestions.forEach((q, i) => {
-    const btn = document.createElement('button');
-    btn.id        = 'pb-' + i;
-    btn.textContent = q._num;
+  for (var i=0; i<mockQuestions.length; i++) {
+    var btn = document.createElement('button');
+    btn.id = 'pb-' + i;
+    btn.textContent = mockQuestions[i]._num;
     btn.style.cssText = 'aspect-ratio:1;border-radius:8px;border:1.5px solid #F0E8DE;background:#fff;font-size:0.72rem;font-weight:600;color:#6B5C45;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all 0.15s;';
-    btn.onclick = () => jumpTo(i);
+    (function(idx) {
+      btn.onclick = function() { jumpTo(idx); };
+    })(i);
     grid.appendChild(btn);
-  });
+  }
 }
 
 function jumpTo(i) {
-  const card = document.getElementById('mq-' + i);
+  var card = document.getElementById('mq-' + i);
   if (!card) return;
-  card.scrollIntoView({ behavior:'smooth', block:'center' });
+  card.scrollIntoView({behavior:'smooth', block:'center'});
   card.style.outline = '3px solid #FF6B1A';
   card.style.outlineOffset = '2px';
-  setTimeout(() => card.style.outline = '', 900);
+  setTimeout(function() { card.style.outline=''; }, 900);
 }
 
-// ── TIMER ─────────────────────────────────────────────────────────────
 function startTimer() {
-  const el = document.getElementById('timer');
-  timerInterval = setInterval(() => {
+  var el = document.getElementById('timer');
+  timerInterval = setInterval(function() {
     timeLeft--;
-    const h = Math.floor(timeLeft/3600);
-    const m = Math.floor((timeLeft%3600)/60);
-    const s = timeLeft%60;
-    el.textContent = h+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+    var h = Math.floor(timeLeft/3600);
+    var m = Math.floor((timeLeft%3600)/60);
+    var s = timeLeft%60;
+    el.textContent = h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
     if (timeLeft<=600) { el.style.color='#B91C1C'; el.style.background='#FEE2E2'; }
     if (timeLeft<=0)   { clearInterval(timerInterval); submitMock(); }
   }, 1000);
 }
 
-// ── SUBMIT ────────────────────────────────────────────────────────────
 function submitMock() {
   clearInterval(timerInterval);
   testDone = true;
 
-  // Colour every question
-  mockQuestions.forEach((q, i) => {
-    const chosen  = userAnswers[i] || null;
-    const correct = q.correct_answer;
+  for (var i=0; i<mockQuestions.length; i++) {
+    var q       = mockQuestions[i];
+    var chosen  = userAnswers[i] || null;
+    var correct = q.correct_answer;
+    var keys    = ['A','B','C','D'];
 
-    ['A','B','C','D'].forEach(k => {
-      const btn = document.getElementById('opt-' + i + '-' + k);
-      if (!btn) return;
+    for (var ki=0; ki<4; ki++) {
+      var k   = keys[ki];
+      var btn = document.getElementById('opt-' + i + '-' + k);
+      if (!btn) continue;
       btn.style.pointerEvents = 'none';
       btn.style.cursor        = 'default';
       btn.style.transition    = 'all 0.2s';
-      btn.style.fontWeight    = '400';
-      btn.style.opacity       = '0.35';
 
       if (k === correct) {
         btn.style.background  = '#F0FDF4';
@@ -835,119 +867,128 @@ function submitMock() {
         btn.style.background  = '#FEF2F2';
         btn.style.borderColor = '#EF4444';
         btn.style.color       = '#B91C1C';
+        btn.style.fontWeight  = '400';
         btn.style.opacity     = '1';
       } else {
         btn.style.background  = '#ffffff';
         btn.style.borderColor = '#F0E8DE';
         btn.style.color       = '#1A1208';
+        btn.style.fontWeight  = '400';
+        btn.style.opacity     = '0.35';
       }
-    });
-
-    // Show explanation
-    const exp = document.getElementById('exp-' + i);
-    if (exp) {
-      exp.style.display = 'block';
-      const ncert = q.ncert_ref && q.ncert_ref !== 'undefined'
-        ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">📖 ' + q.ncert_ref + '</div>' : '';
-      exp.innerHTML = '<strong style="color:#E85500;">✅ Correct: ' + correct + '</strong>' +
-        (chosen && chosen!==correct ? ' &nbsp;<span style="color:#B91C1C;">❌ You chose: ' + chosen + '</span>' : '') +
-        '<br>' + (q.explanation||'') + ncert;
     }
 
-    // Palette: green=correct, red=wrong, grey=skip
-    const pb = document.getElementById('pb-' + i);
+    // Show explanation
+    var exp = document.getElementById('exp-' + i);
+    if (exp) {
+      exp.style.cssText = 'display:block;margin-top:1rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:12px;padding:1rem 1.2rem;font-size:0.875rem;line-height:1.6;color:#1A1208;';
+      var ncert = (q.ncert_ref && q.ncert_ref !== 'undefined')
+        ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">&#x1F4D6; ' + q.ncert_ref + '</div>' : '';
+      exp.innerHTML = '<strong style="color:#E85500;">Correct: ' + correct + '</strong>'
+        + (chosen && chosen!==correct ? ' <span style="color:#B91C1C;">You chose: ' + chosen + '</span>' : '')
+        + '<br>' + (q.explanation||'') + ncert;
+    }
+
+    // Palette colour
+    var pb = document.getElementById('pb-' + i);
     if (pb) {
       if (!chosen) {
-        pb.style.background = '#F3F4F6'; pb.style.borderColor = '#D1D5DB'; pb.style.color = '#9CA3AF';
+        pb.style.background = '#F3F4F6'; pb.style.borderColor='#D1D5DB'; pb.style.color='#9CA3AF';
       } else if (chosen === correct) {
-        pb.style.background = '#DCFCE7'; pb.style.borderColor = '#22C55E'; pb.style.color = '#15803D';
+        pb.style.background = '#DCFCE7'; pb.style.borderColor='#22C55E'; pb.style.color='#15803D';
       } else {
-        pb.style.background = '#FEE2E2'; pb.style.borderColor = '#EF4444'; pb.style.color = '#B91C1C';
+        pb.style.background = '#FEE2E2'; pb.style.borderColor='#EF4444'; pb.style.color='#B91C1C';
       }
       pb.style.fontWeight = '700';
     }
-  });
+  }
 
-  // ── Score calculation ─────────────────────────────────────────────
-  let score=0, correct=0, wrong=0, skip=0;
-  const subj = { Physics:{c:0,w:0,s:0}, Chemistry:{c:0,w:0,s:0}, Biology:{c:0,w:0,s:0} };
-
-  mockQuestions.forEach((q,i) => {
-    const s = q._subj;
-    const a = userAnswers[i];
-    if (!a)                    { skip++;  subj[s].s++; }
+  // Calculate score
+  var score=0, correct=0, wrong=0, skip=0;
+  var subj = {Physics:{c:0,w:0,s:0}, Chemistry:{c:0,w:0,s:0}, Biology:{c:0,w:0,s:0}};
+  for (var i=0; i<mockQuestions.length; i++) {
+    var q = mockQuestions[i];
+    var s = q._subj;
+    var a = userAnswers[i];
+    if (!a)                     { skip++;  subj[s].s++; }
     else if (a===q.correct_answer) { score+=4; correct++; subj[s].c++; }
-    else                       { score-=1; wrong++;  subj[s].w++; }
-  });
+    else                        { score-=1; wrong++;  subj[s].w++; }
+  }
 
-  // Switch screens
   document.getElementById('test-screen').style.display   = 'none';
   document.getElementById('result-screen').style.display = 'block';
+  document.getElementById('result-score').textContent    = score;
+  document.getElementById('r-correct').textContent       = correct;
+  document.getElementById('r-wrong').textContent         = wrong;
+  document.getElementById('r-skip').textContent          = skip;
+  document.getElementById('r-accuracy').textContent      = (correct+wrong>0)
+    ? Math.round(correct/(correct+wrong)*100)+'%' : '0%';
 
-  document.getElementById('result-score').textContent = score;
-  document.getElementById('r-correct').textContent    = correct;
-  document.getElementById('r-wrong').textContent      = wrong;
-  document.getElementById('r-skip').textContent       = skip;
-  document.getElementById('r-accuracy').textContent   =
-    correct+wrong>0 ? Math.round(correct/(correct+wrong)*100)+'%' : '0%';
+  var breakdown = '';
+  var subjList = ['Physics','Chemistry','Biology'];
+  for (var si=0; si<3; si++) {
+    var s = subjList[si];
+    breakdown += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'
+      + (subj[s].c*4 - subj[s].w) + '</div><div class="lbl">' + s + '</div>'
+      + '<div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
+      + (subj[s].c>0?'✅'+subj[s].c+' ':'') + (subj[s].w>0?'❌'+subj[s].w+' ':'') + '⬜'+subj[s].s
+      + '</div></div>';
+  }
+  document.getElementById('subject-breakdown').innerHTML = breakdown;
 
-  // Subject breakdown
-  document.getElementById('subject-breakdown').innerHTML =
-    ['Physics','Chemistry','Biology'].map(s => `
-      <div class="result-box">
-        <div class="num" style="color:#FF6B1A;">${subj[s].c*4 - subj[s].w}</div>
-        <div class="lbl">${s}</div>
-        <div style="font-size:11px;color:#6B5C45;margin-top:4px;">✅${subj[s].c} ❌${subj[s].w} ⬜${subj[s].s}</div>
-      </div>`).join('');
-
-  // Review: wrong answers with jump button
-  const rc = document.getElementById('review-container');
-  const wrongList = mockQuestions
-    .map((q,i) => ({q,i,chosen:userAnswers[i]}))
-    .filter(({q,i}) => userAnswers[i] && userAnswers[i] !== q.correct_answer);
+  // Review wrong answers
+  var rc = document.getElementById('review-container');
+  var wrongList = [];
+  for (var i=0; i<mockQuestions.length; i++) {
+    if (userAnswers[i] && userAnswers[i] !== mockQuestions[i].correct_answer)
+      wrongList.push({q:mockQuestions[i], i:i, chosen:userAnswers[i]});
+  }
 
   if (!wrongList.length) {
     rc.innerHTML = '<p style="color:#22C55E;font-weight:600;padding:2rem 0;">No wrong answers — perfect! 🎉</p>';
     return;
   }
 
-  rc.innerHTML = wrongList.map(({q,i,chosen}) => {
-    const correct = q.correct_answer;
-    const opts = ['A','B','C','D'].map(k => {
-      let bg='#fff',bc='#F0E8DE',col='#1A1208',fw='400',op='0.38';
+  var reviewHtml = '';
+  for (var wi=0; wi<wrongList.length; wi++) {
+    var item    = wrongList[wi];
+    var q       = item.q;
+    var qidx    = item.i;
+    var chosen  = item.chosen;
+    var correct = q.correct_answer;
+    var keys    = ['A','B','C','D'];
+    var optHtml = '';
+    for (var ki=0; ki<4; ki++) {
+      var k = keys[ki];
+      var bg='#fff', bc='#F0E8DE', col='#1A1208', fw='400', op='0.38';
       if (k===correct)  { bg='#F0FDF4'; bc='#22C55E'; col='#15803D'; fw='700'; op='1'; }
       else if (k===chosen) { bg='#FEF2F2'; bc='#EF4444'; col='#B91C1C'; fw='400'; op='1'; }
-      return `<div style="background:${bg};border:1.5px solid ${bc};color:${col};border-radius:10px;padding:0.6rem 1rem;font-size:0.9rem;font-weight:${fw};opacity:${op};margin-bottom:0.5rem;">
-        <span style="font-weight:700;margin-right:0.4rem;color:#FF6B1A;">${k}</span>${q.options[k]||''}</div>`;
-    }).join('');
-    const ncert = q.ncert_ref && q.ncert_ref!=='undefined'
-      ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">📖 ' + q.ncert_ref + '</div>' : '';
-    return `
-      <div style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">
-        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem;">
-          <span style="font-size:0.72rem;font-weight:700;background:#F0E8DE;color:#6B5C45;padding:0.25rem 0.7rem;border-radius:100px;">Q${q._num}</span>
-          <button onclick="goToQuestion(${i})"
-            style="background:none;border:1.5px solid #FF6B1A;color:#FF6B1A;border-radius:100px;padding:0.3rem 0.85rem;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all 0.2s;">
-            ↑ Jump to Q${q._num}
-          </button>
-        </div>
-        <div style="font-size:0.95rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">${q.question}</div>
-        ${opts}
-        <div style="margin-top:0.9rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:10px;padding:0.9rem 1.1rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">
-          <strong style="color:#E85500;">✅ ${correct}</strong>
-          &nbsp;<span style="color:#B91C1C;">❌ You: ${chosen}</span><br>
-          ${q.explanation||''}${ncert}
-        </div>
-      </div>`;
-  }).join('');
+      optHtml += '<div style="background:'+bg+';border:1.5px solid '+bc+';color:'+col+';border-radius:10px;padding:0.6rem 1rem;font-size:0.9rem;font-weight:'+fw+';opacity:'+op+';margin-bottom:0.5rem;">'
+              + '<span style="font-weight:700;color:#FF6B1A;margin-right:0.4rem;">'+k+'</span>'+(q.options[k]||'')+'</div>';
+    }
+    var ncert = (q.ncert_ref && q.ncert_ref !== 'undefined')
+      ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">&#x1F4D6; ' + q.ncert_ref + '</div>' : '';
+    reviewHtml += '<div style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">'
+      + '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem;">'
+      + '<span style="font-size:0.72rem;font-weight:700;background:#F0E8DE;color:#6B5C45;padding:0.25rem 0.7rem;border-radius:100px;">Q'+q._num+'</span>'
+      + '<button onclick="goToQuestion('+qidx+')" style="background:none;border:1.5px solid #FF6B1A;color:#FF6B1A;border-radius:100px;padding:0.3rem 0.85rem;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;">&#8593; Jump to Q'+q._num+'</button>'
+      + '</div>'
+      + '<div style="font-size:0.95rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">'+q.question+'</div>'
+      + optHtml
+      + '<div style="margin-top:0.9rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:10px;padding:0.9rem 1.1rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">'
+      + '<strong style="color:#E85500;">Correct: '+correct+'</strong>'
+      + ' <span style="color:#B91C1C;">You chose: '+chosen+'</span><br>'
+      + (q.explanation||'') + ncert + '</div></div>';
+  }
+  rc.innerHTML = reviewHtml;
 }
 
-// Jump from review back to test question
 function goToQuestion(idx) {
   document.getElementById('result-screen').style.display = 'none';
   document.getElementById('test-screen').style.display   = 'block';
-  setTimeout(() => jumpTo(idx), 150);
+  setTimeout(function() { jumpTo(idx); }, 150);
 }
+
 </script>
 </body>
 </html>
