@@ -1,0 +1,108 @@
+/* ════════════════════════════════
+   NEETO — shared nav + mobile
+════════════════════════════════ */
+
+/* ── NAV ── */
+nav, .navbar {
+  position: sticky;
+  top: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 5%;
+  height: 64px;
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(14px);
+  border-bottom: 1.5px solid #F0E8DE;
+  box-shadow: none;
+}
+
+.logo, nav .logo, .navbar .logo {
+  font-family: 'Fraunces', serif !important;
+  font-size: 1.4rem !important;
+  font-weight: 900 !important;
+  color: #FF6B1A !important;
+  letter-spacing: -0.02em;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  gap: 1.8rem;
+  align-items: center;
+}
+
+.nav-links a {
+  text-decoration: none;
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: #6B5C45;
+  transition: color 0.15s;
+  white-space: nowrap;
+}
+
+.nav-links a:hover  { color: #FF6B1A; }
+.nav-links a.active { color: #FF6B1A; font-weight: 700; }
+
+/* ── HAMBURGER (mobile) ── */
+.nav-hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: 1.5px solid #F0E8DE;
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 7px;
+}
+
+.nav-hamburger span {
+  display: block;
+  height: 2px;
+  background: #6B5C45;
+  border-radius: 2px;
+  transition: all 0.2s;
+}
+
+/* ── MOBILE DROPDOWN ── */
+.nav-mobile-menu {
+  display: none;
+  position: fixed;
+  top: 64px;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border-bottom: 1.5px solid #F0E8DE;
+  z-index: 199;
+  padding: 0.8rem 5%;
+  flex-direction: column;
+  gap: 0;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.06);
+}
+
+.nav-mobile-menu.open { display: flex; }
+
+.nav-mobile-menu a {
+  display: block;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid #F0E8DE;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #6B5C45;
+  transition: color 0.15s;
+}
+
+.nav-mobile-menu a:last-child { border-bottom: none; }
+.nav-mobile-menu a.active { color: #FF6B1A; font-weight: 700; }
+.nav-mobile-menu a:hover  { color: #FF6B1A; }
+
+@media (max-width: 680px) {
+  .nav-links        { display: none; }
+  .nav-hamburger    { display: flex; }
+}
