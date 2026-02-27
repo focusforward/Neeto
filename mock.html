@@ -658,46 +658,77 @@
   [100, 400, 900].forEach(t => setTimeout(() => colourTags(), t));
 
 
-  /* ── 2. OWN selectOption entirely (no _orig call) ── */
-  function installSelectOption() {
-    window.selectOption = function (cardIndex, chosenKey) {
-      chosenKey = chosenKey.toUpperCase();
-      selected[cardIndex] = chosenKey;
+  /* ── 2. DOM-LEVEL onclick HIJACK for option buttons ──
+     app.js keeps overwriting window.selectOption so we strip
+     the onclick attribute from every button and own the click.
+  ── */
+  function handleMockAnswer(cardIndex, chosenKey) {
+    chosenKey = String(chosenKey).toUpperCase();
+    selected[cardIndex] = chosenKey;
 
-      const card = document.getElementById('qc-' + cardIndex);
-      if (!card) return;
+    const card = document.getElementById('qc-' + cardIndex);
+    if (!card) return;
 
-      // Allow re-selection during test (student can change mind)
-      card.querySelectorAll('button.option').forEach(btn => {
-        const key = (btn.dataset.key || '').toUpperCase();
-        btn.removeAttribute('style');
-        if (key === chosenKey) {
-          btn.style.background  = '#FFF0E6';
-          btn.style.border      = '2px solid #FF6B1A';
-          btn.style.color       = '#E85500';
-          btn.style.fontWeight  = '600';
-        } else {
-          btn.style.background  = '#ffffff';
-          btn.style.border      = '1.5px solid #F0E8DE';
-          btn.style.color       = '#1A1208';
-          btn.style.opacity     = '0.65';
-        }
-      });
-
-      // Update palette button → green (answered)
-      const palBtn = document.querySelector(`#palette button:nth-child(${cardIndex + 1})`);
-      if (palBtn) {
-        palBtn.style.background  = '#DCFCE7';
-        palBtn.style.borderColor = '#22C55E';
-        palBtn.style.color       = '#15803D';
+    // Allow re-selection: clear previous selection on this card
+    card.querySelectorAll('button.option').forEach(btn => {
+      const key = (btn.dataset.key || '').toUpperCase();
+      btn.removeAttribute('style');
+      btn.style.borderRadius  = '10px';
+      btn.style.padding       = '0.65rem 1rem';
+      btn.style.width         = '100%';
+      btn.style.textAlign     = 'left';
+      btn.style.fontSize      = '0.9rem';
+      btn.style.transition    = 'all 0.15s';
+      if (key === chosenKey) {
+        btn.style.background  = '#FFF0E6';
+        btn.style.border      = '2px solid #FF6B1A';
+        btn.style.color       = '#E85500';
+        btn.style.fontWeight  = '600';
+      } else {
+        btn.style.background  = '#ffffff';
+        btn.style.border      = '1.5px solid #F0E8DE';
+        btn.style.color       = '#1A1208';
+        btn.style.opacity     = '0.65';
       }
-    };
+    });
+
+    // Update palette button → green (answered)
+    const palBtn = document.querySelector(`#palette button:nth-child(${cardIndex + 1})`);
+    if (palBtn) {
+      palBtn.style.background  = '#DCFCE7';
+      palBtn.style.border      = '1.5px solid #22C55E';
+      palBtn.style.color       = '#15803D';
+    }
   }
 
-  // Install now (app.js already loaded) and re-install to be safe
-  installSelectOption();
-  setTimeout(installSelectOption, 100);
-  setTimeout(installSelectOption, 500);
+  function hijackMockBtn(btn) {
+    if (btn._neetoHijacked) return;
+    btn._neetoHijacked = true;
+    const onclickVal = btn.getAttribute('onclick') || '';
+    const m = onclickVal.match(/selectOption\s*\(\s*(\d+)\s*,\s*['"]([A-D])['"]\s*\)/i);
+    if (!m) return;
+    const cardIndex = parseInt(m[1]);
+    const key       = m[2];
+    btn.removeAttribute('onclick');
+    btn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      handleMockAnswer(cardIndex, key);
+    });
+  }
+
+  function hijackAllMock() {
+    document.querySelectorAll('button.option').forEach(hijackMockBtn);
+  }
+
+  new MutationObserver(muts => {
+    muts.forEach(m => m.addedNodes.forEach(n => {
+      if (n.nodeType !== 1) return;
+      if (n.matches && n.matches('button.option')) hijackMockBtn(n);
+      n.querySelectorAll && n.querySelectorAll('button.option').forEach(hijackMockBtn);
+    }));
+  }).observe(document.body, { childList: true, subtree: true });
+
+  [0, 100, 400, 1000, 2000].forEach(t => setTimeout(hijackAllMock, t));
 
 
   /* ── 3. OWN submitMock — call original then force colours ── */
