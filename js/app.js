@@ -202,7 +202,7 @@ function initPractice() {
     if (pf) filtered = filtered.filter(q => q.pattern    === pf);
     if (df) filtered = filtered.filter(q => q.difficulty === df);
     if (countEl) countEl.textContent = `${filtered.length} questions`;
-    renderQuestions(filtered.slice(0, 50));
+    renderQuestions(filtered.slice(0, 100));
   }
 }
 
@@ -347,7 +347,7 @@ function selectOption(idx, key) {
     questionId:  q.id || q.question_id || `${q.subject}_${idx}`,
     subject:     q.subject,
     chapter:     q.unit_code || '',
-    chapterName: UNIT_NAMES[q.unit_code] || q.unit_code || '',
+    chapterName: q.chapter || UNIT_NAMES[q.unit_code] || q.unit_code || '',
     difficulty:  q.difficulty || 'L1',
     userAnswer:  chosenKey,
     correctAnswer: correctKey,
@@ -416,7 +416,7 @@ function revealAnswer(idx) {
     questionId:  q.id || q.question_id || `${q.subject}_${idx}`,
     subject:     q.subject,
     chapter:     q.unit_code || '',
-    chapterName: UNIT_NAMES[q.unit_code] || q.unit_code || '',
+    chapterName: q.chapter || UNIT_NAMES[q.unit_code] || q.unit_code || '',
     difficulty:  q.difficulty || 'L1',
     userAnswer:  null,
     correctAnswer: (q.correct_answer || '').toString().trim().toUpperCase(),
