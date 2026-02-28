@@ -279,7 +279,7 @@ function showQuestion(idx) {
              border:1px solid rgba(255,107,26,0.2);border-radius:12px;
              padding:1rem 1.2rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">
           <strong style="color:#E85500;">✅ Correct Answer: ${(q.correct_answer||'').toString().trim().toUpperCase()}</strong><br/>
-          ${q.explanation || ''}
+          ${(q.explanation && q.explanation.trim() && !q.explanation.includes('not provided') && !q.explanation.includes('PDF')) ? q.explanation : 'Please refer to your NCERT textbook for a detailed explanation of this concept.'}
           ${cleanNcert(q)}
         </div>
 
