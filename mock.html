@@ -543,7 +543,7 @@
 <div id="start-screen">
   <h1>Full Mock Test</h1>
   <p style="color:#6B5C45; font-size:1rem; margin-bottom:0.3rem;">200 Questions &nbsp;·&nbsp; 200 Minutes &nbsp;·&nbsp; 720 Marks</p>
-  <p style="color:#6B5C45; font-size:0.9rem; margin-bottom:0rem;">Physics 50 &nbsp;+&nbsp; Chemistry 50 &nbsp;+&nbsp; Biology 100</p>
+  <p style="color:#6B5C45; font-size:0.9rem; margin-bottom:0rem;">Physics 50 &nbsp;+&nbsp; Chemistry 50 &nbsp;+&nbsp; Botany 50 &nbsp;+&nbsp; Zoology 50 &nbsp;·&nbsp; Section A: 35 mandatory · Section B: attempt any 10 of 15</p>
 
   <div class="start-info-card">
     <div>
@@ -638,16 +638,36 @@ async function startMock() {
     ]);
     var bio=results[0], chem=results[1], phys=results[2];
     var clean = function(q){ return !q.diagram_required; };
-    var pSel = shuffle(phys.filter(clean)).slice(0,50);
-    var cSel = shuffle(chem.filter(clean)).slice(0,50);
-    var bSel = shuffle(bio.filter(clean)).slice(0,100);
-    mockQuestions = pSel.concat(cSel).concat(bSel).map(function(q,i){
-      return Object.assign({},q,{
-        _num:i+1,
-        _subj:i<50?'Physics':i<100?'Chemistry':'Biology',
-        _sec:(i<35||(i>=50&&i<85)||(i>=100&&i<170))?'A':'B'
-      });
-    });
+
+    // NEET 2024 pattern: 50 Physics + 50 Chemistry + 50 Botany + 50 Zoology
+    // Each subject: 35 Section A (mandatory) + 15 Section B (attempt any 10)
+    var bioClean = shuffle(bio.filter(clean));
+    var midpoint = Math.floor(bioClean.length / 2);
+    var botany   = bioClean.slice(0, midpoint);      // first half = Botany
+    var zoology  = bioClean.slice(midpoint);          // second half = Zoology
+
+    function pick50(pool) {
+      var s = shuffle(pool.slice());
+      return { A: s.slice(0,35), B: s.slice(35,50) };
+    }
+
+    var phy  = pick50(phys.filter(clean));
+    var che  = pick50(chem.filter(clean));
+    var bot  = pick50(botany);
+    var zoo  = pick50(zoology);
+
+    // Order: Phy-A(1-35), Phy-B(36-50), Che-A(51-85), Che-B(86-100),
+    //        Bot-A(101-135), Bot-B(136-150), Zoo-A(151-185), Zoo-B(186-200)
+    var ordered = []
+      .concat(phy.A.map(function(q,i){ return Object.assign({},q,{_num:i+1,   _subj:'Physics',   _sec:'A'}); }))
+      .concat(phy.B.map(function(q,i){ return Object.assign({},q,{_num:i+36,  _subj:'Physics',   _sec:'B'}); }))
+      .concat(che.A.map(function(q,i){ return Object.assign({},q,{_num:i+51,  _subj:'Chemistry', _sec:'A'}); }))
+      .concat(che.B.map(function(q,i){ return Object.assign({},q,{_num:i+86,  _subj:'Chemistry', _sec:'B'}); }))
+      .concat(bot.A.map(function(q,i){ return Object.assign({},q,{_num:i+101, _subj:'Botany',    _sec:'A'}); }))
+      .concat(bot.B.map(function(q,i){ return Object.assign({},q,{_num:i+136, _subj:'Botany',    _sec:'B'}); }))
+      .concat(zoo.A.map(function(q,i){ return Object.assign({},q,{_num:i+151, _subj:'Zoology',   _sec:'A'}); }))
+      .concat(zoo.B.map(function(q,i){ return Object.assign({},q,{_num:i+186, _subj:'Zoology',   _sec:'B'}); }));
+    mockQuestions = ordered;
   } catch(e) {
     document.getElementById('mock-questions').innerHTML =
       '<div style="text-align:center;padding:60px;color:#EF4444;">Could not load. Please refresh.</div>';
@@ -665,7 +685,7 @@ function renderMockQuestions() {
   var CHUNK = 40;
   var idx   = 0;
   var secDone = {};
-  var secNames = {0:'Physics',50:'Chemistry',100:'Biology'};
+  var secNames = {0:'Physics',50:'Chemistry',100:'Botany',150:'Zoology'};
 
   function renderChunk() {
     var frag = document.createDocumentFragment();
@@ -682,12 +702,20 @@ function renderMockQuestions() {
     for (var i=idx; i<end; i++) {
       var q = mockQuestions[i];
 
-      if ((i===50||i===100) && !secDone[i]) {
+      if ((i===50||i===100||i===150) && !secDone[i]) {
         secDone[i] = true;
         var sh = document.createElement('div');
         sh.style.cssText = 'font-family:Fraunces,serif;font-size:1.15rem;font-weight:900;color:#1A1208;padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #F0E8DE;margin-bottom:1.2rem;';
         sh.textContent = secNames[i];
         frag.appendChild(sh);
+      }
+
+      // Section B divider
+      if (i===35||i===85||i===135||i===185) {
+        var div = document.createElement('div');
+        div.style.cssText = 'display:flex;align-items:center;gap:12px;margin:1rem 0 0.8rem;';
+        div.innerHTML = '<div style="flex:1;height:1px;background:#F0E8DE;"></div><span style="font-size:0.72rem;font-weight:700;color:#FF6B1A;background:#FFF0E6;padding:4px 12px;border-radius:100px;border:1px solid #FFD4B3;">SECTION B — Attempt any 10</span><div style="flex:1;height:1px;background:#F0E8DE;"></div>';
+        frag.appendChild(div);
       }
 
       var card = document.createElement('div');
@@ -849,13 +877,15 @@ function submitMock() {
 
   // Score
   var score=0,correct=0,wrong=0,skip=0;
-  var subj={Physics:{c:0,w:0,s:0},Chemistry:{c:0,w:0,s:0},Biology:{c:0,w:0,s:0}};
+  var subj={Physics:{c:0,w:0,s:0},Chemistry:{c:0,w:0,s:0},Botany:{c:0,w:0,s:0},Zoology:{c:0,w:0,s:0}};
   for (var i=0; i<mockQuestions.length; i++) {
     var q=mockQuestions[i], s=q._subj, a=userAnswers[i];
     if (!a){ skip++; subj[s].s++; }
     else if (a===q.correct_answer){ score+=4; correct++; subj[s].c++; }
     else { score-=1; wrong++; subj[s].w++; }
   }
+  // Biology = Botany + Zoology combined
+  var bioC=subj.Botany.c+subj.Zoology.c, bioW=subj.Botany.w+subj.Zoology.w, bioS=subj.Botany.s+subj.Zoology.s;
 
   document.getElementById('test-screen').style.display   = 'none';
   document.getElementById('result-screen').style.display = 'block';
@@ -865,13 +895,18 @@ function submitMock() {
   document.getElementById('r-skip').textContent          = skip;
   document.getElementById('r-accuracy').textContent      = (correct+wrong>0)?Math.round(correct/(correct+wrong)*100)+'%':'0%';
 
-  var bd='', sl=['Physics','Chemistry','Biology'];
-  for (var si=0; si<3; si++) {
-    var s=sl[si];
-    bd+='<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(subj[s].c*4-subj[s].w)+'</div>'
-      +'<div class="lbl">'+s+'</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
-      +(subj[s].c?'✅'+subj[s].c+' ':'')+( subj[s].w?'❌'+subj[s].w+' ':'' )+'⬜'+subj[s].s+'</div></div>';
-  }
+  var bd = '';
+  var sl = [{n:'Physics',s:'Physics'},{n:'Chemistry',s:'Chemistry'},{n:'Biology',s:'bio'}];
+  bd += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(subj.Physics.c*4-subj.Physics.w)+'</div>'
+      + '<div class="lbl">Physics</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
+      + (subj.Physics.c?'✅'+subj.Physics.c+' ':'')+(subj.Physics.w?'❌'+subj.Physics.w+' ':'')+'⬜'+subj.Physics.s+'</div></div>';
+  bd += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(subj.Chemistry.c*4-subj.Chemistry.w)+'</div>'
+      + '<div class="lbl">Chemistry</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
+      + (subj.Chemistry.c?'✅'+subj.Chemistry.c+' ':'')+(subj.Chemistry.w?'❌'+subj.Chemistry.w+' ':'')+'⬜'+subj.Chemistry.s+'</div></div>';
+  bd += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(bioC*4-bioW)+'</div>'
+      + '<div class="lbl">Biology</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
+      + (bioC?'✅'+bioC+' ':'')+(bioW?'❌'+bioW+' ':'')+'⬜'+bioS+'</div>'
+      + '<div style="font-size:10px;color:#9CA3AF;margin-top:2px;">Botany + Zoology</div></div>';
   document.getElementById('subject-breakdown').innerHTML = bd;
 
   // Review wrong
@@ -923,6 +958,7 @@ function goToQuestion(idx) {
   </div>
   <p>© 2026 NEETO. All rights reserved.</p>
 </footer>
+
 <script>
 function toggleNav() {
   document.getElementById('mob-nav').classList.toggle('open');
