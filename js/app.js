@@ -202,6 +202,11 @@ function initPractice() {
     if (pf) filtered = filtered.filter(q => q.pattern    === pf);
     if (df) filtered = filtered.filter(q => q.difficulty === df);
     if (countEl) countEl.textContent = `${filtered.length} questions`;
+    // Shuffle every time so students get different questions each session
+    for (let i = filtered.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
+    }
     renderQuestions(filtered.slice(0, 100));
   }
 }
