@@ -4,249 +4,136 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Units — NEETO</title>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme-override.css">
 <link rel="stylesheet" href="css/nav.css">
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --orange: #FF6B1A; --orange-pale: #FFF0E6; --orange-deep: #E85500;
+  --off-white: #FAFAF8; --ink: #1A1208; --ink-muted: #6B5C45; --border: #F0E8DE;
+}
+html,body { overflow-x:hidden; max-width:100%; width:100%;
+  font-family:'DM Sans',sans-serif; background:var(--off-white); color:var(--ink); min-height:100vh; }
 
-  :root {
-    --orange: #FF6B1A;
-    --orange-light: #FF8C4A;
-    --orange-pale: #FFF0E6;
-    --orange-deep: #E85500;
-    --white: #FFFFFF;
-    --off-white: #FAFAF8;
-    --ink: #1A1208;
-    --ink-muted: #6B5C45;
-    --border: #F0E8DE;
-  }
+.page-header {
+  background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8f3 100%);
+  border-bottom: 1px solid var(--border); padding: 3rem 5% 2.5rem;
+}
+.page-header h1 {
+  font-family:'Fraunces',serif;
+  font-size: clamp(1.8rem,4vw,2.8rem);
+  font-weight:900; letter-spacing:-0.02em; color:var(--ink);
+}
+.page-header p { margin-top:0.5rem; color:var(--ink-muted); font-size:0.95rem; }
 
-  html,body{overflow-x:hidden;max-width:100%;width:100%;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--ink);
-    min-height: 100vh;
-  }
+/* summary bar */
+.summary-bar {
+  display:flex; gap:32px; padding:1.1rem 5%; background:#fff;
+  border-bottom:1px solid var(--border); flex-wrap:wrap;
+}
+.sb-item { display:flex; flex-direction:column; gap:2px; }
+.sb-num { font-family:'Fraunces',serif; font-size:1.5rem; font-weight:900; color:var(--orange); line-height:1; }
+.sb-lbl { font-size:0.72rem; font-weight:600; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-muted); }
 
-  /* ── NAV ── */
-  nav, .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
-    height: 68px;
-    background: rgba(255,255,255,0.92) !important;
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border) !important;
-    box-shadow: none !important;
-  }
+/* subject tabs */
+.subject-tabs {
+  display:flex; gap:0; padding:0 5%;
+  background:#fff; border-bottom:1px solid var(--border);
+}
+.tab-btn {
+  font-family:'DM Sans',sans-serif; font-size:0.88rem; font-weight:600;
+  color:var(--ink-muted); background:none; border:none; border-bottom:3px solid transparent;
+  padding:14px 20px; cursor:pointer; transition:all 0.15s;
+}
+.tab-btn:hover { color:var(--orange); }
+.tab-btn.active { color:var(--orange); border-bottom-color:var(--orange); }
 
-  .logo {
-    font-family: 'Fraunces', serif !important;
-    font-size: 1.5rem !important;
-    font-weight: 900 !important;
-    color: var(--orange) !important;
-    letter-spacing: -0.02em;
-    text-decoration: none;
-  }
+/* search */
+.search-bar {
+  padding:12px 5%; background:#fff; border-bottom:1px solid var(--border);
+}
+.search-bar input {
+  font-family:'DM Sans',sans-serif; font-size:0.875rem;
+  width:100%; max-width:400px; padding:9px 16px;
+  border:1.5px solid var(--border); border-radius:100px;
+  outline:none; background:#FAFAF8; color:var(--ink);
+  transition:border-color 0.15s;
+}
+.search-bar input:focus { border-color:var(--orange); }
 
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
+/* grid */
+.units-grid {
+  max-width:1100px; margin:0 auto;
+  padding:1.5rem 5% 4rem;
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(260px,1fr));
+  gap:1rem;
+}
 
-  .nav-links a {
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--ink-muted) !important;
-    transition: color 0.2s;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-  }
+.unit-card {
+  background:#fff; border:1.5px solid var(--border); border-radius:16px;
+  padding:1.4rem 1.5rem; text-decoration:none;
+  display:flex; flex-direction:column; gap:0.3rem;
+  transition:all 0.2s; position:relative; overflow:hidden;
+}
+.unit-card:hover {
+  border-color:var(--orange); transform:translateY(-3px);
+  box-shadow:0 6px 24px rgba(255,107,26,0.12);
+  padding-right:2.4rem;
+}
+.unit-card::after {
+  content:'→'; position:absolute; right:1.2rem; top:50%;
+  transform:translateY(-50%) translateX(8px);
+  opacity:0; color:var(--orange); font-size:1rem; font-weight:700;
+  transition:all 0.2s;
+}
+.unit-card:hover::after { opacity:1; transform:translateY(-50%) translateX(0); }
 
-  .nav-links a:hover { color: var(--orange) !important; }
-  .nav-links a.active { color: var(--orange) !important; font-weight: 600; }
+.uc-subj {
+  font-size:0.68rem; font-weight:700; text-transform:uppercase;
+  letter-spacing:0.08em; padding:2px 8px; border-radius:100px;
+  display:inline-block; margin-bottom:0.2rem; width:fit-content;
+}
+.s-bio  { background:#DCFCE7; color:#15803D; }
+.s-chem { background:#DBEAFE; color:#1D4ED8; }
+.s-phys { background:#FEF3C7; color:#B45309; }
 
-  /* ── PAGE HEADER ── */
-  .page-header {
-    background: linear-gradient(135deg, var(--orange-pale) 0%, #fff8f3 100%);
-    border-bottom: 1px solid var(--border);
-    padding: 3rem 5% 2.5rem;
-  }
+.uc-name {
+  font-family:'Fraunces',serif; font-size:1rem;
+  font-weight:700; color:var(--ink); line-height:1.3; letter-spacing:-0.01em;
+}
+.uc-count { font-size:0.8rem; font-weight:500; color:var(--ink-muted); margin-top:2px; }
 
-  .page-header h1 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(1.8rem, 4vw, 2.8rem);
-    font-weight: 900;
-    letter-spacing: -0.02em;
-    color: var(--ink);
-  }
+.uc-bar {
+  height:3px; border-radius:2px; margin-top:8px;
+  background:var(--border); overflow:hidden;
+}
+.uc-bar-fill { height:100%; border-radius:2px; transition:width 0.4s; }
+.fill-bio  { background:#22C55E; }
+.fill-chem { background:#2563EB; }
+.fill-phys { background:#F59E0B; }
 
-  .page-header p {
-    margin-top: 0.5rem;
-    color: var(--ink-muted);
-    font-size: 0.95rem;
-  }
+.hidden-card { display:none; }
 
-  /* ── FILTERS ── */
-  .filters {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.75rem;
-    padding: 1.5rem 5%;
-    background: white;
-    border-bottom: 1px solid var(--border);
-  }
+.no-results {
+  grid-column:1/-1; text-align:center; padding:60px 20px;
+  color:var(--ink-muted); font-size:0.9rem;
+}
 
-  .filters select {
-    font-family: 'DM Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--ink);
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 100px;
-    padding: 0.5rem 1.1rem;
-    cursor: pointer;
-    outline: none;
-    transition: border-color 0.2s;
-    appearance: none;
-    -webkit-appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 0.9rem center;
-    padding-right: 2.2rem;
-  }
-
-  .filters select:focus,
-  .filters select:hover { border-color: var(--orange); }
-
-  /* ── UNITS GRID ── */
-  #units-grid, .units-grid {
-    max-width: 1100px;
-    margin: 2rem auto;
-    padding: 0 5% 4rem;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-  }
-
-  /* ── UNIT CARD ── */
-  .unit-card {
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 18px;
-    padding: 1.5rem 1.6rem;
-    text-decoration: none;
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-    transition: all 0.22s;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .unit-card::after {
-    content: '→';
-    position: absolute;
-    right: 1.4rem;
-    top: 50%;
-    transform: translateY(-50%) translateX(6px);
-    opacity: 0;
-    color: var(--orange);
-    font-size: 1.1rem;
-    font-weight: 700;
-    transition: all 0.2s;
-  }
-
-  .unit-card:hover {
-    border-color: var(--orange);
-    box-shadow: 0 6px 24px rgba(255,107,26,0.12);
-    transform: translateY(-3px);
-    padding-right: 2.8rem;
-  }
-
-  .unit-card:hover::after {
-    opacity: 1;
-    transform: translateY(-50%) translateX(0);
-  }
-
-  .unit-subject {
-    font-size: 0.72rem;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    display: inline-block;
-    padding: 0.2rem 0.6rem;
-    border-radius: 100px;
-    margin-bottom: 0.2rem;
-  }
-
-  .unit-subject-bio { background: #DCFCE7; color: #15803D; }
-  .unit-subject-chem { background: #DBEAFE; color: #1D4ED8; }
-  .unit-subject-phys { background: #FEF3C7; color: #B45309; }
-
-  /* fallback for dynamically set subject text */
-  .unit-card .unit-subject:not(.unit-subject-bio):not(.unit-subject-chem):not(.unit-subject-phys) {
-    background: var(--orange-pale);
-    color: var(--orange-deep);
-  }
-
-  .unit-name {
-    font-family: 'Fraunces', serif;
-    font-size: 1.05rem;
-    font-weight: 700;
-    color: var(--ink);
-    letter-spacing: -0.01em;
-    line-height: 1.3;
-  }
-
-  .unit-count {
-    font-size: 0.82rem;
-    font-weight: 500;
-    color: var(--ink-muted);
-    margin-top: 0.1rem;
-  }
-
-  /* loading state */
-  #units-grid p {
-    color: var(--ink-muted) !important;
-    grid-column: 1 / -1;
-    padding: 3rem;
-    text-align: center;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 1.8rem 5%;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    background: white;
-  }
-
-  @media (max-width: 600px) {
-    #units-grid, .units-grid { grid-template-columns: 1fr; }
-    /* see nav.css for mobile */
-  }
+@media (max-width:600px) {
+  .units-grid { grid-template-columns:1fr; }
+  .summary-bar { gap:20px; padding:1rem 5%; }
+  .tab-btn { padding:12px 14px; font-size:0.82rem; }
+}
 </style>
 </head>
 <body>
 
 <nav class="navbar">
-  <a href="index.html" class="nav-brand">
-    <img src="neeto-logo.png" alt="NEETO">
-    <span>NEETO</span>
-  </a>
+  <a href="index.html" class="nav-brand"><img src="neeto-logo.png" alt="NEETO"><span>NEETO</span></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
@@ -267,90 +154,222 @@
 </div>
 
 <div class="page-header">
-  <h1>Practice by Unit</h1>
-  <p>Click any unit to practise only those questions</p>
+  <h1>Practice by Chapter</h1>
+  <p>Click any chapter to practice only those questions</p>
 </div>
 
-<div class="filters" style="gap:12px;">
-  <select id="filter-subject">
-    <option value="">All Subjects</option>
-    <option value="Biology">Biology</option>
-    <option value="Chemistry">Chemistry</option>
-    <option value="Physics">Physics</option>
-  </select>
+<div class="summary-bar">
+  <div class="sb-item"><div class="sb-num">5,062</div><div class="sb-lbl">Total Questions</div></div>
+  <div class="sb-item"><div class="sb-num">2,622</div><div class="sb-lbl">Biology</div></div>
+  <div class="sb-item"><div class="sb-num">1,056</div><div class="sb-lbl">Chemistry</div></div>
+  <div class="sb-item"><div class="sb-num">1,384</div><div class="sb-lbl">Physics</div></div>
+  <div class="sb-item"><div class="sb-num">115</div><div class="sb-lbl">Chapters</div></div>
 </div>
 
-<div id="units-grid" class="units-grid">
-  <p style="color:#6B5C45; padding:40px; text-align:center;">Loading units...</p>
+<div class="subject-tabs">
+  <button class="tab-btn active" onclick="setTab('')">All (115)</button>
+  <button class="tab-btn" onclick="setTab('Biology')">🧬 Biology (44)</button>
+  <button class="tab-btn" onclick="setTab('Chemistry')">⚗️ Chemistry (30)</button>
+  <button class="tab-btn" onclick="setTab('Physics')">⚡ Physics (41)</button>
 </div>
+
+<div class="search-bar">
+  <input id="search" type="text" placeholder="Search chapters…" oninput="doSearch(this.value)">
+</div>
+
+<div class="units-grid" id="grid"></div>
 
 <footer class="neeto-footer">
-  <div class="footer-brand">
-    <img src="neeto-logo.png" alt="NEETO">
-    <span>NEETO</span>
-  </div>
+  <div class="footer-brand"><img src="neeto-logo.png" alt="NEETO"><span>NEETO</span></div>
   <p>© 2026 NEETO. All rights reserved.</p>
 </footer>
 
-<script src="js/app.js"></script>
 <script>
-  // Color unit-subject tags based on text content after app.js renders them
-  function colorSubjectTags() {
-    document.querySelectorAll('.unit-subject').forEach(el => {
-      const t = el.textContent.trim().toLowerCase();
-      el.classList.remove('unit-subject-bio','unit-subject-chem','unit-subject-phys');
-      if (t === 'biology') el.classList.add('unit-subject-bio');
-      else if (t === 'chemistry') el.classList.add('unit-subject-chem');
-      else if (t === 'physics') el.classList.add('unit-subject-phys');
-    });
-  }
+// ── ALL CHAPTER DATA (from api_biology/chemistry/physics.json) ─────────────
+const CHAPTERS = [
+  // BIOLOGY — 2,622 total
+  {s:"Biology",c:"Principles of Inheritance and Variation",n:370},
+  {s:"Biology",c:"Ecosystem",n:174},
+  {s:"Biology",c:"Reproductive Health",n:169},
+  {s:"Biology",c:"Excretory Products and Elimination",n:153},
+  {s:"Biology",c:"Organisms and Populations",n:146},
+  {s:"Biology",c:"Breathing and Exchange of Gases",n:120},
+  {s:"Biology",c:"Biotechnology: Principles and Processes",n:118},
+  {s:"Biology",c:"Biological Classification",n:110},
+  {s:"Biology",c:"Cell: The Unit of Life",n:107},
+  {s:"Biology",c:"Human Reproduction",n:107},
+  {s:"Biology",c:"Reproduction in Organisms",n:106},
+  {s:"Biology",c:"Molecular Basis of Inheritance",n:105},
+  {s:"Biology",c:"Photosynthesis in Higher Plants",n:103},
+  {s:"Biology",c:"Neural Control and Coordination",n:93},
+  {s:"Biology",c:"Human Health and Disease",n:67},
+  {s:"Biology",c:"Biodiversity and Conservation",n:66},
+  {s:"Biology",c:"Morphology of Flowering Plants",n:65},
+  {s:"Biology",c:"Plant Growth and Development",n:56},
+  {s:"Biology",c:"Evolution",n:37},
+  {s:"Biology",c:"Microbes in Human Welfare",n:34},
+  {s:"Biology",c:"Environmental Issues",n:32},
+  {s:"Biology",c:"Cell Cycle and Cell Division",n:28},
+  {s:"Biology",c:"Structural Organisation in Animals",n:28},
+  {s:"Biology",c:"Biotechnology and its Applications",n:23},
+  {s:"Biology",c:"Sexual Reproduction in Flowering Plants",n:23},
+  {s:"Biology",c:"Biomolecules",n:19},
+  {s:"Biology",c:"Transport in Plants",n:18},
+  {s:"Biology",c:"Plant Kingdom",n:16},
+  {s:"Biology",c:"Body Fluids and Circulation",n:16},
+  {s:"Biology",c:"Anatomy of Flowering Plants",n:16},
+  {s:"Biology",c:"The Living World",n:15},
+  {s:"Biology",c:"Mineral Nutrition",n:15},
+  {s:"Biology",c:"Strategies for Enhancement in Food Production",n:13},
+  {s:"Biology",c:"Chemical Coordination and Integration",n:12},
+  {s:"Biology",c:"Respiration in Plants",n:12},
+  {s:"Biology",c:"Locomotion and Movement",n:8},
+  {s:"Biology",c:"Plant & Animal Biology",n:4},
+  {s:"Biology",c:"Reproduction",n:3},
+  {s:"Biology",c:"Animal Kingdom",n:2},
+  {s:"Biology",c:"Human Physiology",n:2},
+  {s:"Biology",c:"Chemical Bonding and Molecular Structure",n:1},
+  {s:"Biology",c:"Biotechnology Principles",n:1},
+  {s:"Biology",c:"Genetics & Biotechnology",n:1},
+  {s:"Biology",c:"Digestion and Absorption",n:1},
+  // CHEMISTRY — 1,056 total
+  {s:"Chemistry",c:"Electrochemistry",n:124},
+  {s:"Chemistry",c:"Chemical Bonding and Molecular Structure",n:109},
+  {s:"Chemistry",c:"Thermodynamics",n:108},
+  {s:"Chemistry",c:"Some Basic Concepts of Chemistry",n:93},
+  {s:"Chemistry",c:"Equilibrium",n:74},
+  {s:"Chemistry",c:"Organic Chemistry: Some Basic Principles and Techniques",n:63},
+  {s:"Chemistry",c:"p-Block Elements",n:58},
+  {s:"Chemistry",c:"Solutions",n:57},
+  {s:"Chemistry",c:"Structure of Atom",n:48},
+  {s:"Chemistry",c:"Coordination Compounds",n:39},
+  {s:"Chemistry",c:"d and f-Block Elements",n:33},
+  {s:"Chemistry",c:"Chemical Kinetics",n:29},
+  {s:"Chemistry",c:"Alcohols, Phenols and Ethers",n:22},
+  {s:"Chemistry",c:"Hydrocarbons",n:21},
+  {s:"Chemistry",c:"Aldehydes, Ketones and Carboxylic Acids",n:20},
+  {s:"Chemistry",c:"Amines",n:20},
+  {s:"Chemistry",c:"Biomolecules",n:19},
+  {s:"Chemistry",c:"Hydrogen",n:16},
+  {s:"Chemistry",c:"Classification of Elements and Periodicity in Properties",n:14},
+  {s:"Chemistry",c:"Redox Reactions",n:14},
+  {s:"Chemistry",c:"Haloalkanes and Haloarenes",n:13},
+  {s:"Chemistry",c:"Polymers",n:12},
+  {s:"Chemistry",c:"s-Block Elements",n:12},
+  {s:"Chemistry",c:"States of Matter",n:9},
+  {s:"Chemistry",c:"Surface Chemistry",n:9},
+  {s:"Chemistry",c:"General Principles and Processes of Isolation of Elements",n:5},
+  {s:"Chemistry",c:"Chemistry in Everyday Life",n:5},
+  {s:"Chemistry",c:"Solid State",n:2},
+  {s:"Chemistry",c:"Stereochemistry",n:1},
+  {s:"Chemistry",c:"Organic Chemistry - Esters",n:1},
+  // PHYSICS — 1,384 total
+  {s:"Physics",c:"Moving Charges and Magnetism",n:159},
+  {s:"Physics",c:"Atoms",n:115},
+  {s:"Physics",c:"System of Particles and Rotational Motion",n:95},
+  {s:"Physics",c:"Electromagnetic Induction",n:93},
+  {s:"Physics",c:"Ray Optics and Optical Instruments",n:92},
+  {s:"Physics",c:"Thermodynamics",n:85},
+  {s:"Physics",c:"Work, Energy and Power",n:84},
+  {s:"Physics",c:"Laws of Motion",n:79},
+  {s:"Physics",c:"Alternating Current",n:65},
+  {s:"Physics",c:"Nuclei",n:51},
+  {s:"Physics",c:"Current Electricity",n:49},
+  {s:"Physics",c:"Electric Charges and Fields",n:32},
+  {s:"Physics",c:"Semiconductor Electronics",n:23},
+  {s:"Physics",c:"Dual Nature of Radiation and Matter",n:23},
+  {s:"Physics",c:"Physical World and Measurement",n:21},
+  {s:"Physics",c:"Wave Optics",n:21},
+  {s:"Physics",c:"Gravitation",n:18},
+  {s:"Physics",c:"Kinematics",n:17},
+  {s:"Physics",c:"Mechanical Properties of Fluids",n:17},
+  {s:"Physics",c:"Oscillations",n:13},
+  {s:"Physics",c:"Electromagnetic Waves",n:12},
+  {s:"Physics",c:"Mechanical Properties of Solids",n:11},
+  {s:"Physics",c:"Electrostatic Potential and Capacitance",n:9},
+  {s:"Physics",c:"Kinetic Theory",n:8},
+  {s:"Physics",c:"Waves",n:7},
+  {s:"Physics",c:"Thermal Properties of Matter",n:7},
+  {s:"Physics",c:"Mathematical Tools",n:6},
+  {s:"Physics",c:"Motion in a Plane",n:5},
+  {s:"Physics",c:"Communication Systems",n:4},
+  {s:"Physics",c:"Magnetism and Matter",n:2},
+  {s:"Physics",c:"Principles of Inheritance and Variation",n:1},
+  {s:"Physics",c:"Breathing and Exchange of Gases",n:1},
+  {s:"Physics",c:"Coordination Compounds",n:1},
+  {s:"Physics",c:"Electrostatics",n:1},
+  {s:"Physics",c:"Thermal Radiation",n:1},
+  {s:"Physics",c:"Nuclear Physics",n:1},
+  {s:"Physics",c:"Kinetic Theory of Gases",n:1},
+  {s:"Physics",c:"Magnetic Effects of Current",n:1},
+  {s:"Physics",c:"Dual Nature of Matter",n:1},
+  {s:"Physics",c:"Fluids",n:1},
+  {s:"Physics",c:"Semiconductors",n:1},
+];
 
-  setTimeout(colorSubjectTags, 800);
-  setTimeout(colorSubjectTags, 2000);
+// Max count for progress bar scaling
+const MAX_N = Math.max(...CHAPTERS.map(c=>c.n));
 
-  document.getElementById('filter-subject').addEventListener('change', function() {
-    const subj = this.value;
-    document.querySelectorAll('.unit-card').forEach(card => {
-      if (!subj || card.querySelector('.unit-subject').textContent.trim() === subj) {
-        card.style.display = '';
-      } else {
-        card.style.display = 'none';
-      }
-    });
+const SCLS = { Biology:'s-bio', Chemistry:'s-chem', Physics:'s-phys' };
+const FCLS = { Biology:'fill-bio', Chemistry:'fill-chem', Physics:'fill-phys' };
+
+let activeTab = '';
+let activeSearch = '';
+
+function buildCards() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  let visible = 0;
+  CHAPTERS.forEach(ch => {
+    const matchTab    = !activeTab   || ch.s === activeTab;
+    const matchSearch = !activeSearch || ch.c.toLowerCase().includes(activeSearch) || ch.s.toLowerCase().includes(activeSearch);
+    const show = matchTab && matchSearch;
+
+    const a = document.createElement('a');
+    a.className = 'unit-card' + (show ? '' : ' hidden-card');
+    a.href = 'practice.html?subject=' + encodeURIComponent(ch.s) + '&chapter=' + encodeURIComponent(ch.c);
+
+    const pct = Math.round((ch.n / MAX_N) * 100);
+    a.innerHTML = `
+      <span class="uc-subj ${SCLS[ch.s]||''}">${ch.s}</span>
+      <div class="uc-name">${ch.c}</div>
+      <div class="uc-count">${ch.n.toLocaleString()} question${ch.n!==1?'s':''}</div>
+      <div class="uc-bar"><div class="uc-bar-fill ${FCLS[ch.s]||''}" style="width:${pct}%"></div></div>
+    `;
+    grid.appendChild(a);
+    if (show) visible++;
   });
 
-  // Fix any dark inline styles injected by app.js
-  (function() {
-    const DARK = /^#(?:0|1|2|3)[0-9a-f]{5}/i;
-    const LIGHT_TEXT = /^#(?:[e-f]{3,6}|fff|ccc|ddd|eee|888|999|666)/i;
-    function fixEl(el) {
-      if (!(el instanceof HTMLElement)) return;
-      const s = el.style;
-      if (s.background && DARK.test(s.background.trim()))           s.background = '#ffffff';
-      if (s.backgroundColor && DARK.test(s.backgroundColor.trim())) s.backgroundColor = '#ffffff';
-      if (s.color && LIGHT_TEXT.test(s.color.trim()))               s.color = '#1A1208';
-      if (s.borderColor && DARK.test(s.borderColor.trim()))         s.borderColor = '#F0E8DE';
-    }
-    function fixAll() { document.querySelectorAll('*').forEach(fixEl); colorSubjectTags(); }
-    [400, 1000, 2000].forEach(t => setTimeout(fixAll, t));
-    new MutationObserver(m => {
-      m.forEach(mut => {
-        mut.addedNodes.forEach(n => { if (n.nodeType===1) { fixEl(n); n.querySelectorAll&&n.querySelectorAll('*').forEach(fixEl); } });
-        if (mut.type==='attributes'&&mut.attributeName==='style') fixEl(mut.target);
-      });
-    }).observe(document.body, { childList:true, subtree:true, attributes:true, attributeFilter:['style'] });
-  })();
-</script>
-<script>
-function toggleNav() {
-  document.getElementById('mob-nav').classList.toggle('open');
+  if (visible === 0) {
+    const d = document.createElement('div');
+    d.className = 'no-results';
+    d.textContent = 'No chapters found. Try a different search.';
+    grid.appendChild(d);
+  }
 }
+
+function setTab(subj) {
+  activeTab = subj;
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('search').value = '';
+  activeSearch = '';
+  buildCards();
+}
+
+function doSearch(val) {
+  activeSearch = val.trim().toLowerCase();
+  buildCards();
+}
+
+function toggleNav() { document.getElementById('mob-nav').classList.toggle('open'); }
 document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav');
-  var b = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
-    m.classList.remove('open');
+  var m=document.getElementById('mob-nav'),b=document.querySelector('.nav-hamburger');
+  if(m&&m.classList.contains('open')&&!m.contains(e.target)&&b&&!b.contains(e.target)) m.classList.remove('open');
 });
+
+// Initial render
+buildCards();
 </script>
 </body>
 </html>

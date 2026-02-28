@@ -10,18 +10,12 @@
 <link rel="stylesheet" href="css/nav.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
 html, body {
   font-family: 'DM Sans', sans-serif;
-  background: #FAFAF8;
-  color: #1A1208;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+  background: #FAFAF8; color: #1A1208;
+  min-height: 100vh; width: 100%; max-width: 100%; overflow-x: hidden;
 }
 
-/* PAGE HEADER */
 .page-header {
   background: linear-gradient(135deg, #FFF0E6 0%, #fff8f3 100%);
   border-bottom: 1.5px solid #F0E8DE;
@@ -30,71 +24,127 @@ html, body {
 .page-header h1 {
   font-family: 'Fraunces', serif;
   font-size: clamp(1.5rem, 4vw, 2.2rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: #1A1208;
+  font-weight: 900; letter-spacing: -0.02em; color: #1A1208;
 }
 .page-header p { margin-top: 4px; color: #6B5C45; font-size: 0.88rem; }
 
-/* FILTERS */
 .filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 14px 20px;
-  background: #fff;
-  border-bottom: 1.5px solid #F0E8DE;
-  width: 100%;
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 14px 20px; background: #fff;
+  border-bottom: 1.5px solid #F0E8DE; width: 100%;
 }
-
 .filters select {
   font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #1A1208;
-  background: #FAFAF8;
-  border: 1.5px solid #F0E8DE;
-  border-radius: 100px;
-  padding: 8px 32px 8px 14px;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
+  font-size: 0.85rem; font-weight: 500; color: #1A1208;
+  background: #FAFAF8; border: 1.5px solid #F0E8DE;
+  border-radius: 100px; padding: 8px 32px 8px 14px;
+  cursor: pointer; outline: none;
+  appearance: none; -webkit-appearance: none;
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
+  background-repeat: no-repeat; background-position: right 12px center;
   transition: border-color 0.15s;
-  max-width: 100%;
 }
+.filters select:hover, .filters select:focus { border-color: #FF6B1A; }
 
-.filters select:hover,
-.filters select:focus { border-color: #FF6B1A; }
-
-/* Q-COUNT BAR */
 .q-count-bar {
-  padding: 10px 20px;
-  background: #fff;
+  padding: 10px 20px; background: #fff;
   border-bottom: 1.5px solid #F0E8DE;
-  font-size: 0.8rem;
-  color: #6B5C45;
-  font-weight: 500;
+  font-size: 0.8rem; color: #6B5C45; font-weight: 500;
+  display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
+.q-count-bar button {
+  font-family: 'DM Sans', sans-serif; font-size: 0.78rem; font-weight: 700;
+  background: #FF6B1A; color: #fff; border: none;
+  padding: 5px 14px; border-radius: 100px; cursor: pointer; transition: background 0.15s;
+}
+.q-count-bar button:hover { background: #E85500; }
 
-/* QUESTIONS AREA */
 #questions-container {
-  max-width: 720px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px 20px 80px;
+  max-width: 720px; width: 100%;
+  margin: 0 auto; padding: 20px 20px 80px;
 }
 
-/* MOBILE */
+/* ── QUESTION CARD ── */
+.q-card {
+  background: #fff; border: 1.5px solid #F0E8DE;
+  border-radius: 16px; padding: 1.6rem 1.6rem 1.2rem;
+  margin-bottom: 1.2rem;
+}
+.q-meta { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 0.85rem; align-items: center; }
+.q-badge {
+  font-size: 0.68rem; font-weight: 700; letter-spacing: 0.05em;
+  text-transform: uppercase; padding: 3px 9px; border-radius: 100px;
+}
+.b-bio   { background: #DCFCE7; color: #15803D; }
+.b-chem  { background: #DBEAFE; color: #1D4ED8; }
+.b-phys  { background: #FEF3C7; color: #B45309; }
+.b-ch    { background: #F5F5F4; color: #57534E; }
+.b-pat   { background: #FFF0E6; color: #E85500; }
+.b-L1    { background: #DCFCE7; color: #15803D; }
+.b-L2    { background: #FEF3C7; color: #B45309; }
+.b-L3    { background: #FEE2E2; color: #B91C1C; }
+.b-year  { background: #F3E8FF; color: #7E22CE; }
+
+.q-text { font-size: 0.95rem; line-height: 1.7; color: #1A1208; margin-bottom: 1rem; }
+
+.opts { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 0.8rem; }
+.opt {
+  display: flex; align-items: flex-start; gap: 9px;
+  padding: 10px 13px; border-radius: 10px;
+  border: 1.5px solid #F0E8DE; background: #FAFAF8;
+  cursor: pointer; text-align: left;
+  font-size: 0.875rem; font-family: 'DM Sans', sans-serif;
+  color: #1A1208; line-height: 1.45; transition: all 0.12s;
+}
+.opt:hover:not([disabled]) { border-color: #FF6B1A; background: #FFF7F0; }
+.opt-ltr { font-weight: 700; font-size: 0.72rem; color: #6B5C45; min-width: 15px; margin-top: 2px; flex-shrink: 0; }
+.opt.correct  { border-color: #22C55E; background: #F0FDF4; color: #15803D; }
+.opt.correct .opt-ltr { color: #22C55E; }
+.opt.wrong    { border-color: #EF4444; background: #FEF2F2; color: #B91C1C; }
+.opt.wrong .opt-ltr   { color: #EF4444; }
+.opt.reveal   { border-color: #22C55E; background: #F0FDF4; color: #15803D; }
+.opt.reveal .opt-ltr  { color: #22C55E; }
+.opt[disabled] { cursor: default; }
+
+.exp {
+  display: none; margin-top: 0.6rem;
+  background: #FFF7F0; border-left: 3px solid #FF6B1A;
+  border-radius: 0 8px 8px 0; padding: 0.7rem 1rem;
+  font-size: 0.875rem; line-height: 1.65; color: #1A1208;
+}
+.exp.on { display: block; }
+.exp strong { color: #E85500; }
+
+.ptip {
+  display: none; margin-top: 0.45rem;
+  background: #F0F9FF; border-left: 3px solid #38BDF8;
+  border-radius: 0 8px 8px 0; padding: 0.6rem 1rem;
+  font-size: 0.82rem; line-height: 1.6; color: #0C4A6E;
+}
+.ptip.on { display: block; }
+
+.load-more {
+  text-align: center; padding: 8px 0 24px;
+}
+.load-more button {
+  font-family: 'DM Sans', sans-serif; font-size: 0.88rem; font-weight: 700;
+  background: #fff; color: #FF6B1A; border: 2px solid #FF6B1A;
+  border-radius: 100px; padding: 10px 28px; cursor: pointer; transition: all 0.15s;
+}
+.load-more button:hover { background: #FFF0E6; }
+
+.empty {
+  text-align: center; padding: 60px 20px; color: #6B5C45;
+}
+.empty .ei { font-size: 2.5rem; margin-bottom: 10px; }
+
 @media (max-width: 680px) {
   .page-header { padding: 1.4rem 16px 1.2rem; }
-  .filters     { padding: 10px 16px; gap: 6px; }
+  .filters { padding: 10px 16px; gap: 6px; }
   .filters select { font-size: 0.8rem; padding: 7px 28px 7px 12px; }
   .q-count-bar { padding: 8px 16px; }
   #questions-container { padding: 16px 16px 80px; }
+  .opts { grid-template-columns: 1fr; }
 }
 </style>
 </head>
@@ -102,8 +152,7 @@ html, body {
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neeto-logo.png" alt="NEETO">
-    <span>NEETO</span>
+    <img src="neeto-logo.png" alt="NEETO"><span>NEETO</span>
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
@@ -116,7 +165,6 @@ html, body {
     <span></span><span></span><span></span>
   </button>
 </nav>
-
 <div class="nav-mobile-menu" id="mob-nav">
   <a href="index.html">Home</a>
   <a href="practice.html" class="active">Practice</a>
@@ -127,26 +175,29 @@ html, body {
 
 <div class="page-header">
   <h1>Practice Questions</h1>
-  <p>Filter by subject, pattern or difficulty — one question at a time</p>
+  <p>Filter by subject, chapter, pattern or difficulty — tap an option to reveal the answer</p>
 </div>
 
 <div class="filters">
-  <select id="filter-subject">
+  <select id="fs">
     <option value="">All Subjects</option>
-    <option value="Biology">Biology</option>
-    <option value="Chemistry">Chemistry</option>
-    <option value="Physics">Physics</option>
+    <option value="Biology">🧬 Biology</option>
+    <option value="Chemistry">⚗️ Chemistry</option>
+    <option value="Physics">⚡ Physics</option>
   </select>
-  <select id="filter-pattern">
+  <select id="fc">
+    <option value="">All Chapters</option>
+  </select>
+  <select id="fp">
     <option value="">All Patterns</option>
     <option value="memory_test">🎯 Memory Test</option>
-    <option value="negative_charge">⚡ Negative Charge (NOT/EXCEPT)</option>
-    <option value="concept_guru">🌀 Concept Guru (Multi-statement)</option>
+    <option value="negative_charge">⚡ Negative Charge</option>
+    <option value="concept_guru">🌀 Concept Guru</option>
     <option value="diagram_dhamaka">🖼️ Diagram Dhamaka</option>
-    <option value="speed_breaker">⛔ Speed Breaker (Order/Match)</option>
-    <option value="best_choice">🔽 Best Choice (Eliminate)</option>
+    <option value="speed_breaker">⛔ Speed Breaker</option>
+    <option value="best_choice">🔽 Best Choice</option>
   </select>
-  <select id="filter-diff">
+  <select id="fd">
     <option value="">All Levels</option>
     <option value="L1">L1 — Easy</option>
     <option value="L2">L2 — Medium</option>
@@ -154,30 +205,236 @@ html, body {
   </select>
 </div>
 
-<div class="q-count-bar" id="q-count">Loading...</div>
+<div class="q-count-bar">
+  <span id="qct">Loading…</span>
+  <button onclick="doShuffle()">🔀 Shuffle</button>
+</div>
+
 <div id="questions-container">
-  <p style="text-align:center;padding:60px 0;color:#6B5C45;">Loading questions...</p>
+  <p style="text-align:center;padding:60px 0;color:#6B5C45;">Loading questions…</p>
 </div>
 
 <footer class="neeto-footer">
-  <div class="footer-brand">
-    <img src="neeto-logo.png" alt="NEETO">
-    <span>NEETO</span>
-  </div>
+  <div class="footer-brand"><img src="neeto-logo.png" alt="NEETO"><span>NEETO</span></div>
   <p>© 2026 NEETO. All rights reserved.</p>
 </footer>
 
-<script src="js/app.js"></script>
 <script>
-function toggleNav() {
-  document.getElementById('mob-nav').classList.toggle('open');
+const PLABEL = {
+  memory_test:     '🎯 Memory Test',
+  negative_charge: '⚡ Negative Charge',
+  concept_guru:    '🌀 Concept Guru',
+  diagram_dhamaka: '🖼️ Diagram Dhamaka',
+  speed_breaker:   '⛔ Speed Breaker',
+  best_choice:     '🔽 Best Choice',
+};
+const PTIP = {
+  memory_test:     '<strong>Memory Test:</strong> Pure recall — no trick. You either know it or you don\'t.',
+  negative_charge: '<strong>Negative Charge — Googly!</strong> The question flips on you. Re-read the stem slowly. Your brain wants to pick what\'s TRUE — this punishes that instinct.',
+  concept_guru:    '<strong>Concept Guru:</strong> Multi-statement trap. One buried wrong statement invalidates the whole answer. Check every line independently.',
+  diagram_dhamaka: '<strong>Diagram Dhamaka:</strong> The image is the question. Text alone won\'t save you here.',
+  speed_breaker:   '<strong>Speed Breaker:</strong> Order/Match question. Lock on the ONE pair you\'re certain about — it instantly eliminates half the options.',
+  best_choice:     '<strong>Best Choice:</strong> Multiple options look right. Eliminate wrong ones — don\'t just pick the first that sounds correct.',
+};
+const DLABEL = { L1:'Easy', L2:'Medium', L3:'Hard' };
+const SBG    = { Biology:'b-bio', Chemistry:'b-chem', Physics:'b-phys' };
+
+let ALL = [], filtered = [], curPage = 0;
+const PER_PAGE = 20;
+
+// ── LOAD ──────────────────────────────────────────────────────────────────
+async function boot() {
+  try {
+    const [b, c, p] = await Promise.all([
+      fetch('api_biology.json').then(r=>r.json()),
+      fetch('api_chemistry.json').then(r=>r.json()),
+      fetch('api_physics.json').then(r=>r.json()),
+    ]);
+    ALL = [
+      ...(b.questions||b||[]),
+      ...(c.questions||c||[]),
+      ...(p.questions||p||[]),
+    ];
+  } catch(e) {
+    document.getElementById('questions-container').innerHTML =
+      '<div class="empty"><div class="ei">⚠️</div><p>Could not load questions.<br>Make sure the JSON files are in the same folder.</p></div>';
+    return;
+  }
+
+  // Pre-select subject from URL param (coming from home subject cards)
+  const params = new URLSearchParams(location.search);
+  const urlSubj = params.get('subject') || '';
+  const urlCh   = params.get('chapter') || '';
+  if (urlSubj) { document.getElementById('fs').value = urlSubj; }
+  rebuildChapterDrop(urlSubj, urlCh);
+  doFilter();
 }
+
+// ── CHAPTER DROPDOWN ──────────────────────────────────────────────────────
+function rebuildChapterDrop(subj, selectVal) {
+  const pool = subj ? ALL.filter(q=>q.subject===subj) : ALL;
+  const cnt  = {};
+  pool.forEach(q => {
+    const c = (q.chapter||'').trim();
+    if (c && c !== 'UNCLASSIFIED') cnt[c] = (cnt[c]||0) + 1;
+  });
+  const sorted = Object.entries(cnt).sort((a,b) => b[1]-a[1]);
+  const sel = document.getElementById('fc');
+  sel.innerHTML = '<option value="">All Chapters</option>';
+  sorted.forEach(([ch, n]) => {
+    const o = document.createElement('option');
+    o.value = ch;
+    o.textContent = ch + ' (' + n + ')';
+    sel.appendChild(o);
+  });
+  if (selectVal) sel.value = selectVal;
+}
+
+// ── FILTER ────────────────────────────────────────────────────────────────
+function doFilter() {
+  const subj = document.getElementById('fs').value;
+  const ch   = document.getElementById('fc').value;
+  const pat  = document.getElementById('fp').value;
+  const diff = document.getElementById('fd').value;
+  filtered = ALL.filter(q =>
+    (!subj || q.subject    === subj) &&
+    (!ch   || q.chapter    === ch)   &&
+    (!pat  || q.pattern    === pat)  &&
+    (!diff || q.difficulty === diff)
+  );
+  curPage = 0;
+  render(true);
+}
+
+// ── SHUFFLE ───────────────────────────────────────────────────────────────
+function doShuffle() {
+  for (let i = filtered.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [filtered[i],filtered[j]] = [filtered[j],filtered[i]];
+  }
+  curPage = 0;
+  render(true);
+}
+
+// ── RENDER ────────────────────────────────────────────────────────────────
+function render(reset) {
+  const wrap = document.getElementById('questions-container');
+  const start = curPage * PER_PAGE;
+  const slice = filtered.slice(start, start + PER_PAGE);
+
+  document.getElementById('qct').textContent =
+    filtered.length.toLocaleString() + ' question' + (filtered.length !== 1 ? 's' : '');
+
+  if (filtered.length === 0) {
+    wrap.innerHTML = '<div class="empty"><div class="ei">🔍</div><p>No questions match these filters.<br>Try removing a filter.</p></div>';
+    return;
+  }
+  if (reset) wrap.innerHTML = '';
+
+  // Remove old load-more
+  const old = wrap.querySelector('.load-more');
+  if (old) old.remove();
+
+  slice.forEach(q => wrap.appendChild(makeCard(q)));
+
+  const shown = start + slice.length;
+  if (shown < filtered.length) {
+    const d = document.createElement('div');
+    d.className = 'load-more';
+    d.innerHTML = '<button onclick="loadMore()">Load more (' + (filtered.length - shown).toLocaleString() + ' remaining)</button>';
+    wrap.appendChild(d);
+  }
+}
+
+function loadMore() { curPage++; render(false); }
+
+// ── CARD ──────────────────────────────────────────────────────────────────
+function makeCard(q) {
+  const id  = q.id || Math.random().toString(36).slice(2);
+  const pat = q.pattern || 'memory_test';
+  const diff= q.difficulty || '';
+  const ch  = (q.chapter||'').trim();
+  const subj= q.subject || '';
+
+  // Badges
+  let badges = `<span class="q-badge ${SBG[subj]||'b-ch'}">${subj}</span>`;
+  if (ch && ch !== 'UNCLASSIFIED') badges += `<span class="q-badge b-ch">${esc(ch)}</span>`;
+  badges += `<span class="q-badge b-pat">${PLABEL[pat]||pat}</span>`;
+  if (diff) badges += `<span class="q-badge b-${diff}">${DLABEL[diff]||diff}</span>`;
+  if (q.year) badges += `<span class="q-badge b-year">NEET ${q.year}</span>`;
+
+  // Options
+  const opts = q.options || {};
+  const optHtml = ['A','B','C','D'].map(l => {
+    const txt = opts[l] || '';
+    return `<button class="opt" data-l="${l}"
+      onclick="pick(this,'${esc(id)}','${l}','${q.correct_answer}')">
+      <span class="opt-ltr">${l}.</span>
+      <span>${esc(txt)}</span>
+    </button>`;
+  }).join('');
+
+  const exp  = q.explanation || 'Refer to NCERT for the complete explanation of this concept.';
+  const tip  = PTIP[pat] || '';
+
+  const card = document.createElement('div');
+  card.className = 'q-card';
+  card.id = 'card-' + id;
+  card.innerHTML = `
+    <div class="q-meta">${badges}</div>
+    <div class="q-text">${esc(q.question||'')}</div>
+    <div class="opts" id="opts-${id}">${optHtml}</div>
+    <div class="exp" id="exp-${id}"><strong>Explanation:</strong> ${esc(exp)}</div>
+    <div class="ptip" id="tip-${id}">${tip}</div>`;
+  return card;
+}
+
+// ── PICK ──────────────────────────────────────────────────────────────────
+function pick(btn, id, chosen, correct) {
+  const grid = document.getElementById('opts-' + id);
+  if (!grid || grid.dataset.done) return;
+  grid.dataset.done = '1';
+  grid.querySelectorAll('.opt').forEach(b => {
+    b.disabled = true;
+    if (b.dataset.l === correct) b.classList.add('reveal');
+  });
+  btn.classList.remove('reveal');
+  btn.classList.add(chosen === correct ? 'correct' : 'wrong');
+  const expEl = document.getElementById('exp-' + id);
+  const tipEl = document.getElementById('tip-' + id);
+  if (expEl) expEl.classList.add('on');
+  if (tipEl) tipEl.classList.add('on');
+  // Save to localStorage for progress tracking
+  try {
+    const key = 'neeto_ans';
+    const s = JSON.parse(localStorage.getItem(key)||'{}');
+    s[id] = { ok: chosen===correct, pat: btn.closest('.q-card').querySelector('.b-pat')?.textContent||'' };
+    localStorage.setItem(key, JSON.stringify(s));
+  } catch(e) {}
+}
+
+// ── HELPERS ───────────────────────────────────────────────────────────────
+function esc(s) {
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ── EVENTS ────────────────────────────────────────────────────────────────
+document.getElementById('fs').addEventListener('change', function() {
+  rebuildChapterDrop(this.value, '');
+  doFilter();
+});
+['fc','fp','fd'].forEach(id => document.getElementById(id).addEventListener('change', doFilter));
+
+function toggleNav() { document.getElementById('mob-nav').classList.toggle('open'); }
 document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav');
-  var b = document.querySelector('.nav-hamburger');
+  var m = document.getElementById('mob-nav'), b = document.querySelector('.nav-hamburger');
   if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
     m.classList.remove('open');
 });
+
+boot();
 </script>
 </body>
 </html>
