@@ -1,4 +1,14 @@
 // NEETO — app.js  (with localStorage caching + attempt analytics)
+// v2 — clears stale cache from pre-data/ folder structure
+(function() {
+  var CACHE_VERSION = 'v2';
+  if (localStorage.getItem('neeto_cache_version') !== CACHE_VERSION) {
+    Object.keys(localStorage).forEach(function(k) {
+      if (k.startsWith('neeto_q_')) localStorage.removeItem(k);
+    });
+    localStorage.setItem('neeto_cache_version', CACHE_VERSION);
+  }
+})();
 
 let ALL_QUESTIONS = [];
 let LOADED_SUBJECTS = {};
