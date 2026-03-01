@@ -640,27 +640,180 @@ async function startMock() {
       loadSubjectFile('Biology'), loadSubjectFile('Chemistry'), loadSubjectFile('Physics')
     ]);
     var bio=results[0], chem=results[1], phys=results[2];
-    var clean = function(q){ return !q.diagram_required; };
 
-    // NEET 2024 pattern: 50 Physics + 50 Chemistry + 50 Botany + 50 Zoology
-    // Each subject: 35 Section A (mandatory) + 15 Section B (attempt any 10)
-    var bioClean = shuffle(bio.filter(clean));
-    var midpoint = Math.floor(bioClean.length / 2);
-    var botany   = bioClean.slice(0, midpoint);      // first half = Botany
-    var zoology  = bioClean.slice(midpoint);          // second half = Zoology
+    // ═══════════════════════════════════════════════════════════════
+    // NEET CHAPTER-WISE WEIGHTAGE (PDF 2027 guide)
+    // Biology: 100Q total (50 Botany + 50 Zoology)
+    // Physics: 50Q | Chemistry: 50Q
+    // Each subject: 35 Sec-A mandatory + 15 Sec-B (attempt any 10)
+    // ═══════════════════════════════════════════════════════════════
 
-    function pick50(pool) {
-      var s = shuffle(pool.slice());
-      return { A: s.slice(0,35), B: s.slice(35,50) };
+    // ── CHAPTER CLASSIFICATION MAPS ─────────────────────────────────
+    var BIO_TOPIC_MAP = {
+      'Diversity in Living World': ['the living world','biological classification','plant kingdom','animal kingdom'],
+      'Structural Organisation':  ['morphology of flowering plants','anatomy of flowering plants','structural organisation in animals'],
+      'Cell Structure & Function':['cell: the unit of life','biomolecules','cell cycle and cell division'],
+      'Plant Physiology':         ['transport in plants','mineral nutrition','photosynthesis in higher plants','respiration in plants','plant growth and development'],
+      'Human Physiology':         ['digestion and absorption','breathing and exchange of gases','body fluids and circulation','excretory products and elimination','locomotion and movement','neural control and coordination','chemical coordination and integration','human physiology','human physiology and zoology'],
+      'Reproduction':             ['reproduction in organisms','sexual reproduction in flowering plants','human reproduction','reproductive health','reproduction'],
+      'Genetics & Evolution':     ['principles of inheritance and variation','molecular basis of inheritance','evolution'],
+      'Biology in Human Welfare': ['human health and disease','strategies for enhancement in food production','microbes in human welfare'],
+      'Biotechnology':            ['biotechnology: principles and processes','biotechnology and its applications','biotechnology principles','genetics & biotechnology'],
+      'Ecology':                  ['organisms and populations','ecosystem','biodiversity and conservation','environmental issues']
+    };
+
+    var PHY_TOPIC_MAP = {
+      'Units & Measurement':  ['physical world and measurement','mathematical tools'],
+      'Kinematics':           ['kinematics','motion in a plane'],
+      'Laws of Motion':       ['laws of motion'],
+      'Work, Energy & Power': ['work, energy and power'],
+      'Rotational Motion':    ['system of particles and rotational motion'],
+      'Gravitation':          ['gravitation'],
+      'Properties of Matter': ['mechanical properties of solids','mechanical properties of fluids','thermal properties of matter'],
+      'Thermodynamics':       ['thermodynamics','kinetic theory of gases'],
+      'Kinetic Theory':       ['kinetic theory'],
+      'Oscillations & Waves': ['oscillations','waves'],
+      'Electrostatics':       ['electric charges and fields','electrostatic potential and capacitance','electrostatics'],
+      'Current Electricity':  ['current electricity'],
+      'Magnetism + EMI':      ['moving charges and magnetism','magnetism and matter','electromagnetic induction','alternating current','magnetic effects of current'],
+      'Optics':               ['ray optics and optical instruments','wave optics'],
+      'Dual Nature':          ['dual nature of radiation and matter','dual nature of matter'],
+      'Atoms & Nuclei':       ['atoms','nuclei','nuclear physics'],
+      'Semiconductors':       ['semiconductor electronics','semiconductors','communication systems','electromagnetic waves']
+    };
+
+    var CHEM_TOPIC_MAP = {
+      'Basic Concepts':              ['some basic concepts of chemistry'],
+      'Structure of Atom':           ['structure of atom'],
+      'Periodic Table':              ['classification of elements and periodicity in properties','classification of elements & periodicity'],
+      'Chemical Bonding':            ['chemical bonding and molecular structure','chemical bonding'],
+      'States of Matter':            ['states of matter'],
+      'Thermodynamics':              ['thermodynamics'],
+      'Equilibrium':                 ['equilibrium'],
+      'Redox':                       ['redox reactions'],
+      'GOC':                         ['organic chemistry: some basic principles and techniques','organic chemistry','stereochemistry'],
+      'Hydrocarbons':                ['hydrocarbons'],
+      'Solid State':                 ['solid state'],
+      'Solutions':                   ['solutions'],
+      'Electrochemistry':            ['electrochemistry'],
+      'Chemical Kinetics':           ['chemical kinetics'],
+      'Surface Chemistry':           ['surface chemistry'],
+      'p-Block':                     ['p-block elements','hydrogen','s-block elements'],
+      'd & f Block':                 ['d and f-block elements'],
+      'Coordination Compounds':      ['coordination compounds'],
+      'Haloalkanes & Haloarenes':    ['haloalkanes and haloarenes'],
+      'Alcohols, Phenols, Ethers':   ['alcohols, phenols and ethers'],
+      'Carbonyl Compounds':          ['aldehydes, ketones and carboxylic acids','organic chemistry - esters'],
+      'Amines':                      ['amines'],
+      'Biomolecules':                ['biomolecules','polymers','chemistry in everyday life']
+    };
+
+    // ── QUESTION COUNTS PER TOPIC (per 50Q section) ─────────────────
+    // Biology targets apply to BOTH Botany and Zoology (50Q each)
+    var BIO_Q = {
+      'Diversity in Living World':8,'Structural Organisation':6,'Cell Structure & Function':9,
+      'Plant Physiology':8,'Human Physiology':20,'Reproduction':9,'Genetics & Evolution':18,
+      'Biology in Human Welfare':4,'Biotechnology':6,'Ecology':12
+    };
+    var PHY_Q = {
+      'Units & Measurement':1,'Kinematics':2,'Laws of Motion':2,'Work, Energy & Power':2,
+      'Rotational Motion':3,'Gravitation':2,'Properties of Matter':3,'Thermodynamics':5,
+      'Kinetic Theory':2,'Oscillations & Waves':2,'Electrostatics':4,'Current Electricity':3,
+      'Magnetism + EMI':5,'Optics':5,'Dual Nature':3,'Atoms & Nuclei':3,'Semiconductors':3
+    };
+    var CHEM_Q = {
+      'Basic Concepts':1,'Structure of Atom':2,'Periodic Table':2,'Chemical Bonding':5,
+      'States of Matter':1,'Thermodynamics':4,'Equilibrium':3,'Redox':2,'GOC':2,'Hydrocarbons':2,
+      'Solid State':1,'Solutions':2,'Electrochemistry':2,'Chemical Kinetics':2,'Surface Chemistry':1,
+      'p-Block':3,'d & f Block':2,'Coordination Compounds':4,'Haloalkanes & Haloarenes':2,
+      'Alcohols, Phenols, Ethers':2,'Carbonyl Compounds':2,'Amines':2,'Biomolecules':1
+    };
+
+    // ── BUILD REVERSE LOOKUP: chapter_name → topic ───────────────────
+    function buildRevMap(topicMap) {
+      var rev = {};
+      Object.keys(topicMap).forEach(function(topic) {
+        topicMap[topic].forEach(function(ch) { rev[ch] = topic; });
+      });
+      return rev;
+    }
+    var bioRev  = buildRevMap(BIO_TOPIC_MAP);
+    var phyRev  = buildRevMap(PHY_TOPIC_MAP);
+    var chemRev = buildRevMap(CHEM_TOPIC_MAP);
+
+    // ── INDEX QUESTIONS BY TOPIC ─────────────────────────────────────
+    function indexByTopic(pool, revMap) {
+      var idx = {};
+      pool.forEach(function(q) {
+        var ch = (q.chapter || '').toLowerCase();
+        var topic = revMap[ch];
+        if (topic) {
+          if (!idx[topic]) idx[topic] = [];
+          idx[topic].push(q);
+        }
+      });
+      // Shuffle each bucket
+      Object.keys(idx).forEach(function(t) { idx[t] = shuffle(idx[t]); });
+      return idx;
     }
 
-    var phy  = pick50(phys.filter(clean));
-    var che  = pick50(chem.filter(clean));
-    var bot  = pick50(botany);
-    var zoo  = pick50(zoology);
+    // ── CHAPTER-WEIGHTED PICK ────────────────────────────────────────
+    // Pick exact counts per topic, fall back to any topic if bucket empty
+    function pickChapterWeighted(pool, revMap, topicCounts, total) {
+      var byTopic = indexByTopic(pool, revMap);
+      var selected = [];
+      var usedIds  = {};
 
-    // Order: Phy-A(1-35), Phy-B(36-50), Che-A(51-85), Che-B(86-100),
-    //        Bot-A(101-135), Bot-B(136-150), Zoo-A(151-185), Zoo-B(186-200)
+      function useQ(q) {
+        var uid = q.id || q.question;
+        if (usedIds[uid]) return false;
+        usedIds[uid] = true;
+        selected.push(q);
+        return true;
+      }
+
+      // First pass: pick exact topic counts
+      Object.keys(topicCounts).forEach(function(topic) {
+        var need = topicCounts[topic];
+        var bucket = byTopic[topic] || [];
+        var taken = 0;
+        for (var i = 0; i < bucket.length && taken < need; i++) {
+          if (useQ(bucket[i])) taken++;
+        }
+      });
+
+      // Fallback: fill any shortfall from entire pool (shuffled)
+      if (selected.length < total) {
+        var fallback = shuffle(pool.slice());
+        for (var i = 0; i < fallback.length && selected.length < total; i++) {
+          useQ(fallback[i]);
+        }
+      }
+
+      // Trim to total and shuffle final order
+      return shuffle(selected.slice(0, total));
+    }
+
+    // ── SPLIT 50 INTO SEC-A (35) + SEC-B (15) ───────────────────────
+    function makeSection(pool, revMap, topicCounts) {
+      var fifty = pickChapterWeighted(pool, revMap, topicCounts, 50);
+      return { A: fifty.slice(0, 35), B: fifty.slice(35, 50) };
+    }
+
+    // ── BIOLOGY: split pool 50/50 for Botany / Zoology ──────────────
+    var bioShuffled = shuffle(bio.slice());
+    var bioMid  = Math.floor(bioShuffled.length / 2);
+    var botPool = bioShuffled.slice(0, bioMid);
+    var zooPool = bioShuffled.slice(bioMid);
+
+    var phy = makeSection(phys,   phyRev,  PHY_Q);
+    var che = makeSection(chem,   chemRev, CHEM_Q);
+    var bot = makeSection(botPool, bioRev,  BIO_Q);
+    var zoo = makeSection(zooPool, bioRev,  BIO_Q);
+
+    // ── ASSEMBLE FINAL ORDERED LIST ──────────────────────────────────
+    // Phy-A(1-35), Phy-B(36-50), Che-A(51-85), Che-B(86-100),
+    // Bot-A(101-135), Bot-B(136-150), Zoo-A(151-185), Zoo-B(186-200)
     var ordered = []
       .concat(phy.A.map(function(q,i){ return Object.assign({},q,{_num:i+1,   _subj:'Physics',   _sec:'A'}); }))
       .concat(phy.B.map(function(q,i){ return Object.assign({},q,{_num:i+36,  _subj:'Physics',   _sec:'B'}); }))
@@ -670,10 +823,13 @@ async function startMock() {
       .concat(bot.B.map(function(q,i){ return Object.assign({},q,{_num:i+136, _subj:'Botany',    _sec:'B'}); }))
       .concat(zoo.A.map(function(q,i){ return Object.assign({},q,{_num:i+151, _subj:'Zoology',   _sec:'A'}); }))
       .concat(zoo.B.map(function(q,i){ return Object.assign({},q,{_num:i+186, _subj:'Zoology',   _sec:'B'}); }));
+
     mockQuestions = ordered;
+
   } catch(e) {
+    console.error('Mock build error:', e);
     document.getElementById('mock-questions').innerHTML =
-      '<div style="text-align:center;padding:60px;color:#EF4444;">Could not load. Please refresh.</div>';
+      '<div style="text-align:center;padding:60px;color:#EF4444;font-weight:600;">⚠️ Could not load questions. Please refresh.</div>';
     return;
   }
 
