@@ -41,16 +41,20 @@ nav, .navbar {
 }
 
 /* NEETO — uppercase height matches logo height exactly */
-.nav-brand span {
+.nav-brand span,
+.brand-neet,
+.brand-minds {
   font-family: 'Fraunces', serif !important;
-  font-size: 2.15rem !important;       /* tall enough that cap-height ≈ 44px */
+  font-size: 2.15rem !important;
   font-weight: 900 !important;
-  color: #FF6B1A !important;
   letter-spacing: -0.04em !important;
-  line-height: 44px !important;        /* same pixel height as the logo */
-  display: block !important;
+  line-height: 44px !important;
+  display: inline !important;
   text-decoration: none !important;
 }
+.nav-brand span { color: #FF6B1A !important; }   /* fallback */
+.brand-neet     { color: #FF6B1A !important; }   /* NEET = orange */
+.brand-minds    { color: #1E3A5F !important; }   /* minds = deep navy */
 
 /* NAV LINKS */
 .nav-links {
