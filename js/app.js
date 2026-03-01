@@ -115,7 +115,7 @@ async function loadSubject(subject) {
     }
   } catch(e) {}
 
-  const file = `api_${subject.toLowerCase()}.json`;
+  const file = `data/api_${subject.toLowerCase()}.json`;
   try {
     const res  = await fetch(file);
     const data = await res.json();
