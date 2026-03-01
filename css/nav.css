@@ -34,16 +34,14 @@ nav, .navbar {
 .nav-brand img {
   height: 44px !important;
   width: 44px !important;
-  object-fit: cover !important;
-  border-radius: 10px !important;
+  object-fit: contain !important;   /* contain so brain logo isn't cropped */
+  border-radius: 0 !important;      /* no rounding — brain silhouette needs clean edges */
   display: block !important;
   flex-shrink: 0 !important;
 }
 
-/* NEETO — uppercase height matches logo height exactly */
-.nav-brand span,
-.brand-neet,
-.brand-minds {
+/* NEETminds — single word, two colours, no gap */
+.nav-brand .brand-word {
   font-family: 'Fraunces', serif !important;
   font-size: 2.15rem !important;
   font-weight: 900 !important;
@@ -51,10 +49,10 @@ nav, .navbar {
   line-height: 44px !important;
   display: inline !important;
   text-decoration: none !important;
+  white-space: nowrap !important;
 }
-.nav-brand span { color: #FF6B1A !important; }   /* fallback */
-.brand-neet     { color: #FF6B1A !important; }   /* NEET = orange */
-.brand-minds    { color: #1E3A5F !important; }   /* minds = deep navy */
+.brand-neet  { color: #CC3300 !important; }   /* NEET = dark burnt orange (like neetfirst) */
+.brand-minds { color: #FF6B1A !important; }   /* minds = bright orange */
 
 /* NAV LINKS */
 .nav-links {
