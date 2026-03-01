@@ -520,21 +520,33 @@
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETminds Logo">
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">minds</span></span>
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html" class="active">Mock Test</a>
     <a href="units.html">Units</a>
-    <a href="analytics.html">Progress</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="mindset.html">Mindset</a>
+    <a href="about.html">About</a>
+    <a href="analytics.html">Analytics</a>
   </div>
-  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="nav-mobile-menu" id="mob-nav">
+<div class="nav-mobile-menu" id="mmenu">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html" class="active">Mock Test</a>
+  <a href="units.html">Units</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="mindset.html">Mindset</a>
+  <a href="about.html">About</a>
+  <a href="analytics.html">Analytics</a>
+</div><div class="nav-mobile-menu" id="mob-nav">
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock Test</a>
@@ -586,7 +598,7 @@
   <nav class="navbar">
     <div class="logo"><span style="color:#FF6B1A;">NEET</span><span style="color:#1E3A5F;">minds</span></div>
     <div class="nav-links">
-      <a href="mock.html">Retake Test</a>
+      <a href="mock.html" class="active">Retake Test</a>
       <a href="practice.html">Practice</a>
     </div>
   </nav>

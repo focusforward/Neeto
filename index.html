@@ -1,253 +1,346 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8"/>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>NEETminds — Pattern-Based NEET Preparation | 5000+ Questions</title>
-<meta name="description" content="NEETminds uses Pattern Intelligence to prepare you for NEET. 5,076 questions tagged across 6 question patterns. Practice smarter, track your weak spots, score higher.">
-<meta property="og:title" content="NEETminds — Pattern-Based NEET Preparation | 5000+ Questions">
-<meta property="og:description" content="NEETminds uses Pattern Intelligence to prepare you for NEET. 5,076 questions tagged across 6 question patterns. Practice smarter, track your weak spots, score higher.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/theme-override.css">
-<link rel="stylesheet" href="css/nav.css">
-<style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html,body{overflow-x:hidden;max-width:100%;width:100%; font-family: 'DM Sans', sans-serif; background: #FAFAF8; color: #1A1208; min-height: 100vh; }
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>AI Powered NEET Test Preparation Platform — Crack the Code with neetminds ™</title>
+  <meta name="description" content="Stop battling the syllabus. Start solving the pattern. neetminds ™ shows you how to think like the examiner, not just a student."/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; line-height: 1.6; }
 
-/* COUNTDOWN STRIP */
-.countdown-strip {
-  background: linear-gradient(135deg, #FF6B1A 0%, #E85500 100%);
-  color: #fff; text-align: center; padding: 0.7rem 5%;
-  font-size: 0.88rem; font-weight: 600; letter-spacing: 0.01em;
-}
-.countdown-strip strong { font-family: 'Fraunces', serif; font-size: 1.05rem; }
+    .hero {
+      position: relative; overflow: hidden;
+      padding: 80px 20px 60px; text-align: center;
+      background: linear-gradient(165deg, #FFFDF9 0%, #FFF0E6 45%, #FFF7F0 100%);
+    }
+    .hero::before {
+      content: ''; position: absolute; inset: 0; pointer-events: none;
+      background: radial-gradient(ellipse 900px 600px at 65% 15%, rgba(204,51,0,0.05) 0%, transparent 70%),
+                  radial-gradient(ellipse 600px 400px at 15% 85%, rgba(255,107,26,0.07) 0%, transparent 70%);
+    }
+    .hero-eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(204,51,0,0.08); border: 1px solid rgba(204,51,0,0.2);
+      border-radius: 100px; padding: 6px 18px; margin-bottom: 30px;
+      font-size: 0.75rem; font-weight: 700; color: #CC3300;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .dot { width: 6px; height: 6px; border-radius: 50%; background: #CC3300; display: inline-block; animation: pulse 2s infinite; }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
+    .hero h1 {
+      font-family: 'Fraunces', serif; font-size: clamp(2.3rem, 5vw, 3.6rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -0.03em;
+      color: #1A1208; margin-bottom: 22px; max-width: 840px; margin-left: auto; margin-right: auto;
+    }
+    .hero h1 em { font-style: italic; color: #CC3300; }
+    .hero-sub {
+      font-size: clamp(0.95rem, 2vw, 1.12rem); color: #5C4A30;
+      max-width: 680px; margin: 0 auto 42px; font-weight: 400; line-height: 1.75;
+    }
+    .hero-cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .btn-primary {
+      background: #CC3300; color: #fff; padding: 14px 32px; border-radius: 12px;
+      font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(204,51,0,0.28);
+    }
+    .btn-primary:hover { background: #AA2800; transform: translateY(-2px); box-shadow: 0 8px 28px rgba(204,51,0,0.35); }
+    .btn-secondary {
+      background: #fff; color: #1A1208; padding: 14px 32px; border-radius: 12px;
+      font-size: 1rem; font-weight: 600; text-decoration: none;
+      border: 1.5px solid #E8DDD0; transition: all 0.2s;
+    }
+    .btn-secondary:hover { border-color: #CC3300; color: #CC3300; }
 
-/* HERO */
-.hero {
-  padding: 3.5rem 5% 3rem; text-align: center;
-  max-width: 720px; margin: 0 auto;
-}
-.hero h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(2rem, 5.5vw, 3rem);
-  font-weight: 900; letter-spacing: -0.03em; line-height: 1.15;
-  color: #1A1208; margin-bottom: 0.9rem;
-}
-.hero h1 span { color: #FF6B1A; }
-.hero p { font-size: clamp(0.92rem, 2.2vw, 1.05rem); color: #6B5C45; margin-bottom: 2rem; line-height: 1.65; }
-.hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+    .stats-bar {
+      display: flex; border-top: 1.5px solid #F0E8DE; border-bottom: 1.5px solid #F0E8DE;
+      background: #fff; overflow-x: auto;
+    }
+    .stat-item {
+      flex: 1; min-width: 130px; padding: 22px 20px; text-align: center;
+      border-right: 1.5px solid #F0E8DE;
+    }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Fraunces', serif; font-size: 1.9rem; font-weight: 900; color: #CC3300; line-height: 1; }
+    .stat-label { font-size: 0.76rem; color: #6B5C45; font-weight: 500; margin-top: 5px; }
 
-.btn-primary {
-  background: #FF6B1A; color: #fff;
-  padding: 0.75rem 2rem; border-radius: 100px;
-  font-weight: 700; font-size: 0.95rem; text-decoration: none;
-  box-shadow: 0 6px 20px rgba(255,107,26,0.35);
-  transition: all 0.2s; font-family: 'DM Sans', sans-serif;
-  display: inline-block;
-}
-.btn-primary:hover { background: #E85500; transform: translateY(-2px); }
+    /* AHA SECTION */
+    .aha-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+    .section-label { font-size: 0.73rem; font-weight: 700; color: #CC3300; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 12px; display: block; }
+    .aha-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem); font-weight: 900; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 48px; }
 
-.btn-secondary {
-  background: #fff; color: #FF6B1A;
-  padding: 0.75rem 2rem; border-radius: 100px;
-  font-weight: 700; font-size: 0.95rem; text-decoration: none;
-  border: 2px solid #FF6B1A; transition: all 0.2s;
-  font-family: 'DM Sans', sans-serif; display: inline-block;
-}
-.btn-secondary:hover { background: #FFF0E6; }
+    .aha-cols { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 32px; }
+    @media(max-width:680px){ .aha-cols { grid-template-columns: 1fr; } }
 
-/* STATS */
-.stats-row {
-  display: grid; grid-template-columns: repeat(4, 1fr);
-  gap: 1px; background: #F0E8DE;
-  border-top: 1.5px solid #F0E8DE; border-bottom: 1.5px solid #F0E8DE;
-}
-.stat-card { background: #fff; padding: 1.4rem 1rem; text-align: center; }
-.stat-number {
-  font-family: 'Fraunces', serif; font-size: 2rem;
-  font-weight: 900; color: #FF6B1A; line-height: 1;
-}
-.stat-label {
-  font-size: 0.72rem; font-weight: 600; color: #6B5C45;
-  text-transform: uppercase; letter-spacing: 0.04em; margin-top: 0.3rem;
-}
+    .aha-col { border-radius: 20px; padding: 30px 28px; position: relative; }
+    .aha-col.panic { background: #FEF2F2; border: 1.5px solid rgba(239,68,68,0.22); }
+    .aha-col.smart { background: #F0FDF4; border: 1.5px solid rgba(34,197,94,0.28); }
 
-/* SUBJECT CARDS */
-.subject-section { max-width: 900px; margin: 0 auto; padding: 2.5rem 5%; }
-.subject-section h2 {
-  font-family: 'Fraunces', serif; font-size: 1.4rem;
-  font-weight: 900; letter-spacing: -0.02em; margin-bottom: 1.1rem;
-}
-.cards-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
-.subject-card {
-  background: #fff; border: 1.5px solid #F0E8DE; border-radius: 18px;
-  padding: 1.8rem 1.4rem; text-decoration: none;
-  display: flex; flex-direction: column; gap: 0.35rem;
-  transition: all 0.2s; cursor: pointer;
-}
-.subject-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(255,107,26,0.1); border-color: #FF6B1A; }
-.subject-icon { font-size: 2rem; margin-bottom: 0.3rem; }
-.subject-name { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 900; color: #1A1208; }
-.subject-count { font-size: 0.8rem; font-weight: 500; color: #6B5C45; }
-.subject-card.bio  { border-top: 3px solid #22C55E; }
-.subject-card.chem { border-top: 3px solid #2563EB; }
-.subject-card.phys { border-top: 3px solid #F59E0B; }
+    .aha-badge {
+      display: inline-flex; align-items: center; gap: 6px; font-size: 0.72rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em;
+      padding: 5px 12px; border-radius: 100px; margin-bottom: 18px;
+    }
+    .panic .aha-badge { background: rgba(239,68,68,0.12); color: #DC2626; }
+    .smart .aha-badge { background: rgba(34,197,94,0.15); color: #15803D; }
 
-/* PROGRESS TEASER */
-.progress-band {
-  background: #FFF7F0; border-top: 1.5px solid #F0E8DE; border-bottom: 1.5px solid #F0E8DE;
-  padding: 1.5rem 5%; display: flex; align-items: center;
-  justify-content: space-between; gap: 1rem; flex-wrap: wrap;
-}
-.progress-band h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 900; }
-.progress-band p  { font-size: 0.82rem; color: #6B5C45; margin-top: 3px; }
+    .aha-col h3 { font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 700; margin-bottom: 14px; }
+    .panic h3 { color: #991B1B; }
+    .smart h3 { color: #15803D; }
 
-/* FEATURES */
-.features-section { max-width: 760px; margin: 0 auto; padding: 0 5% 3rem; }
-.features-grid {
-  display: grid; grid-template-columns: repeat(2, 1fr); gap: 0.8rem;
-}
-.feature {
-  background: #fff; border: 1.5px solid #F0E8DE; border-radius: 12px;
-  padding: 0.9rem 1.1rem; font-size: 0.88rem; font-weight: 500; color: #1A1208;
-}
+    .aha-thought { font-size: 0.87rem; line-height: 1.75; color: #374151; }
+    .aha-quote {
+      font-style: italic; font-family: 'Fraunces', serif; font-size: 0.97rem; line-height: 1.65;
+      margin: 14px 0; padding: 12px 16px; border-left: 3px solid; border-radius: 0 8px 8px 0;
+    }
+    .panic .aha-quote { border-color: #EF4444; background: rgba(239,68,68,0.06); color: #991B1B; }
+    .smart .aha-quote { border-color: #22C55E; background: rgba(34,197,94,0.06); color: #15803D; }
 
-/* MOBILE */
-@media (max-width: 680px) {
-  .stats-row { grid-template-columns: repeat(2, 1fr); }
-  .cards-row { grid-template-columns: 1fr; }
-  .features-grid { grid-template-columns: 1fr; }
-  .hero { padding: 2rem 5% 1.8rem; }
-  .progress-band { flex-direction: column; align-items: flex-start; gap: 0.8rem; }
-}
-</style>
+    .result-chip {
+      display: flex; align-items: center; gap: 8px; padding: 10px 14px;
+      border-radius: 10px; font-size: 0.81rem; font-weight: 600; margin-top: 18px;
+    }
+    .panic .result-chip { background: rgba(239,68,68,0.1); color: #DC2626; }
+    .smart .result-chip { background: rgba(34,197,94,0.1); color: #15803D; }
+
+    .aha-takeaway {
+      background: linear-gradient(135deg, #1A1208 0%, #2D1F0A 100%);
+      color: #fff; border-radius: 20px; padding: 36px 40px; text-align: center;
+    }
+    @media(max-width:500px){ .aha-takeaway { padding: 28px 22px; } }
+    .aha-takeaway p { font-size: 1.05rem; line-height: 1.85; color: #E8DDD0; }
+    .aha-takeaway strong { color: #FF8C4A; }
+
+    /* PATTERNS */
+    .patterns-section { padding: 80px 20px; background: #fff; }
+    .patterns-inner { max-width: 1100px; margin: 0 auto; }
+    .patterns-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 10px; }
+    .patterns-section .sub-p { color: #6B5C45; margin-bottom: 44px; font-size: 0.97rem; }
+    .pattern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+    @media(max-width:780px){ .pattern-grid { grid-template-columns: 1fr 1fr; } }
+    @media(max-width:460px){ .pattern-grid { grid-template-columns: 1fr; } }
+    .pattern-card {
+      border: 1.5px solid #F0E8DE; border-radius: 18px; padding: 24px 20px;
+      cursor: pointer; transition: all 0.2s; text-decoration: none; color: inherit; display: block;
+    }
+    .pattern-card:hover { border-color: #CC3300; box-shadow: 0 6px 24px rgba(204,51,0,0.1); transform: translateY(-2px); }
+    .p-icon { font-size: 2rem; margin-bottom: 10px; }
+    .p-name { font-family: 'Fraunces', serif; font-weight: 700; font-size: 1.05rem; margin-bottom: 4px; }
+    .p-pct { font-size: 0.73rem; font-weight: 700; color: #CC3300; text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 8px; }
+    .p-desc { font-size: 0.82rem; color: #6B5C45; line-height: 1.6; }
+
+    /* SUBJECTS */
+    .subjects-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+    .subjects-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 40px; }
+    .subject-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    @media(max-width:660px){ .subject-grid { grid-template-columns: 1fr; } }
+    .subject-card {
+      border-radius: 20px; padding: 28px; text-decoration: none; color: inherit;
+      border: 1.5px solid; transition: all 0.2s; display: block;
+    }
+    .subject-card:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(0,0,0,0.1); }
+    .bio-card  { background: #F0FDF4; border-color: rgba(34,197,94,0.25); }
+    .chem-card { background: #EFF6FF; border-color: rgba(37,99,235,0.2); }
+    .phys-card { background: #FFF7F0; border-color: rgba(204,51,0,0.2); }
+    .s-icon { font-size: 2.4rem; margin-bottom: 12px; }
+    .s-name { font-family: 'Fraunces', serif; font-size: 1.25rem; font-weight: 900; margin-bottom: 4px; }
+    .s-count { font-size: 1.9rem; font-weight: 900; font-family: 'Fraunces', serif; line-height: 1; }
+    .s-label { font-size: 0.76rem; font-weight: 500; opacity: 0.65; margin-top: 3px; }
+    .bio-card  .s-count { color: #16A34A; }
+    .chem-card .s-count { color: #2563EB; }
+    .phys-card .s-count { color: #CC3300; }
+
+    /* PROOF */
+    .proof-section { background: #1A1208; color: #fff; padding: 80px 20px; text-align: center; }
+    .proof-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 16px; }
+    .proof-section > p { color: #C8B89A; max-width: 560px; margin: 0 auto 52px; font-size: 1.02rem; line-height: 1.75; }
+    .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 860px; margin: 0 auto; }
+    @media(max-width:580px){ .proof-grid { grid-template-columns: 1fr; } }
+    .ps-num { font-family: 'Fraunces', serif; font-size: 2.8rem; font-weight: 900; color: #FF6B1A; line-height: 1; }
+    .ps-label { font-size: 0.83rem; color: #C8B89A; margin-top: 8px; line-height: 1.55; }
+    .proof-cta {
+      display: inline-flex; align-items: center; gap: 10px; margin-top: 52px;
+      background: #CC3300; color: #fff; padding: 16px 36px; border-radius: 12px;
+      font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s;
+    }
+    .proof-cta:hover { background: #AA2800; transform: translateY(-2px); }
+  </style>
 </head>
 <body>
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETminds Logo">
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">minds</span></span>
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
     <a href="index.html" class="active">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock Test</a>
     <a href="units.html">Units</a>
-    <a href="analytics.html">Progress</a>
-    <a href="pattern_intelligence.html">Patterns 🧠</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="mindset.html">Mindset</a>
+    <a href="about.html">About</a>
+    <a href="analytics.html">Analytics</a>
   </div>
-  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="nav-mobile-menu" id="mob-nav">
+<div class="nav-mobile-menu" id="mmenu">
   <a href="index.html" class="active">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
   <a href="units.html">Units</a>
-  <a href="analytics.html">Progress</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="mindset.html">Mindset</a>
+  <a href="about.html">About</a>
+  <a href="analytics.html">Analytics</a>
 </div>
 
-
-<div class="countdown-strip">
-  🎯 NEET 2026 in <strong id="days-hero">—</strong> days &nbsp;·&nbsp; May 6, 2026
-</div>
-
+<!-- HERO -->
 <section class="hero">
-  <h1>Crack NEET by learning <span>how it thinks</span></h1>
-  <p>NEET uses just 6 question patterns — Memory Test, Negative Charge, Concept Guru, Diagram Dhamaka, Speed Breaker, Best Choice. 5,076 questions. Every one tagged. Train your pattern recognition, not just your memory.</p>
-  <div class="hero-buttons">
-    <a href="practice.html" class="btn-primary">Start Practice</a>
-    <a href="mock.html" class="btn-secondary">Take Mock Test</a>
-    <a href="pattern_intelligence.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.88rem;font-weight:700;color:#FF6B1A;text-decoration:none;padding:11px 22px;border:1.5px solid #FF6B1A;border-radius:100px;transition:all 0.15s;" onmouseover="this.style.background='#FFF0E6'" onmouseout="this.style.background='transparent'">🧠 Our Method</a>
+  <div class="hero-eyebrow"><span class="dot"></span> NEET Pattern Intelligence Platform</div>
+  <h1>Stop Battling the Syllabus.<br/><em>Start Solving the Pattern.</em></h1>
+  <p class="hero-sub">
+    NEET isn't a test of how hard you work — it's a test of how smartly you recognise the game.
+    There is no "secret ingredient." Just patterns, practice, and the right mindset.
+    We show you how to <strong>think like the examiner</strong>, not just a student.
+  </p>
+  <div class="hero-cta-row">
+    <a href="practice.html" class="btn-primary">Start Practising →</a>
+    <a href="methodology.html" class="btn-secondary">See the Method</a>
   </div>
 </section>
 
-<div class="stats-row">
-  <div class="stat-card"><div class="stat-number">3,274</div><div class="stat-label">Total Questions</div></div>
-  <div class="stat-card"><div class="stat-number">300+</div><div class="stat-label">Previous NEET Questions</div></div>
-  <div class="stat-card"><div class="stat-number">100%</div><div class="stat-label">Syllabus Coverage</div></div>
-  <div class="stat-card"><div class="stat-number">67</div><div class="stat-label">Topics Covered</div></div>
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stat-item"><div class="stat-num">3,115</div><div class="stat-label">Biology Questions</div></div>
+  <div class="stat-item"><div class="stat-num">1,706</div><div class="stat-label">Physics Questions</div></div>
+  <div class="stat-item"><div class="stat-num">1,333</div><div class="stat-label">Chemistry Questions</div></div>
+  <div class="stat-item"><div class="stat-num">6,154</div><div class="stat-label">Total Questions</div></div>
+  <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Question Patterns</div></div>
 </div>
 
-<section class="subject-section">
-  <h2>Practice by Subject</h2>
-  <div class="cards-row">
-    <a href="practice.html?subject=Biology" class="subject-card bio">
-      <div class="subject-icon">🧬</div>
-      <div class="subject-name">Biology</div>
-      <div class="subject-count">1,618 questions</div>
+<!-- AHA MOMENT -->
+<section class="aha-section">
+  <span class="section-label">The neetminds ™ Difference</span>
+  <h2>See What Pattern Intelligence<br/>Looks Like in Real Time</h2>
+
+  <div class="aha-cols">
+    <div class="aha-col panic">
+      <div class="aha-badge">😰 The Student's View — The Panic</div>
+      <h3>Assertion-Reason on Genetics</h3>
+      <div class="aha-thought">
+        <p><strong>Question type:</strong> Difficult Assertion-Reason on Molecular Basis of Inheritance.</p>
+        <div class="aha-quote">"Oh no, I don't remember this specific NCERT line. I'm going to get it wrong. Let me re-read both statements three more times…"</div>
+        <p>Wastes precious time. Gets anxious. Might still get it wrong.</p>
+      </div>
+      <div class="result-chip">❌ 3+ minutes wasted · Confidence shattered</div>
+    </div>
+    <div class="aha-col smart">
+      <div class="aha-badge">🧠 The Examiner's View — The Pattern</div>
+      <h3>Speed Breaker — Recognised in 10 seconds.</h3>
+      <div class="aha-thought">
+        <p><strong>Pattern spotted:</strong> The Reason is technically correct — but it doesn't directly explain the Assertion. Classic <strong>Speed Breaker</strong>.</p>
+        <div class="aha-quote">"If the Reason doesn't <em>explain</em> the Assertion, the answer is immediately 'A'. I don't need to verify every fact. Mark and move."</div>
+        <p>Zero second-guessing. Zero anxiety.</p>
+      </div>
+      <div class="result-chip">✅ 2 minutes saved · Confidence intact</div>
+    </div>
+  </div>
+
+  <div class="aha-takeaway">
+    <p>See? You just shifted from being a <strong>memoriser</strong> to a <strong>strategist.</strong><br/>
+    That's the <strong>neetminds ™ difference.</strong><br/>
+    You build the mindset — the hard work builds the skill.</p>
+  </div>
+</section>
+
+<!-- 6 PATTERNS -->
+<section class="patterns-section">
+  <div class="patterns-inner">
+    <span class="section-label">The Framework</span>
+    <h2>6 Patterns. Every NEET Question<br/>Is One of These.</h2>
+    <p class="sub-p">Once you can name the pattern, you own the question. Every single one.</p>
+    <div class="pattern-grid">
+      <a href="practice.html?pattern=memory_test" class="pattern-card">
+        <div class="p-icon">🎯</div><div class="p-name">Memory Test</div>
+        <div class="p-pct">~45% of NEET</div>
+        <div class="p-desc">Direct factual recall from NCERT. Speed is everything — don't overthink these.</div>
+      </a>
+      <a href="practice.html?pattern=concept_guru" class="pattern-card">
+        <div class="p-icon">🌀</div><div class="p-name">Concept Guru</div>
+        <div class="p-pct">~20% of NEET</div>
+        <div class="p-desc">Assertion-Reason &amp; multi-statement questions. Logic over memory.</div>
+      </a>
+      <a href="practice.html?pattern=best_choice" class="pattern-card">
+        <div class="p-icon">🔽</div><div class="p-name">Best Choice</div>
+        <div class="p-pct">~14% of NEET</div>
+        <div class="p-desc">Elimination game. No single option is obviously right — use strategy.</div>
+      </a>
+      <a href="practice.html?pattern=negative_charge" class="pattern-card">
+        <div class="p-icon">⚡</div><div class="p-name">Negative Charge</div>
+        <div class="p-pct">~10% of NEET</div>
+        <div class="p-desc">NOT / EXCEPT / INCORRECT traps. Flip your thinking entirely.</div>
+      </a>
+      <a href="practice.html?pattern=speed_breaker" class="pattern-card">
+        <div class="p-icon">⛔</div><div class="p-name">Speed Breaker</div>
+        <div class="p-pct">~8% of NEET</div>
+        <div class="p-desc">Match-the-column &amp; sequence questions. Designed to slow you down.</div>
+      </a>
+      <a href="practice.html?pattern=diagram_dhamaka" class="pattern-card">
+        <div class="p-icon">🖼️</div><div class="p-name">Diagram Dhamaka</div>
+        <div class="p-pct">~4% of NEET</div>
+        <div class="p-desc">Figure-based questions. Train your visual recall, not just text memory.</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- SUBJECTS -->
+<section class="subjects-section">
+  <span class="section-label">Question Bank</span>
+  <h2>6,154 Questions Mapped<br/>to Real NEET Patterns</h2>
+  <div class="subject-grid">
+    <a href="practice.html?subject=biology"   class="subject-card bio-card">
+      <div class="s-icon">🌿</div><div class="s-name">Biology</div>
+      <div class="s-count">3,115</div><div class="s-label">questions · Botany &amp; Zoology</div>
     </a>
-    <a href="practice.html?subject=Chemistry" class="subject-card chem">
-      <div class="subject-icon">⚗️</div>
-      <div class="subject-name">Chemistry</div>
-      <div class="subject-count">769 questions</div>
+    <a href="practice.html?subject=physics"   class="subject-card phys-card">
+      <div class="s-icon">⚛️</div><div class="s-name">Physics</div>
+      <div class="s-count">1,706</div><div class="s-label">questions · chapter-weighted</div>
     </a>
-    <a href="practice.html?subject=Physics" class="subject-card phys">
-      <div class="subject-icon">⚡</div>
-      <div class="subject-name">Physics</div>
-      <div class="subject-count">887 questions</div>
+    <a href="practice.html?subject=chemistry" class="subject-card chem-card">
+      <div class="s-icon">🧪</div><div class="s-name">Chemistry</div>
+      <div class="s-count">1,333</div><div class="s-label">questions · NCERT aligned</div>
     </a>
   </div>
 </section>
 
-<div class="progress-band">
-  <div>
-    <h3>📊 Track your progress</h3>
-    <p>Scores, weak chapters, accuracy — saved right in your browser.</p>
+<!-- PROOF -->
+<section class="proof-section">
+  <h2>NEET is a Pattern Problem.<br/>Not a Memory Problem.</h2>
+  <p>Every year, thousands of students who outworked their peers still don't crack it. The ones who do? They stopped memorising and started strategising.</p>
+  <div class="proof-grid">
+    <div><div class="ps-num">~45%</div><div class="ps-label">of NEET is Memory Test — get those right and you're already halfway there</div></div>
+    <div><div class="ps-num">6</div><div class="ps-label">patterns cover 100% of all NEET questions across every subject and year</div></div>
+    <div><div class="ps-num">2 min</div><div class="ps-label">saved per question when you recognise the pattern before reading options</div></div>
   </div>
-  <a href="analytics.html" class="btn-primary" style="font-size:0.85rem;padding:0.6rem 1.4rem;white-space:nowrap;">View Progress →</a>
-</div>
-
-<section class="features-section" style="padding-top:2rem;">
-  <div class="features-grid">
-    <div class="feature">✅ 🧠 Pattern Intelligence — every Q tagged</div>
-    <div class="feature">📖 Every question linked to NCERT</div>
-    <div class="feature">🎯 6 question patterns + GOOGLY traps</div>
-    <div class="feature">📝 Full 200-question mock test</div>
-  </div>
+  <a href="mock.html" class="proof-cta">Take a Full Mock Test →</a>
 </section>
 
 <footer class="neeto-footer">
   <div class="footer-brand">
-    <img src="neetminds-logo.png" style="object-fit:contain;border-radius:0;" alt="NEETminds">
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">minds</span></span>
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
   </div>
-  <p>© 2026 NEETminds. All rights reserved.</p>
+  <p>A neetminds ™ product · Built by cognitive performance scientists, doctors, engineers &amp; teachers.</p>
+  <p style="margin-top:4px;opacity:0.6;">Questions from NCERT &amp; past NEET papers · For educational use.</p>
 </footer>
 
-<script src="js/app.js"></script>
-<script>
-(function() {
-  var neet = new Date('2026-05-06T00:00:00');
-  var today = new Date(); today.setHours(0,0,0,0);
-  var days = Math.ceil((neet - today) / 86400000);
-  var el = document.getElementById('days-hero');
-  if (el) el.textContent = days > 0 ? days : '🎓';
-})();
-function toggleMobileNav() {
-  document.getElementById('mobile-nav').classList.toggle('open');
-}
-document.addEventListener('click', function(e) {
-  var m = document.getElementById('mobile-nav');
-  var btn = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && !m.contains(e.target) && btn && !btn.contains(e.target))
-    m.classList.remove('open');
-});
-</script>
-<script>
-function toggleNav() {
-  document.getElementById('mob-nav').classList.toggle('open');
-}
-document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav');
-  var b = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
-    m.classList.remove('open');
-});
-</script>
 </body>
 </html>

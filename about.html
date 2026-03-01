@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>About — neetminds ™</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="css/nav.css"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; line-height: 1.6; }
+
+    .about-hero {
+      padding: 80px 20px 70px; text-align: center; max-width: 900px; margin: 0 auto;
+    }
+    .eyebrow {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: rgba(204,51,0,0.08); border: 1px solid rgba(204,51,0,0.18);
+      border-radius: 100px; padding: 6px 18px; margin-bottom: 28px;
+      font-size: 0.73rem; font-weight: 700; color: #CC3300;
+      text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .about-hero h1 {
+      font-family: 'Fraunces', serif; font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 900; line-height: 1.08; letter-spacing: -0.03em;
+      color: #1A1208; margin-bottom: 24px;
+    }
+    .about-hero h1 em { font-style: italic; color: #CC3300; }
+    .about-hero p {
+      font-size: 1.1rem; color: #5C4A30; line-height: 1.8;
+      max-width: 720px; margin: 0 auto;
+    }
+
+    /* MISSION */
+    .mission { background: #1A1208; color: #fff; padding: 80px 20px; }
+    .mission-inner { max-width: 900px; margin: 0 auto; }
+    .mission-inner h2 {
+      font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.8rem);
+      font-weight: 900; margin-bottom: 28px; line-height: 1.15;
+      color: #fff;
+    }
+    .mission-inner h2 span { color: #FF6B1A; }
+    .mission-inner .mission-body {
+      font-size: 1.08rem; color: #C8B89A; line-height: 1.85; max-width: 760px;
+    }
+    .mission-inner .mission-body p { margin-bottom: 24px; }
+    .mission-inner .mission-body p:last-child { margin-bottom: 0; }
+    .mission-inner .mission-body strong { color: #FF8C4A; }
+
+    /* THE BELIEF */
+    .belief-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
+    .belief-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 40px; }
+    .belief-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    @media(max-width:660px){ .belief-grid { grid-template-columns: 1fr; } }
+    .belief-card {
+      border: 1.5px solid #F0E8DE; border-radius: 18px; padding: 28px 24px;
+    }
+    .belief-icon { font-size: 2rem; margin-bottom: 14px; }
+    .belief-card h3 { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 700; margin-bottom: 10px; color: #CC3300; }
+    .belief-card p { font-size: 0.88rem; color: #5C4A30; line-height: 1.7; }
+
+    /* TEAM ROLES */
+    .team-section { background: #FFF7F0; padding: 80px 20px; }
+    .team-inner { max-width: 1100px; margin: 0 auto; }
+    .team-inner h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 12px; }
+    .team-sub { color: #6B5C45; margin-bottom: 48px; font-size: 0.97rem; }
+    .team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+    @media(max-width:780px){ .team-grid { grid-template-columns: repeat(2, 1fr); } }
+    @media(max-width:440px){ .team-grid { grid-template-columns: 1fr; } }
+    .team-card {
+      background: #fff; border: 1.5px solid #F0E8DE; border-radius: 18px;
+      padding: 28px 20px; text-align: center;
+    }
+    .team-card .t-icon { font-size: 2.5rem; margin-bottom: 12px; }
+    .team-card h3 { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 700; margin-bottom: 8px; }
+    .team-card p { font-size: 0.8rem; color: #6B5C45; line-height: 1.6; }
+
+    /* MANIFESTO QUOTE */
+    .manifesto {
+      padding: 80px 20px; max-width: 820px; margin: 0 auto; text-align: center;
+    }
+    .manifesto blockquote {
+      font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 3vw, 2.1rem);
+      font-weight: 700; font-style: italic; line-height: 1.45; color: #1A1208;
+      margin-bottom: 24px; letter-spacing: -0.01em;
+    }
+    .manifesto blockquote span { color: #CC3300; }
+    .manifesto cite { font-size: 0.85rem; color: #6B5C45; font-style: normal; }
+
+    /* CTA */
+    .about-cta { background: #CC3300; padding: 70px 20px; text-align: center; color: #fff; }
+    .about-cta h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 12px; }
+    .about-cta p { opacity: 0.85; margin-bottom: 32px; font-size: 1rem; max-width: 540px; margin-left: auto; margin-right: auto; }
+    .btn-white { background: #fff; color: #CC3300; padding: 14px 32px; border-radius: 12px; font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+    .btn-white:hover { background: #F5EDE0; transform: translateY(-2px); }
+  </style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="units.html">Units</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="mindset.html">Mindset</a>
+    <a href="about.html" class="active">About</a>
+    <a href="analytics.html">Analytics</a>
+  </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="units.html">Units</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="mindset.html">Mindset</a>
+  <a href="about.html" class="active">About</a>
+  <a href="analytics.html">Analytics</a>
+</div>
+
+<!-- HERO -->
+<div class="about-hero">
+  <div class="eyebrow">Who We Are</div>
+  <h1>We Are <em>Cognitive Performance</em><br/>Scientists at Heart.</h1>
+  <p>
+    Doctors. Engineers. Teachers. Scientists. All united by a single question: why do brilliant students fail NEET, while some with half the knowledge consistently crack it?
+    The answer changed everything we thought about education.
+  </p>
+</div>
+
+<!-- MISSION -->
+<section class="mission">
+  <div class="mission-inner">
+    <h2>neetminds ™ was born out of a belief that<br/><span>NEET is not what most people think it is.</span></h2>
+    <div class="mission-body">
+      <p>
+        There is a general perception — reinforced by the coaching industry, by worried parents, by exhausted toppers — that NEET requires an almost superhuman amount of hard work, expensive coaching classes, and years of relentless grinding.
+      </p>
+      <p>
+        <strong>We disagree. Fundamentally.</strong>
+      </p>
+      <p>
+        NEET does not require you to work harder than every other student. It requires you to <strong>teach yourself the pattern intelligence</strong> of the neetminds ™ methodology. Once you understand how the examiner thinks — how they construct questions, where they hide the traps, which 6 patterns account for 100% of all questions — the exam becomes a game you already know how to play.
+      </p>
+      <p>
+        Hard work builds your knowledge base. <strong>Pattern intelligence wins the exam.</strong> neetminds ™ gives you both.
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- BELIEFS -->
+<section class="belief-section">
+  <h2>Our Core Beliefs</h2>
+  <div class="belief-grid">
+    <div class="belief-card">
+      <div class="belief-icon">🧠</div>
+      <h3>Intelligence is trainable.</h3>
+      <p>Cognitive performance isn't fixed. The ability to recognise patterns, think strategically, and stay calm under pressure can be developed with the right system. That's what we build.</p>
+    </div>
+    <div class="belief-card">
+      <div class="belief-icon">🎯</div>
+      <h3>NEET is a pattern problem.</h3>
+      <p>Every question, every year, across every subject falls into one of 6 recognisable patterns. This isn't a theory — it's a data observation from analysing thousands of questions from 2017–2024.</p>
+    </div>
+    <div class="belief-card">
+      <div class="belief-icon">💸</div>
+      <h3>Good preparation should be accessible.</h3>
+      <p>The best NEET strategy shouldn't cost ₹2 lakh per year. Cognitive performance science doesn't have a paywall. We built neetminds ™ to make that real.</p>
+    </div>
+    <div class="belief-card">
+      <div class="belief-icon">🔥</div>
+      <h3>Mindset before method.</h3>
+      <p>The greatest obstacle in NEET isn't the syllabus — it's the student's belief that the exam is too hard. We dissolve that belief first. Then we hand you the system.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team-section">
+  <div class="team-inner">
+    <h2>Who Built This</h2>
+    <p class="team-sub">A multidisciplinary team driven by one shared frustration: watching capable students fail a solvable exam.</p>
+    <div class="team-grid">
+      <div class="team-card">
+        <div class="t-icon">🩺</div>
+        <h3>Doctors</h3>
+        <p>Medical professionals who've been through the NEET journey. They know what the exam actually tests — and what most coaching classes get wrong.</p>
+      </div>
+      <div class="team-card">
+        <div class="t-icon">⚙️</div>
+        <h3>Engineers</h3>
+        <p>Built the platform, the question engine, the mock test system, and the analytics. Every data point about your performance is intentional.</p>
+      </div>
+      <div class="team-card">
+        <div class="t-icon">📚</div>
+        <h3>Teachers</h3>
+        <p>Experienced educators who mapped 6,154 questions to real NEET patterns, chapter weightages, and NCERT sections. The bank is curated, not scraped.</p>
+      </div>
+      <div class="team-card">
+        <div class="t-icon">🔬</div>
+        <h3>Cognitive Scientists</h3>
+        <p>Researchers in learning science, memory, and stress performance. They designed the Mindset module and the practice flow to enhance how your brain retains under pressure.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MANIFESTO QUOTE -->
+<div class="manifesto">
+  <blockquote>
+    "NEET doesn't need you to be brilliant.<br/>
+    It needs you to be <span>strategic, calm, and relentless.</span><br/>
+    We give you the strategy and the calm.<br/>
+    The relentlessness — that's yours."
+  </blockquote>
+  <cite>— The neetminds ™ Team</cite>
+</div>
+
+<!-- CTA -->
+<section class="about-cta">
+  <h2>Start Where You Are.<br/>The Method Works From Day One.</h2>
+  <p>You don't need months of preparation to start using pattern intelligence. Open a practice session right now and see the difference.</p>
+  <a href="practice.html" class="btn-white">Begin Practising →</a>
+</section>
+
+<footer class="neeto-footer">
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
+  </div>
+  <p>A neetminds ™ product · Built by cognitive performance scientists, doctors, engineers &amp; teachers.</p>
+</footer>
+
+</body>
+</html>
