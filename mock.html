@@ -621,7 +621,7 @@ function shuffle(arr) {
 }
 
 async function loadSubjectFile(subject) {
-  var res  = await fetch('api_' + subject.toLowerCase() + '.json');
+  var res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
   var data = await res.json();
   return data.questions || [];
 }
