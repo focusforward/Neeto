@@ -4690,7 +4690,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Physical World and Measurement",
       "topic": "",
-      "question": "A metal wire has mass (0.4±0.002) g. radius (0.3±0.001) mm and length (5±0.02) cm. The maximum possible percentage error in the measurement of density will nearly be",
+      "question": "²⁹⁰₈₂X —α→ Y —e⁺→ Z —β⁻→ P —e⁻→ Q. In the nuclear emission stated above, the mass number and atomic number of the product Q respectively are:",
       "options": {
         "A": "1.2%",
         "B": "1.3%",
@@ -4951,10 +4951,10 @@
       "topic": "",
       "question": "The resistance of platinum wire at 0∘C is 2 Ω and 6.8 Ω at 80∘C. The temperature coefficient of resistance of the wire is",
       "options": {
-        "A": "3\\times10^{-4}^{\\circ}C^{-1}",
-        "B": "3\\times10^{-3}^{0}C^{-1}",
-        "C": "3\\times10^{-2}^{\\circ}C^{-1}",
-        "D": "3\\times10^{-1}^{\\circ}C^{-1}"
+        "A": "3×10⁻⁴ °C⁻¹",
+        "B": "3×10⁻³ °C⁻¹",
+        "C": "3×10⁻² °C⁻¹",
+        "D": "3×10⁻¹ °C⁻¹"
       },
       "correct_answer": "C",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -15600,7 +15600,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Atoms",
       "topic": "",
-      "question": "The right option for the mass of CO₂ produced by heating 20 g of 20% pure limestone is (Atomic mass of Ca=40)[CaCO_{3}-\\frac{1200~K}{\\rightarrow CaO+CO_{2}]",
+      "question": "The right option for the mass of CO₂ produced by heating 20 g of 20% pure limestone is (Atomic mass of Ca = 40): CaCO₃ →(1200 K)→ CaO + CO₂",
       "options": {
         "A": "1.12 g",
         "B": "1.76 g",
@@ -25075,10 +25075,10 @@
       "topic": "Ray and Wave Optics",
       "question": "The relations amongst the three elements of earth's magnetic field, namely horizontal component H, vertical component V and dip δ are, (BE= total magnetic field)",
       "options": {
-        "A": "V=BE, H=BE tan$\\delta$",
-        "B": "V=BE tan$\\delta$, H=BE",
-        "C": "V=BE sin$\\delta$, H=BEcosδ",
-        "D": "V=BEcosδ, H=BEsinδ"
+        "A": "V = Bₑ,  H = Bₑ tan δ",
+        "B": "V = Bₑ tan δ,  H = Bₑ",
+        "C": "V = Bₑ sin δ,  H = Bₑ cos δ",
+        "D": "V = Bₑ cos δ,  H = Bₑ sin δ"
       },
       "correct_answer": "C",
       "explanation": "H=BEcosδ V=BEsinδ",
