@@ -2292,39 +2292,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEET_UPLOAD_Q0002",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List-I with List-II. List-I (Material): (",
-      "options": {
-        "A": "A-III, В-II, С-І, D-IV",
-        "B": "A-IV, В-III, С-II, D-I",
-        "C": "A-II, B-III, C-IV, D-I",
-        "D": "C-II, B-I, C-III, D-IV"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "NEET_UPLOAD_Q0003",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -2471,39 +2438,6 @@
       },
       "correct_answer": "C",
       "explanation": "Correct answer is C: A is correct but B is incorrect..",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0019",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Atoms",
-      "topic": "",
-      "question": "Match the List-I with List-II. List-I (Spectral Lines of Hydrogen for transitions from): (",
-      "options": {
-        "A": "A-IV, B-III, C-I, D-II",
-        "B": "Α-Ι, В-II, C-III, D-IV",
-        "C": "A-II, В-I, C-IV, D-III",
-        "D": "A-III, B-IV, C-II, D-I"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Physics",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -2853,39 +2787,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0051",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List-I with List-II. List-I (Conversion): (",
-      "options": {
-        "A": "A-II, В-III, C-I, D-IV",
-        "B": "A-III, B-IV, C-II, D-I",
-        "C": "A-II, B-IV, C-I, D-III",
-        "D": "A-III, B-IV, C-I, D-II"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "NEET_UPLOAD_Q0053",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -2966,72 +2867,6 @@
       }
     },
     {
-      "id": "NEET_UPLOAD_Q0056",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List-I with List-II. List-I (Compound): (",
-      "options": {
-        "A": "A-III, B-IV, C-I, D-II",
-        "B": "A-II, В-III, C-IV, D-I",
-        "C": "A-I, B-IV, C-II, D-III",
-        "D": "A-II, B-IV, C-III, D-I"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0058",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List-I with List-II. List-I (Process): (",
-      "options": {
-        "A": "Α-I, В-II, C-III, D-IV",
-        "B": "A-II, B-III, C-IV, D-I",
-        "C": "A-IV, B-III, C-II, D-I",
-        "D": "A-IV, B-II, C-III, D-I"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "NEET_UPLOAD_Q0061",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -3079,72 +2914,6 @@
       },
       "correct_answer": "C",
       "explanation": "Correct answer is C: Both Statement I and Statement II are true..",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0066",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List I with List II. List I (Quantum Number): (",
-      "options": {
-        "A": "A-III, В-IV, C-II, D-I",
-        "B": "Α-II, В-I, C-IV, D-III",
-        "C": "A-I, В-III, C-II, D-IV",
-        "D": "A-III, B-IV, C-I, D-II"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0067",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Match List I with List II. List I (Reaction): (",
-      "options": {
-        "A": "A-IV, B-I, C-II, D-III",
-        "B": "A-I, B-IV, C-II, D-III",
-        "C": "A-IV, B-I, C-III, D-II",
-        "D": "A-III, B-I, C-II, D-IV"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Physics",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -3493,18 +3262,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Rhizopus",
-          "B": "Ustilago",
-          "C": "Puccinia",
-          "D": "Agaricus"
-        },
-        "col2": {
-          "I": "Mushroom",
-          "II": "Smut fungus",
-          "III": "Bread mould",
-          "IV": "Rust fungus"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Rhizopus",
+            "col2": "1. Mushroom"
+          },
+          {
+            "col1": "B. Ustilago",
+            "col2": "2. Smut fungus"
+          },
+          {
+            "col1": "C. Puccinia",
+            "col2": "3. Bread mould"
+          },
+          {
+            "col1": "D. Agaricus",
+            "col2": "4. Rust fungus"
+          }
+        ]
       }
     },
     {
@@ -3574,86 +3352,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0134",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List-I with List-II. List-I: (",
-      "options": {
-        "A": "A-II, В-ІII, C-IV, D-I",
-        "B": "A-IV, B-I, C-II, D-III",
-        "C": "А-ІІІ, В-II, C-I, D-IV",
-        "D": "A-III, B-IV, C-I, D-II"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0149",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List-I with List-II. List-I (Types of stamen): (",
-      "options": {
-        "A": "A-I, В-III, C-II, D-IV",
-        "B": "A-III, B-IV, C-II, D-I",
-        "C": "A-II, В-III, C-I, D-IV",
-        "D": "A-IV, B-II, C-I, D-III"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Iron",
-          "B": "Zinc",
-          "C": "Boron",
-          "D": "Molybdenum"
-        },
-        "col2": {
-          "I": "Synthesis of auxin",
-          "II": "Component of nitrate reductase",
-          "III": "Activator of catalase",
-          "IV": "Cell elongation and differentiation"
-        }
-      }
-    },
-    {
       "id": "NEET_UPLOAD_Q0150",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -3719,18 +3417,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Typhoid",
-          "B": "Leishmaniasis",
-          "C": "Ringworm",
-          "D": "Filariasis"
-        },
-        "col2": {
-          "I": "Fungus",
-          "II": "Nematode",
-          "III": "Protozoa",
-          "IV": "Bacteria"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Typhoid",
+            "col2": "1. Fungus"
+          },
+          {
+            "col1": "B. Leishmaniasis",
+            "col2": "2. Nematode"
+          },
+          {
+            "col1": "C. Ringworm",
+            "col2": "3. Protozoa"
+          },
+          {
+            "col1": "D. Filariasis",
+            "col2": "4. Bacteria"
+          }
+        ]
       }
     },
     {
@@ -3912,18 +3619,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Expiratory capacity",
-          "B": "Functional residual capacity",
-          "C": "Vital capacity",
-          "D": "Inspiratory capacity"
-        },
-        "col2": {
-          "I": "Expiratory reserve volume + Tidal volume + Inspiratory reserve volume",
-          "II": "Tidal volume + Expiratory reserve volume",
-          "III": "Tidal volume + Inspiratory reserve volume",
-          "IV": "Expiratory reserve volume + Residual volume"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Expiratory capacity",
+            "col2": "1. Expiratory reserve volume + Tidal volume + Inspiratory reserve volume"
+          },
+          {
+            "col1": "B. Functional residual capacity",
+            "col2": "2. Tidal volume + Expiratory reserve volume"
+          },
+          {
+            "col1": "C. Vital capacity",
+            "col2": "3. Tidal volume + Inspiratory reserve volume"
+          },
+          {
+            "col1": "D. Inspiratory capacity",
+            "col2": "4. Expiratory reserve volume + Residual volume"
+          }
+        ]
       }
     },
     {
@@ -4006,18 +3722,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "α-1 antitrypsin",
-          "B": "Cry IAb",
-          "C": "Cry IAc",
-          "D": "Enzyme replacement therapy"
-        },
-        "col2": {
-          "I": "Cotton bollworm",
-          "II": "ADA deficiency",
-          "III": "Emphysema",
-          "IV": "Corn borer"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. α-1 antitrypsin",
+            "col2": "1. Cotton bollworm"
+          },
+          {
+            "col1": "B. Cry IAb",
+            "col2": "2. ADA deficiency"
+          },
+          {
+            "col1": "C. Cry IAc",
+            "col2": "3. Emphysema"
+          },
+          {
+            "col1": "D. Enzyme replacement therapy",
+            "col2": "4. Corn borer"
+          }
+        ]
       }
     },
     {
@@ -4086,18 +3811,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Fibrous joints",
-          "B": "Cartilaginous joints",
-          "C": "Hinge",
-          "D": "Ball and socket joints"
-        },
-        "col2": {
-          "I": "Adjacent vertebrae, limited movement",
-          "II": "Humerus and pectoral girdle, rotational movement",
-          "III": "Skull, don't allow any movement",
-          "IV": "Knee, help in locomotion"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Fibrous joints",
+            "col2": "1. Adjacent vertebrae, limited movement"
+          },
+          {
+            "col1": "B. Cartilaginous joints",
+            "col2": "2. Humerus and pectoral girdle, rotational movement"
+          },
+          {
+            "col1": "C. Hinge",
+            "col2": "3. Skull, don't allow any movement"
+          },
+          {
+            "col1": "D. Ball and socket joints",
+            "col2": "4. Knee, help in locomotion"
+          }
+        ]
       }
     },
     {
@@ -4133,18 +3867,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Common cold",
-          "B": "Haemozoin",
-          "C": "Widal test",
-          "D": "Allergy"
-        },
-        "col2": {
-          "I": "Plasmodium",
-          "II": "Typhoid",
-          "III": "Rhinoviruses",
-          "IV": "Dust mites"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Common cold",
+            "col2": "1. Plasmodium"
+          },
+          {
+            "col1": "B. Haemozoin",
+            "col2": "2. Typhoid"
+          },
+          {
+            "col1": "C. Widal test",
+            "col2": "3. Rhinoviruses"
+          },
+          {
+            "col1": "D. Allergy",
+            "col2": "4. Dust mites"
+          }
+        ]
       }
     },
     {
@@ -4312,18 +4055,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "The structures used for storing of food.",
-          "B": "Ring of 6-8 blind tubules at junction of foregut and midgut.",
-          "C": "Ring of 100-150 yellow coloured thin filaments at junction of midgut and hindgut.",
-          "D": "The structures used for grinding the food."
-        },
-        "col2": {
-          "I": "Gizzard",
-          "II": "Gastric Caeca",
-          "III": "Malpighian tubules",
-          "IV": "Crop"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. The structures used for storing of food",
+            "col2": "1. Gizzard"
+          },
+          {
+            "col1": "B. Ring of 6-8 blind tubules at junction of foregut and midgut",
+            "col2": "2. Gastric Caeca"
+          },
+          {
+            "col1": "C. Ring of 100-150 yellow coloured thin filaments at junction of midgut and hindgut",
+            "col2": "3. Malpighian tubules"
+          },
+          {
+            "col1": "D. The structures used for grinding the food",
+            "col2": "4. Crop"
+          }
+        ]
       }
     },
     {
@@ -4359,18 +4111,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Exophthalmic goiter",
-          "B": "Acromegaly",
-          "C": "Cushing's syndrome",
-          "D": "Cretinism"
-        },
-        "col2": {
-          "I": "Excess secretion of cortisol, moon face & hyperglycemia",
-          "II": "Hypo-secretion of thyroid hormone and stunted growth.",
-          "III": "Hyper secretion of thyroid hormone & protruding eye balls.",
-          "IV": "Excessive secretion of growth hormone."
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Exophthalmic goiter",
+            "col2": "1. Excess secretion of cortisol, moon face & hyperglycemia"
+          },
+          {
+            "col1": "B. Acromegaly",
+            "col2": "2. Hypo-secretion of thyroid hormone and stunted growth"
+          },
+          {
+            "col1": "C. Cushing's syndrome",
+            "col2": "3. Hyper secretion of thyroid hormone & protruding eye balls"
+          },
+          {
+            "col1": "D. Cretinism",
+            "col2": "4. Excessive secretion of growth hormone"
+          }
+        ]
       }
     },
     {
@@ -4406,18 +4167,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "P wave",
-          "B": "QRS complex",
-          "C": "T wave",
-          "D": "T-P gap"
-        },
-        "col2": {
-          "I": "Heart muscles are electrically silent.",
-          "II": "Depolarisation of ventricles.",
-          "III": "Depolarisation of atria.",
-          "IV": "Repolarisation of ventricles."
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. P wave",
+            "col2": "1. Heart muscles are electrically silent"
+          },
+          {
+            "col1": "B. QRS complex",
+            "col2": "2. Depolarisation of ventricles"
+          },
+          {
+            "col1": "C. T wave",
+            "col2": "3. Depolarisation of atria"
+          },
+          {
+            "col1": "D. T-P gap",
+            "col2": "4. Repolarisation of ventricles"
+          }
+        ]
       }
     },
     {
@@ -5782,18 +5552,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Vasectomy",
-          "B": "Coitus interruptus",
-          "C": "Cervical caps",
-          "D": "Saheli"
-        },
-        "col2": {
-          "I": "Oral method",
-          "II": "Barrier method",
-          "III": "Surgical method",
-          "IV": "Natural method"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Vasectomy, Coitus interruptus, Cervical caps, Saheli",
+        "col2_header": "Column II – Oral method, Barrier method, Surgical method, Natural method",
+        "rows": [
+          {
+            "col1": "A. Vasectomy",
+            "col2": "1. Oral method"
+          },
+          {
+            "col1": "B. Coitus interruptus",
+            "col2": "2. Barrier method"
+          },
+          {
+            "col1": "C. Cervical caps",
+            "col2": "3. Surgical method"
+          },
+          {
+            "col1": "D. Saheli",
+            "col2": "4. Natural method"
+          }
+        ]
       }
     },
     {
@@ -5895,18 +5674,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Cartilaginous Joint",
-          "B": "Ball and Socket Joint",
-          "C": "Fibrous Joint",
-          "D": "Saddle Joint"
-        },
-        "col2": {
-          "I": "Between flat skull bones",
-          "II": "Between adjacent vertebrae",
-          "III": "Between carpal and metacarpal of thumb",
-          "IV": "Between Humerus and Pectoral girdle"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Cartilaginous Joint",
+            "col2": "1. Found between: Between flat skull bones"
+          },
+          {
+            "col1": "B. Ball and Socket Joint",
+            "col2": "2. Between adjacent vertebrae"
+          },
+          {
+            "col1": "C. Fibrous Joint",
+            "col2": "3. Between carpal and metacarpal of thumb"
+          },
+          {
+            "col1": "D. Saddle Joint",
+            "col2": "4. Between Humerus and Pectoral girdle"
+          }
+        ]
       }
     },
     {
@@ -5975,18 +5763,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Taenia",
-          "B": "Paramoecium",
-          "C": "Periplaneta",
-          "D": "Pheretima"
-        },
-        "col2": {
-          "I": "Nephridia",
-          "II": "Contractile vacuole",
-          "III": "Flame cells",
-          "IV": "Urecose gland"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Taenia, Paramoecium, Periplaneta, Pheretima",
+        "col2_header": "Column II – Nephridia, Contractile vacuole, Flame cells, Urecose gland",
+        "rows": [
+          {
+            "col1": "A. Taenia",
+            "col2": "1. Nephridia"
+          },
+          {
+            "col1": "B. Paramoecium",
+            "col2": "2. Contractile vacuole"
+          },
+          {
+            "col1": "C. Periplaneta",
+            "col2": "3. Flame cells"
+          },
+          {
+            "col1": "D. Pheretima",
+            "col2": "4. Urecose gland"
+          }
+        ]
       }
     },
     {
@@ -6021,53 +5818,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0170",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List I (Fovea, Iris, Blind spot, Sclera) with List II (Eye structure properties).",
-      "options": {
-        "A": "A-III, B-I, C-IV, D-II",
-        "B": "A-IV, B-III, C-II, D-I",
-        "C": "A-I, B-IV, C-III, D-II",
-        "D": "A-II, B-I, C-III, D-IV"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Fovea",
-          "B": "Iris",
-          "C": "Blind spot",
-          "D": "Sclera"
-        },
-        "col2": {
-          "I": "Regulates amount of light entering eye",
-          "II": "Tough fibrous outer coat",
-          "III": "Region of maximum visual acuity",
-          "IV": "Region where optic nerve exits; no photoreceptors"
-        }
-      }
     },
     {
       "id": "PHY_unclassified_a3de975bfb",
@@ -6233,53 +5983,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_unclassified_d7c8838a49",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List I (Logistic growth, Exponential growth, Expanding age pyramid, Stable age pyramid) with List II (Growth condition and pyramid properties).",
-      "options": {
-        "A": "A-II, B-I, C-III, D-IV",
-        "B": "A-II, B-III, C-I, D-IV",
-        "C": "A-II, B-IV, C-I, D-III",
-        "D": "A-II, B-IV, C-III, D-I"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Logistic growth",
-          "B": "Exponential growth",
-          "C": "Expanding age pyramid",
-          "D": "Stable age pyramid"
-        },
-        "col2": {
-          "I": "J-shaped curve; unlimited resources",
-          "II": "S-shaped curve; resource-limited environment",
-          "III": "Equal proportion of all age groups",
-          "IV": "Pre-reproductive age group is largest"
-        }
-      }
     },
     {
       "id": "NEET_UPLOAD_Q0187",
@@ -8506,18 +8209,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Gregarious, polyphagous pest",
-          "b": "Monophagous pest",
-          "c": "Haematophagous",
-          "d": "Omnivorous pest"
-        },
-        "col2": {
-          "i": "Silkworm moth",
-          "ii": "Cockroach",
-          "iii": "Locust",
-          "iv": "Mosquito"
-        }
+        "question_stem": "Match the following columns and select the correct option",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Gregarious, polyphagous pest",
+            "col2": "1. Asterias"
+          },
+          {
+            "col1": "B. Adult with radial symmetry and larva with bilateral symmetry",
+            "col2": "2. Scorpion"
+          },
+          {
+            "col1": "C. Book lungs",
+            "col2": "3. Ctenoplana"
+          },
+          {
+            "col1": "D. Bioluminescence Column-11",
+            "col2": "4. Locusta"
+          }
+        ]
       }
     },
     {
@@ -9623,18 +9335,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "CO(g) + H₂(g)",
-          "b": "Temporary hardness of water",
-          "c": "Permanent hardness of water",
-          "d": "Baking powder"
-        },
-        "col2": {
-          "i": "CaSO₄ dissolved in water",
-          "ii": "NaHCO₃ + tartaric acid",
-          "iii": "Water gas",
-          "iv": "Ca(HCO₃)₂ dissolved in water"
-        }
+        "question_stem": "Match the following and identify the correct option",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. CO(g)+H₂(g)",
+            "col2": "1. Mg(HCO3)2+Ca(HCO3)2"
+          },
+          {
+            "col1": "B. Temporary hardness of water",
+            "col2": "2. An electron deficient hydride"
+          },
+          {
+            "col1": "C. B2H6",
+            "col2": "3. Synthesis gas"
+          },
+          {
+            "col1": "D. H2O2",
+            "col2": "4. Non-planar structure"
+          }
+        ]
       }
     },
     {
@@ -14939,18 +14660,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "ethane",
-          "B": "ethene",
-          "C": "carbon molecule, C₂",
-          "D": "ethyne"
-        },
-        "col2": {
-          "I": "one σ-bond and two π-bonds",
-          "II": "two π-bonds",
-          "III": "one σ-bond",
-          "IV": "one σ-bond and one π-bond"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Molecule",
+        "col2_header": "Column II – Number and types of bond/s between two carbon atoms",
+        "rows": [
+          {
+            "col1": "A. ethane",
+            "col2": "1. one σ-bond and two π-bonds"
+          },
+          {
+            "col1": "B. ethene",
+            "col2": "2. two π-bonds"
+          },
+          {
+            "col1": "C. carbon molecule, C₂",
+            "col2": "3. one σ-bond"
+          },
+          {
+            "col1": "D. ethyne",
+            "col2": "4. one σ-bond and one π-bond"
+          }
+        ]
       }
     },
     {
