@@ -1014,7 +1014,7 @@
       "unit_code": "UNIT4_ChemicalThermodynamics",
       "chapter": "Thermodynamics",
       "topic": "",
-      "question": "Identify the correct orders against the property mentioned. A.H₂O>NH₃>CHCl₃ - dipole moment B.XeF₄>XeO₃>XeF₂ - lone pairs C.O-H>C-H>N-O - bond length D.N₂>O₂>H₂ - bond enthalpy",
+      "question": "Identify the correct orders against the property mentioned.",
       "options": {
         "A": "B, C only",
         "B": "A, D only",
@@ -1035,7 +1035,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "HIGH"
+      "confidence": "HIGH",
+      "statements": [
+        {
+          "label": "A",
+          "text": "H₂O>NH₃>CHCl₃ - dipole moment"
+        },
+        {
+          "label": "B",
+          "text": "XeF₄>XeO₃>XeF₂ - lone pairs"
+        },
+        {
+          "label": "C",
+          "text": "O-H>C-H>N-O - bond length"
+        },
+        {
+          "label": "D",
+          "text": "N₂>O₂>H₂ - bond enthalpy"
+        }
+      ]
     },
     {
       "id": "NEET2025_CHE_088",
@@ -2667,7 +2685,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Equilibrium",
       "topic": "",
-      "question": "If c is the velocity of light in free space, the correct statements about photon among the following are: A. The energy of a photon is E=hv. B. The velocity of a photon is c. C. The momentum of a photon, p=chv. D. In a photon-electron collision, both total energy and total momentum are conserved. E. Photon posses positive charge.",
+      "question": "If c is the velocity of light in free space, the correct statements about photon among the following are:",
       "options": {
         "A": "A, C and D only",
         "B": "A, B, D and E only",
@@ -2692,7 +2710,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "The energy of a photon is E=hv."
+        },
+        {
+          "label": "B",
+          "text": "The velocity of a photon is c."
+        },
+        {
+          "label": "C",
+          "text": "The momentum of a photon, p=chv."
+        },
+        {
+          "label": "D",
+          "text": "In a photon-electron collision, both total energy and total momentum are conserved."
+        },
+        {
+          "label": "E",
+          "text": "Photon posses positive charge."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0021",
@@ -4359,7 +4399,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "UNCLASSIFIED",
       "topic": "",
-      "question": "Select the correct statements from the following: A. Atoms of all elements are composed of two fundamental particles. B. The mass of the electron is 9.10939 x 10-31 kg. C. All the isotopes of a given element show same chemical properties. D. Protons and electrons are collectively known as nucleons. E. Dalton's atomic theory, regarded the atom as an ultimate particles of matter.",
+      "question": "Select the correct statements from the following:",
       "options": {
         "A": "A, B and C only",
         "B": "C, D and E only",
@@ -4384,7 +4424,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Atoms of all elements are composed of two fundamental particles."
+        },
+        {
+          "label": "B",
+          "text": "The mass of the electron is 9.10939 x 10-31 kg."
+        },
+        {
+          "label": "C",
+          "text": "All the isotopes of a given element show same chemical properties."
+        },
+        {
+          "label": "D",
+          "text": "Protons and electrons are collectively known as nucleons."
+        },
+        {
+          "label": "E",
+          "text": "Dalton's atomic theory, regarded the atom as an ultimate particles of matter."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0074",
@@ -4877,7 +4939,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Equilibrium",
       "topic": "",
-      "question": "Which of the following statements are correct about Klinefelter's Syndrome? A. This disorder was first described by Langdon Down (1866). B. Such an individual has overall masculine development. However, the femine developement is also expressed. C. The affected individual is short statured. D. Physical, psychomotor and mental development is retarded. E. Such individuals are sterile.",
+      "question": "Which of the following statements are correct about Klinefelter's Syndrome?",
       "options": {
         "A": "A and B only",
         "B": "C and D only",
@@ -4902,7 +4964,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "This disorder was first described by Langdon Down (1866)."
+        },
+        {
+          "label": "B",
+          "text": "Such an individual has overall masculine development. However, the femine developement is also expressed."
+        },
+        {
+          "label": "C",
+          "text": "The affected individual is short statured."
+        },
+        {
+          "label": "D",
+          "text": "Physical, psychomotor and mental development is retarded."
+        },
+        {
+          "label": "E",
+          "text": "Such individuals are sterile."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0139",
@@ -5210,7 +5294,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Coordination Compounds",
       "topic": "",
-      "question": "Select the correct statements. A. Tetrad formation is seen during Leptotene. B. During Anaphase, the centromeres split and chromatids separate. C. Terminalization takes place during Pachytene. D. Nucleolus, Golgi complex and ER are reformed during Telophase. E. Crossing over takes place between sister chromatids of homologous chromosome.",
+      "question": "Select the correct statements.",
       "options": {
         "A": "A and C only",
         "B": "B and D only",
@@ -5235,7 +5319,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Tetrad formation is seen during Leptotene."
+        },
+        {
+          "label": "B",
+          "text": "During Anaphase, the centromeres split and chromatids separate."
+        },
+        {
+          "label": "C",
+          "text": "Terminalization takes place during Pachytene."
+        },
+        {
+          "label": "D",
+          "text": "Nucleolus, Golgi complex and ER are reformed during Telophase."
+        },
+        {
+          "label": "E",
+          "text": "Crossing over takes place between sister chromatids of homologous chromosome."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0193",
@@ -11623,7 +11729,7 @@
       "unit_code": "UNIT1_BasicConceptsChemistry",
       "chapter": "Classification of Elements and Periodicity in Properties",
       "topic": "",
-      "question": "Which of the following statements are true? A.Unlike Ga that has a very high melting point, Cs has a very low melting point. B.On Pauling scale, the electronegativity values of N and Cl are not the same. C.Ar, K⁺, Cl⁻, Ca²⁺, and S²⁻ are all isoelectronic species. D.The correct order of first ionization enthalpies of Na, Mg, Al, Si is Si>Al>Mg>Na. E.The atomic radius of Cs is greater than that of Li and Rb.",
+      "question": "Which of the following statements are true?",
       "options": {
         "A": "A, C, and E only",
         "B": "A, B, and E only",
@@ -11644,7 +11750,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "verified",
-      "confidence": "HIGH"
+      "confidence": "HIGH",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Unlike Ga that has a very high melting point, Cs has a very low melting point."
+        },
+        {
+          "label": "B",
+          "text": "On Pauling scale, the electronegativity values of N and Cl are not the same."
+        },
+        {
+          "label": "C",
+          "text": "Ar, K⁺, Cl⁻, Ca²⁺, and S²⁻ are all isoelectronic species."
+        },
+        {
+          "label": "D",
+          "text": "The correct order of first ionization enthalpies of Na, Mg, Al, Si is Si>Al>Mg>Na."
+        },
+        {
+          "label": "E",
+          "text": "The atomic radius of Cs is greater than that of Li and Rb."
+        }
+      ]
     },
     {
       "id": "NEET2025_CHE_080",
@@ -12471,7 +12599,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Hydrogen",
       "topic": "",
-      "question": "Which of the following statements are NOT correct? A. Hydrogen is used to reduce heavy metal oxides to metals. B. Heavy water is used to study reaction mechanism. C. Hydrogen is used to make saturated fats from oils. D. The H-H bond dissociation enthalpy is lowest as compared to a single bond between two atoms of any elements. E. Hydrogen reduces oxides of metals that are more active than iron.",
+      "question": "Which of the following statements are NOT correct?",
       "options": {
         "A": "B, C, D, E only",
         "B": "B, D only",
@@ -12496,7 +12624,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "unverified",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Hydrogen is used to reduce heavy metal oxides to metals."
+        },
+        {
+          "label": "B",
+          "text": "Heavy water is used to study reaction mechanism."
+        },
+        {
+          "label": "C",
+          "text": "Hydrogen is used to make saturated fats from oils."
+        },
+        {
+          "label": "D",
+          "text": "The H-H bond dissociation enthalpy is lowest as compared to a single bond between two atoms of any elements."
+        },
+        {
+          "label": "E",
+          "text": "Hydrogen reduces oxides of metals that are more active than iron."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0081",
@@ -12537,7 +12687,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Redox Reactions",
       "topic": "",
-      "question": "Which of the following statements are INCORRECT? A. All the transition metals except scandium form MO oxides which are ionic. B. The highest oxidation number corresponding to the group number in transition metal oxides is attained in Sc2O3 to Mn2O7 C. Basic character increases from V2O3 to V2O4 to V2O5. D. V2O4 dissolves in acids to give VO43− salts. E. CrO is basic but Cr2O3 is amphoteric.",
+      "question": "Which of the following statements are INCORRECT?",
       "options": {
         "A": "A and E only",
         "B": "B and D only",
@@ -12562,7 +12712,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "unverified",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "All the transition metals except scandium form MO oxides which are ionic."
+        },
+        {
+          "label": "B",
+          "text": "The highest oxidation number corresponding to the group number in transition metal oxides is attained in Sc2O3 to Mn2O7 C. Basic character increases from V2O3 to V2O4 to V2O5."
+        },
+        {
+          "label": "D",
+          "text": "V2O4 dissolves in acids to give VO43− salts."
+        },
+        {
+          "label": "E",
+          "text": "CrO is basic but Cr2O3 is amphoteric."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0136",

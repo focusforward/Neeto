@@ -2429,7 +2429,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Semiconductor Electronics",
       "topic": "",
-      "question": "Consider the following statements A and B and identify the correct answer: A. For a solar-cell, the I-V characteristics lies in the IV quadrant of the given graph. B. In a reverse biașed pn junction diode, the current measured in (μ",
+      "question": "Consider the following statements A and B and identify the correct answer:",
       "options": {
         "A": "Both A and B are correct.",
         "B": "Both A and B are incorrect.",
@@ -2454,7 +2454,17 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "For a solar-cell, the I-V characteristics lies in the IV quadrant of the given graph."
+        },
+        {
+          "label": "B",
+          "text": "In a reverse biașed pn junction diode, the current measured in (μ"
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0023",
@@ -5414,7 +5424,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Alternating Current",
       "topic": "",
-      "question": "Identify the correct statements: A. Detrivores perform fragmentation. B. The humus is further degraded by some microbes during mineralization. C. Water soluble inorganic nutrients go down into the soil and get precipitated by a process called leaching. D. The detritus food chain begins with living organisms. E. Earthworms break down detritus into smaller particles by a process called catabolism.",
+      "question": "Identify the correct statements:",
       "options": {
         "A": "A, B, C only",
         "B": "B, C, D only",
@@ -5439,7 +5449,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Detrivores perform fragmentation."
+        },
+        {
+          "label": "B",
+          "text": "The humus is further degraded by some microbes during mineralization."
+        },
+        {
+          "label": "C",
+          "text": "Water soluble inorganic nutrients go down into the soil and get precipitated by a process called leaching."
+        },
+        {
+          "label": "D",
+          "text": "The detritus food chain begins with living organisms."
+        },
+        {
+          "label": "E",
+          "text": "Earthworms break down detritus into smaller particles by a process called catabolism."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0123",
@@ -5546,7 +5578,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Ray Optics and Optical Instruments",
       "topic": "",
-      "question": "Identify the correct statements: A. Lenticels are the lens-shaped openings permitting the exchange of gases. B. Bark formed early in the season is called hard bark. C. Bark is a technical term that refers to all tissues exterior to vascular cambium. D. Bark refers to periderm and secondary phloem. E. Phellogen is single-layered in thickness.",
+      "question": "Identify the correct statements:",
       "options": {
         "A": "B, C and E only",
         "B": "A and D only",
@@ -5571,7 +5603,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Lenticels are the lens-shaped openings permitting the exchange of gases."
+        },
+        {
+          "label": "B",
+          "text": "Bark formed early in the season is called hard bark."
+        },
+        {
+          "label": "C",
+          "text": "Bark is a technical term that refers to all tissues exterior to vascular cambium."
+        },
+        {
+          "label": "D",
+          "text": "Bark refers to periderm and secondary phloem."
+        },
+        {
+          "label": "E",
+          "text": "Phellogen is single-layered in thickness."
+        }
+      ]
     },
     {
       "id": "PHY_unclassified_b5d3b9d1d7",
@@ -5879,7 +5933,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Alternating Current",
       "topic": "",
-      "question": "Which of the following statements are correct regarding female reproductive cycle? A. In non-primate mammals cyclical changes during reproduction are called oestrus cycle. B. First menstrual cycle begins at puberty and is called menopause. C. Lack of menstruation may be indicative of pregnancy. D. Cyclic menstruation extends between menarche and menopause.",
+      "question": "Which of the following statements are correct regarding female reproductive cycle?",
       "options": {
         "A": "A and D only",
         "B": "A and B only",
@@ -5904,7 +5958,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "In non-primate mammals cyclical changes during reproduction are called oestrus cycle."
+        },
+        {
+          "label": "B",
+          "text": "First menstrual cycle begins at puberty and is called menopause."
+        },
+        {
+          "label": "C",
+          "text": "Lack of menstruation may be indicative of pregnancy."
+        },
+        {
+          "label": "D",
+          "text": "Cyclic menstruation extends between menarche and menopause."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0175",
@@ -6044,7 +6116,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Wave Optics",
       "topic": "",
-      "question": "Select the correct statements with reference to chordates. A. Presence of a mid-dorsal, solid and double nerve cord. B. Presence of closed circulatory system. C. Presence of paired pharyngeal gill slits. D. Presence of dorsal heart. E. Triploblastic pseudocoelomate animals.",
+      "question": "Select the correct statements with reference to chordates.",
       "options": {
         "A": "A, C and D only",
         "B": "B and C only",
@@ -6069,7 +6141,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Presence of a mid-dorsal, solid and double nerve cord."
+        },
+        {
+          "label": "B",
+          "text": "Presence of closed circulatory system."
+        },
+        {
+          "label": "C",
+          "text": "Presence of paired pharyngeal gill slits."
+        },
+        {
+          "label": "D",
+          "text": "Presence of dorsal heart."
+        },
+        {
+          "label": "E",
+          "text": "Triploblastic pseudocoelomate animals."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0189",
@@ -7816,7 +7910,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "UNCLASSIFIED",
       "topic": "",
-      "question": "Match Column I and Column II and choose the correct match from the given choices. Column - I (",
+      "question": "Match Column I and Column II and choose the correct match from the given choices. [Question data incomplete — refer to NCERT]",
       "options": {
         "A": "(A)-(R), (",
         "B": "-(Q), (",
@@ -7827,7 +7921,7 @@
       "explanation": "Correct answer is D: -(S) B) (A)-(R), (B)-(P), (C)-(S), (D)-(Q) C) (A)-(Q), (B)-(R), (C)-(S), (D)-(P) D) (A)-(Q), (B)-(P), (C)-(S), (D)-(R).",
       "ncert_ref": "NCERT Physics",
       "ncert_line": "",
-      "pattern": "speed_breaker",
+      "pattern": "memory_test",
       "pattern_name": "Memory Test",
       "difficulty": "L2",
       "year": null,

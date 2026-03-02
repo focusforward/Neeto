@@ -209,7 +209,7 @@
       "unit_code": "UNIT6_Reproduction",
       "chapter": "Reproduction in Organisms",
       "topic": "",
-      "question": "Consider the following: A.The reductive division for female gametogenesis starts earlier than male. B.Gap between meiotic divisions is shorter for males. C.First polar body is associated with primary oocyte. D.LH surge leads to disintegration of endometrium. Which are true?",
+      "question": "Consider the following:",
       "options": {
         "A": "B and C are true",
         "B": "A and B are true",
@@ -230,7 +230,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "HIGH"
+      "confidence": "HIGH",
+      "statements": [
+        {
+          "label": "A",
+          "text": "The reductive division for female gametogenesis starts earlier than male."
+        },
+        {
+          "label": "B",
+          "text": "Gap between meiotic divisions is shorter for males."
+        },
+        {
+          "label": "C",
+          "text": "First polar body is associated with primary oocyte."
+        },
+        {
+          "label": "D",
+          "text": "LH surge leads to disintegration of endometrium. Which are true?"
+        }
+      ]
     },
     {
       "id": "NEET2025_BIO_100",
@@ -10223,7 +10241,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Body Fluids and Circulation",
       "topic": "",
-      "question": "Which of the following statements are correct? A. An excessive loss of body fluid from the body switches off osmoreceptors. B. ADH facilitates water reabsorption to prevent diuresis. C. ANF causes vasodilation. D. ADH causes increase in blood pressure. E. ADH is responsible for decrease in GFR.",
+      "question": "Which of the following statements are correct?",
       "options": {
         "A": "A and B only",
         "B": "B, C and D only",
@@ -10248,7 +10266,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "An excessive loss of body fluid from the body switches off osmoreceptors."
+        },
+        {
+          "label": "B",
+          "text": "ADH facilitates water reabsorption to prevent diuresis."
+        },
+        {
+          "label": "C",
+          "text": "ANF causes vasodilation."
+        },
+        {
+          "label": "D",
+          "text": "ADH causes increase in blood pressure."
+        },
+        {
+          "label": "E",
+          "text": "ADH is responsible for decrease in GFR."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0199",
@@ -10256,7 +10296,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Locomotion and Movement",
       "topic": "",
-      "question": "Which of the following statements are correct regarding skeletal muscle? A. Muscle bundles are held together by collagenous connective tissue layer called fascicle. B. Sarcoplasmic reticulum of muscle fibre is a store house of calcium ions. C. Striated appearance of skeletal muscle fibre is due to distribution pattern of actin and myosin proteins. D. M line is considered as functional unit of contraction called sarcomere.",
+      "question": "Which of the following statements are correct regarding skeletal muscle?",
       "options": {
         "A": "A, B and C only",
         "B": "B and C only",
@@ -10281,7 +10321,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Muscle bundles are held together by collagenous connective tissue layer called fascicle."
+        },
+        {
+          "label": "B",
+          "text": "Sarcoplasmic reticulum of muscle fibre is a store house of calcium ions."
+        },
+        {
+          "label": "C",
+          "text": "Striated appearance of skeletal muscle fibre is due to distribution pattern of actin and myosin proteins."
+        },
+        {
+          "label": "D",
+          "text": "M line is considered as functional unit of contraction called sarcomere."
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0101",
