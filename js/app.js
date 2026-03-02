@@ -1,28 +1,63 @@
 // ── MATCH TABLE RENDERER ─────────────────────────────────────────────────
 function renderMatchTable(mt) {
-  if (!mt || !mt.rows || mt.rows.length < 2) return null;
-  var hasCol2 = mt.rows.some(function(r) { return r.col2 && r.col2 !== '—'; });
-  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-  var stem = mt.question_stem
-    ? '<div class="match-stem">' + esc(mt.question_stem) + '</div>' : '';
-  var h1 = esc(mt.col1_header || 'Column I');
-  var h2 = hasCol2 ? esc(mt.col2_header || 'Column II') : '';
-  var rows = mt.rows.map(function(r) {
-    var c1m = r.col1.match(/^([A-D])\. (.*)/s);
-    var c1 = c1m ? '<span style="font-weight:800;color:#FF6B1A;margin-right:4px;">' + c1m[1] + '.</span>' + esc(c1m[2]) : esc(r.col1);
-    var c2 = '';
-    if (hasCol2 && r.col2 && r.col2 !== '—') {
-      var c2m = r.col2.match(/^(\d+)\. (.*)/s);
-      c2 = c2m ? '<span style="font-weight:800;color:#4B91E8;margin-right:4px;">' + c2m[1] + '.</span>' + esc(c2m[2]) : esc(r.col2);
+  if (!mt) return null;
+
+  // Support both {rows:[]} and {col1:{}, col2:{}} formats
+  var rows;
+  if (mt.rows && mt.rows.length >= 2) {
+    rows = mt.rows;
+  } else if (mt.col1 && mt.col2) {
+    var c1k = Object.keys(mt.col1), c2k = Object.keys(mt.col2);
+    var n = Math.max(c1k.length, c2k.length);
+    rows = [];
+    for (var i = 0; i < n; i++) {
+      var k1 = c1k[i] || '', k2 = c2k[i] || '';
+      rows.push({
+        col1: k1 ? k1 + '. ' + mt.col1[k1] : '',
+        col2: k2 ? k2 + '. ' + mt.col2[k2] : '—'
+      });
     }
-    return hasCol2
-      ? '<tr><td style="padding:10px 14px;vertical-align:top;line-height:1.5;border-right:1.5px solid #F0E8DE;width:50%;font-weight:500;">' + c1 + '</td><td style="padding:10px 14px;vertical-align:top;line-height:1.5;">' + c2 + '</td></tr>'
-      : '<tr><td colspan="2" style="padding:10px 14px;line-height:1.5;font-weight:500;">' + c1 + '</td></tr>';
+  } else {
+    return null;
+  }
+
+  var hasCol2 = rows.some(function(r) { return r.col2 && r.col2 !== '—'; });
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  var h1 = esc(mt.col1_header || 'Column I');
+  var h2 = esc(mt.col2_header || 'Column II');
+
+  var rowsHtml = rows.map(function(r) {
+    // Parse "A. text" or "I. text" or "1. text"
+    var c1m = String(r.col1||'').match(/^([A-Da-d])\.\s*([\s\S]*)/);
+    var c1 = c1m
+      ? '<span style="flex-shrink:0;font-weight:800;color:#FF6B1A;min-width:18px;">' + esc(c1m[1]) + '.</span><span>' + esc(c1m[2]) + '</span>'
+      : '<span>' + esc(r.col1||'') + '</span>';
+    var c1td = '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;border-right:1.5px solid #F0E8DE;width:50%;">' +
+      '<div style="display:flex;gap:6px;align-items:flex-start;">' + c1 + '</div></td>';
+
+    var c2td = '';
+    if (hasCol2) {
+      var c2str = (r.col2 && r.col2 !== '—') ? String(r.col2) : '';
+      var c2m = c2str.match(/^([IVXivx\d]+)\.\s*([\s\S]*)/);
+      var c2 = c2m
+        ? '<span style="flex-shrink:0;font-weight:800;color:#2563EB;min-width:24px;">' + esc(c2m[1]) + '.</span><span>' + esc(c2m[2]) + '</span>'
+        : '<span>' + esc(c2str) + '</span>';
+      c2td = '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;">' +
+        '<div style="display:flex;gap:6px;align-items:flex-start;">' + c2 + '</div></td>';
+    }
+
+    return '<tr style="border-bottom:1px solid #F0E8DE;">' + c1td + (hasCol2 ? c2td : '') + '</tr>';
   }).join('');
-  var thead = hasCol2
-    ? '<thead><tr><th style="padding:9px 14px;text-align:left;font-weight:700;font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;color:#8B6E52;border-right:1.5px solid #E8DDD0;">' + h1 + '</th><th style="padding:9px 14px;text-align:left;font-weight:700;font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;color:#8B6E52;">' + h2 + '</th></tr></thead>'
-    : '<thead><tr><th colspan="2" style="padding:9px 14px;text-align:left;font-weight:700;font-size:0.75rem;letter-spacing:0.05em;text-transform:uppercase;color:#8B6E52;">' + h1 + '</th></tr></thead>';
-  return stem + '<table style="width:100%;border-collapse:collapse;border:1.5px solid #E8DDD0;border-radius:12px;overflow:hidden;margin-bottom:1.2rem;font-size:0.875rem;">' + thead + '<tbody>' + rows + '</tbody></table>';
+
+  var thStyle = 'padding:8px 14px;text-align:left;font-weight:700;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:#CC3300;background:#FFF5F0;';
+  var thead = '<thead><tr>' +
+    '<th style="' + thStyle + 'border-right:1.5px solid #F0E8DE;">' + h1 + '</th>' +
+    (hasCol2 ? '<th style="' + thStyle + '">' + h2 + '</th>' : '') +
+    '</tr></thead>';
+
+  return '<table style="width:100%;border-collapse:collapse;border:1.5px solid #F0E8DE;border-radius:12px;overflow:hidden;margin-bottom:1.2rem;font-size:0.875rem;font-weight:500;">' +
+    thead + '<tbody>' + rowsHtml + '</tbody></table>';
 }
 
 // NEETO — app.js  (with localStorage caching + attempt analytics)
@@ -128,7 +163,7 @@ function showLoader(containerId, msg) {
 
 // ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
 // Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
-const DATA_VER = 'v3';
+const DATA_VER = 'v4';
 
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
@@ -297,7 +332,13 @@ function showQuestion(idx) {
         ${(function(){
           var mt = q.match_table;
           var rendered = mt ? renderMatchTable(mt) : null;
-          if (rendered) return '<div style="margin-bottom:1rem;">' + rendered + '</div>';
+          if (rendered) {
+            // Show the clean stem (e.g. "Match List I with List II") above the table
+            var stem = (mt.question_stem || 'Match the following:')
+              .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+            return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.8rem;">' + stem + '</div>' +
+              '<div style="margin-bottom:1rem;">' + rendered + '</div>';
+          }
           return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">' + (q.question||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>';
         })()}
 
