@@ -1,66 +1,70 @@
 // ── MATCH TABLE RENDERER ─────────────────────────────────────────────────
 function renderMatchTable(mt) {
   if (!mt) return null;
+  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
 
-  // Support both {rows:[]} and {col1:{}, col2:{}} formats
-  var rows;
+  // Normalise to rows array regardless of storage format
+  var rows = [];
   if (mt.rows && mt.rows.length >= 2) {
     rows = mt.rows;
   } else if (mt.col1 && mt.col2) {
     var c1k = Object.keys(mt.col1), c2k = Object.keys(mt.col2);
-    var n = Math.max(c1k.length, c2k.length);
-    rows = [];
-    for (var i = 0; i < n; i++) {
-      var k1 = c1k[i] || '', k2 = c2k[i] || '';
+    for (var i = 0; i < Math.max(c1k.length, c2k.length); i++) {
+      var k1 = c1k[i]||'', k2 = c2k[i]||'';
       rows.push({
         col1: k1 ? k1 + '. ' + mt.col1[k1] : '',
         col2: k2 ? k2 + '. ' + mt.col2[k2] : '—'
       });
     }
-  } else {
-    return null;
   }
+  if (rows.length < 2) return null;
 
   var hasCol2 = rows.some(function(r) { return r.col2 && r.col2 !== '—'; });
-  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
   var h1 = esc(mt.col1_header || 'Column I');
   var h2 = esc(mt.col2_header || 'Column II');
 
-  var rowsHtml = rows.map(function(r) {
-    // Parse "A. text" or "I. text" or "1. text"
-    var c1m = String(r.col1||'').match(/^([A-Da-d])\.\s*([\s\S]*)/);
-    var c1 = c1m
-      ? '<span style="flex-shrink:0;font-weight:800;color:#FF6B1A;min-width:18px;">' + esc(c1m[1]) + '.</span><span>' + esc(c1m[2]) + '</span>'
-      : '<span>' + esc(r.col1||'') + '</span>';
-    var c1td = '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;border-right:1.5px solid #F0E8DE;width:50%;">' +
-      '<div style="display:flex;gap:6px;align-items:flex-start;">' + c1 + '</div></td>';
-
-    var c2td = '';
-    if (hasCol2) {
-      var c2str = (r.col2 && r.col2 !== '—') ? String(r.col2) : '';
-      var c2m = c2str.match(/^([IVXivx\d]+)\.\s*([\s\S]*)/);
-      var c2 = c2m
-        ? '<span style="flex-shrink:0;font-weight:800;color:#2563EB;min-width:24px;">' + esc(c2m[1]) + '.</span><span>' + esc(c2m[2]) + '</span>'
-        : '<span>' + esc(c2str) + '</span>';
-      c2td = '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;">' +
-        '<div style="display:flex;gap:6px;align-items:flex-start;">' + c2 + '</div></td>';
-    }
-
-    return '<tr style="border-bottom:1px solid #F0E8DE;">' + c1td + (hasCol2 ? c2td : '') + '</tr>';
-  }).join('');
-
-  var thStyle = 'padding:8px 14px;text-align:left;font-weight:700;font-size:0.72rem;letter-spacing:0.06em;text-transform:uppercase;color:#CC3300;background:#FFF5F0;';
+  var thStyle = 'padding:8px 14px;text-align:left;font-weight:700;font-size:0.72rem;' +
+    'letter-spacing:0.06em;text-transform:uppercase;background:#FFF5F0;';
   var thead = '<thead><tr>' +
-    '<th style="' + thStyle + 'border-right:1.5px solid #F0E8DE;">' + h1 + '</th>' +
-    (hasCol2 ? '<th style="' + thStyle + '">' + h2 + '</th>' : '') +
+    '<th style="' + thStyle + 'color:#CC3300;border-right:1.5px solid #F0E8DE;width:50%;">' + h1 + '</th>' +
+    (hasCol2 ? '<th style="' + thStyle + 'color:#1A4DB5;">' + h2 + '</th>' : '') +
     '</tr></thead>';
 
-  return '<table style="width:100%;border-collapse:collapse;border:1.5px solid #F0E8DE;border-radius:12px;overflow:hidden;margin-bottom:1.2rem;font-size:0.875rem;font-weight:500;">' +
+  var rowsHtml = rows.map(function(r, i) {
+    // Parse "A. text" for col1
+    var c1str = String(r.col1||'');
+    var c1m = c1str.match(/^([A-Da-d])\.\s*([\s\S]+)/);
+    var c1 = c1m
+      ? '<span style="font-weight:800;color:#FF6B1A;margin-right:6px;flex-shrink:0;">' + esc(c1m[1]) + '.</span>' + esc(c1m[2])
+      : esc(c1str);
+
+    // Parse "I. text" or "1. text" for col2 — handles Roman numerals
+    var c2html = '';
+    if (hasCol2) {
+      var c2str = (r.col2 && r.col2 !== '—') ? String(r.col2) : '';
+      var c2m = c2str.match(/^([IVXivx]+|\d+)\.\s*([\s\S]+)/);
+      c2html = c2m
+        ? '<span style="font-weight:800;color:#1A4DB5;margin-right:6px;flex-shrink:0;">' + esc(c2m[1]) + '.</span>' + esc(c2m[2])
+        : esc(c2str);
+    }
+
+    var bg = i % 2 === 0 ? '#fff' : '#FAFAF8';
+    return '<tr style="background:' + bg + ';border-top:1px solid #F0E8DE;">' +
+      '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;border-right:1.5px solid #F0E8DE;font-weight:500;display:table-cell;">' +
+        '<div style="display:flex;align-items:flex-start;">' + c1 + '</div></td>' +
+      (hasCol2 ? '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;font-weight:500;">' +
+        '<div style="display:flex;align-items:flex-start;">' + c2html + '</div></td>' : '') +
+      '</tr>';
+  }).join('');
+
+  return '<table style="width:100%;border-collapse:collapse;border:1.5px solid #F0E8DE;' +
+    'border-radius:10px;overflow:hidden;margin-bottom:1.2rem;font-size:0.875rem;">' +
     thead + '<tbody>' + rowsHtml + '</tbody></table>';
 }
 
-// NEETO — app.js  (with localStorage caching + attempt analytics)
+// ── NEETO — app.js  (with localStorage caching + attempt analytics)
+function _esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
 
 let ALL_QUESTIONS = [];
 let LOADED_SUBJECTS = {};
@@ -163,7 +167,7 @@ function showLoader(containerId, msg) {
 
 // ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
 // Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
-const DATA_VER = 'v4';
+const DATA_VER = 'v5';
 
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
@@ -281,7 +285,7 @@ function initPractice() {
       const j = Math.floor(Math.random() * (i + 1));
       [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
     }
-    renderQuestions(filtered.slice(0, 100));
+    renderQuestions(filtered);
   }
 }
 
@@ -333,14 +337,12 @@ function showQuestion(idx) {
           var mt = q.match_table;
           var rendered = mt ? renderMatchTable(mt) : null;
           if (rendered) {
-            // Show the clean stem (e.g. "Match List I with List II") above the table
-            var stem = (mt.question_stem || 'Match the following:')
-              .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-            return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.8rem;">' + stem + '</div>' +
-              '<div style="margin-bottom:1rem;">' + rendered + '</div>';
+            var stem = _esc(mt.question_stem || 'Match the following:');
+            return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' + stem + '</div>' +
+              rendered;
           }
-          return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">' + (q.question||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') + '</div>';
-        })()}
+          return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">' + _esc(q.question||'') + '</div>';
+        })()} 
 
         <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
           ${['A','B','C','D'].map(k => `
