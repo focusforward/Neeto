@@ -87,25 +87,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List I with List II",
+        "question_stem": "Match",
         "col1_header": "Column I – Mixture",
         "col2_header": "Column II – Mixture and Method of separation",
         "rows": [
           {
-            "col1": "A. CHCl₃+C₆H₅NH₂",
-            "col2": "—"
+            "col1": "A. CHCl₃ + C₆H₅NH₂",
+            "col2": "I. Steam distillation"
           },
           {
             "col1": "B. Crude oil in petroleum industry",
-            "col2": "—"
+            "col2": "II. Vacuum distillation"
           },
           {
             "col1": "C. Glycerol from spent-lye",
-            "col2": "—"
+            "col2": "III. Simple distillation"
           },
           {
-            "col1": "D. Aniline water",
-            "col2": "—"
+            "col1": "D. Aniline water mixture",
+            "col2": "IV. Fractional distillation"
           }
         ]
       }
@@ -400,25 +400,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List-I with List-II",
+        "question_stem": "Match",
         "col1_header": "Column I – Process",
         "col2_header": "Column II – Process and Catalyst",
         "rows": [
           {
             "col1": "A. Haber process",
-            "col2": "—"
+            "col2": "I. Iron (Fe)"
           },
           {
             "col1": "B. Wacker oxidation",
-            "col2": "—"
+            "col2": "II. TiCl₄ / Al(C₂H₅)₃"
           },
           {
             "col1": "C. Wilkinson catalyst",
-            "col2": "—"
+            "col2": "III. RhCl(PPh₃)₃"
           },
           {
             "col1": "D. Ziegler catalyst",
-            "col2": "—"
+            "col2": "IV. PdCl₂"
           }
         ]
       }
@@ -452,25 +452,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List-I with List-II",
+        "question_stem": "Match",
         "col1_header": "Column I – Vitamin",
         "col2_header": "Column II – Vitamin and Deficiency disease",
         "rows": [
           {
             "col1": "A. Vitamin B₁₂",
-            "col2": "—"
+            "col2": "I. Anaemia / Convulsions"
           },
           {
             "col1": "B. Vitamin D",
-            "col2": "—"
+            "col2": "II. Pernicious anaemia"
           },
           {
             "col1": "C. Vitamin B₂",
-            "col2": "—"
+            "col2": "III. Rickets"
           },
           {
             "col1": "D. Vitamin B₆",
-            "col2": "—"
+            "col2": "IV. Ariboflavinosis / Cheilosis"
           }
         ]
       }
@@ -533,25 +533,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List I with List II",
+        "question_stem": "Match",
         "col1_header": "Column I – Ion",
         "col2_header": "Column II – Ion and Group Number",
         "rows": [
           {
             "col1": "A. Co²⁺",
-            "col2": "—"
+            "col2": "I. Group I"
           },
           {
             "col1": "B. Mg²⁺",
-            "col2": "—"
+            "col2": "II. Group II"
           },
           {
             "col1": "C. Pb²⁺",
-            "col2": "—"
+            "col2": "III. Group III"
           },
           {
             "col1": "D. Al³⁺",
-            "col2": "—"
+            "col2": "IV. Group V"
           }
         ]
       }
@@ -875,25 +875,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List-I with List-II",
+        "question_stem": "Match",
         "col1_header": "Column I – Xenon compound",
         "col2_header": "Column II – Xenon compound and Shape",
         "rows": [
           {
             "col1": "A. XeO₃",
-            "col2": "—"
+            "col2": "I. Square pyramidal"
           },
           {
             "col1": "B. XeF₂",
-            "col2": "—"
+            "col2": "II. Linear"
           },
           {
             "col1": "C. XeOF₄",
-            "col2": "—"
+            "col2": "III. Distorted octahedral"
           },
           {
             "col1": "D. XeF₆",
-            "col2": "—"
+            "col2": "IV. Pyramidal"
           }
         ]
       }
@@ -927,25 +927,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List-I with List-II",
+        "question_stem": "Match",
         "col1_header": "Column I – Example",
         "col2_header": "Column II – Example and Type of Solution",
         "rows": [
           {
             "col1": "A. Humidity",
-            "col2": "—"
+            "col2": "I. Liquid in solid"
           },
           {
             "col1": "B. Alloys",
-            "col2": "—"
+            "col2": "II. Gas in gas"
           },
           {
             "col1": "C. Amalgams",
-            "col2": "—"
+            "col2": "III. Solid in solid"
           },
           {
             "col1": "D. Smoke",
-            "col2": "—"
+            "col2": "IV. Solid in gas"
           }
         ]
       }
@@ -3090,25 +3090,25 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "question_stem": "Match List-I with List-II. List-I (Complex): A",
+        "question_stem": "Match",
         "col1_header": "Column I – Complex",
         "col2_header": "Column II – Type of isomerism",
         "rows": [
           {
             "col1": "A. [Co(NH₃)5(NO₂)]Cl₂",
-            "col2": "1. Solvate isomerism"
+            "col2": "I. Solvate isomerism"
           },
           {
             "col1": "B. [Co(NH₃)5(SO₄)]Br",
-            "col2": "2. Linkage isomerism"
+            "col2": "II. Linkage isomerism"
           },
           {
             "col1": "C. [Co(NH₃)6][Cr(CN)6]",
-            "col2": "3. Ionization isomerism"
+            "col2": "III. Ionization isomerism"
           },
           {
             "col1": "D. [Co(H₂O)6]Cl3",
-            "col2": "4. Coordination isomerism"
+            "col2": "IV. Coordination isomerism"
           }
         ]
       }
@@ -3350,19 +3350,19 @@
         "rows": [
           {
             "col1": "A. Clostridium butylicum",
-            "col2": "—"
+            "col2": "I. Ethanol"
           },
           {
             "col1": "B. Saccharomyces cerevisiae",
-            "col2": "—"
+            "col2": "II. Streptokinase"
           },
           {
             "col1": "C. Trichoderma polysporum",
-            "col2": "—"
+            "col2": "III. Butyric acid"
           },
           {
-            "col1": "D. Streptoccus sp",
-            "col2": "—"
+            "col1": "D. Streptoccus sp.",
+            "col2": "IV. Cyclosporin-A"
           }
         ]
       }
@@ -3570,20 +3570,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Lipase",
-            "col2": "—"
+            "col1": "A. CCK",
+            "col2": "I. Kidney"
           },
           {
-            "col1": "B. Nuclease",
-            "col2": "—"
+            "col1": "B. GIP",
+            "col2": "II. Heart"
           },
           {
-            "col1": "C. Protease",
-            "col2": "—"
+            "col1": "C. ANF",
+            "col2": "III. Gastric gland"
           },
           {
-            "col1": "D. Amylase",
-            "col2": "—"
+            "col1": "D. ADH",
+            "col2": "IV. Pancreas"
           }
         ]
       }
@@ -3627,19 +3627,19 @@
         "rows": [
           {
             "col1": "A. Cocaine",
-            "col2": "—"
+            "col2": "I. Effective in sedative surgery"
           },
           {
             "col1": "B. Heroin",
-            "col2": "—"
+            "col2": "II. Cannabis sativa"
           },
           {
             "col1": "C. Morphine",
-            "col2": "—"
+            "col2": "III. Erythroxylum"
           },
           {
             "col1": "D. Marijuana",
-            "col2": "—"
+            "col2": "IV. Papaver somniferum"
           }
         ]
       }
@@ -3749,19 +3749,19 @@
         "rows": [
           {
             "col1": "A. Pleurobrachia",
-            "col2": "—"
+            "col2": "I. Mollusca"
           },
           {
             "col1": "B. Radula",
-            "col2": "—"
+            "col2": "II. Ctenophora"
           },
           {
             "col1": "C. Stomochord",
-            "col2": "—"
+            "col2": "III. Osteichthyes"
           },
           {
             "col1": "D. Air bladder",
-            "col2": "—"
+            "col2": "IV. Hemichordata"
           }
         ]
       }
@@ -3805,19 +3805,19 @@
         "rows": [
           {
             "col1": "A. Diakinesis",
-            "col2": "1. Synaptonemal complex formation"
+            "col2": "I. Synaptonemal complex formation"
           },
           {
             "col1": "B. Pachytene",
-            "col2": "2. Completion of terminalisation of chiasmata"
+            "col2": "II. Completion of terminalisation of chiasmata"
           },
           {
             "col1": "C. Zygotene",
-            "col2": "3. Chromosomes look like thin threads"
+            "col2": "III. Chromosomes look like thin threads"
           },
           {
             "col1": "D. Leptotene",
-            "col2": "4. Appearance of recombination nodules"
+            "col2": "IV. Appearance of recombination nodules"
           }
         ]
       }
@@ -3861,19 +3861,19 @@
         "rows": [
           {
             "col1": "A. Pterophyllum",
-            "col2": "—"
+            "col2": "I. Hag fish"
           },
           {
             "col1": "B. Myxine",
-            "col2": "—"
+            "col2": "II. Saw fish"
           },
           {
             "col1": "C. Pristis",
-            "col2": "—"
+            "col2": "III. Angel fish"
           },
           {
             "col1": "D. Exocoetus",
-            "col2": "—"
+            "col2": "IV. Flying fish"
           }
         ]
       }
@@ -3917,19 +3917,19 @@
         "rows": [
           {
             "col1": "A. Mesozoic Era",
-            "col2": "—"
+            "col2": "I. Lower invertebrates"
           },
           {
             "col1": "B. Proterozoic Era",
-            "col2": "—"
+            "col2": "II. Fish & Amphibia"
           },
           {
             "col1": "C. Cenozoic Era",
-            "col2": "—"
+            "col2": "III. Birds & Reptiles"
           },
           {
             "col1": "D. Paleozoic Era",
-            "col2": "—"
+            "col2": "IV. Mammals"
           }
         ]
       }
@@ -4138,19 +4138,19 @@
         "rows": [
           {
             "col1": "A. Coke",
-            "col2": "1. Atoms are sp3 hybridised"
+            "col2": "I. Atoms are sp³ hybridised"
           },
           {
             "col1": "B. Diamond",
-            "col2": "2. Used as a dry lubricant"
+            "col2": "II. Used as a dry lubricant"
           },
           {
             "col1": "C. Fullerene",
-            "col2": "3. Used as a reducing agent"
+            "col2": "III. Used as a reducing agent"
           },
           {
             "col1": "D. Graphite",
-            "col2": "4. Cage like molecules"
+            "col2": "IV. Cage-like molecules"
           }
         ]
       }
@@ -4491,19 +4491,19 @@
         "rows": [
           {
             "col1": "A. Peroxodisulphuric acid",
-            "col2": "—"
+            "col2": "I. Contains S–O–O–S bond"
           },
           {
             "col1": "B. Sulphuric acid",
-            "col2": "—"
+            "col2": "II. Contains S–O–S bond"
           },
           {
             "col1": "C. Pyrosulphuric acid",
-            "col2": "—"
+            "col2": "III. Contains only S–OH bonds"
           },
           {
             "col1": "D. Sulphurous acid",
-            "col2": "—"
+            "col2": "IV. Contains no S=O (peroxy) bond"
           }
         ]
       }
@@ -4943,19 +4943,19 @@
         "rows": [
           {
             "col1": "A. Oxidative decarboxylation",
-            "col2": "1. Citrate synthase"
+            "col2": "I. Citrate synthase"
           },
           {
             "col1": "B. Glycolysis",
-            "col2": "2. Pyruvate dehydrogenase"
+            "col2": "II. Pyruvate dehydrogenase"
           },
           {
             "col1": "C. Oxidative phosphorylation",
-            "col2": "3. Electron transport system"
+            "col2": "III. Electron transport system"
           },
           {
             "col1": "D. Tricarboxylic acid cycle",
-            "col2": "4. EMP pathway"
+            "col2": "IV. EMP pathway"
           }
         ]
       }
@@ -4999,19 +4999,19 @@
         "rows": [
           {
             "col1": "A. Cohesion",
-            "col2": "1. More attraction in liquid phase"
+            "col2": "I. More attraction in liquid phase than vapour"
           },
           {
             "col1": "B. Adhesion",
-            "col2": "2. Mutual attraction among water molecules"
+            "col2": "II. Mutual attraction among water molecules"
           },
           {
             "col1": "C. Surface tension",
-            "col2": "3. Water loss in liquid phase"
+            "col2": "III. Water loss in liquid phase"
           },
           {
             "col1": "D. Guttation",
-            "col2": "4. Attraction towards polar surfaces"
+            "col2": "IV. Attraction towards polar surfaces"
           }
         ]
       }
@@ -5088,19 +5088,19 @@
         "rows": [
           {
             "col1": "A. Heroin",
-            "col2": "1. Effect on cardiovascular system"
+            "col2": "I. Effect on cardiovascular system"
           },
           {
             "col1": "B. Marijuana",
-            "col2": "2. Slow down body function"
+            "col2": "II. Slow down body function"
           },
           {
             "col1": "C. Cocaine",
-            "col2": "3. Painkiller"
+            "col2": "III. Painkiller"
           },
           {
             "col1": "D. Morphine",
-            "col2": "4. Interfere with transport of dopamine"
+            "col2": "IV. Interfere with transport of dopamine"
           }
         ]
       }
@@ -7288,20 +7288,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. CO",
-            "col2": "1. Basic"
+            "col1": "a. CO",
+            "col2": "i. Basic"
           },
           {
-            "col1": "B. BaO",
-            "col2": "2. Neutral"
+            "col1": "b. BaO",
+            "col2": "ii. Neutral"
           },
           {
-            "col1": "C. Al2O3",
-            "col2": "3. Acidic"
+            "col1": "c. Al₂O₃",
+            "col2": "iii. Amphoteric"
           },
           {
-            "col1": "D. Cl2O7 Nature:",
-            "col2": "4. Amphoteric"
+            "col1": "d. Cl₂O₇",
+            "col2": "iv. Acidic"
           }
         ]
       }
@@ -34445,8 +34445,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. (See table below)",
-            "col2": "—"
+            "col1": "A. XeF₆",
+            "col2": "1. Square pyramidal"
+          },
+          {
+            "col1": "B. XeO₃",
+            "col2": "2. Square planar"
+          },
+          {
+            "col1": "C. XeOF₄",
+            "col2": "3. Pyramidal"
+          },
+          {
+            "col1": "D. XeF₄",
+            "col2": "4. Distorted octahedral"
           }
         ]
       }

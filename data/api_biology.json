@@ -464,25 +464,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List I with List II",
+        "question_stem": "Match",
         "col1_header": "Column I – Plant name",
         "col2_header": "Column II – Plant name and Type of inflorescence",
         "rows": [
           {
             "col1": "A. Mustard",
-            "col2": "—"
+            "col2": "I. Umbel"
           },
           {
             "col1": "B. Sunflower",
-            "col2": "—"
+            "col2": "II. Cymose"
           },
           {
-            "col1": "C. Bana",
-            "col2": "—"
+            "col1": "C. Banana",
+            "col2": "III. Capitulum"
           },
           {
             "col1": "D. Coriander",
-            "col2": "—"
+            "col2": "IV. Raceme"
           }
         ]
       }
@@ -632,25 +632,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List I with List II",
+        "question_stem": "Match",
         "col1_header": "Column I – Name of the scientist",
         "col2_header": "Column II – Name of the scientist and Discovery",
         "rows": [
           {
             "col1": "A. Alec Jeffreys",
-            "col2": "—"
+            "col2": "I. Semi-conservative replication of DNA"
           },
           {
             "col1": "B. F. Sanger",
-            "col2": "—"
+            "col2": "II. DNA fingerprinting"
           },
           {
             "col1": "C. Jacob and Monod",
-            "col2": "—"
+            "col2": "III. Sequencing of insulin"
           },
           {
             "col1": "D. Meselson and Stahl",
-            "col2": "—"
+            "col2": "IV. Lac operon model"
           }
         ]
       }
@@ -1003,25 +1003,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List I with List II",
+        "question_stem": "Match",
         "col1_header": "Column I – Bio",
         "col2_header": "Column II – Bio-control agent and Target pest",
         "rows": [
           {
             "col1": "A. Bacillus thuringiensis",
-            "col2": "—"
+            "col2": "I. Aphids"
           },
           {
             "col1": "B. Trichoderma",
-            "col2": "—"
+            "col2": "II. Insects and arthropods"
           },
           {
             "col1": "C. Baculoviruses",
-            "col2": "—"
+            "col2": "III. Fungal pathogens in plants"
           },
           {
             "col1": "D. Ladybird",
-            "col2": "—"
+            "col2": "IV. Lepidopteran insects (Bt toxin)"
           }
         ]
       }
@@ -1838,25 +1838,25 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "question_stem": "Match List I with List II",
+        "question_stem": "Match",
         "col1_header": "Column I – Type of interaction",
         "col2_header": "Column II – Type of interaction and Example",
         "rows": [
           {
             "col1": "A. Mutualism",
-            "col2": "—"
+            "col2": "I. Orchid on mango tree (epiphyte)"
           },
           {
             "col1": "B. Commensalism",
-            "col2": "—"
+            "col2": "II. Barnacles on whale"
           },
           {
             "col1": "C. Parasitism",
-            "col2": "—"
+            "col2": "III. Cuscuta on hedge plant"
           },
           {
             "col1": "D. Amensalism",
-            "col2": "—"
+            "col2": "IV. Penicillium inhibiting bacteria"
           }
         ]
       }
@@ -7624,19 +7624,19 @@
         "rows": [
           {
             "col1": "A. Two or more alternative forms of a gene",
-            "col2": "—"
+            "col2": "I. Back cross"
           },
           {
             "col1": "B. Cross of progeny F1 with homozygous recessive parent",
-            "col2": "—"
+            "col2": "II. Ploidy"
           },
           {
             "col1": "C. Cross of F1 progeny with any of the parents",
-            "col2": "—"
+            "col2": "III. Alle"
           },
           {
             "col1": "D. Number of chromosome sets in plant",
-            "col2": "—"
+            "col2": "IV. Test cross"
           }
         ]
       }
@@ -8109,19 +8109,19 @@
         "rows": [
           {
             "col1": "A. Non-medicated IUD",
-            "col2": "—"
+            "col2": "I. Multiload 375"
           },
           {
             "col1": "B. Copper releasing IUD",
-            "col2": "—"
+            "col2": "II. Progestonges"
           },
           {
             "col1": "C. Hormone releasing IUD",
-            "col2": "—"
+            "col2": "III. Lippes loop"
           },
           {
             "col1": "D. Implants",
-            "col2": "—"
+            "col2": "IV. LNG-20"
           }
         ]
       }
@@ -8165,19 +8165,19 @@
         "rows": [
           {
             "col1": "A. Pons",
-            "col2": "—"
+            "col2": "I. Provides additional space for Neurons, regulates posture and balance."
           },
           {
             "col1": "B. Hypothalamus",
-            "col2": "—"
+            "col2": "II. Controls respiration and gastric secretions."
           },
           {
             "col1": "C. Medulla",
-            "col2": "—"
+            "col2": "III. Connects different regions of the brain."
           },
           {
             "col1": "D. Cerebellum",
-            "col2": "—"
+            "col2": "IV. Neuro secretory cells"
           }
         ]
       }
@@ -8419,19 +8419,19 @@
         "rows": [
           {
             "col1": "A. Axoneme",
-            "col2": "—"
+            "col2": "I. Centriole"
           },
           {
             "col1": "B. Cartwheel pattern",
-            "col2": "—"
+            "col2": "II. Cilia and flagella"
           },
           {
             "col1": "C. Crista",
-            "col2": "—"
+            "col2": "III. Chromosome"
           },
           {
             "col1": "D. Satellite",
-            "col2": "—"
+            "col2": "IV. Mitochondria"
           }
         ]
       }
@@ -8475,19 +8475,19 @@
         "rows": [
           {
             "col1": "A. Down's syndrome",
-            "col2": "—"
+            "col2": "I. 11th chromosome"
           },
           {
             "col1": "B. α- Thalassemia",
-            "col2": "—"
+            "col2": "II. 'X' chromosome"
           },
           {
             "col1": "C. β-Thalassemia",
-            "col2": "—"
+            "col2": "III. 21st chromosome"
           },
           {
             "col1": "D. Klinefelter's",
-            "col2": "—"
+            "col2": "IV. 16th chromosome"
           }
         ]
       }
@@ -8531,19 +8531,19 @@
         "rows": [
           {
             "col1": "A. RNA polymerase III",
-            "col2": "—"
+            "col2": "I. snRNPs"
           },
           {
             "col1": "B. Termination of transcription",
-            "col2": "—"
+            "col2": "II. Promotor"
           },
           {
             "col1": "C. Splicing of Exons",
-            "col2": "—"
+            "col2": "III. Rho factor"
           },
           {
             "col1": "D. Tata box",
-            "col2": "—"
+            "col2": "IV. SnRNAs, tRNA"
           }
         ]
       }
@@ -8587,19 +8587,19 @@
         "rows": [
           {
             "col1": "A. Unicellular glandular epithelium",
-            "col2": "—"
+            "col2": "I. Salivary glands"
           },
           {
             "col1": "B. Compound epithelium",
-            "col2": "—"
+            "col2": "II. Pancreas"
           },
           {
             "col1": "C. Multicellular glandular epithelium",
-            "col2": "—"
+            "col2": "III. Goblet cells of alimentary canal"
           },
           {
             "col1": "D. Endocrine glandular epithelium",
-            "col2": "—"
+            "col2": "IV. Moist surface of buccal cavity"
           }
         ]
       }
@@ -9402,19 +9402,19 @@
         "rows": [
           {
             "col1": "A. M Phase",
-            "col2": "1. Proteins are synthesized"
+            "col2": "I. Proteins are synthesized"
           },
           {
             "col1": "B. G2 Phase",
-            "col2": "2. Inactive phase"
+            "col2": "II. Inactive phase"
           },
           {
             "col1": "C. Quiescent stage",
-            "col2": "3. Interval between mitosis and initiation of DNA replication"
+            "col2": "III. Interval between mitosis and initiation of DNA replication"
           },
           {
             "col1": "D. G1 Phase",
-            "col2": "4. Equational division"
+            "col2": "IV. Equational division"
           }
         ]
       }
@@ -9458,19 +9458,19 @@
         "rows": [
           {
             "col1": "A. Mutualism",
-            "col2": "1. +"
+            "col2": "I. +, 0"
           },
           {
             "col1": "B. Commensalism",
-            "col2": "2. 0; -"
+            "col2": "II. -, 0"
           },
           {
             "col1": "C. Amensalism",
-            "col2": "3. 0; +"
+            "col2": "III. +, -"
           },
           {
             "col1": "D. Parasitism",
-            "col2": "4. -; +"
+            "col2": "IV. +, +"
           }
         ]
       }
@@ -9646,19 +9646,19 @@
         "rows": [
           {
             "col1": "A. CCK",
-            "col2": "1. Kidney"
+            "col2": "I. Kidney"
           },
           {
             "col1": "B. GIP",
-            "col2": "2. Heart"
+            "col2": "II. Heart"
           },
           {
             "col1": "C. ANF",
-            "col2": "3. Gastric gland"
+            "col2": "III. Gastric gland"
           },
           {
             "col1": "D. ADH",
-            "col2": "4. Pancreas"
+            "col2": "IV. Pancreas"
           }
         ]
       }
@@ -9800,8 +9800,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. (See table below)",
-            "col2": "—"
+            "col1": "A. Lichen (algae + fungus)",
+            "col2": "I. Competition"
+          },
+          {
+            "col1": "B. Cuckoo laying eggs in crow's nest",
+            "col2": "II. Brood parasitism"
+          },
+          {
+            "col1": "C. Fig tree and fig wasp",
+            "col2": "III. Mutualism"
+          },
+          {
+            "col1": "D. Orchid growing on mango tree",
+            "col2": "IV. Commensalism"
           }
         ]
       }
@@ -9911,19 +9923,19 @@
         "rows": [
           {
             "col1": "A. Gene a",
-            "col2": "1. β-galactosidase"
+            "col2": "I. β-galactosidase"
           },
           {
             "col1": "B. Gene y",
-            "col2": "2. Transacetylase"
+            "col2": "II. Transacetylase"
           },
           {
             "col1": "C. Gene i",
-            "col2": "3. Permease"
+            "col2": "III. Permease"
           },
           {
             "col1": "D. Gene z",
-            "col2": "4. Repressor protein"
+            "col2": "IV. Repressor protein"
           }
         ]
       }
@@ -9967,19 +9979,19 @@
         "rows": [
           {
             "col1": "A. Peptic cells",
-            "col2": "1. Mucus"
+            "col2": "I. Mucus"
           },
           {
             "col1": "B. Goblet cells",
-            "col2": "2. Bile juice"
+            "col2": "II. Bile juice"
           },
           {
             "col1": "C. Oxyntic cells",
-            "col2": "3. Proenzyme pepsinogen"
+            "col2": "III. Proenzyme pepsinogen"
           },
           {
             "col1": "D. Hepatic cells",
-            "col2": "4. HCl/intrinsic factor"
+            "col2": "IV. HCl / intrinsic factor"
           }
         ]
       }
@@ -10122,19 +10134,19 @@
         "rows": [
           {
             "col1": "A. Mast cells",
-            "col2": "1. Ciliated epithelium"
+            "col2": "I. Ciliated epithelium"
           },
           {
             "col1": "B. Inner surface of bronchiole",
-            "col2": "2. Areolar connective tissue"
+            "col2": "II. Areolar connective tissue"
           },
           {
             "col1": "C. Blood",
-            "col2": "3. Specialised connective tissue"
+            "col2": "III. Specialised connective tissue"
           },
           {
             "col1": "D. Tubular parts of nephron",
-            "col2": "4. Cuboidal epithelium"
+            "col2": "IV. Cuboidal epithelium"
           }
         ]
       }
@@ -10738,20 +10750,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Spirogyra",
-            "col2": "1. Dominant diploid sporophyte vascular plant, with highly reduced male or female gametophyte"
+            "col1": "a. Spirogyra",
+            "col2": "i. Diplohaplontic"
           },
           {
-            "col1": "B. Fern",
-            "col2": "2. Dominant haploid free-living gametophyte"
+            "col1": "b. Fern",
+            "col2": "ii. Haplontic"
           },
           {
-            "col1": "C. Funaria",
-            "col2": "3. Dominant diploid sporophyte alternating with reduced gametophyte called prothallus"
+            "col1": "c. Funaria",
+            "col2": "iii. Haplodiplontic"
           },
           {
-            "col1": "D. Cycas List-II",
-            "col2": "4. Dominant haploid leafy gametophyte alternating with partially dependent multicellular sporophyte"
+            "col1": "d. Chara",
+            "col2": "iv. Haplobiontic"
           }
         ]
       }
@@ -11718,20 +11730,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Iron",
-            "col2": "1. Photolysis of water"
+            "col1": "a. Iron",
+            "col2": "i. Synthesis of indole acetic acid (auxin)"
           },
           {
-            "col1": "B. Zinc",
-            "col2": "2. Pollen germination"
+            "col1": "b. Zinc",
+            "col2": "ii. Component of nitrogenase"
           },
           {
-            "col1": "C. Boron",
-            "col2": "3. Required for chlorophyll biosynthesis"
+            "col1": "c. Copper",
+            "col2": "iii. Cell elongation and differentiation"
           },
           {
-            "col1": "D. Manganese",
-            "col2": "4. IAA biosynthesis"
+            "col1": "d. Boron",
+            "col2": "iv. Component of cytochrome oxidase"
           }
         ]
       }
@@ -11774,20 +11786,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Inhibitor of catalytic activity",
-            "col2": "1. Ricin"
+            "col1": "a. Inhibitor of catalytic activity",
+            "col2": "i. Glycogen"
           },
           {
-            "col1": "B. Possess peptide bonds",
-            "col2": "2. Malonate"
+            "col1": "b. Possess peptide bonds",
+            "col2": "ii. Malonate"
           },
           {
-            "col1": "C. Cell wall material in fungi",
-            "col2": "3. Chitin"
+            "col1": "c. Cell wall material of fungi",
+            "col2": "iii. Chitin"
           },
           {
-            "col1": "D. Secondary metabolite",
-            "col2": "4. Collagen"
+            "col1": "d. Stored form of carbohydrate in animals",
+            "col2": "iv. Proteins"
           }
         ]
       }
@@ -12127,20 +12139,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Zygotene",
-            "col2": "1. Terminalization"
+            "col1": "a. Zygotene",
+            "col2": "i. Terminalisation of chiasmata"
           },
           {
-            "col1": "B. Pachytene",
-            "col2": "2. Chiasmata"
+            "col1": "b. Pachytene",
+            "col2": "ii. Dissolution of synaptonemal complex"
           },
           {
-            "col1": "C. Diplotene",
-            "col2": "3. Crossing over"
+            "col1": "c. Diplotene",
+            "col2": "iii. Crossing over / recombination nodules"
           },
           {
-            "col1": "D. Diakinesis",
-            "col2": "4. Synapsis"
+            "col1": "d. Diakinesis",
+            "col2": "iv. Synapsis of homologous chromosomes"
           }
         ]
       }
@@ -12216,20 +12228,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Bt cotton",
-            "col2": "1. Gene therapy"
+            "col1": "a. Bt cotton",
+            "col2": "i. Gene therapy"
           },
           {
-            "col1": "B. Adenosine deaminase deficiency",
-            "col2": "2. Cellular defence"
+            "col1": "b. Adenosine deaminase deficiency",
+            "col2": "ii. Human protein-enriched milk"
           },
           {
-            "col1": "C. RNAi",
-            "col2": "3. Detection of HIV infection"
+            "col1": "c. Rosie",
+            "col2": "iii. Vitamin A-enriched grain"
           },
           {
-            "col1": "D. PCR",
-            "col2": "4. Bacillus thuringiensis"
+            "col1": "d. Golden rice",
+            "col2": "iv. Resistance to bollworm"
           }
         ]
       }
@@ -43399,20 +43411,20 @@
         "col2_header": "Column II – Organic acid",
         "rows": [
           {
-            "col1": "A. Aspergillus niger",
-            "col2": "1. Butyric acid"
+            "col1": "a. Aspergillus niger",
+            "col2": "i. Citric acid"
           },
           {
-            "col1": "B. Clostridium butylicum",
-            "col2": "2. Citric acid"
+            "col1": "b. Clostridium butylicum",
+            "col2": "ii. Butyric acid"
           },
           {
-            "col1": "C. Acetobacter aceti",
-            "col2": "3. Lactic acid"
+            "col1": "c. Acetobacter aceti",
+            "col2": "iii. Acetic acid"
           },
           {
-            "col1": "D. Lactobacillus",
-            "col2": "4. Acetic acid"
+            "col1": "d. Lactobacillus",
+            "col2": "iv. Lactic acid"
           }
         ]
       }
@@ -48737,20 +48749,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Artemesia annua",
-            "col2": "1. Henna"
+            "col1": "a. Artemesia annua",
+            "col2": "i. Henna"
           },
           {
-            "col1": "B. Lawsonia inermis",
-            "col2": "2. Anticancer drug"
+            "col1": "b. Lawsonia inermis",
+            "col2": "ii. Vincristine / Vinblastine"
           },
           {
-            "col1": "C. Vinca rosea",
-            "col2": "3. Kattha"
+            "col1": "c. Vinca rosea",
+            "col2": "iii. Artemisin"
           },
           {
-            "col1": "D. Acacia catechu",
-            "col2": "4. Antimalarial drug"
+            "col1": "d. Papaver somniferum",
+            "col2": "iv. Morphine"
           }
         ]
       }
@@ -50021,16 +50033,16 @@
         "col2_header": "Column II – Means of transport",
         "rows": [
           {
-            "col1": "A. Water (i) Colluvial",
-            "col2": "1. Colluvial b. Air"
+            "col1": "a. Water",
+            "col2": "i. Colluvial"
           },
           {
-            "col1": "B. Air (ii) Alluvial",
-            "col2": "2. Alluvial c. Gravity"
+            "col1": "b. Air",
+            "col2": "ii. Alluvial"
           },
           {
-            "col1": "C. Gravity (iii) Eolian",
-            "col2": "3. Eolian"
+            "col1": "c. Gravity",
+            "col2": "iii. Eolian"
           }
         ]
       }
@@ -50137,16 +50149,16 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Aestivation (i) Over wintering",
-            "col2": "1. Over wintering b. Hibernation"
+            "col1": "a. Aestivation",
+            "col2": "i. Over wintering"
           },
           {
-            "col1": "B. Hibernation (ii) Over summer",
-            "col2": "2. Over summer c. Diapause"
+            "col1": "b. Hibernation",
+            "col2": "ii. Over summer"
           },
           {
-            "col1": "C. Diapause (iii) Suspended development in zooplanktons",
-            "col2": "3. Suspended development in zooplanktons"
+            "col1": "c. Diapause",
+            "col2": "iii. Suspended development in zooplanktons"
           }
         ]
       }
@@ -50657,16 +50669,16 @@
         "col2_header": "Column II – Depth of sea water",
         "rows": [
           {
-            "col1": "A. Shallowest depth (i) Brown algae",
-            "col2": "1. Brown algae b. Intermediate depth"
+            "col1": "a. Shallowest depth",
+            "col2": "i. Brown algae"
           },
           {
-            "col1": "B. Intermediate depth (ii) Green algae",
-            "col2": "2. Green algae c. Greatest depth"
+            "col1": "b. Intermediate depth",
+            "col2": "ii. Green algae"
           },
           {
-            "col1": "C. Greatest depth (iii) Red algae",
-            "col2": "3. Red algae"
+            "col1": "c. Greatest depth",
+            "col2": "iii. Red algae"
           }
         ]
       }
@@ -59586,20 +59598,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Solid symbol (i) Carrier of sex linked trait",
-            "col2": "1. Carrier of sex linked trait b. Horizontal line"
+            "col1": "a. Solid symbol",
+            "col2": "i. Carrier of sex-linked trait"
           },
           {
-            "col1": "B. Horizontal line (ii) Offspring between symbols",
-            "col2": "2. Offspring between symbols c. Horizontal line"
+            "col1": "b. Horizontal line (mating)",
+            "col2": "ii. Offspring between symbols"
           },
           {
-            "col1": "C. Horizontal line (iii) Trait to be studied above the symbols",
-            "col2": "3. Trait to be studied above the symbols d. Dot in centre"
+            "col1": "c. Vertical line below mating line",
+            "col2": "iii. Trait expressed (affected)"
           },
           {
-            "col1": "D. Dot in centre (iv) Parents",
-            "col2": "4. Parents"
+            "col1": "d. Half-filled symbol",
+            "col2": "iv. Mating between two individuals"
           }
         ]
       }
@@ -59892,20 +59904,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Dominance",
-            "col2": "1. Many genes govern a single character (b) Codominance"
+            "col1": "a. Dominance",
+            "col2": "i. Many genes govern a single character"
           },
           {
-            "col1": "B. Codominance",
-            "col2": "2. In a heterozygous organism only one alle expresses itself (c) Pleiotropy"
+            "col1": "b. Codominance",
+            "col2": "ii. Expression of only one allele in heterozygous organism"
           },
           {
-            "col1": "C. Pleiotropy",
-            "col2": "3. In a heterozygous organism both alles express themselves fully (d) Polygenic inheritance"
+            "col1": "c. Polygeny",
+            "col2": "iii. Side-by-side full expression of both alleles"
           },
           {
-            "col1": "D. Polygenic inheritance",
-            "col2": "4. A single gene influences many characters"
+            "col1": "d. Pleiotropy",
+            "col2": "iv. Single gene exhibits multiple phenotypic effects"
           }
         ]
       }

@@ -2852,18 +2852,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Bt cotton",
-          "b": "Adenosine deaminase deficiency",
-          "c": "Rosie",
-          "d": "Golden rice"
-        },
-        "col2": {
-          "i": "Gene therapy",
-          "ii": "Human protein-enriched milk",
-          "iii": "Vitamin A-enriched grain",
-          "iv": "Resistance to bollworm"
-        }
+        "question_stem": "1 gram of sodium hydroxide was treated with 25 mL of 0.75 M HCl solution, the mass of sodium hydroxide left unreacted is equal to",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "a. Bt cotton",
+            "col2": "i. Gene therapy"
+          },
+          {
+            "col1": "b. Adenosine deaminase deficiency",
+            "col2": "ii. Human protein-enriched milk"
+          },
+          {
+            "col1": "c. Rosie",
+            "col2": "iii. Vitamin A-enriched grain"
+          },
+          {
+            "col1": "d. Golden rice",
+            "col2": "iv. Resistance to bollworm"
+          }
+        ]
       }
     },
     {
@@ -3268,19 +3277,19 @@
         "rows": [
           {
             "col1": "A. Rhizopus",
-            "col2": "1. Mushroom"
+            "col2": "I. Mushroom"
           },
           {
             "col1": "B. Ustilago",
-            "col2": "2. Smut fungus"
+            "col2": "II. Smut fungus"
           },
           {
             "col1": "C. Puccinia",
-            "col2": "3. Bread mould"
+            "col2": "III. Bread mould"
           },
           {
             "col1": "D. Agaricus",
-            "col2": "4. Rust fungus"
+            "col2": "IV. Rust fungus"
           }
         ]
       }
@@ -3423,19 +3432,19 @@
         "rows": [
           {
             "col1": "A. Typhoid",
-            "col2": "1. Fungus"
+            "col2": "I. Fungus"
           },
           {
             "col1": "B. Leishmaniasis",
-            "col2": "2. Nematode"
+            "col2": "II. Nematode"
           },
           {
             "col1": "C. Ringworm",
-            "col2": "3. Protozoa"
+            "col2": "III. Protozoa"
           },
           {
             "col1": "D. Filariasis",
-            "col2": "4. Bacteria"
+            "col2": "IV. Bacteria"
           }
         ]
       }
@@ -3506,18 +3515,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Heroin",
-          "B": "Marijuana",
-          "C": "Cocaine",
-          "D": "Morphine"
-        },
-        "col2": {
-          "I": "Effect on cardiovascular system",
-          "II": "Slow down body function",
-          "III": "Painkiller",
-          "IV": "Interfere with transport of dopamine"
-        }
+        "question_stem": "Which of the following is not a steroid hormone?",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Heroin",
+            "col2": "I. Effect on cardiovascular system"
+          },
+          {
+            "col1": "B. Marijuana",
+            "col2": "II. Slow down body function"
+          },
+          {
+            "col1": "C. Cocaine",
+            "col2": "III. Painkiller"
+          },
+          {
+            "col1": "D. Morphine",
+            "col2": "IV. Interfere with transport of dopamine"
+          }
+        ]
       }
     },
     {
@@ -3625,19 +3643,19 @@
         "rows": [
           {
             "col1": "A. Expiratory capacity",
-            "col2": "1. Expiratory reserve volume + Tidal volume + Inspiratory reserve volume"
+            "col2": "I. Expiratory reserve volume + Tidal volume + Inspiratory reserve volume"
           },
           {
             "col1": "B. Functional residual capacity",
-            "col2": "2. Tidal volume + Expiratory reserve volume"
+            "col2": "II. Tidal volume + Expiratory reserve volume"
           },
           {
             "col1": "C. Vital capacity",
-            "col2": "3. Tidal volume + Inspiratory reserve volume"
+            "col2": "III. Tidal volume + Inspiratory reserve volume"
           },
           {
             "col1": "D. Inspiratory capacity",
-            "col2": "4. Expiratory reserve volume + Residual volume"
+            "col2": "IV. Expiratory reserve volume + Residual volume"
           }
         ]
       }
@@ -3675,18 +3693,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Lichen (algae + fungus)",
-          "B": "Cuckoo laying eggs in crow's nest",
-          "C": "Fig tree and fig wasp",
-          "D": "Orchid growing on mango tree"
-        },
-        "col2": {
-          "I": "Competition",
-          "II": "Brood parasitism",
-          "III": "Mutualism",
-          "IV": "Commensalism"
-        }
+        "question_stem": "Which of the following factors are favourable for the formation of oxyhaemoglobin in alveoli?",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Lichen (algae + fungus)",
+            "col2": "I. Competition"
+          },
+          {
+            "col1": "B. Cuckoo laying eggs in crow's nest",
+            "col2": "II. Brood parasitism"
+          },
+          {
+            "col1": "C. Fig tree and fig wasp",
+            "col2": "III. Mutualism"
+          },
+          {
+            "col1": "D. Orchid growing on mango tree",
+            "col2": "IV. Commensalism"
+          }
+        ]
       }
     },
     {
@@ -3728,19 +3755,19 @@
         "rows": [
           {
             "col1": "A. α-1 antitrypsin",
-            "col2": "1. Cotton bollworm"
+            "col2": "I. Cotton bollworm"
           },
           {
             "col1": "B. Cry IAb",
-            "col2": "2. ADA deficiency"
+            "col2": "II. ADA deficiency"
           },
           {
             "col1": "C. Cry IAc",
-            "col2": "3. Emphysema"
+            "col2": "III. Emphysema"
           },
           {
             "col1": "D. Enzyme replacement therapy",
-            "col2": "4. Corn borer"
+            "col2": "IV. Corn borer"
           }
         ]
       }
@@ -3817,19 +3844,19 @@
         "rows": [
           {
             "col1": "A. Fibrous joints",
-            "col2": "1. Adjacent vertebrae, limited movement"
+            "col2": "I. Adjacent vertebrae, limited movement"
           },
           {
             "col1": "B. Cartilaginous joints",
-            "col2": "2. Humerus and pectoral girdle, rotational movement"
+            "col2": "II. Humerus and pectoral girdle, rotational movement"
           },
           {
             "col1": "C. Hinge",
-            "col2": "3. Skull, don't allow any movement"
+            "col2": "III. Skull, don't allow any movement"
           },
           {
             "col1": "D. Ball and socket joints",
-            "col2": "4. Knee, help in locomotion"
+            "col2": "IV. Knee, help in locomotion"
           }
         ]
       }
@@ -3873,19 +3900,19 @@
         "rows": [
           {
             "col1": "A. Common cold",
-            "col2": "1. Plasmodium"
+            "col2": "I. Plasmodium"
           },
           {
             "col1": "B. Haemozoin",
-            "col2": "2. Typhoid"
+            "col2": "II. Typhoid"
           },
           {
             "col1": "C. Widal test",
-            "col2": "3. Rhinoviruses"
+            "col2": "III. Rhinoviruses"
           },
           {
             "col1": "D. Allergy",
-            "col2": "4. Dust mites"
+            "col2": "IV. Dust mites"
           }
         ]
       }
@@ -4060,20 +4087,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. The structures used for storing of food",
-            "col2": "1. Gizzard"
+            "col1": "A. The structures used for storing of food.",
+            "col2": "I. Gizzard"
           },
           {
-            "col1": "B. Ring of 6-8 blind tubules at junction of foregut and midgut",
-            "col2": "2. Gastric Caeca"
+            "col1": "B. Ring of 6-8 blind tubules at junction of foregut and midgut.",
+            "col2": "II. Gastric Caeca"
           },
           {
-            "col1": "C. Ring of 100-150 yellow coloured thin filaments at junction of midgut and hindgut",
-            "col2": "3. Malpighian tubules"
+            "col1": "C. Ring of 100-150 yellow coloured thin filaments at junction of midgut and hindgut.",
+            "col2": "III. Malpighian tubules"
           },
           {
-            "col1": "D. The structures used for grinding the food",
-            "col2": "4. Crop"
+            "col1": "D. The structures used for grinding the food.",
+            "col2": "IV. Crop"
           }
         ]
       }
@@ -4117,19 +4144,19 @@
         "rows": [
           {
             "col1": "A. Exophthalmic goiter",
-            "col2": "1. Excess secretion of cortisol, moon face & hyperglycemia"
+            "col2": "I. Excess secretion of cortisol, moon face & hyperglycemia"
           },
           {
             "col1": "B. Acromegaly",
-            "col2": "2. Hypo-secretion of thyroid hormone and stunted growth"
+            "col2": "II. Hypo-secretion of thyroid hormone and stunted growth."
           },
           {
             "col1": "C. Cushing's syndrome",
-            "col2": "3. Hyper secretion of thyroid hormone & protruding eye balls"
+            "col2": "III. Hyper secretion of thyroid hormone & protruding eye balls."
           },
           {
             "col1": "D. Cretinism",
-            "col2": "4. Excessive secretion of growth hormone"
+            "col2": "IV. Excessive secretion of growth hormone."
           }
         ]
       }
@@ -4173,19 +4200,19 @@
         "rows": [
           {
             "col1": "A. P wave",
-            "col2": "1. Heart muscles are electrically silent"
+            "col2": "I. Heart muscles are electrically silent."
           },
           {
             "col1": "B. QRS complex",
-            "col2": "2. Depolarisation of ventricles"
+            "col2": "II. Depolarisation of ventricles."
           },
           {
             "col1": "C. T wave",
-            "col2": "3. Depolarisation of atria"
+            "col2": "III. Depolarisation of atria."
           },
           {
             "col1": "D. T-P gap",
-            "col2": "4. Repolarisation of ventricles"
+            "col2": "IV. Repolarisation of ventricles."
           }
         ]
       }
@@ -4586,18 +4613,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Iron",
-          "b": "Zinc",
-          "c": "Copper",
-          "d": "Boron"
-        },
-        "col2": {
-          "i": "Synthesis of indole acetic acid (auxin)",
-          "ii": "Component of nitrogenase",
-          "iii": "Cell elongation and differentiation",
-          "iv": "Component of cytochrome oxidase"
-        }
+        "question_stem": "The errors in the measurement which arise due to unpredictable fluctuations in temperature and voltage supply are",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "a. Iron",
+            "col2": "i. Synthesis of indole acetic acid (auxin)"
+          },
+          {
+            "col1": "b. Zinc",
+            "col2": "ii. Component of nitrogenase"
+          },
+          {
+            "col1": "c. Copper",
+            "col2": "iii. Cell elongation and differentiation"
+          },
+          {
+            "col1": "d. Boron",
+            "col2": "iv. Component of cytochrome oxidase"
+          }
+        ]
       }
     },
     {
@@ -4633,18 +4669,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Inhibitor of catalytic activity",
-          "b": "Possess peptide bonds",
-          "c": "Cell wall material of fungi",
-          "d": "Stored form of carbohydrate in animals"
-        },
-        "col2": {
-          "i": "Glycogen",
-          "ii": "Malonate",
-          "iii": "Chitin",
-          "iv": "Proteins"
-        }
+        "question_stem": "The venturi-meter works on",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "a. Inhibitor of catalytic activity",
+            "col2": "i. Glycogen"
+          },
+          {
+            "col1": "b. Possess peptide bonds",
+            "col2": "ii. Malonate"
+          },
+          {
+            "col1": "c. Cell wall material of fungi",
+            "col2": "iii. Chitin"
+          },
+          {
+            "col1": "d. Stored form of carbohydrate in animals",
+            "col2": "iv. Proteins"
+          }
+        ]
       }
     },
     {
@@ -4812,18 +4857,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Fourth trophic level",
-          "b": "Third trophic level",
-          "c": "Second trophic level",
-          "d": "First trophic level"
-        },
-        "col2": {
-          "i": "Grass",
-          "ii": "Grasshopper",
-          "iii": "Frog / Snake",
-          "iv": "Lion / Hawk"
-        }
+        "question_stem": "Assertion",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "a. Fourth trophic level",
+            "col2": "i. Grass"
+          },
+          {
+            "col1": "b. Third trophic level",
+            "col2": "ii. Grasshopper"
+          },
+          {
+            "col1": "c. Second trophic level",
+            "col2": "iii. Frog / Snake"
+          },
+          {
+            "col1": "d. First trophic level",
+            "col2": "iv. Lion / Hawk"
+          }
+        ]
       }
     },
     {
@@ -5558,19 +5612,19 @@
         "rows": [
           {
             "col1": "A. Vasectomy",
-            "col2": "1. Oral method"
+            "col2": "I. Oral method"
           },
           {
             "col1": "B. Coitus interruptus",
-            "col2": "2. Barrier method"
+            "col2": "II. Barrier method"
           },
           {
             "col1": "C. Cervical caps",
-            "col2": "3. Surgical method"
+            "col2": "III. Surgical method"
           },
           {
             "col1": "D. Saheli",
-            "col2": "4. Natural method"
+            "col2": "IV. Natural method"
           }
         ]
       }
@@ -5680,19 +5734,19 @@
         "rows": [
           {
             "col1": "A. Cartilaginous Joint",
-            "col2": "1. Found between: Between flat skull bones"
+            "col2": "I. Between flat skull bones"
           },
           {
             "col1": "B. Ball and Socket Joint",
-            "col2": "2. Between adjacent vertebrae"
+            "col2": "II. Between adjacent vertebrae"
           },
           {
             "col1": "C. Fibrous Joint",
-            "col2": "3. Between carpal and metacarpal of thumb"
+            "col2": "III. Between carpal and metacarpal of thumb"
           },
           {
             "col1": "D. Saddle Joint",
-            "col2": "4. Between Humerus and Pectoral girdle"
+            "col2": "IV. Between Humerus and Pectoral girdle"
           }
         ]
       }
@@ -5769,19 +5823,19 @@
         "rows": [
           {
             "col1": "A. Taenia",
-            "col2": "1. Nephridia"
+            "col2": "I. Nephridia"
           },
           {
             "col1": "B. Paramoecium",
-            "col2": "2. Contractile vacuole"
+            "col2": "II. Contractile vacuole"
           },
           {
             "col1": "C. Periplaneta",
-            "col2": "3. Flame cells"
+            "col2": "III. Flame cells"
           },
           {
             "col1": "D. Pheretima",
-            "col2": "4. Urecose gland"
+            "col2": "IV. Urecose gland"
           }
         ]
       }
@@ -7238,18 +7292,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Cohesion",
-          "B": "Adhesion",
-          "C": "Surface tension",
-          "D": "Guttation"
-        },
-        "col2": {
-          "I": "More attraction in liquid phase than vapour",
-          "II": "Mutual attraction among water molecules",
-          "III": "Water loss in liquid phase",
-          "IV": "Attraction towards polar surfaces"
-        }
+        "question_stem": "Which of the following occurs due to the presence of autosome linked dominant trait ?",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Cohesion",
+            "col2": "I. More attraction in liquid phase than vapour"
+          },
+          {
+            "col1": "B. Adhesion",
+            "col2": "II. Mutual attraction among water molecules"
+          },
+          {
+            "col1": "C. Surface tension",
+            "col2": "III. Water loss in liquid phase"
+          },
+          {
+            "col1": "D. Guttation",
+            "col2": "IV. Attraction towards polar surfaces"
+          }
+        ]
       }
     },
     {
@@ -8214,20 +8277,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. Gregarious, polyphagous pest",
-            "col2": "1. Asterias"
+            "col1": "a. Gregarious, polyphagous pest",
+            "col2": "i. Silkworm moth"
           },
           {
-            "col1": "B. Adult with radial symmetry and larva with bilateral symmetry",
-            "col2": "2. Scorpion"
+            "col1": "b. Monophagous pest",
+            "col2": "ii. Cockroach"
           },
           {
-            "col1": "C. Book lungs",
-            "col2": "3. Ctenoplana"
+            "col1": "c. Haematophagous",
+            "col2": "iii. Locust"
           },
           {
-            "col1": "D. Bioluminescence Column-11",
-            "col2": "4. Locusta"
+            "col1": "d. Omnivorous pest",
+            "col2": "iv. Mosquito"
           }
         ]
       }
@@ -8529,18 +8592,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Bacillus thuringiensis",
-          "b": "Thermus aquaticus",
-          "c": "Agrobacterium tumefaciens",
-          "d": "Salmonella typhimurium"
-        },
-        "col2": {
-          "i": "Cloning vector Ti plasmid",
-          "ii": "Insect resistance in plants",
-          "iii": "Ames test (carcinogenicity)",
-          "iv": "Taq polymerase"
-        }
+        "question_stem": "Match the organism with its use in biotechnology. (a) Bacillus thuringiensis (b) Thermus aquaticus (c) Agrobacterium tumefaciens (d) Salmonella typhimurium (i) Cloning vector (ii) Construction of first rDNA molecule (iii) DNA polymerase (iv) Cry proteins",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "a. Bacillus thuringiensis",
+            "col2": "i. Cloning vector Ti plasmid"
+          },
+          {
+            "col1": "b. Thermus aquaticus",
+            "col2": "ii. Insect resistance in plants"
+          },
+          {
+            "col1": "c. Agrobacterium tumefaciens",
+            "col2": "iii. Ames test (carcinogenicity)"
+          },
+          {
+            "col1": "d. Salmonella typhimurium",
+            "col2": "iv. Taq polymerase"
+          }
+        ]
       }
     },
     {
@@ -9340,20 +9412,20 @@
         "col2_header": "Column II",
         "rows": [
           {
-            "col1": "A. CO(g)+H₂(g)",
-            "col2": "1. Mg(HCO3)2+Ca(HCO3)2"
+            "col1": "a. CO(g) + H₂(g)",
+            "col2": "i. CaSO₄ dissolved in water"
           },
           {
-            "col1": "B. Temporary hardness of water",
-            "col2": "2. An electron deficient hydride"
+            "col1": "b. Temporary hardness of water",
+            "col2": "ii. NaHCO₃ + tartaric acid"
           },
           {
-            "col1": "C. B2H6",
-            "col2": "3. Synthesis gas"
+            "col1": "c. Permanent hardness of water",
+            "col2": "iii. Water gas"
           },
           {
-            "col1": "D. H2O2",
-            "col2": "4. Non-planar structure"
+            "col1": "d. Baking powder",
+            "col2": "iv. Ca(HCO₃)₂ dissolved in water"
           }
         ]
       }
@@ -9754,18 +9826,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "CCK",
-          "B": "GIP",
-          "C": "ANF",
-          "D": "ADH"
-        },
-        "col2": {
-          "I": "Kidney",
-          "II": "Heart",
-          "III": "Gastric gland",
-          "IV": "Pancreas"
-        }
+        "question_stem": "A wire of length L, area of cross section A is hanging from a fixed support. The length of the wire changes to L₁ when mass M is suspended from its free en",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. CCK",
+            "col2": "I. Kidney"
+          },
+          {
+            "col1": "B. GIP",
+            "col2": "II. Heart"
+          },
+          {
+            "col1": "C. ANF",
+            "col2": "III. Gastric gland"
+          },
+          {
+            "col1": "D. ADH",
+            "col2": "IV. Pancreas"
+          }
+        ]
       }
     },
     {
@@ -14666,19 +14747,19 @@
         "rows": [
           {
             "col1": "A. ethane",
-            "col2": "1. one σ-bond and two π-bonds"
+            "col2": "I. one σ-bond and two π-bonds"
           },
           {
             "col1": "B. ethene",
-            "col2": "2. two π-bonds"
+            "col2": "II. two π-bonds"
           },
           {
             "col1": "C. carbon molecule, C₂",
-            "col2": "3. one σ-bond"
+            "col2": "III. one σ-bond"
           },
           {
             "col1": "D. ethyne",
-            "col2": "4. one σ-bond and one π-bond"
+            "col2": "IV. one σ-bond and one π-bond"
           }
         ]
       }
@@ -14716,18 +14797,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Peroxodisulphuric acid",
-          "B": "Sulphuric acid",
-          "C": "Pyrosulphuric acid",
-          "D": "Sulphurous acid"
-        },
-        "col2": {
-          "I": "Contains S–O–O–S bond",
-          "II": "Contains S–O–S bond",
-          "III": "Contains only S–OH bonds",
-          "IV": "Contains no S=O (peroxy) bond"
-        }
+        "question_stem": "A compound X contains 32% of A, 20% of B and remaing percentage of",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Peroxodisulphuric acid",
+            "col2": "I. Contains S–O–O–S bond"
+          },
+          {
+            "col1": "B. Sulphuric acid",
+            "col2": "II. Contains S–O–S bond"
+          },
+          {
+            "col1": "C. Pyrosulphuric acid",
+            "col2": "III. Contains only S–OH bonds"
+          },
+          {
+            "col1": "D. Sulphurous acid",
+            "col2": "IV. Contains no S=O (peroxy) bond"
+          }
+        ]
       }
     },
     {
@@ -16446,18 +16536,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Zygotene",
-          "b": "Pachytene",
-          "c": "Diplotene",
-          "d": "Diakinesis"
-        },
-        "col2": {
-          "i": "Terminalisation of chiasmata",
-          "ii": "Dissolution of synaptonemal complex",
-          "iii": "Crossing over / recombination nodules",
-          "iv": "Synapsis of homologous chromosomes"
-        }
+        "question_stem": "Zr (Z = 40) and Hf (Z = 72) have similar atomic and ionic radii because of:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "a. Zygotene",
+            "col2": "i. Terminalisation of chiasmata"
+          },
+          {
+            "col1": "b. Pachytene",
+            "col2": "ii. Dissolution of synaptonemal complex"
+          },
+          {
+            "col1": "c. Diplotene",
+            "col2": "iii. Crossing over / recombination nodules"
+          },
+          {
+            "col1": "d. Diakinesis",
+            "col2": "iv. Synapsis of homologous chromosomes"
+          }
+        ]
       }
     },
     {
@@ -16625,18 +16724,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Oxidative decarboxylation",
-          "B": "Glycolysis",
-          "C": "Oxidative phosphorylation",
-          "D": "Tricarboxylic acid cycle"
-        },
-        "col2": {
-          "I": "Citrate synthase",
-          "II": "Pyruvate dehydrogenase",
-          "III": "Electron transport system",
-          "IV": "EMP pathway"
-        }
+        "question_stem": "A cylinder contains hydrogen gas at pressure of 249 kPa and temperature 27∘C Its density is: (R=8.3 J mol−1K−1)",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Oxidative decarboxylation",
+            "col2": "I. Citrate synthase"
+          },
+          {
+            "col1": "B. Glycolysis",
+            "col2": "II. Pyruvate dehydrogenase"
+          },
+          {
+            "col1": "C. Oxidative phosphorylation",
+            "col2": "III. Electron transport system"
+          },
+          {
+            "col1": "D. Tricarboxylic acid cycle",
+            "col2": "IV. EMP pathway"
+          }
+        ]
       }
     },
     {
@@ -16705,18 +16813,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "M Phase",
-          "B": "G2 Phase",
-          "C": "Quiescent stage",
-          "D": "G1 Phase"
-        },
-        "col2": {
-          "I": "Proteins are synthesized",
-          "II": "Inactive phase",
-          "III": "Interval between mitosis and initiation of DNA replication",
-          "IV": "Equational division"
-        }
+        "question_stem": "A screw gauge has least count of 0.01 mm and there are 50 divisions in its circular scale. The pitch of the screw gauge is:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. M Phase",
+            "col2": "I. Proteins are synthesized"
+          },
+          {
+            "col1": "B. G2 Phase",
+            "col2": "II. Inactive phase"
+          },
+          {
+            "col1": "C. Quiescent stage",
+            "col2": "III. Interval between mitosis and initiation of DNA replication"
+          },
+          {
+            "col1": "D. G1 Phase",
+            "col2": "IV. Equational division"
+          }
+        ]
       }
     },
     {
@@ -16752,18 +16869,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Mutualism",
-          "B": "Commensalism",
-          "C": "Amensalism",
-          "D": "Parasitism"
-        },
-        "col2": {
-          "I": "+, 0",
-          "II": "-, 0",
-          "III": "+, -",
-          "IV": "+, +"
-        }
+        "question_stem": "In a guitar, two strings A and B made of same material are slightly out of tune and produce beats of frequency 6 Hz. When tension in B is slightly decreased, the beat frequency increases to 7 Hz. If the frequency of A is 530 Hz, the original frequency of B will be:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Mutualism",
+            "col2": "I. +, 0"
+          },
+          {
+            "col1": "B. Commensalism",
+            "col2": "II. -, 0"
+          },
+          {
+            "col1": "C. Amensalism",
+            "col2": "III. +, -"
+          },
+          {
+            "col1": "D. Parasitism",
+            "col2": "IV. +, +"
+          }
+        ]
       }
     },
     {
@@ -17162,18 +17288,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Peptic cells",
-          "B": "Goblet cells",
-          "C": "Oxyntic cells",
-          "D": "Hepatic cells"
-        },
-        "col2": {
-          "I": "Mucus",
-          "II": "Bile juice",
-          "III": "Proenzyme pepsinogen",
-          "IV": "HCl / intrinsic factor"
-        }
+        "question_stem": "A capillary tube of radius r is immersed in water and water rises in it to a height h. The mass of the water in the capillary is 5 g. Another capillary tube of radius 2r is immersed in water. The mass of water that will rise in this tube is:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Peptic cells",
+            "col2": "I. Mucus"
+          },
+          {
+            "col1": "B. Goblet cells",
+            "col2": "II. Bile juice"
+          },
+          {
+            "col1": "C. Oxyntic cells",
+            "col2": "III. Proenzyme pepsinogen"
+          },
+          {
+            "col1": "D. Hepatic cells",
+            "col2": "IV. HCl / intrinsic factor"
+          }
+        ]
       }
     },
     {
