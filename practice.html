@@ -3,101 +3,131 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Practice Questions — neetminds | Train by Pattern & Chapter</title>
-<meta name="description" content="Filter NEET questions by subject, pattern type, and difficulty. Practice Memory Test, Negative Charge, Concept Guru and more — one question at a time.">
-<meta property="og:title" content="Practice Questions — neetminds | Train by Pattern & Chapter">
-<meta property="og:description" content="Filter NEET questions by subject, pattern type, and difficulty. Practice Memory Test, Negative Charge, Concept Guru and more — one question at a time.">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/nav.css">
+<title>Practice Questions — neetminds™ | Train by Pattern & Chapter</title>
+<meta name="description" content="NEET is a pattern problem. Practise all 6 question patterns — Memory Test, Concept Guru, Negative Charge and more — with 6,154 mapped questions."/>
+<meta property="og:title" content="Practice Questions — neetminds™"/>
+<meta property="og:description" content="NEET is a pattern problem. Learn to recognise all 6."/>
+<meta property="og:image" content="neetminds-og.png"/>
+<meta name="twitter:card" content="summary_large_image"/>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/nav.css"/>
 <style>
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+*, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+html, body { font-family:'DM Sans',sans-serif; background:#FAFAF8; color:var(--c-ink); min-height:100vh; overflow-x:hidden; }
 
-html, body {
-  font-family: 'DM Sans', sans-serif;
-  background: #FAFAF8;
-  color: #1A1208;
-  min-height: 100vh;
-  width: 100%;
-  max-width: 100%;
-  overflow-x: hidden;
+/* ── SESSION HUD  (#P4) ─────────────────────────────── */
+.session-hud {
+  display:flex; align-items:center; gap:16px; flex-wrap:wrap;
+  padding:10px 20px; background:#fff;
+  border-bottom:1.5px solid var(--c-border);
+  font-size:.78rem; font-weight:600; color:var(--c-ink-muted);
 }
+.hud-stat { display:flex; align-items:center; gap:5px; }
+.hud-val  { font-family:'Fraunces',serif; font-size:1rem; font-weight:900; color:var(--c-ink); }
+.hud-val.green { color:var(--c-success); }
+.hud-sep  { color:var(--c-border); font-size:1rem; }
+.hud-pattern-tag {
+  margin-left:auto; background:var(--c-brand-pale);
+  border:1px solid var(--c-brand-bdr,#FFD4B3); border-radius:var(--r-full);
+  padding:3px 12px; font-size:.72rem; font-weight:700; color:var(--c-brand);
+}
+@media(max-width:500px){ .hud-pattern-tag { display:none; } }
 
-/* PAGE HEADER */
+/* ── PAGE HEADER ────────────────────────────────────── */
 .page-header {
-  background: linear-gradient(135deg, #FFF0E6 0%, #fff8f3 100%);
-  border-bottom: 1.5px solid #F0E8DE;
-  padding: 2rem 20px 1.6rem;
+  background:linear-gradient(135deg,#FFF0E6 0%,#FFFDF9 100%);
+  border-bottom:1.5px solid var(--c-border);
+  padding:28px 20px 22px;
 }
-.page-header h1 {
-  font-family: 'Fraunces', serif;
-  font-size: clamp(1.5rem, 4vw, 2.2rem);
-  font-weight: 900;
-  letter-spacing: -0.02em;
-  color: #1A1208;
-}
-.page-header p { margin-top: 4px; color: #6B5C45; font-size: 0.88rem; }
+.page-header h1 { font-family:'Fraunces',serif; font-size:var(--fs-h1); font-weight:900; letter-spacing:-0.02em; color:var(--c-ink); }
+.page-header p { margin-top:4px; color:var(--c-ink-muted); font-size:.88rem; }
 
-/* FILTERS */
-.filters {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  padding: 14px 20px;
-  background: #fff;
-  border-bottom: 1.5px solid #F0E8DE;
-  width: 100%;
+/* ── FILTERS  (#P3 — visual filter bar with helper text) ── */
+.filter-bar {
+  background:#fff; border-bottom:1.5px solid var(--c-border);
+  padding:14px 20px;
 }
-
+.filter-hint {
+  font-size:.73rem; color:var(--c-ink-muted); margin-bottom:10px;
+  display:flex; align-items:center; gap:6px;
+}
+.filter-hint .tip { background:var(--c-brand-pale); border-radius:var(--r-full); padding:2px 10px; color:var(--c-brand); font-weight:700; font-size:.7rem; }
+.filters { display:flex; flex-wrap:wrap; gap:8px; }
 .filters select {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.85rem;
-  font-weight: 500;
-  color: #1A1208;
-  background: #FAFAF8;
-  border: 1.5px solid #F0E8DE;
-  border-radius: 100px;
-  padding: 8px 32px 8px 14px;
-  cursor: pointer;
-  outline: none;
-  appearance: none;
-  -webkit-appearance: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
-  background-repeat: no-repeat;
-  background-position: right 12px center;
-  transition: border-color 0.15s;
-  max-width: 100%;
+  font-family:'DM Sans',sans-serif; font-size:.83rem; font-weight:500; color:var(--c-ink);
+  background:#FAFAF8; border:1.5px solid var(--c-border); border-radius:var(--r-full);
+  padding:8px 32px 8px 14px; cursor:pointer; outline:none;
+  appearance:none; -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat:no-repeat; background-position:right 12px center; transition:border-color .15s;
 }
+.filters select:hover, .filters select:focus { border-color:var(--c-brand-mid); }
 
-.filters select:hover,
-.filters select:focus { border-color: #FF6B1A; }
+/* ── Q COUNT ─────────────────────────────────────────── */
+.q-count-bar { padding:8px 20px; background:#fff; border-bottom:1.5px solid var(--c-border); font-size:.78rem; color:var(--c-ink-muted); font-weight:500; }
 
-/* Q-COUNT BAR */
-.q-count-bar {
-  padding: 10px 20px;
-  background: #fff;
-  border-bottom: 1.5px solid #F0E8DE;
-  font-size: 0.8rem;
-  color: #6B5C45;
-  font-weight: 500;
+/* ── ONBOARDING CARD  (#P1 — rich empty state) ──────── */
+.onboard-card {
+  max-width:680px; margin:32px auto; padding:0 20px;
 }
-
-/* QUESTIONS AREA */
-#questions-container {
-  max-width: 720px;
-  width: 100%;
-  margin: 0 auto;
-  padding: 20px 20px 80px;
+.onboard-inner {
+  background:#fff; border:1.5px solid var(--c-border); border-radius:var(--r-lg);
+  padding:28px 28px 24px; box-shadow:var(--shadow-sm);
 }
+.onboard-label { font-size:.72rem; font-weight:700; color:var(--c-brand); text-transform:uppercase; letter-spacing:.1em; margin-bottom:10px; display:flex; align-items:center; gap:6px; }
+.onboard-label::before { content:''; width:6px; height:6px; border-radius:50%; background:var(--c-brand); display:inline-block; }
+.onboard-inner h2 { font-family:'Fraunces',serif; font-size:1.2rem; font-weight:900; margin-bottom:8px; }
+.onboard-inner p { font-size:.88rem; color:var(--c-ink-muted); line-height:1.65; margin-bottom:20px; }
+.onboard-chips { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:20px; }
+.o-chip {
+  background:var(--c-bg); border:1.5px solid var(--c-border); border-radius:var(--r-full);
+  padding:6px 14px; font-size:.78rem; font-weight:600; color:var(--c-ink-muted);
+  cursor:pointer; transition:all .15s; display:flex; align-items:center; gap:5px;
+}
+.o-chip:hover, .o-chip.active { border-color:var(--c-brand); color:var(--c-brand); background:var(--c-brand-pale); }
+.o-chip .badge { background:var(--c-brand); color:#fff; border-radius:var(--r-full); padding:1px 7px; font-size:.65rem; }
+.onboard-start {
+  display:inline-flex; align-items:center; gap:8px;
+  background:var(--c-brand); color:#fff; padding:11px 24px; border-radius:var(--r-sm);
+  font-size:.9rem; font-weight:700; text-decoration:none; transition:all .2s;
+  box-shadow:var(--shadow-cta);
+}
+.onboard-start:hover { background:var(--c-brand-dark); transform:translateY(-1px); }
 
-/* MOBILE */
-@media (max-width: 680px) {
-  .page-header { padding: 1.4rem 16px 1.2rem; }
-  .filters     { padding: 10px 16px; gap: 6px; }
-  .filters select { font-size: 0.8rem; padding: 7px 28px 7px 12px; }
-  .q-count-bar { padding: 8px 16px; }
-  #questions-container { padding: 16px 16px 80px; }
+/* ── SKELETON LOADERS  (#P2) ─────────────────────────── */
+.skeleton { background:linear-gradient(90deg,#F0E8DE 25%,#E8DDD0 50%,#F0E8DE 75%); background-size:200% 100%; animation:shimmer 1.5s infinite; border-radius:var(--r-md); }
+@keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+.skel-card { background:#fff; border:1px solid var(--c-border-sys,#E2E8F0); border-radius:var(--r-md); padding:24px; margin-bottom:16px; box-shadow:var(--shadow-xs); }
+.skel-line { height:14px; margin-bottom:10px; border-radius:4px; }
+.skel-line.s80 { width:80%; } .skel-line.s60 { width:60%; } .skel-line.s40 { width:40%; } .skel-line.s30 { width:30%; }
+.skel-opt { height:44px; border-radius:var(--r-sm); margin-bottom:8px; }
+
+/* ── QUESTIONS AREA ──────────────────────────────────── */
+#questions-container { max-width:720px; width:100%; margin:0 auto; padding:20px 20px 80px; }
+
+/* ── ANSWER REVEAL PATTERN TIP  (#P5) ───────────────── */
+.pattern-tip {
+  background:linear-gradient(135deg,var(--c-brand-pale) 0%,#fff 100%);
+  border:1px solid var(--c-brand-bdr,#FFD4B3); border-radius:var(--r-md);
+  padding:14px 18px; margin-top:10px; font-size:.82rem; line-height:1.6;
+  display:none;
+}
+.pattern-tip strong { color:var(--c-brand); }
+.pattern-tip .next-q-btn {
+  display:inline-flex; align-items:center; gap:6px; margin-top:10px;
+  background:var(--c-brand); color:#fff; padding:8px 18px; border-radius:var(--r-sm);
+  font-size:.82rem; font-weight:700; text-decoration:none; border:none; cursor:pointer;
+  font-family:inherit; transition:background .15s;
+}
+.pattern-tip .next-q-btn:hover { background:var(--c-brand-dark); }
+
+@media(max-width:680px){
+  .page-header  { padding:20px 16px 16px; }
+  .filter-bar   { padding:12px 16px; }
+  .q-count-bar  { padding:6px 16px; }
+  #questions-container { padding:14px 16px 80px; }
+  .onboard-card { margin:20px auto; }
 }
 </style>
 </head>
@@ -109,83 +139,172 @@ html, body {
     <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
     <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock Test</a>
-    <a href="units.html">Units</a>
     <a href="methodology.html">Methodology</a>
-    <a href="mindset.html">Mindset</a>
     <a href="about.html">About</a>
-    <a href="analytics.html">Analytics</a>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+  <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="nav-mobile-menu" id="mmenu">
+<div class="nav-mobile-menu" id="nmenu">
   <a href="index.html">Home</a>
   <a href="practice.html" class="active">Practice</a>
   <a href="mock.html">Mock Test</a>
-  <a href="units.html">Units</a>
   <a href="methodology.html">Methodology</a>
-  <a href="mindset.html">Mindset</a>
   <a href="about.html">About</a>
+  <a href="units.html">Units</a>
+  <a href="mindset.html">Mindset</a>
   <a href="analytics.html">Analytics</a>
+  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
+</div>
+
+<!-- SESSION HUD  (#P4) -->
+<div class="session-hud" id="session-hud" style="display:none;">
+  <div class="hud-stat"><span>Done</span><span class="hud-val" id="hud-done">0</span></div>
+  <span class="hud-sep">·</span>
+  <div class="hud-stat"><span>Correct</span><span class="hud-val green" id="hud-correct">0</span></div>
+  <span class="hud-sep">·</span>
+  <div class="hud-stat"><span>Accuracy</span><span class="hud-val" id="hud-acc">—</span></div>
+  <div class="hud-pattern-tag" id="hud-pattern">All Patterns</div>
 </div>
 
 <div class="page-header">
   <h1>Practice Questions</h1>
-  <p>Filter by subject, pattern or difficulty — one question at a time</p>
+  <p>Filter by pattern, subject or difficulty — each question shows you the strategy after you answer</p>
 </div>
 
-<div class="filters">
-  <select id="filter-subject">
-    <option value="">All Subjects</option>
-    <option value="Biology">Biology</option>
-    <option value="Chemistry">Chemistry</option>
-    <option value="Physics">Physics</option>
-  </select>
-  <select id="filter-pattern">
-    <option value="">All Patterns</option>
-    <option value="memory_test">🎯 Memory Test</option>
-    <option value="negative_charge">⚡ Negative Charge (NOT/EXCEPT)</option>
-    <option value="concept_guru">🌀 Concept Guru (Multi-statement)</option>
-    <option value="diagram_dhamaka">🖼️ Diagram Dhamaka</option>
-    <option value="speed_breaker">⛔ Speed Breaker (Order/Match)</option>
-    <option value="best_choice">🔽 Best Choice (Eliminate)</option>
-  </select>
-  <select id="filter-diff">
-    <option value="">All Levels</option>
-    <option value="L1">L1 — Easy</option>
-    <option value="L2">L2 — Medium</option>
-    <option value="L3">L3 — Hard</option>
-  </select>
+<!-- FILTER BAR  (#P3 — with helper microcopy + recommended badge) -->
+<div class="filter-bar">
+  <div class="filter-hint">
+    <span class="tip">💡 Recommended</span>
+    Start with Memory Test — it's ~45% of the exam. Get these right first.
+  </div>
+  <div class="filters">
+    <select id="filter-subject">
+      <option value="">All Subjects</option>
+      <option value="Biology">🌿 Biology</option>
+      <option value="Chemistry">🧪 Chemistry</option>
+      <option value="Physics">⚛️ Physics</option>
+    </select>
+    <select id="filter-pattern">
+      <option value="memory_test">🎯 Memory Test — 45% of NEET</option>
+      <option value="">All Patterns</option>
+      <option value="negative_charge">⚡ Negative Charge</option>
+      <option value="concept_guru">🌀 Concept Guru</option>
+      <option value="diagram_dhamaka">🖼️ Diagram Dhamaka</option>
+      <option value="speed_breaker">⛔ Speed Breaker</option>
+      <option value="best_choice">🔽 Best Choice</option>
+    </select>
+    <select id="filter-diff">
+      <option value="">All Levels</option>
+      <option value="L1">L1 — Easy</option>
+      <option value="L2">L2 — Medium</option>
+      <option value="L3">L3 — Hard</option>
+    </select>
+  </div>
 </div>
 
-<div class="q-count-bar" id="q-count">Loading...</div>
-<div id="questions-container">
-  <p style="text-align:center;padding:60px 0;color:#6B5C45;">Loading questions...</p>
+<div class="q-count-bar" id="q-count">Loading questions…</div>
+
+<!-- ONBOARDING CARD  (#P1 — rich empty / suggested start state) -->
+<div class="onboard-card" id="onboard-card">
+  <div class="onboard-inner">
+    <div class="onboard-label">Recommended Starting Point</div>
+    <h2>Begin with Memory Test — Biology</h2>
+    <p>Memory Test questions are direct factual recall from NCERT. They make up ~45% of all NEET questions. Mastering these first gives you the fastest score gain. The filter is already set — just hit Start.</p>
+    <div class="onboard-chips">
+      <span class="o-chip active">🎯 Memory Test <span class="badge">45%</span></span>
+      <span class="o-chip">⚡ Negative Charge</span>
+      <span class="o-chip">🌀 Concept Guru</span>
+      <span class="o-chip">⛔ Speed Breaker</span>
+    </div>
+    <a href="#" class="onboard-start" onclick="dismissOnboard();return false;">Start Practising →</a>
+  </div>
 </div>
+
+<!-- SKELETON LOADERS  (#P2) -->
+<div id="skeleton-area" style="max-width:720px;margin:0 auto;padding:20px 20px 0;display:none;">
+  <div class="skel-card">
+    <div class="skel-line s30 skeleton" style="height:10px;margin-bottom:14px;"></div>
+    <div class="skel-line s80 skeleton"></div>
+    <div class="skel-line s60 skeleton"></div>
+    <div style="margin-top:18px;">
+      <div class="skel-opt skeleton"></div>
+      <div class="skel-opt skeleton"></div>
+      <div class="skel-opt skeleton"></div>
+      <div class="skel-opt skeleton"></div>
+    </div>
+  </div>
+  <div class="skel-card">
+    <div class="skel-line s40 skeleton" style="height:10px;margin-bottom:14px;"></div>
+    <div class="skel-line s80 skeleton"></div>
+    <div class="skel-line s60 skeleton" style="width:70%;"></div>
+    <div style="margin-top:18px;">
+      <div class="skel-opt skeleton"></div>
+      <div class="skel-opt skeleton"></div>
+      <div class="skel-opt skeleton"></div>
+      <div class="skel-opt skeleton"></div>
+    </div>
+  </div>
+</div>
+
+<div id="questions-container"></div>
 
 <footer class="neeto-footer">
   <div class="footer-brand">
-    <img src="neetminds-logo.png" style="object-fit:contain;border-radius:0;" alt="neetminds">
-    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span><span style="color:var(--c-brand)">neet</span><span style="color:var(--c-brand-mid)">minds</span><span style="color:var(--c-brand);font-size:.6rem;vertical-align:super;">™</span></span>
   </div>
-  <p>© 2026 neetminds. All rights reserved.</p>
+  <p>Built by MBBS doctors · IIT engineers · Cognitive scientists · Experienced teachers.</p>
 </footer>
 
-<script src="js/app.js?v=1772333228"></script>
 <script>
-function toggleNav() {
-  document.getElementById('mob-nav').classList.toggle('open');
+// ── Session stats (#P4) ────────────────────────────
+var session = { done:0, correct:0 };
+
+function updateHud(patternLabel) {
+  var hud = document.getElementById('session-hud');
+  if (!hud) return;
+  hud.style.display = 'flex';
+  document.getElementById('hud-done').textContent    = session.done;
+  document.getElementById('hud-correct').textContent = session.correct;
+  var acc = session.done > 0 ? Math.round(session.correct/session.done*100)+'%' : '—';
+  document.getElementById('hud-acc').textContent     = acc;
+  if (patternLabel) document.getElementById('hud-pattern').textContent = patternLabel;
 }
-document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav');
-  var b = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
-    m.classList.remove('open');
-});
+
+// ── Skeleton / onboard helpers ─────────────────────
+function showSkeletons() {
+  document.getElementById('skeleton-area').style.display = 'block';
+  document.getElementById('onboard-card').style.display  = 'none';
+}
+function hideSkeletons() {
+  document.getElementById('skeleton-area').style.display = 'none';
+}
+function dismissOnboard() {
+  document.getElementById('onboard-card').style.display = 'none';
+  showSkeletons();
+  setTimeout(hideSkeletons, 800); // skeleton shows briefly then questions appear
+}
+
+// ── Pattern strategy tips (#P5) ───────────────────
+var PATTERN_TIPS = {
+  memory_test:     'This is a <strong>Memory Test</strong> — direct NCERT recall. Speed is the strategy: if you know it, mark immediately. If you don\'t, skip and come back.',
+  concept_guru:    'This is a <strong>Concept Guru</strong> — logic over memory. Evaluate each statement independently before looking at combinations.',
+  negative_charge: 'This is a <strong>Negative Charge</strong> (NOT/EXCEPT). Flip your thinking — you\'re looking for the wrong one. Check every option before committing.',
+  speed_breaker:   'This is a <strong>Speed Breaker</strong> — matching or sequencing. Work systematically: eliminate one wrong pair and half the options disappear.',
+  best_choice:     'This is a <strong>Best Choice</strong> — no obviously wrong option. Use elimination on the weakest options first, then compare survivors.',
+  diagram_dhamaka: 'This is a <strong>Diagram Dhamaka</strong> — train visual recall, not text memory. Label each part as you read and map to the diagram.'
+};
+
+function getPatternTipHTML(pattern) {
+  var tip = PATTERN_TIPS[pattern] || 'Practise naming the pattern before reading options — it saves 60 seconds per question.';
+  return '<div class="pattern-tip" style="display:block;"><strong>Pattern tip:</strong> ' + tip + '</div>';
+}
 </script>
+<script src="js/app.js?v=1772333228"></script>
 </body>
 </html>
