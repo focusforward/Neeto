@@ -335,12 +335,31 @@ function showQuestion(idx) {
 
         ${(function(){
           var mt = q.match_table;
+          var stmts = q.statements;
           var rendered = mt ? renderMatchTable(mt) : null;
+
+          // Match-table question
           if (rendered) {
             var stem = _esc(mt.question_stem || 'Match the following:');
             return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' + stem + '</div>' +
               rendered;
           }
+
+          // Multi-statement question (A. B. C. D. sub-statements)
+          if (stmts && stmts.length >= 2) {
+            var stmtHtml = stmts.map(function(s) {
+              return '<div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;' +
+                'background:#FAFAF8;border-radius:8px;margin-bottom:6px;line-height:1.6;">' +
+                '<span style="font-weight:800;color:#CC3300;flex-shrink:0;min-width:18px;">' + _esc(s.label) + '.</span>' +
+                '<span style="color:#1A1208;font-weight:500;">' + _esc(s.text) + '</span>' +
+                '</div>';
+            }).join('');
+            return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' +
+              _esc(q.question||'') + '</div>' +
+              '<div style="margin-bottom:1rem;">' + stmtHtml + '</div>';
+          }
+
+          // Plain question
           return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">' + _esc(q.question||'') + '</div>';
         })()} 
 
