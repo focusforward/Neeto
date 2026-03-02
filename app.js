@@ -163,7 +163,7 @@ function showLoader(containerId, msg) {
 
 // ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
 // Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
-const DATA_VER = 'v3';
+const DATA_VER = 'v4';
 
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
