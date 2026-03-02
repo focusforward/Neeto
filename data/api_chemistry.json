@@ -87,18 +87,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "CHCl₃ + C₆H₅NH₂",
-          "B": "Crude oil in petroleum industry",
-          "C": "Glycerol from spent-lye",
-          "D": "Aniline water mixture"
-        },
-        "col2": {
-          "I": "Steam distillation",
-          "II": "Vacuum distillation",
-          "III": "Simple distillation",
-          "IV": "Fractional distillation"
-        }
+        "question_stem": "Match List I with List II",
+        "col1_header": "Column I – Mixture",
+        "col2_header": "Column II – Mixture and Method of separation",
+        "rows": [
+          {
+            "col1": "A. CHCl₃+C₆H₅NH₂",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Crude oil in petroleum industry",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Glycerol from spent-lye",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Aniline water",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -391,18 +400,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Haber process",
-          "B": "Wacker oxidation",
-          "C": "Wilkinson catalyst",
-          "D": "Ziegler catalyst"
-        },
-        "col2": {
-          "I": "Iron (Fe)",
-          "II": "TiCl₄ / Al(C₂H₅)₃",
-          "III": "RhCl(PPh₃)₃",
-          "IV": "PdCl₂"
-        }
+        "question_stem": "Match List-I with List-II",
+        "col1_header": "Column I – Process",
+        "col2_header": "Column II – Process and Catalyst",
+        "rows": [
+          {
+            "col1": "A. Haber process",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Wacker oxidation",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Wilkinson catalyst",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Ziegler catalyst",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -434,18 +452,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Vitamin B₁₂",
-          "B": "Vitamin D",
-          "C": "Vitamin B₂",
-          "D": "Vitamin B₆"
-        },
-        "col2": {
-          "I": "Anaemia / Convulsions",
-          "II": "Pernicious anaemia",
-          "III": "Rickets",
-          "IV": "Ariboflavinosis / Cheilosis"
-        }
+        "question_stem": "Match List-I with List-II",
+        "col1_header": "Column I – Vitamin",
+        "col2_header": "Column II – Vitamin and Deficiency disease",
+        "rows": [
+          {
+            "col1": "A. Vitamin B₁₂",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Vitamin D",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Vitamin B₂",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Vitamin B₆",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -506,18 +533,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Co²⁺",
-          "B": "Mg²⁺",
-          "C": "Pb²⁺",
-          "D": "Al³⁺"
-        },
-        "col2": {
-          "I": "Group I",
-          "II": "Group II",
-          "III": "Group III",
-          "IV": "Group V"
-        }
+        "question_stem": "Match List I with List II",
+        "col1_header": "Column I – Ion",
+        "col2_header": "Column II – Ion and Group Number",
+        "rows": [
+          {
+            "col1": "A. Co²⁺",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Mg²⁺",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Pb²⁺",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Al³⁺",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -839,18 +875,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "XeO₃",
-          "B": "XeF₂",
-          "C": "XeOF₄",
-          "D": "XeF₆"
-        },
-        "col2": {
-          "I": "Square pyramidal",
-          "II": "Linear",
-          "III": "Distorted octahedral",
-          "IV": "Pyramidal"
-        }
+        "question_stem": "Match List-I with List-II",
+        "col1_header": "Column I – Xenon compound",
+        "col2_header": "Column II – Xenon compound and Shape",
+        "rows": [
+          {
+            "col1": "A. XeO₃",
+            "col2": "—"
+          },
+          {
+            "col1": "B. XeF₂",
+            "col2": "—"
+          },
+          {
+            "col1": "C. XeOF₄",
+            "col2": "—"
+          },
+          {
+            "col1": "D. XeF₆",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -882,18 +927,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Humidity",
-          "B": "Alloys",
-          "C": "Amalgams",
-          "D": "Smoke"
-        },
-        "col2": {
-          "I": "Liquid in solid",
-          "II": "Gas in gas",
-          "III": "Solid in solid",
-          "IV": "Solid in gas"
-        }
+        "question_stem": "Match List-I with List-II",
+        "col1_header": "Column I – Example",
+        "col2_header": "Column II – Example and Type of Solution",
+        "rows": [
+          {
+            "col1": "A. Humidity",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Alloys",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Amalgams",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Smoke",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -2646,7 +2700,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Equilibrium",
       "topic": "",
-      "question": "²⁹⁰₈₂X —α→ Y —e⁺→ Z —β⁻→ P —e⁻→ Q. In the nuclear emission stated above, the mass number and atomic number of the product Q respectively are:",
+      "question": "{}_{82}^{290}X\\longrightarrow\\frac{\\alpha}{\\rightarrow Y\\longrightarrow\\frac{e^{+}}\\rightarrow Z\\longrightarrow\\frac{\\beta^{-}}\\rightarrow P\\longrightarrow\\frac{e^{-}}\\rightarrow Q In the nuclear emission stated above, the mass number and atomic number of the product Q respectively, are:",
       "options": {
         "A": "288, 82",
         "B": "286, 81",
@@ -2704,21 +2758,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "a": "Zygotene",
-          "b": "Pachytene",
-          "c": "Diplotene",
-          "d": "Diakinesis"
-        },
-        "col2": {
-          "i": "Terminalisation of chiasmata",
-          "ii": "Dissolution of synaptonemal complex",
-          "iii": "Crossing over / recombination nodules",
-          "iv": "Synapsis of homologous chromosomes"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0054",
@@ -2817,21 +2857,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "a": "Fourth trophic level",
-          "b": "Third trophic level",
-          "c": "Second trophic level",
-          "d": "First trophic level"
-        },
-        "col2": {
-          "i": "Grass",
-          "ii": "Grasshopper",
-          "iii": "Frog / Snake",
-          "iv": "Lion / Hawk"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0062",
@@ -2999,39 +3025,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0078",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Thermodynamics",
-      "topic": "",
-      "question": "In which of the following processes entropy increases? A. A liquid evaporates to vapour; B. Temperature of a crystalline solid lowered from 130 K to 0 K; C. 2NaHCO3(s)→Na₂CO₃(s)+CO₂(g)+H₂O(g); D. Cl₂(g)→2Cl(g)",
-      "options": {
-        "A": "A, C and D",
-        "B": "C and D",
-        "C": "A and C",
-        "D": "A, B and D"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "NEET_UPLOAD_Q0079",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -3097,18 +3090,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "[Co(NH₃)5(NO₂)]Cl₂",
-          "B": "[Co(NH₃)5(SO₄)]Br",
-          "C": "[Co(NH₃)6][Cr(CN)6]",
-          "D": "[Co(H₂O)6]Cl3"
-        },
-        "col2": {
-          "I": "Solvate isomerism",
-          "II": "Linkage isomerism",
-          "III": "Ionization isomerism",
-          "IV": "Coordination isomerism"
-        }
+        "question_stem": "Match List-I with List-II. List-I (Complex): A",
+        "col1_header": "Column I – Complex",
+        "col2_header": "Column II – Type of isomerism",
+        "rows": [
+          {
+            "col1": "A. [Co(NH₃)5(NO₂)]Cl₂",
+            "col2": "1. Solvate isomerism"
+          },
+          {
+            "col1": "B. [Co(NH₃)5(SO₄)]Br",
+            "col2": "2. Linkage isomerism"
+          },
+          {
+            "col1": "C. [Co(NH₃)6][Cr(CN)6]",
+            "col2": "3. Ionization isomerism"
+          },
+          {
+            "col1": "D. [Co(H₂O)6]Cl3",
+            "col2": "4. Coordination isomerism"
+          }
+        ]
       }
     },
     {
@@ -3342,18 +3344,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Clostridium butylicum",
-          "B": "Saccharomyces cerevisiae",
-          "C": "Trichoderma polysporum",
-          "D": "Streptoccus sp."
-        },
-        "col2": {
-          "I": "Ethanol",
-          "II": "Streptokinase",
-          "III": "Butyric acid",
-          "IV": "Cyclosporin-A"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Clostridium butylicum",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Saccharomyces cerevisiae",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Trichoderma polysporum",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Streptoccus sp",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -3554,18 +3565,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Lipase",
-          "B": "Nuclease",
-          "C": "Protease",
-          "D": "Amylase"
-        },
-        "col2": {
-          "I": "Peptide bond",
-          "II": "Ester bond",
-          "III": "Glycosidic bond",
-          "IV": "Phosphodiester bond"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Lipase",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Nuclease",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Protease",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Amylase",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -3601,18 +3621,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Cocaine",
-          "B": "Heroin",
-          "C": "Morphine",
-          "D": "Marijuana"
-        },
-        "col2": {
-          "I": "Effective in sedative surgery",
-          "II": "Cannabis sativa",
-          "III": "Erythroxylum",
-          "IV": "Papaver somniferum"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Cocaine",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Heroin",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Morphine",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Marijuana",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -3714,18 +3743,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Pleurobrachia",
-          "B": "Radula",
-          "C": "Stomochord",
-          "D": "Air bladder"
-        },
-        "col2": {
-          "I": "Mollusca",
-          "II": "Ctenophora",
-          "III": "Osteichthyes",
-          "IV": "Hemichordata"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Pleurobrachia",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Radula",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Stomochord",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Air bladder",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -3761,18 +3799,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Diakinesis",
-          "B": "Pachytene",
-          "C": "Zygotene",
-          "D": "Leptotene"
-        },
-        "col2": {
-          "I": "Synaptonemal complex formation",
-          "II": "Completion of terminalisation of chiasmata",
-          "III": "Chromosomes look like thin threads",
-          "IV": "Appearance of recombination nodules"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Sub phases of prophase I",
+        "col2_header": "Column II – Specific characters",
+        "rows": [
+          {
+            "col1": "A. Diakinesis",
+            "col2": "1. Synaptonemal complex formation"
+          },
+          {
+            "col1": "B. Pachytene",
+            "col2": "2. Completion of terminalisation of chiasmata"
+          },
+          {
+            "col1": "C. Zygotene",
+            "col2": "3. Chromosomes look like thin threads"
+          },
+          {
+            "col1": "D. Leptotene",
+            "col2": "4. Appearance of recombination nodules"
+          }
+        ]
       }
     },
     {
@@ -3808,18 +3855,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Pterophyllum",
-          "B": "Myxine",
-          "C": "Pristis",
-          "D": "Exocoetus"
-        },
-        "col2": {
-          "I": "Hag fish",
-          "II": "Saw fish",
-          "III": "Angel fish",
-          "IV": "Flying fish"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Pterophyllum",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Myxine",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Pristis",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Exocoetus",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -3855,18 +3911,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Mesozoic Era",
-          "B": "Proterozoic Era",
-          "C": "Cenozoic Era",
-          "D": "Paleozoic Era"
-        },
-        "col2": {
-          "I": "Lower invertebrates",
-          "II": "Fish & Amphibia",
-          "III": "Birds & Reptiles",
-          "IV": "Mammals"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Mesozoic Era",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Proterozoic Era",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Cenozoic Era",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Paleozoic Era",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -4035,39 +4100,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0051",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Amines",
-      "topic": "",
-      "question": "Which of the following reactions will NOT give primary amine as the product?",
-      "options": {
-        "A": "CH3CONH2 (Br₂/KOH) -> Product",
-        "B": "CH3CN (1. LiAlH4, 2. H₃O+) -> Product",
-        "C": "CH3NC (1. LiAlH4, 2. H₃O+) -> Product",
-        "D": "CH3CONH2 (1. LiAlH4, 2. H₃O+) -> Product"
-      },
-      "correct_answer": "C",
-      "explanation": "Correct answer is C: CH3NC (1. LiAlH4, 2. H₃O+) -> Product.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "CHE_redoxreactio_2468d9dc5d",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -4100,18 +4132,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Coke",
-          "B": "Diamond",
-          "C": "Fullerene",
-          "D": "Graphite"
-        },
-        "col2": {
-          "I": "Atoms are sp³ hybridised",
-          "II": "Used as a dry lubricant",
-          "III": "Used as a reducing agent",
-          "IV": "Cage-like molecules"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Coke, Diamond, Fullerene, Graphite",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Coke",
+            "col2": "1. Atoms are sp3 hybridised"
+          },
+          {
+            "col1": "B. Diamond",
+            "col2": "2. Used as a dry lubricant"
+          },
+          {
+            "col1": "C. Fullerene",
+            "col2": "3. Used as a reducing agent"
+          },
+          {
+            "col1": "D. Graphite",
+            "col2": "4. Cage like molecules"
+          }
+        ]
       }
     },
     {
@@ -4162,39 +4203,6 @@
       },
       "correct_answer": "D",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0056",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Chemical Kinetics",
-      "topic": "",
-      "question": "Assertion A: A reaction can have zero activation energy. Reasons R: The minimum extra amount of energy absorbed by reactant molecules so that their energy becomes equal to threshold value, is called activation energy.",
-      "options": {
-        "A": "Both A and R are true and R is the correct explanation of A",
-        "B": "Both A and R are true and R is NOT the correct explanation of A",
-        "C": "A is true but R is false",
-        "D": "A is false but R is true"
-      },
-      "correct_answer": "B",
-      "explanation": "Correct answer is B: Both A and R are true and R is NOT the correct explanation of A.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -4287,10 +4295,10 @@
       "topic": "",
       "question": "The correct order of energies of molecular orbitals of N₂ molecule, is",
       "options": {
-        "A": "σ1s<σ∗1s<σ2s<σ∗2s<(π2px=π2py)<σ2p2<(π∗2px=π∗2py)<σ∗2pz",
-        "B": "σ1s<σ∗1s<σ2s<σ∗2s<σ2pz<(π2px=π2py)<(π∗2px=π∗2py)<σ∗2pz",
-        "C": "σ1s<σ∗1s<σ2s<σ∗2s<σ2pz<σ∗2pz<(π2px=π2py)<(π∗2px=π∗2py)",
-        "D": "σ1s<σ∗1s<σ2s<σ∗2s<(π2px=π2py)<(π∗2px=π∗2py)<σ2pz<σ∗2pz"
+        "A": "σ₁ₛ<σ*₁ₛ<σ₂ₛ<σ*₂ₛ<(π₂ₚₓ=π₂ₚᵧ)<σ₂ₚz<(π*₂ₚₓ=π*₂ₚᵧ)<σ*₂ₚz",
+        "B": "σ₁ₛ<σ*₁ₛ<σ₂ₛ<σ*₂ₛ<σ₂ₚz<(π₂ₚₓ=π₂ₚᵧ)<(π*₂ₚₓ=π*₂ₚᵧ)<σ*₂ₚz",
+        "C": "σ₁ₛ<σ*₁ₛ<σ₂ₛ<σ*₂ₛ<σ₂ₚz<σ*₂ₚz<(π₂ₚₓ=π₂ₚᵧ)<(π*₂ₚₓ=π*₂ₚᵧ)",
+        "D": "σ₁ₛ<σ*₁ₛ<σ₂ₛ<σ*₂ₛ<(π₂ₚₓ=π₂ₚᵧ)<(π*₂ₚₓ=π*₂ₚᵧ)<σ₂ₚz<σ*₂ₚz"
       },
       "correct_answer": "A",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -4477,18 +4485,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Peroxodisulphuric acid",
-          "B": "Sulphuric acid",
-          "C": "Pyrosulphuric acid",
-          "D": "Sulphurous acid"
-        },
-        "col2": {
-          "I": "Contains S–O–O–S bond",
-          "II": "Contains S–O–S bond",
-          "III": "Contains only S–OH bonds",
-          "IV": "Contains no S=O (peroxy) bond"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II – Bonds",
+        "rows": [
+          {
+            "col1": "A. Peroxodisulphuric acid",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Sulphuric acid",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Pyrosulphuric acid",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Sulphurous acid",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -4920,18 +4937,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Oxidative decarboxylation",
-          "B": "Glycolysis",
-          "C": "Oxidative phosphorylation",
-          "D": "Tricarboxylic acid cycle"
-        },
-        "col2": {
-          "I": "Citrate synthase",
-          "II": "Pyruvate dehydrogenase",
-          "III": "Electron transport system",
-          "IV": "EMP pathway"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Oxidative decarboxylation",
+            "col2": "1. Citrate synthase"
+          },
+          {
+            "col1": "B. Glycolysis",
+            "col2": "2. Pyruvate dehydrogenase"
+          },
+          {
+            "col1": "C. Oxidative phosphorylation",
+            "col2": "3. Electron transport system"
+          },
+          {
+            "col1": "D. Tricarboxylic acid cycle",
+            "col2": "4. EMP pathway"
+          }
+        ]
       }
     },
     {
@@ -4967,18 +4993,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Cohesion",
-          "B": "Adhesion",
-          "C": "Surface tension",
-          "D": "Guttation"
-        },
-        "col2": {
-          "I": "More attraction in liquid phase than vapour",
-          "II": "Mutual attraction among water molecules",
-          "III": "Water loss in liquid phase",
-          "IV": "Attraction towards polar surfaces"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Cohesion, Adhesion, Surface tension, Guttation",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Cohesion",
+            "col2": "1. More attraction in liquid phase"
+          },
+          {
+            "col1": "B. Adhesion",
+            "col2": "2. Mutual attraction among water molecules"
+          },
+          {
+            "col1": "C. Surface tension",
+            "col2": "3. Water loss in liquid phase"
+          },
+          {
+            "col1": "D. Guttation",
+            "col2": "4. Attraction towards polar surfaces"
+          }
+        ]
       }
     },
     {
@@ -5047,18 +5082,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Heroin",
-          "B": "Marijuana",
-          "C": "Cocaine",
-          "D": "Morphine"
-        },
-        "col2": {
-          "I": "Effect on cardiovascular system",
-          "II": "Slow down body function",
-          "III": "Painkiller",
-          "IV": "Interfere with transport of dopamine"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Heroin, Marijuana, Cocaine, Morphine",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Heroin",
+            "col2": "1. Effect on cardiovascular system"
+          },
+          {
+            "col1": "B. Marijuana",
+            "col2": "2. Slow down body function"
+          },
+          {
+            "col1": "C. Cocaine",
+            "col2": "3. Painkiller"
+          },
+          {
+            "col1": "D. Morphine",
+            "col2": "4. Interfere with transport of dopamine"
+          }
+        ]
       }
     },
     {
@@ -5093,53 +5137,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0174",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Coordination Compounds",
-      "topic": "",
-      "question": "Match List I (P-wave, Q-wave, QRS complex, T-wave) with List II (Atrial/Ventricular Depolarisation/Repolarisation properties).",
-      "options": {
-        "A": "A-III, B-I, C-IV, D-II",
-        "B": "A-IV, B-III, C-II, D-I",
-        "C": "A-II, B-IV, C-I, D-III",
-        "D": "A-I, B-II, C-III, D-IV"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "P-wave",
-          "B": "Q-wave",
-          "C": "QRS complex",
-          "D": "T-wave"
-        },
-        "col2": {
-          "I": "Atrial depolarisation",
-          "II": "Ventricular repolarisation",
-          "III": "Initial ventricular depolarisation",
-          "IV": "Ventricular depolarisation"
-        }
-      }
     },
     {
       "id": "CHE_unclassified_53731b1fa9",
@@ -5307,39 +5304,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0002",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "General Principles and Processes of Isolation of Elements",
-      "topic": "",
-      "question": "Two hollow conducting spheres of radii R₁ and R₂ (R₁>>R₂) have equal charges. The potential would be",
-      "options": {
-        "A": "Dependent on the material property of the sphere",
-        "B": "More on bigger sphere",
-        "C": "More on smaller sphere",
-        "D": "Equal on both the spheres"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "NEET_UPLOAD_Q0011",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -5387,39 +5351,6 @@
       },
       "correct_answer": "B",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0019",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Moving Charges and Magnetism",
-      "topic": "",
-      "question": "Given below are two statements Statement I: Biot-Savart's law gives us the expression for the magnetic field strength of an infinitesimal current element (Idl) of a current carrying conductor only. Statement II: Biot-Savart's law is analogous to Coulomb's inverse square law of charge q, with the former being related to the field produced by a scalar source, Idl while the latter being produced by a vector source, q.",
-      "options": {
-        "A": "Statement I is incorrect and Statement II is correct",
-        "B": "Both Statement I and Statement II are correct",
-        "C": "Both Statement I and Statement II are incorrect",
-        "D": "Statement I is correct and Statement II is incorrect"
-      },
-      "correct_answer": "D",
-      "explanation": "Correct answer is D: Statement I is correct and Statement II is incorrect.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -5835,39 +5766,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0096",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Coordination Compounds",
-      "topic": "",
-      "question": "The order of energy absorbed which is responsible for the color of complexes (",
-      "options": {
-        "A": "(",
-        "B": "> (A) > (",
-        "C": "B) (A) > (B) > (C) C) (C) > (B) > (A)",
-        "D": "(C) > (A) > (B)"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "CHE_hydrogen_1d60232045",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -6046,39 +5944,6 @@
         "D": "About 10%"
       },
       "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0134",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Amines",
-      "topic": "",
-      "question": "Exoskeleton of arthropods is composed of:",
-      "options": {
-        "A": "Glucosamine",
-        "B": "Cutin",
-        "C": "Cellulose",
-        "D": "Chitin"
-      },
-      "correct_answer": "D",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
@@ -6278,53 +6143,6 @@
       },
       "correct_answer": "B",
       "explanation": "Correct answer is B: Both Statement I and Statement II are correct.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Peptic cells",
-          "B": "Goblet cells",
-          "C": "Oxyntic cells",
-          "D": "Hepatic cells"
-        },
-        "col2": {
-          "I": "Mucus",
-          "II": "Bile juice",
-          "III": "Proenzyme pepsinogen",
-          "IV": "HCl / intrinsic factor"
-        }
-      }
-    },
-    {
-      "id": "NEET_UPLOAD_Q0003",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Equilibrium",
-      "topic": "",
-      "question": "Column-l gives certain physical terms associated with flow of current through a metallic conductor. Column-II gives some mathematical relations involving electrical quanties. Match Column-l and Column-II with appropriate relations. Column-l (",
-      "options": {
-        "A": "(A)-(R), (",
-        "B": "-(Q), (",
-        "C": "-(S), (",
-        "D": "-(P) B) (A)-(R), (B)-(S), (C)-(P), (D)-(Q) C) (A)-(R), (B)-(S), (C)-(Q), (D)-(P) D) (A)-(R), (B)-(P), (C)-(S), (D)-(Q)"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -6718,39 +6536,6 @@
         "B": "Cytb6f complex to PS-I",
         "C": "PS-I to NADP+",
         "D": "PS-I to ATP synthase"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0066",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alcohols, Phenols and Ethers",
-      "topic": "",
-      "question": "Which of the following is not an inhibitory substance governing seed dormancy?",
-      "options": {
-        "A": "Gibberellic acid",
-        "B": "Abscisic acid",
-        "C": "Phenolic acid",
-        "D": "Para-ascorbic acid"
       },
       "correct_answer": "A",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -7498,18 +7283,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "CO",
-          "b": "BaO",
-          "c": "Al₂O₃",
-          "d": "Cl₂O₇"
-        },
-        "col2": {
-          "i": "Basic",
-          "ii": "Neutral",
-          "iii": "Amphoteric",
-          "iv": "Acidic"
-        }
+        "question_stem": "Match the following: Oxide",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. CO",
+            "col2": "1. Basic"
+          },
+          {
+            "col1": "B. BaO",
+            "col2": "2. Neutral"
+          },
+          {
+            "col1": "C. Al2O3",
+            "col2": "3. Acidic"
+          },
+          {
+            "col1": "D. Cl2O7 Nature:",
+            "col2": "4. Amphoteric"
+          }
+        ]
       }
     },
     {
@@ -7708,21 +7502,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Cartilaginous Joint",
-          "B": "Ball and Socket Joint",
-          "C": "Fibrous Joint",
-          "D": "Saddle Joint"
-        },
-        "col2": {
-          "I": "Between flat skull bones",
-          "II": "Between adjacent vertebrae",
-          "III": "Between carpal and metacarpal of thumb",
-          "IV": "Between Humerus and Pectoral girdle"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "C6_001",
@@ -12526,7 +12306,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Equilibrium",
       "topic": "",
-      "question": "Identify the major product C formed in the following reaction sequence: CH₃–CH₂–I →(NaCN)→ A →(Partial hydrolysis)→ B →(NaOH/Br₂)→ C (major)",
+      "question": "Identify the major product C formed in the following reaction sequence: CH_{3}-CH_{2}-I\\longrightarrow\\frac{NaCN}{\\rightarrow A \\xrightarrow{Partial~hydrolysis} B \\xrightarrow{NaOH/Br_2} C (major)",
       "options": {
         "A": "butanamide",
         "B": "α-bromobutanoic acid",
@@ -14176,7 +13956,22 @@
         "best_choice"
       ],
       "accuracy_flag": "unverified",
-      "confidence": "medium"
+      "confidence": "medium",
+      "match_table": {
+        "question_stem": "Match items of",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. (b)",
+            "col2": "—"
+          },
+          {
+            "col1": "C. (d)",
+            "col2": "—"
+          }
+        ]
+      }
     },
     {
       "id": "neet2016_chem_059",
@@ -14586,7 +14381,22 @@
         "best_choice"
       ],
       "accuracy_flag": "unverified",
-      "confidence": "medium"
+      "confidence": "medium",
+      "match_table": {
+        "question_stem": "Match the compounds given in",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. (b)",
+            "col2": "—"
+          },
+          {
+            "col1": "C. (d)",
+            "col2": "—"
+          }
+        ]
+      }
     },
     {
       "id": "neet2016_chem_074",
@@ -17895,7 +17705,7 @@
         "D": "Li2"
       },
       "correct_answer": "A",
-      "explanation": "O₂ has 8+8=16 electrons, so distribution of electrons in MO(molecular orbitals) follows the order as (σ1s)2,(σ∗1s)2,(σ2s)2,(σ∗2s)2,(σ2pz)2(π2px)2(π∗2px)1 (π2py)2(π∗2py)1 So, in O₂ molecule, there are two (2) unpaired electrons, so, it is a \"paramagnetic\" substance in nature.",
+      "explanation": "O₂ has 8+8=16 electrons, so distribution of electrons in MO(molecular orbitals) follows the order as (σ₁ₛ)2,(σ*₁ₛ)2,(σ₂ₛ)2,(σ*₂ₛ)2,(σ₂ₚz)2(π₂ₚₓ)2(π*₂ₚₓ)1 (π₂ₚᵧ)2(π*₂ₚᵧ)1 So, in O₂ molecule, there are two (2) unpaired electrons, so, it is a \"paramagnetic\" substance in nature.",
       "ncert_ref": "",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -20049,7 +19859,7 @@
       "unit_code": "",
       "chapter": "Solutions",
       "topic": "Thermodynamics and Equilibrium",
-      "question": "The rate of a first-order reaction is 0.04 mol L⁻¹s⁻¹ at 10 seconds and 0.03 mol L⁻¹s⁻¹ at 20 seconds after initiation of the reaction. The half-life period of the reaction is:",
+      "question": "The rate of a first-order reaction is 0.04 mol l^{-1}s^{-1} at 10 seconds and 0.03 mol l^{-1}s^{-1} at 20 seconds after initiation of the reaction. The half-life period of the reaction is :",
       "options": {
         "A": "24.1 s",
         "B": "34.1 s",
@@ -25665,7 +25475,7 @@
         "D": "1"
       },
       "correct_answer": "A",
-      "explanation": "Atomic number 16 is sulfur (S2). MO configuration: KK σ2s2 σ2s2 σ2pz2 π2px2 π2py2 π2px1 π*2py1. Two unpaired electrons.",
+      "explanation": "Atomic number 16 is sulfur (S2). MO configuration: KK σ₂ₛ2 σ₂ₛ2 σ₂ₚz2 π₂ₚₓ2 π₂ₚᵧ2 π₂ₚₓ1 π*₂ₚᵧ1. Two unpaired electrons.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -26158,7 +25968,7 @@
         "D": "4"
       },
       "correct_answer": "C",
-      "explanation": "N2 = σ1s2, σ1s2, σ2s2, σ2s2, π2px2 = π2py2, σ2pz2. Bonding pairs: σ1s, σ2s, π2px, π2py, σ2pz. Total 5 bonding pairs.",
+      "explanation": "N2 = σ₁ₛ2, σ₁ₛ2, σ₂ₛ2, σ₂ₛ2, π₂ₚₓ2 = π₂ₚᵧ2, σ₂ₚz2. Bonding pairs: σ₁ₛ, σ₂ₛ, π₂ₚₓ, π₂ₚᵧ, σ₂ₚz. Total 5 bonding pairs.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -27061,7 +26871,7 @@
         "D": "In O2- , the O-O bond order decreases"
       },
       "correct_answer": "B",
-      "explanation": "O2 = π*2px1 = π*2py1, paramagnetic. N2 = π2px2 = π2py2, diamagnetic.",
+      "explanation": "O2 = π*₂ₚₓ1 = π*₂ₚᵧ1, paramagnetic. N2 = π₂ₚₓ2 = π₂ₚᵧ2, diamagnetic.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "negative_charge",
@@ -27092,7 +26902,7 @@
         "D": "B2"
       },
       "correct_answer": "C",
-      "explanation": "Be2 does not exist because Be2 = 8 = σ1s2,σ2s2",
+      "explanation": "Be2 does not exist because Be2 = 8 = σ₁ₛ2,σ₂ₛ2",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -27171,7 +26981,7 @@
       "unit_code": "",
       "chapter": "Chemical Bonding and Molecular Structure",
       "topic": "Chemical Bonding and Molecular Structure",
-      "question": "Number of nodal planes in π2px are",
+      "question": "Number of nodal planes in π₂ₚₓ are",
       "options": {
         "A": "Zero",
         "B": "One",
@@ -27782,7 +27592,7 @@
       "unit_code": "",
       "chapter": "Chemical Bonding and Molecular Structure",
       "topic": "Chemical Bonding and Molecular Structure",
-      "question": "The ground state electronic configuration of valence shell electrons in nitrogen molecule (N2) is written as kk, σ2s2, σ*2s2, , σ2px2. Hence the bond order in nitrogen molecule is",
+      "question": "The ground state electronic configuration of valence shell electrons in nitrogen molecule (N2) is written as kk, σ₂ₛ2, σ*₂ₛ2, , σ₂ₚₓ2. Hence the bond order in nitrogen molecule is",
       "options": {
         "A": "2",
         "B": "3",
@@ -27848,7 +27658,7 @@
         "D": "4"
       },
       "correct_answer": "B",
-      "explanation": "O2- = 17 e- = σ1s2, σ1s2, σ2s2, σ2s2, σ2pz2, π2px2 = π2py2, π*2px2 = π*2py1 Number of antibonding electron pairs are 3 (σ1s, σ2s, π*2px).",
+      "explanation": "O2- = 17 e- = σ₁ₛ2, σ₁ₛ2, σ₂ₛ2, σ₂ₛ2, σ₂ₚz2, π₂ₚₓ2 = π₂ₚᵧ2, π*₂ₚₓ2 = π*₂ₚᵧ1 Number of antibonding electron pairs are 3 (σ₁ₛ, σ₂ₛ, π*₂ₚₓ).",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -28604,7 +28414,7 @@
         "D": "σ orbitals"
       },
       "correct_answer": "A",
-      "explanation": "O2 = σ1s2, σ1s2, σ2s2, σ2s2, σ2pz2, π2px2 = π2py2, π*2px1 = π*2py1. O22- adds two electrons, both in the π* orbitals.",
+      "explanation": "O2 = σ₁ₛ2, σ₁ₛ2, σ₂ₛ2, σ₂ₛ2, σ₂ₚz2, π₂ₚₓ2 = π₂ₚᵧ2, π*₂ₚₓ1 = π*₂ₚᵧ1. O22- adds two electrons, both in the π* orbitals.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -33616,33 +33426,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEW_CHE_pBlockElements_0d5d5a91",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "p-Block Elements",
-      "topic": "",
-      "question": "In which of the following molecules, all atoms are coplanar?",
-      "options": {
-        "A": "b.",
-        "C": "d."
-      },
-      "correct_answer": "A",
-      "explanation": "The molecule in which all the carbon atoms are sp²-hybridised will be coplanar. In option (a), all carbons are sp²-hybridised.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "diagram_dhamaka",
-      "pattern_name": "Diagram Dhamaka",
-      "difficulty": "L2",
-      "year": "",
-      "source": "docx_chem_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEW_CHE_ChemicalKinetics_ee97c18b",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -34455,32 +34238,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEW_CHE_AldehydesKetonesA_cf305f8d",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Aldehydes, Ketones And Carboxylic Acids",
-      "topic": "",
-      "question": "Predict the correct intermediate and product in the following reaction:",
-      "options": {
-        "A": "→ Product (B)"
-      },
-      "correct_answer": "A",
-      "explanation": "Answer: d",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "",
-      "source": "docx_chem_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEW_CHE_ChemicalKinetics_fe830bfc",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -34655,49 +34412,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEW_CHE_ChemicalBonding_725ac07c",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Chemical Bonding",
-      "topic": "",
-      "question": "Match List-I with List-II.",
-      "options": {
-        "A": "A-II, B-I, C-IV, D-III",
-        "B": "A-II, B-IV, C-III, D-I",
-        "C": "A-II, B-III, C-I, D-IV",
-        "D": "A-II, B-I, C-IV, D-III"
-      },
-      "correct_answer": "D",
-      "explanation": "XeF₂ - Linear, XeF₄ - Square planar, XeO₃ - Pyramidal, XeOF₄ - Square pyramidal.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Speed Breaker",
-      "difficulty": "L2",
-      "year": "",
-      "source": "docx_chem_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH",
-      "match_table": {
-        "col1": {
-          "A": "XeF₂",
-          "B": "XeF₄",
-          "C": "XeO₃",
-          "D": "XeOF₄"
-        },
-        "col2": {
-          "I": "Square planar",
-          "II": "Linear",
-          "III": "Square pyramidal",
-          "IV": "Pyramidal"
-        }
-      }
-    },
-    {
       "id": "NEW_CHE_ChemicalBonding_16965b24",
       "subject": "Chemistry",
       "unit_code": "UNCLASSIFIED",
@@ -34726,18 +34440,15 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "XeF₆",
-          "B": "XeO₃",
-          "C": "XeOF₄",
-          "D": "XeF₄"
-        },
-        "col2": {
-          "1": "Square pyramidal",
-          "2": "Square planar",
-          "3": "Pyramidal",
-          "4": "Distorted octahedral"
-        }
+        "question_stem": "Match the compounds given in",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. (See table below)",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -35318,7 +35029,18 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "HIGH"
+      "confidence": "HIGH",
+      "match_table": {
+        "question_stem": "Match the metal ions given in",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. (See table below)",
+            "col2": "—"
+          }
+        ]
+      }
     },
     {
       "id": "NEW_CHE_pBlockElements_1ddf5beb",
@@ -35532,10 +35254,10 @@
       "question": "Propionic acid with Br₂/P yields a dibromo product. Its structure would be",
       "options": {
         "A": "CH₂Br-CHBr-COOH",
-        "C": "CH₂Br-CH₂-COBr",
-        "D": "CH₃-CBr₂-COOH"
+        "B": "CH₂Br-CH₂-COBr",
+        "C": "CH₃-CBr₂-COOH"
       },
-      "correct_answer": "D",
+      "correct_answer": "C",
       "explanation": "HVZ reaction: Carboxylic acids with Br₂/red P give α-bromo acids. Propionic acid gives 2-bromopropionic acid, then further bromination gives 2,2-dibromopropionic acid.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
@@ -35710,7 +35432,7 @@
         "D": "O₂"
       },
       "correct_answer": "B",
-      "explanation": "C₂ has configuration: σ1s² σ1s² σ2s² σ2s² π2px² = π2py². The double bond consists of both π-bonds.",
+      "explanation": "C₂ has configuration: σ₁ₛ² σ₁ₛ² σ₂ₛ² σ₂ₛ² π₂ₚₓ² = π₂ₚᵧ². The double bond consists of both π-bonds.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "concept_guru",
@@ -35739,7 +35461,7 @@
         "D": "6"
       },
       "correct_answer": "C",
-      "explanation": "O₂²⁻ has 18 electrons. Configuration: σ1s² σ1s² σ2s² σ2s² σ2pz² π2px² π2py² π2px² π2py². Antibonding electron pairs = 4 (σ1s, σ2s, π2px, π2py).",
+      "explanation": "O₂²⁻ has 18 electrons. Configuration: σ₁ₛ² σ₁ₛ² σ₂ₛ² σ₂ₛ² σ₂ₚz² π₂ₚₓ² π₂ₚᵧ² π₂ₚₓ² π₂ₚᵧ². Antibonding electron pairs = 4 (σ₁ₛ, σ₂ₛ, π₂ₚₓ, π₂ₚᵧ).",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
       "pattern": "concept_guru",

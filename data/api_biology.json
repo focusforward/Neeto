@@ -464,18 +464,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Mustard",
-          "B": "Sunflower",
-          "C": "Banana",
-          "D": "Coriander"
-        },
-        "col2": {
-          "I": "Umbel",
-          "II": "Cymose",
-          "III": "Capitulum",
-          "IV": "Raceme"
-        }
+        "question_stem": "Match List I with List II",
+        "col1_header": "Column I – Plant name",
+        "col2_header": "Column II – Plant name and Type of inflorescence",
+        "rows": [
+          {
+            "col1": "A. Mustard",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Sunflower",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Bana",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Coriander",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -623,18 +632,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Alec Jeffreys",
-          "B": "F. Sanger",
-          "C": "Jacob and Monod",
-          "D": "Meselson and Stahl"
-        },
-        "col2": {
-          "I": "Semi-conservative replication of DNA",
-          "II": "DNA fingerprinting",
-          "III": "Sequencing of insulin",
-          "IV": "Lac operon model"
-        }
+        "question_stem": "Match List I with List II",
+        "col1_header": "Column I – Name of the scientist",
+        "col2_header": "Column II – Name of the scientist and Discovery",
+        "rows": [
+          {
+            "col1": "A. Alec Jeffreys",
+            "col2": "—"
+          },
+          {
+            "col1": "B. F. Sanger",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Jacob and Monod",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Meselson and Stahl",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -985,18 +1003,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Bacillus thuringiensis",
-          "B": "Trichoderma",
-          "C": "Baculoviruses",
-          "D": "Ladybird"
-        },
-        "col2": {
-          "I": "Aphids",
-          "II": "Insects and arthropods",
-          "III": "Fungal pathogens in plants",
-          "IV": "Lepidopteran insects (Bt toxin)"
-        }
+        "question_stem": "Match List I with List II",
+        "col1_header": "Column I – Bio",
+        "col2_header": "Column II – Bio-control agent and Target pest",
+        "rows": [
+          {
+            "col1": "A. Bacillus thuringiensis",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Trichoderma",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Baculoviruses",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Ladybird",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -1811,18 +1838,27 @@
       "accuracy_flag": "ok",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "A": "Mutualism",
-          "B": "Commensalism",
-          "C": "Parasitism",
-          "D": "Amensalism"
-        },
-        "col2": {
-          "I": "Orchid on mango tree (epiphyte)",
-          "II": "Barnacles on whale",
-          "III": "Cuscuta on hedge plant",
-          "IV": "Penicillium inhibiting bacteria"
-        }
+        "question_stem": "Match List I with List II",
+        "col1_header": "Column I – Type of interaction",
+        "col2_header": "Column II – Type of interaction and Example",
+        "rows": [
+          {
+            "col1": "A. Mutualism",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Commensalism",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Parasitism",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Amensalism",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -7582,18 +7618,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Two or more alternative forms of a gene",
-          "B": "Cross of progeny F1 with homozygous recessive parent",
-          "C": "Cross of F1 progeny with any of the parents",
-          "D": "Number of chromosome sets in plant"
-        },
-        "col2": {
-          "I": "Back cross",
-          "II": "Ploidy",
-          "III": "Alle",
-          "IV": "Test cross"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Two or more alternative forms of a gene",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Cross of progeny F1 with homozygous recessive parent",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Cross of F1 progeny with any of the parents",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Number of chromosome sets in plant",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -7792,21 +7837,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "a": "CO(g) + H₂(g)",
-          "b": "Temporary hardness of water",
-          "c": "Permanent hardness of water",
-          "d": "Baking powder"
-        },
-        "col2": {
-          "i": "CaSO₄ dissolved in water",
-          "ii": "NaHCO₃ + tartaric acid",
-          "iii": "Water gas",
-          "iv": "Ca(HCO₃)₂ dissolved in water"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0132",
@@ -7971,21 +8002,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Oxidative decarboxylation",
-          "B": "Glycolysis",
-          "C": "Oxidative phosphorylation",
-          "D": "Tricarboxylic acid cycle"
-        },
-        "col2": {
-          "I": "Citrate synthase",
-          "II": "Pyruvate dehydrogenase",
-          "III": "Electron transport system",
-          "IV": "EMP pathway"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0142",
@@ -8018,21 +8035,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Cohesion",
-          "B": "Adhesion",
-          "C": "Surface tension",
-          "D": "Guttation"
-        },
-        "col2": {
-          "I": "More attraction in liquid phase than vapour",
-          "II": "Mutual attraction among water molecules",
-          "III": "Water loss in liquid phase",
-          "IV": "Attraction towards polar surfaces"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0145",
@@ -8100,18 +8103,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Non-medicated IUD",
-          "B": "Copper releasing IUD",
-          "C": "Hormone releasing IUD",
-          "D": "Implants"
-        },
-        "col2": {
-          "I": "Multiload 375",
-          "II": "Progestonges",
-          "III": "Lippes loop",
-          "IV": "LNG-20"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Non-medicated IUD",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Copper releasing IUD",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Hormone releasing IUD",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Implants",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -8147,18 +8159,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Pons",
-          "B": "Hypothalamus",
-          "C": "Medulla",
-          "D": "Cerebellum"
-        },
-        "col2": {
-          "I": "Provides additional space for Neurons, regulates posture and balance.",
-          "II": "Controls respiration and gastric secretions.",
-          "III": "Connects different regions of the brain.",
-          "IV": "Neuro secretory cells"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Pons",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Hypothalamus",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Medulla",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Cerebellum",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -8192,21 +8213,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Cartilaginous Joint",
-          "B": "Ball and Socket Joint",
-          "C": "Fibrous Joint",
-          "D": "Saddle Joint"
-        },
-        "col2": {
-          "I": "Between flat skull bones",
-          "II": "Between adjacent vertebrae",
-          "III": "Between carpal and metacarpal of thumb",
-          "IV": "Between Humerus and Pectoral girdle"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0158",
@@ -8305,21 +8312,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Taenia",
-          "B": "Paramoecium",
-          "C": "Periplaneta",
-          "D": "Pheretima"
-        },
-        "col2": {
-          "I": "Nephridia",
-          "II": "Contractile vacuole",
-          "III": "Flame cells",
-          "IV": "Urecose gland"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0166",
@@ -8388,53 +8381,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0170",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Biotechnology: Principles and Processes",
-      "topic": "",
-      "question": "The following diagram showing restriction sites in E.coli cloning vector pBR322. Find the role of 'X' and 'Y' genes:",
-      "options": {
-        "A": "The gene 'X' is for protein involved in replication of Plasmid and 'Y' for resistance to antibiotics.",
-        "B": "Gene 'X' is responsible for recognition sites and 'Y' is responsible for antibiotic resistance.",
-        "C": "The gene 'X' is respoinsible for resistance to antibiotics and 'Y' for protein involved in the replication of Plasmid.",
-        "D": "The gene 'X' is responsible for controlling the copy number of the linked DNA and 'Y' for protein involved in the replication of Plasmid."
-      },
-      "correct_answer": "D",
-      "explanation": "Correct answer is D: The gene 'X' is responsible for controlling the copy number of the linked DNA and 'Y' for protein involved in the replication of Plasmid..",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Fovea",
-          "B": "Iris",
-          "C": "Blind spot",
-          "D": "Sclera"
-        },
-        "col2": {
-          "I": "Regulates amount of light entering eye",
-          "II": "Tough fibrous outer coat",
-          "III": "Region of maximum visual acuity",
-          "IV": "Region where optic nerve exits; no photoreceptors"
-        }
-      }
-    },
-    {
       "id": "NEET_UPLOAD_Q0177",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -8467,18 +8413,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Axoneme",
-          "B": "Cartwheel pattern",
-          "C": "Crista",
-          "D": "Satellite"
-        },
-        "col2": {
-          "I": "Centriole",
-          "II": "Cilia and flagella",
-          "III": "Chromosome",
-          "IV": "Mitochondria"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Axoneme",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Cartwheel pattern",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Crista",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Satellite",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -8514,52 +8469,28 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Down's syndrome",
-          "B": "α- Thalassemia",
-          "C": "β-Thalassemia",
-          "D": "Klinefelter's"
-        },
-        "col2": {
-          "I": "11th chromosome",
-          "II": "'X' chromosome",
-          "III": "21st chromosome",
-          "IV": "16th chromosome"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Down's syndrome",
+            "col2": "—"
+          },
+          {
+            "col1": "B. α- Thalassemia",
+            "col2": "—"
+          },
+          {
+            "col1": "C. β-Thalassemia",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Klinefelter's",
+            "col2": "—"
+          }
+        ]
       }
-    },
-    {
-      "id": "NEET_UPLOAD_Q0189",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Human Reproduction",
-      "topic": "",
-      "question": "Identify the correct option (",
-      "options": {
-        "A": "FSH, Sertoli cells, Leydig cells, spermatogenesis.",
-        "B": "ICSH, Leydig cells, Sertoli cells, spermatogenesis.",
-        "C": "FSH, Leydig cells, Sertoli cells, spermiogenesis",
-        "D": "ICSH, Interstial cells, Leydig cells, spermiogenesis."
-      },
-      "correct_answer": "C",
-      "explanation": "Correct answer is C: FSH, Leydig cells, Sertoli cells, spermiogenesis.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0190",
@@ -8594,18 +8525,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "RNA polymerase III",
-          "B": "Termination of transcription",
-          "C": "Splicing of Exons",
-          "D": "Tata box"
-        },
-        "col2": {
-          "I": "snRNPs",
-          "II": "Promotor",
-          "III": "Rho factor",
-          "IV": "SnRNAs, tRNA"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. RNA polymerase III",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Termination of transcription",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Splicing of Exons",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Tata box",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -8641,18 +8581,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Unicellular glandular epithelium",
-          "B": "Compound epithelium",
-          "C": "Multicellular glandular epithelium",
-          "D": "Endocrine glandular epithelium"
-        },
-        "col2": {
-          "I": "Salivary glands",
-          "II": "Pancreas",
-          "III": "Goblet cells of alimentary canal",
-          "IV": "Moist surface of buccal cavity"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Unicellular glandular epithelium",
+            "col2": "—"
+          },
+          {
+            "col1": "B. Compound epithelium",
+            "col2": "—"
+          },
+          {
+            "col1": "C. Multicellular glandular epithelium",
+            "col2": "—"
+          },
+          {
+            "col1": "D. Endocrine glandular epithelium",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -9283,39 +9232,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0134",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Biotechnology: Principles and Processes",
-      "topic": "",
-      "question": "Frequency of recombination between gene pairs on same chromosome as a measure of the distance between genes to map their position on chromosome, was used for the first time by",
-      "options": {
-        "A": "Thomas Hunt Morgan",
-        "B": "Sutton and Boveri",
-        "C": "Alfred Sturtevant",
-        "D": "Henking"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "NEET_UPLOAD_Q0140",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -9480,18 +9396,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "M Phase",
-          "B": "G2 Phase",
-          "C": "Quiescent stage",
-          "D": "G1 Phase"
-        },
-        "col2": {
-          "I": "Proteins are synthesized",
-          "II": "Inactive phase",
-          "III": "Interval between mitosis and initiation of DNA replication",
-          "IV": "Equational division"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – M Phase, G2 Phase, Quiescent stage, G1 Phase",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. M Phase",
+            "col2": "1. Proteins are synthesized"
+          },
+          {
+            "col1": "B. G2 Phase",
+            "col2": "2. Inactive phase"
+          },
+          {
+            "col1": "C. Quiescent stage",
+            "col2": "3. Interval between mitosis and initiation of DNA replication"
+          },
+          {
+            "col1": "D. G1 Phase",
+            "col2": "4. Equational division"
+          }
+        ]
       }
     },
     {
@@ -9527,18 +9452,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Mutualism",
-          "B": "Commensalism",
-          "C": "Amensalism",
-          "D": "Parasitism"
-        },
-        "col2": {
-          "I": "+, 0",
-          "II": "-, 0",
-          "III": "+, -",
-          "IV": "+, +"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Mutualism, Commensalism, Amensalism, Parasitism",
+        "col2_header": "Column II – +, 0; -, 0; +, -; +, + species A and B interaction",
+        "rows": [
+          {
+            "col1": "A. Mutualism",
+            "col2": "1. +"
+          },
+          {
+            "col1": "B. Commensalism",
+            "col2": "2. 0; -"
+          },
+          {
+            "col1": "C. Amensalism",
+            "col2": "3. 0; +"
+          },
+          {
+            "col1": "D. Parasitism",
+            "col2": "4. -; +"
+          }
+        ]
       }
     },
     {
@@ -9573,53 +9507,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0149",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Plant Growth and Development",
-      "topic": "",
-      "question": "Match List I (Iron, Zinc, Boron, Molybdenum) with List II (Synthesis of auxin, Component of nitrate reductase, Activator of catalase, Cell elongation and differentiation).",
-      "options": {
-        "A": "A-III, B-II, C-I, D-IV",
-        "B": "A-III, B-I, C-IV, D-II",
-        "C": "A-II, B-III, C-IV, D-I",
-        "D": "A-II, B-I, C-I, D-III"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "Iron",
-          "B": "Zinc",
-          "C": "Boron",
-          "D": "Molybdenum"
-        },
-        "col2": {
-          "I": "Synthesis of auxin",
-          "II": "Component of nitrate reductase",
-          "III": "Activator of catalase",
-          "IV": "Cell elongation and differentiation"
-        }
-      }
     },
     {
       "id": "NEET_UPLOAD_Q0150",
@@ -9753,18 +9640,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "CCK",
-          "B": "GIP",
-          "C": "ANF",
-          "D": "ADH"
-        },
-        "col2": {
-          "I": "Kidney",
-          "II": "Heart",
-          "III": "Gastric gland",
-          "IV": "Pancreas"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – CCK, GIP, ANF, ADH",
+        "col2_header": "Column II – Kidney, Heart, Gastric gland, Pancreas",
+        "rows": [
+          {
+            "col1": "A. CCK",
+            "col2": "1. Kidney"
+          },
+          {
+            "col1": "B. GIP",
+            "col2": "2. Heart"
+          },
+          {
+            "col1": "C. ANF",
+            "col2": "3. Gastric gland"
+          },
+          {
+            "col1": "D. ADH",
+            "col2": "4. Pancreas"
+          }
+        ]
       }
     },
     {
@@ -9899,18 +9795,15 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Lichen (algae + fungus)",
-          "B": "Cuckoo laying eggs in crow's nest",
-          "C": "Fig tree and fig wasp",
-          "D": "Orchid growing on mango tree"
-        },
-        "col2": {
-          "I": "Competition",
-          "II": "Brood parasitism",
-          "III": "Mutualism",
-          "IV": "Commensalism"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Interacting species",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. (See table below)",
+            "col2": "—"
+          }
+        ]
       }
     },
     {
@@ -10012,18 +9905,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Gene a",
-          "B": "Gene y",
-          "C": "Gene i",
-          "D": "Gene z"
-        },
-        "col2": {
-          "I": "β-galactosidase",
-          "II": "Transacetylase",
-          "III": "Permease",
-          "IV": "Repressor protein"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Gene a, Gene y, Gene i, Gene z",
+        "col2_header": "Column II – β-galactosidase, Transacetylase, Permease, Repressor protein",
+        "rows": [
+          {
+            "col1": "A. Gene a",
+            "col2": "1. β-galactosidase"
+          },
+          {
+            "col1": "B. Gene y",
+            "col2": "2. Transacetylase"
+          },
+          {
+            "col1": "C. Gene i",
+            "col2": "3. Permease"
+          },
+          {
+            "col1": "D. Gene z",
+            "col2": "4. Repressor protein"
+          }
+        ]
       }
     },
     {
@@ -10059,18 +9961,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Peptic cells",
-          "B": "Goblet cells",
-          "C": "Oxyntic cells",
-          "D": "Hepatic cells"
-        },
-        "col2": {
-          "I": "Mucus",
-          "II": "Bile juice",
-          "III": "Proenzyme pepsinogen",
-          "IV": "HCl / intrinsic factor"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I – Peptic cells, Goblet cells, Oxyntic cells, Hepatic cells",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Peptic cells",
+            "col2": "1. Mucus"
+          },
+          {
+            "col1": "B. Goblet cells",
+            "col2": "2. Bile juice"
+          },
+          {
+            "col1": "C. Oxyntic cells",
+            "col2": "3. Proenzyme pepsinogen"
+          },
+          {
+            "col1": "D. Hepatic cells",
+            "col2": "4. HCl/intrinsic factor"
+          }
+        ]
       }
     },
     {
@@ -10205,18 +10116,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "A": "Mast cells",
-          "B": "Inner surface of bronchiole",
-          "C": "Blood",
-          "D": "Tubular parts of nephron"
-        },
-        "col2": {
-          "I": "Ciliated epithelium",
-          "II": "Areolar connective tissue",
-          "III": "Specialised connective tissue",
-          "IV": "Cuboidal epithelium"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Mast cells",
+            "col2": "1. Ciliated epithelium"
+          },
+          {
+            "col1": "B. Inner surface of bronchiole",
+            "col2": "2. Areolar connective tissue"
+          },
+          {
+            "col1": "C. Blood",
+            "col2": "3. Specialised connective tissue"
+          },
+          {
+            "col1": "D. Tubular parts of nephron",
+            "col2": "4. Cuboidal epithelium"
+          }
+        ]
       }
     },
     {
@@ -10813,18 +10733,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Spirogyra",
-          "b": "Fern",
-          "c": "Funaria",
-          "d": "Chara"
-        },
-        "col2": {
-          "i": "Diplohaplontic",
-          "ii": "Haplontic",
-          "iii": "Haplodiplontic",
-          "iv": "Haplobiontic"
-        }
+        "question_stem": "Match the plant with the kind of life cycle it exhibits",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Spirogyra",
+            "col2": "1. Dominant diploid sporophyte vascular plant, with highly reduced male or female gametophyte"
+          },
+          {
+            "col1": "B. Fern",
+            "col2": "2. Dominant haploid free-living gametophyte"
+          },
+          {
+            "col1": "C. Funaria",
+            "col2": "3. Dominant diploid sporophyte alternating with reduced gametophyte called prothallus"
+          },
+          {
+            "col1": "D. Cycas List-II",
+            "col2": "4. Dominant haploid leafy gametophyte alternating with partially dependent multicellular sporophyte"
+          }
+        ]
       }
     },
     {
@@ -11090,53 +11019,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0174",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Body Fluids and Circulation",
-      "topic": "",
-      "question": "In gene therapy of Adenosine Deaminase (AD",
-      "options": {
-        "A": "Genetically engineered lymphocytes are not immortal cells.",
-        "B": "Retroviral vector is introduced into these lymphocytes.",
-        "C": "Gene isolated from marrow cells producing ADA is introduced into cells at embryonic stages",
-        "D": "Lymphocytes from patient's blood are grown in culture, outside the body."
-      },
-      "correct_answer": "A",
-      "explanation": "Correct answer is A: Genetically engineered lymphocytes are not immortal cells..",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "A": "P-wave",
-          "B": "Q-wave",
-          "C": "QRS complex",
-          "D": "T-wave"
-        },
-        "col2": {
-          "I": "Atrial depolarisation",
-          "II": "Ventricular repolarisation",
-          "III": "Initial ventricular depolarisation",
-          "IV": "Ventricular depolarisation"
-        }
-      }
     },
     {
       "id": "NEET_UPLOAD_Q0175",
@@ -11568,39 +11450,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0051",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Cell: The Unit of Life",
-      "topic": "",
-      "question": "Right option for the number of tetrahedral and octahedral voids in hexagonal primitive unit cell are:",
-      "options": {
-        "A": "12, 6",
-        "B": "8, 4",
-        "C": "6, 12",
-        "D": "2, 1"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "BIO_excretorypro_116a03274c",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -11864,18 +11713,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Iron",
-          "b": "Zinc",
-          "c": "Copper",
-          "d": "Boron"
-        },
-        "col2": {
-          "i": "Synthesis of indole acetic acid (auxin)",
-          "ii": "Component of nitrogenase",
-          "iii": "Cell elongation and differentiation",
-          "iv": "Component of cytochrome oxidase"
-        }
+        "question_stem": "Match the following concerning essential elements and their functions in plants",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Iron",
+            "col2": "1. Photolysis of water"
+          },
+          {
+            "col1": "B. Zinc",
+            "col2": "2. Pollen germination"
+          },
+          {
+            "col1": "C. Boron",
+            "col2": "3. Required for chlorophyll biosynthesis"
+          },
+          {
+            "col1": "D. Manganese",
+            "col2": "4. IAA biosynthesis"
+          }
+        ]
       }
     },
     {
@@ -11911,18 +11769,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Inhibitor of catalytic activity",
-          "b": "Possess peptide bonds",
-          "c": "Cell wall material of fungi",
-          "d": "Stored form of carbohydrate in animals"
-        },
-        "col2": {
-          "i": "Glycogen",
-          "ii": "Malonate",
-          "iii": "Chitin",
-          "iv": "Proteins"
-        }
+        "question_stem": "Match the following",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Inhibitor of catalytic activity",
+            "col2": "1. Ricin"
+          },
+          {
+            "col1": "B. Possess peptide bonds",
+            "col2": "2. Malonate"
+          },
+          {
+            "col1": "C. Cell wall material in fungi",
+            "col2": "3. Chitin"
+          },
+          {
+            "col1": "D. Secondary metabolite",
+            "col2": "4. Collagen"
+          }
+        ]
       }
     },
     {
@@ -12255,18 +12122,27 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Zygotene",
-          "b": "Pachytene",
-          "c": "Diplotene",
-          "d": "Diakinesis"
-        },
-        "col2": {
-          "i": "Terminalisation of chiasmata",
-          "ii": "Dissolution of synaptonemal complex",
-          "iii": "Crossing over / recombination nodules",
-          "iv": "Synapsis of homologous chromosomes"
-        }
+        "question_stem": "Match the following with respect to meiosis",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Zygotene",
+            "col2": "1. Terminalization"
+          },
+          {
+            "col1": "B. Pachytene",
+            "col2": "2. Chiasmata"
+          },
+          {
+            "col1": "C. Diplotene",
+            "col2": "3. Crossing over"
+          },
+          {
+            "col1": "D. Diakinesis",
+            "col2": "4. Synapsis"
+          }
+        ]
       }
     },
     {
@@ -12335,52 +12211,28 @@
       "accuracy_flag": "ok",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Bt cotton",
-          "b": "Adenosine deaminase deficiency",
-          "c": "Rosie",
-          "d": "Golden rice"
-        },
-        "col2": {
-          "i": "Gene therapy",
-          "ii": "Human protein-enriched milk",
-          "iii": "Vitamin A-enriched grain",
-          "iv": "Resistance to bollworm"
-        }
+        "question_stem": "Match the following columns and select the correct option",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Bt cotton",
+            "col2": "1. Gene therapy"
+          },
+          {
+            "col1": "B. Adenosine deaminase deficiency",
+            "col2": "2. Cellular defence"
+          },
+          {
+            "col1": "C. RNAi",
+            "col2": "3. Detection of HIV infection"
+          },
+          {
+            "col1": "D. PCR",
+            "col2": "4. Bacillus thuringiensis"
+          }
+        ]
       }
-    },
-    {
-      "id": "NEET_UPLOAD_Q0056",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Environmental Issues",
-      "topic": "",
-      "question": "Montreal protocol was signed in 1987 for control of",
-      "options": {
-        "A": "Transport of Genetically modified organisms from one country to another",
-        "B": "Emission of ozone depleting substances",
-        "C": "Release of Green House gases",
-        "D": "Disposal of e-wastes"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0057",
@@ -12397,39 +12249,6 @@
       },
       "correct_answer": "B",
       "explanation": "Correct answer is B: They have free RNA without protein coat.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0058",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Human Reproduction",
-      "topic": "",
-      "question": "The ovary is half inferior in:",
-      "options": {
-        "A": "Brinjal",
-        "B": "Mustard",
-        "C": "Sunflower",
-        "D": "Plum"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Biology",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -12512,21 +12331,7 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "col1": {
-          "a": "Fourth trophic level",
-          "b": "Third trophic level",
-          "c": "Second trophic level",
-          "d": "First trophic level"
-        },
-        "col2": {
-          "i": "Grass",
-          "ii": "Grasshopper",
-          "iii": "Frog / Snake",
-          "iv": "Lion / Hawk"
-        }
-      }
+      "confidence": "medium"
     },
     {
       "id": "NEET_UPLOAD_Q0064",
@@ -12542,39 +12347,6 @@
         "D": "Abscisic acid"
       },
       "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0067",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Biomolecules",
-      "topic": "",
-      "question": "Name the enzyme that facilitates opening of DNA helix during transcription.",
-      "options": {
-        "A": "DNA ligase",
-        "B": "DNA helicase",
-        "C": "DNA polymerase",
-        "D": "RNA polymerase"
-      },
-      "correct_answer": "D",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Biology",
       "ncert_line": "",
@@ -12642,39 +12414,6 @@
       },
       "correct_answer": "B",
       "explanation": "Correct answer is B: Gross primary productivity is always more than net primary productivity.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0078",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Biotechnology: Principles and Processes",
-      "topic": "",
-      "question": "The sequence that controls the copy number of the linked DNA in the vector, is termed",
-      "options": {
-        "A": "Selectable marker",
-        "B": "Ori site",
-        "C": "Palindromic sequence",
-        "D": "Recognition site"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Biology",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -30469,7 +30208,22 @@
         "best_choice"
       ],
       "accuracy_flag": "unverified",
-      "confidence": "medium"
+      "confidence": "medium",
+      "match_table": {
+        "question_stem": "Match the terms in",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. (b)",
+            "col2": "—"
+          },
+          {
+            "col1": "C. (d)",
+            "col2": "—"
+          }
+        ]
+      }
     },
     {
       "id": "neet2016_biol_127",
@@ -43640,18 +43394,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Aspergillus niger",
-          "b": "Clostridium butylicum",
-          "c": "Acetobacter aceti",
-          "d": "Lactobacillus"
-        },
-        "col2": {
-          "i": "Citric acid",
-          "ii": "Butyric acid",
-          "iii": "Acetic acid",
-          "iv": "Lactic acid"
-        }
+        "question_stem": "Match the following (",
+        "col1_header": "Column I – Microbes",
+        "col2_header": "Column II – Organic acid",
+        "rows": [
+          {
+            "col1": "A. Aspergillus niger",
+            "col2": "1. Butyric acid"
+          },
+          {
+            "col1": "B. Clostridium butylicum",
+            "col2": "2. Citric acid"
+          },
+          {
+            "col1": "C. Acetobacter aceti",
+            "col2": "3. Lactic acid"
+          },
+          {
+            "col1": "D. Lactobacillus",
+            "col2": "4. Acetic acid"
+          }
+        ]
       }
     },
     {
@@ -48969,18 +48732,27 @@
       "accuracy_flag": "unverified",
       "confidence": "medium",
       "match_table": {
-        "col1": {
-          "a": "Artemesia annua",
-          "b": "Lawsonia inermis",
-          "c": "Vinca rosea",
-          "d": "Papaver somniferum"
-        },
-        "col2": {
-          "i": "Henna",
-          "ii": "Vincristine / Vinblastine",
-          "iii": "Artemisin",
-          "iv": "Morphine"
-        }
+        "question_stem": "Match the",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Artemesia annua",
+            "col2": "1. Henna"
+          },
+          {
+            "col1": "B. Lawsonia inermis",
+            "col2": "2. Anticancer drug"
+          },
+          {
+            "col1": "C. Vinca rosea",
+            "col2": "3. Kattha"
+          },
+          {
+            "col1": "D. Acacia catechu",
+            "col2": "4. Antimalarial drug"
+          }
+        ]
       }
     },
     {
@@ -50244,16 +50016,23 @@
       "accuracy_flag": "verified",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "a": "Water",
-          "b": "Air",
-          "c": "Gravity"
-        },
-        "col2": {
-          "i": "Colluvial",
-          "ii": "Alluvial",
-          "iii": "Eolian"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II – Means of transport",
+        "rows": [
+          {
+            "col1": "A. Water (i) Colluvial",
+            "col2": "1. Colluvial b. Air"
+          },
+          {
+            "col1": "B. Air (ii) Alluvial",
+            "col2": "2. Alluvial c. Gravity"
+          },
+          {
+            "col1": "C. Gravity (iii) Eolian",
+            "col2": "3. Eolian"
+          }
+        ]
       }
     },
     {
@@ -50353,16 +50132,23 @@
       "accuracy_flag": "verified",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "a": "Aestivation",
-          "b": "Hibernation",
-          "c": "Diapause"
-        },
-        "col2": {
-          "i": "Over wintering",
-          "ii": "Over summer",
-          "iii": "Suspended development in zooplanktons"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Aestivation (i) Over wintering",
+            "col2": "1. Over wintering b. Hibernation"
+          },
+          {
+            "col1": "B. Hibernation (ii) Over summer",
+            "col2": "2. Over summer c. Diapause"
+          },
+          {
+            "col1": "C. Diapause (iii) Suspended development in zooplanktons",
+            "col2": "3. Suspended development in zooplanktons"
+          }
+        ]
       }
     },
     {
@@ -50866,16 +50652,23 @@
       "accuracy_flag": "verified",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "a": "Shallowest depth",
-          "b": "Intermediate depth",
-          "c": "Greatest depth"
-        },
-        "col2": {
-          "i": "Brown algae",
-          "ii": "Green algae",
-          "iii": "Red algae"
-        }
+        "question_stem": "Match",
+        "col1_header": "Column I",
+        "col2_header": "Column II – Depth of sea water",
+        "rows": [
+          {
+            "col1": "A. Shallowest depth (i) Brown algae",
+            "col2": "1. Brown algae b. Intermediate depth"
+          },
+          {
+            "col1": "B. Intermediate depth (ii) Green algae",
+            "col2": "2. Green algae c. Greatest depth"
+          },
+          {
+            "col1": "C. Greatest depth (iii) Red algae",
+            "col2": "3. Red algae"
+          }
+        ]
       }
     },
     {
@@ -59788,18 +59581,27 @@
       "accuracy_flag": "verified",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "a": "Solid symbol",
-          "b": "Horizontal line (mating)",
-          "c": "Vertical line below mating line",
-          "d": "Half-filled symbol"
-        },
-        "col2": {
-          "i": "Carrier of sex-linked trait",
-          "ii": "Offspring between symbols",
-          "iii": "Trait expressed (affected)",
-          "iv": "Mating between two individuals"
-        }
+        "question_stem": "Match the following - (w.r.t. Pedigree analysis) Column - I Column - II",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Solid symbol (i) Carrier of sex linked trait",
+            "col2": "1. Carrier of sex linked trait b. Horizontal line"
+          },
+          {
+            "col1": "B. Horizontal line (ii) Offspring between symbols",
+            "col2": "2. Offspring between symbols c. Horizontal line"
+          },
+          {
+            "col1": "C. Horizontal line (iii) Trait to be studied above the symbols",
+            "col2": "3. Trait to be studied above the symbols d. Dot in centre"
+          },
+          {
+            "col1": "D. Dot in centre (iv) Parents",
+            "col2": "4. Parents"
+          }
+        ]
       }
     },
     {
@@ -60085,18 +59887,27 @@
       "accuracy_flag": "verified",
       "confidence": "HIGH",
       "match_table": {
-        "col1": {
-          "a": "Dominance",
-          "b": "Codominance",
-          "c": "Polygeny",
-          "d": "Pleiotropy"
-        },
-        "col2": {
-          "i": "Many genes govern a single character",
-          "ii": "Expression of only one allele in heterozygous organism",
-          "iii": "Side-by-side full expression of both alleles",
-          "iv": "Single gene exhibits multiple phenotypic effects"
-        }
+        "question_stem": "Match the terms in",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Dominance",
+            "col2": "1. Many genes govern a single character (b) Codominance"
+          },
+          {
+            "col1": "B. Codominance",
+            "col2": "2. In a heterozygous organism only one alle expresses itself (c) Pleiotropy"
+          },
+          {
+            "col1": "C. Pleiotropy",
+            "col2": "3. In a heterozygous organism both alles express themselves fully (d) Polygenic inheritance"
+          },
+          {
+            "col1": "D. Polygenic inheritance",
+            "col2": "4. A single gene influences many characters"
+          }
+        ]
       }
     },
     {
@@ -82651,32 +82462,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEW_BIO_UNCLASSIFIED_22f3f325",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Given below are two statements: one is labelled as Assertion (A), and the other is labelled as Reason (R).",
-      "options": {
-        "A": ": The primary function of the Golgi apparatus is to package the materials made by the endoplasmic reticulum and deliver it to intracellular targets and outside the cell."
-      },
-      "correct_answer": "R",
-      "explanation": "In the light of the above statements, choose the correct answer:",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "",
-      "source": "docx_biology_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEW_BIO_PhotosynthesisinHi_a0c63411",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -82909,32 +82694,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEW_BIO_UNCLASSIFIED_1fc5b10a",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Read the following statements on plant growth and development:",
-      "options": {
-        "A": "Parthenocarpy can be induced by auxins.\n(B) Plant growth regulators can be involved in promotion as well as inhibition of growth.\n(C) Dedifferentiation is a pre-requisite for re-differentiation.\n(D) Abscisic acid is a plant growth promoter.\n(E) Apical dominance promotes the growth of lateral buds."
-      },
-      "correct_answer": "C",
-      "explanation": "a. B, D, E only b. A, B, C only c. A, C, E only d. A, D, E only",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "",
-      "source": "docx_biology_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEW_BIO_ChemicalCoordinatio_5fe642c8",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -83094,32 +82853,6 @@
       },
       "correct_answer": "A",
       "explanation": "Streptokinase produced by bacterium Streptococcus is used for removing clots from blood vessels. [Source: NEET (UG)-2025 (Code-47) - Page 13, Q137]",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "",
-      "source": "docx_biology_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
-      "id": "NEW_BIO_UNCLASSIFIED_46061f1b",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Given below are two statements: One is labelled as Assertion (A) and the other is labelled as Reason (R).",
-      "options": {
-        "A": ": A typical unfertilised, angiosperm embryo sac at maturity is 8 nucleate and 7-celled."
-      },
-      "correct_answer": "R",
-      "explanation": "In the light of the above statements, choose the correct answer:",
       "ncert_ref": "NCERT Biology",
       "ncert_line": "",
       "pattern": "memory_test",
@@ -83425,32 +83158,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEW_BIO_UNCLASSIFIED_01472ce1",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Find the correct statement:",
-      "options": {
-        "A": "In human pregnancy, the major organ systems are formed at the end of 12 weeks.\n(B) In human pregnancy the major organ systems are formed at the end of 8 weeks.\n(C) In human pregnancy heart is formed after one month of gestation.\n(D) In human pregnancy, limbs and digits develop by the end of second month.\n(E) In human pregnancy the appearance of hair is usually observed in the fifth month."
-      },
-      "correct_answer": "C",
-      "explanation": "a. A, C, D and E only b. A and E only c. B and C only d. B, C, D and E only",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "",
-      "source": "docx_biology_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEW_BIO_UNCLASSIFIED_ec4ea437",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -83465,32 +83172,6 @@
       },
       "correct_answer": "D",
       "explanation": "Wine and beer are produced without distillation whereas whisky, brandy and rum are produced by distillation of fermented broth. [Source: NEET (UG)-2025 (Code-47) - Page 21, Q158]",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "",
-      "source": "docx_biology_2025",
-      "verified": true,
-      "tags": [],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
-      "id": "NEW_BIO_UNCLASSIFIED_fb4c66d2",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Given below are two statements:",
-      "options": {
-        "A": ""
-      },
-      "correct_answer": "S",
-      "explanation": "In the light of the above statements, choose the most appropriate answer:",
       "ncert_ref": "NCERT Biology",
       "ncert_line": "",
       "pattern": "memory_test",
