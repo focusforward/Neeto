@@ -3258,7 +3258,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "d and f-Block Elements",
       "topic": "",
-      "question": "Given below are certain cations. Using inorganic qualitative analysis, arrange them in increasing group number from 0 to VI: A. Al3+, B. Cu2+, C. Ba2+, D. Co2+, E. Mg2+",
+      "question": "Given below are certain cations. Using inorganic qualitative analysis, arrange them in increasing group number from 0 to VI",
       "options": {
         "A": "E, C, D, B, A",
         "B": "E, A, B, C, D",
@@ -3283,7 +3283,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Al3+,"
+        },
+        {
+          "label": "B",
+          "text": "Cu2+,"
+        },
+        {
+          "label": "C",
+          "text": "Ba2+,"
+        },
+        {
+          "label": "D",
+          "text": "Co2+, E. Mg2+"
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0111",
@@ -3545,7 +3563,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Equilibrium",
       "topic": "",
-      "question": "Which of the following are Autoimmune disorders? A. Myasthenia gravis, B. Rheumatoid arthritis, C. Gout, D. Muscular dystrophy, E. Systemic Lupus Erythematosus (SLE)",
+      "question": "Which of the following are Autoimmune disorders?",
       "options": {
         "A": "B, C & E only",
         "B": "C, D & E only",
@@ -3570,7 +3588,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Myasthenia gravis,"
+        },
+        {
+          "label": "B",
+          "text": "Rheumatoid arthritis,"
+        },
+        {
+          "label": "C",
+          "text": "Gout,"
+        },
+        {
+          "label": "D",
+          "text": "Muscular dystrophy, E. Systemic Lupus Erythematosus (SLE)"
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0161",

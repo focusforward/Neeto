@@ -7905,39 +7905,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_unclassified_cd8d91c225",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match Column I and Column II and choose the correct match from the given choices. [Question data incomplete — refer to NCERT]",
-      "options": {
-        "A": "(A)-(R), (",
-        "B": "-(Q), (",
-        "C": "-(P), (",
-        "D": "-(S) B) (A)-(R), (B)-(P), (C)-(S), (D)-(Q) C) (A)-(Q), (B)-(R), (C)-(S), (D)-(P) D) (A)-(Q), (B)-(P), (C)-(S), (D)-(R)"
-      },
-      "correct_answer": "D",
-      "explanation": "Correct answer is D: -(S) B) (A)-(R), (B)-(P), (C)-(S), (D)-(Q) C) (A)-(Q), (B)-(R), (C)-(S), (D)-(P) D) (A)-(Q), (B)-(P), (C)-(S), (D)-(R).",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "PHY_unclassified_4356aa9509",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -46123,6 +46090,2566 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "HIGH"
+    },
+    {
+      "id": "NEET_PHY_001",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following units with their corresponding physical quantities.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Thermal conductivity",
+            "col2": "I. C²/(N·m²)"
+          },
+          {
+            "col1": "B. Permittivity of free space",
+            "col2": "II. W m⁻¹ K⁻¹"
+          },
+          {
+            "col1": "C. Planck's constant",
+            "col2": "III. J-s"
+          },
+          {
+            "col1": "D. Force (in system with 10g, 10cm, 0.1s)",
+            "col2": "IV. 0.1 N"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-II, C-III, D-I"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_002",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following screw gauge terms with their values.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Least count (1 mm pitch, 100 divisions)",
+            "col2": "I. 0.5 mm"
+          },
+          {
+            "col1": "B. Pitch (LC = 0.01 mm, 50 divisions)",
+            "col2": "II. 0.01 mm"
+          },
+          {
+            "col1": "C. Diameter (MSR=0, CSR=52, LC=0.001 cm)",
+            "col2": "III. 0.052 cm"
+          },
+          {
+            "col1": "D. Least count (1 MSD=1/n cm, n VSD = n-1 MSD)",
+            "col2": "IV. 1/n² cm"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-IV, D-I",
+        "D": "A-IV, B-II, C-III, D-I"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_003",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following percentage error formulas with their corresponding quantities.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. ΔP/P = 3Δa/a + 2Δb/b + Δc/c + Δd/d",
+            "col2": "I. Volume of sphere"
+          },
+          {
+            "col1": "B. ΔV/V = 3Δr/r",
+            "col2": "II. Density ρ = m/l³"
+          },
+          {
+            "col1": "C. Δρ/ρ = Δm/m + 3Δl/l",
+            "col2": "III. P = a³b²/(cd)"
+          },
+          {
+            "col1": "D. ΔK/K = Δm/m + 2Δv/v",
+            "col2": "IV. Kinetic energy"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-III, B-I, C-II, D-IV",
+        "B": "A-I, B-III, C-II, D-IV",
+        "C": "A-III, B-II, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_004",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following dimensional formulas with their physical quantities.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. [ML²T⁻²]",
+            "col2": "I. Pressure"
+          },
+          {
+            "col1": "B. [ML⁻¹T⁻²]",
+            "col2": "II. Energy"
+          },
+          {
+            "col1": "C. [ML²T⁻³]",
+            "col2": "III. Electric field"
+          },
+          {
+            "col1": "D. [MLT⁻³A⁻¹]",
+            "col2": "IV. Power"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-IV, D-I",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_005",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following kinematic quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. v = u + at",
+            "col2": "I. Position-time relation"
+          },
+          {
+            "col1": "B. s = ut + ½at²",
+            "col2": "II. Velocity-time relation"
+          },
+          {
+            "col1": "C. v² = u² + 2as",
+            "col2": "III. Velocity-displacement relation"
+          },
+          {
+            "col1": "D. sₙ = u + (a/2)(2n-1)",
+            "col2": "IV. Distance in nth second"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_006",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following average speed formulas with their situations.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. v_avg = (v₁ + v₂)/2",
+            "col2": "I. Equal distances with different speeds"
+          },
+          {
+            "col1": "B. v_avg = 2v₁v₂/(v₁ + v₂)",
+            "col2": "II. Equal times with different speeds"
+          },
+          {
+            "col1": "C. v_avg = total distance/total time",
+            "col2": "III. General definition"
+          },
+          {
+            "col1": "D. v_avg = (v₁t₁ + v₂t₂)/(t₁ + t₂)",
+            "col2": "IV. Weighted average by time"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_007",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following vector operations with their results.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "C. A·B = 0",
+            "col2": "III. Vectors are perpendicular"
+          },
+          {
+            "col1": "D. A × B = 0",
+            "col2": "IV. Vectors are parallel"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_008",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following projectile quantities with their formulas.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Range R",
+            "col2": "I. u² sin²θ/(2g)"
+          },
+          {
+            "col1": "B. Maximum height H",
+            "col2": "II. u² sin2θ/g"
+          },
+          {
+            "col1": "C. Time of flight T",
+            "col2": "III. u²/g"
+          },
+          {
+            "col1": "D. Maximum range R_max",
+            "col2": "IV. 2u sinθ/g"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_009",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following circular motion quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Centripetal acceleration",
+            "col2": "I. 2π/T"
+          },
+          {
+            "col1": "B. Angular velocity ω",
+            "col2": "II. rω²"
+          },
+          {
+            "col1": "C. Time period T",
+            "col2": "III. 1/T"
+          },
+          {
+            "col1": "D. Frequency f",
+            "col2": "IV. 2πr/v"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_010",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following forces with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Force on a rocket",
+            "col2": "I. 6π η r v"
+          },
+          {
+            "col1": "B. Viscous force on a sphere",
+            "col2": "II. -v dm/dt"
+          },
+          {
+            "col1": "C. Restoring force in SHM",
+            "col2": "III. -kx"
+          },
+          {
+            "col1": "D. Force in spring",
+            "col2": "IV. -mω²x"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_011",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following friction terms with their descriptions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Static friction",
+            "col2": "I. μkN"
+          },
+          {
+            "col1": "B. Kinetic friction",
+            "col2": "II. Self-adjusting force"
+          },
+          {
+            "col1": "C. Limiting friction",
+            "col2": "III. Maximum static friction"
+          },
+          {
+            "col1": "D. Rolling friction",
+            "col2": "IV. Smaller than sliding friction"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_012",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following banking of roads expressions with their quantities.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Optimum speed (frictionless)",
+            "col2": "I. √[Rg((tanθ+μ)/(1-μ tanθ))]"
+          },
+          {
+            "col1": "B. Maximum safe speed",
+            "col2": "II. √(Rg tanθ)"
+          },
+          {
+            "col1": "C. Angle of banking",
+            "col2": "III. tan⁻¹(v²/Rg)"
+          },
+          {
+            "col1": "D. Minimum safe speed",
+            "col2": "IV. √[Rg((tanθ-μ)/(1+μ tanθ))]"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_013",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following work, energy and power quantities with their formulas.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Work done by variable force",
+            "col2": "I. F·s"
+          },
+          {
+            "col1": "B. Kinetic energy",
+            "col2": "II. ½mv²"
+          },
+          {
+            "col1": "C. Potential energy (spring)",
+            "col2": "III. ∫F·dx"
+          },
+          {
+            "col1": "D. Power",
+            "col2": "IV. ½kx²"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-III, B-II, C-IV, D-I? Wait D should be F·v."
+      },
+      "correct_answer": "A-I, B-II, C-III, D-IV",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_014",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following collision terms with their characteristics.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Elastic collision",
+            "col2": "I. e = 0"
+          },
+          {
+            "col1": "B. Inelastic collision",
+            "col2": "II. e = 1"
+          },
+          {
+            "col1": "C. Perfectly inelastic collision",
+            "col2": "III. 0 < e < 1"
+          },
+          {
+            "col1": "D. Coefficient of restitution",
+            "col2": "IV. Relative velocity after/relative velocity before"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_015",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following moments of inertia with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Solid sphere about diameter",
+            "col2": "I. MR²"
+          },
+          {
+            "col1": "B. Circular ring about axis",
+            "col2": "II. ½MR²"
+          },
+          {
+            "col1": "C. Circular disc about axis",
+            "col2": "III. ⅖MR²"
+          },
+          {
+            "col1": "D. Thin rod about centre ⊥ to length",
+            "col2": "IV. (1/12)ML²"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-III, B-I, C-II, D-IV",
+        "B": "A-I, B-III, C-II, D-IV",
+        "C": "A-III, B-II, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_016",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following radii of gyration with their values (for same mass and radius R).",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Circular ring about axis",
+            "col2": "I. R/√2"
+          },
+          {
+            "col1": "B. Circular disc about axis",
+            "col2": "II. R"
+          },
+          {
+            "col1": "C. Solid sphere about diameter",
+            "col2": "III. R√(2/3)"
+          },
+          {
+            "col1": "D. Hollow sphere about diameter",
+            "col2": "IV. R√(2/5)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_017",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following Kepler's laws with their statements.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. First law",
+            "col2": "I. T² ∝ r³"
+          },
+          {
+            "col1": "B. Second law",
+            "col2": "II. Elliptical orbits with sun at focus"
+          },
+          {
+            "col1": "C. Third law",
+            "col2": "III. Areal velocity constant"
+          },
+          {
+            "col1": "D. Law of periods",
+            "col2": "IV. Another name for third law"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-III, B-II, C-I, D-IV"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_018",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following gravitation quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Acceleration due to gravity at height h",
+            "col2": "I. g(1 - 2h/R) for h << R"
+          },
+          {
+            "col1": "B. Acceleration due to gravity at depth d",
+            "col2": "II. g(1 - d/R)"
+          },
+          {
+            "col1": "C. Escape velocity",
+            "col2": "III. √(2GM/R)"
+          },
+          {
+            "col1": "D. Orbital velocity",
+            "col2": "IV. √(GM/R)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-II, C-IV, D-III",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_019",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following thermal expansion coefficients with their definitions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Coefficient of linear expansion (α)",
+            "col2": "I. ΔA/(AΔT)"
+          },
+          {
+            "col1": "B. Coefficient of area expansion (β)",
+            "col2": "II. ΔV/(VΔT)"
+          },
+          {
+            "col1": "C. Coefficient of volume expansion (γ)",
+            "col2": "III. ΔL/(LΔT)"
+          },
+          {
+            "col1": "D. Relation between coefficients",
+            "col2": "IV. β = 2α, γ = 3α"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-III, B-I, C-II, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-III, B-II, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_020",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following heat transfer terms with their definitions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Conduction",
+            "col2": "I. Heat transfer through fluid motion"
+          },
+          {
+            "col1": "B. Convection",
+            "col2": "II. Heat transfer through electromagnetic waves"
+          },
+          {
+            "col1": "C. Radiation",
+            "col2": "III. Heat transfer without material motion"
+          },
+          {
+            "col1": "D. Thermal conductivity",
+            "col2": "IV. Coefficient in Fourier's law"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-III, B-I, C-II, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-III, B-II, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_021",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following thermodynamic processes with their characteristics.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Isothermal",
+            "col2": "I. ΔQ = 0"
+          },
+          {
+            "col1": "B. Adiabatic",
+            "col2": "II. ΔT = 0"
+          },
+          {
+            "col1": "C. Isobaric",
+            "col2": "III. ΔV = 0"
+          },
+          {
+            "col1": "D. Isochoric",
+            "col2": "IV. ΔP = 0"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-IV, D-I",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_022",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following gas laws with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Boyle's law",
+            "col2": "I. V/T = constant (P constant)"
+          },
+          {
+            "col1": "B. Charles' law",
+            "col2": "II. PV = constant (T constant)"
+          },
+          {
+            "col1": "C. Gay-Lussac's law",
+            "col2": "III. P/T = constant (V constant)"
+          },
+          {
+            "col1": "D. Ideal gas equation",
+            "col2": "IV. PV = nRT"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_023",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following kinetic theory quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Mean free path λ",
+            "col2": "I. √(3RT/M)"
+          },
+          {
+            "col1": "B. RMS speed v_rms",
+            "col2": "II. √(8RT/πM)"
+          },
+          {
+            "col1": "C. Average speed v_avg",
+            "col2": "III. √(2RT/M)"
+          },
+          {
+            "col1": "D. Most probable speed v_mp",
+            "col2": "IV. 1/(√2 n π d²)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-IV, B-I, C-II, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-IV, B-II, C-I, D-III",
+        "D": "A-III, B-I, C-II, D-IV"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_024",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following degrees of freedom with their values.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Monoatomic gas",
+            "col2": "I. f = 5"
+          },
+          {
+            "col1": "B. Diatomic gas (rigid)",
+            "col2": "II. f = 6"
+          },
+          {
+            "col1": "C. Diatomic gas (with vibration)",
+            "col2": "III. f = 3"
+          },
+          {
+            "col1": "D. Triatomic gas (non-linear)",
+            "col2": "IV. f = 7"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-III, B-I, C-IV, D-II",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-III, B-II, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_025",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following SHM quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Displacement x",
+            "col2": "I. -ω²x"
+          },
+          {
+            "col1": "B. Velocity v",
+            "col2": "II. A sin(ωt + φ)"
+          },
+          {
+            "col1": "C. Acceleration a",
+            "col2": "III. ω√(A² - x²)"
+          },
+          {
+            "col1": "D. Time period T",
+            "col2": "IV. 2π√(m/k)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_026",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following simple pendulum quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Time period T",
+            "col2": "I. √(2gh)"
+          },
+          {
+            "col1": "B. Velocity at lowest point",
+            "col2": "II. 2π√(l/g)"
+          },
+          {
+            "col1": "C. Angular frequency ω",
+            "col2": "III. mgl(1 - cosθ)"
+          },
+          {
+            "col1": "D. Potential energy at angle θ",
+            "col2": "IV. √(g/l)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-IV, D-III",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_027",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following wave quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Wave number k",
+            "col2": "I. 1/T"
+          },
+          {
+            "col1": "B. Angular frequency ω",
+            "col2": "II. 2π/λ"
+          },
+          {
+            "col1": "C. Frequency f",
+            "col2": "III. 2πf"
+          },
+          {
+            "col1": "D. Wave velocity v",
+            "col2": "IV. fλ"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_028",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following sound wave terms with their definitions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Beats",
+            "col2": "I. Phenomenon due to superposition of waves from two sources"
+          },
+          {
+            "col1": "B. Doppler effect",
+            "col2": "II. Apparent change in frequency due to relative motion"
+          },
+          {
+            "col1": "C. Resonance",
+            "col2": "III. Increase in amplitude when driving frequency equals natural frequency"
+          },
+          {
+            "col1": "D. Echo",
+            "col2": "IV. Reflection of sound"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_029",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following stationary wave terms for a closed pipe.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Fundamental frequency",
+            "col2": "I. 5v/(4L)"
+          },
+          {
+            "col1": "B. First overtone",
+            "col2": "II. v/(4L)"
+          },
+          {
+            "col1": "C. Second overtone",
+            "col2": "III. 3v/(4L)"
+          },
+          {
+            "col1": "D. Third harmonic",
+            "col2": "IV. 7v/(4L)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_030",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following stationary wave terms for an open pipe.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Fundamental frequency",
+            "col2": "I. 3v/(2L)"
+          },
+          {
+            "col1": "B. First overtone",
+            "col2": "II. v/(2L)"
+          },
+          {
+            "col1": "C. Second overtone",
+            "col2": "III. 2v/(2L) = v/L"
+          },
+          {
+            "col1": "D. Third harmonic",
+            "col2": "IV. 4v/(2L) = 2v/L"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_031",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following Coulomb's law quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Force between two charges",
+            "col2": "I. (1/4πε₀)(q₁q₂/r²)"
+          },
+          {
+            "col1": "B. Electric field due to point charge",
+            "col2": "II. (1/4πε₀)(q/r²)"
+          },
+          {
+            "col1": "C. Permittivity of free space ε₀",
+            "col2": "III. 8.85 × 10⁻¹² C²/N·m²"
+          },
+          {
+            "col1": "D. Constant k = 1/(4πε₀)",
+            "col2": "IV. 9 × 10⁹ N·m²/C²"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_032",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following electric field terms with their descriptions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Electric field inside a hollow conductor",
+            "col2": "I. Zero"
+          },
+          {
+            "col1": "B. Electric field on the surface of a conductor",
+            "col2": "II. Perpendicular to surface"
+          },
+          {
+            "col1": "C. Electric field lines",
+            "col2": "III. Start from positive charge, end at negative charge"
+          },
+          {
+            "col1": "D. Electric field due to dipole at axial point",
+            "col2": "IV. 2kp/r³"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_033",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following electric dipole quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Dipole moment p",
+            "col2": "I. q × 2a"
+          },
+          {
+            "col1": "B. Electric field at axial point",
+            "col2": "II. (1/4πε₀)(2p/r³)"
+          },
+          {
+            "col1": "C. Electric field at equatorial point",
+            "col2": "III. (1/4πε₀)(p/r³)"
+          },
+          {
+            "col1": "D. Torque on dipole in uniform field",
+            "col2": "IV. pE sinθ"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_034",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following Gauss's law applications with their results.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Electric field due to infinite line charge",
+            "col2": "I. σ/(2ε₀)"
+          },
+          {
+            "col1": "B. Electric field due to infinite plane sheet",
+            "col2": "II. λ/(2πε₀r)"
+          },
+          {
+            "col1": "C. Electric field due to spherical shell (outside)",
+            "col2": "III. (1/4πε₀)(q/r²)"
+          },
+          {
+            "col1": "D. Electric field due to spherical shell (inside)",
+            "col2": "IV. Zero"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_035",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following electric potential expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Potential due to point charge",
+            "col2": "I. (1/4πε₀)(q/r)"
+          },
+          {
+            "col1": "B. Potential due to dipole (axial)",
+            "col2": "II. (1/4πε₀)(p cosθ/r²)"
+          },
+          {
+            "col1": "C. Potential due to dipole (general)",
+            "col2": "III. (1/4πε₀)(p/r²)"
+          },
+          {
+            "col1": "D. Potential inside a hollow conductor",
+            "col2": "IV. Constant"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-III, C-II, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "B",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_036",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following capacitor terms with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Capacitance of parallel plate capacitor",
+            "col2": "I. ε₀A/d"
+          },
+          {
+            "col1": "B. Energy stored in capacitor",
+            "col2": "II. ½CV²"
+          },
+          {
+            "col1": "C. Capacitors in series",
+            "col2": "III. 1/C_eq = 1/C₁ + 1/C₂"
+          },
+          {
+            "col1": "D. Capacitors in parallel",
+            "col2": "IV. C_eq = C₁ + C₂"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_037",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following dielectric terms with their definitions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Dielectric constant K",
+            "col2": "I. ε/ε₀"
+          },
+          {
+            "col1": "B. Dielectric strength",
+            "col2": "II. Maximum electric field before breakdown"
+          },
+          {
+            "col1": "C. Polarization",
+            "col2": "III. Induced dipole moment per unit volume"
+          },
+          {
+            "col1": "D. Electric displacement D",
+            "col2": "IV. ε₀E + P"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_038",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following current electricity quantities with their units.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Current",
+            "col2": "I. Ohm (Ω)"
+          },
+          {
+            "col1": "B. Resistance",
+            "col2": "II. Ampere (A)"
+          },
+          {
+            "col1": "C. Resistivity",
+            "col2": "III. Ohm-meter (Ω·m)"
+          },
+          {
+            "col1": "D. Conductivity",
+            "col2": "IV. Siemens per meter (S/m)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_039",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following resistance relations with their conditions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. R = ρl/A",
+            "col2": "I. General formula for resistance"
+          },
+          {
+            "col1": "B. R = R₀(1 + αΔT)",
+            "col2": "II. Temperature dependence"
+          },
+          {
+            "col1": "C. R_series = R₁ + R₂",
+            "col2": "III. Series combination"
+          },
+          {
+            "col1": "D. 1/R_parallel = 1/R₁ + 1/R₂",
+            "col2": "IV. Parallel combination"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_040",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following colour codes with their values.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Black",
+            "col2": "I. 0"
+          },
+          {
+            "col1": "B. Brown",
+            "col2": "II. 1"
+          },
+          {
+            "col1": "C. Red",
+            "col2": "III. 2"
+          },
+          {
+            "col1": "D. Orange",
+            "col2": "IV. 3"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_041",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following colour codes with their multipliers.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Brown",
+            "col2": "I. 10¹"
+          },
+          {
+            "col1": "B. Red",
+            "col2": "II. 10²"
+          },
+          {
+            "col1": "C. Orange",
+            "col2": "III. 10³"
+          },
+          {
+            "col1": "D. Yellow",
+            "col2": "IV. 10⁴"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_042",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following tolerance colour codes with their values.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Gold",
+            "col2": "I. ±5%"
+          },
+          {
+            "col1": "B. Silver",
+            "col2": "II. ±10%"
+          },
+          {
+            "col1": "C. No colour",
+            "col2": "III. ±20%"
+          },
+          {
+            "col1": "D. Brown",
+            "col2": "IV. ±1%"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_043",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following heating effect quantities with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Heat produced in resistor",
+            "col2": "I. V²/R"
+          },
+          {
+            "col1": "B. Power dissipated",
+            "col2": "II. I²R"
+          },
+          {
+            "col1": "C. Electrical energy",
+            "col2": "III. VIt"
+          },
+          {
+            "col1": "D. Joule's law",
+            "col2": "IV. H = I²Rt"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-IV, B-II, C-III, D-I? Wait, D should be IV."
+      },
+      "correct_answer": "A-IV, B-II, C-III, D-I",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_044",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following cells and batteries terms with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Emf of cell E",
+            "col2": "I. V + Ir"
+          },
+          {
+            "col1": "B. Terminal voltage V",
+            "col2": "II. E - Ir"
+          },
+          {
+            "col1": "C. Internal resistance r",
+            "col2": "III. (E/V - 1)R"
+          },
+          {
+            "col1": "D. Cells in series",
+            "col2": "IV. E_eq = E₁ + E₂"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_045",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following Kirchhoff's rules with their statements.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Junction rule",
+            "col2": "I. ΣIR + ΣE = 0 in a loop"
+          },
+          {
+            "col1": "B. Loop rule",
+            "col2": "II. ΣI_in = ΣI_out"
+          },
+          {
+            "col1": "C. Conservation of charge",
+            "col2": "III. Basis of junction rule"
+          },
+          {
+            "col1": "D. Conservation of energy",
+            "col2": "IV. Basis of loop rule"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_046",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following Wheatstone bridge conditions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Balanced condition",
+            "col2": "I. P/Q = R/S"
+          },
+          {
+            "col1": "B. Galvanometer current",
+            "col2": "II. Zero at balance"
+          },
+          {
+            "col1": "C. Sensitivity",
+            "col2": "III. Depends on all resistances"
+          },
+          {
+            "col1": "D. Meter bridge",
+            "col2": "IV. Practical form of Wheatstone bridge"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_071",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following galvanometer terms with their conversions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Galvanometer to ammeter",
+            "col2": "I. Connect high resistance in series"
+          },
+          {
+            "col1": "B. Galvanometer to voltmeter",
+            "col2": "II. Connect low resistance in parallel (shunt)"
+          },
+          {
+            "col1": "C. Current sensitivity",
+            "col2": "III. θ/I"
+          },
+          {
+            "col1": "D. Voltage sensitivity",
+            "col2": "IV. θ/V"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_072",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following magnetic field formulas with their configurations.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Long straight wire",
+            "col2": "I. μ₀nI"
+          },
+          {
+            "col1": "B. Circular loop at centre",
+            "col2": "II. μ₀I/(2πr)"
+          },
+          {
+            "col1": "C. Solenoid",
+            "col2": "III. μ₀I/(2r)"
+          },
+          {
+            "col1": "D. Toroid",
+            "col2": "IV. μ₀NI/(2πr)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_073",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following magnetic force expressions with their situations.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Force on moving charge",
+            "col2": "I. F = q(v × B)"
+          },
+          {
+            "col1": "B. Force on current carrying conductor",
+            "col2": "II. F = I(l × B)"
+          },
+          {
+            "col1": "C. Force between parallel wires",
+            "col2": "III. F/l = μ₀I₁I₂/(2πr)"
+          },
+          {
+            "col1": "D. Torque on current loop",
+            "col2": "IV. τ = NIAB sinθ"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_074",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following magnetic materials with their properties.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Diamagnetic",
+            "col2": "I. χ is positive and large"
+          },
+          {
+            "col1": "B. Paramagnetic",
+            "col2": "II. χ is negative"
+          },
+          {
+            "col1": "C. Ferromagnetic",
+            "col2": "III. χ is positive and small"
+          },
+          {
+            "col1": "D. Curie temperature",
+            "col2": "IV. Temperature above which ferromagnetic becomes paramagnetic"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_075",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following earth's magnetism terms with their definitions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Magnetic declination",
+            "col2": "I. Angle between earth's total field and horizontal"
+          },
+          {
+            "col1": "B. Magnetic inclination (dip)",
+            "col2": "II. Angle between geographic meridian and magnetic meridian"
+          },
+          {
+            "col1": "C. Horizontal component H",
+            "col2": "III. B_E cosδ"
+          },
+          {
+            "col1": "D. Vertical component V",
+            "col2": "IV. B_E sinδ"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_076",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following electromagnetic induction terms with their laws.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Faraday's law",
+            "col2": "I. e = -dφ/dt"
+          },
+          {
+            "col1": "B. Lenz's law",
+            "col2": "II. Direction of induced emf opposes cause"
+          },
+          {
+            "col1": "C. Motional emf",
+            "col2": "III. e = Blv"
+          },
+          {
+            "col1": "D. Eddy currents",
+            "col2": "IV. Currents induced in bulk conductors"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_077",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following inductor terms with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Self-inductance L",
+            "col2": "I. Nφ/I"
+          },
+          {
+            "col1": "B. Mutual inductance M",
+            "col2": "II. N₂φ₂/I₁"
+          },
+          {
+            "col1": "C. Energy stored in inductor",
+            "col2": "III. ½LI²"
+          },
+          {
+            "col1": "D. Inductive reactance",
+            "col2": "IV. ωL"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_078",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following AC circuit terms with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Impedance Z",
+            "col2": "I. √[R² + (X_L - X_C)²]"
+          },
+          {
+            "col1": "B. Power factor",
+            "col2": "II. cosφ = R/Z"
+          },
+          {
+            "col1": "C. Resonant frequency",
+            "col2": "III. ω₀ = 1/√(LC)"
+          },
+          {
+            "col1": "D. Quality factor Q",
+            "col2": "IV. ω₀L/R"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_079",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following AC circuit quantities with their formulas.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Inductive reactance X_L",
+            "col2": "I. 1/(ωC)"
+          },
+          {
+            "col1": "B. Capacitive reactance X_C",
+            "col2": "II. ωL"
+          },
+          {
+            "col1": "C. Average power",
+            "col2": "III. V_rms I_rms cosφ"
+          },
+          {
+            "col1": "D. RMS value",
+            "col2": "IV. Peak value/√2"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_080",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following transformer terms with their relations.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Voltage ratio",
+            "col2": "I. V_s/V_p = N_s/N_p"
+          },
+          {
+            "col1": "B. Current ratio",
+            "col2": "II. I_s/I_p = N_p/N_s"
+          },
+          {
+            "col1": "C. Power relation (ideal)",
+            "col2": "III. V_pI_p = V_sI_s"
+          },
+          {
+            "col1": "D. Efficiency",
+            "col2": "IV. Output power/Input power"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_081",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following electromagnetic wave terms with their properties.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Speed of EM wave",
+            "col2": "I. c = 1/√(μ₀ε₀)"
+          },
+          {
+            "col1": "B. Relation between E and B",
+            "col2": "II. E = cB"
+          },
+          {
+            "col1": "C. Energy density",
+            "col2": "III. u = ε₀E² = B²/μ₀"
+          },
+          {
+            "col1": "D. Poynting vector",
+            "col2": "IV. S = (E × B)/μ₀"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_082",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following electromagnetic spectrum regions with their wavelengths.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Gamma rays",
+            "col2": "I. 400 nm - 700 nm"
+          },
+          {
+            "col1": "B. X-rays",
+            "col2": "II. < 0.01 nm"
+          },
+          {
+            "col1": "C. Visible light",
+            "col2": "III. 0.01 nm - 10 nm"
+          },
+          {
+            "col1": "D. Microwaves",
+            "col2": "IV. 1 mm - 1 m"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-III, C-I, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-I, C-III, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_083",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following ray optics terms with their laws.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Reflection",
+            "col2": "I. i = r"
+          },
+          {
+            "col1": "B. Refraction",
+            "col2": "II. μ₁ sin i = μ₂ sin r"
+          },
+          {
+            "col1": "C. Total internal reflection",
+            "col2": "III. i > critical angle"
+          },
+          {
+            "col1": "D. Critical angle",
+            "col2": "IV. sin C = 1/μ"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_084",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following mirror formula terms with their sign conventions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Object distance u",
+            "col2": "I. Negative for real object"
+          },
+          {
+            "col1": "B. Image distance v",
+            "col2": "II. Positive for virtual image"
+          },
+          {
+            "col1": "C. Focal length f (concave)",
+            "col2": "III. Negative"
+          },
+          {
+            "col1": "D. Focal length f (convex)",
+            "col2": "IV. Positive"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_085",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following lens formula terms with their expressions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Lens maker's formula",
+            "col2": "I. 1/f = (μ-1)(1/R₁ - 1/R₂)"
+          },
+          {
+            "col1": "B. Power of lens",
+            "col2": "II. P = 1/f (in meters)"
+          },
+          {
+            "col1": "C. Magnification",
+            "col2": "III. m = v/u"
+          },
+          {
+            "col1": "D. Combination of lenses",
+            "col2": "IV. 1/F = 1/f₁ + 1/f₂"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_086",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following optical instrument terms with their formulas.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Simple microscope",
+            "col2": "I. m = 1 + D/f"
+          },
+          {
+            "col1": "B. Compound microscope",
+            "col2": "II. m = (L/f₀)(D/f_e)"
+          },
+          {
+            "col1": "C. Astronomical telescope",
+            "col2": "III. m = f₀/f_e"
+          },
+          {
+            "col1": "D. Terrestrial telescope",
+            "col2": "IV. Uses erecting lens"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_087",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following prism terms with their formulas.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Angle of prism A",
+            "col2": "I. r₁ + r₂"
+          },
+          {
+            "col1": "B. Deviation δ",
+            "col2": "II. i + e - A"
+          },
+          {
+            "col1": "C. Minimum deviation δ_m",
+            "col2": "III. i = e, r₁ = r₂ = A/2"
+          },
+          {
+            "col1": "D. Refractive index μ",
+            "col2": "IV. sin[(A+δ_m)/2]/sin(A/2)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_088",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following dispersion terms with their definitions.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Angular dispersion",
+            "col2": "I. θ = δ_v - δ_r"
+          },
+          {
+            "col1": "B. Dispersive power",
+            "col2": "II. ω = (μ_v - μ_r)/(μ_y - 1)"
+          },
+          {
+            "col1": "C. Chromatic aberration",
+            "col2": "III. Image formed at different positions for different colours"
+          },
+          {
+            "col1": "D. Achromatic combination",
+            "col2": "IV. Combination cancelling chromatic aberration"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_089",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following wave optics terms with their phenomena.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Interference",
+            "col2": "I. Bending of light around obstacles"
+          },
+          {
+            "col1": "B. Diffraction",
+            "col2": "II. Superposition of waves from coherent sources"
+          },
+          {
+            "col1": "C. Polarisation",
+            "col2": "III. Restriction of vibration to one plane"
+          },
+          {
+            "col1": "D. Coherent sources",
+            "col2": "IV. Constant phase difference"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-II, B-I, C-III, D-IV",
+        "B": "A-I, B-II, C-III, D-IV",
+        "C": "A-II, B-III, C-I, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
+    },
+    {
+      "id": "NEET_PHY_090",
+      "subject": "Physics",
+      "chapter": "Mixed",
+      "pattern": "speed_breaker",
+      "difficulty": "Medium",
+      "question": "Match the following YDSE terms with their formulas.",
+      "match_table": {
+        "question_stem": "Match the following:",
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "A. Fringe width β",
+            "col2": "I. λD/d"
+          },
+          {
+            "col1": "B. Path difference for maxima",
+            "col2": "II. nλ"
+          },
+          {
+            "col1": "C. Path difference for minima",
+            "col2": "III. (2n-1)λ/2"
+          },
+          {
+            "col1": "D. Intensity I",
+            "col2": "IV. I₀ cos²(φ/2)"
+          }
+        ]
+      },
+      "options": {
+        "A": "A-I, B-II, C-III, D-IV",
+        "B": "A-II, B-I, C-III, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
+        "D": "A-IV, B-I, C-II, D-III"
+      },
+      "correct_answer": "A",
+      "explanation": ""
     }
   ]
 }

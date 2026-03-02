@@ -8305,7 +8305,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Evolution",
       "topic": "",
-      "question": "Given below are some stages of human evolution. Arrange them in correct sequence. (Past to Recent): A. Homo habilis, B. Homo sapiens, C. Homo neanderthalensis, D. Homo erectus",
+      "question": "Given below are some stages of human evolution. Arrange them in correct sequence. (Past to Recent)",
       "options": {
         "A": "C-B-D-A",
         "B": "A-D-C-B",
@@ -8330,7 +8330,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Homo habilis,"
+        },
+        {
+          "label": "B",
+          "text": "Homo sapiens,"
+        },
+        {
+          "label": "C",
+          "text": "Homo neanderthalensis,"
+        },
+        {
+          "label": "D",
+          "text": "Homo erectus"
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0166",
@@ -9532,7 +9550,7 @@
       "unit_code": "UNCLASSIFIED",
       "chapter": "Biotechnology: Principles and Processes",
       "topic": "",
-      "question": "Arrange these steps in a correct sequence: A. Insertion of recombinant DNA into the host cell B. Cutting of DNA at specific location by restriction enzyme C. Isolation of desired DNA fragment D. Amplification of gene of interest using PCR",
+      "question": "Arrange these steps in a correct sequence",
       "options": {
         "A": "B, C, D, A",
         "B": "C, A, B, D",
@@ -9557,7 +9575,25 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "statements": [
+        {
+          "label": "A",
+          "text": "Insertion of recombinant DNA into the host cell"
+        },
+        {
+          "label": "B",
+          "text": "Cutting of DNA at specific location by restriction enzyme"
+        },
+        {
+          "label": "C",
+          "text": "Isolation of desired DNA fragment"
+        },
+        {
+          "label": "D",
+          "text": "Amplification of gene of interest using PCR"
+        }
+      ]
     },
     {
       "id": "NEET_UPLOAD_Q0159",
