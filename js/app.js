@@ -127,12 +127,23 @@ function showLoader(containerId, msg) {
 }
 
 // ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
+// Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
+const DATA_VER = 'v3';
+
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
 
-  // Check localStorage cache (valid for 24 hours)
-  const cacheKey = `neeto_q_cache_${subject}`;
-  const tsKey    = `neeto_q_ts_${subject}`;
+  const cacheKey = `neeto_q_${DATA_VER}_${subject}`;
+  const tsKey    = `neeto_ts_${DATA_VER}_${subject}`;
+
+  // Purge any old-version cache keys so localStorage doesn't fill up
+  try {
+    Object.keys(localStorage)
+      .filter(k => (k.startsWith('neeto_q_') || k.startsWith('neeto_ts_')) && !k.includes(DATA_VER))
+      .forEach(k => localStorage.removeItem(k));
+  } catch(e) {}
+
+  // Serve from cache if fresh (24 hr)
   try {
     const cached = localStorage.getItem(cacheKey);
     const ts     = parseInt(localStorage.getItem(tsKey) || '0');
@@ -142,13 +153,14 @@ async function loadSubject(subject) {
     }
   } catch(e) {}
 
-  const file = `api_${subject.toLowerCase()}.json`;
+  // Fetch fresh from server (cache-bust with version param)
+  const file = `api_${subject.toLowerCase()}.json?v=${DATA_VER}`;
   try {
     const res  = await fetch(file);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     const qs   = data.questions || [];
     LOADED_SUBJECTS[subject] = qs;
-    // Save to cache
     try {
       localStorage.setItem(cacheKey, JSON.stringify(qs));
       localStorage.setItem(tsKey, String(Date.now()));
