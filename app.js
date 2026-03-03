@@ -195,37 +195,26 @@
     /* ── RENDER ONE QUESTION ── */
     /* ── Diagram image / placeholder renderer ───────────── */
     function buildDiagHtml(q) {
-      var isDiag = q.pattern === 'diagram_dhamaka';
-      if (!isDiag) return '';
+      if (q.pattern !== 'diagram_dhamaka') return '';
 
       if (q.image_url) {
-        var img = document.createElement('img');
-        img.src = q.image_url;
-        img.alt = 'Diagram';
-        img.className = 'diag-img';
-        img.style.cssText = 'max-width:100%;max-height:340px;object-fit:contain;' +
-          'border-radius:10px;border:1.5px solid var(--c-border,#F0E8DE);' +
-          'background:var(--c-surface,#fff);padding:10px;display:block;margin:0 auto;';
-        img.onerror = function() { this.parentNode.style.display = 'none'; };
-        var wrap = document.createElement('div');
-        wrap.style.cssText = 'margin:0.75rem 0 1.2rem;text-align:center;';
-        wrap.appendChild(img);
-        var tmp = document.createElement('div');
-        tmp.appendChild(wrap);
-        return tmp.innerHTML;
+        // Pure string — no DOM serialization (serialization drops onerror)
+        return '<div id="diag-wrap" style="margin:0.75rem 0 1.2rem;text-align:center;">'
+          + '<img src="' + q.image_url + '" alt="Diagram"'
+          + ' style="max-width:100%;max-height:340px;object-fit:contain;border-radius:10px;'
+          + 'border:1.5px solid #F0E8DE;background:#fff;padding:10px;display:block;margin:0 auto;"'
+          + ' onload="this.parentNode.style.display='block'"'
+          + ' onerror="this.parentNode.innerHTML='<div style=\"display:flex;align-items:center;gap:10px;background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:14px 16px;\"><span style=\"font-size:1.3rem;\">🖼️</span><div style=\"font-size:0.76rem;color:#6B5C45;\">Figure could not load. Refer to NCERT book for diagram.</div></div>'"'
+          + '></div>';
       }
 
-      // No image stored — show figure-referenced notice
-      return '<div style="margin:0.75rem 0 1.2rem;display:flex;align-items:center;gap:10px;' +
-        'background:var(--c-surface-2,#FFF8F3);border:1.5px dashed var(--c-border,#F0E8DE);' +
-        'border-radius:10px;padding:14px 16px;">' +
-        '<span style="font-size:1.4rem;flex-shrink:0;">🖼️</span>' +
-        '<div>' +
-        '<div style="font-size:0.8rem;font-weight:700;color:var(--c-brand,#CC3300);' +
-        'text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">Figure referenced in question</div>' +
-        '<div style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);line-height:1.5;">' +
-        'This question refers to a diagram. Refer to your NCERT book or past paper for the figure.</div>' +
-        '</div></div>';
+      return '<div style="display:flex;align-items:center;gap:10px;margin:0.75rem 0 1.2rem;'
+        + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:14px 16px;">'
+        + '<span style="font-size:1.4rem;flex-shrink:0;">🖼️</span>'
+        + '<div><div style="font-size:0.78rem;font-weight:700;color:#CC3300;'
+        + 'text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">Figure referenced</div>'
+        + '<div style="font-size:0.76rem;color:#6B5C45;line-height:1.5;">'
+        + 'Refer to NCERT book or past paper for the diagram.</div></div></div>';
     }
 
     /* ── Match-table renderer ──────────────────────────── */
