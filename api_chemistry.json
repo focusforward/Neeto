@@ -4615,7 +4615,7 @@
       "question": "Which complex compound is most stable?",
       "options": {
         "A": "[Co(NH₃)4(H₂O)Br](NO₃)2",
-        "B": "[Co(NH₃)3(NO₃)3]",
+        "B": "Co(NH₃)3(NO₃)3",
         "C": "[CoCl2(en)2]NO₃",
         "D": "[Co(NH₃)6]2(SO₄)3"
       },
@@ -6311,10 +6311,10 @@
       "topic": "",
       "question": "If force [F], acceleration [A] and time [T] are chosen as the fundamental physical quanties. Find the dimensions of energy.",
       "options": {
-        "A": "[F][A−1][T]",
-        "B": "[F][A][T]",
-        "C": "[F][A][T₂]",
-        "D": "[F][A][T−1]"
+        "A": "F][A−1][T",
+        "B": "F][A][T",
+        "C": "F][A][T₂",
+        "D": "F][A][T−1"
       },
       "correct_answer": "C",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -8473,7 +8473,7 @@
         "A": "[Co(NH₃)6]3+",
         "B": "[Co(en)3]3+",
         "C": "[CoCl2(NH₃)4]+",
-        "D": "[Pt(Cl)2(NH₃)2]"
+        "D": "Pt(Cl)2(NH₃)2"
       },
       "correct_answer": "B",
       "explanation": "Correct: B. [Co(en)3]3+ shows optical isomerism (Δ and Λ). It has no plane of symmetry.",
@@ -10884,7 +10884,7 @@
       "topic": "",
       "question": "Which of the following complexes does NOT show geometrical isomerism?",
       "options": {
-        "A": "[Pt(NH₃)2Cl2]",
+        "A": "Pt(NH₃)2Cl2",
         "B": "[Co(NH₃)4Cl2]+",
         "C": "[Co(en)3]3+",
         "D": "[Pt(NH₃)(Cl)(Br)(NO₂)] (square planar)"
@@ -17991,10 +17991,10 @@
       "topic": "Rate Laws",
       "question": "The amine that reacts with Hinsberg's reagent to give an alkali insoluble product is",
       "options": {
-        "A": "[Structure of primary amine]",
-        "B": "[Structure of secondary amine: CH₃-CH-NH-CH₃]",
-        "C": "[Structure of tertiary amine]",
-        "D": "[Structure of primary amine]"
+        "A": "Structure of primary amine",
+        "B": "Structure of secondary amine: CH₃-CH-NH-CH₃",
+        "C": "Structure of tertiary amine",
+        "D": "Structure of primary amine"
       },
       "correct_answer": "B",
       "explanation": "Secondary amines react with Hinsberg's reagent to give a product which is insoluble in alkali.",
@@ -21052,8 +21052,8 @@
       "topic": "Equilibrium",
       "question": "The Kc for given reaction will be 2 A (g) 2B(g) C(g) 2D(s) + ���⇀ ↽���",
       "options": {
-        "A": "[C][D][A2][B]2[C][D]",
-        "B": "[C][A2][B]2[C]",
+        "A": "C][D][A2][B]2[C][D",
+        "B": "C][A2][B]2[C",
         "C": "[A2][B]2[C][D][A2][B]2",
         "D": "[A2][B]2[C][A2][B]2"
       },
@@ -41929,7 +41929,7 @@
       "difficulty": "L2",
       "question": "Which of the following complexes is used as an anticancer agent?",
       "options": {
-        "A": "[Co(NH₃)₂Cl₃]",
+        "A": "Co(NH₃)₂Cl₃",
         "B": "cis-[PtCl₂(NH₃)₂]",
         "C": "cis-K₂[PtCl₂Br₂]",
         "D": "Na₂[CoCl₄]"
@@ -43343,7 +43343,7 @@
         "A": "[Co(NH₃)₆]³⁺",
         "B": "[Co(NH₃)₅Cl]²⁺",
         "C": "[Co(NH₃)₄Cl₂]⁺",
-        "D": "[Co(NH₃)₃Cl₃]"
+        "D": "Co(NH₃)₃Cl₃"
       },
       "correct_answer": "C",
       "explanation": "[Co(NH₃)₄Cl₂]⁺ is of type [MA₄B₂] which shows geometrical isomerism (cis and trans). [MA₅B] and [MA₆] show no geometrical isomerism.",
@@ -43918,8 +43918,8 @@
       "difficulty": "L1",
       "question": "The formula of dichlorobis(urea)copper(II) is",
       "options": {
-        "A": "[Cu(O=C(NH₂)₂)₂Cl₂]",
-        "B": "[Cu(O=C(NH₂)₂)Cl₂]",
+        "A": "Cu(O=C(NH₂)₂)₂Cl₂",
+        "B": "Cu(O=C(NH₂)₂)Cl₂",
         "C": "[Cu(O=C(NH₂)₂)₂]Cl₂",
         "D": "[Cu(O=C(NH₂)₂)₃]Cl₂"
       },
@@ -44072,7 +44072,7 @@
       "question": "Which of the following complexes is paramagnetic?",
       "options": {
         "A": "[Ni(CN)₄]²⁻",
-        "B": "[Ni(CO)₄]",
+        "B": "Ni(CO)₄",
         "C": "[NiCl₄]²⁻",
         "D": "[Zn(NH₃)₄]²⁺"
       },

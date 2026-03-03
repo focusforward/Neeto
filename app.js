@@ -1,613 +1,538 @@
-// ── MATCH TABLE RENDERER ─────────────────────────────────────────────────
-function renderMatchTable(mt) {
-  if (!mt) return null;
-  function esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+/* ═══════════════════════════════════════════════════════
+   neetminds — app.js  v3
+   Handles: Practice page + Units page
+   Mock test engine is self-contained in mock.html
+═══════════════════════════════════════════════════════ */
 
-  // Normalise to rows array regardless of storage format
-  var rows = [];
-  if (mt.rows && mt.rows.length >= 2) {
-    rows = mt.rows;
-  } else if (mt.col1 && mt.col2) {
-    var c1k = Object.keys(mt.col1), c2k = Object.keys(mt.col2);
-    for (var i = 0; i < Math.max(c1k.length, c2k.length); i++) {
-      var k1 = c1k[i]||'', k2 = c2k[i]||'';
-      rows.push({
-        col1: k1 ? k1 + '. ' + mt.col1[k1] : '',
-        col2: k2 ? k2 + '. ' + mt.col2[k2] : '—'
+(function () {
+  'use strict';
+
+  /* ── CONSTANTS ── */
+  var CACHE_VERSION  = 'v12';
+  var CACHE_TTL      = 24 * 60 * 60 * 1000; // 24 hours
+  var MAX_ATTEMPTS   = 2000;
+  var PAGE_SIZE      = 1; // one question at a time on practice page
+
+  var SUBJECTS = ['Biology', 'Chemistry', 'Physics'];
+  var DATA_FILES = {
+    Biology:   'data/api_biology.json',
+    Chemistry: 'data/api_chemistry.json',
+    Physics:   'data/api_physics.json'
+  };
+
+  var PATTERN_LABELS = {
+    memory_test:     '🎯 Memory Test',
+    negative_charge: '⚡ Negative Charge',
+    concept_guru:    '🌀 Concept Guru',
+    diagram_dhamaka: '🖼️ Diagram Dhamaka',
+    speed_breaker:   '⛔ Speed Breaker',
+    best_choice:     '🔽 Best Choice'
+  };
+
+  /* ── CACHE HELPERS ── */
+  function cacheGet(key) {
+    try { return localStorage.getItem(key); } catch(e) { return null; }
+  }
+  function cacheSet(key, val) {
+    try { localStorage.setItem(key, val); } catch(e) {}
+  }
+
+  // Clear old cache if version changed
+  (function migrateCacheVersion() {
+    try {
+      if (localStorage.getItem('neeto_cache_version') !== CACHE_VERSION) {
+        SUBJECTS.forEach(function(s) {
+          localStorage.removeItem('neeto_q_cache_' + s);
+          localStorage.removeItem('neeto_q_ts_'    + s);
+        });
+        localStorage.setItem('neeto_cache_version', CACHE_VERSION);
+      }
+    } catch(e) {}
+  })();
+
+  /* ── DATA LOADING ── */
+  var _cache = {};
+
+  function loadSubject(subject) {
+    if (_cache[subject]) return Promise.resolve(_cache[subject]);
+
+    // Check localStorage cache
+    var tsKey    = 'neeto_q_ts_' + subject;
+    var dataKey  = 'neeto_q_cache_' + subject;
+    var ts       = parseInt(cacheGet(tsKey) || '0', 10);
+    var now      = Date.now();
+
+    if ((now - ts) < CACHE_TTL) {
+      var raw = cacheGet(dataKey);
+      if (raw) {
+        try {
+          var qs = JSON.parse(raw);
+          _cache[subject] = qs;
+          return Promise.resolve(qs);
+        } catch(e) {}
+      }
+    }
+
+    // Fetch fresh
+    return fetch(DATA_FILES[subject] + '?v=' + CACHE_VERSION)
+      .then(function(r) {
+        if (!r.ok) throw new Error('HTTP ' + r.status);
+        return r.json();
+      })
+      .then(function(data) {
+        var qs = Array.isArray(data) ? data : (data.questions || []);
+        _cache[subject] = qs;
+        try {
+          cacheSet(dataKey, JSON.stringify(qs));
+          cacheSet(tsKey,   String(Date.now()));
+        } catch(e) {}
+        return qs;
+      })
+      .catch(function(e) {
+        console.error('Failed to load', subject, e);
+        showLoadError();
+        return [];
+      });
+  }
+
+  function loadAll() {
+    return Promise.all(SUBJECTS.map(loadSubject))
+      .then(function(arrays) {
+        return [].concat.apply([], arrays);
+      });
+  }
+
+  function showLoadError() {
+    var el = document.getElementById('questions-container');
+    if (el) el.innerHTML = [
+      '<div style="text-align:center;padding:60px 20px;">',
+      '<p style="color:#B91C1C;font-size:1rem;margin-bottom:16px;font-weight:600;">⚠️ Failed to load questions. Check your connection.</p>',
+      '<button onclick="location.reload()" style="background:#FF6B1A;color:white;border:none;',
+      'padding:10px 24px;border-radius:100px;font-size:0.9rem;cursor:pointer;',
+      'font-family:inherit;font-weight:700;">↺ Retry</button>',
+      '</div>'
+    ].join('');
+  }
+
+  /* ── SHUFFLE ── */
+  function shuffle(arr) {
+    var a = arr.slice();
+    for (var i = a.length - 1; i > 0; i--) {
+      var j = Math.floor(Math.random() * (i + 1));
+      var t = a[i]; a[i] = a[j]; a[j] = t;
+    }
+    return a;
+  }
+
+  /* ── ATTEMPTS TRACKING ── */
+  function saveAttempt(obj) {
+    try {
+      var attempts = JSON.parse(cacheGet('neeto_attempts') || '[]');
+      attempts.push(obj);
+      if (attempts.length > MAX_ATTEMPTS) attempts = attempts.slice(-MAX_ATTEMPTS);
+      cacheSet('neeto_attempts', JSON.stringify(attempts));
+    } catch(e) {}
+  }
+
+  /* ══════════════════════════════════════════════════
+     PRACTICE PAGE
+  ══════════════════════════════════════════════════ */
+  function initPracticePage() {
+    var subjectEl = document.getElementById('filter-subject');
+    var patternEl = document.getElementById('filter-pattern');
+    var diffEl    = document.getElementById('filter-diff');
+    var countEl   = document.getElementById('q-count');
+    var container = document.getElementById('questions-container');
+
+    if (!container) return; // not on practice page
+
+    // Read URL params
+    var params  = new URLSearchParams(window.location.search);
+    var urlSubj = params.get('subject') || '';
+    var urlUnit = params.get('unit') || '';
+    var urlPatt = params.get('pattern') || '';
+
+    if (subjectEl && urlSubj) subjectEl.value = urlSubj;
+    if (patternEl && urlPatt) patternEl.value = urlPatt;
+
+    var allQuestions = [];
+    var filtered     = [];
+    var currentIndex = 0;
+    var answered     = false;
+    var sessionStart = Date.now();
+
+    /* ── FILTER LOGIC ── */
+    function applyFilters() {
+      var subj = subjectEl ? subjectEl.value : urlSubj;
+      var patt = patternEl ? patternEl.value : urlPatt;
+      var diff = diffEl    ? diffEl.value    : '';
+
+      filtered = allQuestions.filter(function(q) {
+        if (subj && q.subject !== subj) return false;
+        if (patt && q.pattern !== patt) return false;
+        if (diff && q.difficulty !== diff) return false;
+        if (urlUnit && q.unit_code !== urlUnit && q.chapter !== urlUnit) return false;
+        return true;
+      });
+
+      filtered = shuffle(filtered);
+      currentIndex = 0;
+      answered = false;
+
+      if (countEl) {
+        var label = filtered.length + ' question' + (filtered.length !== 1 ? 's' : '');
+        var parts = [];
+        if (subj) parts.push(subj);
+        if (patt && PATTERN_LABELS[patt]) parts.push(PATTERN_LABELS[patt]);
+        if (diff) parts.push(diff);
+        if (urlUnit) parts.push('this unit');
+        countEl.textContent = label + (parts.length ? ' · ' + parts.join(', ') : ' · All subjects');
+      }
+
+      renderQuestion();
+    }
+
+    /* ── RENDER ONE QUESTION ── */
+    /* ── Match-table renderer ──────────────────────────── */
+    function matchTableHTML(mt) {
+      if (!mt || !mt.col1 || !mt.col2) return '';
+      var c1keys = Object.keys(mt.col1);
+      var c2keys = Object.keys(mt.col2);
+      var rows   = Math.max(c1keys.length, c2keys.length);
+      var html   = '<div class="match-table-wrap">';
+      html += '<div class="match-table-head"><span>Column I</span><span>Column II</span></div>';
+      for (var i = 0; i < rows; i++) {
+        var k1 = c1keys[i] || '';
+        var v1 = k1 ? escHtml(mt.col1[k1]) : '';
+        var k2 = c2keys[i] || '';
+        var v2 = k2 ? escHtml(mt.col2[k2]) : '';
+        html += '<div class="match-table-row">';
+        html += '<div class="match-cell"><span class="match-key">' + escHtml(k1) + '</span>' + v1 + '</div>';
+        html += '<div class="match-cell"><span class="match-key">' + escHtml(k2) + '</span>' + v2 + '</div>';
+        html += '</div>';
+      }
+      html += '</div>';
+      return html;
+    }
+
+    function renderQuestion() {
+      if (!filtered.length) {
+        container.innerHTML = '<div style="text-align:center;padding:60px 20px;">' +
+          '<p style="color:var(--c-ink-muted,#6B5C45);font-size:1rem;">No questions match your filters.</p></div>';
+        return;
+      }
+
+      var q   = filtered[currentIndex];
+      var num = currentIndex + 1;
+      var tot = filtered.length;
+      answered = false;
+      var qStart = Date.now();
+
+      /* progress bar */
+      var pct = Math.round((num / tot) * 100);
+
+      var optKeys = ['A','B','C','D'];
+      var optsHtml = optKeys.map(function(k) {
+        var val = (q.options && q.options[k]) ? q.options[k] : '';
+        if (!val) return '';
+        return '<button class="neeto-opt" data-key="' + k + '" onclick="window._neetAnswer(this)">' +
+          '<span class="opt-label">' + k + '</span> ' + escHtml(val) + '</button>';
+      }).join('');
+
+      var patternTag = '';
+      if (q.pattern && PATTERN_LABELS[q.pattern]) {
+        patternTag = '<span style="display:inline-block;font-size:0.72rem;font-weight:700;' +
+          'background:#FFF0E6;color:#E85500;padding:3px 10px;border-radius:100px;margin-bottom:10px;">' +
+          PATTERN_LABELS[q.pattern] + '</span>';
+      }
+
+      var yearTag = q.year ? '<span style="font-size:0.72rem;color:#6B5C45;margin-left:8px;">NEET ' + q.year + '</span>' : '';
+
+      container.innerHTML = [
+        /* Progress */
+        '<div style="margin-bottom:16px;">',
+        '  <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;">',
+        '    <span style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);font-weight:500;">Question ' + num + ' of ' + tot + '</span>',
+        '    <span style="font-size:0.78rem;color:#6B5C45;">' + pct + '%</span>',
+        '  </div>',
+        '  <div style="height:4px;background:#F0E8DE;border-radius:100px;overflow:hidden;">',
+        '    <div style="height:100%;width:' + pct + '%;background:#FF6B1A;border-radius:100px;transition:width 0.3s;"></div>',
+        '  </div>',
+        '</div>',
+
+        /* Question card */
+        '<div class="q-card" style="padding:1.6rem;margin-bottom:1rem;">',
+        '  ' + patternTag + yearTag,
+        '  <p style="font-size:0.72rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">' +
+          escHtml(q.subject || '') + ' · ' + escHtml(q.chapter || '') + '</p>',
+        '  <p style="font-size:1rem;font-weight:500;line-height:1.65;color:var(--qcard-text,#1A1208);margin-bottom:' + (q.match_table ? '0.8rem' : '1.4rem') + ';">' + escHtml(q.question || '') + '</p>',
+        (q.match_table ? matchTableHTML(q.match_table) : ''),
+        (q.image_url ? '<div style="margin:0.75rem 0 1rem;text-align:center;"><img src="' + q.image_url + '" alt="Diagram" class="diag-img" onerror="this.style.display='none'" style="max-width:100%;max-height:320px;object-fit:contain;border-radius:10px;border:1.5px solid var(--c-border,#F0E8DE);background:var(--c-surface,#fff);padding:8px;display:block;margin:0 auto;"></div>' : ''),
+        '  <div id="options-wrap">' + optsHtml + '</div>',
+        '  <div id="explanation-wrap"></div>',
+        '</div>',
+
+        /* Nav buttons */
+        '<div style="display:flex;gap:10px;justify-content:space-between;align-items:center;flex-wrap:wrap;">',
+        '  <button onclick="window._neetSkip()" style="background:var(--opt-bg,#fff);border:1.5px solid var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);',
+        '    padding:9px 22px;border-radius:100px;font-size:0.85rem;font-weight:600;cursor:pointer;',
+        '    font-family:inherit;transition:all 0.15s;" onmouseover="this.style.borderColor=\'#FF6B1A\';this.style.color=\'#FF6B1A\'" ',
+        '    onmouseout="this.style.borderColor=\'#F0E8DE\';this.style.color=\'#6B5C45\'">Skip →</button>',
+        '  <span style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);">' +
+          (q.difficulty === 'L1' ? '🟢 Easy' : q.difficulty === 'L2' ? '🟡 Medium' : '🔴 Hard') +
+          '</span>',
+        '</div>'
+      ].join('\n');
+
+      /* expose answer handler */
+      window._neetAnswer = function(btn) {
+        if (answered) return;
+        answered = true;
+        var chosen  = btn.getAttribute('data-key');
+        var correct = (q.correct_answer || '').toUpperCase();
+        var isRight = chosen === correct;
+        var elapsed = Date.now() - qStart;
+
+        /* colour options */
+        var wrap = document.getElementById('options-wrap');
+        if (wrap) {
+          var btns = wrap.querySelectorAll('.neeto-opt');
+          btns.forEach(function(b) {
+            var k = b.getAttribute('data-key');
+            if (k === correct) {
+              b.classList.add('neeto-correct');
+            } else if (k === chosen) {
+              b.classList.add('neeto-wrong');
+            } else {
+              b.classList.add('neeto-dim');
+            }
+          });
+        }
+
+        /* explanation */
+        var expWrap = document.getElementById('explanation-wrap');
+        if (expWrap && q.explanation) {
+          expWrap.innerHTML = '<div class="explanation" style="margin-top:1rem;padding:1rem 1.2rem;">' +
+            '<p style="font-size:0.78rem;font-weight:700;color:#E85500;margin-bottom:6px;">💡 Explanation</p>' +
+            '<p style="font-size:0.88rem;line-height:1.6;color:var(--c-ink,#1A1208);">' + escHtml(q.explanation) + '</p>' +
+            (q.ncert_ref ? '<p style="font-size:0.72rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 ' + escHtml(q.ncert_ref) + '</p>' : '') +
+            '</div>' +
+            '<div style="margin-top:12px;text-align:center;">' +
+            '<button onclick="window._neetNext()" style="background:#FF6B1A;color:#fff;border:none;' +
+            'padding:10px 32px;border-radius:100px;font-size:0.9rem;font-weight:700;cursor:pointer;' +
+            'font-family:inherit;box-shadow:0 4px 14px rgba(255,107,26,0.3);">Next Question →</button>' +
+            '</div>';
+        } else if (expWrap) {
+          expWrap.innerHTML = '<div style="margin-top:12px;text-align:center;">' +
+            '<button onclick="window._neetNext()" style="background:#FF6B1A;color:#fff;border:none;' +
+            'padding:10px 32px;border-radius:100px;font-size:0.9rem;font-weight:700;cursor:pointer;' +
+            'font-family:inherit;box-shadow:0 4px 14px rgba(255,107,26,0.3);">Next Question →</button>' +
+            '</div>';
+        }
+
+        /* save attempt */
+        saveAttempt({
+          type: 'practice',
+          questionId: q.id || '',
+          subject: q.subject || '',
+          chapter: q.unit_code || '',
+          chapterName: q.chapter || '',
+          pattern: q.pattern || '',
+          difficulty: q.difficulty || '',
+          userAnswer: chosen,
+          correctAnswer: correct,
+          isCorrect: isRight,
+          timeSpentMs: elapsed,
+          year: q.year || '',
+          ts: Date.now()
+        });
+      };
+
+      window._neetSkip = function() {
+        if (!answered) {
+          saveAttempt({
+            type: 'practice',
+            questionId: q.id || '',
+            subject: q.subject || '',
+            chapter: q.unit_code || '',
+            chapterName: q.chapter || '',
+            pattern: q.pattern || '',
+            difficulty: q.difficulty || '',
+            userAnswer: null,
+            correctAnswer: (q.correct_answer || '').toUpperCase(),
+            isCorrect: false,
+            timeSpentMs: Date.now() - qStart,
+            year: q.year || '',
+            ts: Date.now()
+          });
+        }
+        window._neetNext();
+      };
+
+      window._neetNext = function() {
+        currentIndex++;
+        if (currentIndex >= filtered.length) {
+          /* End of filtered set — reshuffle and restart */
+          filtered = shuffle(filtered);
+          currentIndex = 0;
+          container.innerHTML = [
+            '<div style="text-align:center;padding:40px 20px;background:#F0FDF4;border-radius:18px;border:1.5px solid #22C55E;margin-bottom:20px;">',
+            '<p style="font-size:1.5rem;margin-bottom:8px;">🎉</p>',
+            '<p style="font-family:\'Fraunces\',serif;font-size:1.2rem;font-weight:900;color:#15803D;margin-bottom:6px;">You finished this set!</p>',
+            '<p style="font-size:0.88rem;color:#6B5C45;margin-bottom:16px;">Starting again with a fresh shuffle...</p>',
+            '<button onclick="window._neetNext()" style="background:#FF6B1A;color:#fff;border:none;',
+            'padding:10px 28px;border-radius:100px;font-size:0.9rem;font-weight:700;cursor:pointer;font-family:inherit;">Continue →</button>',
+            '</div>'
+          ].join('');
+          /* Don't call renderQuestion yet — let the button trigger it */
+          window._neetNext = function() { renderQuestion(); };
+          return;
+        }
+        renderQuestion();
+      };
+    }
+
+    /* ── BIND FILTERS ── */
+    [subjectEl, patternEl, diffEl].forEach(function(el) {
+      if (el) el.addEventListener('change', applyFilters);
+    });
+
+    /* ── LOAD DATA ── */
+    var subjectToLoad = urlSubj || '';
+    if (subjectToLoad) {
+      loadSubject(subjectToLoad).then(function(qs) {
+        allQuestions = qs;
+        applyFilters();
+      });
+    } else {
+      loadAll().then(function(qs) {
+        allQuestions = qs;
+        applyFilters();
       });
     }
   }
-  if (rows.length < 2) return null;
 
-  var hasCol2 = rows.some(function(r) { return r.col2 && r.col2 !== '—'; });
-  // Clean headers: strip column items packed into header (e.g. "Column I – Taenia, Paramoecium...")
-  function cleanHdr(h, fb) {
-    if (!h) return fb;
-    var c = h.replace(/\s*[–\-—].*$/, '').replace(/,.*$/, '').trim();
-    return c || fb;
-  }
-  var h1 = esc(cleanHdr(mt.col1_header, 'Column I'));
-  var h2 = esc(cleanHdr(mt.col2_header, 'Column II'));
+  /* ══════════════════════════════════════════════════
+     UNITS PAGE
+  ══════════════════════════════════════════════════ */
+  function initUnitsPage() {
+    var grid = document.getElementById('units-grid');
+    if (!grid) return;
 
-  var thStyle = 'padding:8px 14px;text-align:left;font-weight:700;font-size:0.72rem;' +
-    'letter-spacing:0.06em;text-transform:uppercase;background:#FFF5F0;';
-  var thead = '<thead><tr>' +
-    '<th style="' + thStyle + 'color:#CC3300;border-right:1.5px solid #F0E8DE;width:50%;">' + h1 + '</th>' +
-    (hasCol2 ? '<th style="' + thStyle + 'color:#1A4DB5;">' + h2 + '</th>' : '') +
-    '</tr></thead>';
+    loadAll().then(function(allQs) {
+      /* Build unit map */
+      var unitMap = {};
+      allQs.forEach(function(q) {
+        var key = q.unit_code || 'UNIT_GENERAL';
+        if (!unitMap[key]) {
+          unitMap[key] = {
+            unit_code: key,
+            chapter: q.chapter || key,
+            subject: q.subject || '',
+            count: 0
+          };
+        }
+        unitMap[key].count++;
+      });
 
-  var rowsHtml = rows.map(function(r, i) {
-    // Parse "A. text" for col1
-    var c1str = String(r.col1||'');
-    var c1m = c1str.match(/^([A-Da-d])\.\s*([\s\S]+)/);
-    var c1 = c1m
-      ? '<span style="font-weight:800;color:#FF6B1A;margin-right:6px;flex-shrink:0;">' + esc(c1m[1]) + '.</span>' + esc(c1m[2])
-      : esc(c1str);
+      /* Sort: by subject then chapter */
+      var units = Object.values(unitMap).sort(function(a, b) {
+        if (a.subject < b.subject) return -1;
+        if (a.subject > b.subject) return 1;
+        return (a.chapter || '').localeCompare(b.chapter || '');
+      });
 
-    // Parse "I. text" or "1. text" for col2 — handles Roman numerals
-    var c2html = '';
-    if (hasCol2) {
-      var c2str = (r.col2 && r.col2 !== '—') ? String(r.col2) : '';
-      var c2m = c2str.match(/^([IVXivx]+|\d+)\.\s*([\s\S]+)/);
-      c2html = c2m
-        ? '<span style="font-weight:800;color:#1A4DB5;margin-right:6px;flex-shrink:0;">' + esc(c2m[1]) + '.</span>' + esc(c2m[2])
-        : esc(c2str);
-    }
+      /* Render cards */
+      grid.innerHTML = units.map(function(u) {
+        var subjClass = u.subject === 'Biology'   ? 'unit-subject-bio'  :
+                        u.subject === 'Chemistry' ? 'unit-subject-chem' :
+                        u.subject === 'Physics'   ? 'unit-subject-phys' : '';
+        var url = 'practice.html?subject=' + encodeURIComponent(u.subject) +
+                  '&unit=' + encodeURIComponent(u.unit_code);
+        return [
+          '<a class="unit-card" href="' + url + '">',
+          '  <span class="unit-subject ' + subjClass + '">' + escHtml(u.subject) + '</span>',
+          '  <div class="unit-name">' + escHtml(u.chapter) + '</div>',
+          '  <div class="unit-count">' + u.count + ' question' + (u.count !== 1 ? 's' : '') + '</div>',
+          '</a>'
+        ].join('\n');
+      }).join('\n');
 
-    var bg = i % 2 === 0 ? 'var(--c-surface,#fff)' : 'var(--c-bg-alt,#FAFAF8)';
-    return '<tr style="background:' + bg + ';border-top:1px solid #F0E8DE;">' +
-      '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;border-right:1.5px solid #F0E8DE;font-weight:500;display:table-cell;">' +
-        '<div style="display:flex;align-items:flex-start;">' + c1 + '</div></td>' +
-      (hasCol2 ? '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;font-weight:500;">' +
-        '<div style="display:flex;align-items:flex-start;">' + c2html + '</div></td>' : '') +
-      '</tr>';
-  }).join('');
-
-  return '<table style="width:100%;border-collapse:collapse;border:1.5px solid #F0E8DE;' +
-    'border-radius:10px;overflow:hidden;margin-bottom:1.2rem;font-size:0.875rem;">' +
-    thead + '<tbody>' + rowsHtml + '</tbody></table>';
-}
-
-// ── NEETO — app.js  (with localStorage caching + attempt analytics)
-function _esc(s) { return String(s||'').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
-
-
-let ALL_QUESTIONS = [];
-let LOADED_SUBJECTS = {};
-
-// ── ANALYTICS STORE ──────────────────────────────────────────────────
-// All data lives in localStorage under these keys:
-//   neeto_attempts   → array of attempt objects (practice + mock)
-//   neeto_sessions   → array of session summaries (mock only)
-//   neeto_q_cache_*  → cached JSON question files
-
-const ANALYTICS = {
-  saveAttempt(obj) {
-    try {
-      const arr = JSON.parse(localStorage.getItem('neeto_attempts') || '[]');
-      arr.push({ ...obj, ts: Date.now() });
-      // Keep last 2000 attempts to avoid storage bloat
-      if (arr.length > 2000) arr.splice(0, arr.length - 2000);
-      localStorage.setItem('neeto_attempts', JSON.stringify(arr));
-    } catch(e) {}
-  },
-  saveSession(obj) {
-    try {
-      const arr = JSON.parse(localStorage.getItem('neeto_sessions') || '[]');
-      arr.push({ ...obj, ts: Date.now() });
-      if (arr.length > 50) arr.splice(0, arr.length - 50);
-      localStorage.setItem('neeto_sessions', JSON.stringify(arr));
-    } catch(e) {}
-  },
-  getAttempts()  { try { return JSON.parse(localStorage.getItem('neeto_attempts') || '[]'); } catch(e) { return []; } },
-  getSessions()  { try { return JSON.parse(localStorage.getItem('neeto_sessions') || '[]'); } catch(e) { return []; } },
-};
-
-const UNIT_NAMES = {
-  "UNIT1_DiversityLivingWorld":    "Diversity in Living World",
-  "UNIT2_StructuralOrganisation":  "Structural Organisation",
-  "UNIT3_CellStructureFunction":   "Cell Structure & Function",
-  "UNIT4_PlantPhysiology":         "Plant Physiology",
-  "UNIT5_HumanPhysiology":         "Human Physiology",
-  "UNIT6_Reproduction":            "Reproduction",
-  "UNIT7_GeneticsEvolution":       "Genetics & Evolution",
-  "UNIT8_BiologyHumanWelfare":     "Biology & Human Welfare",
-  "UNIT9_BiotechnologyApplications":"Biotechnology",
-  "UNIT10_EcologyEnvironment":     "Ecology & Environment",
-  "UNIT1_PhysicsWorld":            "Physical World & Kinematics",
-  "UNIT2_KinematicsLaws":          "Laws of Motion",
-  "UNIT3_WorkEnergyPower":         "Work, Energy & Power",
-  "UNIT4_RotationalMotion":        "Rotational Motion",
-  "UNIT5_Gravitation":             "Gravitation",
-  "UNIT6_PropertiesMatter":        "Properties of Matter",
-  "UNIT7_ThermalProperties":       "Thermal Properties",
-  "UNIT8_Thermodynamics":          "Thermodynamics",
-  "UNIT9_KineticTheory":           "Kinetic Theory",
-  "UNIT10_Oscillations":           "Oscillations & Waves",
-  "UNIT11_Electrostatics":         "Electrostatics",
-  "UNIT12_CurrentElectricity":     "Current Electricity",
-  "UNIT13_MagnetismCurrents":      "Magnetism & EMI",
-  "UNIT14_AlternatingCurrent":     "Alternating Current",
-  "UNIT15_ElectromagneticWaves":   "Electromagnetic Waves",
-  "UNIT16_Optics":                 "Optics",
-  "UNIT17_DualNature":             "Dual Nature",
-  "UNIT18_AtomsNuclei":            "Atoms & Nuclei",
-  "UNIT19_Semiconductors":         "Semiconductors",
-  "UNIT20_CommunicationSystems":   "Communication Systems",
-  "UNIT2_AtomicStructure":         "Atomic Structure",
-  "UNIT3_ChemicalBondingMolecularStructure": "Chemical Bonding",
-  "UNIT4_ChemicalThermodynamics":  "Thermodynamics",
-  "UNIT5_Solutions":               "Solutions",
-  "UNIT6_Equilibrium":             "Equilibrium",
-  "UNIT7_RedoxElectrochemistry":   "Electrochemistry",
-  "UNIT8_ChemicalKinetics":        "Chemical Kinetics",
-  "UNIT8_sBlockElements":          "s-Block Elements",
-  "UNIT9_ClassificationElementsPeriodicity": "Periodic Table",
-  "UNIT10_pBlockElements":         "p-Block Elements",
-  "UNIT11_dAndFBlockElements":     "d & f Block Elements",
-  "UNIT12_CoordinationCompounds":  "Coordination Compounds",
-  "UNIT13_OrganometallicChemistry":"Organometallics",
-  "UNIT14_BasicPrinciplesOrganicChemistry": "Basic Organic Chemistry",
-  "UNIT15_Hydrocarbons":           "Hydrocarbons",
-  "UNIT16_OrganicHalogens":        "Haloalkanes & Haloarenes",
-  "UNIT17_OrganicOxygen":          "Alcohols, Aldehydes & Acids",
-  "UNIT18_OrganicNitrogen":        "Amines",
-  "UNIT19_Biomolecules":           "Biomolecules",
-  "UNIT20_Polymers":               "Polymers",
-  "UNIT21_Chemistry_Environment":  "Chemistry in Everyday Life",
-  "UNCLASSIFIED":                  "General",
-};
-
-function subjectFromUnit(unit_code) {
-  const bioStarts  = ['UNIT1_D','UNIT2_S','UNIT3_C','UNIT4_P','UNIT5_H','UNIT6_R','UNIT7_G','UNIT8_B','UNIT9_B','UNIT10_E'];
-  const chemStarts = ['UNIT2_A','UNIT3_Ch','UNIT4_Ch','UNIT5_S','UNIT6_E','UNIT7_R','UNIT8_Ch','UNIT8_s','UNIT9_Cl','UNIT10_p','UNIT11_d','UNIT12_C','UNIT13_O','UNIT14_B','UNIT15_H','UNIT16_O','UNIT17_O','UNIT18_O','UNIT19_B','UNIT20_P','UNIT21_C'];
-  for (const p of bioStarts)  if (unit_code.startsWith(p)) return 'Biology';
-  for (const p of chemStarts) if (unit_code.startsWith(p)) return 'Chemistry';
-  return 'Physics';
-}
-
-function showLoader(containerId, msg) {
-  const el = document.getElementById(containerId);
-  if (el) el.innerHTML = `<div style="text-align:center;padding:60px;color:#FF6B1A;font-size:1.1rem;">⏳ ${msg || 'Loading...'}</div>`;
-}
-
-// ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
-// Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
-const DATA_VER = 'v11';
-
-async function loadSubject(subject) {
-  if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
-
-  const cacheKey = `neeto_q_${DATA_VER}_${subject}`;
-  const tsKey    = `neeto_ts_${DATA_VER}_${subject}`;
-
-  // Purge any old-version cache keys so localStorage doesn't fill up
-  try {
-    Object.keys(localStorage)
-      .filter(k => (k.startsWith('neeto_q_') || k.startsWith('neeto_ts_')) && !k.includes(DATA_VER))
-      .forEach(k => localStorage.removeItem(k));
-  } catch(e) {}
-
-  // Serve from cache if fresh (24 hr)
-  try {
-    const cached = localStorage.getItem(cacheKey);
-    const ts     = parseInt(localStorage.getItem(tsKey) || '0');
-    if (cached && Date.now() - ts < 24 * 60 * 60 * 1000) {
-      LOADED_SUBJECTS[subject] = JSON.parse(cached);
-      return LOADED_SUBJECTS[subject];
-    }
-  } catch(e) {}
-
-  // Fetch fresh from server (cache-bust with version param)
-  const file = `api_${subject.toLowerCase()}.json?v=${DATA_VER}`;
-  try {
-    const res  = await fetch(file);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const qs   = data.questions || [];
-    LOADED_SUBJECTS[subject] = qs;
-    try {
-      localStorage.setItem(cacheKey, JSON.stringify(qs));
-      localStorage.setItem(tsKey, String(Date.now()));
-    } catch(e) {}
-    return qs;
-  } catch(e) {
-    console.error('Failed to load', file, e);
-    return [];
-  }
-}
-
-async function loadAllQuestions() {
-  const [bio, chem, phys] = await Promise.all([
-    loadSubject('Biology'),
-    loadSubject('Chemistry'),
-    loadSubject('Physics')
-  ]);
-  ALL_QUESTIONS = [...bio, ...chem, ...phys];
-  return ALL_QUESTIONS;
-}
-
-function getParam(key) {
-  return new URLSearchParams(window.location.search).get(key);
-}
-
-function cleanNcert(q) {
-  if (!q.ncert_ref || q.ncert_ref === 'undefined') return '';
-  if (!q.ncert_line || !q.ncert_line.trim() || q.ncert_line.includes('To be added')) {
-    return `<div class="ncert-line">📖 ${q.ncert_ref}</div>`;
-  }
-  return `<div class="ncert-line">📖 ${q.ncert_ref}<br/><em>${q.ncert_line.substring(0,200)}...</em></div>`;
-}
-
-// ── PRACTICE PAGE ─────────────────────────────────────────────────────
-function initPractice() {
-  if (!document.getElementById('questions-container')) return;
-
-  const subjectFilter = document.getElementById('filter-subject');
-  const patternFilter = document.getElementById('filter-pattern');
-  const diffFilter    = document.getElementById('filter-diff');
-  const countEl       = document.getElementById('q-count');
-
-  const urlSubject = getParam('subject');
-  const urlUnit    = getParam('unit');
-
-  if (urlSubject && subjectFilter) subjectFilter.value = urlSubject;
-
-  showLoader('questions-container', 'Loading questions...');
-
-  const subjectToLoad = urlSubject || (subjectFilter ? subjectFilter.value : '');
-  const loadPromise = subjectToLoad
-    ? loadSubject(subjectToLoad).then(qs => { ALL_QUESTIONS = qs; return qs; })
-    : loadAllQuestions();
-
-  loadPromise.then(() => {
-    renderFiltered();
-    if (subjectFilter) subjectFilter.addEventListener('change', () => {
-      const sel = subjectFilter.value;
-      if (sel && !LOADED_SUBJECTS[sel]) {
-        showLoader('questions-container', 'Loading...');
-        loadSubject(sel).then(qs => { ALL_QUESTIONS = qs; renderFiltered(); });
-      } else {
-        ALL_QUESTIONS = sel ? (LOADED_SUBJECTS[sel] || []) : Object.values(LOADED_SUBJECTS).flat();
-        renderFiltered();
+      /* Subject filter (units page) */
+      var filterEl = document.getElementById('filter-subject');
+      if (filterEl) {
+        filterEl.addEventListener('change', function() {
+          var val = this.value;
+          document.querySelectorAll('.unit-card').forEach(function(card) {
+            var subj = card.querySelector('.unit-subject');
+            var match = !val || (subj && subj.textContent.trim() === val);
+            card.style.display = match ? '' : 'none';
+          });
+        });
       }
     });
-    if (patternFilter) patternFilter.addEventListener('change', renderFiltered);
-    if (diffFilter)    diffFilter.addEventListener('change', renderFiltered);
-  });
-
-  function renderFiltered() {
-    let filtered = [...ALL_QUESTIONS];
-    if (urlUnit) filtered = filtered.filter(q => q.unit_code === urlUnit);
-    const sf = subjectFilter ? subjectFilter.value : '';
-    const pf = patternFilter ? patternFilter.value : '';
-    const df = diffFilter    ? diffFilter.value    : '';
-    if (sf) filtered = filtered.filter(q => q.subject    === sf);
-    if (pf) filtered = filtered.filter(q => q.pattern    === pf);
-    if (df) filtered = filtered.filter(q => q.difficulty === df);
-    if (countEl) countEl.textContent = `${filtered.length} questions`;
-    // Shuffle every time so students get different questions each session
-    for (let i = filtered.length - 1; i > 0; i--) {
-      const j = Math.floor(Math.random() * (i + 1));
-      [filtered[i], filtered[j]] = [filtered[j], filtered[i]];
-    }
-    renderQuestions(filtered);
-  }
-}
-
-// ── ONE-AT-A-TIME PRACTICE ────────────────────────────────────────────
-let _practiceQs   = [];
-let _practiceIdx  = 0;
-let _questionStart = 0;  // timestamp when current question was shown
-
-function renderQuestions(qs) {
-  _practiceQs  = qs;
-  _practiceIdx = 0;
-  window._currentQs = qs;
-  showQuestion(0);
-}
-
-function showQuestion(idx) {
-  const container = document.getElementById('questions-container');
-  if (!container) return;
-
-  if (!_practiceQs.length) {
-    container.innerHTML = '<p style="padding:40px;text-align:center;color:var(--c-ink-muted,#6B5C45);">No questions match your filters.</p>';
-    return;
   }
 
-  _practiceIdx   = idx;
-  _questionStart = Date.now();
-  const q        = _practiceQs[idx];
-  const total    = _practiceQs.length;
-  const isLast   = idx === total - 1;
-
-  container.innerHTML = `
-    <div style="max-width:680px;margin:0 auto;">
-      <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;">
-        <div style="flex:1;height:6px;background:var(--c-border,#F0E8DE);border-radius:100px;overflow:hidden;class='prog-track'">
-          <div style="width:${Math.round(((idx+1)/total)*100)}%;height:100%;background:#FF6B1A;border-radius:100px;transition:width 0.3s;"></div>
-        </div>
-        <span style="font-size:0.82rem;font-weight:600;color:#6B5C45;white-space:nowrap;">${idx+1} / ${total}</span>
-      </div>
-
-      <div class="q-card" id="qc-0" style="border-radius:18px;padding:2rem 2rem 1.5rem;">
-        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.2rem;">
-          <span style="${tagStyle(q.subject,'subject')}">${q.subject}</span>
-          ${q.difficulty ? `<span style="${tagStyle(q.difficulty,'diff')}">${q.difficulty}</span>` : ''}
-          ${q.pattern    ? `<span style="${tagStyle('','pattern')}">${q.pattern}</span>` : ''}
-          ${q.year       ? `<span style="${tagStyle('','year')}">NEET ${q.year}</span>` : ''}
-        </div>
-
-        ${(function(){
-          var mt = q.match_table;
-          var stmts = q.statements;
-          var rendered = mt ? renderMatchTable(mt) : null;
-          var imgUrl = q.image_url || '';
-
-          // Image block (shown for diagram questions - above options)
-          var imgHtml = imgUrl
-            ? '<div style="margin-bottom:1rem;text-align:center;">' +
-              '<img src="' + imgUrl + '" alt="Diagram" class="diag-img" ' +
-              'onerror="this.style.display=\'none\'">' +
-              '</div>'
-            : '';
-
-          // Question text line (always shown)
-          var qText = '<div style="font-size:1rem;line-height:1.7;color:var(--qcard-text,#1A1208);font-weight:500;margin-bottom:0.75rem;">' +
-            _esc(q.question||'') + '</div>';
-
-          // Match-table question
-          if (rendered) {
-            var stem = _esc(mt.question_stem || 'Match the following:');
-            return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' + stem + '</div>' +
-              rendered;
-          }
-
-          // Multi-statement question (A. B. C. D. sub-statements)
-          if (stmts && stmts.length >= 2) {
-            var stmtHtml = stmts.map(function(s) {
-              return '<div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;' +
-                'background:var(--c-bg-alt,#FAFAF8);border-radius:8px;margin-bottom:6px;line-height:1.6;">' +
-                '<span style="font-weight:800;color:#CC3300;flex-shrink:0;min-width:18px;">' + _esc(s.label) + '.</span>' +
-                '<span style="color:#1A1208;font-weight:500;">' + _esc(s.text) + '</span>' +
-                '</div>';
-            }).join('');
-            return qText + '<div style="margin-bottom:1rem;">' + stmtHtml + '</div>';
-          }
-
-          // Diagram question OR plain question
-          return qText + imgHtml;
-        })()} 
-
-        <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
-          ${['A','B','C','D'].filter(k => q.options && q.options[k] && String(q.options[k]).trim()).map(k => `
-            <button data-key="${k}" onclick="selectOption(${idx},'${k}')"
-              style="background:var(--opt-bg,#fff);border:1.5px solid var(--opt-border,#E2E8F0);border-radius:10px;padding:0.75rem 1.1rem;width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;color:var(--c-ink,#1A1208);transition:all 0.15s;display:flex;align-items:center;gap:10px;">
-              <span style="font-weight:700;color:#FF6B1A;min-width:1.1rem;">${k}.</span>
-              ${q.options[k]}
-            </button>`).join('')}
-        </div>
-
-        <button id="show-ans-btn" onclick="revealAnswer(${idx})"
-          style="margin-top:1.1rem;background:none;border:1.5px solid var(--c-border,#F0E8DE);border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);cursor:pointer;font-family:inherit;">
-          Show Answer
-        </button>
-
-        <div id="exp-0" style="display:none;margin-top:1rem;background:var(--expl-bg,#FFF7F0);border:1px solid var(--expl-border,rgba(255,107,26,0.2));border-radius:12px;padding:1rem 1.2rem;font-size:0.875rem;color:var(--c-ink,#1A1208);line-height:1.6;">
-          <strong style="color:#E85500;">✅ Correct Answer: ${(q.correct_answer||'').toString().trim().toUpperCase()}</strong><br/>
-          ${(q.explanation && q.explanation.trim() && !q.explanation.includes('not provided') && !q.explanation.includes('PDF')) ? q.explanation : 'Please refer to your NCERT textbook for a detailed explanation of this concept.'}
-          ${cleanNcert(q)}
-        </div>
-
-        <div id="nav-row" style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:12px;">
-          <button onclick="goQuestion(${idx-1})" ${idx===0?'disabled':''}
-            style="background:none;border:1.5px solid var(--c-border,#F0E8DE);border-radius:100px;padding:0.55rem 1.2rem;font-size:0.875rem;font-weight:600;color:${idx===0?'var(--c-border-mid,#D1C8BE)':'var(--c-ink-muted,#6B5C45)'};cursor:${idx===0?'default':'pointer'};font-family:inherit;">
-            ← Prev
-          </button>
-          <button id="next-btn" onclick="goQuestion(${idx+1})" ${isLast?'disabled':''}
-            style="background:${isLast?'#F0E8DE':'#FF6B1A'};border:none;border-radius:100px;
-                   padding:0.6rem 1.6rem;font-size:0.875rem;font-weight:700;
-                   color:${isLast?'#A09080':'#fff'};cursor:${isLast?'default':'pointer'};
-                   font-family:inherit;box-shadow:${isLast?'none':'0 4px 14px rgba(255,107,26,0.3)'};">
-            ${isLast ? 'Last Question' : 'Next →'}
-          </button>
-        </div>
-      </div>
-    </div>`;
-}
-
-function tagStyle(val, type) {
-  const base = 'display:inline-block;border-radius:100px;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border:none;text-transform:uppercase;letter-spacing:0.04em;';
-  if (type === 'subject') {
-    if (val === 'Biology')   return base + 'background:#DCFCE7;color:#15803D;';
-    if (val === 'Chemistry') return base + 'background:#DBEAFE;color:#1D4ED8;';
-    return base + 'background:#FEF3C7;color:#B45309;';
+  /* ── ESCAPE HTML ── */
+  /* ── LaTeX → readable-text sanitiser ──────────────── */
+  function sanitiseLatex(str) {
+    if (!str || str.indexOf('\\') === -1) return str;
+    return str
+      // Arrows
+      .replace(/\\longrightarrow|\\rightarrow|\\to\b/g, ' → ')
+      .replace(/\\longleftarrow|\\leftarrow/g, ' ← ')
+      .replace(/\\xrightarrow\{([^}]*)\}/g, function(_,a){ return ' →(' + a.replace(/~/g,' ') + ')→ '; })
+      .replace(/\\xleftarrow\{([^}]*)\}/g, function(_,a){ return ' ←(' + a.replace(/~/g,' ') + ')← '; })
+      // Fractions used as reaction-condition notation: \frac{label}{\rightarrow ...}
+      .replace(/\\frac\{([^}]*)\}\{\\rightarrow/g, ' →($1)→ ')
+      .replace(/\\frac\{([^}]*)\}\{/g, '($1)/( ')
+      // Super/subscripts
+      .replace(/\^\{([^}]*)\}/g, function(_,a){ return toSuperscript(a); })
+      .replace(/_{([^}]*)}/g, function(_,a){ return toSubscript(a); })
+      .replace(/\^(-?\d+)/g, function(_,a){ return toSuperscript(a); })
+      .replace(/_(-?\d+)/g, function(_,a){ return toSubscript(a); })
+      // Greek letters
+      .replace(/\\alpha/g,'α').replace(/\\beta/g,'β').replace(/\\gamma/g,'γ')
+      .replace(/\\delta/g,'δ').replace(/\\Delta/g,'Δ').replace(/\\epsilon/g,'ε')
+      .replace(/\\lambda/g,'λ').replace(/\\mu/g,'μ').replace(/\\nu/g,'ν')
+      .replace(/\\pi/g,'π').replace(/\\sigma/g,'σ').replace(/\\omega/g,'ω')
+      .replace(/\\Omega/g,'Ω').replace(/\\theta/g,'θ').replace(/\\phi/g,'φ')
+      // Math operators
+      .replace(/\\times/g,'×').replace(/\\div/g,'÷').replace(/\\pm/g,'±')
+      .replace(/\\cdot/g,'·').replace(/\\leq/g,'≤').replace(/\\geq/g,'≥')
+      .replace(/\\neq/g,'≠').replace(/\\approx/g,'≈').replace(/\\infty/g,'∞')
+      // Formatting
+      .replace(/\\text\{([^}]*)\}/g,'$1')
+      .replace(/\\mathrm\{([^}]*)\}/g,'$1')
+      .replace(/\\mathbf\{([^}]*)\}/g,'$1')
+      .replace(/\\left[\(\[{|]/g,'').replace(/\\right[\)\]}|]/g,'')
+      // Inline $ delimiters
+      .replace(/\$([^$]+)\$/g,'$1')
+      // Clean up stray backslashes and double-spaces
+      .replace(/\\\s*/g,' ')
+      .replace(/\s{2,}/g,' ')
+      .trim();
   }
-  if (type === 'diff') {
-    if (val === 'L1') return base + 'background:#DCFCE7;color:#15803D;';
-    if (val === 'L2') return base + 'background:#FEF3C7;color:#B45309;';
-    if (val === 'L3') return base + 'background:#FEE2E2;color:#B91C1C;';
+
+  var SUPER = {'0':'⁰','1':'¹','2':'²','3':'³','4':'⁴','5':'⁵','6':'⁶','7':'⁷','8':'⁸','9':'⁹','+':'⁺','-':'⁻','n':'ⁿ','i':'ⁱ'};
+  var SUB   = {'0':'₀','1':'₁','2':'₂','3':'₃','4':'₄','5':'₅','6':'₆','7':'₇','8':'₈','9':'₉','+':'₊','-':'₋'};
+  function toSuperscript(s){ return s.split('').map(function(c){ return SUPER[c]||c; }).join(''); }
+  function toSubscript(s)  { return s.split('').map(function(c){ return SUB[c]  ||c; }).join(''); }
+
+  function escHtml(str) {
+    var s = sanitiseLatex(String(str || ''));
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
   }
-  return base + 'background:#FFF0E6;color:#E85500;font-weight:600;text-transform:none;';
-}
 
-function goQuestion(idx) {
-  if (idx < 0 || idx >= _practiceQs.length) return;
-  showQuestion(idx);
-  requestAnimationFrame(() => requestAnimationFrame(() => {
-    const card = document.getElementById('qc-0');
-    if (!card) return;
-    const nav  = document.querySelector('nav') || document.querySelector('.navbar');
-    const navH = nav ? nav.offsetHeight : 68;
-    const cardTop = card.getBoundingClientRect().top + window.scrollY;
-    window.scrollTo({ top: cardTop - navH - 20, behavior: 'smooth' });
-  }));
-}
-
-function selectOption(idx, key) {
-  // Always use _practiceIdx as authoritative — idx passed from onclick matches it
-  const i = (idx === _practiceIdx) ? _practiceIdx : idx;
-  const q = _practiceQs[i];
-  if (!q) return;
-
-  const card = document.getElementById('qc-0');
-  if (card && card.dataset.done) return;
-  if (card) card.dataset.done = '1';
-
-  // Normalise: trim whitespace + uppercase so "a ", "A", "a" all match
-  const correctKey  = (q.correct_answer || '').toString().trim().toUpperCase();
-  const chosenKey   = (key || '').toString().trim().toUpperCase();
-  const timeSpentMs = Date.now() - _questionStart;
-  const isCorrect   = chosenKey === correctKey;
-
-  // ── LOG ATTEMPT ──
-  ANALYTICS.saveAttempt({
-    type:        'practice',
-    questionId:  q.id || q.question_id || `${q.subject}_${idx}`,
-    subject:     q.subject,
-    chapter:     q.unit_code || '',
-    chapterName: q.chapter || UNIT_NAMES[q.unit_code] || q.unit_code || '',
-    difficulty:  q.difficulty || 'L1',
-    userAnswer:  chosenKey,
-    correctAnswer: correctKey,
-    isCorrect,
-    timeSpentMs,
-    year:        q.year || null,
-  });
-
-  document.querySelectorAll('#options-wrap button').forEach(btn => {
-    const k = (btn.dataset.key || '').trim().toUpperCase();
-    btn.style.pointerEvents = 'none';
-    btn.style.cursor        = 'default';
-
-    if (isCorrect && k === correctKey) {
-      // User picked correctly — show green on their choice only
-      btn.style.background = '#F0FDF4';
-      btn.style.border     = '2px solid #22C55E';
-      btn.style.color      = '#15803D';
-      btn.style.fontWeight = '600';
-      btn.style.opacity    = '1';
-    } else if (!isCorrect && k === chosenKey) {
-      // User picked wrong — show red on their wrong choice
-      btn.style.background = '#FEF2F2';
-      btn.style.border     = '2px solid #EF4444';
-      btn.style.color      = '#B91C1C';
-      btn.style.fontWeight = '600';
-      btn.style.opacity    = '1';
-    } else if (!isCorrect && k === correctKey) {
-      // Reveal the correct answer in green
-      btn.style.background = '#F0FDF4';
-      btn.style.border     = '2px solid #22C55E';
-      btn.style.color      = '#15803D';
-      btn.style.fontWeight = '600';
-      btn.style.opacity    = '1';
-    } else {
-      // Everything else — dim
-      btn.style.opacity = '0.35';
-    }
-  });
-
-  const exp = document.getElementById('exp-0');
-  if (exp) exp.style.display = 'block';
-  const sb = document.getElementById('show-ans-btn');
-  if (sb) sb.style.display = 'none';
-
-  if (isCorrect) {
-    const nextBtn = document.getElementById('next-btn');
-    if (nextBtn && _practiceIdx < _practiceQs.length - 1) {
-      nextBtn.style.background = '#22C55E';
-      nextBtn.style.boxShadow  = '0 4px 14px rgba(34,197,94,0.35)';
-      nextBtn.textContent      = 'Next →';
-    }
-  }
-}
-
-function revealAnswer(idx) {
-  const q = _practiceQs[_practiceIdx];
-  if (!q) return;
-  const card = document.getElementById('qc-0');
-  if (card && card.dataset.done) return;
-  if (card) card.dataset.done = '1';
-
-  // Log as skipped/revealed
-  ANALYTICS.saveAttempt({
-    type:        'practice',
-    questionId:  q.id || q.question_id || `${q.subject}_${idx}`,
-    subject:     q.subject,
-    chapter:     q.unit_code || '',
-    chapterName: q.chapter || UNIT_NAMES[q.unit_code] || q.unit_code || '',
-    difficulty:  q.difficulty || 'L1',
-    userAnswer:  null,
-    correctAnswer: (q.correct_answer || '').toString().trim().toUpperCase(),
-    isCorrect:   false,
-    revealed:    true,
-    timeSpentMs: Date.now() - _questionStart,
-  });
-
-  const correctKey = (q.correct_answer || '').toString().trim().toUpperCase();
-  document.querySelectorAll('#options-wrap button').forEach(btn => {
-    btn.style.pointerEvents = 'none';
-    btn.style.cursor        = 'default';
-    if ((btn.dataset.key || '').trim().toUpperCase() === correctKey) {
-      btn.style.background = '#F0FDF4';
-      btn.style.border     = '2px solid #22C55E';
-      btn.style.color      = '#15803D';
-      btn.style.fontWeight = '600';
-      btn.style.opacity    = '1';
-    } else {
-      btn.style.opacity = '0.38';
-    }
-  });
-
-  const exp = document.getElementById('exp-0');
-  if (exp) exp.style.display = 'block';
-  const sb = document.getElementById('show-ans-btn');
-  if (sb) sb.style.display = 'none';
-}
-
-// ── UNITS PAGE ────────────────────────────────────────────────────────
-function initUnits() {
-  if (!document.getElementById('units-grid')) return;
-  showLoader('units-grid', 'Loading units...');
-  loadAllQuestions().then(qs => {
-    const subjectFilter = document.getElementById('filter-subject');
-    renderUnits(qs);
-    if (subjectFilter) subjectFilter.addEventListener('change', () => {
-      const sf = subjectFilter.value;
-      renderUnits(sf ? qs.filter(q => q.subject === sf) : qs);
+  /* ── INIT ── */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', function() {
+      initPracticePage();
+      initUnitsPage();
     });
-  });
-}
+  } else {
+    initPracticePage();
+    initUnitsPage();
+  }
 
-function renderUnits(qs) {
-  const grid = document.getElementById('units-grid');
-  if (!grid) return;
-  const unitMap = {};
-  qs.forEach(q => {
-    const u = q.unit_code || 'UNCLASSIFIED';
-    if (!unitMap[u]) unitMap[u] = { count: 0, subject: q.subject };
-    unitMap[u].count++;
-  });
-  const sorted = Object.entries(unitMap).sort((a,b) => b[1].count - a[1].count);
-  const max    = sorted[0]?.[1].count || 1;
-  grid.innerHTML = sorted.map(([code, info]) => {
-    const name = UNIT_NAMES[code] || code.replace(/^UNIT\d+_/, '').replace(/([A-Z])/g, ' $1').trim();
-    const pct  = Math.round((info.count / max) * 100);
-    const subj = info.subject || subjectFromUnit(code);
-    const cls  = subj === 'Biology' ? 'bio' : subj === 'Chemistry' ? 'chem' : 'phys';
-    return `
-      <div class="unit-card ${cls}" onclick="location.href='practice.html?unit=${code}'">
-        <div class="unit-name">${name}</div>
-        <div class="unit-subject">${subj}</div>
-        <div class="unit-bar"><div class="unit-bar-fill" style="width:${pct}%"></div></div>
-        <div class="unit-count">${info.count} questions</div>
-      </div>`;
-  }).join('');
-}
-
-// Init on load
-document.addEventListener('DOMContentLoaded', () => {
-  initPractice();
-  initUnits();
-});
+})();

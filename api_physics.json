@@ -7846,10 +7846,10 @@
       "topic": "",
       "question": "If E and G respectively denote energy and gravitational constant, then GE has the dimensions of",
       "options": {
-        "A": "[M2][L−2][T−1]",
-        "B": "[M2][L−1][T0]",
-        "C": "[M][L−1][T−1]",
-        "D": "[M][L0][T0]"
+        "A": "M2][L−2][T−1",
+        "B": "M2][L−1][T0",
+        "C": "M][L−1][T−1",
+        "D": "M][L0][T0"
       },
       "correct_answer": "B",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -8143,10 +8143,10 @@
       "topic": "",
       "question": "For the given circuit, the input digital signals are applied at the terminals A, B and C. What would be the output at the terminal y?",
       "options": {
-        "A": "[Waveform output showing high/low]",
-        "B": "[Waveform output showing high/low]",
-        "C": "[Waveform output showing 5V constant]",
-        "D": "[Waveform output showing 0V constant]"
+        "A": "Waveform output showing high/low",
+        "B": "Waveform output showing high/low",
+        "C": "Waveform output showing 5V constant",
+        "D": "Waveform output showing 0V constant"
       },
       "correct_answer": "C",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -9961,10 +9961,10 @@
       "topic": "",
       "question": "Dimensions of stress",
       "options": {
-        "A": "[MLT−2]",
-        "B": "[ML2T−2]",
-        "C": "[ML0T−2]",
-        "D": "[ML−1T−2]"
+        "A": "MLT−2",
+        "B": "ML2T−2",
+        "C": "ML0T−2",
+        "D": "ML−1T−2"
       },
       "correct_answer": "D",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -36967,10 +36967,10 @@
       "topic": "Electromagnetic Induction",
       "question": "Dimensional formula of magnetic flux is",
       "options": {
-        "A": "[M L2 T–2 A–1]",
-        "B": "[M L1 T–1 A–2]",
-        "C": "[M L2 T–3 A–1]",
-        "D": "[M L–2 T–2 A–2]"
+        "A": "M L2 T–2 A–1",
+        "B": "M L1 T–1 A–2",
+        "C": "M L2 T–3 A–1",
+        "D": "M L–2 T–2 A–2"
       },
       "correct_answer": "A",
       "explanation": "φ = BA and F = ilB ⇒ B = F/il So dimensional formula will be ML2T–2A–1",
@@ -37199,10 +37199,10 @@
       "topic": "Electromagnetic Induction",
       "question": "The magnetic flux through a coil varies with time t as shown in the diagram. Which graph best represents the variation of the e.m.f. E induced in the coil with time t? [Graph of φ vs t (sinusoidal)]",
       "options": {
-        "A": "[E vs t (cosine)]",
-        "B": "[E vs t (negative cosine)]",
-        "C": "[E vs t (sine)]",
-        "D": "[E vs t (negative sine)]"
+        "A": "E vs t (cosine)",
+        "B": "E vs t (negative cosine)",
+        "C": "E vs t (sine)",
+        "D": "E vs t (negative sine)"
       },
       "correct_answer": "B",
       "explanation": "φ = A sin ωt ε = -dφ/dt = -Aω cos ωt So graph is negative cosine.",
@@ -37808,10 +37808,10 @@
       "topic": "Electromagnetic Induction",
       "question": "If L and R denote inductance and resistance respectively, then the dimension of L/R is",
       "options": {
-        "A": "[M0L0T–1]",
-        "B": "[M0L0T1]",
-        "C": "[M0L0T2]",
-        "D": "[MLT2]"
+        "A": "M0L0T–1",
+        "B": "M0L0T1",
+        "C": "M0L0T2",
+        "D": "MLT2"
       },
       "correct_answer": "B",
       "explanation": "τ = L/R represents time constant, hence will have dimension of time.",
@@ -39200,10 +39200,10 @@
       "topic": "Electromagnetic Induction",
       "question": "In Q.79, which of the following graphs best represents the current flowing from X to Y? [Four graphs of current vs time]",
       "options": {
-        "A": "[sine wave starting from 0]",
-        "B": "[cosine wave starting from max]",
-        "C": "[sine wave with decreasing amplitude]",
-        "D": "[cosine wave with decreasing amplitude]"
+        "A": "sine wave starting from 0",
+        "B": "cosine wave starting from max",
+        "C": "sine wave with decreasing amplitude",
+        "D": "cosine wave with decreasing amplitude"
       },
       "correct_answer": "B",
       "explanation": "At t = 0, current is maximum, so i = I0 cos ωt.",
