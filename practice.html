@@ -154,21 +154,39 @@ html, body {
   color: var(--qcard-text) !important;
 }
 
-/* Option buttons dark mode fix */
-#options-wrap button {
+/* Option buttons — base state only (do NOT override answered states) */
+#options-wrap .neeto-opt:not(.neeto-correct):not(.neeto-wrong):not(.neeto-dim) {
   background: var(--opt-bg) !important;
   border-color: var(--opt-border) !important;
   color: var(--c-ink) !important;
-  transition: all .15s, background .3s, color .3s !important;
+  transition: all .15s !important;
 }
-#options-wrap button:hover {
+#options-wrap .neeto-opt:not(.neeto-correct):not(.neeto-wrong):not(.neeto-dim):hover {
   background: var(--opt-hover-bg) !important;
   border-color: var(--opt-hover-bdr) !important;
   color: var(--opt-hover-clr) !important;
 }
-/* Keep correct/wrong highlight colours */
-#options-wrap button[style*="#F0FDF4"] { background: var(--c-success-bg) !important; }
-#options-wrap button[style*="#FEF2F2"] { background: var(--c-error-bg) !important; }
+/* Correct answer — bright green */
+#options-wrap .neeto-correct {
+  background: #DCFCE7 !important;
+  border: 2px solid #16A34A !important;
+  color: #15803D !important;
+  font-weight: 700 !important;
+  pointer-events: none !important;
+}
+/* Wrong answer — red */
+#options-wrap .neeto-wrong {
+  background: #FEE2E2 !important;
+  border: 2px solid #EF4444 !important;
+  color: #B91C1C !important;
+  font-weight: 600 !important;
+  pointer-events: none !important;
+}
+/* Unchosen options after answer — dimmed */
+#options-wrap .neeto-dim {
+  opacity: 0.35 !important;
+  pointer-events: none !important;
+}
 
 /* Explanation block */
 #exp-0 {
