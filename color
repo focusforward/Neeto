@@ -8,16 +8,16 @@
   'use strict';
 
   /* ── CONSTANTS ── */
-  var CACHE_VERSION  = 'v12';
+  var CACHE_VERSION  = 'v13';
   var CACHE_TTL      = 24 * 60 * 60 * 1000; // 24 hours
   var MAX_ATTEMPTS   = 2000;
   var PAGE_SIZE      = 1; // one question at a time on practice page
 
   var SUBJECTS = ['Biology', 'Chemistry', 'Physics'];
   var DATA_FILES = {
-    Biology:   'data/api_biology.json',
-    Chemistry: 'data/api_chemistry.json',
-    Physics:   'data/api_physics.json'
+    Biology:   'api_biology.json',
+    Chemistry: 'api_chemistry.json',
+    Physics:   'api_physics.json'
   };
 
   var PATTERN_LABELS = {
@@ -242,7 +242,7 @@
     function renderQuestion() {
       if (!filtered.length) {
         container.innerHTML = '<div style="text-align:center;padding:60px 20px;">' +
-          '<p style="color:var(--c-ink-muted,#6B5C45);font-size:1rem;">No questions match your filters.</p></div>';
+          '<p style="color:var(--c-ink-muted,#1A1208);font-size:1rem;">No questions match your filters.</p></div>';
         return;
       }
 
