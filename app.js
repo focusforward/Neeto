@@ -20,8 +20,14 @@ function renderMatchTable(mt) {
   if (rows.length < 2) return null;
 
   var hasCol2 = rows.some(function(r) { return r.col2 && r.col2 !== '—'; });
-  var h1 = esc(mt.col1_header || 'Column I');
-  var h2 = esc(mt.col2_header || 'Column II');
+  // Clean headers: strip column items packed into header (e.g. "Column I – Taenia, Paramoecium...")
+  function cleanHdr(h, fb) {
+    if (!h) return fb;
+    var c = h.replace(/\s*[–\-—].*$/, '').replace(/,.*$/, '').trim();
+    return c || fb;
+  }
+  var h1 = esc(cleanHdr(mt.col1_header, 'Column I'));
+  var h2 = esc(cleanHdr(mt.col2_header, 'Column II'));
 
   var thStyle = 'padding:8px 14px;text-align:left;font-weight:700;font-size:0.72rem;' +
     'letter-spacing:0.06em;text-transform:uppercase;background:#FFF5F0;';
@@ -167,7 +173,7 @@ function showLoader(containerId, msg) {
 
 // ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
 // Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
-const DATA_VER = 'v5';
+const DATA_VER = 'v10';
 
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
@@ -337,6 +343,20 @@ function showQuestion(idx) {
           var mt = q.match_table;
           var stmts = q.statements;
           var rendered = mt ? renderMatchTable(mt) : null;
+          var imgUrl = q.image_url || '';
+
+          // Image block (shown for diagram questions - above options)
+          var imgHtml = imgUrl
+            ? '<div style="margin-bottom:1rem;text-align:center;">' +
+              '<img src="' + imgUrl + '" alt="Diagram" ' +
+              'style="max-width:100%;max-height:320px;object-fit:contain;' +
+              'border-radius:10px;border:1.5px solid #F0E8DE;background:#fff;padding:8px;">' +
+              '</div>'
+            : '';
+
+          // Question text line (always shown)
+          var qText = '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' +
+            _esc(q.question||'') + '</div>';
 
           // Match-table question
           if (rendered) {
@@ -354,23 +374,21 @@ function showQuestion(idx) {
                 '<span style="color:#1A1208;font-weight:500;">' + _esc(s.text) + '</span>' +
                 '</div>';
             }).join('');
-            return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' +
-              _esc(q.question||'') + '</div>' +
-              '<div style="margin-bottom:1rem;">' + stmtHtml + '</div>';
+            return qText + '<div style="margin-bottom:1rem;">' + stmtHtml + '</div>';
           }
 
-          // Plain question
-          return '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:1.4rem;">' + _esc(q.question||'') + '</div>';
+          // Diagram question OR plain question
+          return qText + imgHtml;
         })()} 
 
         <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
-          ${['A','B','C','D'].map(k => `
+          ${['A','B','C','D'].filter(k => q.options && q.options[k] && String(q.options[k]).trim()).map(k => `
             <button data-key="${k}" onclick="selectOption(${idx},'${k}')"
               style="background:#fff;border:1.5px solid #F0E8DE;border-radius:10px;padding:0.75rem 1.1rem;
                      width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;
                      color:#1A1208;transition:all 0.15s;display:flex;align-items:center;gap:10px;">
               <span style="font-weight:700;color:#FF6B1A;min-width:1.1rem;">${k}.</span>
-              ${(q.options && q.options[k]) || ''}
+              ${q.options[k]}
             </button>`).join('')}
         </div>
 
