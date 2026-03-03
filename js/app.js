@@ -8,7 +8,7 @@
   'use strict';
 
   /* ── CONSTANTS ── */
-  var CACHE_VERSION  = 'v13';
+  var CACHE_VERSION  = 'v14';
   var CACHE_TTL      = 24 * 60 * 60 * 1000; // 24 hours
   var MAX_ATTEMPTS   = 2000;
   var PAGE_SIZE      = 1; // one question at a time on practice page
@@ -194,26 +194,30 @@
 
     /* ── RENDER ONE QUESTION ── */
     /* ── Diagram image / placeholder renderer ───────────── */
+    /*
+     * Global diagram error handler — called via onerror="window.__neetDiagErr(this)"
+     * No nested quotes needed at all.
+     */
+    window.__neetDiagErr = function(img) {
+      var w = img && img.parentNode;
+      if (!w) return;
+      w.innerHTML = '<div style="display:flex;align-items:center;gap:10px;'
+        + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:14px 16px;">'
+        + '<span style="font-size:1.3rem;">🖼️</span>'
+        + '<div style="font-size:0.76rem;color:#6B5C45;line-height:1.5;">'
+        + 'Image could not load — refer to your NCERT book for this diagram.</div></div>';
+    };
+
     function buildDiagHtml(q) {
       if (q.pattern !== 'diagram_dhamaka') return '';
 
       if (q.image_url) {
-        /*
-         * Use a unique wrapper ID.
-         * onerror calls a self-invoking function that gets the wrapper by ID
-         * and replaces it — zero quote-nesting issues.
-         */
-        var wid = 'dw' + Math.random().toString(36).slice(2, 8);
-        return '<div id="' + wid + '" style="margin:0.75rem 0 1.2rem;text-align:center;">'
+        /* onerror passes `this` (the img element) to the global handler — no quote nesting */
+        return '<div style="margin:0.75rem 0 1.2rem;text-align:center;">'
           + '<img src="' + q.image_url + '" alt="Diagram"'
           + ' style="max-width:100%;max-height:340px;object-fit:contain;border-radius:10px;'
           + 'border:1.5px solid #F0E8DE;background:#fff;padding:10px;display:block;margin:0 auto;"'
-          + ' onerror="window.__diagErr=function(id){var w=document.getElementById(id);'
-          + 'if(w)w.innerHTML=\'<div style="display:flex;align-items:center;gap:10px;'
-          + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:14px 16px;">'
-          + '<span style=\\"font-size:1.3rem;\\">🖼️</span>'
-          + '<div style=\\"font-size:0.76rem;color:#6B5C45;\\">Image could not load — refer to your NCERT book for this diagram.</div>'
-          + "</div>';};window.__diagErr('" + wid + "')\""
+          + ' onerror="window.__neetDiagErr(this)"'
           + '></div>';
       }
 
