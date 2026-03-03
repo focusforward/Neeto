@@ -16,6 +16,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme-override.css">
 <link rel="stylesheet" href="css/nav.css">
+<!-- ── THEME INIT ── -->
+<script>
+(function(){
+  var saved = localStorage.getItem('nm_theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  var h = new Date().getHours();
+  var timeBasedDark = (h >= 18 || h < 6);
+  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (timeBasedDark || sysDark) document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.setAttribute('data-theme','light');
+})();
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -531,12 +543,20 @@
     <a href="methodology.html">Methodology</a>
     <a href="about.html">About</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle dark/light mode"><span id="theme-icon">🌙</span></button>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;">
   <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
+  </div>
 </nav>
 <div class="nav-mobile-menu" id="nmenu">
+
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock Test</a>
@@ -844,6 +864,34 @@ async function startMock() {
   startTimer();
 }
 
+  // ── DIAGRAM IMAGE / PLACEHOLDER HELPER ──────────────────────────────
+  function buildMockDiagHtml(q) {
+    if (q.pattern !== 'diagram_dhamaka') return null;
+
+    var wrap = document.createElement('div');
+    wrap.style.cssText = 'margin:0.5rem 0 1rem;text-align:center;';
+
+    if (q.image_url) {
+      var img = document.createElement('img');
+      img.src = q.image_url;
+      img.alt = 'Diagram';
+      img.style.cssText = 'max-width:100%;max-height:320px;object-fit:contain;' +
+        'border-radius:10px;border:1.5px solid #F0E8DE;background:#fff;' +
+        'padding:10px;display:block;margin:0 auto;';
+      img.onerror = function() { wrap.style.display = 'none'; };
+      wrap.appendChild(img);
+    } else {
+      wrap.style.cssText = 'margin:0.5rem 0 1rem;display:flex;align-items:center;gap:10px;' +
+        'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:12px 14px;text-align:left;';
+      wrap.innerHTML = '<span style="font-size:1.3rem;flex-shrink:0;">🖼️</span>' +
+        '<div><div style="font-size:0.78rem;font-weight:700;color:#CC3300;text-transform:uppercase;' +
+        'letter-spacing:0.06em;margin-bottom:2px;">Figure referenced</div>' +
+        '<div style="font-size:0.75rem;color:#6B5C45;line-height:1.5;">' +
+        'Refer to NCERT book or past paper for the diagram.</div></div>';
+    }
+    return wrap;
+  }
+
 function renderMockQuestions() {
   var container = document.getElementById('mock-questions');
   container.innerHTML = '';
@@ -922,8 +970,10 @@ function renderMockQuestions() {
       expDiv.id = 'exp-' + i;
       expDiv.style.display = 'none';
 
+      var diagEl = buildMockDiagHtml(q);
       card.appendChild(metaDiv);
       card.appendChild(qDiv);
+      if (diagEl) card.appendChild(diagEl);
       card.appendChild(optsDiv);
       card.appendChild(expDiv);
       frag.appendChild(card);
@@ -1102,6 +1152,7 @@ function submitMock() {
       +'<button onclick="goToQuestion('+qidx+')" style="background:none;border:1.5px solid #FF6B1A;color:#FF6B1A;border-radius:100px;padding:0.3rem 0.85rem;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;">&#x2191; Jump to Q'+q._num+'</button>'
       +'</div>'
       +'<div style="font-size:0.95rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">'+q.question+'</div>'
+      +(q.image_url ? '<div style="margin:0.5rem 0 1rem;text-align:center;"><img src="'+q.image_url+'" alt="Diagram" style="max-width:100%;max-height:280px;object-fit:contain;border-radius:10px;border:1.5px solid #F0E8DE;background:#fff;padding:8px;display:block;margin:0 auto;"></div>' : (q.pattern==='diagram_dhamaka' ? '<div style="margin:0.5rem 0 1rem;display:flex;align-items:center;gap:8px;background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:8px;padding:10px 12px;"><span style="font-size:1.2rem;">🖼️</span><span style="font-size:0.75rem;color:#6B5C45;">Figure referenced — refer to NCERT or past paper.</span></div>' : ''))
       +optHtml
       +'<div style="margin-top:0.9rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:10px;padding:0.9rem 1.1rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">'
       +'<strong style="color:#E85500;">Correct: '+correct+'</strong> <span style="color:#B91C1C;">You chose: '+chosen+'</span><br>'+(q.explanation||'')+ncert+'</div></div>';

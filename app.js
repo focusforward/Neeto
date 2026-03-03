@@ -193,6 +193,41 @@
     }
 
     /* ── RENDER ONE QUESTION ── */
+    /* ── Diagram image / placeholder renderer ───────────── */
+    function buildDiagHtml(q) {
+      var isDiag = q.pattern === 'diagram_dhamaka';
+      if (!isDiag) return '';
+
+      if (q.image_url) {
+        var img = document.createElement('img');
+        img.src = q.image_url;
+        img.alt = 'Diagram';
+        img.className = 'diag-img';
+        img.style.cssText = 'max-width:100%;max-height:340px;object-fit:contain;' +
+          'border-radius:10px;border:1.5px solid var(--c-border,#F0E8DE);' +
+          'background:var(--c-surface,#fff);padding:10px;display:block;margin:0 auto;';
+        img.onerror = function() { this.parentNode.style.display = 'none'; };
+        var wrap = document.createElement('div');
+        wrap.style.cssText = 'margin:0.75rem 0 1.2rem;text-align:center;';
+        wrap.appendChild(img);
+        var tmp = document.createElement('div');
+        tmp.appendChild(wrap);
+        return tmp.innerHTML;
+      }
+
+      // No image stored — show figure-referenced notice
+      return '<div style="margin:0.75rem 0 1.2rem;display:flex;align-items:center;gap:10px;' +
+        'background:var(--c-surface-2,#FFF8F3);border:1.5px dashed var(--c-border,#F0E8DE);' +
+        'border-radius:10px;padding:14px 16px;">' +
+        '<span style="font-size:1.4rem;flex-shrink:0;">🖼️</span>' +
+        '<div>' +
+        '<div style="font-size:0.8rem;font-weight:700;color:var(--c-brand,#CC3300);' +
+        'text-transform:uppercase;letter-spacing:0.06em;margin-bottom:2px;">Figure referenced in question</div>' +
+        '<div style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);line-height:1.5;">' +
+        'This question refers to a diagram. Refer to your NCERT book or past paper for the figure.</div>' +
+        '</div></div>';
+    }
+
     /* ── Match-table renderer ──────────────────────────── */
     function matchTableHTML(mt) {
       if (!mt || !mt.col1 || !mt.col2) return '';
@@ -267,7 +302,7 @@
           escHtml(q.subject || '') + ' · ' + escHtml(q.chapter || '') + '</p>',
         '  <p style="font-size:1rem;font-weight:500;line-height:1.65;color:var(--qcard-text,#1A1208);margin-bottom:' + (q.match_table ? '0.8rem' : '1.4rem') + ';">' + escHtml(q.question || '') + '</p>',
         (q.match_table ? matchTableHTML(q.match_table) : ''),
-        (q.image_url ? '<div style="margin:0.75rem 0 1rem;text-align:center;"><img src="' + q.image_url + '" alt="Diagram" class="diag-img" onerror="this.style.display='none'" style="max-width:100%;max-height:320px;object-fit:contain;border-radius:10px;border:1.5px solid var(--c-border,#F0E8DE);background:var(--c-surface,#fff);padding:8px;display:block;margin:0 auto;"></div>' : ''),
+        buildDiagHtml(q),
         '  <div id="options-wrap">' + optsHtml + '</div>',
         '  <div id="explanation-wrap"></div>',
         '</div>',
