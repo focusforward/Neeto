@@ -8,9 +8,21 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/nav.css"/>
+<!-- ── THEME INIT ── -->
+<script>
+(function(){
+  var saved = localStorage.getItem('nm_theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  var h = new Date().getHours();
+  var timeBasedDark = (h >= 18 || h < 6);
+  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (timeBasedDark || sysDark) document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.setAttribute('data-theme','light');
+})();
+</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; line-height: 1.6; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--c-bg,#FFFDF9); color: var(--c-ink,#1A1208); line-height: 1.6; transition: background .3s, color .3s; }
 
     /* ── HERO ──────────────────────────────────────────────── */
     .hero {
@@ -74,13 +86,13 @@
 
     /* ── STATS BAR ──────────────────────────────────────────── */
     .stats-bar {
-      display: flex; border-top: 1.5px solid #F0E8DE; border-bottom: 1.5px solid #F0E8DE;
-      background: #fff; overflow-x: auto;
+      display: flex; border-top: 1.5px solid var(--c-border,#F0E8DE); border-bottom: 1.5px solid var(--c-border,#F0E8DE);
+      background: var(--c-surface,#fff); overflow-x: auto;
     }
     .stat-item { flex: 1; min-width: 130px; padding: 20px 16px; text-align: center; border-right: 1.5px solid #F0E8DE; }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-family: 'Fraunces', serif; font-size: 1.85rem; font-weight: 900; color: #CC3300; line-height: 1; }
-    .stat-label { font-size: 0.74rem; color: #6B5C45; font-weight: 500; margin-top: 4px; }
+    .stat-label { font-size: 0.74rem; color: var(--c-ink-muted,#6B5C45); font-weight: 500; margin-top: 4px; }
 
     /* ── AHA SECTION ────────────────────────────────────────── */
     .aha-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
@@ -116,7 +128,7 @@
     .panic h3 { color: #991B1B; }
     .smart h3 { color: #15803D; }
 
-    .aha-thought { font-size: 0.87rem; line-height: 1.75; color: #374151; }
+    .aha-thought { font-size: 0.87rem; line-height: 1.75; color: var(--c-ink,#374151); }
     .aha-quote { font-style: italic; font-family: 'Fraunces', serif; font-size: 0.97rem; line-height: 1.65; margin: 14px 0; padding: 12px 16px; border-left: 3px solid; border-radius: 0 8px 8px 0; }
     .panic .aha-quote { border-color: #EF4444; background: rgba(239,68,68,0.06); color: #991B1B; }
     .smart .aha-quote { border-color: #22C55E; background: rgba(34,197,94,0.06); color: #15803D; }
@@ -131,7 +143,7 @@
     .aha-takeaway strong { color: #FF8C4A; }
 
     /* ── PATTERNS SECTION ───────────────────────────────────── */
-    .patterns-section { padding: 80px 20px; background: #fff; }
+    .patterns-section { padding: 80px 20px; background: var(--c-surface,#fff); transition: background .3s; }
     .patterns-inner { max-width: 1100px; margin: 0 auto; }
     .patterns-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 10px; }
     .patterns-section .sub-p { color: #6B5C45; margin-bottom: 44px; font-size: 0.97rem; }
@@ -156,7 +168,7 @@
     .pattern-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
     @media(max-width:780px){ .pattern-grid { grid-template-columns: 1fr 1fr; } }
     @media(max-width:460px){ .pattern-grid { grid-template-columns: 1fr; } }
-    .pattern-card { border: 1.5px solid #F0E8DE; border-radius: 18px; padding: 24px 20px; cursor: pointer; transition: all 0.2s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
+    .pattern-card { border: 1.5px solid var(--c-border,#F0E8DE); border-radius: 18px; padding: 24px 20px; cursor: pointer; transition: all 0.2s; text-decoration: none; color: inherit; display: block; position: relative; overflow: hidden; }
     .pattern-card::after { content: ''; position: absolute; bottom: 0; left: 0; height: 3px; width: 100%; border-radius: 0 0 18px 18px; opacity: 0; transition: opacity 0.2s; }
     .pattern-card:hover { transform: translateY(-3px); }
     .pattern-card:hover::after { opacity: 1; }
@@ -176,7 +188,7 @@
     .pc-nc .p-pct { color: #DC2626; }
     .pc-sb .p-pct { color: #0D9488; }
     .pc-dd .p-pct { color: #7C3AED; }
-    .p-desc { font-size: 0.81rem; color: #6B5C45; line-height: 1.6; }
+    .p-desc { font-size: 0.81rem; color: var(--c-ink-muted,#6B5C45); line-height: 1.6; }
 
     /* SUBJECTS */
     .subjects-section { padding: 80px 20px; max-width: 1100px; margin: 0 auto; }
@@ -197,7 +209,7 @@
     .phys-card .s-count { color: #CC3300; }
 
     /* PROOF SECTION */
-    .proof-section { background: #1A1208; color: #fff; padding: 80px 20px; text-align: center; }
+    .proof-section { background: var(--c-surface,#1A1208); color: #fff; padding: 80px 20px; text-align: center; }
     .proof-section h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; margin-bottom: 16px; }
     .proof-section > p { color: #C8B89A; max-width: 560px; margin: 0 auto 52px; font-size: 1.02rem; line-height: 1.75; }
     .proof-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px; max-width: 860px; margin: 0 auto; }
@@ -223,12 +235,20 @@
     <a href="about.html">About</a>
     <!-- Secondary links hidden in hamburger overflow on desktop, shown on mobile -->
     <a href="practice.html" class="nav-cta">Start Free →</a>
+  <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark/light mode" title="Toggle dark/light mode"><span id="theme-icon">🌙</span></button>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;">
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
+  </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
+
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
   <a href="index.html" class="active">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -266,9 +286,9 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat-item"><div class="stat-num">3,115</div><div class="stat-label">Biology Questions</div></div>
-  <div class="stat-item"><div class="stat-num">1,706</div><div class="stat-label">Physics Questions</div></div>
-  <div class="stat-item"><div class="stat-num">1,333</div><div class="stat-label">Chemistry Questions</div></div>
+  <div class="stat-item"><div class="stat-num">3,491</div><div class="stat-label">Biology Questions</div></div>
+  <div class="stat-item"><div class="stat-num">2,151</div><div class="stat-label">Physics Questions</div></div>
+  <div class="stat-item"><div class="stat-num">1,680</div><div class="stat-label">Chemistry Questions</div></div>
   <div class="stat-item"><div class="stat-num">6,154</div><div class="stat-label">Total Questions</div></div>
   <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Question Patterns</div></div>
 </div>
@@ -370,15 +390,15 @@
   <div class="subject-grid">
     <a href="practice.html?subject=biology"   class="subject-card bio-card">
       <div class="s-icon">🌿</div><div class="s-name">Biology</div>
-      <div class="s-count">3,115</div><div class="s-label">questions · Botany &amp; Zoology</div>
+      <div class="s-count">3,491</div><div class="s-label">questions · Botany &amp; Zoology</div>
     </a>
     <a href="practice.html?subject=physics"   class="subject-card phys-card">
       <div class="s-icon">⚛️</div><div class="s-name">Physics</div>
-      <div class="s-count">1,706</div><div class="s-label">questions · chapter-weighted</div>
+      <div class="s-count">2,151</div><div class="s-label">questions · chapter-weighted</div>
     </a>
     <a href="practice.html?subject=chemistry" class="subject-card chem-card">
       <div class="s-icon">🧪</div><div class="s-name">Chemistry</div>
-      <div class="s-count">1,333</div><div class="s-label">questions · NCERT aligned</div>
+      <div class="s-count">1,680</div><div class="s-label">questions · NCERT aligned</div>
     </a>
   </div>
 </section>

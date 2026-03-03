@@ -54,7 +54,7 @@ function renderMatchTable(mt) {
         : esc(c2str);
     }
 
-    var bg = i % 2 === 0 ? '#fff' : '#FAFAF8';
+    var bg = i % 2 === 0 ? 'var(--c-surface,#fff)' : 'var(--c-bg-alt,#FAFAF8)';
     return '<tr style="background:' + bg + ';border-top:1px solid #F0E8DE;">' +
       '<td style="padding:10px 14px;vertical-align:top;line-height:1.55;border-right:1.5px solid #F0E8DE;font-weight:500;display:table-cell;">' +
         '<div style="display:flex;align-items:flex-start;">' + c1 + '</div></td>' +
@@ -173,7 +173,7 @@ function showLoader(containerId, msg) {
 
 // ── QUESTION LOADING WITH localStorage CACHE ─────────────────────────
 // Bump DATA_VER whenever you push new JSON files — clears all user caches instantly
-const DATA_VER = 'v10';
+const DATA_VER = 'v11';
 
 async function loadSubject(subject) {
   if (LOADED_SUBJECTS[subject]) return LOADED_SUBJECTS[subject];
@@ -312,7 +312,7 @@ function showQuestion(idx) {
   if (!container) return;
 
   if (!_practiceQs.length) {
-    container.innerHTML = '<p style="padding:40px;text-align:center;color:#6B5C45;">No questions match your filters.</p>';
+    container.innerHTML = '<p style="padding:40px;text-align:center;color:var(--c-ink-muted,#6B5C45);">No questions match your filters.</p>';
     return;
   }
 
@@ -325,13 +325,13 @@ function showQuestion(idx) {
   container.innerHTML = `
     <div style="max-width:680px;margin:0 auto;">
       <div style="display:flex;align-items:center;gap:12px;margin-bottom:1.5rem;">
-        <div style="flex:1;height:6px;background:#F0E8DE;border-radius:100px;overflow:hidden;">
+        <div style="flex:1;height:6px;background:var(--c-border,#F0E8DE);border-radius:100px;overflow:hidden;class='prog-track'">
           <div style="width:${Math.round(((idx+1)/total)*100)}%;height:100%;background:#FF6B1A;border-radius:100px;transition:width 0.3s;"></div>
         </div>
         <span style="font-size:0.82rem;font-weight:600;color:#6B5C45;white-space:nowrap;">${idx+1} / ${total}</span>
       </div>
 
-      <div class="q-card" id="qc-0" style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:2rem 2rem 1.5rem;">
+      <div class="q-card" id="qc-0" style="border-radius:18px;padding:2rem 2rem 1.5rem;">
         <div style="display:flex;gap:8px;flex-wrap:wrap;margin-bottom:1.2rem;">
           <span style="${tagStyle(q.subject,'subject')}">${q.subject}</span>
           ${q.difficulty ? `<span style="${tagStyle(q.difficulty,'diff')}">${q.difficulty}</span>` : ''}
@@ -348,14 +348,13 @@ function showQuestion(idx) {
           // Image block (shown for diagram questions - above options)
           var imgHtml = imgUrl
             ? '<div style="margin-bottom:1rem;text-align:center;">' +
-              '<img src="' + imgUrl + '" alt="Diagram" ' +
-              'style="max-width:100%;max-height:320px;object-fit:contain;' +
-              'border-radius:10px;border:1.5px solid #F0E8DE;background:#fff;padding:8px;">' +
+              '<img src="' + imgUrl + '" alt="Diagram" class="diag-img" ' +
+              'onerror="this.style.display=\'none\'">' +
               '</div>'
             : '';
 
           // Question text line (always shown)
-          var qText = '<div style="font-size:1rem;line-height:1.7;color:#1A1208;font-weight:500;margin-bottom:0.75rem;">' +
+          var qText = '<div style="font-size:1rem;line-height:1.7;color:var(--qcard-text,#1A1208);font-weight:500;margin-bottom:0.75rem;">' +
             _esc(q.question||'') + '</div>';
 
           // Match-table question
@@ -369,7 +368,7 @@ function showQuestion(idx) {
           if (stmts && stmts.length >= 2) {
             var stmtHtml = stmts.map(function(s) {
               return '<div style="display:flex;gap:10px;align-items:flex-start;padding:8px 12px;' +
-                'background:#FAFAF8;border-radius:8px;margin-bottom:6px;line-height:1.6;">' +
+                'background:var(--c-bg-alt,#FAFAF8);border-radius:8px;margin-bottom:6px;line-height:1.6;">' +
                 '<span style="font-weight:800;color:#CC3300;flex-shrink:0;min-width:18px;">' + _esc(s.label) + '.</span>' +
                 '<span style="color:#1A1208;font-weight:500;">' + _esc(s.text) + '</span>' +
                 '</div>';
@@ -384,24 +383,18 @@ function showQuestion(idx) {
         <div id="options-wrap" style="display:flex;flex-direction:column;gap:10px;">
           ${['A','B','C','D'].filter(k => q.options && q.options[k] && String(q.options[k]).trim()).map(k => `
             <button data-key="${k}" onclick="selectOption(${idx},'${k}')"
-              style="background:#fff;border:1.5px solid #F0E8DE;border-radius:10px;padding:0.75rem 1.1rem;
-                     width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;
-                     color:#1A1208;transition:all 0.15s;display:flex;align-items:center;gap:10px;">
+              style="background:var(--opt-bg,#fff);border:1.5px solid var(--opt-border,#E2E8F0);border-radius:10px;padding:0.75rem 1.1rem;width:100%;text-align:left;font-size:0.95rem;font-family:inherit;cursor:pointer;color:var(--c-ink,#1A1208);transition:all 0.15s;display:flex;align-items:center;gap:10px;">
               <span style="font-weight:700;color:#FF6B1A;min-width:1.1rem;">${k}.</span>
               ${q.options[k]}
             </button>`).join('')}
         </div>
 
         <button id="show-ans-btn" onclick="revealAnswer(${idx})"
-          style="margin-top:1.1rem;background:none;border:1.5px solid #F0E8DE;border-radius:100px;
-                 padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:#6B5C45;
-                 cursor:pointer;font-family:inherit;">
+          style="margin-top:1.1rem;background:none;border:1.5px solid var(--c-border,#F0E8DE);border-radius:100px;padding:0.4rem 1rem;font-size:0.8rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);cursor:pointer;font-family:inherit;">
           Show Answer
         </button>
 
-        <div id="exp-0" style="display:none;margin-top:1rem;background:#FFF7F0;
-             border:1px solid rgba(255,107,26,0.2);border-radius:12px;
-             padding:1rem 1.2rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">
+        <div id="exp-0" style="display:none;margin-top:1rem;background:var(--expl-bg,#FFF7F0);border:1px solid var(--expl-border,rgba(255,107,26,0.2));border-radius:12px;padding:1rem 1.2rem;font-size:0.875rem;color:var(--c-ink,#1A1208);line-height:1.6;">
           <strong style="color:#E85500;">✅ Correct Answer: ${(q.correct_answer||'').toString().trim().toUpperCase()}</strong><br/>
           ${(q.explanation && q.explanation.trim() && !q.explanation.includes('not provided') && !q.explanation.includes('PDF')) ? q.explanation : 'Please refer to your NCERT textbook for a detailed explanation of this concept.'}
           ${cleanNcert(q)}
@@ -409,9 +402,7 @@ function showQuestion(idx) {
 
         <div id="nav-row" style="display:flex;justify-content:space-between;align-items:center;margin-top:1.5rem;gap:12px;">
           <button onclick="goQuestion(${idx-1})" ${idx===0?'disabled':''}
-            style="background:none;border:1.5px solid #F0E8DE;border-radius:100px;
-                   padding:0.55rem 1.2rem;font-size:0.875rem;font-weight:600;
-                   color:${idx===0?'#D1C8BE':'#6B5C45'};cursor:${idx===0?'default':'pointer'};font-family:inherit;">
+            style="background:none;border:1.5px solid var(--c-border,#F0E8DE);border-radius:100px;padding:0.55rem 1.2rem;font-size:0.875rem;font-weight:600;color:${idx===0?'var(--c-border-mid,#D1C8BE)':'var(--c-ink-muted,#6B5C45)'};cursor:${idx===0?'default':'pointer'};font-family:inherit;">
             ← Prev
           </button>
           <button id="next-btn" onclick="goQuestion(${idx+1})" ${isLast?'disabled':''}
