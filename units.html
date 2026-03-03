@@ -14,6 +14,18 @@
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme-override.css">
 <link rel="stylesheet" href="css/nav.css">
+<!-- ── THEME INIT ── -->
+<script>
+(function(){
+  var saved = localStorage.getItem('nm_theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  var h = new Date().getHours();
+  var timeBasedDark = (h >= 18 || h < 6);
+  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (timeBasedDark || sysDark) document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.setAttribute('data-theme','light');
+})();
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -257,11 +269,18 @@
     <a href="about.html">About</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;">
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
+  </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
+
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -299,7 +318,7 @@
   <p>© 2026 neetminds. All rights reserved.</p>
 </footer>
 
-<script src="js/app.js"></script>
+<script src="js/app.js?v=12"></script>
 <script>
   // Color unit-subject tags based on text content after app.js renders them
   function colorSubjectTags() {
