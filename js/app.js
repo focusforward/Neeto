@@ -458,6 +458,7 @@
         var correct = (q.correct_answer || '').toUpperCase();
         var isRight = chosen === correct;
         var elapsed = Date.now() - qStart;
+        if (window._practiceAnswered) window._practiceAnswered(isRight);
 
         var wrap = document.getElementById('options-wrap');
         if (wrap) {
