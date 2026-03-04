@@ -29802,7 +29802,7 @@
         "D": "Zero, that is no photoemission"
       },
       "correct_answer": "D",
-      "explanation": "Sol. Answer (4)  When violet light falls on photosensitive material, the maximum kinetic energy of photoelectrons is 1 eV. The energy of violet light is greater than that of red light. For red light to cause photoemission, its energy must be greater than the work function. Since the energy difference between violet and red light is greater than 1 eV, the energy of red light is less than the work function, so no photoemission occurs.",
+      "explanation": "Sol. Answer (4)\n\n• Violet light: KEmax = 1 eV\n• Energy difference (Eviolet − Ered) > 1 eV\n• For photoemission: Ered ≥ Work function\n• Since Ered < Work function → No emission",
       "ncert_ref": "NCERT Physics",
       "ncert_line": "",
       "pattern": "memory_test",
