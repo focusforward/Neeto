@@ -248,7 +248,6 @@ html,body{
 .pb.pb-green{background:#DCFCE7;border-color:#22C55E;color:#15803D;}
 .pb.pb-red{background:#FEE2E2;border-color:#EF4444;color:#B91C1C;}
 .pb.pb-grey{background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);}
-.pb.pb-answered{background:var(--c-surface-2,#FFF8F3);border-color:var(--c-brand,#FF6B1A);color:var(--c-brand-deep,#E85500);}
 .pb.pb-cur{border-color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
 
 /* RESULT SCREEN */
@@ -462,34 +461,9 @@ var timeLeft      = 200 * 60;
 var testDone      = false;
 
 // ── ESCAPE HTML ───────────────────────────────────────────────
-// ── SUPERSCRIPT / SUBSCRIPT + LaTeX SANITISER ────────────────
-var SUPER={'0':'\u2070','1':'\u00b9','2':'\u00b2','3':'\u00b3','4':'\u2074','5':'\u2075','6':'\u2076','7':'\u2077','8':'\u2078','9':'\u2079','+':'\u207a','-':'\u207b','n':'\u207f','i':'\u2071'};
-var SUB={'0':'\u2080','1':'\u2081','2':'\u2082','3':'\u2083','4':'\u2084','5':'\u2085','6':'\u2086','7':'\u2087','8':'\u2088','9':'\u2089','+':'\u208a','-':'\u208b'};
-function toSup(s){return s.split('').map(function(c){return SUPER[c]||c;}).join('');}
-function toSub(s){return s.split('').map(function(c){return SUB[c]||c;}).join('');}
-function sanitiseLatex(str){
-  if(!str||str.indexOf('\\')===-1)return str;
-  return str
-    .replace(/\\longrightarrow|\\rightarrow|\\to\b/g,' \u2192 ')
-    .replace(/\\longleftarrow|\\leftarrow/g,' \u2190 ')
-    .replace(/\\frac\{([^}]*)\}\{/g,'($1)/(')
-    .replace(/\^\{([^}]*)\}/g,function(_,a){return toSup(a);})
-    .replace(/_{([^}]*)}/g,function(_,a){return toSub(a);})
-    .replace(/\^(-?\d+)/g,function(_,a){return toSup(a);})
-    .replace(/_(-?\d+)/g,function(_,a){return toSub(a);})
-    .replace(/\\alpha/g,'\u03b1').replace(/\\beta/g,'\u03b2').replace(/\\gamma/g,'\u03b3')
-    .replace(/\\delta/g,'\u03b4').replace(/\\Delta/g,'\u0394').replace(/\\lambda/g,'\u03bb')
-    .replace(/\\mu/g,'\u03bc').replace(/\\pi/g,'\u03c0').replace(/\\sigma/g,'\u03c3')
-    .replace(/\\omega/g,'\u03c9').replace(/\\Omega/g,'\u03a9').replace(/\\theta/g,'\u03b8')
-    .replace(/\\phi/g,'\u03c6').replace(/\\times/g,'\u00d7').replace(/\\pm/g,'\u00b1')
-    .replace(/\\leq/g,'\u2264').replace(/\\geq/g,'\u2265').replace(/\\neq/g,'\u2260')
-    .replace(/\\approx/g,'\u2248').replace(/\\infty/g,'\u221e')
-    .replace(/\\text\{([^}]*)\}/g,'$1').replace(/\$([^$]+)\$/g,'$1')
-    .replace(/\\\s*/g,' ').replace(/\s{2,}/g,' ').trim();
-}
 function esc(s){
-  var t=sanitiseLatex(String(s||''));
-  return t.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
     .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
 }
 
@@ -696,7 +670,7 @@ function renderQuestion(idx){
       +'<div class="secb-line"></div></div>';
   }
 
-  // Options: blue-selected during test; green/red only after submit
+  // Options — A. B. C. D. (period after key)
   var optsHTML='';
   ['A','B','C','D'].forEach(function(k){
     var val=q.options&&q.options[k]?q.options[k]:'';
@@ -705,25 +679,21 @@ function renderQuestion(idx){
     var correct=(q.correct_answer||'').toUpperCase();
     var cls='mock-opt';
     if(ans){
-      if(testDone){
-        if(k===correct)     cls+=' mo-correct';
-        else if(k===ans)    cls+=' mo-wrong';
-        else                cls+=' mo-dim';
-      } else {
-        if(k===ans)         cls+=' mo-selected';
-      }
+      if(k===correct)       cls+=' mo-correct';
+      else if(k===ans)      cls+=' mo-wrong';
+      else                  cls+=' mo-dim';
     }
     var dis=(testDone||!!ans)?'disabled':'';
     optsHTML+='<button class="'+cls+'" id="opt-'+idx+'-'+k+'"'
       +' data-key="'+k+'" '+dis
-      +' onclick="mockSelect('+idx+",'" +k+"'" +')">'
+      +' onclick="mockSelect('+idx+',\''+k+'\')">'
       +'<span class="opt-key">'+k+'.</span> '+esc(val)
       +'</button>';
   });
 
-  // Explanation: only shown after test is submitted (real exam behaviour)
+  // Explanation block
   var expHTML='';
-  if(testDone&&userAnswers[idx]){
+  if(testDone||userAnswers[idx]){
     var chosen=userAnswers[idx]||null;
     var correct=(q.correct_answer||'').toUpperCase();
     var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')
@@ -786,22 +756,39 @@ function mockSelect(qidx,key){
   if(userAnswers[qidx])return;   // already answered this Q
   userAnswers[qidx]=key;
 
-  // During test: mark selected option BLUE only — no green/red reveal
+  var correct=(mockQuestions[qidx].correct_answer||'').toUpperCase();
   ['A','B','C','D'].forEach(function(k){
     var btn=document.getElementById('opt-'+qidx+'-'+k);
     if(!btn)return;
     btn.classList.remove('mo-selected','mo-correct','mo-wrong','mo-dim');
-    if(k===key) btn.classList.add('mo-selected');
+    if(k===correct)        btn.classList.add('mo-correct');
+    else if(k===key)       btn.classList.add('mo-wrong');
+    else                   btn.classList.add('mo-dim');
     btn.disabled=true;
   });
 
-  // NO explanation shown during test — only after submit
+  // Show explanation
+  var q=mockQuestions[qidx];
+  var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')
+    ?'<p style="font-size:.78rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 '+esc(q.ncert_ref)+'</p>':'';
+  var exp=document.querySelector('#mock-q-area .mock-exp');
+  if(!exp){
+    exp=document.createElement('div');
+    exp.className='mock-exp';
+    var card=document.querySelector('.mock-q-card');
+    if(card)card.appendChild(exp);
+  }
+  exp.innerHTML='<p style="font-size:.82rem;font-weight:700;color:var(--c-brand-deep,#E85500);margin-bottom:6px;">💡 Explanation</p>'
+    +'<p style="margin-bottom:4px;"><strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
+    +(key!==correct?' &nbsp;<span style="color:#B91C1C;">You chose: '+key+'</span>':'')+'</p>'
+    +'<p style="font-size:.88rem;line-height:1.65;">'+esc(q.explanation||'')+'</p>'+ncert;
+  exp.classList.add('visible');
 
-  // Palette: mark as answered (grey/blue, not green/red yet)
+  // Palette
   var pb=document.getElementById('pb-'+qidx);
   if(pb){
     pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur');
-    pb.classList.add('pb-answered');
+    pb.classList.add(key===correct?'pb-green':'pb-red');
   }
 }
 
@@ -824,8 +811,7 @@ function updatePaletteCurrent(idx){
   document.querySelectorAll('.pb').forEach(function(b){b.classList.remove('pb-cur');});
   var cur=document.getElementById('pb-'+idx);
   if(cur){
-    // Don't add pb-cur if already has a final state (green/red) or answered-blue
-    if(!cur.classList.contains('pb-green')&&!cur.classList.contains('pb-red')&&!cur.classList.contains('pb-answered'))
+    if(!cur.classList.contains('pb-green')&&!cur.classList.contains('pb-red'))
       cur.classList.add('pb-cur');
   }
 }
@@ -855,10 +841,10 @@ function submitMock(){
   clearInterval(timerInterval);
   testDone=true;
 
-  // Final palette colours - reveal green/red
+  // Final palette colours
   mockQuestions.forEach(function(q,i){
     var pb=document.getElementById('pb-'+i);if(!pb)return;
-    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur','pb-answered');
+    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur');
     var a=userAnswers[i],c=(q.correct_answer||'').toUpperCase();
     if(!a)pb.classList.add('pb-grey');
     else if(a===c)pb.classList.add('pb-green');
