@@ -248,6 +248,7 @@ html,body{
 .pb.pb-green{background:#DCFCE7;border-color:#22C55E;color:#15803D;}
 .pb.pb-red{background:#FEE2E2;border-color:#EF4444;color:#B91C1C;}
 .pb.pb-grey{background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);}
+.pb.pb-answered{background:rgba(255,107,26,.1);border-color:var(--c-brand,#FF6B1A);color:var(--c-brand-deep,#E85500);}
 .pb.pb-cur{border-color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
 
 /* RESULT SCREEN */
@@ -670,7 +671,7 @@ function renderQuestion(idx){
       +'<div class="secb-line"></div></div>';
   }
 
-  // Options — A. B. C. D. (period after key)
+  // Options — blue during test; green/red/dim only after Submit
   var optsHTML='';
   ['A','B','C','D'].forEach(function(k){
     var val=q.options&&q.options[k]?q.options[k]:'';
@@ -678,22 +679,25 @@ function renderQuestion(idx){
     var ans=userAnswers[idx];
     var correct=(q.correct_answer||'').toUpperCase();
     var cls='mock-opt';
-    if(ans){
-      if(k===correct)       cls+=' mo-correct';
-      else if(k===ans)      cls+=' mo-wrong';
-      else                  cls+=' mo-dim';
+    if(testDone&&ans){
+      // Post-submit: reveal correct/wrong/dim
+      if(k===correct)     cls+=' mo-correct';
+      else if(k===ans)    cls+=' mo-wrong';
+      else                cls+=' mo-dim';
+    } else if(!testDone&&ans===k){
+      // During test: blue on selected option only
+      cls+=' mo-selected';
     }
-    var dis=(testDone||!!ans)?'disabled':'';
+    var dis=testDone?'disabled':'';
     optsHTML+='<button class="'+cls+'" id="opt-'+idx+'-'+k+'"'
       +' data-key="'+k+'" '+dis
-      +' onclick="mockSelect('+idx+',\''+k+'\')">'
-      +'<span class="opt-key">'+k+'.</span> '+esc(val)
+      +' onclick="mockSelect('+idx+',\''+k+'\')">'      +'<span class="opt-key">'+k+'.</span> '+esc(val)
       +'</button>';
   });
 
-  // Explanation block
+  // Explanation block — only after Submit
   var expHTML='';
-  if(testDone||userAnswers[idx]){
+  if(testDone&&userAnswers[idx]){
     var chosen=userAnswers[idx]||null;
     var correct=(q.correct_answer||'').toUpperCase();
     var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')
@@ -753,42 +757,22 @@ function goTo(idx){
 // ── SELECT ANSWER ─────────────────────────────────────────────
 function mockSelect(qidx,key){
   if(testDone)return;
-  if(userAnswers[qidx])return;   // already answered this Q
+  // Allow changing answer any time before Submit
   userAnswers[qidx]=key;
 
-  var correct=(mockQuestions[qidx].correct_answer||'').toUpperCase();
+  // Blue on selected option only — no correct/wrong reveal during test
   ['A','B','C','D'].forEach(function(k){
     var btn=document.getElementById('opt-'+qidx+'-'+k);
     if(!btn)return;
     btn.classList.remove('mo-selected','mo-correct','mo-wrong','mo-dim');
-    if(k===correct)        btn.classList.add('mo-correct');
-    else if(k===key)       btn.classList.add('mo-wrong');
-    else                   btn.classList.add('mo-dim');
-    btn.disabled=true;
+    if(k===key) btn.classList.add('mo-selected');
   });
 
-  // Show explanation
-  var q=mockQuestions[qidx];
-  var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')
-    ?'<p style="font-size:.78rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 '+esc(q.ncert_ref)+'</p>':'';
-  var exp=document.querySelector('#mock-q-area .mock-exp');
-  if(!exp){
-    exp=document.createElement('div');
-    exp.className='mock-exp';
-    var card=document.querySelector('.mock-q-card');
-    if(card)card.appendChild(exp);
-  }
-  exp.innerHTML='<p style="font-size:.82rem;font-weight:700;color:var(--c-brand-deep,#E85500);margin-bottom:6px;">💡 Explanation</p>'
-    +'<p style="margin-bottom:4px;"><strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
-    +(key!==correct?' &nbsp;<span style="color:#B91C1C;">You chose: '+key+'</span>':'')+'</p>'
-    +'<p style="font-size:.88rem;line-height:1.65;">'+esc(q.explanation||'')+'</p>'+ncert;
-  exp.classList.add('visible');
-
-  // Palette
+  // Palette: orange dot = answered, pending evaluation
   var pb=document.getElementById('pb-'+qidx);
   if(pb){
-    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur');
-    pb.classList.add(key===correct?'pb-green':'pb-red');
+    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur','pb-answered');
+    pb.classList.add('pb-answered');
   }
 }
 
@@ -811,7 +795,8 @@ function updatePaletteCurrent(idx){
   document.querySelectorAll('.pb').forEach(function(b){b.classList.remove('pb-cur');});
   var cur=document.getElementById('pb-'+idx);
   if(cur){
-    if(!cur.classList.contains('pb-green')&&!cur.classList.contains('pb-red'))
+    if(!cur.classList.contains('pb-green')&&!cur.classList.contains('pb-red')
+       &&!cur.classList.contains('pb-answered'))
       cur.classList.add('pb-cur');
   }
 }
@@ -844,7 +829,7 @@ function submitMock(){
   // Final palette colours
   mockQuestions.forEach(function(q,i){
     var pb=document.getElementById('pb-'+i);if(!pb)return;
-    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur');
+    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur','pb-answered');
     var a=userAnswers[i],c=(q.correct_answer||'').toUpperCase();
     if(!a)pb.classList.add('pb-grey');
     else if(a===c)pb.classList.add('pb-green');
