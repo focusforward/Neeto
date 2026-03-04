@@ -154,16 +154,31 @@ html,body{
   font-family:'DM Sans',sans-serif;line-height:1.55;
 }
 .mock-opt:not([disabled]):hover{
-  border-color:var(--c-brand,#FF6B1A);
-  background:var(--c-surface-2,#FFF8F3);
-  color:var(--c-brand-deep,#E85500);
+  border-color: #3B82F6;
+  background: #EFF6FF;
+  color: #1E40AF;
 }
-.mock-opt.mo-selected{border-color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
+.mock-opt.mo-selected {
+  border-color: #3B82F6 !important;
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  font-weight: 500;
+}
 .mock-opt.mo-correct{border-color:#22C55E!important;background:#F0FDF4!important;color:#15803D!important;}
 .mock-opt.mo-wrong{border-color:#EF4444!important;background:#FEF2F2!important;color:#B91C1C!important;}
 .mock-opt.mo-dim{opacity:.38;}
+[data-theme="dark"] .mock-opt.mo-selected {
+  border-color: #60A5FA !important;
+  background: #1E3A8A !important;
+  color: #BFDBFE !important;
+}
 [data-theme="dark"] .mock-opt.mo-correct{background:#0A2010!important;color:#4ADE80!important;}
 [data-theme="dark"] .mock-opt.mo-wrong{background:#1F0808!important;color:#F87171!important;}
+[data-theme="dark"] .mock-opt:not([disabled]):hover {
+  border-color: #60A5FA;
+  background: #1E3A8A;
+  color: #BFDBFE;
+}
 .opt-key{font-weight:700;color:var(--c-brand,#FF6B1A);min-width:1.4rem;flex-shrink:0;}
 
 /* EXPLANATION */
@@ -308,9 +323,6 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 }
 [data-theme="dark"] .mock-opt {
   background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink);
-}
-[data-theme="dark"] .mock-opt:not([disabled]):hover {
-  border-color: var(--c-brand); background: var(--c-surface-2); color: var(--c-brand-deep);
 }
 [data-theme="dark"] .mock-exp { background: var(--c-surface-2); }
 [data-theme="dark"] .mock-palette {
