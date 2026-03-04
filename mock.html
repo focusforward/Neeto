@@ -864,6 +864,16 @@ async function startMock() {
 }
 
   // ── DIAGRAM IMAGE / PLACEHOLDER HELPER ──────────────────────────────
+  window.__mockDiagErr = function(img) {
+    var w = img && img.parentNode;
+    if (!w) return;
+    w.innerHTML = '<div style="display:flex;align-items:center;gap:10px;'
+      + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:12px 14px;">'
+      + '<span style="font-size:1.3rem;">🖼️</span>'
+      + '<div style="font-size:0.75rem;color:#6B5C45;line-height:1.5;">'
+      + 'Refer to NCERT book or past paper for the diagram.</div></div>';
+  };
+
   function buildMockDiagHtml(q) {
     if (q.pattern !== 'diagram_dhamaka') return null;
     var el = document.createElement('div');
@@ -872,7 +882,7 @@ async function startMock() {
       el.innerHTML = '<img src="' + q.image_url + '" alt="Diagram"'
         + ' style="max-width:100%;max-height:320px;object-fit:contain;border-radius:10px;'
         + 'border:1.5px solid #F0E8DE;background:#fff;padding:10px;display:block;margin:0 auto;"'
-        + ' onerror="this.parentNode.style.display='none'">';
+        + ' onerror="window.__mockDiagErr(this)">';
     } else {
       el.style.cssText = 'margin:0.5rem 0 1rem;display:flex;align-items:center;gap:10px;'
         + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:12px 14px;';
