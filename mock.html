@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-<title>Full Mock Test — neetminds™ | NEET 2027 Pattern, 720 Marks</title>
+<title>Full Mock Test — NEETMINDS™ | NEET 2027 Pattern, 720 Marks</title>
 <meta name="description" content="Full NEET mock test — 200 questions, 200 minutes, 720 marks. Chapter-weighted NEET 2027 pattern."/>
-<meta property="og:title" content="Full Mock Test — neetminds™ | NEET 2027 Pattern, 720 Marks"/>
+<meta property="og:title" content="Full Mock Test — NEETMINDS™ | NEET 2027 Pattern, 720 Marks"/>
 <meta property="og:image" content="neetminds-og.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
@@ -284,6 +284,47 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
   .result-grid{grid-template-columns:repeat(2,1fr);}
   .mock-q-area{padding:1.2rem 4%;}
 }
+
+
+.mock-opt:focus { outline: none; }
+.mock-opt:focus-visible { outline: 2px solid var(--c-brand, #FF6B1A); }
+
+/* ── DARK MODE MOCK-SPECIFIC OVERRIDES ── */
+[data-theme="dark"] #start-screen {
+  background: linear-gradient(160deg, var(--c-surface-2) 0%, var(--c-bg) 50%);
+}
+[data-theme="dark"] .start-info-card {
+  background: var(--c-surface); border-color: var(--c-border);
+}
+[data-theme="dark"] .mock-header {
+  background: var(--c-surface); border-color: var(--c-border);
+}
+[data-theme="dark"] .timer {
+  background: var(--c-surface-2); color: var(--c-brand);
+}
+[data-theme="dark"] .mock-q-card {
+  background: var(--c-surface); border-color: var(--c-border);
+}
+[data-theme="dark"] .mock-opt {
+  background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink);
+}
+[data-theme="dark"] .mock-opt:not([disabled]):hover {
+  border-color: var(--c-brand); background: var(--c-surface-2); color: var(--c-brand-deep);
+}
+[data-theme="dark"] .mock-exp { background: var(--c-surface-2); }
+[data-theme="dark"] .mock-palette {
+  background: var(--c-surface); border-color: var(--c-border);
+}
+[data-theme="dark"] .pb { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
+[data-theme="dark"] .result-hero {
+  background: linear-gradient(135deg, var(--c-surface-2) 0%, var(--c-surface) 100%);
+}
+[data-theme="dark"] .result-box { background: var(--c-surface); }
+[data-theme="dark"] .result-box:hover { background: var(--c-surface-2); }
+[data-theme="dark"] .nav-btn { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
+[data-theme="dark"] footer { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
+[data-theme="dark"] .q-block { background: var(--c-surface-2); }
+[data-theme="dark"] .secb-pill { background: var(--c-surface-2); }
 </style>
 </head>
 <body>
@@ -291,8 +332,8 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 <!-- ══ NAV ══════════════════════════════════════════════════════ -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="neetminds logo"/>
-    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
+    <img src="neetminds-logo.png" alt="NEETMINDS"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
     <a href="practice.html">Practice</a>
@@ -369,7 +410,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 <div id="result-screen" style="display:none;">
   <nav class="navbar">
     <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;">
-      <span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span>
+      <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
     </span>
     <div class="nav-links">
       <a href="mock.html" class="active">Retake Test</a>
@@ -396,15 +437,15 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 
 <footer class="neeto-footer">
   <div class="footer-brand">
-    <img src="neetminds-logo.png" style="height:28px;object-fit:contain;border-radius:0;" alt="neetminds"/>
-    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
+    <img src="neetminds-logo.png" style="height:28px;object-fit:contain;border-radius:0;" alt="NEETMINDS"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
-  <p>© 2026 neetminds™. All rights reserved.</p>
+  <p>© 2026 NEETMINDS™. All rights reserved.</p>
 </footer>
 
 <script>
 // ═══════════════════════════════════════════════════════════════
-//  neetminds mock.html  v2
+//  NEETMINDS mock.html  v2
 //  • Question-by-question (Prev / Next)
 //  • Match tables via nav.css classes
 //  • Assertion-Reason / Statement I–II / lettered lists formatted
@@ -471,55 +512,84 @@ document.addEventListener('click',function(e){
 function formatQText(raw){
   if(!raw)return '';
   var t=String(raw).trim();
+  var arStyle='border-left:3px solid var(--c-brand,#FF6B1A);background:var(--c-bg,#FAFAF8);'
+    +'border-radius:0 8px 8px 0;padding:.6rem 1rem;margin-bottom:.55rem;'
+    +'font-size:.95rem;line-height:1.65;color:var(--c-ink,#1A1208);';
+  var arLbl='font-weight:700;color:var(--c-brand-deep,#E85500);display:block;margin-bottom:.2rem;font-size:.88rem;';
+  var stemSt='font-size:1rem;line-height:1.75;color:var(--c-ink,#1A1208);margin-bottom:.6rem;';
+  var stKey='font-weight:700;color:var(--c-brand-deep,#E85500);min-width:1.6rem;flex-shrink:0;';
+  var stRow='display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.95rem;line-height:1.65;color:var(--c-ink,#1A1208);';
+  var out='';
 
-  // ── 1. Assertion & Reason ──────────────────────────────────
-  // Matches "Assertion A: …" or "Assertion (A): …" + "Reason R: …"
-  var ar=t.match(/^([\s\S]*?)\bAssertion\s*[:(]?\s*[Aa][):]?\s*([\s\S]+?)\bReason\s*[:(]?\s*[Rr][):]?\s*([\s\S]+)$/i);
+  // ── 1. Assertion (A) / Reason (R) ─────────────────────────
+  var ar=t.match(/^([\s\S]*?)\bAssertion\s*[:(（]?\s*[Aa][)）:]?\s*([\s\S]+?)\bReason\s*[:(（]?\s*[Rr][)）:]?\s*([\s\S]+)$/i);
   if(ar){
-    var pre=ar[1].trim(), ass=ar[2].trim(), rea=ar[3].trim();
-    return (pre?'<p class="q-stem">'+esc(pre)+'</p>':'')
-      +'<div class="q-block"><span class="q-block-lbl">Assertion (A)</span>'+esc(ass)+'</div>'
-      +'<div class="q-block"><span class="q-block-lbl">Reason (R)</span>'+esc(rea)+'</div>';
+    var pre=ar[1].trim(),ass=ar[2].trim(),rea=ar[3].trim();
+    if(pre)out+='<p style="'+stemSt+'">'+esc(pre)+'</p>';
+    out+='<div style="'+arStyle+'"><span style="'+arLbl+'">Assertion (A)</span>'+esc(ass)+'</div>';
+    out+='<div style="'+arStyle+'"><span style="'+arLbl+'">Reason (R)</span>'+esc(rea)+'</div>';
+    return out;
   }
 
   // ── 2. Statement I / Statement II ─────────────────────────
-  // Split on "Statement I:" "Statement II:" "Statement-I" etc.
-  var stSplit=t.split(/Statement[\s\-]*(I{1,3}|[1-3])\s*[:-]?\s*/i);
-  // stSplit = [before, label1, text1, label2, text2, ...]
-  if(stSplit.length>=5){
-    var out='';
-    var pre2=stSplit[0].trim();
-    if(pre2)out+='<p class="q-stem">'+esc(pre2)+'</p>';
-    for(var si=1;si<stSplit.length-1;si+=2){
-      var lbl=stSplit[si].trim().toUpperCase();
-      var txt=stSplit[si+1].trim();
+  var stParts=t.split(/Statement[\s\-]*(I{1,3}|[1-3])\s*[:\-]?\s*/i);
+  if(stParts.length>=5){
+    var pre2=stParts[0].trim();
+    if(pre2)out+='<p style="'+stemSt+'">'+esc(pre2)+'</p>';
+    for(var si=1;si<stParts.length-1;si+=2){
+      var lbl=stParts[si].trim().toUpperCase();
+      var txt=(stParts[si+1]||'').trim();
       if(!txt)continue;
-      var label='Statement '+(lbl==='1'||lbl==='I'?'I':lbl==='2'||lbl==='II'?'II':'III')+':';
-      out+='<div class="q-block"><span class="q-block-lbl">'+label+'</span>'+esc(txt)+'</div>';
+      var label=(lbl==='1'||lbl==='I')?'Statement I':(lbl==='2'||lbl==='II')?'Statement II':'Statement III';
+      out+='<div style="'+arStyle+'"><span style="'+arLbl+'">'+label+'</span>'+esc(txt)+'</div>';
     }
     if(out)return out;
   }
 
-  // ── 3. Lettered / numbered sub-item list ──────────────────
-  // Detect lines starting with A. B. C. D.  or  A) B) or  1. 2. 3.
-  var lines=t.split('\n');
-  var itemLines=lines.filter(function(l){return /^\s*[A-Da-d][.)]\s+\S/.test(l.trim())||/^\s*[1-4][.)]\s+\S/.test(l.trim());});
+  // ── 3a. Inline lettered list: "stem: A. text; B. text; C. text" ──
+  // Detect pattern: ends in ": A." or "; A." and has "; B." "; C." inline
+  var inlineMatch=t.match(/^(.*?[.?:!])\s*(?:A[.)]\s)([\s\S]+)$/);
+  if(inlineMatch){
+    var inlineStem=inlineMatch[1].trim();
+    var rest=inlineMatch[2];
+    // Split on "; B." "; C." "; D." "; E."
+    var parts=rest.split(/[;,]\s*(?=[A-Ea-e][.)]\s)/);
+    if(parts.length>=2){
+      out+='<p style="'+stemSt+'">'+esc(inlineStem)+'</p>';
+      out+='<div style="margin-bottom:.9rem;">';
+      var letters=['A','B','C','D','E'];
+      parts.forEach(function(p,pi){
+        var pm=p.trim().match(/^([A-Ea-e][.)]\s*)([\s\S]+)/);
+        var key=pm?pm[1].trim():letters[pi]+'.';
+        var val=pm?pm[2].trim():p.trim();
+        if(val)out+='<div style="'+stRow+'"><span style="'+stKey+'">'+esc(key)+'</span><span>'+esc(val)+'</span></div>';
+      });
+      out+='</div>';
+      return out;
+    }
+  }
+
+  // ── 3b. Newline-separated lettered list ────────────────────
+  var lines=t.replace(/\r\n/g,'\n').split('\n');
+  var itemLines=lines.filter(function(l){return /^\s*[A-Da-d1-4][.)]\s+\S/.test(l.trim());});
   if(itemLines.length>=2){
-    var firstIdx=lines.findIndex(function(l){return /^\s*[A-Da-d1-4][.)]\s+\S/.test(l.trim());});
-    var stem3=lines.slice(0,firstIdx).join(' ').trim();
-    var out3=stem3?'<p class="q-stem">'+esc(stem3)+'</p>':'';
-    out3+='<div class="q-stmt-list">';
+    var firstIdx=0;
+    for(var li=0;li<lines.length;li++){
+      if(/^\s*[A-Da-d1-4][.)]\s+\S/.test(lines[li].trim())){firstIdx=li;break;}
+    }
+    var stemPart=lines.slice(0,firstIdx).join(' ').trim();
+    if(stemPart)out+='<p style="'+stemSt+'margin-bottom:.5rem;">'+esc(stemPart)+'</p>';
+    out+='<div style="margin-bottom:.9rem;">';
     lines.slice(firstIdx).forEach(function(l){
-      var lm=l.trim().match(/^([A-Da-d1-4][.)])\s+([\s\S]*)/);
+      var lm=l.trim().match(/^([A-Da-d1-4][.)]) +([\s\S]*)/);
       if(lm){
-        out3+='<div class="q-stmt-row"><span class="q-stmt-key">'+esc(lm[1])+'</span><span>'+esc(lm[2])+'</span></div>';
+        out+='<div style="'+stRow+'"><span style="'+stKey+'">'+esc(lm[1])+'</span><span>'+esc(lm[2])+'</span></div>';
       }else if(l.trim()){
-        // continuation line — append to last item (treat as plain)
-        out3+='<div class="q-stmt-row"><span class="q-stmt-key"></span><span>'+esc(l.trim())+'</span></div>';
+        out+='<div style="font-size:.95rem;line-height:1.6;color:var(--c-ink,#1A1208);padding-left:2.1rem;">'+esc(l.trim())+'</div>';
       }
     });
-    out3+='</div>';
-    return out3;
+    out+='</div>';
+    return out;
   }
 
   // ── 4. Plain text ──────────────────────────────────────────
@@ -608,14 +678,12 @@ function renderQuestion(idx){
     var ans=userAnswers[idx];
     var correct=(q.correct_answer||'').toUpperCase();
     var cls='mock-opt';
-    if(testDone||ans){
-      if(k===correct)             cls+=' mo-correct';
-      else if(ans&&k===ans)       cls+=' mo-wrong';
-      else                        cls+=' mo-dim';
-    } else if(ans===k){
-      cls+=' mo-selected';
+    if(ans){
+      if(k===correct)       cls+=' mo-correct';
+      else if(k===ans)      cls+=' mo-wrong';
+      else                  cls+=' mo-dim';
     }
-    var dis=(testDone||(ans&&ans!==k))?'disabled':'';
+    var dis=(testDone||!!ans)?'disabled':'';
     optsHTML+='<button class="'+cls+'" id="opt-'+idx+'-'+k+'"'
       +' data-key="'+k+'" '+dis
       +' onclick="mockSelect('+idx+',\''+k+'\')">'
