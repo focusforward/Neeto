@@ -1,11 +1,11 @@
 /* ═══════════════════════════════════════════════════════
-   neetminds — app.js  v14
+   NEETMINDS — app.js  v15
    Handles: Practice page + Units page
 
-   FIXES IN v14:
+   FIXES IN v15:
    - matchTableHTML: handles rows[] schema (all 146 match questions)
    - buildDiagHtml: onerror uses _diagFallback map — no quote nesting
-   - CACHE_VERSION v14 busts stale caches
+   - CACHE_VERSION v15 busts stale caches
    - Data loaded from root api_*.json (GitHub Pages)
    - Dark mode: var(--c-ink) everywhere
 ═══════════════════════════════════════════════════════ */
@@ -13,7 +13,7 @@
 (function () {
   'use strict';
 
-  var CACHE_VERSION = 'v14';
+  var CACHE_VERSION = 'v15';
   var CACHE_TTL     = 24 * 60 * 60 * 1000;
   var MAX_ATTEMPTS  = 2000;
   var SUBJECTS      = ['Biology', 'Chemistry', 'Physics'];
@@ -209,6 +209,96 @@
        Schema B — legacy / future imports (col1/col2 dicts):
          { col1:{A:'Object distance u',...}, col2:{I:'Negative...',...} }
     ══════════════════════════════════════════════════ */
+
+    /* ══════════════════════════════════════════════════
+       FORMAT QUESTION TEXT
+       Handles Assertion-Reason, Statement I/II, lettered
+       sub-lists (A. B. C. D. or 1. 2. 3.) and plain text.
+    ══════════════════════════════════════════════════ */
+    function formatQText(raw) {
+      if (!raw) return '';
+      var t = String(raw).trim();
+      var arStyle = 'border-left:3px solid var(--c-brand,#FF6B1A);background:var(--c-bg,#FAFAF8);'
+        + 'border-radius:0 8px 8px 0;padding:.6rem 1rem;margin-bottom:.55rem;'
+        + 'font-size:.95rem;line-height:1.65;color:var(--c-ink,#1A1208);';
+      var arLbl   = 'font-weight:700;color:var(--c-brand-deep,#E85500);display:block;margin-bottom:.2rem;font-size:.88rem;';
+      var stemSt  = 'font-size:1rem;line-height:1.75;color:var(--c-ink,#1A1208);margin-bottom:.6rem;';
+      var stKey   = 'font-weight:700;color:var(--c-brand-deep,#E85500);min-width:1.6rem;flex-shrink:0;';
+      var stRow   = 'display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.95rem;line-height:1.65;color:var(--c-ink,#1A1208);';
+      var out = '';
+
+      // 1. Assertion (A) / Reason (R)
+      var ar = t.match(/^([\s\S]*?)\bAssertion\s*[:(（]?\s*[Aa][)）:]?\s*([\s\S]+?)\bReason\s*[:(（]?\s*[Rr][)）:]?\s*([\s\S]+)$/i);
+      if (ar) {
+        var pre = ar[1].trim(), ass = ar[2].trim(), rea = ar[3].trim();
+        if (pre) out += '<p style="' + stemSt + '">' + escHtml(pre) + '</p>';
+        out += '<div style="' + arStyle + '"><span style="' + arLbl + '">Assertion (A)</span>' + escHtml(ass) + '</div>';
+        out += '<div style="' + arStyle + '"><span style="' + arLbl + '">Reason (R)</span>' + escHtml(rea) + '</div>';
+        return out;
+      }
+
+      // 2. Statement I / Statement II
+      var stParts = t.split(/Statement[\s\-]*(I{1,3}|[1-3])\s*[:\-]?\s*/i);
+      if (stParts.length >= 5) {
+        var pre2 = stParts[0].trim();
+        if (pre2) out += '<p style="' + stemSt + '">' + escHtml(pre2) + '</p>';
+        for (var si = 1; si < stParts.length - 1; si += 2) {
+          var lbl = stParts[si].trim().toUpperCase();
+          var txt = (stParts[si + 1] || '').trim();
+          if (!txt) continue;
+          var label = (lbl === '1' || lbl === 'I') ? 'Statement I' : (lbl === '2' || lbl === 'II') ? 'Statement II' : 'Statement III';
+          out += '<div style="' + arStyle + '"><span style="' + arLbl + '">' + label + '</span>' + escHtml(txt) + '</div>';
+        }
+        if (out) return out;
+      }
+
+      // 3a. INLINE lettered list: "stem text: A. item; B. item; C. item"
+      var inlineM = t.match(/^(.*?[.?:!])\s*A[.)]\s([\s\S]+)$/);
+      if (inlineM) {
+        var iStem = inlineM[1].trim();
+        var iParts = inlineM[2].split(/[;,]\s*(?=[A-Ea-e][.)]\s)/);
+        if (iParts.length >= 2) {
+          out += '<p style="' + stemSt + '">' + escHtml(iStem) + '</p>';
+          out += '<div style="margin-bottom:.9rem;">';
+          var letters = ['A','B','C','D','E'];
+          iParts.forEach(function(p, pi) {
+            var pm = p.trim().match(/^([A-Ea-e][.)]\s*)([\s\S]+)/);
+            var key = pm ? pm[1].trim() : letters[pi] + '.';
+            var val = pm ? pm[2].trim() : p.trim();
+            if (val) out += '<div style="' + stRow + '"><span style="' + stKey + '">' + escHtml(key) + '</span><span>' + escHtml(val) + '</span></div>';
+          });
+          out += '</div>';
+          return out;
+        }
+      }
+
+      // 3b. Newline-separated lettered list
+      var lines = t.replace(/\r\n/g,'\n').split('\n');
+      var itemLines = lines.filter(function(l){ return /^\s*[A-Da-d1-4][.)]\s+\S/.test(l.trim()); });
+      if (itemLines.length >= 2) {
+        var firstIdx = 0;
+        for (var li = 0; li < lines.length; li++) {
+          if (/^\s*[A-Da-d1-4][.)]\s+\S/.test(lines[li].trim())) { firstIdx = li; break; }
+        }
+        var stemPart = lines.slice(0, firstIdx).join(' ').trim();
+        if (stemPart) out += '<p style="' + stemSt + 'margin-bottom:.5rem;">' + escHtml(stemPart) + '</p>';
+        out += '<div style="margin-bottom:.9rem;">';
+        lines.slice(firstIdx).forEach(function(l) {
+          var lm = l.trim().match(/^([A-Da-d1-4][.)]) +([\s\S]*)/);
+          if (lm) {
+            out += '<div style="' + stRow + '"><span style="' + stKey + '">' + escHtml(lm[1]) + '</span><span>' + escHtml(lm[2]) + '</span></div>';
+          } else if (l.trim()) {
+            out += '<div style="font-size:.95rem;line-height:1.6;color:var(--c-ink,#1A1208);padding-left:2.1rem;">' + escHtml(l.trim()) + '</div>';
+          }
+        });
+        out += '</div>';
+        return out;
+      }
+
+      // 4. Plain text
+      return '<p style="font-size:1rem;font-weight:500;line-height:1.65;color:var(--c-ink,#1A1208);margin-bottom:1.4rem;">' + escHtml(t) + '</p>';
+    }
+
     function matchTableHTML(mt) {
       if (!mt) return '';
       var html = '<div class="match-table-wrap">';
@@ -309,7 +399,7 @@
         var val = q.options && q.options[k] ? q.options[k] : '';
         if (!val) return '';
         return '<button class="neeto-opt" data-key="' + k + '" onclick="window._neetAnswer(this)">'
-          + '<span class="opt-label">' + k + '</span> ' + escHtml(val) + '</button>';
+          + '<span class="opt-label">' + k + '.</span> ' + escHtml(val) + '</button>';
       }).join('');
 
       var patternTag = q.pattern && PATTERN_LABELS[q.pattern]
@@ -343,8 +433,7 @@
         '<p style="font-size:0.72rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);'
           + 'text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">'
           + escHtml(q.subject || '') + ' · ' + escHtml(q.chapter || '') + '</p>',
-        '<p style="font-size:1rem;font-weight:500;line-height:1.65;color:var(--c-ink,#1A1208);margin-bottom:' + qMargin + ';">'
-          + escHtml(q.question || '') + '</p>',
+        formatQText(q.question || ''),
         hasTable ? matchTableHTML(q.match_table) : '',
         buildDiagHtml(q),
         '<div id="options-wrap">' + optsHtml + '</div>',
