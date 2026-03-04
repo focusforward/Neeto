@@ -187,8 +187,10 @@ html,body{
   border:1px solid rgba(255,107,26,.2);border-radius:12px;
   padding:1rem 1.2rem;font-size:.875rem;line-height:1.65;
   color:var(--c-ink);display:none;
+  word-break:break-word;overflow-wrap:anywhere;overflow:hidden;
 }
 .mock-exp.visible{display:block;}
+.mock-exp p{word-break:break-word;overflow-wrap:anywhere;}
 
 /* SECTION B DIVIDER */
 .secb-banner{
@@ -718,7 +720,7 @@ function renderQuestion(idx){
       +'<p style="font-size:.82rem;font-weight:700;color:var(--c-brand-deep,#E85500);margin-bottom:6px;">💡 Explanation</p>'
       +'<p style="margin-bottom:4px;"><strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
       +(chosen&&chosen!==correct?' &nbsp;<span style="color:#B91C1C;">You chose: '+chosen+'</span>':'')+'</p>'
-      +'<p style="font-size:.88rem;line-height:1.65;">'+esc(q.explanation||'')+'</p>'
+      +'<p style="font-size:.88rem;line-height:1.65;word-break:break-word;overflow-wrap:anywhere;">'+esc(q.explanation||'')+'</p>'
       +ncert+'</div>';
   }
 
@@ -915,7 +917,7 @@ function submitMock(){
       +(hasTable?matchTableHTML(q.match_table):'')
       +diagHTML(q)
       +optsH
-      +'<div style="margin-top:.9rem;background:var(--c-surface-2,#FFF8F3);border:1px solid rgba(255,107,26,.2);border-radius:10px;padding:.9rem 1.1rem;font-size:.875rem;color:var(--c-ink);line-height:1.6;">'
+      +'<div style="margin-top:.9rem;background:var(--c-surface-2,#FFF8F3);border:1px solid rgba(255,107,26,.2);border-radius:10px;padding:.9rem 1.1rem;font-size:.875rem;color:var(--c-ink);line-height:1.6;word-break:break-word;overflow-wrap:anywhere;overflow:hidden;">'
       +'<strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
       +' <span style="color:#B91C1C;">You chose: '+chosen+'</span><br>'
       +esc(q.explanation||'')+ncert+'</div></div>';
