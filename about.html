@@ -106,42 +106,48 @@
     .about-cta p { opacity: 0.85; margin-bottom: 32px; font-size: 1rem; max-width: 540px; margin-left: auto; margin-right: auto; }
     .btn-white { background: #fff; color: #CC3300; padding: 14px 32px; border-radius: 12px; font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
     .btn-white:hover { background: #F5EDE0; transform: translateY(-2px); }
+  
+    /* NEETMINDS™ brand wordmark */
+    .brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; display: inline-flex; align-items: baseline; }
+    .brand-neet  { color: #CC3300; }
+    .brand-minds { color: #FF6B1A; }
+    .brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
+    .nav-cta     { background: #CC3300 !important; color: #fff !important; font-weight: 700 !important;
+                   padding: 8px 18px !important; border-radius: 100px !important; }
+
   </style>
 </head>
 <body>
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
-    <div class="nav-links">
+  <div class="nav-links">
+    <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
+    <a href="mock.html">Mock</a>
     <a href="methodology.html">Methodology</a>
     <a href="about.html" class="active">About</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
     <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
+  <a href="mock.html">Mock</a>
   <a href="methodology.html">Methodology</a>
   <a href="about.html" class="active">About</a>
-  <a href="units.html">Units</a>
-  <a href="mindset.html">Mindset</a>
-  <a href="analytics.html">Analytics</a>
   <a href="practice.html" class="nav-cta">Start Practising Free →</a>
 </div>
 
@@ -254,7 +260,7 @@
 <footer class="neeto-footer">
   <div class="footer-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS"/>
-    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
   <p>A NEETMINDS™ product · Built by cognitive performance scientists, doctors, engineers &amp; teachers.</p>
 </footer>

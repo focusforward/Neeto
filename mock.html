@@ -187,10 +187,8 @@ html,body{
   border:1px solid rgba(255,107,26,.2);border-radius:12px;
   padding:1rem 1.2rem;font-size:.875rem;line-height:1.65;
   color:var(--c-ink);display:none;
-  word-break:break-word;overflow-wrap:anywhere;overflow:hidden;
 }
 .mock-exp.visible{display:block;}
-.mock-exp p{word-break:break-word;overflow-wrap:anywhere;}
 
 /* SECTION B DIVIDER */
 .secb-banner{
@@ -340,22 +338,26 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 [data-theme="dark"] footer { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
 [data-theme="dark"] .q-block { background: var(--c-surface-2); }
 [data-theme="dark"] .secb-pill { background: var(--c-surface-2); }
-</style>
+
+    .brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; display: inline-flex; align-items: baseline; }
+    .brand-neet  { color: #CC3300; }
+    .brand-minds { color: #FF6B1A; }
+    .brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
+  </style>
 </head>
 <body>
 
 <!-- ══ NAV ══════════════════════════════════════════════════════ -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
-  </a>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span></a>
   <div class="nav-links">
+    <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html" class="active">Mock Test</a>
+    <a href="mock.html" class="active">Mock</a>
     <a href="methodology.html">Methodology</a>
     <a href="about.html">About</a>
-    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
@@ -373,13 +375,10 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html" class="active">Mock Test</a>
+  <a href="mock.html" class="active">Mock</a>
   <a href="methodology.html">Methodology</a>
   <a href="about.html">About</a>
-  <a href="units.html">Units</a>
-  <a href="mindset.html">Mindset</a>
-  <a href="analytics.html">Analytics</a>
-  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
+  <a href="practice.html" class="nav-cta">Start Practising →</a>
 </div>
 
 <!-- ══ START SCREEN ══════════════════════════════════════════════ -->
@@ -720,7 +719,7 @@ function renderQuestion(idx){
       +'<p style="font-size:.82rem;font-weight:700;color:var(--c-brand-deep,#E85500);margin-bottom:6px;">💡 Explanation</p>'
       +'<p style="margin-bottom:4px;"><strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
       +(chosen&&chosen!==correct?' &nbsp;<span style="color:#B91C1C;">You chose: '+chosen+'</span>':'')+'</p>'
-      +'<p style="font-size:.88rem;line-height:1.65;word-break:break-word;overflow-wrap:anywhere;">'+esc(q.explanation||'')+'</p>'
+      +'<p style="font-size:.88rem;line-height:1.65;">'+esc(q.explanation||'')+'</p>'
       +ncert+'</div>';
   }
 
@@ -917,7 +916,7 @@ function submitMock(){
       +(hasTable?matchTableHTML(q.match_table):'')
       +diagHTML(q)
       +optsH
-      +'<div style="margin-top:.9rem;background:var(--c-surface-2,#FFF8F3);border:1px solid rgba(255,107,26,.2);border-radius:10px;padding:.9rem 1.1rem;font-size:.875rem;color:var(--c-ink);line-height:1.6;word-break:break-word;overflow-wrap:anywhere;overflow:hidden;">'
+      +'<div style="margin-top:.9rem;background:var(--c-surface-2,#FFF8F3);border:1px solid rgba(255,107,26,.2);border-radius:10px;padding:.9rem 1.1rem;font-size:.875rem;color:var(--c-ink);line-height:1.6;">'
       +'<strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
       +' <span style="color:#B91C1C;">You chose: '+chosen+'</span><br>'
       +esc(q.explanation||'')+ncert+'</div></div>';

@@ -24,65 +24,94 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'DM Sans', sans-serif; background: var(--c-bg,#FFFDF9); color: var(--c-ink,#1A1208); line-height: 1.6; transition: background .3s, color .3s; }
 
-    /* ── HERO ──────────────────────────────────────────────── */
+    
+    /* ── HERO v3 — TARGET TOP 100 RANKS ─────────────────────── */
     .hero {
       position: relative; overflow: hidden;
-      padding: 72px 20px 64px; text-align: center;
-      background: linear-gradient(165deg, #FFFDF9 0%, #FFF0E6 45%, #FFF7F0 100%);
+      padding: 80px 20px 72px; text-align: center;
+      background: linear-gradient(160deg, #FFFDF9 0%, #FFF0E6 50%, #FFF7F0 100%);
     }
     .hero::before {
       content: ''; position: absolute; inset: 0; pointer-events: none;
       background:
-        radial-gradient(ellipse 900px 600px at 65% 15%, rgba(204,51,0,0.05) 0%, transparent 70%),
-        radial-gradient(ellipse 600px 400px at 15% 85%, rgba(255,107,26,0.07) 0%, transparent 70%);
+        radial-gradient(ellipse 900px 600px at 70% 10%, rgba(204,51,0,0.06) 0%, transparent 70%),
+        radial-gradient(ellipse 600px 400px at 10% 90%, rgba(255,107,26,0.08) 0%, transparent 70%);
     }
-    /* ── AUDIT FIX #5: eyebrow speaks to fear, not feature jargon ── */
     .hero-eyebrow {
       display: inline-flex; align-items: center; gap: 8px;
       background: rgba(204,51,0,0.08); border: 1px solid rgba(204,51,0,0.2);
-      border-radius: 100px; padding: 6px 18px; margin-bottom: 26px;
-      font-size: 0.75rem; font-weight: 700; color: #CC3300;
+      border-radius: 100px; padding: 6px 18px; margin-bottom: 28px;
+      font-size: 0.73rem; font-weight: 700; color: #CC3300;
       text-transform: uppercase; letter-spacing: 0.1em;
     }
     .dot { width: 6px; height: 6px; border-radius: 50%; background: #CC3300; display: inline-block; animation: pulse 2s infinite; }
-    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.5)} }
+    @keyframes pulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.6)} }
 
-    .hero h1 {
-      font-family: 'Fraunces', serif; font-size: clamp(2.3rem, 5vw, 3.6rem);
-      font-weight: 900; line-height: 1.08; letter-spacing: -0.03em;
-      color: #1A1208; margin-bottom: 20px; max-width: 840px; margin-left: auto; margin-right: auto;
-    }
-    .hero h1 em { font-style: italic; color: #CC3300; }
-
-    /* ── AUDIT FIX #2: sub-headline speaks to fear first, then solution ── */
-    .hero-sub {
-      font-size: clamp(0.97rem, 2vw, 1.12rem); color: #5C4A30;
-      max-width: 660px; margin: 0 auto 16px; font-weight: 400; line-height: 1.75;
+    /* MAIN HEADLINE */
+    .hero-h1 {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2.8rem, 7vw, 5rem);
+      font-weight: 900; line-height: 1.0; letter-spacing: -0.04em;
+      color: #1A1208; margin-bottom: 14px;
+      text-transform: uppercase;
     }
 
-    /* ── AUDIT FIX #4: social proof line above CTA ── */
-    .hero-proof {
-      font-size: 0.83rem; color: #8B6F4E; margin-bottom: 32px;
-      display: flex; align-items: center; justify-content: center; gap: 8px;
+    /* TAGLINE */
+    .hero-tagline {
+      font-family: 'DM Sans', sans-serif;
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-weight: 600; color: #5C4A30;
+      letter-spacing: 0.05em; margin-bottom: 18px;
+      text-transform: uppercase;
     }
-    .hero-proof .proof-dot { width: 5px; height: 5px; border-radius: 50%; background: #22C55E; display: inline-block; }
-    .hero-proof strong { color: #1A7A3A; }
 
-    /* ── AUDIT FIX #3: dominant CTA + ghost secondary ── */
-    .hero-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center; }
+    /* PUNCHLINE */
+    .hero-punchline {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(1.6rem, 4vw, 2.6rem);
+      font-weight: 900; font-style: italic;
+      color: #CC3300;
+      margin-bottom: 28px; line-height: 1.1;
+      letter-spacing: -0.02em;
+    }
+
+    /* STAT BAR */
+    .hero-statbar {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: 8px 10px; margin-bottom: 36px;
+      font-size: 0.85rem; font-weight: 500; color: #5C4A30;
+    }
+    .stat-pill {
+      background: #1A1208; color: #FF8C4A;
+      padding: 4px 12px; border-radius: 100px;
+      font-weight: 700; font-size: 0.82rem;
+      letter-spacing: 0.01em;
+    }
+    .stat-divider { color: #D4C4B0; font-size: 1rem; }
+    .stat-accent { color: #CC3300; font-weight: 700; }
+
+    /* HERO CTA */
+    .hero-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center; margin-bottom: 24px; }
+    .btn-hero {
+      font-size: 1.05rem !important;
+      padding: 16px 40px !important;
+      letter-spacing: 0.01em !important;
+      box-shadow: 0 6px 28px rgba(204,51,0,0.35) !important;
+    }
     .btn-primary {
       background: #CC3300; color: #fff; padding: 15px 36px; border-radius: 12px;
-      font-size: 1.02rem; font-weight: 700; text-decoration: none; transition: all 0.2s;
-      box-shadow: 0 4px 24px rgba(204,51,0,0.32); letter-spacing: 0.01em;
+      font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s;
+      box-shadow: 0 4px 20px rgba(204,51,0,0.3); display: inline-block;
     }
-    .btn-primary:hover { background: #AA2800; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(204,51,0,0.38); }
-    /* ghost — visually subordinate */
-    .btn-ghost {
-      color: #6B5C45; font-size: 0.93rem; font-weight: 600; text-decoration: none;
-      padding: 6px 4px; border-bottom: 1.5px solid #D4C4B0; transition: all 0.15s;
-      background: none; border-top: none; border-left: none; border-right: none;
+    .btn-primary:hover { background: #AA2800; transform: translateY(-2px); box-shadow: 0 8px 32px rgba(204,51,0,0.4); }
+
+    /* PROOF LINE */
+    .hero-proof {
+      font-size: 0.82rem; color: #8B6F4E;
+      display: flex; align-items: center; justify-content: center; gap: 8px;
     }
-    .btn-ghost:hover { color: #CC3300; border-bottom-color: #CC3300; }
+    .proof-dot { width: 6px; height: 6px; border-radius: 50%; background: #22C55E; display: inline-block; }
+    .hero-proof strong { color: #1A7A3A; }
 
     /* ── STATS BAR ──────────────────────────────────────────── */
     .stats-bar {
@@ -225,61 +254,56 @@
 <!-- ── AUDIT FIX #1: Nav collapsed to 5 primary items + CTA button ── -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
+    <a href="mock.html">Mock</a>
     <a href="methodology.html">Methodology</a>
     <a href="about.html">About</a>
-    <!-- Secondary links hidden in hamburger overflow on desktop, shown on mobile -->
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
     <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html" class="active">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
+  <a href="mock.html">Mock</a>
   <a href="methodology.html">Methodology</a>
   <a href="about.html">About</a>
-  <a href="units.html">Units</a>
-  <a href="mindset.html">Mindset</a>
-  <a href="analytics.html">Analytics</a>
   <a href="practice.html" class="nav-cta">Start Practising Free →</a>
 </div>
 
 <!-- ── HERO ─────────────────────────────────────────────────────── -->
 <section class="hero">
-  <!-- AUDIT FIX #5: eyebrow speaks to fear, not jargon -->
-  <div class="hero-eyebrow"><span class="dot"></span> Stop losing marks on questions you actually know</div>
-  <h1>Stop Battling the Syllabus.<br/><em>Start Solving the Pattern.</em></h1>
-
-  <!-- AUDIT FIX #2: fear-first sub-headline, names the problem explicitly -->
-  <p class="hero-sub">
-    Most NEET aspirants study harder every year — and still don't crack it. NEETMINDS™ teaches you to spot the <strong>6 question patterns</strong> that cover 100% of the exam, so you stop losing marks on questions you actually know.
-  </p>
-
-  <!-- AUDIT FIX #4: social proof line directly above CTA -->
+  <div class="hero-eyebrow"><span class="dot"></span> India's Most Competitive Medical Entrance</div>
+  <h1 class="hero-h1">TARGET TOP 100 RANKS</h1>
+  <p class="hero-tagline">NEET Patterns Decoded</p>
+  <p class="hero-punchline">720 is Not Impossible</p>
+  <div class="hero-statbar">
+    <span>2025 Reality:</span>
+    <span class="stat-pill">AIR 1 = 686</span>
+    <span class="stat-divider">|</span>
+    <span class="stat-pill">Only 73 Scored 650+</span>
+    <span class="stat-divider">|</span>
+    <span class="stat-accent">Join to Beat the Odds</span>
+  </div>
+  <div class="hero-cta-row">
+    <a href="practice.html" class="btn-primary btn-hero">Start Now and Boost your NEET RANK →</a>
+  </div>
   <div class="hero-proof">
     <span class="proof-dot"></span>
-    <span>Join <strong>2,400+ students</strong> who shifted from memorising to strategising</span>
-  </div>
-
-  <!-- AUDIT FIX #3: single dominant CTA + subordinate ghost link -->
-  <div class="hero-cta-row">
-    <a href="practice.html" class="btn-primary">Start Practising Free →</a>
-    <a href="methodology.html" class="btn-ghost">See the Method</a>
+    <span>Join <strong>2,400+ students</strong> already training with pattern intelligence</span>
   </div>
 </section>
 
@@ -418,7 +442,7 @@
 <footer class="neeto-footer">
   <div class="footer-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS"/>
-    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
   <p>Built by a multidisciplinary team: <strong>MBBS doctors</strong> who cleared NEET · <strong>IIT engineers</strong> who built the platform · <strong>Cognitive scientists</strong> who designed the methodology · <strong>Experienced teachers</strong> who curated every question.</p>
   <p style="margin-top:6px;opacity:0.55;font-size:0.73rem;">Questions sourced from NCERT &amp; past NEET papers · For educational use only.</p>

@@ -228,22 +228,28 @@ html, body {
   #questions-container { padding: 16px 16px 80px; }
   .recommended-card { padding: 12px 16px; }
 }
-</style>
+
+    .brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; display: inline-flex; align-items: baseline; }
+    .brand-neet  { color: #CC3300; }
+    .brand-minds { color: #FF6B1A; }
+    .brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
+  </style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS">
+    <img src="neetminds-logo.png" alt="NEETMINDS™">
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html" class="active">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="units.html">Units</a>
-    <a href="analytics.html">Progress</a>
+    <a href="mock.html">Mock</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+    <a href="mock.html" class="nav-cta">Take Mock →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
@@ -264,9 +270,10 @@ html, body {
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html" class="active">Practice</a>
-  <a href="mock.html">Mock Test</a>
-  <a href="units.html">Units</a>
-  <a href="analytics.html">Progress</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="about.html">About</a>
+  <a href="mock.html" class="nav-cta">Take Mock →</a>
 </div>
 
 <!-- PAGE HEADER -->
@@ -328,7 +335,7 @@ html, body {
 <footer class="neeto-footer">
   <div class="footer-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS">
-    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
   <p>© 2026 NEETMINDS™. All rights reserved.</p>
 </footer>
