@@ -29802,7 +29802,7 @@
         "D": "Zero, that is no photoemission"
       },
       "correct_answer": "D",
-      "explanation": "Sol. Answer (4) When violet light falls on photosensitive material \\frac{h c}{\\lambda_{\\nu}} = E_{\\nu} + w_{0 \\therefore \\frac{h c}{\\lambda_{\\nu}} -1 = w_{0 \\frac{h c}{\\lambda_{\\nu}} -w_{0}< 0\\mathrm{~as~difference~in~energies~of~the~violet~and~red~light~is~greater~than~1~eV.",
+      "explanation": "Sol. Answer (4)  When violet light falls on photosensitive material, the maximum kinetic energy of photoelectrons is 1 eV. The energy of violet light is greater than that of red light. For red light to cause photoemission, its energy must be greater than the work function. Since the energy difference between violet and red light is greater than 1 eV, the energy of red light is less than the work function, so no photoemission occurs.",
       "ncert_ref": "NCERT Physics",
       "ncert_line": "",
       "pattern": "memory_test",
