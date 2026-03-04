@@ -424,5 +424,36 @@
   <p style="margin-top:6px;opacity:0.55;font-size:0.73rem;">Questions sourced from NCERT &amp; past NEET papers · For educational use only.</p>
 </footer>
 
+
+<script>
+function updateThemeUI() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var icon = isDark ? '☀️' : '🌙';
+  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.textContent = icon;
+  });
+  var lbl = document.getElementById('mob-theme-label');
+  if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+}
+function toggleTheme() {
+  var cur  = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('nm_theme', next); } catch(e) {}
+  updateThemeUI();
+}
+function toggleNav() {
+  var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
+  if (m) m.classList.toggle('open');
+}
+document.addEventListener('DOMContentLoaded', updateThemeUI);
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
+
 </body>
 </html>

@@ -4,534 +4,291 @@
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
 <title>Full Mock Test — neetminds™ | NEET 2027 Pattern, 720 Marks</title>
-<meta name="description" content="Full NEET mock test — 200 questions, 200 minutes, 720 marks. Chapter-weighted NEET 2027 pattern. Botany, Zoology, Chemistry and Physics."/>
+<meta name="description" content="Full NEET mock test — 200 questions, 200 minutes, 720 marks. Chapter-weighted NEET 2027 pattern."/>
 <meta property="og:title" content="Full Mock Test — neetminds™ | NEET 2027 Pattern, 720 Marks"/>
-<meta property="og:description" content="NEET is a pattern problem. Learn to recognise all 6."/>
 <meta property="og:image" content="neetminds-og.png"/>
 <meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
-
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="css/theme-override.css">
 <link rel="stylesheet" href="css/nav.css">
-<!-- ── THEME INIT ── -->
+
+<!-- ── THEME INIT: runs before first paint ── -->
 <script>
 (function(){
-  var saved = localStorage.getItem('nm_theme');
-  if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  var s = localStorage.getItem('nm_theme');
+  if (s) { document.documentElement.setAttribute('data-theme', s); return; }
   var h = new Date().getHours();
-  var timeBasedDark = (h >= 18 || h < 6);
-  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
-  if (timeBasedDark || sysDark) document.documentElement.setAttribute('data-theme','dark');
+  if (h>=18||h<6||(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches))
+    document.documentElement.setAttribute('data-theme','dark');
   else document.documentElement.setAttribute('data-theme','light');
 })();
 </script>
+
 <style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* ── RESET ── */
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
-  :root {
-    --orange: #FF6B1A;
-    --orange-light: #FF8C4A;
-    --orange-pale: #FFF0E6;
-    --orange-deep: #E85500;
-    --white: #FFFFFF;
-    --off-white: #FAFAF8;
-    --ink: #1A1208;
-    --ink-muted: #6B5C45;
-    --border: #F0E8DE;
-  }
+/* ── MOCK-SPECIFIC STYLES (nav/theme tokens come from nav.css) ── */
+html,body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--c-bg,#FAFAF8);
+  color:var(--c-ink,#1A1208);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .2s,color .2s;
+}
 
-  html,body{overflow-x:hidden;max-width:100%;width:100%;
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--ink);
-    min-height: 100vh;
-  }
+/* START SCREEN */
+#start-screen{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:5rem 5%;text-align:center;min-height:calc(100vh - 68px);
+  background:linear-gradient(160deg,var(--c-surface-2,#FFF8F3) 0%,var(--c-bg,#FAFAF8) 50%);
+}
+#start-screen h1{
+  font-family:'Fraunces',serif;font-size:clamp(2.2rem,5vw,3.5rem);
+  font-weight:900;letter-spacing:-.03em;color:var(--c-ink);margin-bottom:1rem;
+}
+#start-screen>p{color:var(--c-ink-muted,#6B5C45);font-size:1rem;margin-bottom:.3rem;line-height:1.6;}
+.start-info-card{
+  background:var(--c-surface,#fff);border:1.5px solid var(--c-border,#F0E8DE);
+  border-radius:20px;padding:1.8rem 2.5rem;margin:2rem 0;text-align:left;
+  min-width:280px;box-shadow:0 4px 24px rgba(255,107,26,.06);
+}
+.start-info-card div{color:var(--c-ink);font-size:.95rem;line-height:2.2;}
+.btn-primary{
+  background:var(--c-brand,#FF6B1A)!important;color:#fff!important;
+  padding:.9rem 2.5rem;border-radius:100px;font-weight:700;font-size:1rem;
+  border:none;cursor:pointer;font-family:'DM Sans',sans-serif;
+  box-shadow:0 4px 20px rgba(255,107,26,.35);transition:all .2s;display:inline-block;
+}
+.btn-primary:hover{background:var(--c-brand-deep,#E85500)!important;transform:translateY(-2px);}
 
-  /* ── NAV ── */
-  nav, .navbar {
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex !important;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
-    height: 68px;
-    background: rgba(255,255,255,0.92) !important;
-    backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border) !important;
-    box-shadow: none !important;
-  }
+/* MOCK HEADER */
+.mock-header{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:56px;
+  background:var(--c-surface,#fff);border-bottom:1px solid var(--c-border,#F0E8DE);
+  position:sticky;top:0;z-index:50;gap:1rem;
+  transition:background .2s,border-color .2s;
+}
+#section-label{
+  font-family:'Fraunces',serif;font-size:1rem;font-weight:700;
+  color:var(--c-ink);letter-spacing:-.01em;white-space:nowrap;flex:1;
+}
+.timer{
+  font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;
+  color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);
+  padding:.3rem 1rem;border-radius:100px;letter-spacing:.02em;transition:all .3s;
+}
+.timer.warning{color:#B91C1C!important;background:#FEE2E2!important;}
+.submit-btn{
+  background:var(--c-brand,#FF6B1A)!important;color:#fff!important;border:none;
+  border-radius:100px;padding:.4rem 1.1rem;font-size:.85rem;font-weight:700;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .2s;
+}
+.submit-btn:hover{background:var(--c-brand-deep,#E85500)!important;transform:translateY(-1px);}
 
-  .logo {
-    font-family: 'Fraunces', serif !important;
-    font-size: 1.5rem !important;
-    font-weight: 900 !important;
-    color: var(--orange) !important;
-    letter-spacing: -0.02em;
-    text-decoration: none;
-  }
+/* MOCK BODY LAYOUT */
+.mock-body{display:flex;min-height:calc(100vh - 124px);}
 
-  .nav-links { display: flex; gap: 2rem; align-items: center; }
+/* SINGLE-Q AREA */
+.mock-q-area{
+  flex:1;padding:1.8rem 5%;max-width:780px;
+  margin:0 auto;/* centres on wide screens when palette hidden */
+}
 
-  .nav-links a {
-    text-decoration: none;
-    font-size: 0.9rem;
-    font-weight: 500;
-    color: var(--ink-muted) !important;
-    transition: color 0.2s;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-  }
+/* PROGRESS */
+.mock-progress{margin-bottom:1.2rem;}
+.mock-progress-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.mock-progress-top span{font-size:.78rem;color:var(--c-ink-muted,#6B5C45);font-weight:500;}
+.progress-bar{height:4px;background:var(--c-border,#F0E8DE);border-radius:100px;overflow:hidden;}
+.progress-fill{height:100%;background:var(--c-brand,#FF6B1A);border-radius:100px;transition:width .3s;}
 
-  .nav-links a:hover { color: var(--orange) !important; }
-  .nav-links a.active { color: var(--orange) !important; font-weight: 600; }
+/* QUESTION CARD */
+.mock-q-card{
+  background:var(--c-surface,#fff);border:1.5px solid var(--c-border,#F0E8DE);
+  border-radius:18px;padding:1.8rem 2rem;margin-bottom:1.2rem;
+  transition:background .2s,border-color .2s;
+}
+.q-meta-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem;align-items:center;}
+.q-tag{font-size:.72rem;font-weight:700;padding:.25rem .7rem;border-radius:100px;
+  text-transform:uppercase;letter-spacing:.04em;display:inline-block;}
+.q-tag-num{background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);}
+.q-tag-sec{background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
+.q-tag-ch{background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);
+  font-weight:500;text-transform:none;letter-spacing:0;font-size:.7rem;}
 
-  /* ── START SCREEN ── */
-  #start-screen {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 5rem 5%;
-    text-align: center;
-    min-height: calc(100vh - 68px);
-    background: linear-gradient(160deg, var(--orange-pale) 0%, var(--off-white) 50%);
-  }
+/* QUESTION TEXT — formatted blocks */
+.q-stem{
+  font-size:1rem;line-height:1.75;color:var(--c-ink);margin-bottom:.9rem;
+}
+/* Assertion/Reason + Statement blocks */
+.q-block{
+  border-left:3px solid var(--c-brand,#FF6B1A);
+  background:var(--c-bg,#FAFAF8);border-radius:0 8px 8px 0;
+  padding:.65rem 1rem;margin-bottom:.6rem;
+  font-size:.95rem;line-height:1.65;color:var(--c-ink);
+}
+.q-block-lbl{
+  font-weight:700;color:var(--c-brand-deep,#E85500);
+  display:block;margin-bottom:.2rem;font-size:.88rem;
+}
+/* Lettered statement list */
+.q-stmt-list{margin-bottom:.9rem;}
+.q-stmt-row{
+  display:flex;gap:.6rem;margin-bottom:.4rem;
+  font-size:.95rem;line-height:1.65;color:var(--c-ink);
+}
+.q-stmt-key{
+  font-weight:700;color:var(--c-brand-deep,#E85500);
+  min-width:1.6rem;flex-shrink:0;
+}
 
-  #start-screen h1 {
-    font-family: 'Fraunces', serif !important;
-    font-size: clamp(2.2rem, 5vw, 3.5rem) !important;
-    font-weight: 900 !important;
-    letter-spacing: -0.03em;
-    color: var(--ink) !important;
-    margin-bottom: 1rem !important;
-  }
+/* OPTIONS */
+.q-options{display:flex;flex-direction:column;gap:.5rem;margin-top:.4rem;}
+.mock-opt{
+  display:flex;align-items:flex-start;gap:.75rem;
+  padding:.7rem 1rem;border:1.5px solid var(--c-border,#F0E8DE);
+  border-radius:10px;cursor:pointer;font-size:.92rem;
+  color:var(--c-ink);background:var(--c-surface,#fff);
+  transition:all .15s;text-align:left;width:100%;
+  font-family:'DM Sans',sans-serif;line-height:1.55;
+}
+.mock-opt:not([disabled]):hover{
+  border-color:var(--c-brand,#FF6B1A);
+  background:var(--c-surface-2,#FFF8F3);
+  color:var(--c-brand-deep,#E85500);
+}
+.mock-opt.mo-selected{border-color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
+.mock-opt.mo-correct{border-color:#22C55E!important;background:#F0FDF4!important;color:#15803D!important;}
+.mock-opt.mo-wrong{border-color:#EF4444!important;background:#FEF2F2!important;color:#B91C1C!important;}
+.mock-opt.mo-dim{opacity:.38;}
+[data-theme="dark"] .mock-opt.mo-correct{background:#0A2010!important;color:#4ADE80!important;}
+[data-theme="dark"] .mock-opt.mo-wrong{background:#1F0808!important;color:#F87171!important;}
+.opt-key{font-weight:700;color:var(--c-brand,#FF6B1A);min-width:1.4rem;flex-shrink:0;}
 
-  #start-screen > p {
-    color: var(--ink-muted) !important;
-    font-size: 1rem !important;
-    margin-bottom: 0.4rem !important;
-    line-height: 1.6;
-  }
+/* EXPLANATION */
+.mock-exp{
+  margin-top:1rem;background:var(--c-surface-2,#FFF8F3);
+  border:1px solid rgba(255,107,26,.2);border-radius:12px;
+  padding:1rem 1.2rem;font-size:.875rem;line-height:1.65;
+  color:var(--c-ink);display:none;
+}
+.mock-exp.visible{display:block;}
 
-  .start-info-card {
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 20px;
-    padding: 1.8rem 2.5rem;
-    margin: 2rem 0;
-    text-align: left;
-    display: inline-block;
-    min-width: 280px;
-    box-shadow: 0 4px 24px rgba(255,107,26,0.06);
-  }
+/* SECTION B DIVIDER */
+.secb-banner{
+  display:flex;align-items:center;gap:12px;margin-bottom:1.2rem;
+}
+.secb-line{flex:1;height:1px;background:var(--c-border,#F0E8DE);}
+.secb-pill{
+  font-size:.72rem;font-weight:700;color:var(--c-brand,#FF6B1A);
+  background:var(--c-surface-2,#FFF8F3);padding:4px 14px;
+  border-radius:100px;border:1px solid rgba(255,107,26,.25);white-space:nowrap;
+}
 
-  .start-info-card div {
-    color: var(--ink) !important;
-    font-size: 0.95rem !important;
-    line-height: 2.2 !important;
-    background: none !important;
-    border: none !important;
-    padding: 0 !important;
-  }
+/* NAV BUTTONS */
+.mock-nav-row{
+  display:flex;gap:10px;justify-content:space-between;
+  align-items:center;margin-top:1rem;flex-wrap:wrap;
+}
+.mock-nav-l,.mock-nav-r{display:flex;gap:8px;}
+.nav-btn{
+  padding:.55rem 1.3rem;border-radius:100px;font-size:.88rem;font-weight:600;
+  cursor:pointer;font-family:'DM Sans',sans-serif;transition:all .15s;
+  border:1.5px solid var(--c-border,#F0E8DE);
+  background:var(--c-surface,#fff);color:var(--c-ink-muted,#6B5C45);
+}
+.nav-btn:hover:not([disabled]){border-color:var(--c-brand,#FF6B1A);color:var(--c-brand,#FF6B1A);}
+.nav-btn[disabled]{opacity:.35;cursor:not-allowed;}
+.nav-btn.primary{
+  background:var(--c-brand,#FF6B1A)!important;color:#fff!important;
+  border-color:var(--c-brand,#FF6B1A)!important;
+  box-shadow:0 4px 14px rgba(255,107,26,.3);
+}
+.nav-btn.primary:hover{background:var(--c-brand-deep,#E85500)!important;border-color:var(--c-brand-deep,#E85500)!important;}
 
-  .btn-primary {
-    background: var(--orange) !important;
-    color: white !important;
-    text-decoration: none;
-    padding: 0.9rem 2.5rem !important;
-    border-radius: 100px !important;
-    font-weight: 700 !important;
-    font-size: 1rem !important;
-    box-shadow: 0 4px 20px rgba(255,107,26,0.35);
-    transition: all 0.2s;
-    border: none;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    display: inline-block;
-  }
+/* DIAGRAM */
+.diag-img-wrap{margin:.5rem 0 1.2rem;text-align:center;}
+.diag-img-wrap img{
+  max-width:100%;max-height:320px;object-fit:contain;
+  border-radius:10px;border:1.5px solid var(--c-border,#F0E8DE);
+  background:var(--c-surface,#fff);padding:10px;display:block;margin:0 auto;
+}
+.diag-placeholder{
+  display:flex;align-items:center;gap:10px;
+  background:var(--c-surface-2,#FFF8F3);border:1.5px dashed var(--c-border,#F0E8DE);
+  border-radius:10px;padding:12px 14px;margin:.5rem 0 1.2rem;
+}
+.diag-placeholder span{font-size:.78rem;color:var(--c-ink-muted,#6B5C45);line-height:1.5;}
 
-  .btn-primary:hover {
-    background: var(--orange-deep) !important;
-    transform: translateY(-2px);
-    box-shadow: 0 8px 28px rgba(255,107,26,0.45);
-  }
+/* PALETTE SIDEBAR */
+.mock-palette{
+  width:210px;flex-shrink:0;padding:1.4rem 1.1rem;
+  background:var(--c-surface,#fff);border-left:1px solid var(--c-border,#F0E8DE);
+  overflow-y:auto;position:sticky;top:56px;max-height:calc(100vh - 56px);
+  transition:background .2s,border-color .2s;
+}
+.mock-palette h3{
+  font-family:'Fraunces',serif;font-size:.95rem;font-weight:700;
+  color:var(--c-ink);margin-bottom:.8rem;
+}
+.pal-legend{display:flex;gap:.4rem;flex-wrap:wrap;margin-bottom:.9rem;font-size:.68rem;font-weight:500;}
+.pl-ans{background:#DCFCE7;color:#15803D;padding:2px 8px;border-radius:100px;}
+.pl-cur{background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);padding:2px 8px;border-radius:100px;}
+.pl-skip{background:var(--c-bg,#FAFAF8);color:var(--c-ink-muted,#6B5C45);border:1px solid var(--c-border,#F0E8DE);padding:2px 8px;border-radius:100px;}
+.palette-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:.32rem;}
+.pb{
+  aspect-ratio:1;border-radius:8px;border:1.5px solid var(--c-border,#F0E8DE);
+  background:var(--c-surface,#fff);font-size:.7rem;font-weight:600;
+  color:var(--c-ink-muted,#6B5C45);cursor:pointer;
+  display:flex;align-items:center;justify-content:center;
+  font-family:'DM Sans',sans-serif;transition:all .12s;
+}
+.pb:hover{border-color:var(--c-brand,#FF6B1A);color:var(--c-brand,#FF6B1A);}
+.pb.pb-green{background:#DCFCE7;border-color:#22C55E;color:#15803D;}
+.pb.pb-red{background:#FEE2E2;border-color:#EF4444;color:#B91C1C;}
+.pb.pb-grey{background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);}
+.pb.pb-cur{border-color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
 
-  /* ── MOCK HEADER (test in progress) ── */
-  .mock-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 5%;
-    height: 60px;
-    background: white !important;
-    border-bottom: 1px solid var(--border);
-    position: sticky;
-    top: 0;
-    z-index: 50;
-    gap: 1rem;
-  }
+/* RESULT SCREEN */
+#result-screen{background:var(--c-bg,#FAFAF8);min-height:100vh;transition:background .2s;}
+.result-hero{
+  text-align:center;padding:4rem 5% 3rem;
+  background:linear-gradient(135deg,var(--c-surface-2,#FFF8F3) 0%,var(--c-surface,#fff) 100%);
+  border-bottom:1px solid var(--c-border,#F0E8DE);
+}
+.result-score{
+  font-family:'Fraunces',serif;font-size:clamp(4rem,12vw,7rem);
+  font-weight:900;color:var(--c-brand,#FF6B1A);line-height:1;letter-spacing:-.03em;
+}
+.result-max{font-family:'Fraunces',serif;font-size:1.5rem;color:var(--c-ink-muted,#6B5C45);margin-top:.2rem;}
+.result-grid{
+  display:grid;grid-template-columns:repeat(4,1fr);gap:1px;
+  background:var(--c-border,#F0E8DE);max-width:700px;margin:2rem auto;
+  border-radius:20px;overflow:hidden;border:1px solid var(--c-border,#F0E8DE);padding:0 5%;
+}
+.result-box{background:var(--c-surface,#fff);padding:1.5rem 1rem;text-align:center;transition:background .2s;}
+.result-box:hover{background:var(--c-surface-2,#FFF8F3);}
+.result-box .num{font-family:'Fraunces',serif;font-size:2rem;font-weight:900;line-height:1;margin-bottom:.3rem;}
+.result-box .lbl{font-size:.75rem;font-weight:600;text-transform:uppercase;letter-spacing:.05em;color:var(--c-ink-muted,#6B5C45);}
+.review-section{max-width:820px;margin:2rem auto;padding:0 5% 4rem;}
+.review-section h2{font-family:'Fraunces',serif;font-size:1.6rem;font-weight:900;color:var(--c-ink);letter-spacing:-.02em;margin-bottom:1.5rem;}
 
-  .mock-header h2, #section-label {
-    font-family: 'Fraunces', serif;
-    font-size: 1.1rem;
-    font-weight: 700;
-    color: var(--ink) !important;
-    letter-spacing: -0.01em;
-  }
+/* FOOTER */
+footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align:center;font-size:.85rem;color:var(--c-ink-muted,#6B5C45);background:var(--c-surface,#fff);}
+.footer-brand{display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:.5rem;}
 
-  .timer {
-    font-family: 'Fraunces', serif;
-    font-size: 1.3rem;
-    font-weight: 900;
-    color: var(--orange) !important;
-    background: var(--orange-pale) !important;
-    border: none !important;
-    padding: 0.35rem 1rem;
-    border-radius: 100px;
-    letter-spacing: 0.02em;
-  }
-
-  .timer.warning { color: #B91C1C !important; background: #FEE2E2 !important; }
-
-  .submit-btn {
-    background: var(--orange) !important;
-    color: white !important;
-    border: none;
-    border-radius: 100px;
-    padding: 0.45rem 1.2rem;
-    font-size: 0.85rem;
-    font-weight: 700;
-    cursor: pointer;
-    font-family: 'DM Sans', sans-serif;
-    transition: all 0.2s;
-  }
-
-  .submit-btn:hover { background: var(--orange-deep) !important; transform: translateY(-1px); }
-
-  /* ── MOCK BODY ── */
-  .mock-body {
-    display: flex;
-    gap: 0;
-    min-height: calc(100vh - 128px);
-  }
-
-  .mock-questions {
-    flex: 1;
-    padding: 2rem 3% 2rem 5%;
-    overflow-y: auto;
-    display: flex;
-    flex-direction: column;
-    gap: 1.2rem;
-  }
-
-  /* ── QUESTION CARD ── */
-  .question-card, .q-card, .mock-question {
-    background: white;
-    border: 1.5px solid var(--border);
-    border-radius: 18px;
-    padding: 1.6rem 1.8rem;
-    transition: box-shadow 0.2s, border-color 0.2s;
-  }
-
-  .q-meta {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.9rem;
-  }
-
-  .q-num {
-    font-size: 0.78rem;
-    font-weight: 700;
-    color: var(--ink-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-  }
-
-  .q-text {
-    font-size: 0.97rem;
-    line-height: 1.7;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-
-  .q-options {
-    display: flex;
-    flex-direction: column;
-    gap: 0.5rem;
-  }
-
-  .q-option {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 0.65rem 1rem;
-    border: 1.5px solid var(--border);
-    border-radius: 10px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--ink);
-    background: white;
-    transition: all 0.15s;
-    text-align: left;
-    width: 100%;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .q-option:hover { border-color: var(--orange) !important; background: var(--orange-pale) !important; color: var(--orange-deep) !important; }
-  .q-option.selected { border-color: var(--orange) !important; background: var(--orange-pale) !important; color: var(--orange-deep) !important; }
-  .q-option.correct { border-color: #22C55E !important; background: #F0FDF4 !important; color: #15803D !important; }
-  .q-option.wrong { border-color: #EF4444 !important; background: #FEF2F2 !important; color: #B91C1C !important; }
-
-  .option-label { font-weight: 700; color: var(--orange); min-width: 1.1rem; }
-
-  /* ── NUCLEAR OVERRIDE — kill all dark backgrounds from style.css ── */
-  * {
-    --old-bg: unset;
-  }
-
-  /* Option buttons — any element acting as an answer choice */
-  .option, .opt, [class*="option"]:not(.mock-palette):not(#palette),
-  .choice, .answer-option, .answer-choice,
-  .q-option, .q-opt,
-  li.option, button.option {
-    background: white !important;
-    background-color: white !important;
-    color: var(--ink) !important;
-    border: 1.5px solid var(--border) !important;
-    border-radius: 10px !important;
-  }
-
-  /* Kill any dark card/panel backgrounds */
-  .card:not(.unit-card):not(.subject-card):not(.stat-card):not(.result-box):not(.start-info-card),
-  .panel, .box:not(.result-box),
-  [style*="background:#1a1a2e"],
-  [style*="background: #1a1a2e"],
-  [style*="background:#0f0f"],
-  [style*="background:#111"],
-  [style*="background:#222"],
-  [style*="background:#333"],
-  [style*="background: rgb(0"],
-  [style*="background-color:#1a"],
-  [style*="background-color: #1a"] {
-    background: white !important;
-    background-color: white !important;
-    color: var(--ink) !important;
-    border-color: var(--border) !important;
-  }
-
-  /* Force white text areas */
-  [style*="color:#fff"], [style*="color: #fff"],
-  [style*="color:#ccc"], [style*="color: #ccc"],
-  [style*="color:#888"], [style*="color: #888"],
-  [style*="color:#666"], [style*="color: #666"] {
-    color: var(--ink-muted) !important;
-  }
-
-  /* Subject / section tags */
-  .tag, .badge, .label, .pill,
-  [class*="tag-"], [class*="badge-"],
-  .section-tag-pill, .q-tag, .q-label {
-    border-radius: 100px !important;
-  }
-
-  /* Palette buttons */
-  .pal-btn, #palette button, .palette-btn {
-    background: white !important;
-    color: var(--ink-muted) !important;
-    border: 1.5px solid var(--border) !important;
-  }
-
-  .pal-btn.answered, #palette button.answered { background: #DCFCE7 !important; border-color: #22C55E !important; color: #15803D !important; }
-  .pal-btn.current, #palette button.current { background: var(--orange-pale) !important; border-color: var(--orange) !important; color: var(--orange-deep) !important; }
-
-  /* ── PALETTE ── */
-  .mock-palette {
-    width: 220px;
-    flex-shrink: 0;
-    padding: 1.5rem 1.2rem;
-    background: white;
-    border-left: 1px solid var(--border);
-    overflow-y: auto;
-    position: sticky;
-    top: 60px;
-    max-height: calc(100vh - 60px);
-  }
-
-  .mock-palette h3 {
-    font-family: 'Fraunces', serif;
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--ink);
-    margin-bottom: 1rem;
-  }
-
-  .palette-legend {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 1rem;
-    font-size: 0.72rem;
-    font-weight: 500;
-  }
-
-  .pal-answered { background: #DCFCE7; color: #15803D; padding: 0.2rem 0.6rem; border-radius: 100px; }
-  .pal-unanswered { background: var(--off-white); color: var(--ink-muted); border: 1px solid var(--border); padding: 0.2rem 0.6rem; border-radius: 100px; }
-
-  .palette-grid, #palette {
-    display: grid;
-    grid-template-columns: repeat(5, 1fr);
-    gap: 0.35rem;
-  }
-
-  .pal-btn {
-    aspect-ratio: 1;
-    border-radius: 8px;
-    border: 1.5px solid var(--border);
-    background: white;
-    font-size: 0.72rem;
-    font-weight: 600;
-    color: var(--ink-muted);
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-
-  .pal-btn:hover { border-color: var(--orange); color: var(--orange); }
-  .pal-btn.answered { background: #DCFCE7; border-color: #22C55E; color: #15803D; }
-  .pal-btn.current { border-color: var(--orange); background: var(--orange-pale); color: var(--orange-deep); }
-
-  /* ── RESULT SCREEN ── */
-  #result-screen {
-    background: var(--off-white);
-    min-height: 100vh;
-  }
-
-  .result-hero {
-    text-align: center;
-    padding: 4rem 5% 3rem;
-    background: linear-gradient(135deg, var(--orange-pale) 0%, white 100%);
-    border-bottom: 1px solid var(--border);
-  }
-
-  .result-hero > div:first-child {
-    font-size: 0.85rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    color: var(--ink-muted) !important;
-    margin-bottom: 0.5rem !important;
-  }
-
-  .result-score {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(4rem, 12vw, 7rem) !important;
-    font-weight: 900 !important;
-    color: var(--orange) !important;
-    line-height: 1 !important;
-    letter-spacing: -0.03em;
-  }
-
-  .result-max {
-    font-family: 'Fraunces', serif;
-    font-size: 1.5rem;
-    font-weight: 400;
-    color: var(--ink-muted) !important;
-    margin-top: 0.2rem;
-  }
-
-  .result-grid {
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 1px;
-    background: var(--border);
-    max-width: 700px;
-    margin: 2rem auto;
-    border-radius: 20px;
-    overflow: hidden;
-    border: 1px solid var(--border);
-    padding: 0 5%;
-  }
-
-  .result-box {
-    background: white;
-    padding: 1.5rem 1rem;
-    text-align: center;
-    transition: background 0.2s;
-  }
-
-  .result-box:hover { background: var(--orange-pale); }
-
-  .result-box .num {
-    font-family: 'Fraunces', serif;
-    font-size: 2rem;
-    font-weight: 900;
-    line-height: 1;
-    margin-bottom: 0.3rem;
-  }
-
-  .correct-num { color: #22C55E !important; }
-  .wrong-num { color: #EF4444 !important; }
-  .skip-num { color: var(--ink-muted) !important; }
-
-  .result-box .lbl {
-    font-size: 0.75rem;
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    color: var(--ink-muted);
-  }
-
-  .review-section {
-    max-width: 820px;
-    margin: 2rem auto;
-    padding: 0 5% 4rem;
-  }
-
-  .review-section h2 {
-    font-family: 'Fraunces', serif;
-    font-size: 1.6rem;
-    font-weight: 900;
-    color: var(--ink);
-    letter-spacing: -0.02em;
-    margin-bottom: 1.5rem;
-  }
-
-  #review-container {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  /* ── FOOTER ── */
-  footer {
-    border-top: 1px solid var(--border);
-    padding: 1.8rem 5%;
-    text-align: center;
-    font-size: 0.85rem;
-    color: var(--ink-muted);
-    background: white;
-  }
-
-  @media (max-width: 700px) {
-    .mock-body { flex-direction: column; }
-    .mock-palette { width: 100%; position: static; border-left: none; border-top: 1px solid var(--border); }
-    .result-grid { grid-template-columns: repeat(2, 1fr); }
-    /* see nav.css for mobile */
-  }
+@media(max-width:700px){
+  .mock-body{flex-direction:column;}
+  .mock-palette{width:100%;position:static;border-left:none;border-top:1px solid var(--c-border,#F0E8DE);max-height:none;}
+  .result-grid{grid-template-columns:repeat(2,1fr);}
+  .mock-q-area{padding:1.2rem 4%;}
+}
 </style>
 </head>
 <body>
 
+<!-- ══ NAV ══════════════════════════════════════════════════════ -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="neetminds logo"/>
@@ -545,16 +302,18 @@
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
-  <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+    <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </nav>
 <div class="nav-mobile-menu" id="nmenu">
-
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
@@ -567,64 +326,66 @@
   <a href="practice.html" class="nav-cta">Start Practising Free →</a>
 </div>
 
-<!-- START SCREEN -->
+<!-- ══ START SCREEN ══════════════════════════════════════════════ -->
 <div id="start-screen">
   <h1>Full Mock Test</h1>
-  <p style="color:#6B5C45; font-size:1rem; margin-bottom:0.3rem;">200 Questions &nbsp;·&nbsp; 200 Minutes &nbsp;·&nbsp; 720 Marks</p>
-  <p style="color:#6B5C45; font-size:0.9rem; margin-bottom:0rem;">Physics 50 &nbsp;+&nbsp; Chemistry 50 &nbsp;+&nbsp; Botany 50 &nbsp;+&nbsp; Zoology 50 &nbsp;·&nbsp; Section A: 35 mandatory · Section B: attempt any 10 of 15</p>
-
+  <p>200 Questions &nbsp;·&nbsp; 200 Minutes &nbsp;·&nbsp; 720 Marks</p>
+  <p style="font-size:.9rem;">Physics 50 &nbsp;+&nbsp; Chemistry 50 &nbsp;+&nbsp; Botany 50 &nbsp;+&nbsp; Zoology 50</p>
   <div class="start-info-card">
     <div>
       ✅ &nbsp;+4 for correct answer<br/>
       ❌ &nbsp;−1 for wrong answer<br/>
       ⬜ &nbsp;0 for unattempted<br/>
-      📝 &nbsp;Section B: attempt any 10 of 15
+      📝 &nbsp;Section A: 35 mandatory &nbsp;·&nbsp; Section B: attempt any 10 of 15
     </div>
   </div>
-
   <button class="btn-primary" onclick="startMock()">Start Test →</button>
 </div>
 
-<!-- TEST SCREEN -->
+<!-- ══ TEST SCREEN ═══════════════════════════════════════════════ -->
 <div id="test-screen" style="display:none;">
   <div class="mock-header">
-    <h2 id="section-label">Physics — Section A</h2>
+    <span id="section-label">Full Mock Test</span>
     <div class="timer" id="timer">3:20:00</div>
-    <button class="submit-btn" onclick="submitMock()">Submit Test</button>
+    <button class="submit-btn" onclick="confirmSubmit()">Submit Test</button>
   </div>
-
   <div class="mock-body">
-    <div class="mock-questions" id="mock-questions"></div>
+    <div class="mock-q-area" id="mock-q-area">
+      <div style="text-align:center;padding:80px;color:var(--c-brand,#FF6B1A);font-size:1.1rem;">Building your test…</div>
+    </div>
     <div class="mock-palette">
       <h3>Question Palette</h3>
-      <div class="palette-legend">
-        <span class="pal-answered">Answered</span>
-        <span class="pal-unanswered">Not answered</span>
+      <div class="pal-legend">
+        <span class="pl-ans">Answered</span>
+        <span class="pl-cur">Current</span>
+        <span class="pl-skip">Skipped</span>
       </div>
       <div class="palette-grid" id="palette"></div>
     </div>
   </div>
 </div>
 
-<!-- RESULT SCREEN -->
+<!-- ══ RESULT SCREEN ═════════════════════════════════════════════ -->
 <div id="result-screen" style="display:none;">
   <nav class="navbar">
-    <div class="logo"><span style="color:#FF6B1A;">NEET</span><span style="color:#1E3A5F;">minds</span></div>
+    <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;">
+      <span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span>
+    </span>
     <div class="nav-links">
       <a href="mock.html" class="active">Retake Test</a>
       <a href="practice.html">Practice</a>
     </div>
   </nav>
   <div class="result-hero">
-    <div style="color:#6B5C45; font-size:0.85rem; font-weight:600; text-transform:uppercase; letter-spacing:0.1em; margin-bottom:0.5rem;">Your Score</div>
+    <div style="color:var(--c-ink-muted,#6B5C45);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Your Score</div>
     <div class="result-score" id="result-score">0</div>
     <div class="result-max">/ 720</div>
   </div>
   <div class="result-grid">
-    <div class="result-box"><div class="num correct-num" id="r-correct">0</div><div class="lbl">Correct</div></div>
-    <div class="result-box"><div class="num wrong-num"   id="r-wrong">0</div><div class="lbl">Wrong</div></div>
-    <div class="result-box"><div class="num skip-num"    id="r-skip">0</div><div class="lbl">Skipped</div></div>
-    <div class="result-box"><div class="num" id="r-accuracy" style="color:var(--orange);">0%</div><div class="lbl">Accuracy</div></div>
+    <div class="result-box"><div class="num" style="color:#22C55E;" id="r-correct">0</div><div class="lbl">Correct</div></div>
+    <div class="result-box"><div class="num" style="color:#EF4444;" id="r-wrong">0</div><div class="lbl">Wrong</div></div>
+    <div class="result-box"><div class="num" style="color:var(--c-ink-muted,#6B5C45);" id="r-skip">0</div><div class="lbl">Skipped</div></div>
+    <div class="result-box"><div class="num" style="color:var(--c-brand,#FF6B1A);" id="r-accuracy">0%</div><div class="lbl">Accuracy</div></div>
   </div>
   <div class="result-grid" id="subject-breakdown"></div>
   <div class="review-section">
@@ -633,561 +394,602 @@
   </div>
 </div>
 
+<footer class="neeto-footer">
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" style="height:28px;object-fit:contain;border-radius:0;" alt="neetminds"/>
+    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
+  </div>
+  <p>© 2026 neetminds™. All rights reserved.</p>
+</footer>
+
 <script>
-// NEETO MOCK — self-contained, class-based colouring
+// ═══════════════════════════════════════════════════════════════
+//  neetminds mock.html  v2
+//  • Question-by-question (Prev / Next)
+//  • Match tables via nav.css classes
+//  • Assertion-Reason / Statement I–II / lettered lists formatted
+//  • A. B. C. D. period after option key
+//  • Dark mode toggle works here + all pages via localStorage
+// ═══════════════════════════════════════════════════════════════
 
 var mockQuestions = [];
-var userAnswers   = {};
+var userAnswers   = {};          // qIndex → 'A'|'B'|'C'|'D'
+var currentQ      = 0;
 var timerInterval = null;
 var timeLeft      = 200 * 60;
 var testDone      = false;
 
-function shuffle(arr) {
-  var a = arr.slice();
-  for (var i=a.length-1; i>0; i--) { var j=Math.floor(Math.random()*(i+1)); var t=a[i]; a[i]=a[j]; a[j]=t; }
+// ── ESCAPE HTML ───────────────────────────────────────────────
+function esc(s){
+  return String(s||'')
+    .replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;').replace(/'/g,'&#39;');
+}
+
+// ── SHUFFLE ───────────────────────────────────────────────────
+function shuffle(arr){
+  var a=arr.slice();
+  for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t;}
   return a;
 }
 
-async function loadSubjectFile(subject) {
-  var res  = await fetch('data/api_' + subject.toLowerCase() + '.json');
-  var data = await res.json();
-  return data.questions || [];
+// ── THEME ─────────────────────────────────────────────────────
+function updateThemeUI(){
+  var dark=document.documentElement.getAttribute('data-theme')==='dark';
+  var icon=dark?'☀️':'🌙';
+  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
+    var el=document.getElementById(id);if(el)el.textContent=icon;
+  });
+  var lbl=document.getElementById('mob-theme-label');
+  if(lbl)lbl.textContent=dark?'Switch to Light Mode':'Switch to Dark Mode';
+}
+function toggleTheme(){
+  var cur=document.documentElement.getAttribute('data-theme');
+  var next=cur==='dark'?'light':'dark';
+  document.documentElement.setAttribute('data-theme',next);
+  try{localStorage.setItem('nm_theme',next);}catch(e){}
+  updateThemeUI();
+}
+document.addEventListener('DOMContentLoaded',updateThemeUI);
+
+// ── NAV CLOSE ─────────────────────────────────────────────────
+document.addEventListener('click',function(e){
+  var m=document.getElementById('nmenu');
+  var b=document.querySelector('.nav-hamburger');
+  if(m&&m.classList.contains('open')&&!m.contains(e.target)&&b&&!b.contains(e.target))
+    m.classList.remove('open');
+});
+
+// ═══════════════════════════════════════════════════════════════
+//  QUESTION TEXT FORMATTER
+//  Handles four patterns:
+//    1. Assertion (A): … Reason (R): …
+//    2. Statement I: … Statement II: …
+//    3. Lettered sub-items  A. / B. / a) / 1. etc (≥2 items)
+//    4. Plain text (default)
+// ═══════════════════════════════════════════════════════════════
+function formatQText(raw){
+  if(!raw)return '';
+  var t=String(raw).trim();
+
+  // ── 1. Assertion & Reason ──────────────────────────────────
+  // Matches "Assertion A: …" or "Assertion (A): …" + "Reason R: …"
+  var ar=t.match(/^([\s\S]*?)\bAssertion\s*[:(]?\s*[Aa][):]?\s*([\s\S]+?)\bReason\s*[:(]?\s*[Rr][):]?\s*([\s\S]+)$/i);
+  if(ar){
+    var pre=ar[1].trim(), ass=ar[2].trim(), rea=ar[3].trim();
+    return (pre?'<p class="q-stem">'+esc(pre)+'</p>':'')
+      +'<div class="q-block"><span class="q-block-lbl">Assertion (A)</span>'+esc(ass)+'</div>'
+      +'<div class="q-block"><span class="q-block-lbl">Reason (R)</span>'+esc(rea)+'</div>';
+  }
+
+  // ── 2. Statement I / Statement II ─────────────────────────
+  // Split on "Statement I:" "Statement II:" "Statement-I" etc.
+  var stSplit=t.split(/Statement[\s\-]*(I{1,3}|[1-3])\s*[:-]?\s*/i);
+  // stSplit = [before, label1, text1, label2, text2, ...]
+  if(stSplit.length>=5){
+    var out='';
+    var pre2=stSplit[0].trim();
+    if(pre2)out+='<p class="q-stem">'+esc(pre2)+'</p>';
+    for(var si=1;si<stSplit.length-1;si+=2){
+      var lbl=stSplit[si].trim().toUpperCase();
+      var txt=stSplit[si+1].trim();
+      if(!txt)continue;
+      var label='Statement '+(lbl==='1'||lbl==='I'?'I':lbl==='2'||lbl==='II'?'II':'III')+':';
+      out+='<div class="q-block"><span class="q-block-lbl">'+label+'</span>'+esc(txt)+'</div>';
+    }
+    if(out)return out;
+  }
+
+  // ── 3. Lettered / numbered sub-item list ──────────────────
+  // Detect lines starting with A. B. C. D.  or  A) B) or  1. 2. 3.
+  var lines=t.split('\n');
+  var itemLines=lines.filter(function(l){return /^\s*[A-Da-d][.)]\s+\S/.test(l.trim())||/^\s*[1-4][.)]\s+\S/.test(l.trim());});
+  if(itemLines.length>=2){
+    var firstIdx=lines.findIndex(function(l){return /^\s*[A-Da-d1-4][.)]\s+\S/.test(l.trim());});
+    var stem3=lines.slice(0,firstIdx).join(' ').trim();
+    var out3=stem3?'<p class="q-stem">'+esc(stem3)+'</p>':'';
+    out3+='<div class="q-stmt-list">';
+    lines.slice(firstIdx).forEach(function(l){
+      var lm=l.trim().match(/^([A-Da-d1-4][.)])\s+([\s\S]*)/);
+      if(lm){
+        out3+='<div class="q-stmt-row"><span class="q-stmt-key">'+esc(lm[1])+'</span><span>'+esc(lm[2])+'</span></div>';
+      }else if(l.trim()){
+        // continuation line — append to last item (treat as plain)
+        out3+='<div class="q-stmt-row"><span class="q-stmt-key"></span><span>'+esc(l.trim())+'</span></div>';
+      }
+    });
+    out3+='</div>';
+    return out3;
+  }
+
+  // ── 4. Plain text ──────────────────────────────────────────
+  return '<p class="q-stem">'+esc(t)+'</p>';
 }
 
-async function startMock() {
-  document.getElementById('start-screen').style.display = 'none';
-  document.getElementById('test-screen').style.display  = 'block';
-  document.getElementById('mock-questions').innerHTML =
-    '<div style="text-align:center;padding:80px;color:#FF6B1A;font-size:1.1rem;">Building your test...</div>';
+// ═══════════════════════════════════════════════════════════════
+//  MATCH TABLE — uses nav.css classes (.match-table-wrap etc.)
+// ═══════════════════════════════════════════════════════════════
+function matchTableHTML(mt){
+  if(!mt)return '';
+  var html='<div class="match-table-wrap">';
 
-  try {
-    var results = await Promise.all([
-      loadSubjectFile('Biology'), loadSubjectFile('Chemistry'), loadSubjectFile('Physics')
-    ]);
-    var bio=results[0], chem=results[1], phys=results[2];
+  if(mt.rows&&mt.rows.length){
+    var h1=mt.col1_header||'Column I', h2=mt.col2_header||'Column II';
+    html+='<div class="match-table-head"><span>'+esc(h1)+'</span><span>'+esc(h2)+'</span></div>';
+    mt.rows.forEach(function(row){
+      if(!row.col1&&!row.col2)return;
+      html+='<div class="match-table-row">'
+        +'<div class="match-cell">'+esc(row.col1||'')+'</div>'
+        +'<div class="match-cell">'+esc(row.col2||'')+'</div>'
+        +'</div>';
+    });
+    return html+'</div>';
+  }
 
-    // ═══════════════════════════════════════════════════════════════
-    // NEET CHAPTER-WISE WEIGHTAGE (PDF 2027 guide)
-    // Biology: 100Q total (50 Botany + 50 Zoology)
-    // Physics: 50Q | Chemistry: 50Q
-    // Each subject: 35 Sec-A mandatory + 15 Sec-B (attempt any 10)
-    // ═══════════════════════════════════════════════════════════════
-
-    // ── CHAPTER CLASSIFICATION MAPS ─────────────────────────────────
-    var BIO_TOPIC_MAP = {
-      'Diversity in Living World': ['the living world','biological classification','plant kingdom','animal kingdom'],
-      'Structural Organisation':  ['morphology of flowering plants','anatomy of flowering plants','structural organisation in animals'],
-      'Cell Structure & Function':['cell: the unit of life','biomolecules','cell cycle and cell division'],
-      'Plant Physiology':         ['transport in plants','mineral nutrition','photosynthesis in higher plants','respiration in plants','plant growth and development'],
-      'Human Physiology':         ['digestion and absorption','breathing and exchange of gases','body fluids and circulation','excretory products and elimination','locomotion and movement','neural control and coordination','chemical coordination and integration','human physiology','human physiology and zoology'],
-      'Reproduction':             ['reproduction in organisms','sexual reproduction in flowering plants','human reproduction','reproductive health','reproduction'],
-      'Genetics & Evolution':     ['principles of inheritance and variation','molecular basis of inheritance','evolution'],
-      'Biology in Human Welfare': ['human health and disease','strategies for enhancement in food production','microbes in human welfare'],
-      'Biotechnology':            ['biotechnology: principles and processes','biotechnology and its applications','biotechnology principles','genetics & biotechnology'],
-      'Ecology':                  ['organisms and populations','ecosystem','biodiversity and conservation','environmental issues']
-    };
-
-    var PHY_TOPIC_MAP = {
-      'Units & Measurement':  ['physical world and measurement','mathematical tools'],
-      'Kinematics':           ['kinematics','motion in a plane'],
-      'Laws of Motion':       ['laws of motion'],
-      'Work, Energy & Power': ['work, energy and power'],
-      'Rotational Motion':    ['system of particles and rotational motion'],
-      'Gravitation':          ['gravitation'],
-      'Properties of Matter': ['mechanical properties of solids','mechanical properties of fluids','thermal properties of matter'],
-      'Thermodynamics':       ['thermodynamics','kinetic theory of gases'],
-      'Kinetic Theory':       ['kinetic theory'],
-      'Oscillations & Waves': ['oscillations','waves'],
-      'Electrostatics':       ['electric charges and fields','electrostatic potential and capacitance','electrostatics'],
-      'Current Electricity':  ['current electricity'],
-      'Magnetism + EMI':      ['moving charges and magnetism','magnetism and matter','electromagnetic induction','alternating current','magnetic effects of current'],
-      'Optics':               ['ray optics and optical instruments','wave optics'],
-      'Dual Nature':          ['dual nature of radiation and matter','dual nature of matter'],
-      'Atoms & Nuclei':       ['atoms','nuclei','nuclear physics'],
-      'Semiconductors':       ['semiconductor electronics','semiconductors','communication systems','electromagnetic waves']
-    };
-
-    var CHEM_TOPIC_MAP = {
-      'Basic Concepts':              ['some basic concepts of chemistry'],
-      'Structure of Atom':           ['structure of atom'],
-      'Periodic Table':              ['classification of elements and periodicity in properties','classification of elements & periodicity'],
-      'Chemical Bonding':            ['chemical bonding and molecular structure','chemical bonding'],
-      'States of Matter':            ['states of matter'],
-      'Thermodynamics':              ['thermodynamics'],
-      'Equilibrium':                 ['equilibrium'],
-      'Redox':                       ['redox reactions'],
-      'GOC':                         ['organic chemistry: some basic principles and techniques','organic chemistry','stereochemistry'],
-      'Hydrocarbons':                ['hydrocarbons'],
-      'Solid State':                 ['solid state'],
-      'Solutions':                   ['solutions'],
-      'Electrochemistry':            ['electrochemistry'],
-      'Chemical Kinetics':           ['chemical kinetics'],
-      'Surface Chemistry':           ['surface chemistry'],
-      'p-Block':                     ['p-block elements','hydrogen','s-block elements'],
-      'd & f Block':                 ['d and f-block elements'],
-      'Coordination Compounds':      ['coordination compounds'],
-      'Haloalkanes & Haloarenes':    ['haloalkanes and haloarenes'],
-      'Alcohols, Phenols, Ethers':   ['alcohols, phenols and ethers'],
-      'Carbonyl Compounds':          ['aldehydes, ketones and carboxylic acids','organic chemistry - esters'],
-      'Amines':                      ['amines'],
-      'Biomolecules':                ['biomolecules','polymers','chemistry in everyday life']
-    };
-
-    // ── QUESTION COUNTS PER TOPIC (per 50Q section) ─────────────────
-    // Biology targets apply to BOTH Botany and Zoology (50Q each)
-    var BIO_Q = {
-      'Diversity in Living World':8,'Structural Organisation':6,'Cell Structure & Function':9,
-      'Plant Physiology':8,'Human Physiology':20,'Reproduction':9,'Genetics & Evolution':18,
-      'Biology in Human Welfare':4,'Biotechnology':6,'Ecology':12
-    };
-    var PHY_Q = {
-      'Units & Measurement':1,'Kinematics':2,'Laws of Motion':2,'Work, Energy & Power':2,
-      'Rotational Motion':3,'Gravitation':2,'Properties of Matter':3,'Thermodynamics':5,
-      'Kinetic Theory':2,'Oscillations & Waves':2,'Electrostatics':4,'Current Electricity':3,
-      'Magnetism + EMI':5,'Optics':5,'Dual Nature':3,'Atoms & Nuclei':3,'Semiconductors':3
-    };
-    var CHEM_Q = {
-      'Basic Concepts':1,'Structure of Atom':2,'Periodic Table':2,'Chemical Bonding':5,
-      'States of Matter':1,'Thermodynamics':4,'Equilibrium':3,'Redox':2,'GOC':2,'Hydrocarbons':2,
-      'Solid State':1,'Solutions':2,'Electrochemistry':2,'Chemical Kinetics':2,'Surface Chemistry':1,
-      'p-Block':3,'d & f Block':2,'Coordination Compounds':4,'Haloalkanes & Haloarenes':2,
-      'Alcohols, Phenols, Ethers':2,'Carbonyl Compounds':2,'Amines':2,'Biomolecules':1
-    };
-
-    // ── BUILD REVERSE LOOKUP: chapter_name → topic ───────────────────
-    function buildRevMap(topicMap) {
-      var rev = {};
-      Object.keys(topicMap).forEach(function(topic) {
-        topicMap[topic].forEach(function(ch) { rev[ch] = topic; });
-      });
-      return rev;
+  if(mt.col1&&mt.col2){
+    var c1k=Object.keys(mt.col1), c2k=Object.keys(mt.col2);
+    var rc=Math.max(c1k.length,c2k.length);
+    html+='<div class="match-table-head"><span>Column I</span><span>Column II</span></div>';
+    for(var i=0;i<rc;i++){
+      var k1=c1k[i]||'',v1=k1?mt.col1[k1]:'';
+      var k2=c2k[i]||'',v2=k2?mt.col2[k2]:'';
+      html+='<div class="match-table-row">'
+        +'<div class="match-cell"><span class="match-key">'+esc(k1)+'</span>'+esc(v1)+'</div>'
+        +'<div class="match-cell"><span class="match-key">'+esc(k2)+'</span>'+esc(v2)+'</div>'
+        +'</div>';
     }
-    var bioRev  = buildRevMap(BIO_TOPIC_MAP);
-    var phyRev  = buildRevMap(PHY_TOPIC_MAP);
-    var chemRev = buildRevMap(CHEM_TOPIC_MAP);
+    return html+'</div>';
+  }
+  return '';
+}
 
-    // ── INDEX QUESTIONS BY TOPIC ─────────────────────────────────────
-    function indexByTopic(pool, revMap) {
-      var idx = {};
-      pool.forEach(function(q) {
-        var ch = (q.chapter || '').toLowerCase();
-        var topic = revMap[ch];
-        if (topic) {
-          if (!idx[topic]) idx[topic] = [];
-          idx[topic].push(q);
-        }
-      });
-      // Shuffle each bucket
-      Object.keys(idx).forEach(function(t) { idx[t] = shuffle(idx[t]); });
+// ── DIAGRAM HTML ──────────────────────────────────────────────
+function diagHTML(q){
+  if(q.pattern!=='diagram_dhamaka')return '';
+  if(q.image_url){
+    return '<div class="diag-img-wrap">'
+      +'<img src="'+esc(q.image_url)+'" alt="Diagram"'
+      +' onerror="this.parentNode.innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
+      +'</div>';
+  }
+  return '<div class="diag-placeholder">'
+    +'<span style="font-size:1.3rem;flex-shrink:0;">🖼️</span>'
+    +'<span>Refer to NCERT or past paper for the diagram.</span></div>';
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  RENDER SINGLE QUESTION
+// ═══════════════════════════════════════════════════════════════
+function renderQuestion(idx){
+  if(!mockQuestions.length)return;
+  currentQ=idx;
+  var area=document.getElementById('mock-q-area');
+  var q=mockQuestions[idx];
+  var tot=mockQuestions.length;
+  var pct=Math.round(((idx+1)/tot)*100);
+
+  // Update sticky header label
+  var sl=document.getElementById('section-label');
+  if(sl)sl.textContent=q._subj+' — Section '+q._sec;
+
+  // Section B banner
+  var secBBanner='';
+  if([35,85,135,185].indexOf(idx)!==-1){
+    secBBanner='<div class="secb-banner"><div class="secb-line"></div>'
+      +'<span class="secb-pill">SECTION B — Attempt any 10 of 15</span>'
+      +'<div class="secb-line"></div></div>';
+  }
+
+  // Options — A. B. C. D. (period after key)
+  var optsHTML='';
+  ['A','B','C','D'].forEach(function(k){
+    var val=q.options&&q.options[k]?q.options[k]:'';
+    if(!val)return;
+    var ans=userAnswers[idx];
+    var correct=(q.correct_answer||'').toUpperCase();
+    var cls='mock-opt';
+    if(testDone||ans){
+      if(k===correct)             cls+=' mo-correct';
+      else if(ans&&k===ans)       cls+=' mo-wrong';
+      else                        cls+=' mo-dim';
+    } else if(ans===k){
+      cls+=' mo-selected';
+    }
+    var dis=(testDone||(ans&&ans!==k))?'disabled':'';
+    optsHTML+='<button class="'+cls+'" id="opt-'+idx+'-'+k+'"'
+      +' data-key="'+k+'" '+dis
+      +' onclick="mockSelect('+idx+',\''+k+'\')">'
+      +'<span class="opt-key">'+k+'.</span> '+esc(val)
+      +'</button>';
+  });
+
+  // Explanation block
+  var expHTML='';
+  if(testDone||userAnswers[idx]){
+    var chosen=userAnswers[idx]||null;
+    var correct=(q.correct_answer||'').toUpperCase();
+    var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')
+      ?'<p style="font-size:.78rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 '+esc(q.ncert_ref)+'</p>':'';
+    expHTML='<div class="mock-exp visible">'
+      +'<p style="font-size:.82rem;font-weight:700;color:var(--c-brand-deep,#E85500);margin-bottom:6px;">💡 Explanation</p>'
+      +'<p style="margin-bottom:4px;"><strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
+      +(chosen&&chosen!==correct?' &nbsp;<span style="color:#B91C1C;">You chose: '+chosen+'</span>':'')+'</p>'
+      +'<p style="font-size:.88rem;line-height:1.65;">'+esc(q.explanation||'')+'</p>'
+      +ncert+'</div>';
+  }
+
+  // Prev / Next / Submit
+  var prevDis=idx===0?'disabled':'';
+  var prevBtn='<button class="nav-btn" '+prevDis+' onclick="goTo('+(idx-1)+')">← Previous</button>';
+  var nextBtn=idx<tot-1
+    ?'<button class="nav-btn primary" onclick="goTo('+(idx+1)+')">Next →</button>'
+    :'<button class="nav-btn primary" onclick="confirmSubmit()">Submit Test ✓</button>';
+
+  var hasTable=q.match_table&&(q.match_table.rows||q.match_table.col1);
+
+  area.innerHTML=
+    secBBanner+
+    '<div class="mock-progress">'
+      +'<div class="mock-progress-top">'
+        +'<span>Question '+(idx+1)+' of '+tot+'</span>'
+        +'<span>'+q._subj+' · Sec '+q._sec+' · '+pct+'%</span>'
+      +'</div>'
+      +'<div class="progress-bar"><div class="progress-fill" style="width:'+pct+'%;"></div></div>'
+    +'</div>'
+    +'<div class="mock-q-card">'
+      +'<div class="q-meta-row">'
+        +'<span class="q-tag q-tag-num">Q'+q._num+'</span>'
+        +'<span class="q-tag q-tag-sec">Sec '+q._sec+'</span>'
+        +'<span class="q-tag q-tag-ch">'+esc(q.chapter||q._subj||'')+'</span>'
+      +'</div>'
+      +formatQText(q.question)
+      +(hasTable?matchTableHTML(q.match_table):'')
+      +diagHTML(q)
+      +'<div class="q-options" id="opts-'+idx+'">'+optsHTML+'</div>'
+      +expHTML
+    +'</div>'
+    +'<div class="mock-nav-row">'
+      +'<div class="mock-nav-l">'+prevBtn+'</div>'
+      +'<div class="mock-nav-r">'+nextBtn+'</div>'
+    +'</div>';
+
+  updatePaletteCurrent(idx);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goTo(idx){
+  if(idx<0||idx>=mockQuestions.length)return;
+  renderQuestion(idx);
+}
+
+// ── SELECT ANSWER ─────────────────────────────────────────────
+function mockSelect(qidx,key){
+  if(testDone)return;
+  if(userAnswers[qidx])return;   // already answered this Q
+  userAnswers[qidx]=key;
+
+  var correct=(mockQuestions[qidx].correct_answer||'').toUpperCase();
+  ['A','B','C','D'].forEach(function(k){
+    var btn=document.getElementById('opt-'+qidx+'-'+k);
+    if(!btn)return;
+    btn.classList.remove('mo-selected','mo-correct','mo-wrong','mo-dim');
+    if(k===correct)        btn.classList.add('mo-correct');
+    else if(k===key)       btn.classList.add('mo-wrong');
+    else                   btn.classList.add('mo-dim');
+    btn.disabled=true;
+  });
+
+  // Show explanation
+  var q=mockQuestions[qidx];
+  var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')
+    ?'<p style="font-size:.78rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 '+esc(q.ncert_ref)+'</p>':'';
+  var exp=document.querySelector('#mock-q-area .mock-exp');
+  if(!exp){
+    exp=document.createElement('div');
+    exp.className='mock-exp';
+    var card=document.querySelector('.mock-q-card');
+    if(card)card.appendChild(exp);
+  }
+  exp.innerHTML='<p style="font-size:.82rem;font-weight:700;color:var(--c-brand-deep,#E85500);margin-bottom:6px;">💡 Explanation</p>'
+    +'<p style="margin-bottom:4px;"><strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
+    +(key!==correct?' &nbsp;<span style="color:#B91C1C;">You chose: '+key+'</span>':'')+'</p>'
+    +'<p style="font-size:.88rem;line-height:1.65;">'+esc(q.explanation||'')+'</p>'+ncert;
+  exp.classList.add('visible');
+
+  // Palette
+  var pb=document.getElementById('pb-'+qidx);
+  if(pb){
+    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur');
+    pb.classList.add(key===correct?'pb-green':'pb-red');
+  }
+}
+
+// ── PALETTE ───────────────────────────────────────────────────
+function buildPalette(){
+  var grid=document.getElementById('palette');
+  if(!grid)return;
+  grid.innerHTML='';
+  mockQuestions.forEach(function(q,i){
+    var btn=document.createElement('button');
+    btn.id='pb-'+i;
+    btn.className='pb';
+    btn.textContent=q._num;
+    btn.onclick=(function(idx){return function(){goTo(idx);};})(i);
+    grid.appendChild(btn);
+  });
+}
+
+function updatePaletteCurrent(idx){
+  document.querySelectorAll('.pb').forEach(function(b){b.classList.remove('pb-cur');});
+  var cur=document.getElementById('pb-'+idx);
+  if(cur){
+    if(!cur.classList.contains('pb-green')&&!cur.classList.contains('pb-red'))
+      cur.classList.add('pb-cur');
+  }
+}
+
+// ── TIMER ─────────────────────────────────────────────────────
+function startTimer(){
+  var el=document.getElementById('timer');
+  timerInterval=setInterval(function(){
+    timeLeft--;
+    var h=Math.floor(timeLeft/3600),m=Math.floor((timeLeft%3600)/60),s=timeLeft%60;
+    if(el)el.textContent=h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
+    if(timeLeft<=600&&el)el.classList.add('warning');
+    if(timeLeft<=0){clearInterval(timerInterval);submitMock();}
+  },1000);
+}
+
+// ── CONFIRM SUBMIT ────────────────────────────────────────────
+function confirmSubmit(){
+  var ans=Object.keys(userAnswers).length;
+  var skip=mockQuestions.length-ans;
+  if(skip>0&&!confirm('You have '+skip+' unanswered question(s).\n\nSubmit the test now?'))return;
+  submitMock();
+}
+
+// ── SUBMIT ────────────────────────────────────────────────────
+function submitMock(){
+  clearInterval(timerInterval);
+  testDone=true;
+
+  // Final palette colours
+  mockQuestions.forEach(function(q,i){
+    var pb=document.getElementById('pb-'+i);if(!pb)return;
+    pb.classList.remove('pb-green','pb-red','pb-grey','pb-cur');
+    var a=userAnswers[i],c=(q.correct_answer||'').toUpperCase();
+    if(!a)pb.classList.add('pb-grey');
+    else if(a===c)pb.classList.add('pb-green');
+    else pb.classList.add('pb-red');
+  });
+
+  // Score tally
+  var score=0,correct=0,wrong=0,skip=0;
+  var subj={Physics:{c:0,w:0,s:0},Chemistry:{c:0,w:0,s:0},Botany:{c:0,w:0,s:0},Zoology:{c:0,w:0,s:0}};
+  mockQuestions.forEach(function(q,i){
+    var s=q._subj,a=userAnswers[i],c=(q.correct_answer||'').toUpperCase();
+    if(!a){skip++;subj[s].s++;}
+    else if(a===c){score+=4;correct++;subj[s].c++;}
+    else{score-=1;wrong++;subj[s].w++;}
+  });
+  var bioC=subj.Botany.c+subj.Zoology.c,bioW=subj.Botany.w+subj.Zoology.w,bioS=subj.Botany.s+subj.Zoology.s;
+
+  document.getElementById('test-screen').style.display='none';
+  document.getElementById('result-screen').style.display='block';
+  document.getElementById('result-score').textContent=score;
+  document.getElementById('r-correct').textContent=correct;
+  document.getElementById('r-wrong').textContent=wrong;
+  document.getElementById('r-skip').textContent=skip;
+  document.getElementById('r-accuracy').textContent=(correct+wrong>0)?Math.round(correct/(correct+wrong)*100)+'%':'0%';
+
+  function sBox(lbl,c,w,s,sc){
+    return '<div class="result-box">'
+      +'<div class="num" style="color:var(--c-brand,#FF6B1A);">'+sc+'</div>'
+      +'<div class="lbl">'+lbl+'</div>'
+      +'<div style="font-size:11px;color:var(--c-ink-muted,#6B5C45);margin-top:4px;">'
+      +(c?'✅'+c+' ':'')+(w?'❌'+w+' ':'')+'⬜'+s+'</div></div>';
+  }
+  document.getElementById('subject-breakdown').innerHTML=
+    sBox('Physics',subj.Physics.c,subj.Physics.w,subj.Physics.s,subj.Physics.c*4-subj.Physics.w)
+    +sBox('Chemistry',subj.Chemistry.c,subj.Chemistry.w,subj.Chemistry.s,subj.Chemistry.c*4-subj.Chemistry.w)
+    +sBox('Biology',bioC,bioW,bioS,bioC*4-bioW);
+
+  // Review wrong answers
+  var rc=document.getElementById('review-container');
+  var wrongs=mockQuestions.reduce(function(acc,q,i){
+    if(userAnswers[i]&&userAnswers[i]!==(q.correct_answer||'').toUpperCase())
+      acc.push({q:q,i:i,chosen:userAnswers[i]});
+    return acc;
+  },[]);
+
+  if(!wrongs.length){rc.innerHTML='<p style="color:#22C55E;font-weight:600;padding:2rem 0;">No wrong answers — perfect! 🎉</p>';return;}
+
+  var revHTML='';
+  wrongs.forEach(function(item){
+    var q=item.q,qidx=item.i,chosen=item.chosen,correct=(q.correct_answer||'').toUpperCase();
+    var hasTable=q.match_table&&(q.match_table.rows||q.match_table.col1);
+    var optsH='';
+    ['A','B','C','D'].forEach(function(k){
+      var val=q.options&&q.options[k]?q.options[k]:'';if(!val)return;
+      var bg='var(--c-surface,#fff)',bc='var(--c-border,#F0E8DE)',col='var(--c-ink)',fw='400',op='0.38';
+      if(k===correct){bg='#F0FDF4';bc='#22C55E';col='#15803D';fw='700';op='1';}
+      else if(k===chosen){bg='#FEF2F2';bc='#EF4444';col='#B91C1C';fw='400';op='1';}
+      optsH+='<div style="background:'+bg+';border:1.5px solid '+bc+';color:'+col
+        +';border-radius:10px;padding:.6rem 1rem;font-size:.9rem;font-weight:'+fw
+        +';opacity:'+op+';margin-bottom:.5rem;">'
+        +'<span style="font-weight:700;color:var(--c-brand,#FF6B1A);margin-right:.4rem;">'+k+'.</span>'
+        +esc(val)+'</div>';
+    });
+    var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')?'<p style="margin-top:.5rem;font-size:.8rem;color:var(--c-ink-muted,#6B5C45);">📖 '+esc(q.ncert_ref)+'</p>':'';
+    revHTML+='<div style="background:var(--c-surface,#fff);border:1.5px solid var(--c-border,#F0E8DE);border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">'
+      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem;">'
+      +'<span style="font-size:.72rem;font-weight:700;background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);padding:.25rem .7rem;border-radius:100px;">Q'+q._num+'</span>'
+      +'<button onclick="reviewJump('+qidx+')" style="background:none;border:1.5px solid var(--c-brand,#FF6B1A);color:var(--c-brand,#FF6B1A);border-radius:100px;padding:.3rem .85rem;font-size:.78rem;font-weight:600;cursor:pointer;font-family:inherit;">↑ Go to Q'+q._num+'</button>'
+      +'</div>'
+      +'<div style="font-size:.95rem;line-height:1.65;color:var(--c-ink);margin-bottom:1rem;">'+formatQText(q.question)+'</div>'
+      +(hasTable?matchTableHTML(q.match_table):'')
+      +diagHTML(q)
+      +optsH
+      +'<div style="margin-top:.9rem;background:var(--c-surface-2,#FFF8F3);border:1px solid rgba(255,107,26,.2);border-radius:10px;padding:.9rem 1.1rem;font-size:.875rem;color:var(--c-ink);line-height:1.6;">'
+      +'<strong style="color:var(--c-brand-deep,#E85500);">Correct: '+correct+'</strong>'
+      +' <span style="color:#B91C1C;">You chose: '+chosen+'</span><br>'
+      +esc(q.explanation||'')+ncert+'</div></div>';
+  });
+  rc.innerHTML=revHTML;
+}
+
+function reviewJump(idx){
+  document.getElementById('result-screen').style.display='none';
+  document.getElementById('test-screen').style.display='block';
+  renderQuestion(idx);
+}
+
+// ═══════════════════════════════════════════════════════════════
+//  MOCK BUILDER — chapter-weighted question selection
+//  (identical logic to previous version — preserved exactly)
+// ═══════════════════════════════════════════════════════════════
+async function loadSubjectFile(subject){
+  var res=await fetch('data/api_'+subject.toLowerCase()+'.json');
+  var data=await res.json();
+  return data.questions||[];
+}
+
+async function startMock(){
+  document.getElementById('start-screen').style.display='none';
+  document.getElementById('test-screen').style.display='block';
+  document.getElementById('mock-q-area').innerHTML=
+    '<div style="text-align:center;padding:80px;color:var(--c-brand,#FF6B1A);font-size:1.1rem;">Building your test…</div>';
+
+  try{
+    var results=await Promise.all([
+      loadSubjectFile('Biology'),loadSubjectFile('Chemistry'),loadSubjectFile('Physics')
+    ]);
+    var bio=results[0],chem=results[1],phys=results[2];
+
+    var BIO_TOPIC_MAP={
+      'Diversity in Living World':['the living world','biological classification','plant kingdom','animal kingdom'],
+      'Structural Organisation':['morphology of flowering plants','anatomy of flowering plants','structural organisation in animals'],
+      'Cell Structure & Function':['cell: the unit of life','biomolecules','cell cycle and cell division'],
+      'Plant Physiology':['transport in plants','mineral nutrition','photosynthesis in higher plants','respiration in plants','plant growth and development'],
+      'Human Physiology':['digestion and absorption','breathing and exchange of gases','body fluids and circulation','excretory products and elimination','locomotion and movement','neural control and coordination','chemical coordination and integration','human physiology','human physiology and zoology'],
+      'Reproduction':['reproduction in organisms','sexual reproduction in flowering plants','human reproduction','reproductive health','reproduction'],
+      'Genetics & Evolution':['principles of inheritance and variation','molecular basis of inheritance','evolution'],
+      'Biology in Human Welfare':['human health and disease','strategies for enhancement in food production','microbes in human welfare'],
+      'Biotechnology':['biotechnology: principles and processes','biotechnology and its applications','biotechnology principles','genetics & biotechnology'],
+      'Ecology':['organisms and populations','ecosystem','biodiversity and conservation','environmental issues']
+    };
+    var PHY_TOPIC_MAP={
+      'Units & Measurement':['physical world and measurement','mathematical tools'],
+      'Kinematics':['kinematics','motion in a plane'],
+      'Laws of Motion':['laws of motion'],
+      'Work, Energy & Power':['work, energy and power'],
+      'Rotational Motion':['system of particles and rotational motion'],
+      'Gravitation':['gravitation'],
+      'Properties of Matter':['mechanical properties of solids','mechanical properties of fluids','thermal properties of matter'],
+      'Thermodynamics':['thermodynamics','kinetic theory of gases'],
+      'Kinetic Theory':['kinetic theory'],
+      'Oscillations & Waves':['oscillations','waves'],
+      'Electrostatics':['electric charges and fields','electrostatic potential and capacitance','electrostatics'],
+      'Current Electricity':['current electricity'],
+      'Magnetism + EMI':['moving charges and magnetism','magnetism and matter','electromagnetic induction','alternating current','magnetic effects of current'],
+      'Optics':['ray optics and optical instruments','wave optics'],
+      'Dual Nature':['dual nature of radiation and matter','dual nature of matter'],
+      'Atoms & Nuclei':['atoms','nuclei','nuclear physics'],
+      'Semiconductors':['semiconductor electronics','semiconductors','communication systems','electromagnetic waves']
+    };
+    var CHEM_TOPIC_MAP={
+      'Basic Concepts':['some basic concepts of chemistry'],
+      'Structure of Atom':['structure of atom'],
+      'Periodic Table':['classification of elements and periodicity in properties','classification of elements & periodicity'],
+      'Chemical Bonding':['chemical bonding and molecular structure','chemical bonding'],
+      'States of Matter':['states of matter'],
+      'Thermodynamics':['thermodynamics'],
+      'Equilibrium':['equilibrium'],
+      'Redox':['redox reactions'],
+      'GOC':['organic chemistry: some basic principles and techniques','organic chemistry','stereochemistry'],
+      'Hydrocarbons':['hydrocarbons'],
+      'Solid State':['solid state'],
+      'Solutions':['solutions'],
+      'Electrochemistry':['electrochemistry'],
+      'Chemical Kinetics':['chemical kinetics'],
+      'Surface Chemistry':['surface chemistry'],
+      'p-Block':['p-block elements','hydrogen','s-block elements'],
+      'd & f Block':['d and f-block elements'],
+      'Coordination Compounds':['coordination compounds'],
+      'Haloalkanes & Haloarenes':['haloalkanes and haloarenes'],
+      'Alcohols, Phenols, Ethers':['alcohols, phenols and ethers'],
+      'Carbonyl Compounds':['aldehydes, ketones and carboxylic acids','organic chemistry - esters'],
+      'Amines':['amines'],
+      'Biomolecules':['biomolecules','polymers','chemistry in everyday life']
+    };
+    var BIO_Q={'Diversity in Living World':8,'Structural Organisation':6,'Cell Structure & Function':9,'Plant Physiology':8,'Human Physiology':20,'Reproduction':9,'Genetics & Evolution':18,'Biology in Human Welfare':4,'Biotechnology':6,'Ecology':12};
+    var PHY_Q={'Units & Measurement':1,'Kinematics':2,'Laws of Motion':2,'Work, Energy & Power':2,'Rotational Motion':3,'Gravitation':2,'Properties of Matter':3,'Thermodynamics':5,'Kinetic Theory':2,'Oscillations & Waves':2,'Electrostatics':4,'Current Electricity':3,'Magnetism + EMI':5,'Optics':5,'Dual Nature':3,'Atoms & Nuclei':3,'Semiconductors':3};
+    var CHEM_Q={'Basic Concepts':1,'Structure of Atom':2,'Periodic Table':2,'Chemical Bonding':5,'States of Matter':1,'Thermodynamics':4,'Equilibrium':3,'Redox':2,'GOC':2,'Hydrocarbons':2,'Solid State':1,'Solutions':2,'Electrochemistry':2,'Chemical Kinetics':2,'Surface Chemistry':1,'p-Block':3,'d & f Block':2,'Coordination Compounds':4,'Haloalkanes & Haloarenes':2,'Alcohols, Phenols, Ethers':2,'Carbonyl Compounds':2,'Amines':2,'Biomolecules':1};
+
+    function buildRevMap(m){var r={};Object.keys(m).forEach(function(t){m[t].forEach(function(c){r[c]=t;});});return r;}
+    var bioRev=buildRevMap(BIO_TOPIC_MAP),phyRev=buildRevMap(PHY_TOPIC_MAP),chemRev=buildRevMap(CHEM_TOPIC_MAP);
+
+    function indexByTopic(pool,rev){
+      var idx={};
+      pool.forEach(function(q){var ch=(q.chapter||'').toLowerCase(),t=rev[ch];if(t){if(!idx[t])idx[t]=[];idx[t].push(q);}});
+      Object.keys(idx).forEach(function(t){idx[t]=shuffle(idx[t]);});
       return idx;
     }
-
-    // ── CHAPTER-WEIGHTED PICK ────────────────────────────────────────
-    // Pick exact counts per topic, fall back to any topic if bucket empty
-    function pickChapterWeighted(pool, revMap, topicCounts, total) {
-      var byTopic = indexByTopic(pool, revMap);
-      var selected = [];
-      var usedIds  = {};
-
-      function useQ(q) {
-        var uid = q.id || q.question;
-        if (usedIds[uid]) return false;
-        usedIds[uid] = true;
-        selected.push(q);
-        return true;
-      }
-
-      // First pass: pick exact topic counts
-      Object.keys(topicCounts).forEach(function(topic) {
-        var need = topicCounts[topic];
-        var bucket = byTopic[topic] || [];
-        var taken = 0;
-        for (var i = 0; i < bucket.length && taken < need; i++) {
-          if (useQ(bucket[i])) taken++;
-        }
-      });
-
-      // Fallback: fill any shortfall from entire pool (shuffled)
-      if (selected.length < total) {
-        var fallback = shuffle(pool.slice());
-        for (var i = 0; i < fallback.length && selected.length < total; i++) {
-          useQ(fallback[i]);
-        }
-      }
-
-      // Trim to total and shuffle final order
-      return shuffle(selected.slice(0, total));
+    function pickChapterWeighted(pool,rev,counts,total){
+      var byT=indexByTopic(pool,rev),sel=[],used={};
+      function useQ(q){var uid=q.id||q.question;if(used[uid])return false;used[uid]=true;sel.push(q);return true;}
+      Object.keys(counts).forEach(function(t){var n=counts[t],b=byT[t]||[],tk=0;for(var i=0;i<b.length&&tk<n;i++){if(useQ(b[i]))tk++;}});
+      if(sel.length<total){var fb=shuffle(pool.slice());for(var i=0;i<fb.length&&sel.length<total;i++)useQ(fb[i]);}
+      return shuffle(sel.slice(0,total));
     }
+    function makeSection(pool,rev,counts){var f=pickChapterWeighted(pool,rev,counts,50);return{A:f.slice(0,35),B:f.slice(35,50)};}
 
-    // ── SPLIT 50 INTO SEC-A (35) + SEC-B (15) ───────────────────────
-    function makeSection(pool, revMap, topicCounts) {
-      var fifty = pickChapterWeighted(pool, revMap, topicCounts, 50);
-      return { A: fifty.slice(0, 35), B: fifty.slice(35, 50) };
-    }
+    var bioS=shuffle(bio.slice()),bioMid=Math.floor(bioS.length/2);
+    var botPool=bioS.slice(0,bioMid),zooPool=bioS.slice(bioMid);
+    var phy=makeSection(phys,phyRev,PHY_Q),che=makeSection(chem,chemRev,CHEM_Q);
+    var bot=makeSection(botPool,bioRev,BIO_Q),zoo=makeSection(zooPool,bioRev,BIO_Q);
 
-    // ── BIOLOGY: split pool 50/50 for Botany / Zoology ──────────────
-    var bioShuffled = shuffle(bio.slice());
-    var bioMid  = Math.floor(bioShuffled.length / 2);
-    var botPool = bioShuffled.slice(0, bioMid);
-    var zooPool = bioShuffled.slice(bioMid);
+    mockQuestions=[]
+      .concat(phy.A.map(function(q,i){return Object.assign({},q,{_num:i+1,  _subj:'Physics',  _sec:'A'});}))
+      .concat(phy.B.map(function(q,i){return Object.assign({},q,{_num:i+36, _subj:'Physics',  _sec:'B'});}))
+      .concat(che.A.map(function(q,i){return Object.assign({},q,{_num:i+51, _subj:'Chemistry',_sec:'A'});}))
+      .concat(che.B.map(function(q,i){return Object.assign({},q,{_num:i+86, _subj:'Chemistry',_sec:'B'});}))
+      .concat(bot.A.map(function(q,i){return Object.assign({},q,{_num:i+101,_subj:'Botany',   _sec:'A'});}))
+      .concat(bot.B.map(function(q,i){return Object.assign({},q,{_num:i+136,_subj:'Botany',   _sec:'B'});}))
+      .concat(zoo.A.map(function(q,i){return Object.assign({},q,{_num:i+151,_subj:'Zoology',  _sec:'A'});}))
+      .concat(zoo.B.map(function(q,i){return Object.assign({},q,{_num:i+186,_subj:'Zoology',  _sec:'B'});}));
 
-    var phy = makeSection(phys,   phyRev,  PHY_Q);
-    var che = makeSection(chem,   chemRev, CHEM_Q);
-    var bot = makeSection(botPool, bioRev,  BIO_Q);
-    var zoo = makeSection(zooPool, bioRev,  BIO_Q);
-
-    // ── ASSEMBLE FINAL ORDERED LIST ──────────────────────────────────
-    // Phy-A(1-35), Phy-B(36-50), Che-A(51-85), Che-B(86-100),
-    // Bot-A(101-135), Bot-B(136-150), Zoo-A(151-185), Zoo-B(186-200)
-    var ordered = []
-      .concat(phy.A.map(function(q,i){ return Object.assign({},q,{_num:i+1,   _subj:'Physics',   _sec:'A'}); }))
-      .concat(phy.B.map(function(q,i){ return Object.assign({},q,{_num:i+36,  _subj:'Physics',   _sec:'B'}); }))
-      .concat(che.A.map(function(q,i){ return Object.assign({},q,{_num:i+51,  _subj:'Chemistry', _sec:'A'}); }))
-      .concat(che.B.map(function(q,i){ return Object.assign({},q,{_num:i+86,  _subj:'Chemistry', _sec:'B'}); }))
-      .concat(bot.A.map(function(q,i){ return Object.assign({},q,{_num:i+101, _subj:'Botany',    _sec:'A'}); }))
-      .concat(bot.B.map(function(q,i){ return Object.assign({},q,{_num:i+136, _subj:'Botany',    _sec:'B'}); }))
-      .concat(zoo.A.map(function(q,i){ return Object.assign({},q,{_num:i+151, _subj:'Zoology',   _sec:'A'}); }))
-      .concat(zoo.B.map(function(q,i){ return Object.assign({},q,{_num:i+186, _subj:'Zoology',   _sec:'B'}); }));
-
-    mockQuestions = ordered;
-
-  } catch(e) {
-    console.error('Mock build error:', e);
-    document.getElementById('mock-questions').innerHTML =
+  }catch(e){
+    console.error('Mock build error:',e);
+    document.getElementById('mock-q-area').innerHTML=
       '<div style="text-align:center;padding:60px;color:#EF4444;font-weight:600;">⚠️ Could not load questions. Please refresh.</div>';
     return;
   }
 
-  renderMockQuestions();
   buildPalette();
   startTimer();
+  renderQuestion(0);
 }
-
-  // ── DIAGRAM IMAGE / PLACEHOLDER HELPER ──────────────────────────────
-  window.__mockDiagErr = function(img) {
-    var w = img && img.parentNode;
-    if (!w) return;
-    w.innerHTML = '<div style="display:flex;align-items:center;gap:10px;'
-      + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:12px 14px;">'
-      + '<span style="font-size:1.3rem;">🖼️</span>'
-      + '<div style="font-size:0.75rem;color:#6B5C45;line-height:1.5;">'
-      + 'Refer to NCERT book or past paper for the diagram.</div></div>';
-  };
-
-  function buildMockDiagHtml(q) {
-    if (q.pattern !== 'diagram_dhamaka') return null;
-    var el = document.createElement('div');
-    if (q.image_url) {
-      el.style.cssText = 'margin:0.5rem 0 1rem;text-align:center;';
-      el.innerHTML = '<img src="' + q.image_url + '" alt="Diagram"'
-        + ' style="max-width:100%;max-height:320px;object-fit:contain;border-radius:10px;'
-        + 'border:1.5px solid #F0E8DE;background:#fff;padding:10px;display:block;margin:0 auto;"'
-        + ' onerror="window.__mockDiagErr(this)">';
-    } else {
-      el.style.cssText = 'margin:0.5rem 0 1rem;display:flex;align-items:center;gap:10px;'
-        + 'background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:12px 14px;';
-      el.innerHTML = '<span style="font-size:1.3rem;flex-shrink:0;">🖼️</span>'
-        + '<div><div style="font-size:0.78rem;font-weight:700;color:#CC3300;text-transform:uppercase;'
-        + 'letter-spacing:0.06em;margin-bottom:2px;">Figure referenced</div>'
-        + '<div style="font-size:0.75rem;color:#6B5C45;line-height:1.5;">'
-        + 'Refer to NCERT book or past paper for the diagram.</div></div>';
-    }
-    return el;
-  }
-
-function renderMockQuestions() {
-  var container = document.getElementById('mock-questions');
-  container.innerHTML = '';
-  var CHUNK = 40;
-  var idx   = 0;
-  var secDone = {};
-  var secNames = {0:'Physics',50:'Chemistry',100:'Botany',150:'Zoology'};
-
-  function renderChunk() {
-    var frag = document.createDocumentFragment();
-
-    if (secNames[idx] && !secDone[idx]) {
-      secDone[idx] = true;
-      var hdr = document.createElement('div');
-      hdr.style.cssText = 'font-family:Fraunces,serif;font-size:1.15rem;font-weight:900;color:#1A1208;padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #F0E8DE;margin-bottom:1.2rem;';
-      hdr.textContent = secNames[idx];
-      frag.appendChild(hdr);
-    }
-
-    var end = Math.min(idx+CHUNK, mockQuestions.length);
-    for (var i=idx; i<end; i++) {
-      var q = mockQuestions[i];
-
-      if ((i===50||i===100||i===150) && !secDone[i]) {
-        secDone[i] = true;
-        var sh = document.createElement('div');
-        sh.style.cssText = 'font-family:Fraunces,serif;font-size:1.15rem;font-weight:900;color:#1A1208;padding:1.5rem 0 0.75rem;border-bottom:1.5px solid #F0E8DE;margin-bottom:1.2rem;';
-        sh.textContent = secNames[i];
-        frag.appendChild(sh);
-      }
-
-      // Section B divider
-      if (i===35||i===85||i===135||i===185) {
-        var div = document.createElement('div');
-        div.style.cssText = 'display:flex;align-items:center;gap:12px;margin:1rem 0 0.8rem;';
-        div.innerHTML = '<div style="flex:1;height:1px;background:#F0E8DE;"></div><span style="font-size:0.72rem;font-weight:700;color:#FF6B1A;background:#FFF0E6;padding:4px 12px;border-radius:100px;border:1px solid #FFD4B3;">SECTION B — Attempt any 10</span><div style="flex:1;height:1px;background:#F0E8DE;"></div>';
-        frag.appendChild(div);
-      }
-
-      var card = document.createElement('div');
-      card.id = 'mq-' + i;
-      card.style.cssText = 'background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1.2rem;scroll-margin-top:130px;';
-
-      var tagBase = 'display:inline-block;font-size:0.72rem;font-weight:700;padding:0.25rem 0.7rem;border-radius:100px;border:none;margin-right:0.4rem;text-transform:uppercase;letter-spacing:0.04em;';
-
-      var metaDiv = document.createElement('div');
-      metaDiv.style.cssText = 'display:flex;gap:0.5rem;flex-wrap:wrap;margin-bottom:0.9rem;';
-      metaDiv.innerHTML = '<span style="'+tagBase+'background:#F0E8DE;color:#6B5C45;">Q'+q._num+'</span>'
-                        + '<span style="'+tagBase+'background:#FFF0E6;color:#E85500;">Sec '+q._sec+'</span>';
-
-      var qDiv = document.createElement('div');
-      qDiv.style.cssText = 'font-size:0.97rem;line-height:1.7;color:#1A1208;margin-bottom:1rem;';
-      qDiv.innerHTML = q.question;
-
-      var optsDiv = document.createElement('div');
-      optsDiv.id = 'opts-' + i;
-
-      var keys = ['A','B','C','D'];
-      for (var ki=0; ki<4; ki++) {
-        var btn = document.createElement('button');
-        btn.id = 'opt-' + i + '-' + keys[ki];
-        btn.className = 'neeto-opt';
-        btn.setAttribute('data-key', keys[ki]);
-        // Base style — CSS classes will override on state change
-        btn.style.cssText = 'background:#fff;border:1.5px solid #F0E8DE;color:#1A1208;border-radius:10px;padding:0.65rem 1rem;width:100%;text-align:left;font-size:0.9rem;cursor:pointer;font-family:inherit;display:block;margin-bottom:0.5rem;transition:all 0.15s;';
-        btn.innerHTML = '<span style="font-weight:700;color:#FF6B1A;margin-right:0.5rem;">'+keys[ki]+'</span>'+(q.options[keys[ki]]||'');
-        (function(qi,k,b){
-          b.onclick     = function(){ mockSelect(qi,k); };
-          b.onmouseover = function(){ if(!testDone && userAnswers[qi]!==k){ b.style.borderColor='#FF6B1A'; b.style.background='#FFF0E6'; b.style.color='#E85500'; }};
-          b.onmouseout  = function(){ if(!testDone && userAnswers[qi]!==k){ b.style.borderColor='#F0E8DE'; b.style.background='#ffffff'; b.style.color='#1A1208'; }};
-        })(i, keys[ki], btn);
-        optsDiv.appendChild(btn);
-      }
-
-      var expDiv = document.createElement('div');
-      expDiv.id = 'exp-' + i;
-      expDiv.style.display = 'none';
-
-      var diagEl = buildMockDiagHtml(q);
-      card.appendChild(metaDiv);
-      card.appendChild(qDiv);
-      if (diagEl) card.appendChild(diagEl);
-      card.appendChild(optsDiv);
-      card.appendChild(expDiv);
-      frag.appendChild(card);
-    }
-
-    container.appendChild(frag);
-    idx = end;
-    if (idx < mockQuestions.length) requestAnimationFrame(renderChunk);
-  }
-  renderChunk();
-}
-
-// ── SELECT (during test) ─────────────────────────────────────────────
-function mockSelect(qidx, key) {
-  if (testDone) return;
-  userAnswers[qidx] = key;
-
-  var keys = ['A','B','C','D'];
-  for (var i=0; i<4; i++) {
-    var k   = keys[i];
-    var btn = document.getElementById('opt-'+qidx+'-'+k);
-    if (!btn) continue;
-    btn.classList.remove('neeto-selected','neeto-faded','neeto-correct','neeto-wrong','neeto-dim');
-    if (k === key) {
-      btn.classList.add('neeto-selected');
-    } else {
-      btn.classList.add('neeto-faded');
-    }
-  }
-
-  // Palette → green immediately
-  var pb = document.getElementById('pb-'+qidx);
-  if (pb) {
-    pb.classList.remove('pb-green','pb-red','pb-grey');
-    pb.classList.add('pb-green');
-  }
-}
-
-// ── PALETTE ──────────────────────────────────────────────────────────
-function buildPalette() {
-  var grid = document.getElementById('palette');
-  if (!grid) return;
-  grid.innerHTML = '';
-  for (var i=0; i<mockQuestions.length; i++) {
-    var btn = document.createElement('button');
-    btn.id = 'pb-' + i;
-    btn.textContent = mockQuestions[i]._num;
-    btn.style.cssText = 'aspect-ratio:1;border-radius:8px;border:1.5px solid #F0E8DE;background:#fff;font-size:0.72rem;font-weight:600;color:#6B5C45;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:inherit;transition:all 0.15s;';
-    (function(idx){ btn.onclick = function(){ jumpTo(idx); }; })(i);
-    grid.appendChild(btn);
-  }
-}
-
-function jumpTo(i) {
-  var card = document.getElementById('mq-'+i);
-  if (!card) return;
-  card.scrollIntoView({behavior:'smooth',block:'center'});
-  card.style.outline = '3px solid #FF6B1A';
-  card.style.outlineOffset = '2px';
-  setTimeout(function(){ card.style.outline=''; }, 900);
-}
-
-// ── TIMER ────────────────────────────────────────────────────────────
-function startTimer() {
-  var el = document.getElementById('timer');
-  timerInterval = setInterval(function(){
-    timeLeft--;
-    var h=Math.floor(timeLeft/3600), m=Math.floor((timeLeft%3600)/60), s=timeLeft%60;
-    el.textContent = h+':'+(m<10?'0':'')+m+':'+(s<10?'0':'')+s;
-    if (timeLeft<=600){ el.style.color='#B91C1C'; el.style.background='#FEE2E2'; }
-    if (timeLeft<=0){ clearInterval(timerInterval); submitMock(); }
-  },1000);
-}
-
-// ── SUBMIT ───────────────────────────────────────────────────────────
-function submitMock() {
-  clearInterval(timerInterval);
-  testDone = true;
-
-  for (var i=0; i<mockQuestions.length; i++) {
-    var q      = mockQuestions[i];
-    var chosen = userAnswers[i] || null;
-    var correct= q.correct_answer;
-    var keys   = ['A','B','C','D'];
-
-    for (var ki=0; ki<4; ki++) {
-      var k   = keys[ki];
-      var btn = document.getElementById('opt-'+i+'-'+k);
-      if (!btn) continue;
-      btn.classList.remove('neeto-selected','neeto-faded','neeto-correct','neeto-wrong','neeto-dim');
-      if (k === correct)              btn.classList.add('neeto-correct');
-      else if (chosen && k === chosen) btn.classList.add('neeto-wrong');
-      else                            btn.classList.add('neeto-dim');
-    }
-
-    // Explanation
-    var exp = document.getElementById('exp-'+i);
-    if (exp) {
-      exp.style.cssText = 'display:block;margin-top:1rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:12px;padding:1rem 1.2rem;font-size:0.875rem;line-height:1.6;color:#1A1208;';
-      var ncert = (q.ncert_ref && q.ncert_ref!=='undefined')
-        ? '<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">&#x1F4D6; '+q.ncert_ref+'</div>' : '';
-      exp.innerHTML = '<strong style="color:#E85500;">Correct: '+correct+'</strong>'
-        + (chosen&&chosen!==correct?' <span style="color:#B91C1C;">You chose: '+chosen+'</span>':'')
-        + '<br>'+(q.explanation||'')+ncert;
-    }
-
-    // Palette
-    var pb = document.getElementById('pb-'+i);
-    if (pb) {
-      pb.classList.remove('pb-green','pb-red','pb-grey');
-      if (!chosen)               pb.classList.add('pb-grey');
-      else if (chosen===correct) pb.classList.add('pb-green');
-      else                       pb.classList.add('pb-red');
-    }
-  }
-
-  // Score
-  var score=0,correct=0,wrong=0,skip=0;
-  var subj={Physics:{c:0,w:0,s:0},Chemistry:{c:0,w:0,s:0},Botany:{c:0,w:0,s:0},Zoology:{c:0,w:0,s:0}};
-  for (var i=0; i<mockQuestions.length; i++) {
-    var q=mockQuestions[i], s=q._subj, a=userAnswers[i];
-    if (!a){ skip++; subj[s].s++; }
-    else if (a===q.correct_answer){ score+=4; correct++; subj[s].c++; }
-    else { score-=1; wrong++; subj[s].w++; }
-  }
-  // Biology = Botany + Zoology combined
-  var bioC=subj.Botany.c+subj.Zoology.c, bioW=subj.Botany.w+subj.Zoology.w, bioS=subj.Botany.s+subj.Zoology.s;
-
-  document.getElementById('test-screen').style.display   = 'none';
-  document.getElementById('result-screen').style.display = 'block';
-  document.getElementById('result-score').textContent    = score;
-  document.getElementById('r-correct').textContent       = correct;
-  document.getElementById('r-wrong').textContent         = wrong;
-  document.getElementById('r-skip').textContent          = skip;
-  document.getElementById('r-accuracy').textContent      = (correct+wrong>0)?Math.round(correct/(correct+wrong)*100)+'%':'0%';
-
-  var bd = '';
-  var sl = [{n:'Physics',s:'Physics'},{n:'Chemistry',s:'Chemistry'},{n:'Biology',s:'bio'}];
-  bd += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(subj.Physics.c*4-subj.Physics.w)+'</div>'
-      + '<div class="lbl">Physics</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
-      + (subj.Physics.c?'✅'+subj.Physics.c+' ':'')+(subj.Physics.w?'❌'+subj.Physics.w+' ':'')+'⬜'+subj.Physics.s+'</div></div>';
-  bd += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(subj.Chemistry.c*4-subj.Chemistry.w)+'</div>'
-      + '<div class="lbl">Chemistry</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
-      + (subj.Chemistry.c?'✅'+subj.Chemistry.c+' ':'')+(subj.Chemistry.w?'❌'+subj.Chemistry.w+' ':'')+'⬜'+subj.Chemistry.s+'</div></div>';
-  bd += '<div class="result-box"><div class="num" style="color:#FF6B1A;">'+(bioC*4-bioW)+'</div>'
-      + '<div class="lbl">Biology</div><div style="font-size:11px;color:#6B5C45;margin-top:4px;">'
-      + (bioC?'✅'+bioC+' ':'')+(bioW?'❌'+bioW+' ':'')+'⬜'+bioS+'</div>'
-      + '<div style="font-size:10px;color:#9CA3AF;margin-top:2px;">Botany + Zoology</div></div>';
-  document.getElementById('subject-breakdown').innerHTML = bd;
-
-  // Review wrong
-  var rc = document.getElementById('review-container');
-  var wrongList=[];
-  for (var i=0; i<mockQuestions.length; i++) {
-    if (userAnswers[i] && userAnswers[i]!==mockQuestions[i].correct_answer)
-      wrongList.push({q:mockQuestions[i],i:i,chosen:userAnswers[i]});
-  }
-
-  if (!wrongList.length) { rc.innerHTML='<p style="color:#22C55E;font-weight:600;padding:2rem 0;">No wrong answers — perfect! &#x1F389;</p>'; return; }
-
-  var reviewHtml='';
-  for (var wi=0; wi<wrongList.length; wi++) {
-    var item=wrongList[wi], q=item.q, qidx=item.i, chosen=item.chosen, correct=q.correct_answer;
-    var keys=['A','B','C','D'], optHtml='';
-    for (var ki=0; ki<4; ki++) {
-      var k=keys[ki];
-      var bg='#fff',bc='#F0E8DE',col='#1A1208',fw='400',op='0.38';
-      if (k===correct)  { bg='#F0FDF4';bc='#22C55E';col='#15803D';fw='700';op='1'; }
-      else if(k===chosen){ bg='#FEF2F2';bc='#EF4444';col='#B91C1C';fw='400';op='1'; }
-      optHtml+='<div style="background:'+bg+';border:1.5px solid '+bc+';color:'+col+';border-radius:10px;padding:0.6rem 1rem;font-size:0.9rem;font-weight:'+fw+';opacity:'+op+';margin-bottom:0.5rem;"><span style="font-weight:700;color:#FF6B1A;margin-right:0.4rem;">'+k+'</span>'+(q.options[k]||'')+'</div>';
-    }
-    var ncert=(q.ncert_ref&&q.ncert_ref!=='undefined')?'<div style="margin-top:0.5rem;font-size:0.8rem;color:#6B5C45;">&#x1F4D6; '+q.ncert_ref+'</div>':'';
-    reviewHtml+='<div style="background:#fff;border:1.5px solid #F0E8DE;border-radius:18px;padding:1.6rem 1.8rem;margin-bottom:1rem;">'
-      +'<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:0.9rem;">'
-      +'<span style="font-size:0.72rem;font-weight:700;background:#F0E8DE;color:#6B5C45;padding:0.25rem 0.7rem;border-radius:100px;">Q'+q._num+'</span>'
-      +'<button onclick="goToQuestion('+qidx+')" style="background:none;border:1.5px solid #FF6B1A;color:#FF6B1A;border-radius:100px;padding:0.3rem 0.85rem;font-size:0.78rem;font-weight:600;cursor:pointer;font-family:inherit;">&#x2191; Jump to Q'+q._num+'</button>'
-      +'</div>'
-      +'<div style="font-size:0.95rem;line-height:1.65;color:#1A1208;margin-bottom:1rem;">'+q.question+'</div>'
-      +(q.image_url ? '<div style="margin:0.5rem 0 1rem;text-align:center;"><img src="'+q.image_url+'" alt="Diagram" style="max-width:100%;max-height:280px;object-fit:contain;border-radius:10px;border:1.5px solid #F0E8DE;background:#fff;padding:8px;display:block;margin:0 auto;"></div>' : (q.pattern==='diagram_dhamaka' ? '<div style="margin:0.5rem 0 1rem;display:flex;align-items:center;gap:8px;background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:8px;padding:10px 12px;"><span style="font-size:1.2rem;">🖼️</span><span style="font-size:0.75rem;color:#6B5C45;">Figure referenced — refer to NCERT or past paper.</span></div>' : ''))
-      +optHtml
-      +'<div style="margin-top:0.9rem;background:#FFF7F0;border:1px solid rgba(255,107,26,0.2);border-radius:10px;padding:0.9rem 1.1rem;font-size:0.875rem;color:#1A1208;line-height:1.6;">'
-      +'<strong style="color:#E85500;">Correct: '+correct+'</strong> <span style="color:#B91C1C;">You chose: '+chosen+'</span><br>'+(q.explanation||'')+ncert+'</div></div>';
-  }
-  rc.innerHTML = reviewHtml;
-}
-
-function goToQuestion(idx) {
-  document.getElementById('result-screen').style.display='none';
-  document.getElementById('test-screen').style.display='block';
-  setTimeout(function(){ jumpTo(idx); },150);
-}
-
-</script>
-<footer class="neeto-footer">
-  <div class="footer-brand">
-    <img src="neetminds-logo.png" style="object-fit:contain;border-radius:0;" alt="NEETminds">
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">minds</span></span>
-  </div>
-  <p>© 2026 NEETminds. All rights reserved.</p>
-</footer>
-
-<script>
-function toggleNav() {
-  document.getElementById('mob-nav').classList.toggle('open');
-}
-document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav');
-  var b = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
-    m.classList.remove('open');
-});
 </script>
 </body>
 </html>

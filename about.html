@@ -7,6 +7,18 @@
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/nav.css"/>
+<!-- ── THEME INIT ── -->
+<script>
+(function(){
+  var saved = localStorage.getItem('nm_theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  var h = new Date().getHours();
+  var timeBasedDark = (h >= 18 || h < 6);
+  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (timeBasedDark || sysDark) document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.setAttribute('data-theme','light');
+})();
+</script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; line-height: 1.6; }
@@ -110,11 +122,18 @@
     <a href="about.html" class="active">About</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;">
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
+  </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
+
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -239,6 +258,37 @@
   </div>
   <p>A neetminds ™ product · Built by cognitive performance scientists, doctors, engineers &amp; teachers.</p>
 </footer>
+
+
+<script>
+function updateThemeUI() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var icon = isDark ? '☀️' : '🌙';
+  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.textContent = icon;
+  });
+  var lbl = document.getElementById('mob-theme-label');
+  if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+}
+function toggleTheme() {
+  var cur  = document.documentElement.getAttribute('data-theme');
+  var next = cur === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('nm_theme', next); } catch(e) {}
+  updateThemeUI();
+}
+function toggleNav() {
+  var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
+  if (m) m.classList.toggle('open');
+}
+document.addEventListener('DOMContentLoaded', updateThemeUI);
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
 
 </body>
 </html>
