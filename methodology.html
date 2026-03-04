@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Methodology — neetminds ™</title>
+  <title>Methodology — NEETMINDS™</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/nav.css"/>
@@ -175,22 +175,98 @@
     .btn-orange:hover { background: #AA2800; transform: translateY(-2px); }
     .btn-ghost { background: rgba(255,255,255,0.06); color: #F5EDE0; padding: 14px 32px; border-radius: 12px; font-size: 1rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.12); transition: all 0.2s; }
     .btn-ghost:hover { background: rgba(255,255,255,0.1); }
-  </style>
+  
+    /* ── QUESTION SNIPPET EXAMPLES ──────────────────────────── */
+    .pat-example-toggle {
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.78rem; font-weight: 700; color: var(--c-brand-mid,#FF6B1A);
+      background: none; border: none; cursor: pointer; padding: 10px 0 0;
+      font-family: 'DM Sans', sans-serif; text-decoration: none;
+      transition: opacity .15s;
+    }
+    .pat-example-toggle:hover { opacity: .75; }
+    .pat-example-toggle .arrow { transition: transform .25s; display: inline-block; }
+    .pat-example-toggle.open .arrow { transform: rotate(180deg); }
+    .pat-snippet {
+      display: none; margin-top: 12px;
+      background: rgba(0,0,0,0.25); border-radius: 10px;
+      padding: 14px 16px; font-size: 0.82rem; line-height: 1.65;
+      color: var(--c-ink-muted,#C8B89A); border: 1px solid rgba(255,255,255,0.06);
+    }
+    .pat-snippet.visible { display: block; animation: fadeIn .2s ease; }
+    @keyframes fadeIn { from{opacity:0;transform:translateY(-4px)} to{opacity:1;transform:none} }
+    .snippet-q { color: var(--c-ink,#F5EDE0); margin-bottom: 8px; font-weight: 500; }
+    .snippet-opts { display: flex; flex-direction: column; gap: 4px; margin-bottom: 10px; }
+    .snippet-opt { padding: 4px 8px; border-radius: 6px; background: rgba(255,255,255,0.04); }
+    .snippet-opt.correct { background: rgba(34,197,94,0.15); color: #4ADE80; }
+    .snippet-tag { font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .07em; opacity: .6; margin-bottom: 4px; }
+
+    /* ── STATS STRIP ─────────────────────────────────────────── */
+    .meth-stats {
+      display: flex; flex-wrap: wrap; justify-content: center; gap: 28px 48px;
+      background: rgba(204,51,0,0.08); border: 1px solid rgba(204,51,0,0.2);
+      border-radius: 20px; padding: 32px 28px; margin: 0 0 60px;
+    }
+    .mstat { text-align: center; }
+    .mstat-num { font-family: 'Fraunces', serif; font-size: 2.2rem; font-weight: 900;
+      color: var(--c-brand-mid,#FF6B1A); line-height: 1; }
+    .mstat-lbl { font-size: 0.75rem; font-weight: 600; text-transform: uppercase;
+      letter-spacing: .07em; color: var(--c-ink-muted,#C8B89A); margin-top: 5px; }
+
+    /* ── CHEATSHEET CTA ────────────────────────────────────── */
+    .cheatsheet-cta {
+      display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+      background: rgba(255,255,255,0.03); border: 1.5px solid rgba(255,107,26,0.25);
+      border-radius: 16px; padding: 20px 24px; margin: 0 0 48px;
+      cursor: pointer; transition: border-color .15s, background .15s;
+    }
+    .cheatsheet-cta:hover { border-color: rgba(255,107,26,0.5); background: rgba(255,107,26,0.05); }
+    .cheat-icon { font-size: 2.2rem; flex-shrink: 0; }
+    .cheat-text h3 { font-size: 1rem; font-weight: 700; color: var(--c-ink,#F5EDE0); margin-bottom: 3px; }
+    .cheat-text p { font-size: 0.82rem; color: var(--c-ink-muted,#C8B89A); }
+    .cheat-dl { margin-left: auto; background: var(--c-brand,#CC3300); color: #fff;
+      padding: 9px 20px; border-radius: 8px; font-size: 0.82rem; font-weight: 700;
+      white-space: nowrap; transition: background .15s; flex-shrink: 0; text-decoration: none; }
+    .cheat-dl:hover { background: var(--c-brand-dark,#AA2800); }
+
+    </style>
 </head>
 <body>
 
-<nav class="navbar" style="background:#0F0A04 !important; border-bottom-color:rgba(204,51,0,0.2) !important;">
+<nav class="navbar" id="main-nav">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="neetminds logo"/>
-    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
+    <img src="neetminds-logo.png" alt="NEETMINDS"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
-    <div class="nav-links">
-    <a href="practice.html" style="color:#C8B89A">Practice</a>
-    <a href="mock.html" style="color:#C8B89A">Mock Test</a>
-    <a href="methodology.html" style="color:#FF6B1A;font-weight:700">Methodology</a>
-    <a href="about.html" style="color:#C8B89A">About</a>
+  <div class="nav-links">
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="methodology.html" class="active">Methodology</a>
+    <a href="about.html">About</a>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode"><span id="theme-icon">🌙</span></button>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
+  <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="methodology.html" class="active">Methodology</a>
+    <a href="about.html">About</a>
+  <a href="units.html">Units</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
+</div>
   <div style="display:flex;align-items:center;gap:8px;">
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu" style="border-color:rgba(255,255,255,0.15)">
     <span style="background:#F5EDE0"></span><span style="background:#F5EDE0"></span><span style="background:#F5EDE0"></span>
@@ -217,7 +293,7 @@
 <!-- HERO TOP HALF -->
 <section class="meth-hero">
   <div class="meth-eyebrow"><span class="dot"></span> The Framework · How It Works</div>
-  <h1><span>neetminds ™</span><br/><em>Methodology</em></h1>
+  <h1><span>NEETMINDS™</span><br/><em>Methodology</em></h1>
   <p class="meth-hero-sub">
     Every single NEET question belongs to one of 6 patterns. Once you learn to recognise the pattern before reading the options,
     you stop being a student and start being a strategist.
@@ -258,6 +334,16 @@
     These aren't categories. They're weapons. Each pattern has a signature — a recognisable fingerprint in the question stem that tells you exactly how to attack it before you even look at the options.
   </p>
 
+
+  <!-- STATS STRIP -->
+  <div class="meth-stats">
+    <div class="mstat"><div class="mstat-num">7,300+</div><div class="mstat-lbl">Questions in bank</div></div>
+    <div class="mstat"><div class="mstat-num">6</div><div class="mstat-lbl">Recognisable patterns</div></div>
+    <div class="mstat"><div class="mstat-num">3</div><div class="mstat-lbl">Subjects covered</div></div>
+    <div class="mstat"><div class="mstat-num">200</div><div class="mstat-lbl">Questions per mock test</div></div>
+    <div class="mstat"><div class="mstat-num">45%</div><div class="mstat-lbl">Exam covered by Memory Test alone</div></div>
+  </div>
+
   <div class="patterns-grid">
 
     <!-- Memory Test -->
@@ -274,6 +360,22 @@
       <div class="pat-bar-wrap">
         <div class="pat-bar-label"><span>NEET Weightage</span><span>45%</span></div>
         <div class="pat-bar-bg"><div class="pat-bar-fill" style="width:45%"></div></div>
+      
+      <button class="pat-example-toggle" onclick="toggleSnippet('memory_test',this)">
+        <span>See example question</span><span class="arrow">▾</span>
+      </button>
+      <div class="pat-snippet" id="snip-memory_test">
+        <div class="snippet-tag">Sample Memory Test question</div>
+        <div class="snippet-q">Which of the following is NOT a characteristic feature of phylum Annelida?</div>
+        <div class="snippet-opts">
+              <div class="snippet-opt"><strong>A.</strong> Metamerism</div>
+              <div class="snippet-opt"><strong>B.</strong> Closed circulatory system</div>
+              <div class="snippet-opt"><strong>C.</strong> Triploblastic</div>
+              <div class="snippet-opt correct"><strong>D.</strong> Pseudocoelom</div>
+              </div>
+        <div style="font-size:.78rem;color:#9CA3AF;border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:8px;">
+          💡 Annelida have TRUE coelom, not pseudocoelom. Direct NCERT recall — one glance, done.
+        </div>
       </div>
     </div>
 
@@ -291,6 +393,22 @@
       <div class="pat-bar-wrap">
         <div class="pat-bar-label"><span>NEET Weightage</span><span>20%</span></div>
         <div class="pat-bar-bg"><div class="pat-bar-fill" style="width:20%"></div></div>
+      
+      <button class="pat-example-toggle" onclick="toggleSnippet('concept_guru',this)">
+        <span>See example question</span><span class="arrow">▾</span>
+      </button>
+      <div class="pat-snippet" id="snip-concept_guru">
+        <div class="snippet-tag">Sample Concept Guru question</div>
+        <div class="snippet-q">Assertion (A): All enzymes are proteins. Reason (R): Enzymes have specific three-dimensional structure essential for catalysis.</div>
+        <div class="snippet-opts">
+              <div class="snippet-opt"><strong>A.</strong> Both A and R true; R is correct explanation</div>
+              <div class="snippet-opt"><strong>B.</strong> Both A and R true; R is NOT correct explanation</div>
+              <div class="snippet-opt"><strong>C.</strong> A is true, R is false</div>
+              <div class="snippet-opt correct"><strong>D.</strong> A is false, R is true</div>
+              </div>
+        <div style="font-size:.78rem;color:#9CA3AF;border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:8px;">
+          💡 Ribozymes (RNA) are enzymes — so Assertion is false. R is independently true. Evaluate each statement alone.
+        </div>
       </div>
     </div>
 
@@ -308,6 +426,22 @@
       <div class="pat-bar-wrap">
         <div class="pat-bar-label"><span>NEET Weightage</span><span>14%</span></div>
         <div class="pat-bar-bg"><div class="pat-bar-fill" style="width:14%"></div></div>
+      
+      <button class="pat-example-toggle" onclick="toggleSnippet('best_choice',this)">
+        <span>See example question</span><span class="arrow">▾</span>
+      </button>
+      <div class="pat-snippet" id="snip-best_choice">
+        <div class="snippet-tag">Sample Best Choice question</div>
+        <div class="snippet-q">Which of the following BEST describes the role of ATP in cellular reactions?</div>
+        <div class="snippet-opts">
+              <div class="snippet-opt"><strong>A.</strong> Acts as a coenzyme in all reactions</div>
+              <div class="snippet-opt"><strong>B.</strong> Stores genetic information</div>
+              <div class="snippet-opt correct"><strong>C.</strong> Serves as the primary energy currency</div>
+              <div class="snippet-opt"><strong>D.</strong> Catalyses metabolic reactions</div>
+              </div>
+        <div style="font-size:.78rem;color:#9CA3AF;border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:8px;">
+          💡 Eliminate B (DNA) and D (enzymes do this). Between A and C — ATP isn't a coenzyme in ALL reactions. C is more complete and accurate.
+        </div>
       </div>
     </div>
 
@@ -325,6 +459,22 @@
       <div class="pat-bar-wrap">
         <div class="pat-bar-label"><span>NEET Weightage</span><span>10%</span></div>
         <div class="pat-bar-bg"><div class="pat-bar-fill" style="width:10%"></div></div>
+      
+      <button class="pat-example-toggle" onclick="toggleSnippet('negative_charge',this)">
+        <span>See example question</span><span class="arrow">▾</span>
+      </button>
+      <div class="pat-snippet" id="snip-negative_charge">
+        <div class="snippet-tag">Sample Negative Charge question</div>
+        <div class="snippet-q">Which of the following is NOT a function of the liver?</div>
+        <div class="snippet-opts">
+              <div class="snippet-opt"><strong>A.</strong> Synthesis of urea</div>
+              <div class="snippet-opt"><strong>B.</strong> Glycogen storage</div>
+              <div class="snippet-opt correct"><strong>C.</strong> Production of insulin</div>
+              <div class="snippet-opt"><strong>D.</strong> Bile secretion</div>
+              </div>
+        <div style="font-size:.78rem;color:#9CA3AF;border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:8px;">
+          💡 Underline NOT first. A, B, D are all liver functions. Insulin is made by pancreatic β-cells, not liver.
+        </div>
       </div>
     </div>
 
@@ -342,6 +492,22 @@
       <div class="pat-bar-wrap">
         <div class="pat-bar-label"><span>NEET Weightage</span><span>8%</span></div>
         <div class="pat-bar-bg"><div class="pat-bar-fill" style="width:8%"></div></div>
+      
+      <button class="pat-example-toggle" onclick="toggleSnippet('speed_breaker',this)">
+        <span>See example question</span><span class="arrow">▾</span>
+      </button>
+      <div class="pat-snippet" id="snip-speed_breaker">
+        <div class="snippet-tag">Sample Speed Breaker question</div>
+        <div class="snippet-q">Match List I (Ecological pyramid) with List II (characteristic).</div>
+        <div class="snippet-opts">
+              <div class="snippet-opt"><strong>A.</strong> A-III, B-I, C-IV, D-II</div>
+              <div class="snippet-opt correct"><strong>B.</strong> A-II, B-IV, C-I, D-III</div>
+              <div class="snippet-opt"><strong>C.</strong> A-I, B-II, C-III, D-IV</div>
+              <div class="snippet-opt"><strong>D.</strong> A-IV, B-III, C-II, D-I</div>
+              </div>
+        <div style="font-size:.78rem;color:#9CA3AF;border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:8px;">
+          💡 Start with the pairing you're most confident about. Lock it. Eliminate 2–3 options. One more check closes it.
+        </div>
       </div>
     </div>
 
@@ -359,6 +525,22 @@
       <div class="pat-bar-wrap">
         <div class="pat-bar-label"><span>NEET Weightage</span><span>4%</span></div>
         <div class="pat-bar-bg"><div class="pat-bar-fill" style="width:4%"></div></div>
+
+      <button class="pat-example-toggle" onclick="toggleSnippet('diagram_dhamaka',this)">
+        <span>See example question</span><span class="arrow">▾</span>
+      </button>
+      <div class="pat-snippet" id="snip-diagram_dhamaka">
+        <div class="snippet-tag">Sample Diagram Dhamaka question</div>
+        <div class="snippet-q">In the diagram of a nephron, the structure labelled 'X' represents:</div>
+        <div class="snippet-opts">
+          <div class="snippet-opt"><strong>A.</strong> Bowman's capsule</div>
+          <div class="snippet-opt"><strong>B.</strong> Loop of Henle</div>
+          <div class="snippet-opt correct"><strong>C.</strong> Proximal convoluted tubule ✓</div>
+          <div class="snippet-opt"><strong>D.</strong> Collecting duct</div>
+        </div>
+        <div style="font-size:.78rem;color:#9CA3AF;border-top:1px solid rgba(255,255,255,.07);padding-top:8px;margin-top:8px;">
+          💡 Know your NCERT diagrams cold. The PCT is the first convoluted section after Bowman's capsule — drawn from memory, this is instant.
+        </div>
       </div>
     </div>
 
@@ -386,6 +568,17 @@
     </div>
   </div>
 
+
+  <!-- CHEATSHEET CTA -->
+  <div class="cheatsheet-cta" onclick="window.print()">
+    <div class="cheat-icon">📋</div>
+    <div class="cheat-text">
+      <h3>Pattern Recognition Cheatsheet</h3>
+      <p>One-page reference: 6 patterns, 6 strategies, time limits per pattern. Print and keep at your desk.</p>
+    </div>
+    <span class="cheat-dl">🖨 Print / Save as PDF</span>
+  </div>
+
   <!-- CTA -->
   <div class="meth-cta">
     <h2>Ready to Stop Memorising<br/>and Start Strategising?</h2>
@@ -398,13 +591,69 @@
 
 </div><!-- /method-body -->
 
-<footer class="neeto-footer" style="background:#0F0A04;border-top-color:rgba(255,255,255,0.08);color:#9CA3AF">
-  <div class="footer-brand">
-    <img src="neetminds-logo.png" alt="neetminds logo"/>
-    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
+<footer class="neeto-footer">
+  <div class="footer-content">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img src="neetminds-logo.png" alt="NEETMINDS"/>
+        <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;letter-spacing:-0.04em;">
+          <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
+        </span>
+      </div>
+      <p class="footer-tagline">Pattern-based NEET prep.<br/>Train smarter, not harder.</p>
+    </div>
+    <div class="footer-links-col">
+      <p class="footer-col-head">Platform</p>
+      <a href="practice.html">Practice</a>
+      <a href="mock.html">Mock Test</a>
+      <a href="units.html">Units</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <div class="footer-links-col">
+      <p class="footer-col-head">Learn</p>
+      <a href="methodology.html">Methodology</a>
+      <a href="about.html">About</a>
+    </div>
   </div>
-  <p>A neetminds ™ product · Built by cognitive performance scientists, doctors, engineers &amp; teachers.</p>
+  <div class="footer-bottom">
+    <span>© 2026 NEETMINDS™. All rights reserved. For educational use only.</span>
+    <span class="footer-disclaimer">Questions sourced from NCERT &amp; past NEET papers.</span>
+  </div>
 </footer>
 
+<script>
+function updateThemeUI() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var icon = isDark ? '☀️' : '🌙';
+  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.textContent = icon;
+  });
+  var lbl = document.getElementById('mob-theme-label');
+  if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+}
+function toggleTheme() {
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('nm_theme', next); } catch(e) {}
+  updateThemeUI();
+}
+document.addEventListener('DOMContentLoaded', updateThemeUI);
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mmenu');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
+
+<script>
+function toggleSnippet(id, btn) {
+  var el = document.getElementById('snip-' + id);
+  if (!el) return;
+  var isOpen = el.classList.contains('visible');
+  el.classList.toggle('visible', !isOpen);
+  btn.classList.toggle('open', !isOpen);
+}
+</script>
 </body>
 </html>

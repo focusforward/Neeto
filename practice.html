@@ -228,45 +228,216 @@ html, body {
   #questions-container { padding: 16px 16px 80px; }
   .recommended-card { padding: 12px 16px; }
 }
+
+/* ═══ PRACTICE HERO ═════════════════════════════════════════ */
+.practice-hero {
+  background: var(--header-bg);
+  border-bottom: 1.5px solid var(--c-border);
+  padding: 2.5rem 20px 2rem;
+  transition: background .3s, border-color .3s;
+}
+.practice-hero-inner {
+  max-width: 960px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 40px; align-items: center;
+}
+.hero-badge {
+  display: inline-block; font-size: .72rem; font-weight: 800;
+  background: rgba(204,51,0,.1); border: 1px solid rgba(204,51,0,.2);
+  color: var(--c-brand); border-radius: 100px; padding: 3px 12px;
+  text-transform: uppercase; letter-spacing: .08em; margin-bottom: .8rem;
+}
+.practice-hero-text h1 {
+  font-family: 'Fraunces', serif; font-weight: 900;
+  font-size: clamp(1.6rem, 3.5vw, 2.4rem); letter-spacing: -.03em;
+  color: var(--c-ink); margin-bottom: .7rem; line-height: 1.2;
+}
+.practice-hero-text h1 em { color: var(--c-brand); font-style: normal; }
+.practice-hero-text p { font-size: .92rem; color: var(--c-ink-muted); line-height: 1.7; margin-bottom: 1.2rem; }
+.practice-hero-text p strong { color: var(--c-ink); }
+.hero-stats { display: flex; gap: 20px; }
+.hstat { display: flex; flex-direction: column; }
+.hstat-num { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900;
+  color: var(--c-brand); line-height: 1; }
+.hstat-lbl { font-size: .72rem; color: var(--c-ink-muted); font-weight: 600;
+  text-transform: uppercase; letter-spacing: .06em; margin-top: 2px; }
+.practice-hero-patterns {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.hp-card {
+  background: var(--c-surface); border: 1.5px solid var(--c-border);
+  border-radius: 12px; padding: 14px 12px; cursor: pointer;
+  display: flex; flex-direction: column; align-items: center; text-align: center; gap: 5px;
+  transition: all .2s; box-shadow: var(--shadow-xs);
+}
+.hp-card:hover {
+  border-color: var(--c-brand-mid); background: var(--c-surface-2);
+  transform: translateY(-2px); box-shadow: var(--shadow-sm);
+}
+.hp-icon { font-size: 1.3rem; }
+.hp-name { font-size: .78rem; font-weight: 700; color: var(--c-ink); line-height: 1.3; }
+.hp-pct { font-size: .68rem; color: var(--c-ink-muted); }
+@media(max-width:720px) {
+  .practice-hero-inner { grid-template-columns: 1fr; gap: 24px; }
+  .practice-hero-patterns { grid-template-columns: repeat(3, 1fr); }
+}
+@media(max-width:420px) {
+  .practice-hero-patterns { grid-template-columns: repeat(2, 1fr); }
+}
+
+
+/* ── SUBJECT TABS ──────────────────────────────────────────── */
+.subject-tabs {
+  display: flex; gap: 8px; padding: 12px 20px;
+  background: var(--c-surface,#fff); border-bottom: 1.5px solid var(--c-border,#F0E8DE);
+  overflow-x: auto; scrollbar-width: none;
+}
+.subject-tabs::-webkit-scrollbar { display: none; }
+.subj-tab {
+  display: flex; align-items: center; gap: 6px;
+  padding: 7px 18px; border-radius: 100px;
+  border: 1.5px solid var(--c-border,#F0E8DE);
+  background: var(--c-surface,#fff); color: var(--c-ink-muted,#6B5C45);
+  font-size: .82rem; font-weight: 600; cursor: pointer;
+  font-family: 'DM Sans', sans-serif; white-space: nowrap;
+  transition: all .15s; flex-shrink: 0;
+}
+.subj-tab:hover { border-color: var(--c-brand-mid,#FF6B1A); color: var(--c-brand-mid,#FF6B1A); }
+.subj-tab.active {
+  background: var(--c-brand,#CC3300); border-color: var(--c-brand,#CC3300);
+  color: #fff !important; box-shadow: 0 2px 10px rgba(204,51,0,.3);
+}
+
+/* ── PRACTICE PROGRESS STRIP ──────────────────────────────── */
+.practice-progress-strip {
+  background: var(--c-surface-2,#FFF8F3);
+  border-bottom: 1.5px solid var(--c-border,#F0E8DE);
+  padding: 10px 20px;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  font-size: .8rem; color: var(--c-ink-muted,#6B5C45);
+  transition: background .3s;
+}
+.pps-stat { display: flex; align-items: center; gap: 6px; font-weight: 600; }
+.pps-val { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 900; color: var(--c-brand,#CC3300); }
+.pps-streak { display: flex; align-items: center; gap: 4px; }
+.pps-streak span { font-size: .9rem; }
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="navbar">
+<nav class="navbar" id="main-nav">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS">
+    <img src="neetminds-logo.png" alt="NEETMINDS"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
     <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock Test</a>
-    <a href="units.html">Units</a>
-    <a href="analytics.html">Progress</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode"><span id="theme-icon">🌙</span></button>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-      <span id="theme-icon">🌙</span>
-    </button>
-    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
 </nav>
-
-<div class="nav-mobile-menu" id="mob-nav">
+<div class="nav-mobile-menu" id="mmenu">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;">
-      <span id="mob-theme-icon2">🌙</span>
-    </button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
+  <a href="index.html">Home</a>
+    <a href="practice.html" class="active">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+  <a href="units.html">Units</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
+</div>
   <a href="index.html">Home</a>
   <a href="practice.html" class="active">Practice</a>
   <a href="mock.html">Mock Test</a>
   <a href="units.html">Units</a>
   <a href="analytics.html">Progress</a>
+</div>
+
+<!-- PRACTICE HERO -->
+<section class="practice-hero">
+  <div class="practice-hero-inner">
+    <div class="practice-hero-text">
+      <span class="hero-badge">🎯 Pattern-Based Training</span>
+      <h1>Practice the <em>right way</em></h1>
+      <p>NEET has just <strong>6 question patterns</strong> that appear in every paper, every year. Identify which pattern is being tested — and you'll know exactly how to attack it.</p>
+      <div class="hero-stats">
+        <div class="hstat"><span class="hstat-num">7,300+</span><span class="hstat-lbl">Questions</span></div>
+        <div class="hstat"><span class="hstat-num">6</span><span class="hstat-lbl">Patterns</span></div>
+        <div class="hstat"><span class="hstat-num">3</span><span class="hstat-lbl">Subjects</span></div>
+      </div>
+    </div>
+    <div class="practice-hero-patterns">
+      <div class="hp-card" onclick="setPattern('memory_test')">
+        <span class="hp-icon">🎯</span>
+        <span class="hp-name">Memory Test</span>
+        <span class="hp-pct">~45% of exam</span>
+      </div>
+      <div class="hp-card" onclick="setPattern('negative_charge')">
+        <span class="hp-icon">⚡</span>
+        <span class="hp-name">Negative Charge</span>
+        <span class="hp-pct">NOT / EXCEPT</span>
+      </div>
+      <div class="hp-card" onclick="setPattern('concept_guru')">
+        <span class="hp-icon">🌀</span>
+        <span class="hp-name">Concept Guru</span>
+        <span class="hp-pct">Assertion-Reason</span>
+      </div>
+      <div class="hp-card" onclick="setPattern('speed_breaker')">
+        <span class="hp-icon">⛔</span>
+        <span class="hp-name">Speed Breaker</span>
+        <span class="hp-pct">Match / Sequence</span>
+      </div>
+      <div class="hp-card" onclick="setPattern('diagram_dhamaka')">
+        <span class="hp-icon">🖼️</span>
+        <span class="hp-name">Diagram Dhamaka</span>
+        <span class="hp-pct">Visual questions</span>
+      </div>
+      <div class="hp-card" onclick="setPattern('best_choice')">
+        <span class="hp-icon">🔽</span>
+        <span class="hp-name">Best Choice</span>
+        <span class="hp-pct">Eliminate options</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- SUBJECT TABS -->
+<div class="subject-tabs" id="subject-tabs">
+  <button class="subj-tab active" data-subj="" onclick="setSubject(this,'')">🔬 All Subjects</button>
+  <button class="subj-tab" data-subj="Biology" onclick="setSubject(this,'Biology')">🌿 Biology</button>
+  <button class="subj-tab" data-subj="Chemistry" onclick="setSubject(this,'Chemistry')">🧪 Chemistry</button>
+  <button class="subj-tab" data-subj="Physics" onclick="setSubject(this,'Physics')">⚛️ Physics</button>
+</div>
+
+<!-- PROGRESS STRIP -->
+<div class="practice-progress-strip" id="progress-strip">
+  <div class="pps-stat">
+    <span>Session:</span>
+    <span class="pps-val" id="ps-answered">0</span>
+    <span>answered</span>
+  </div>
+  <div class="pps-stat">
+    <span>🔥 Streak:</span>
+    <span class="pps-val" id="ps-streak">0</span>
+  </div>
+  <div class="pps-stat">
+    <span>✓ Correct:</span>
+    <span class="pps-val" id="ps-correct">0</span>
+  </div>
+  <div style="margin-left:auto;font-size:.75rem;opacity:.6;">Resets on page refresh</div>
 </div>
 
 <!-- PAGE HEADER -->
@@ -326,66 +497,91 @@ html, body {
 </div>
 
 <footer class="neeto-footer">
-  <div class="footer-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS">
-    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
+  <div class="footer-content">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img src="neetminds-logo.png" alt="NEETMINDS"/>
+        <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;letter-spacing:-0.04em;">
+          <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
+        </span>
+      </div>
+      <p class="footer-tagline">Pattern-based NEET prep.<br/>Train smarter, not harder.</p>
+    </div>
+    <div class="footer-links-col">
+      <p class="footer-col-head">Platform</p>
+      <a href="practice.html">Practice</a>
+      <a href="mock.html">Mock Test</a>
+      <a href="units.html">Units</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <div class="footer-links-col">
+      <p class="footer-col-head">Learn</p>
+      <a href="methodology.html">Methodology</a>
+      <a href="about.html">About</a>
+    </div>
   </div>
-  <p>© 2026 NEETMINDS™. All rights reserved.</p>
+  <div class="footer-bottom">
+    <span>© 2026 NEETMINDS™. All rights reserved. For educational use only.</span>
+    <span class="footer-disclaimer">Questions sourced from NCERT &amp; past NEET papers.</span>
+  </div>
 </footer>
 
-<script src="js/app.js?v=14"></script>
+<script src="js/app.js?v=15"></script>
 <script>
-// ── THEME SYSTEM ─────────────────────────────────────────────────
 function updateThemeUI() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   var icon = isDark ? '☀️' : '🌙';
-  var el = document.getElementById('theme-icon');
-  var el2 = document.getElementById('mob-theme-icon');
-  var el3 = document.getElementById('mob-theme-icon2');
+  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.textContent = icon;
+  });
   var lbl = document.getElementById('mob-theme-label');
-  if (el)  el.textContent  = icon;
-  if (el2) el2.textContent = icon;
-  if (el3) el3.textContent = icon;
   if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
 }
-
 function toggleTheme() {
-  var current = document.documentElement.getAttribute('data-theme');
-  var next = (current === 'dark') ? 'light' : 'dark';
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
   document.documentElement.setAttribute('data-theme', next);
-  localStorage.setItem('nm_theme', next);
+  try { localStorage.setItem('nm_theme', next); } catch(e) {}
   updateThemeUI();
 }
-
-// Update icon on page load
 document.addEventListener('DOMContentLoaded', updateThemeUI);
-
-// ── NAV ───────────────────────────────────────────────────────────
-function toggleNav() {
-  document.getElementById('mob-nav').classList.toggle('open');
-}
 document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav');
+  var m = document.getElementById('mmenu');
   var b = document.querySelector('.nav-hamburger');
   if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
     m.classList.remove('open');
 });
 
-// ── PATTERN PILLS ────────────────────────────────────────────────
-function setPattern(val) {
-  // Update dropdown
+function setPattern(pattern) {
   var sel = document.getElementById('filter-pattern');
-  if (sel) { sel.value = val; sel.dispatchEvent(new Event('change')); }
-
-  // Update active pill — use data-pattern attribute (no regex parsing needed)
-  document.querySelectorAll('.pattern-pill').forEach(function(btn) {
-    btn.classList.toggle('active', btn.getAttribute('data-pattern') === val);
-  });
-
-  // Scroll to questions
-  var container = document.getElementById('questions-container');
-  if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  if (sel) { sel.value = pattern; sel.dispatchEvent(new Event('change')); }
+  // Scroll to questions area
+  var qc = document.getElementById('questions-container');
+  if (qc) qc.scrollIntoView({behavior:'smooth', block:'start'});
 }
+
+// Subject tabs
+function setSubject(btn, subj) {
+  document.querySelectorAll('.subj-tab').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  var sel = document.getElementById('filter-subject');
+  if (sel) { sel.value = subj; sel.dispatchEvent(new Event('change')); }
+}
+
+// Progress tracker
+var sessionAnswered = 0, sessionCorrect = 0, sessionStreak = 0;
+var lastWasCorrect = false;
+function updateProgress(isCorrect) {
+  sessionAnswered++;
+  if (isCorrect) { sessionCorrect++; if (lastWasCorrect) sessionStreak++; else sessionStreak = 1; }
+  else { sessionStreak = 0; }
+  lastWasCorrect = isCorrect;
+  var el = document.getElementById('ps-answered'); if (el) el.textContent = sessionAnswered;
+  var el2 = document.getElementById('ps-correct'); if (el2) el2.textContent = sessionCorrect;
+  var el3 = document.getElementById('ps-streak'); if (el3) el3.textContent = sessionStreak;
+}
+// Hook into app.js answer event
+window._practiceAnswered = function(isCorrect) { updateProgress(isCorrect); };
+
 </script>
 
 </body>

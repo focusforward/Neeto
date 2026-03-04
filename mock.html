@@ -25,6 +25,9 @@
 </script>
 
 <style>
+/* ── GLOBAL BUTTON FOCUS RESET ── */
+*:focus{outline:none;}
+button:focus,button:focus-visible,button:active{outline:none!important;box-shadow:none!important;}
 /* ── RESET ── */
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
 
@@ -150,8 +153,27 @@ html,body{
   padding:.7rem 1rem;border:1.5px solid var(--c-border,#F0E8DE);
   border-radius:10px;cursor:pointer;font-size:.92rem;
   color:var(--c-ink);background:var(--c-surface,#fff);
-  transition:all .15s;text-align:left;width:100%;
+  transition:background .15s,border-color .15s,color .15s,opacity .15s;
+  text-align:left;width:100%;
   font-family:'DM Sans',sans-serif;line-height:1.55;
+  -webkit-tap-highlight-color:transparent !important;
+  -webkit-appearance:none !important;
+  appearance:none !important;
+  outline:none !important;
+  user-select:none;-webkit-user-select:none;
+}
+.mock-opt:focus,.mock-opt:focus-visible,.mock-opt:focus-within{
+  outline:none !important;
+  box-shadow:none !important;
+}
+.mock-opt:active{
+  background:var(--c-surface-2,#FFF8F3) !important;
+  border-color:var(--c-brand,#FF6B1A) !important;
+  outline:none !important;
+}
+.mock-opt[data-done="1"] { pointer-events:none !important; cursor:default !important; }
+.mock-opt[data-done="1"]:active,.mock-opt[data-done="1"]:focus {
+  outline:none !important; box-shadow:none !important;
 }
 .mock-opt:not([disabled]):hover{
   border-color:var(--c-brand,#FF6B1A);
@@ -288,6 +310,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 
 .mock-opt:focus { outline: none; }
 .mock-opt:focus-visible { outline: 2px solid var(--c-brand, #FF6B1A); }
+.mock-opt:active:not([disabled]) { background:var(--c-surface-2,#FFF8F3) !important; border-color:var(--c-brand,#FF6B1A) !important; }
 
 /* ── DARK MODE MOCK-SPECIFIC OVERRIDES ── */
 [data-theme="dark"] #start-screen {
@@ -330,7 +353,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 <body>
 
 <!-- ══ NAV ══════════════════════════════════════════════════════ -->
-<nav class="navbar">
+<nav class="navbar" id="main-nav">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
@@ -340,8 +363,29 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
     <a href="mock.html" class="active">Mock Test</a>
     <a href="methodology.html">Methodology</a>
     <a href="about.html">About</a>
+    <button class="theme-toggle" onclick="toggleTheme()" title="Toggle dark mode"><span id="theme-icon">🌙</span></button>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
+  <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html" class="active">Mock Test</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+  <a href="units.html">Units</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
+</div>
   <div style="display:flex;align-items:center;gap:8px;">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
       <span id="theme-icon">🌙</span>
@@ -436,11 +480,33 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 </div>
 
 <footer class="neeto-footer">
-  <div class="footer-brand">
-    <img src="neetminds-logo.png" style="height:28px;object-fit:contain;border-radius:0;" alt="NEETMINDS"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  <div class="footer-content">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img src="neetminds-logo.png" alt="NEETMINDS"/>
+        <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;letter-spacing:-0.04em;">
+          <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
+        </span>
+      </div>
+      <p class="footer-tagline">Pattern-based NEET prep.<br/>Train smarter, not harder.</p>
+    </div>
+    <div class="footer-links-col">
+      <p class="footer-col-head">Platform</p>
+      <a href="practice.html">Practice</a>
+      <a href="mock.html">Mock Test</a>
+      <a href="units.html">Units</a>
+      <a href="analytics.html">Analytics</a>
+    </div>
+    <div class="footer-links-col">
+      <p class="footer-col-head">Learn</p>
+      <a href="methodology.html">Methodology</a>
+      <a href="about.html">About</a>
+    </div>
   </div>
-  <p>© 2026 NEETMINDS™. All rights reserved.</p>
+  <div class="footer-bottom">
+    <span>© 2026 NEETMINDS™. All rights reserved. For educational use only.</span>
+    <span class="footer-disclaimer">Questions sourced from NCERT &amp; past NEET papers.</span>
+  </div>
 </footer>
 
 <script>
@@ -683,9 +749,10 @@ function renderQuestion(idx){
       else if(k===ans)      cls+=' mo-wrong';
       else                  cls+=' mo-dim';
     }
-    var dis=(testDone||!!ans)?'disabled':'';
+    var isDone=(testDone||!!ans);
     optsHTML+='<button class="'+cls+'" id="opt-'+idx+'-'+k+'"'
-      +' data-key="'+k+'" '+dis
+      +' data-key="'+k+'"'
+      +(isDone?' data-done="1" style="pointer-events:none;cursor:default;"':'')
       +' onclick="mockSelect('+idx+',\''+k+'\')">'
       +'<span class="opt-key">'+k+'.</span> '+esc(val)
       +'</button>';
@@ -764,7 +831,9 @@ function mockSelect(qidx,key){
     if(k===correct)        btn.classList.add('mo-correct');
     else if(k===key)       btn.classList.add('mo-wrong');
     else                   btn.classList.add('mo-dim');
-    btn.disabled=true;
+    btn.dataset.done='1';
+    btn.style.pointerEvents='none';
+    btn.style.cursor='default';
   });
 
   // Show explanation
