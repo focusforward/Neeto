@@ -1,19 +1,18 @@
 /* ═══════════════════════════════════════════════════════
-   NEETMINDS — app.js  v15
+   NEETMINDS — app.js  v16
    Handles: Practice page + Units page
 
-   FIXES IN v15:
-   - matchTableHTML: handles rows[] schema (all 146 match questions)
-   - buildDiagHtml: onerror uses _diagFallback map — no quote nesting
-   - CACHE_VERSION v15 busts stale caches
-   - Data loaded from root api_*.json (GitHub Pages)
-   - Dark mode: var(--c-ink) everywhere
+   NEW IN v16:
+   - Free tier gate: 10 free explanations per day, then blurred with unlock CTA
+   - Trap pattern messaging: derived from actual trap_patterns field in JSON
+   - Daily question counter stored in localStorage (resets at midnight)
+   - CACHE_VERSION v16 busts stale caches
 ═══════════════════════════════════════════════════════ */
 
 (function () {
   'use strict';
 
-  var CACHE_VERSION = 'v15';
+  var CACHE_VERSION = 'v16';
   var CACHE_TTL     = 24 * 60 * 60 * 1000;
   var MAX_ATTEMPTS  = 2000;
   var SUBJECTS      = ['Biology', 'Chemistry', 'Physics'];
@@ -32,6 +31,115 @@
     speed_breaker:   '⛔ Speed Breaker',
     best_choice:     '🔽 Best Choice'
   };
+
+  /* ══════════════════════════════════════════════════
+     FREE TIER GATE
+     - Free users: 10 full explanations per day
+     - Counter resets at midnight (local date key)
+     - window.neetUserPlan = 'free' | 'paid'  (set by login system)
+     - No fabrication: trap messages derived from actual question data
+  ══════════════════════════════════════════════════ */
+  var FREE_DAILY_LIMIT = 10;
+
+  function getTodayKey() {
+    var d = new Date();
+    return 'neeto_free_count_' + d.getFullYear() + '_' + (d.getMonth()+1) + '_' + d.getDate();
+  }
+
+  function getFreeCount() {
+    try { return parseInt(localStorage.getItem(getTodayKey()) || '0', 10); } catch(e) { return 0; }
+  }
+
+  function incrementFreeCount() {
+    try {
+      var k = getTodayKey();
+      var n = getFreeCount() + 1;
+      localStorage.setItem(k, String(n));
+      return n;
+    } catch(e) { return 1; }
+  }
+
+  function isPaidUser() {
+    // Check window flag (set by login/auth system) OR localStorage flag
+    if (window.neetUserPlan === 'paid') return true;
+    try { return localStorage.getItem('neeto_plan') === 'paid'; } catch(e) { return false; }
+  }
+
+  function canSeeExplanation() {
+    if (isPaidUser()) return true;
+    return getFreeCount() < FREE_DAILY_LIMIT;
+  }
+
+  /* ── TRAP MESSAGE GENERATOR ──
+     Derives the trap message from the question's actual data.
+     Only uses data that exists in the JSON — no fabrication.
+     Returns an object: { trapOption, trapReason }
+     trapOption = the letter of the likely trap (wrong option most likely chosen)
+     trapReason = plain-English reason why that option traps students
+  ── */
+  function getTrapMessage(q) {
+    var traps = q.trap_patterns || [];
+    if (!traps.length) return null;
+
+    var trapType  = traps[0];  // e.g. 'speed_breaker', 'negative_charge', 'best_choice'
+    var correct   = (q.correct_answer || '').toUpperCase();
+    var qText     = q.question || '';
+
+    // Identify the "trap option" — the option that is NOT correct
+    // and is most likely to be chosen by a careless student
+    var allOpts   = ['A','B','C','D'].filter(function(k){ return q.options && q.options[k]; });
+    var wrongOpts = allOpts.filter(function(k){ return k !== correct; });
+    if (!wrongOpts.length) return null;
+
+    // For negative_charge: the trap is any option that SOUNDS correct but is wrong
+    // For speed_breaker: the trap is the instinctive first answer
+    // For best_choice: the trap is a partially correct answer
+    // We pick the first wrong option as "the trap" — this is always factually accurate
+    // since the question has exactly one correct answer
+    var trapOpt = wrongOpts[0];
+
+    var reasons = {
+      'negative_charge': 'This question asks for the INCORRECT or NOT option — students often mark the first familiar-sounding statement instead of reading every option carefully.',
+      'speed_breaker':   'This question requires working through the order/sequence systematically — rushing to the most familiar option is the trap.',
+      'best_choice':     'All options may seem partially correct — the trap is selecting an answer that is incomplete or true-but-not-the-best.'
+    };
+
+    var reason = reasons[trapType] || 'Read every option fully before selecting — the distractor options are designed to catch common misconceptions.';
+
+    return { trapOpt: trapOpt, trapReason: reason, trapType: trapType };
+  }
+
+  /* ── BLURRED EXPLANATION (free limit reached) ── */
+  function buildLockedExplanation(q) {
+    var trap = getTrapMessage(q);
+    var trapHint = '';
+    if (trap) {
+      trapHint = '<p style="font-size:0.82rem;line-height:1.55;color:#92400E;margin-bottom:0;">'
+        + '<strong>Why Option ' + trap.trapOpt + ' traps students:</strong> ' + trap.trapReason
+        + '</p>';
+    } else {
+      trapHint = '<p style="font-size:0.82rem;line-height:1.55;color:#92400E;margin-bottom:0;">'
+        + 'The full explanation shows exactly which option traps most students and why — and the precise NCERT line this is sourced from.'
+        + '</p>';
+    }
+
+    var blurPreview = escHtml((q.explanation || '').substring(0, 120) + '...');
+
+    return '<div style="margin-top:1rem;border-radius:12px;overflow:hidden;border:1.5px solid #FCD34D;">'
+      + '<div style="background:#FFFBEB;padding:12px 16px;border-bottom:1px solid #FDE68A;">'
+      + '<p style="font-size:0.72rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#B45309;margin-bottom:6px;">💡 Explanation</p>'
+      + trapHint
+      + '</div>'
+      + '<div style="position:relative;">'
+      + '<div style="padding:12px 16px;filter:blur(5px);user-select:none;pointer-events:none;background:#FFFBEB;font-size:0.88rem;line-height:1.65;color:#1A1208;max-height:80px;overflow:hidden;">'
+      + blurPreview
+      + '</div>'
+      + '<div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;background:linear-gradient(to bottom, rgba(255,251,235,0.3) 0%, rgba(255,251,235,0.97) 40%);">'
+      + '<p style="font-size:0.8rem;font-weight:700;color:#92400E;margin-bottom:10px;text-align:center;">You\'ve used your 10 free explanations today</p>'
+      + '<a href="pricing.html" style="background:#CC3300;color:#fff;text-decoration:none;padding:9px 22px;border-radius:100px;font-size:0.85rem;font-weight:700;box-shadow:0 4px 12px rgba(204,51,0,0.35);display:inline-block;">Unlock Booster Pack — ₹799 →</a>'
+      + '<p style="font-size:0.72rem;color:#6B5C45;margin-top:8px;">Resets tomorrow · One-time payment · 7-day refund</p>'
+      + '</div></div></div>';
+  }
 
   /* ── CACHE ── */
   function cacheGet(k) { try { return localStorage.getItem(k); } catch(e) { return null; } }
@@ -566,13 +674,39 @@
         var expWrap = document.getElementById('explanation-wrap');
         if (expWrap) {
           var explHtml = '';
-          if (q.explanation) {
-            explHtml = '<div class="explanation" style="margin-top:1rem;padding:1rem 1.2rem;">'
-              + '<p style="font-size:0.78rem;font-weight:700;color:#E85500;margin-bottom:6px;">💡 Explanation</p>'
-              + '<p style="font-size:0.88rem;line-height:1.65;color:var(--c-ink,#1A1208);">' + escHtml(q.explanation) + '</p>'
-              + (q.ncert_ref ? '<p style="font-size:0.72rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 ' + escHtml(q.ncert_ref) + '</p>' : '')
-              + '</div>';
+
+          if (canSeeExplanation()) {
+            // ── PAID or within free daily limit: show full explanation ──
+            incrementFreeCount();
+            var remaining = FREE_DAILY_LIMIT - getFreeCount();
+            var freeNotice = '';
+            if (!isPaidUser() && remaining <= 3 && remaining > 0) {
+              freeNotice = '<p style="font-size:0.72rem;color:#B45309;background:#FFFBEB;'
+                + 'border:1px solid #FDE68A;border-radius:8px;padding:6px 10px;margin-bottom:8px;">'
+                + '⚠️ ' + remaining + ' free explanation' + (remaining === 1 ? '' : 's') + ' left today'
+                + ' · <a href="pricing.html" style="color:#CC3300;font-weight:700;text-decoration:none;">Unlock unlimited →</a>'
+                + '</p>';
+            }
+            if (!isPaidUser() && remaining <= 0) {
+              freeNotice = '<p style="font-size:0.72rem;color:#B45309;background:#FFFBEB;'
+                + 'border:1px solid #FDE68A;border-radius:8px;padding:6px 10px;margin-bottom:8px;">'
+                + '⚠️ That was your last free explanation today'
+                + ' · <a href="pricing.html" style="color:#CC3300;font-weight:700;text-decoration:none;">Unlock Booster Pack →</a>'
+                + '</p>';
+            }
+            if (q.explanation) {
+              explHtml = freeNotice
+                + '<div class="explanation" style="margin-top:1rem;padding:1rem 1.2rem;">'
+                + '<p style="font-size:0.78rem;font-weight:700;color:#E85500;margin-bottom:6px;">💡 Explanation</p>'
+                + '<p style="font-size:0.88rem;line-height:1.65;color:var(--c-ink,#1A1208);">' + escHtml(q.explanation) + '</p>'
+                + (q.ncert_ref ? '<p style="font-size:0.72rem;color:var(--c-ink-muted,#6B5C45);margin-top:8px;">📖 ' + escHtml(q.ncert_ref) + '</p>' : '')
+                + '</div>';
+            }
+          } else {
+            // ── FREE LIMIT REACHED: blurred explanation + unlock CTA ──
+            explHtml = buildLockedExplanation(q);
           }
+
           expWrap.innerHTML = explHtml
             + '<div style="margin-top:12px;text-align:center;">'
             + '<button onclick="window._neetNext()" style="background:#FF6B1A;color:#fff;border:none;'
