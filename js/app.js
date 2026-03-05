@@ -398,8 +398,7 @@
       var optsHtml = ['A','B','C','D'].map(function(k) {
         var val = q.options && q.options[k] ? q.options[k] : '';
         if (!val) return '';
-        return '<button class="neeto-opt" data-key="' + k + '" onclick="window._neetAnswer(this)"'
-          + ' style="display:block;width:100%;text-align:left;box-sizing:border-box;">'
+        return '<button class="neeto-opt" data-key="' + k + '" onclick="window._neetAnswer(this)" style="display:block;width:100%;text-align:left;box-sizing:border-box;">'
           + '<span class="opt-label">' + k + '.</span> ' + escHtml(val) + '</button>';
       }).join('');
 
