@@ -365,7 +365,34 @@ html, body {
 .brand-neet  { color: #CC3300; }
 .brand-minds { color: #FF6B1A; }
 .brand-tm    { color: #CC3300; font-size: 0.38em; position: relative; top: -1.5em; margin-left: 1px; vertical-align: baseline; line-height: 0; }
-</style>
+
+    /* Match question notice */
+    .match-notice {
+      background: #FFF7E6; border: 1.5px solid #F59E0B;
+      border-radius: 10px; padding: 10px 14px;
+      font-size: 0.82rem; font-weight: 600; color: #92400E;
+      margin-bottom: 10px;
+    }
+    /* Match table locked styles */
+    .match-table-wrap {
+      width: 100%; border-radius: 10px; overflow: hidden;
+      border: 1.5px solid #E8DDD0; margin-bottom: 14px;
+    }
+    .match-table-head {
+      display: grid; grid-template-columns: 1fr 1fr;
+      background: #1A1208; color: #fff;
+      font-size: 0.75rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.08em;
+    }
+    .match-table-head span { padding: 8px 14px; }
+    .match-table-row {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-top: 1px solid #F0E8DE;
+    }
+    .match-table-row:nth-child(even) { background: #FFF7F0; }
+    .match-cell { padding: 10px 14px; font-size: 0.87rem; line-height: 1.5; color: #1A1208; }
+    .match-key { font-weight: 700; color: #CC3300; margin-right: 6px; }
+  </style>
 </head>
 <body>
 
@@ -516,7 +543,7 @@ html, body {
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
         <li><a href="#">Refund Policy</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#086571666d6d7c6561666c7b486f65696164266b6765">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -526,12 +553,12 @@ html, body {
     <div class="footer-legal">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#4e2337202b2b3a2327202a3d0e29232f2722602d2123">Contact</a>
     </div>
   </div>
 </footer>
 
-<script src="js/app.js?v=14"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/app.js?v=14"></script>
 <script>
 // ── THEME SYSTEM ─────────────────────────────────────────────────
 function updateThemeUI() {
@@ -590,12 +617,4 @@ function setPattern(val) {
 <script>
 // Sticky nav shadow on scroll
 (function(){
-  var nav = document.querySelector('nav.navbar');
-  if(!nav) return;
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, {passive:true});
-})();
-</script>
-</body>
-</html>
+  var nav = document.querySelector
