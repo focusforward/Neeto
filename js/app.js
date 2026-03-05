@@ -398,7 +398,7 @@
       var optsHtml = ['A','B','C','D'].map(function(k) {
         var val = q.options && q.options[k] ? q.options[k] : '';
         if (!val) return '';
-        return '<button class="neeto-opt" data-key="' + k + '" onclick="window._neetAnswer(this)" style="display:block;width:100%;text-align:left;box-sizing:border-box;">'
+        return '<button class="neeto-opt" data-key="' + k + '" onclick="window._neetAnswer(this)">'
           + '<span class="opt-label">' + k + '.</span> ' + escHtml(val) + '</button>';
       }).join('');
 
@@ -436,7 +436,7 @@
         formatQText(q.question || ''),
         hasTable ? matchTableHTML(q.match_table) : '',
         buildDiagHtml(q),
-        '<div id="options-wrap" style="display:flex;flex-direction:column;gap:8px;width:100%;">' + optsHtml + '</div>',
+        '<div id="options-wrap">' + optsHtml + '</div>',
         '<div id="explanation-wrap"></div>',
         '</div>',
 
