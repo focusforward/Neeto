@@ -76,19 +76,40 @@
     }
 
     /* STAT BAR */
-    .hero-statbar {
-      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
-      gap: 8px 10px; margin-bottom: 36px;
-      font-size: 0.85rem; font-weight: 500; color: #5C4A30;
+    /* RANK COUNTER */
+    .rank-counter-wrap {
+      margin-bottom: 36px;
+      display: flex; flex-direction: column; align-items: center; gap: 2px;
     }
-    .stat-pill {
-      background: #1A1208; color: #FF8C4A;
-      padding: 4px 12px; border-radius: 100px;
-      font-weight: 700; font-size: 0.82rem;
-      letter-spacing: 0.01em;
+    .rank-counter-label {
+      font-size: 1rem; font-weight: 700;
+      transition: color 0.5s;
+      margin-bottom: 4px;
     }
-    .stat-divider { color: #D4C4B0; font-size: 1rem; }
-    .stat-accent { color: #CC3300; font-weight: 700; }
+    .rank-counter-label.lit { color: #CC3300; }
+    .rank-counter-number {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(3.5rem, 10vw, 6rem);
+      font-weight: 900; line-height: 1; letter-spacing: -0.04em;
+      color: #6B5C45;
+      transition: color 0.5s;
+      min-width: 5ch; text-align: center;
+    }
+    .rank-counter-number.lit { color: #CC3300; }
+    .rank-counter-sub {
+      font-size: 0.78rem; color: #B8A898; font-weight: 500;
+      margin-bottom: 10px; transition: color 0.4s;
+    }
+    .rank-counter-sub.lit { color: #FF6B1A; font-weight: 700; }
+    .rank-bar-track {
+      width: min(260px, 70vw); height: 3px;
+      background: #F0E8DE; border-radius: 100px; overflow: hidden;
+    }
+    .rank-bar-fill {
+      height: 100%; width: 0%;
+      background: linear-gradient(90deg, #CC3300, #FF6B1A);
+      border-radius: 100px; transition: width 0.08s linear;
+    }
 
     /* HERO CTA */
     .hero-cta-row { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; align-items: center; margin-bottom: 24px; }
@@ -290,20 +311,19 @@
   <h1 class="hero-h1">TARGET TOP 100 RANKS</h1>
   <p class="hero-tagline">NEET Patterns Decoded</p>
   <p class="hero-punchline">720 is Not Impossible</p>
-  <div class="hero-statbar">
-    <span>2025 Reality:</span>
-    <span class="stat-pill">AIR 1 = 686</span>
-    <span class="stat-divider">|</span>
-    <span class="stat-pill">Only 73 Scored 650+</span>
-    <span class="stat-divider">|</span>
-    <span class="stat-accent">Join to Beat the Odds</span>
+  <!-- RANK COUNTER -->
+  <div class="rank-counter-wrap">
+    <div class="rank-counter-label" id="rank-label"><span style="font-family:'Fraunces',serif;font-weight:900;color:#1A1208;letter-spacing:-0.03em;">NEETMINDS<span style="font-size:0.45em;position:relative;top:-1.5em;margin-left:1px;">™</span></span></div>
+    <div class="rank-counter-number" id="rank-counter">10,000</div>
+    <div class="rank-counter-sub" id="rank-sub">All India Rank</div>
+    <div class="rank-bar-track"><div class="rank-bar-fill" id="rank-bar"></div></div>
   </div>
   <div class="hero-cta-row">
     <a href="practice.html" class="btn-primary btn-hero">Start Now and Boost your NEET RANK →</a>
   </div>
   <div class="hero-proof">
     <span class="proof-dot"></span>
-    <span>Join <strong>2,400+ students</strong> already training with pattern intelligence</span>
+    <span>Master the patterns. Master the NEET exam.</span>
   </div>
 </section>
 
@@ -479,5 +499,65 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
+
+<script>
+(function() {
+  var counterEl = document.getElementById('rank-counter');
+  var barEl     = document.getElementById('rank-bar');
+  var labelEl   = document.getElementById('rank-label');
+  var subEl     = document.getElementById('rank-sub');
+  if (!counterEl) return;
+
+  var START = 10000, END = 1;
+  var DOWN_MS = 3000, HOLD_MS = 1200, RESET_MS = 600;
+  var frame;
+
+  function fmt(n) { return n >= 1000 ? n.toLocaleString('en-IN') : String(n); }
+  function ease(t) { return 1 - Math.pow(1 - t, 2.8); }
+
+  function runDown() {
+    var t0 = null;
+    function step(ts) {
+      if (!t0) t0 = ts;
+      var t = Math.min((ts - t0) / DOWN_MS, 1);
+      var e = ease(t);
+      var cur = Math.round(START - (START - END) * e);
+      counterEl.textContent = fmt(cur);
+      barEl.style.width = (e * 100) + '%';
+      if (cur <= 500) {
+        counterEl.classList.add('lit');
+        labelEl.classList.add('lit');
+        subEl.classList.add('lit');
+        labelEl.innerHTML = '<span style="font-family:\'Fraunces\',serif;font-weight:900;color:#CC3300;letter-spacing:-0.03em;">NEETMINDS<span style="font-size:0.45em;position:relative;top:-1.5em;margin-left:1px;">™</span></span>';
+        subEl.textContent = 'All India Rank';
+      }
+      if (t < 1) { frame = requestAnimationFrame(step); }
+      else {
+        counterEl.textContent = 'AIR 1';
+        setTimeout(reset, HOLD_MS);
+      }
+    }
+    frame = requestAnimationFrame(step);
+  }
+
+  function reset() {
+    counterEl.classList.remove('lit');
+    labelEl.classList.remove('lit');
+    subEl.classList.remove('lit');
+    counterEl.textContent = fmt(START);
+    barEl.style.transition = 'none';
+    barEl.style.width = '0%';
+    labelEl.innerHTML = '<span style="font-family:\'Fraunces\',serif;font-weight:900;color:#1A1208;letter-spacing:-0.03em;">NEETMINDS<span style="font-size:0.45em;position:relative;top:-1.5em;margin-left:1px;">™</span></span>';
+    subEl.textContent = 'All India Rank';
+    setTimeout(function() {
+      barEl.style.transition = 'width 0.08s linear';
+      runDown();
+    }, RESET_MS);
+  }
+
+  // start after short delay
+  setTimeout(runDown, 800);
+})();
+</script>
 </body>
 </html>
