@@ -382,6 +382,27 @@
 
     /* ── RENDER QUESTION ── */
 
+    /* ── RENDER STATEMENT I / STATEMENT II — LOCKED ── */
+    function renderStmtIII(q) {
+      var intro = q.question_intro || '';
+      var tail  = q.question_tail  || '';
+      var stmts = q.statements || [];
+      var html  = '';
+      if (intro) html += '<p style="font-size:0.92rem;line-height:1.7;color:#1A1208;margin-bottom:14px;">' + escHtml(intro) + '</p>';
+      stmts.forEach(function(s) {
+        var isI = s.num === 'I' || s.num === '1';
+        var color = isI ? '#4F46E5' : '#0369A1';
+        var bg    = isI ? '#EEF2FF' : '#F0F9FF';
+        var border= isI ? '#818CF8' : '#38BDF8';
+        html += '<div style="border-radius:10px;border:1.5px solid ' + border + ';background:' + bg + ';padding:14px 16px;margin-bottom:10px;">'
+          + '<span style="font-size:0.68rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:' + color + ';display:block;margin-bottom:6px;">' + escHtml(s.label || ('Statement ' + s.num)) + '</span>'
+          + '<p style="font-size:0.9rem;line-height:1.7;color:#1A1208;margin:0;">' + escHtml(s.text) + '</p>'
+          + '</div>';
+      });
+      if (tail) html += '<p style="font-size:0.88rem;font-weight:600;color:#1A1208;margin-top:6px;">' + escHtml(tail) + '</p>';
+      return html;
+    }
+
     /* ── RENDER ASSERTION-REASON QUESTION ── */
     function renderARQuestion(text) {
       // Split on Assertion / Reason keywords
@@ -401,51 +422,48 @@
         + '</div>';
     }
 
-    /* ── RENDER MULTI-STATEMENT QUESTION ── */
-    function renderMSQuestion(text) {
-      // Split intro from statements I. II. III. IV.
-      var introMatch = text.match(/^([\s\S]*?)(?=(?:I|1)\.\s)/);
-      var intro = introMatch ? introMatch[1].trim() : '';
-      var stmtPart = intro ? text.slice(intro.length) : text;
-      // Extract trailing question (after last statement)
-      var stmts = [];
-      var remaining = stmtPart;
-      var stmtRegex = /(I{1,3}V?|IV|VI{0,3}|I{0,3})\.\s([^]+?)(?=(?:I{1,3}V?|IV|VI{0,3}|I{0,3})\.\s|$)/g;
-      var parts = stmtPart.split(/(?=(?:II|III|IV|V|I)\.\s)/);
-      var question = '';
-      var stmtList = [];
-      parts.forEach(function(p) {
-        var m = p.match(/^([IVX]+)\.\s([\s\S]+)/);
-        if (m) {
-          // Check if end of this statement has a question
-          var stmtText = m[2].trim();
-          stmtList.push({ num: m[1], text: stmtText });
-        } else if (p.trim()) {
-          question = p.trim();
-        }
-      });
-      // Extract trailing question from last statement
-      if (stmtList.length > 0) {
-        var last = stmtList[stmtList.length - 1];
-        var qMatch = last.text.match(/([\s\S]+?)(\s+(?:Which|Select|Choose|How many)[^$]+)$/i);
-        if (qMatch) {
-          last.text = qMatch[1].trim();
-          question = qMatch[2].trim();
+        /* ── RENDER MULTI-STATEMENT QUESTION — LOCKED ── */
+    function renderMSQuestion(text, q) {
+      var stmtList = (q && q.statements) ? q.statements : null;
+      var intro    = (q && q.question_intro) ? q.question_intro : '';
+      var tailQ    = (q && q.question_tail)  ? q.question_tail  : '';
+
+      if (!stmtList) {
+        var parts = text.split('\n');
+        stmtList = [];
+        parts.forEach(function(p) {
+          var m = p.trim().match(/^([IVX]+|[1-4])\.\s+([\s\S]+)/);
+          if (m) {
+            stmtList.push({ num: m[1], text: m[2].trim() });
+          } else if (p.trim() && stmtList.length === 0) {
+            intro += (intro ? ' ' : '') + p.trim();
+          } else if (p.trim()) {
+            tailQ = p.trim();
+          }
+        });
+        if (stmtList.length > 0) {
+          var last = stmtList[stmtList.length - 1];
+          var tq = last.text.match(/([\s\S]+?)\s+((?:Which|Select|How many|Choose)[\s\S]+$)/i);
+          if (tq) { last.text = tq[1].trim(); tailQ = tq[2].trim(); }
         }
       }
+
       var html = '';
-      if (intro) html += '<p style="font-size:0.92rem;line-height:1.7;margin-bottom:12px;">' + escHtml(intro) + '</p>';
-      if (stmtList.length > 0) {
-        html += '<div style="background:#FAFAF7;border:1.5px solid #E8DDD0;border-radius:10px;padding:12px 16px;margin-bottom:12px;">';
-        stmtList.forEach(function(s) {
-          html += '<div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #F0E8DE;">'
-            + '<span style="font-weight:800;font-size:0.82rem;color:#CC3300;min-width:24px;padding-top:2px;">' + escHtml(s.num) + '.</span>'
-            + '<span style="font-size:0.9rem;line-height:1.65;color:#1A1208;">' + escHtml(s.text) + '</span>'
+      if (intro) html += '<p style="font-size:0.92rem;line-height:1.7;color:#1A1208;margin-bottom:14px;">' + escHtml(intro) + '</p>';
+
+      if (stmtList && stmtList.length > 0) {
+        html += '<div style="background:#FAFAF7;border:1.5px solid #E8DDD0;border-radius:12px;overflow:hidden;margin-bottom:14px;">';
+        stmtList.forEach(function(s, i) {
+          var bdr = i < stmtList.length - 1 ? 'border-bottom:1px solid #F0E8DE;' : '';
+          html += '<div style="display:flex;gap:12px;padding:10px 16px;' + bdr + '">'
+            + '<span style="font-weight:800;font-size:0.8rem;color:#CC3300;min-width:20px;flex-shrink:0;padding-top:2px;">' + escHtml(s.num) + '.</span>'
+            + '<span style="font-size:0.9rem;line-height:1.7;color:#1A1208;">' + escHtml(s.text) + '</span>'
             + '</div>';
         });
         html += '</div>';
       }
-      if (question) html += '<p style="font-size:0.92rem;font-weight:600;color:#1A1208;margin-top:4px;">' + escHtml(question) + '</p>';
+
+      if (tailQ) html += '<p style="font-size:0.9rem;font-weight:600;color:#1A1208;margin-top:2px;">' + escHtml(tailQ) + '</p>';
       return html || formatQText(text);
     }
 
@@ -483,6 +501,7 @@
       var hasTable  = q.match_table && (q.match_table.rows || q.match_table.col1);
       var isMatchQ  = (q.question_type === 'match') || (!hasTable && /[Cc]olumn[\s\-]I|Match\s+[Ll]ist/i.test(q.question || ''));
       var isARQ     = (q.question_type === 'assertion_reason') || /\bAssertion\s*[:(（]/i.test(q.question || '');
+      var isStmtQ   = (q.question_type === 'stmt_i_ii') && q.statements && q.statements.length >= 2;
       var isMSQ     = (q.question_type === 'multi_statement') || (!isARQ && /\b(?:I|II|III|IV)\.[^\S\n]/.test(q.question || ''));
       var qMargin   = (hasTable || q.pattern === 'diagram_dhamaka') ? '0.8rem' : '1.4rem';
       var diffLabel = q.difficulty === 'L1' ? '🟢 Easy' : q.difficulty === 'L2' ? '🟡 Medium' : '🔴 Hard';
@@ -504,7 +523,7 @@
         '<p style="font-size:0.72rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);'
           + 'text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">'
           + escHtml(q.subject || '') + ' · ' + escHtml(q.chapter || '') + '</p>',
-        isARQ ? renderARQuestion(q.question || '') : (isMSQ ? renderMSQuestion(q.question || '') : formatQText(q.question || '')),
+        isStmtQ ? renderStmtIII(q) : (isARQ ? renderARQuestion(q.question || '') : (isMSQ ? renderMSQuestion(q.question || '', q) : formatQText(q.question || ''))),
         hasTable ? matchTableHTML(q.match_table) : (isMatchQ ? '<div class="match-notice">📋 Match the following — select the correct combination from the options below.</div>' : ''),
         buildDiagHtml(q),
         '<div id="options-wrap">' + optsHtml + '</div>',
