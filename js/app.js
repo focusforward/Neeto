@@ -381,6 +381,74 @@
     }
 
     /* ── RENDER QUESTION ── */
+
+    /* ── RENDER ASSERTION-REASON QUESTION ── */
+    function renderARQuestion(text) {
+      // Split on Assertion / Reason keywords
+      var arMatch = text.match(/^([\s\S]*?)Assertion\s*[\(:]?\s*[Aa][)\:]?\s*([\s\S]+?)\s*Reason\s*[\(:]?\s*[Rr][)\:]?\s*([\s\S]+)$/i);
+      if (!arMatch) return formatQText(text);
+      var prefix    = arMatch[1] ? '<p style="font-size:0.92rem;line-height:1.7;margin-bottom:12px;">' + escHtml(arMatch[1].trim()) + '</p>' : '';
+      var assertion = arMatch[2].trim();
+      var reason    = arMatch[3].trim();
+      return prefix
+        + '<div style="border-radius:10px;border:1.5px solid #6366F1;background:#F5F3FF;padding:14px 16px;margin-bottom:10px;">'
+        + '<span style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#6366F1;display:block;margin-bottom:6px;">Assertion (A)</span>'
+        + '<p style="font-size:0.9rem;line-height:1.7;color:#1A1208;margin:0;">' + escHtml(assertion) + '</p>'
+        + '</div>'
+        + '<div style="border-radius:10px;border:1.5px solid #0EA5E9;background:#F0F9FF;padding:14px 16px;margin-bottom:14px;">'
+        + '<span style="font-size:0.7rem;font-weight:800;text-transform:uppercase;letter-spacing:0.1em;color:#0EA5E9;display:block;margin-bottom:6px;">Reason (R)</span>'
+        + '<p style="font-size:0.9rem;line-height:1.7;color:#1A1208;margin:0;">' + escHtml(reason) + '</p>'
+        + '</div>';
+    }
+
+    /* ── RENDER MULTI-STATEMENT QUESTION ── */
+    function renderMSQuestion(text) {
+      // Split intro from statements I. II. III. IV.
+      var introMatch = text.match(/^([\s\S]*?)(?=(?:I|1)\.\s)/);
+      var intro = introMatch ? introMatch[1].trim() : '';
+      var stmtPart = intro ? text.slice(intro.length) : text;
+      // Extract trailing question (after last statement)
+      var stmts = [];
+      var remaining = stmtPart;
+      var stmtRegex = /(I{1,3}V?|IV|VI{0,3}|I{0,3})\.\s([^]+?)(?=(?:I{1,3}V?|IV|VI{0,3}|I{0,3})\.\s|$)/g;
+      var parts = stmtPart.split(/(?=(?:II|III|IV|V|I)\.\s)/);
+      var question = '';
+      var stmtList = [];
+      parts.forEach(function(p) {
+        var m = p.match(/^([IVX]+)\.\s([\s\S]+)/);
+        if (m) {
+          // Check if end of this statement has a question
+          var stmtText = m[2].trim();
+          stmtList.push({ num: m[1], text: stmtText });
+        } else if (p.trim()) {
+          question = p.trim();
+        }
+      });
+      // Extract trailing question from last statement
+      if (stmtList.length > 0) {
+        var last = stmtList[stmtList.length - 1];
+        var qMatch = last.text.match(/([\s\S]+?)(\s+(?:Which|Select|Choose|How many)[^$]+)$/i);
+        if (qMatch) {
+          last.text = qMatch[1].trim();
+          question = qMatch[2].trim();
+        }
+      }
+      var html = '';
+      if (intro) html += '<p style="font-size:0.92rem;line-height:1.7;margin-bottom:12px;">' + escHtml(intro) + '</p>';
+      if (stmtList.length > 0) {
+        html += '<div style="background:#FAFAF7;border:1.5px solid #E8DDD0;border-radius:10px;padding:12px 16px;margin-bottom:12px;">';
+        stmtList.forEach(function(s) {
+          html += '<div style="display:flex;gap:10px;padding:7px 0;border-bottom:1px solid #F0E8DE;">'
+            + '<span style="font-weight:800;font-size:0.82rem;color:#CC3300;min-width:24px;padding-top:2px;">' + escHtml(s.num) + '.</span>'
+            + '<span style="font-size:0.9rem;line-height:1.65;color:#1A1208;">' + escHtml(s.text) + '</span>'
+            + '</div>';
+        });
+        html += '</div>';
+      }
+      if (question) html += '<p style="font-size:0.92rem;font-weight:600;color:#1A1208;margin-top:4px;">' + escHtml(question) + '</p>';
+      return html || formatQText(text);
+    }
+
     function renderQuestion() {
       if (!filtered.length) {
         container.innerHTML = '<div style="text-align:center;padding:60px 20px;">'
@@ -413,6 +481,9 @@
         : '';
 
       var hasTable  = q.match_table && (q.match_table.rows || q.match_table.col1);
+      var isMatchQ  = (q.question_type === 'match') || (!hasTable && /[Cc]olumn[\s\-]I|Match\s+[Ll]ist/i.test(q.question || ''));
+      var isARQ     = (q.question_type === 'assertion_reason') || /\bAssertion\s*[:(（]/i.test(q.question || '');
+      var isMSQ     = (q.question_type === 'multi_statement') || (!isARQ && /\b(?:I|II|III|IV)\.[^\S\n]/.test(q.question || ''));
       var qMargin   = (hasTable || q.pattern === 'diagram_dhamaka') ? '0.8rem' : '1.4rem';
       var diffLabel = q.difficulty === 'L1' ? '🟢 Easy' : q.difficulty === 'L2' ? '🟡 Medium' : '🔴 Hard';
 
@@ -433,20 +504,18 @@
         '<p style="font-size:0.72rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);'
           + 'text-transform:uppercase;letter-spacing:0.06em;margin-bottom:10px;">'
           + escHtml(q.subject || '') + ' · ' + escHtml(q.chapter || '') + '</p>',
-        formatQText(q.question || ''),
-        hasTable ? matchTableHTML(q.match_table) : '',
+        isARQ ? renderARQuestion(q.question || '') : (isMSQ ? renderMSQuestion(q.question || '') : formatQText(q.question || '')),
+        hasTable ? matchTableHTML(q.match_table) : (isMatchQ ? '<div class="match-notice">📋 Match the following — select the correct combination from the options below.</div>' : ''),
         buildDiagHtml(q),
         '<div id="options-wrap">' + optsHtml + '</div>',
         '<div id="explanation-wrap"></div>',
         '</div>',
 
         /* Nav */
-        '<div style="display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:0.25rem;">',
+        '<div style="display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;">',
         '<div style="display:flex;gap:8px;">',
-        (currentIndex > 0
-          ? '<button onclick="window._neetPrev()" style="background:var(--opt-bg,#fff);border:1.5px solid var(--c-border,#E8DDD0);color:var(--c-ink-muted,#6B5C45);padding:8px 18px;border-radius:100px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;" onmouseover="this.style.borderColor=\'#FF6B1A\';this.style.color=\'#FF6B1A\';" onmouseout="this.style.borderColor=\'#E8DDD0\';this.style.color=\'#6B5C45\';">← Prev</button>'
-          : ''),
-        '<button onclick="window._neetSkip()" style="background:#FF6B1A;border:none;color:#fff;padding:9px 22px;border-radius:100px;font-size:0.875rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(255,107,26,0.3);transition:all .15s;" onmouseover="this.style.background=\'#E85500\';this.style.transform=\'translateY(-1px)\';" onmouseout="this.style.background=\'#FF6B1A\';this.style.transform=\'none\';">Skip →</button>',
+        (currentIndex > 0 ? '<button class="skip-btn" onclick="window._neetPrev()">← Prev</button>' : ''),
+        '<button class="skip-btn" onclick="window._neetSkip()">Skip →</button>',
         '</div>',
         '<span style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);">' + diffLabel + '</span>',
         '</div>'
@@ -456,6 +525,9 @@
       window._neetAnswer = function(btn) {
         if (answered) return;
         answered = true;
+        // Hide skip button once answered — Next Question takes over
+        var skipBtns = document.querySelectorAll('.skip-btn');
+        skipBtns.forEach(function(b){ if(b.textContent.indexOf('Skip') > -1) b.style.display = 'none'; });
         var chosen  = btn.getAttribute('data-key');
         var correct = (q.correct_answer || '').toUpperCase();
         var isRight = chosen === correct;
