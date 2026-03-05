@@ -514,7 +514,7 @@
         /* Nav */
         '<div style="display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;">',
         '<div style="display:flex;gap:8px;">',
-        (currentIndex > 0 ? '<button class="skip-btn" onclick="window._neetPrev()">← Prev</button>' : ''),
+        (currentIndex > 0 ? '<button class="skip-btn prev-btn" onclick="window._neetPrev()">← Prev</button>' : ''),
         '<button class="skip-btn" onclick="window._neetSkip()">Skip →</button>',
         '</div>',
         '<span style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);">' + diffLabel + '</span>',
