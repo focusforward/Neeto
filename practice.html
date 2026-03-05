@@ -394,6 +394,13 @@ function setPattern(val) {
   if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 </script>
-
+// Debug - check if app.js is loaded and what data looks like
+setTimeout(function() {
+  console.log('Checking app state...');
+  console.log('window.questionsData:', window.questionsData);
+  console.log('window.currentQuestion:', window.currentQuestion);
+  console.log('Any errors? Look above ↑');
+}, 2000);
+</script>
 </body>
 </html>
