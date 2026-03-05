@@ -58,10 +58,12 @@ nav.navbar {
 .brand-minds { color: #FF6B1A !important; }
 .brand-tm    {
   color: #CC3300 !important;
-  font-size: 0.65em !important;
+  font-size: 0.42em !important;
   vertical-align: super !important;
-  line-height: 0 !important;
-  margin-left: 1px !important;
+  line-height: 1 !important;
+  margin-left: 2px !important;
+  position: relative !important;
+  top: 0.1em !important;
 }
 
 /* ── NAV LINKS (desktop) ───────────────────────────────────── */
