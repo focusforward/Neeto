@@ -441,10 +441,12 @@
         '</div>',
 
         /* Nav */
-        '<div style="display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;">',
+        '<div style="display:flex;gap:8px;justify-content:space-between;align-items:center;flex-wrap:wrap;margin-top:0.25rem;">',
         '<div style="display:flex;gap:8px;">',
-        (currentIndex > 0 ? '<button class="skip-btn" onclick="window._neetPrev()">← Prev</button>' : ''),
-        '<button class="skip-btn" onclick="window._neetSkip()">Skip →</button>',
+        (currentIndex > 0
+          ? '<button onclick="window._neetPrev()" style="background:var(--opt-bg,#fff);border:1.5px solid var(--c-border,#E8DDD0);color:var(--c-ink-muted,#6B5C45);padding:8px 18px;border-radius:100px;font-size:0.85rem;font-weight:600;cursor:pointer;font-family:inherit;transition:all .15s;" onmouseover="this.style.borderColor=\'#FF6B1A\';this.style.color=\'#FF6B1A\';" onmouseout="this.style.borderColor=\'#E8DDD0\';this.style.color=\'#6B5C45\';">← Prev</button>'
+          : ''),
+        '<button onclick="window._neetSkip()" style="background:#FF6B1A;border:none;color:#fff;padding:9px 22px;border-radius:100px;font-size:0.875rem;font-weight:700;cursor:pointer;font-family:inherit;box-shadow:0 4px 14px rgba(255,107,26,0.3);transition:all .15s;" onmouseover="this.style.background=\'#E85500\';this.style.transform=\'translateY(-1px)\';" onmouseout="this.style.background=\'#FF6B1A\';this.style.transform=\'none\';">Skip →</button>',
         '</div>',
         '<span style="font-size:0.78rem;color:var(--c-ink-muted,#6B5C45);">' + diffLabel + '</span>',
         '</div>'
