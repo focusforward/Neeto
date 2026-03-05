@@ -9,7 +9,8 @@
   <link rel="stylesheet" href="css/nav.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: #0A0600; color: #F5EDE0; line-height: 1.6; overflow-x: hidden; }
+    html { overflow-x: clip !important; overflow-y: auto !important; }
+    body { font-family: 'DM Sans', sans-serif; background: #0A0600; color: #F5EDE0; line-height: 1.6; overflow-x: clip; padding-top: 68px; }
 
     /* HERO */
     .mind-hero {
@@ -173,8 +174,11 @@
 <style>
 /* MINDSET NAV OVERRIDE — sticky dark nav */
 nav.navbar {
-  position: sticky !important;
+  position: fixed !important;
   top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  width: 100% !important;
   z-index: 9999 !important;
   background: #0A0600 !important;
   border-bottom-color: rgba(255,255,255,0.07) !important;
@@ -186,7 +190,7 @@ nav.navbar .nav-login:hover { background: rgba(255,255,255,0.06) !important; }
 nav.navbar .nav-hamburger { border-color: rgba(255,255,255,0.2) !important; }
 nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
 </style>
-<nav class="navbar" style="position:sticky !important;top:0 !important;z-index:9999 !important;background:#0A0600 !important;border-bottom-color:rgba(255,255,255,0.07) !important;">
+<nav class="navbar" style="position:fixed !important;top:0 !important;left:0 !important;right:0 !important;width:100% !important;z-index:9999 !important;background:#0A0600 !important;border-bottom-color:rgba(255,255,255,0.07) !important;">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
