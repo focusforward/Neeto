@@ -392,6 +392,51 @@ html, body {
     .match-table-row:nth-child(even) { background: #FFF7F0; }
     .match-cell { padding: 10px 14px; font-size: 0.87rem; line-height: 1.5; color: #1A1208; }
     .match-key { font-weight: 700; color: #CC3300; margin-right: 6px; }
+  
+/* ── SKIP / PREV BUTTONS — LOCKED DESIGN ─────────────────── */
+.skip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 22px;
+  border-radius: 100px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.18s;
+  white-space: nowrap;
+  border: none;
+  background: #FF6B1A;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(255,107,26,0.28);
+  letter-spacing: 0.01em;
+}
+.skip-btn:hover {
+  background: #CC3300;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(204,51,0,0.32);
+}
+.skip-btn:active {
+  transform: translateY(0);
+}
+/* Prev button — outlined variant */
+.skip-btn.prev-btn,
+.skip-btn:first-child {
+  background: none;
+  color: #6B5C45;
+  border: 1.5px solid #E8DDD0;
+  box-shadow: none;
+}
+.skip-btn.prev-btn:hover,
+.skip-btn:first-child:hover {
+  border-color: #CC3300;
+  color: #CC3300;
+  background: rgba(204,51,0,0.05);
+  transform: translateY(-1px);
+  box-shadow: none;
+}
+
   </style>
 </head>
 <body>
