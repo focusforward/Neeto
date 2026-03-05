@@ -184,6 +184,7 @@
     <a href="methodology.html" style="color:#C8B89A">Methodology</a>
     <a href="about.html" style="color:#C8B89A">About</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
+    <a href="login.html" class="nav-login-btn">Login / Register</a>
   </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu" style="border-color:rgba(255,255,255,0.12)">
     <span style="background:#F5EDE0"></span><span style="background:#F5EDE0"></span><span style="background:#F5EDE0"></span>
@@ -198,7 +199,8 @@
   <a href="units.html" style="color:#F5EDE0;border-color:rgba(255,255,255,0.08)">Units</a>
   <a href="mindset.html" style="color:#FF6B1A;font-weight:700;border-color:rgba(255,255,255,0.08)">Mindset</a>
   <a href="analytics.html" style="color:#F5EDE0;border-color:rgba(255,255,255,0.08)">Analytics</a>
-  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
+  <a href="practice.html" class="nav-cta">Start Free →</a>
+  <a href="login.html" class="nav-login-btn">Login / Register</a>
 </div>
 
 <!-- HERO -->
@@ -354,5 +356,16 @@
   }
 </script>
 
+
+<script>
+// Sticky nav shadow on scroll
+(function(){
+  var nav = document.querySelector('nav.navbar');
+  if(!nav) return;
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive:true});
+})();
+</script>
 </body>
 </html>

@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Login / Sign Up — NEETMINDS™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/nav.css"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #FFFDF9;
+  color: #1A1208;
+  min-height: 100vh;
+}
+
+/* ── AUTH PAGE WRAPPER ── */
+.auth-page {
+  min-height: calc(100vh - 68px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 48px 20px;
+  background: linear-gradient(160deg, #FFFDF9 0%, #FFF0E6 60%, #FFFDF9 100%);
+  position: relative;
+}
+.auth-page::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 700px 500px at 70% 30%, rgba(204,51,0,0.05) 0%, transparent 65%);
+  pointer-events: none;
+}
+
+/* ── CENTERED CARD ── */
+.auth-card {
+  width: 100%;
+  max-width: 480px;
+  background: #fff;
+  border-radius: 24px;
+  border: 1.5px solid #F0E8DE;
+  box-shadow: 0 8px 48px rgba(26,18,8,0.09);
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+}
+
+/* Top accent bar */
+.auth-card::before {
+  content: '';
+  display: block;
+  height: 4px;
+  background: linear-gradient(90deg, #CC3300, #FF6B1A);
+}
+
+.auth-card-inner { padding: 40px 40px 36px; }
+@media(max-width:520px){ .auth-card-inner { padding: 28px 24px 28px; } }
+
+/* Brand mark inside card */
+.auth-brand {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  margin-bottom: 28px;
+}
+.auth-brand-word {
+  font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em;
+  font-size: 1.3rem; display: inline-flex; align-items: baseline;
+}
+.auth-brand-neet  { color: #CC3300; }
+.auth-brand-minds { color: #FF6B1A; }
+.auth-brand-tm    { color: #CC3300; font-size: 0.38em; position: relative; top: -1.5em; margin-left: 1px; vertical-align: baseline; line-height: 0; }
+
+/* Tabs */
+.auth-tabs {
+  display: flex; gap: 0; margin-bottom: 32px;
+  background: #F5EFE8; border-radius: 12px; padding: 4px;
+}
+.auth-tab {
+  flex: 1; padding: 10px; text-align: center; border-radius: 9px;
+  font-size: 0.88rem; font-weight: 600; cursor: pointer;
+  transition: all 0.2s; color: #9C8A78; border: none; background: none; font-family: inherit;
+}
+.auth-tab.active {
+  background: #fff; color: #1A1208;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+/* Heading */
+.auth-heading {
+  font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 900;
+  letter-spacing: -0.02em; color: #1A1208; margin-bottom: 4px; text-align: center;
+}
+.auth-sub { font-size: 0.83rem; color: #6B5C45; margin-bottom: 28px; text-align: center; }
+
+/* Google button */
+.btn-google {
+  width: 100%; padding: 13px; border-radius: 10px;
+  border: 1.5px solid #E8DDD0; background: #fff;
+  font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #1A1208;
+  cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: all 0.15s; margin-bottom: 20px;
+}
+.btn-google:hover { border-color: #CC3300; background: #FFF7F4; }
+
+/* Divider */
+.divider {
+  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
+}
+.divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #E8DDD0; }
+.divider span { font-size: 0.73rem; color: #B8A898; font-weight: 500; white-space: nowrap; }
+
+/* Form */
+.form-group { margin-bottom: 16px; }
+.form-label {
+  font-size: 0.74rem; font-weight: 700; color: #5C4A30;
+  display: block; margin-bottom: 6px;
+  text-transform: uppercase; letter-spacing: 0.06em;
+}
+.form-input {
+  width: 100%; padding: 12px 14px; border-radius: 10px;
+  border: 1.5px solid #E8DDD0; background: #FFFDF9;
+  font-family: inherit; font-size: 0.92rem; color: #1A1208;
+  transition: border-color 0.15s, box-shadow 0.15s; outline: none;
+}
+.form-input:focus { border-color: #CC3300; box-shadow: 0 0 0 3px rgba(204,51,0,0.1); background: #fff; }
+.form-input::placeholder { color: #C8B89A; }
+select.form-input { cursor: pointer; }
+
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+@media(max-width:420px){ .form-row { grid-template-columns: 1fr; } }
+
+/* Forgot password */
+.forgot-link {
+  display: block; text-align: right; margin-top: -8px; margin-bottom: 16px;
+  font-size: 0.76rem; color: #CC3300; font-weight: 600; text-decoration: none;
+}
+.forgot-link:hover { text-decoration: underline; }
+
+/* Submit button */
+.btn-auth {
+  width: 100%; padding: 14px; border-radius: 12px; border: none;
+  background: #CC3300; color: #fff; font-family: inherit;
+  font-size: 1rem; font-weight: 700; cursor: pointer;
+  box-shadow: 0 4px 20px rgba(204,51,0,0.28);
+  transition: all 0.2s; margin-top: 4px; letter-spacing: 0.01em;
+}
+.btn-auth:hover { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(204,51,0,0.38); }
+
+.auth-switch {
+  font-size: 0.78rem; color: #9C8A78; text-align: center; margin-top: 18px;
+}
+.auth-switch a { color: #CC3300; font-weight: 600; text-decoration: none; }
+.auth-switch a:hover { text-decoration: underline; }
+
+/* Plan selector */
+.plan-label { font-size: 0.74rem; font-weight: 700; color: #5C4A30; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; display: block; }
+.plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
+
+.plan-card {
+  border: 1.5px solid #E8DDD0; border-radius: 14px; padding: 16px 14px;
+  cursor: pointer; transition: all 0.15s; position: relative;
+  background: #FFFDF9; text-align: left;
+  display: block;
+}
+.plan-card:hover { border-color: #CC3300; }
+.plan-card.selected { border-color: #CC3300; background: #FFF7F4; box-shadow: 0 0 0 3px rgba(204,51,0,0.08); }
+.plan-card input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
+.plan-tag {
+  display: inline-block; background: #CC3300; color: #fff;
+  font-size: 0.58rem; font-weight: 700; padding: 2px 8px;
+  border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em;
+  margin-bottom: 8px;
+}
+.plan-tag.free-tag { background: #E8DDD0; color: #6B5C45; }
+.plan-name { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1rem; color: #1A1208; margin-bottom: 2px; }
+.plan-price { font-size: 1.2rem; font-weight: 700; color: #CC3300; line-height: 1.1; }
+.plan-price small { font-size: 0.68rem; font-weight: 500; color: #9C8A78; display: block; }
+.plan-features { font-size: 0.71rem; color: #6B5C45; margin-top: 6px; line-height: 1.55; }
+
+/* Payment block */
+.payment-block {
+  background: #FFF7F0; border: 1.5px solid rgba(204,51,0,0.14);
+  border-radius: 14px; padding: 20px 18px; margin-bottom: 18px;
+  display: none;
+}
+.payment-block.visible { display: block; }
+.payment-block-title {
+  font-size: 0.72rem; font-weight: 700; color: #CC3300;
+  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* Pay method tabs */
+.pay-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+.pay-tab {
+  flex: 1; padding: 7px 4px; border: 1.5px solid #E8DDD0; border-radius: 8px;
+  font-size: 0.72rem; font-weight: 600; color: #6B5C45; cursor: pointer;
+  text-align: center; transition: all 0.15s; background: #fff;
+  font-family: inherit; white-space: nowrap;
+}
+.pay-tab.active { border-color: #CC3300; color: #CC3300; background: #FFF7F4; }
+.pay-panel { display: none; }
+.pay-panel.active { display: block; }
+
+.card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+
+.secure-badge {
+  display: flex; align-items: center; gap: 6px; justify-content: center;
+  font-size: 0.7rem; color: #9C8A78; margin-top: 12px;
+}
+.secure-badge::before {
+  content: '🔒'; font-size: 0.65rem;
+}
+
+/* Panel visibility */
+.auth-panel { display: none; }
+.auth-panel.active { display: block; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html" class="active">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="methodology.html">Our Method</a>
+    <a href="analytics.html">Analytics</a>
+  </div>
+  <div class="nav-right">
+    <a href="login.html" class="nav-login">Login / Register</a>
+  </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
+    <a href="index.html" class="active">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="methodology.html">Our Method</a>
+    <a href="analytics.html">Analytics</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
+
+<!-- AUTH PAGE -->
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-card-inner">
+
+      <!-- Brand -->
+      <div class="auth-brand">
+        <img src="neetminds-logo.png" alt="" style="width:28px;height:28px;object-fit:contain;"/>
+        <span class="auth-brand-word">
+          <span class="auth-brand-neet">NEET</span><span class="auth-brand-minds">MINDS</span><span class="auth-brand-tm">™</span>
+        </span>
+      </div>
+
+      <!-- Tabs -->
+      <div class="auth-tabs">
+        <button class="auth-tab active" onclick="switchTab('login')">Log In</button>
+        <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+      </div>
+
+      <!-- ── LOGIN PANEL ── -->
+      <div class="auth-panel active" id="panel-login">
+        <div class="auth-heading">Welcome back.</div>
+        <div class="auth-sub">Continue your pattern training.</div>
+
+        <button class="btn-google" onclick="handleGoogle()">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div class="divider"><span>or log in with email</span></div>
+
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" placeholder="••••••••"/>
+        </div>
+        <a href="#" class="forgot-link">Forgot password?</a>
+
+        <button class="btn-auth">Log In →</button>
+        <p class="auth-switch">Don't have an account? <a href="#" onclick="switchTab('signup');return false;">Sign up free</a></p>
+      </div>
+
+      <!-- ── SIGN UP PANEL ── -->
+      <div class="auth-panel" id="panel-signup">
+        <div class="auth-heading">Start training.</div>
+        <div class="auth-sub">Free account. No credit card needed.</div>
+
+        <button class="btn-google" onclick="handleGoogle()">
+          <svg width="18" height="18" viewBox="0 0 24 24">
+            <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
+            <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
+            <path d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z" fill="#FBBC05"/>
+            <path d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" fill="#EA4335"/>
+          </svg>
+          Continue with Google
+        </button>
+
+        <div class="divider"><span>or sign up with email</span></div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">First Name</label>
+            <input class="form-input" type="text" placeholder="Arjun"/>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Last Name</label>
+            <input class="form-input" type="text" placeholder="Sharma"/>
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Email</label>
+          <input class="form-input" type="email" placeholder="you@example.com"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Password</label>
+          <input class="form-input" type="password" placeholder="Min. 8 characters"/>
+        </div>
+
+        <!-- Plan chooser -->
+        <span class="plan-label">Choose Plan</span>
+        <div class="plan-selector">
+          <label class="plan-card selected" id="plan-free" onclick="selectPlan('free')">
+            <input type="radio" name="plan" value="free" checked/>
+            <span class="plan-tag free-tag">Free</span>
+            <div class="plan-name">Starter</div>
+            <div class="plan-price">₹0 <small>forever</small></div>
+            <div class="plan-features">6,154 questions · Mock tests · Analytics</div>
+          </label>
+          <label class="plan-card" id="plan-pro" onclick="selectPlan('pro')">
+            <input type="radio" name="plan" value="pro"/>
+            <span class="plan-tag">Most Popular</span>
+            <div class="plan-name">Pro</div>
+            <div class="plan-price">₹499 <small>/ month</small></div>
+            <div class="plan-features">Everything + detailed explanations · Priority support</div>
+          </label>
+        </div>
+
+        <!-- Payment block — appears when Pro selected -->
+        <div class="payment-block" id="payment-block">
+          <div class="payment-block-title">Secure Payment</div>
+          <div class="pay-tabs">
+            <button class="pay-tab active" onclick="switchPayTab(this,'pay-card')">💳 Card</button>
+            <button class="pay-tab" onclick="switchPayTab(this,'pay-upi')">📱 UPI</button>
+            <button class="pay-tab" onclick="switchPayTab(this,'pay-nb')">🏦 Net Banking</button>
+          </div>
+
+          <div class="pay-panel active" id="pay-card">
+            <div class="form-group">
+              <label class="form-label">Card Number</label>
+              <input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"/>
+            </div>
+            <div class="card-row">
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">Expiry</label>
+                <input class="form-input" type="text" placeholder="MM / YY" maxlength="7"/>
+              </div>
+              <div class="form-group" style="margin-bottom:0">
+                <label class="form-label">CVV</label>
+                <input class="form-input" type="password" placeholder="•••" maxlength="3"/>
+              </div>
+            </div>
+            <div class="form-group" style="margin-top:12px;margin-bottom:0;">
+              <label class="form-label">Name on Card</label>
+              <input class="form-input" type="text" placeholder="ARJUN SHARMA"/>
+            </div>
+          </div>
+
+          <div class="pay-panel" id="pay-upi">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">UPI ID</label>
+              <input class="form-input" type="text" placeholder="yourname@upi"/>
+            </div>
+          </div>
+
+          <div class="pay-panel" id="pay-nb">
+            <div class="form-group" style="margin-bottom:0;">
+              <label class="form-label">Select Bank</label>
+              <select class="form-input">
+                <option value="">Choose your bank</option>
+                <option>State Bank of India</option>
+                <option>HDFC Bank</option>
+                <option>ICICI Bank</option>
+                <option>Axis Bank</option>
+                <option>Kotak Mahindra Bank</option>
+                <option>Punjab National Bank</option>
+                <option>Bank of Baroda</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="secure-badge">256-bit SSL · Powered by Razorpay · Cancel anytime</div>
+        </div>
+
+        <button class="btn-auth" id="signup-btn" onclick="handleSignup()">Create Free Account →</button>
+        <p class="auth-switch" style="margin-top:14px;">
+          Already have an account? <a href="#" onclick="switchTab('login');return false;">Log in</a>
+        </p>
+        <p class="auth-switch" style="margin-top:6px;">
+          By signing up you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>
+        </p>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<script>
+function switchTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach((t,i) => {
+    t.classList.toggle('active', (tab==='login'&&i===0)||(tab==='signup'&&i===1));
+  });
+  document.getElementById('panel-login').classList.toggle('active', tab==='login');
+  document.getElementById('panel-signup').classList.toggle('active', tab==='signup');
+}
+
+function selectPlan(plan) {
+  document.getElementById('plan-free').classList.toggle('selected', plan==='free');
+  document.getElementById('plan-pro').classList.toggle('selected', plan==='pro');
+  var pb = document.getElementById('payment-block');
+  pb.classList.toggle('visible', plan==='pro');
+  document.getElementById('signup-btn').textContent =
+    plan==='pro' ? 'Start Pro — ₹499/mo →' : 'Create Free Account →';
+}
+
+function switchPayTab(btn, panelId) {
+  btn.closest('.payment-block').querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  btn.closest('.payment-block').querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(panelId).classList.add('active');
+}
+
+function fmtCard(el) {
+  var v = el.value.replace(/\D/g,'').substring(0,16);
+  el.value = v.replace(/(.{4})/g,'$1 ').trim();
+}
+
+function handleGoogle() { alert('Google Sign-In via Firebase Auth / Google OAuth.'); }
+function handleSignup() {
+  if (document.getElementById('plan-pro').classList.contains('selected')) {
+    alert('Razorpay payment would process here.');
+  } else {
+    window.location.href = 'practice.html';
+  }
+}
+
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mmenu');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
+
+<script>
+// Sticky nav shadow on scroll
+(function(){
+  var nav = document.querySelector('nav.navbar');
+  if(!nav) return;
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
