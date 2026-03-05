@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Methodology — NEETMINDS™ | Pattern Intelligence System</title>
+  <title>Our Method — NEETMINDS™ | Pattern Intelligence System</title>
   <meta name="description" content="NEETMINDS™ teaches the 6 question patterns that cover 100% of NEET. Stop memorising everything. Start recognising the examiner's playbook."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -147,6 +147,13 @@
     .pc-nc .p-example { border-color: #EF4444; }
     .pc-sb .p-example { border-color: #14B8A6; }
     .pc-dd .p-example { border-color: #A855F7; }
+    .p-strategy {
+      font-size: 0.82rem; padding: 10px 14px; border-radius: 10px;
+      line-height: 1.65; color: #1A1208; margin-top: 10px;
+      background: #F0FDF4; border-left: 3px solid #16A34A;
+    }
+    .p-strategy strong { color: #15803D; }
+    .p-example { margin-bottom: 0; }
 
     /* ── HOW IT WORKS ───────────────────────────────────── */
     .how-section { background: #FFF7F0; padding: 80px 20px; }
@@ -221,7 +228,7 @@
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock</a>
-    <a href="methodology.html" class="active">Methodology</a>
+    <a href="methodology.html" class="active">Our Method</a>
     <a href="about.html">About</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
@@ -239,14 +246,14 @@
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock</a>
-  <a href="methodology.html" class="active">Methodology</a>
+  <a href="methodology.html" class="active">Our Method</a>
   <a href="about.html">About</a>
   <a href="practice.html" class="nav-cta">Start Practising Free →</a>
 </div>
 
 <!-- ── HERO ── -->
 <div class="method-hero">
-  <div class="eyebrow">The NEETMINDS™ System</div>
+  <div class="eyebrow">Our Method</div>
   <h1>Stop Memorising Everything.<br/><em>Start Reading the Examiner.</em></h1>
   <p>
     NEET is not a test of how much you know. It's a test of how the examiner thinks.
@@ -284,74 +291,86 @@
   <div class="patterns-inner">
     <span class="section-label">The Pattern Library</span>
     <h2>The 6 Patterns Behind Every NEET Question</h2>
-    <p class="sub-p">Every question you've ever seen in NEET fits into one of these six categories. Know the pattern before you read the options.</p>
+    <p class="sub-p">Every question in NEET fits one of these six patterns. Spot the pattern first — then apply the right strategy. That's the NEETMINDS™ system.</p>
 
     <div class="pattern-grid">
 
+      <!-- 01 MEMORY TEST -->
       <div class="pattern-card pc-et">
         <div class="p-num">01</div>
-        <div class="p-icon">🎭</div>
+        <div class="p-icon">🎯</div>
         <div class="p-badge">~45% of NEET</div>
-        <div class="p-name">The Exception Trap</div>
+        <div class="p-name">Memory Test</div>
         <div class="p-desc">
-          "Which of the following is NOT correct?" The examiner lists 3 true statements and 1 subtly false one. The trap is reading too fast and confirming the truths without checking the exception.
+          "Straight from NCERT" — the most common pattern. Question asks exactly what you've read. No traps, no flips. Just recall.
         </div>
-        <div class="p-example">"All of the following are correct about mitosis EXCEPT…" — Read every option with suspicion.</div>
+        <div class="p-example">"Respiratory quotient for fatty acid is:" — you either remember it's &lt;1 or you don't.</div>
+        <div class="p-strategy"><strong>Strategy:</strong> Pure recall. If you've read NCERT, you get it right. No elimination needed. Master this pattern first — it's almost half the paper.</div>
       </div>
 
-      <div class="pattern-card pc-cg">
-        <div class="p-num">02</div>
-        <div class="p-icon">🔗</div>
-        <div class="p-badge">~20% of NEET</div>
-        <div class="p-name">The Cause-Gets-Garbled</div>
-        <div class="p-desc">
-          An Assertion-Reason question where the Reason is factually correct — but doesn't actually explain the Assertion. Students who don't check the logical link fall for it every time.
-        </div>
-        <div class="p-example">A is true, R is true, but R does not explain A. Answer is immediately (A) without second-guessing.</div>
-      </div>
-
+      <!-- 02 BEST CHOICE -->
       <div class="pattern-card pc-bc">
-        <div class="p-num">03</div>
-        <div class="p-icon">🧩</div>
+        <div class="p-num">02</div>
+        <div class="p-icon">🔽</div>
         <div class="p-badge">~14% of NEET</div>
-        <div class="p-name">The Boundary Confusion</div>
+        <div class="p-name">Best Choice</div>
         <div class="p-desc">
-          Questions that test whether you know the exact boundary of a concept — where one definition ends and another begins. These punish vague understanding.
+          "Most appropriate / most likely / best describes" — no single option is obviously right. Two options will be close. This is an elimination tournament, not a memory test.
         </div>
-        <div class="p-example">"Which of the following is a gymnosperm but NOT a conifer?" — the boundary between overlapping categories.</div>
+        <div class="p-example">"Which of the following best describes the role of oxytocin in parturition?" — two will be true, one is most complete.</div>
+        <div class="p-strategy"><strong>Strategy:</strong> Eliminate the two clearly wrong options first. Then compare the final two on a single axis: which is more complete, more accurate, or more directly answering the question stem?</div>
       </div>
 
+      <!-- 03 CONCEPT GURU -->
+      <div class="pattern-card pc-cg">
+        <div class="p-num">03</div>
+        <div class="p-icon">🌀</div>
+        <div class="p-badge">~9% of NEET</div>
+        <div class="p-name">Concept Guru</div>
+        <div class="p-desc">
+          Assertion-Reason questions where the Reason is factually correct — but doesn't actually explain the Assertion. Students who don't check the logical link fall every time.
+        </div>
+        <div class="p-example">Assertion: Both statements are correct. Reason: The reason correctly explains the assertion.</div>
+        <div class="p-strategy"><strong>Strategy:</strong> Check the logical link, not just truth value. Both A and R can be true — but if R doesn't explain A, the answer is "Both true but R NOT correct explanation."</div>
+      </div>
+
+      <!-- 04 NEGATIVE CHARGE -->
       <div class="pattern-card pc-nc">
         <div class="p-num">04</div>
-        <div class="p-icon">🔢</div>
+        <div class="p-icon">⚡</div>
         <div class="p-badge">~10% of NEET</div>
-        <div class="p-name">The Number Confusion</div>
+        <div class="p-name">Negative Charge</div>
         <div class="p-desc">
-          Specific numbers — chromosomes, stages, days, equations — are swapped or slightly altered. One digit off and you lose a mark. These are pure precision tests.
+          "Which of the following is NOT correct / EXCEPT / INCORRECT?" — the question flips your entire mental model. Students lose marks here by answering the right question to the wrong question.
         </div>
-        <div class="p-example">"The number of chromosomes in a human secondary oocyte at metaphase II is…" — exact numbers only.</div>
+        <div class="p-example">"All of the following are true about meiosis EXCEPT:" — your job is to find the false one.</div>
+        <div class="p-strategy"><strong>Strategy:</strong> Underline NOT/EXCEPT/INCORRECT the moment you see it. Read options as "true or false" statements. Your job is to find the one that's FALSE — not what's correct.</div>
       </div>
 
+      <!-- 05 SPEED BREAKER -->
       <div class="pattern-card pc-sb">
         <div class="p-num">05</div>
-        <div class="p-icon">🚦</div>
+        <div class="p-icon">⛔</div>
         <div class="p-badge">~8% of NEET</div>
-        <div class="p-name">The Speed Breaker</div>
+        <div class="p-name">Speed Breaker</div>
         <div class="p-desc">
-          Long, intimidating question stems designed to slow you down. The actual content being tested is simple — but the framing creates cognitive overload.
+          Match-the-column, correct-sequence, and correct-order questions. Designed to eat 3+ minutes of your time if you approach them without a system.
         </div>
-        <div class="p-example">Three-line scenario about a patient, a diagram, and a lab result — asking something you learned in Class 11.</div>
+        <div class="p-example">"Match Column I with Column II and select the correct option:"</div>
+        <div class="p-strategy"><strong>Strategy:</strong> Start with the pairing you're most confident about. Eliminate options where that pairing is wrong. Often leaves 1–2 options. One more check closes it. Never verify all pairs.</div>
       </div>
 
+      <!-- 06 DIAGRAM DHAMAKA -->
       <div class="pattern-card pc-dd">
         <div class="p-num">06</div>
-        <div class="p-icon">🔁</div>
+        <div class="p-icon">🖼️</div>
         <div class="p-badge">~4% of NEET</div>
-        <div class="p-name">The Definition Drift</div>
+        <div class="p-name">Diagram Dhamaka</div>
         <div class="p-desc">
-          NCERT uses a specific word in a specific context. The examiner rephrases it slightly. Students who paraphrased during revision select the "almost correct" answer.
+          Figure-based questions — label the diagram, identify the structure, interpret the graph. Your NCERT diagrams are your answer key here.
         </div>
-        <div class="p-example">"The process by which…" — NCERT's exact wording matters more than your paraphrase.</div>
+        <div class="p-example">"Identify the structure marked X in the given diagram of nephron:"</div>
+        <div class="p-strategy"><strong>Strategy:</strong> When studying, don't just read diagrams — draw them. Label them from memory. The 4% it represents is fully claimable if you've actively practised visual recall over passive reading.</div>
       </div>
 
     </div>
@@ -368,14 +387,14 @@
         <div class="step-num">1</div>
         <div class="step-body">
           <h3>Identify the Pattern Before Reading Options</h3>
-          <p>Every question in NEETMINDS™ is tagged to one of the 6 patterns. Before you answer, you learn to ask: <strong>Is this an Exception Trap? A Speed Breaker? A Boundary Confusion?</strong> Pattern recognition switches the cognitive load from memory to strategy.</p>
+          <p>Every question in NEETMINDS™ is tagged to one of the 6 patterns. Before you answer, you learn to ask: <strong>Is this a Memory Test? A Negative Charge? A Concept Guru?</strong> Pattern recognition switches the cognitive load from memory to strategy.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
           <h3>Answer with the Pattern's Decision Rule</h3>
-          <p>Each pattern has a specific decision process. Exception Trap? Read every option for the false statement. Cause-Gets-Garbled? Check the logical link, not just the truth value. <strong>You stop guessing. You start executing a system.</strong></p>
+          <p>Each pattern has a specific decision process. Negative Charge? Read every option for the false statement. Concept Guru? Check the logical link — not just the truth value. <strong>You stop guessing. You start executing a system.</strong></p>
         </div>
       </div>
       <div class="step">
