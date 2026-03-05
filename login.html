@@ -483,5 +483,67 @@ document.addEventListener('click', function(e) {
   }, {passive:true});
 })();
 </script>
+
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script>
+// ── Read URL params to pre-select plan ──────────────────────────────
+(function(){
+  var params = new URLSearchParams(window.location.search);
+  var plan    = params.get('plan');    // 'pro' or 'elite'
+  var billing = params.get('billing'); // 'monthly' or 'yearly'
+  if (plan === 'pro' || plan === 'elite') {
+    // Switch to signup tab
+    switchTab('signup');
+    selectPlan(plan);
+  }
+})();
+
+// ── Razorpay payment handler ─────────────────────────────────────────
+function launchRazorpay(planName, amountPaise) {
+  var options = {
+    key: 'YOUR_RAZORPAY_KEY_ID',   // ← Replace with your Razorpay Key ID
+    amount: amountPaise,            // Amount in paise (₹499 = 49900)
+    currency: 'INR',
+    name: 'NEETMINDS™',
+    description: planName + ' Plan — NEET Preparation',
+    image: 'neetminds-logo.png',
+    handler: function(response) {
+      // Payment successful — send payment_id to your backend to verify
+      console.log('Payment ID:', response.razorpay_payment_id);
+      alert('Payment successful! Welcome to NEETMINDS™ ' + planName + '.');
+      window.location.href = 'practice.html';
+    },
+    prefill: {
+      name: '',   // pre-fill from form if available
+      email: (document.querySelector('input[type=email]') || {}).value || '',
+      contact: ''
+    },
+    theme: { color: '#CC3300' },
+    modal: {
+      ondismiss: function() { console.log('Payment cancelled'); }
+    }
+  };
+  var rzp = new Razorpay(options);
+  rzp.on('payment.failed', function(response){
+    alert('Payment failed: ' + response.error.description);
+  });
+  rzp.open();
+}
+
+// ── Override handleSignup to use Razorpay ────────────────────────────
+function handleSignup() {
+  var isPro   = document.getElementById('plan-pro')   && document.getElementById('plan-pro').classList.contains('selected');
+  var isElite = document.getElementById('plan-elite') && document.getElementById('plan-elite').classList.contains('selected');
+
+  if (isPro) {
+    launchRazorpay('Pro', 49900);       // ₹499
+  } else if (isElite) {
+    launchRazorpay('Elite', 99900);     // ₹999
+  } else {
+    alert('Free account created! Redirecting to practice...');
+    window.location.href = 'practice.html';
+  }
+}
+</script>
 </body>
 </html>

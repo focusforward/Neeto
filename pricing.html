@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Pricing — NEETMINDS™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/nav.css"/>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; }
+
+/* HERO */
+.pricing-hero {
+  text-align: center;
+  padding: 80px 20px 60px;
+  background: linear-gradient(160deg, #FFFDF9 0%, #FFF3EA 100%);
+}
+.pricing-eyebrow {
+  display: inline-block; font-size: 0.72rem; font-weight: 700;
+  text-transform: uppercase; letter-spacing: 0.12em; color: #CC3300;
+  background: rgba(204,51,0,0.08); border-radius: 100px;
+  padding: 5px 14px; margin-bottom: 20px;
+}
+.pricing-hero h1 {
+  font-family: 'Fraunces', serif; font-size: clamp(2.2rem, 5vw, 3.5rem);
+  font-weight: 900; letter-spacing: -0.03em; line-height: 1.1;
+  margin-bottom: 16px; color: #1A1208;
+}
+.pricing-hero h1 em { font-style: italic; color: #CC3300; }
+.pricing-hero p { font-size: 1rem; color: #6B5C45; max-width: 520px; margin: 0 auto 36px; line-height: 1.75; }
+
+/* TOGGLE */
+.billing-toggle {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: #F0E8DE; border-radius: 100px; padding: 4px 6px;
+  margin-bottom: 48px;
+}
+.billing-opt {
+  font-size: 0.82rem; font-weight: 600; padding: 7px 18px; border-radius: 100px;
+  cursor: pointer; transition: all 0.2s; color: #6B5C45; border: none; background: none;
+  font-family: inherit;
+}
+.billing-opt.active { background: #CC3300; color: #fff; }
+.billing-save {
+  font-size: 0.68rem; font-weight: 700; color: #16A34A;
+  background: rgba(22,163,74,0.1); border-radius: 100px; padding: 2px 8px;
+}
+
+/* PLANS GRID */
+.plans-section { max-width: 1100px; margin: 0 auto; padding: 0 20px 80px; }
+.plans-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.08fr 1fr;
+  gap: 20px;
+  align-items: start;
+}
+@media(max-width:860px){ .plans-grid { grid-template-columns: 1fr; max-width: 480px; margin: 0 auto; } }
+
+.plan-card {
+  border-radius: 20px; border: 1.5px solid #E8DDD0;
+  background: #fff; padding: 32px 28px;
+  position: relative; transition: box-shadow 0.2s;
+}
+.plan-card:hover { box-shadow: 0 8px 32px rgba(26,18,8,0.08); }
+.plan-card.featured {
+  border-color: #CC3300; background: #1A1208;
+  box-shadow: 0 12px 48px rgba(204,51,0,0.22);
+  transform: translateY(-8px);
+}
+.plan-popular {
+  position: absolute; top: -14px; left: 50%; transform: translateX(-50%);
+  background: #CC3300; color: #fff; font-size: 0.68rem; font-weight: 800;
+  text-transform: uppercase; letter-spacing: 0.1em;
+  padding: 4px 16px; border-radius: 100px; white-space: nowrap;
+}
+.plan-name {
+  font-family: 'Fraunces', serif; font-size: 1.1rem; font-weight: 900;
+  margin-bottom: 6px; color: #1A1208;
+}
+.plan-card.featured .plan-name { color: #fff; }
+.plan-tagline { font-size: 0.8rem; color: #9C8A78; margin-bottom: 24px; line-height: 1.5; }
+.plan-card.featured .plan-tagline { color: #C8B89A; }
+
+.plan-price {
+  display: flex; align-items: baseline; gap: 4px;
+  margin-bottom: 6px;
+}
+.plan-price .currency { font-size: 1.2rem; font-weight: 700; color: #CC3300; margin-top: 4px; }
+.plan-price .amount {
+  font-family: 'Fraunces', serif; font-size: 3rem; font-weight: 900;
+  line-height: 1; letter-spacing: -0.04em; color: #1A1208;
+}
+.plan-card.featured .plan-price .amount { color: #fff; }
+.plan-card.featured .plan-price .currency { color: #FF6B1A; }
+.plan-price .period { font-size: 0.82rem; color: #9C8A78; }
+.plan-card.featured .plan-price .period { color: #9C8A78; }
+.plan-billed { font-size: 0.72rem; color: #9C8A78; margin-bottom: 28px; }
+
+.plan-btn {
+  display: block; width: 100%; padding: 13px; border-radius: 12px;
+  font-family: inherit; font-size: 0.9rem; font-weight: 700;
+  cursor: pointer; text-align: center; text-decoration: none;
+  transition: all 0.18s; margin-bottom: 28px; border: none;
+}
+.plan-btn-free { background: #F0E8DE; color: #1A1208; }
+.plan-btn-free:hover { background: #E8DDD0; }
+.plan-btn-pro { background: #CC3300; color: #fff; box-shadow: 0 4px 18px rgba(204,51,0,0.3); }
+.plan-btn-pro:hover { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(204,51,0,0.4); }
+.plan-btn-elite { background: #fff; color: #1A1208; border: 1.5px solid #E8DDD0; }
+.plan-btn-elite:hover { border-color: #CC3300; color: #CC3300; }
+
+.plan-divider { height: 1px; background: #F0E8DE; margin-bottom: 20px; }
+.plan-card.featured .plan-divider { background: rgba(255,255,255,0.1); }
+
+.plan-features-label {
+  font-size: 0.68rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.1em; color: #9C8A78; margin-bottom: 14px;
+}
+.plan-features { list-style: none; display: flex; flex-direction: column; gap: 10px; }
+.plan-features li {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 0.85rem; color: #1A1208; line-height: 1.5;
+}
+.plan-card.featured .plan-features li { color: #E8DDD0; }
+.plan-features li .chk {
+  width: 17px; height: 17px; border-radius: 50%; flex-shrink: 0; margin-top: 1px;
+  display: flex; align-items: center; justify-content: center; font-size: 0.62rem;
+}
+.chk-free  { background: rgba(107,92,69,0.15); color: #6B5C45; }
+.chk-pro   { background: #CC3300; color: #fff; }
+.chk-elite { background: #FF6B1A; color: #fff; }
+.feat-muted { color: #C8B89A !important; }
+.plan-card.featured .feat-muted { color: rgba(200,184,154,0.5) !important; }
+
+/* FAQ */
+.faq-section { max-width: 760px; margin: 0 auto; padding: 0 20px 80px; }
+.faq-section h2 {
+  font-family: 'Fraunces', serif; font-size: clamp(1.5rem, 3vw, 2rem);
+  font-weight: 900; text-align: center; margin-bottom: 40px; letter-spacing: -0.02em;
+}
+.faq-item {
+  border-bottom: 1px solid #F0E8DE; padding: 20px 0; cursor: pointer;
+}
+.faq-q {
+  display: flex; justify-content: space-between; align-items: center; gap: 16px;
+  font-weight: 600; font-size: 0.95rem; color: #1A1208;
+}
+.faq-icon { font-size: 1.1rem; color: #CC3300; flex-shrink: 0; transition: transform 0.2s; }
+.faq-item.open .faq-icon { transform: rotate(45deg); }
+.faq-a {
+  font-size: 0.88rem; color: #6B5C45; line-height: 1.75;
+  max-height: 0; overflow: hidden; transition: max-height 0.3s ease, padding 0.2s;
+  padding-top: 0;
+}
+.faq-item.open .faq-a { max-height: 200px; padding-top: 12px; }
+
+/* CTA BANNER */
+.pricing-cta {
+  background: #1A1208; text-align: center; padding: 64px 20px;
+  position: relative; overflow: hidden;
+}
+.pricing-cta::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 400px at 50% 100%, rgba(204,51,0,0.2) 0%, transparent 60%);
+  pointer-events: none;
+}
+.pricing-cta h2 {
+  font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 900; color: #fff; letter-spacing: -0.03em; margin-bottom: 14px;
+  position: relative; z-index: 1;
+}
+.pricing-cta p { color: #C8B89A; margin-bottom: 28px; font-size: 1rem; position: relative; z-index: 1; }
+.pricing-cta a {
+  display: inline-block; background: #CC3300; color: #fff;
+  font-weight: 700; font-size: 1rem; padding: 14px 36px;
+  border-radius: 100px; text-decoration: none;
+  box-shadow: 0 6px 24px rgba(204,51,0,0.4); transition: all 0.2s;
+  position: relative; z-index: 1;
+}
+.pricing-cta a:hover { background: #AA2800; transform: translateY(-2px); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="methodology.html">Our Method</a>
+    <a href="analytics.html">Analytics</a>
+  </div>
+  <div class="nav-right">
+    <a href="pricing.html" class="nav-links" style="color:#CC3300;font-weight:700;padding:0 8px;">Pricing</a>
+    <a href="login.html" class="nav-login">Login / Register</a>
+  </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;">Pricing</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
+
+<!-- HERO -->
+<section class="pricing-hero">
+  <div class="pricing-eyebrow">Simple Pricing</div>
+  <h1>One platform.<br/><em>Three ways in.</em></h1>
+  <p>Start free. Upgrade when you're ready. No hidden fees. Cancel anytime.</p>
+
+  <div class="billing-toggle">
+    <button class="billing-opt active" onclick="setBilling('monthly',this)">Monthly</button>
+    <button class="billing-opt" onclick="setBilling('yearly',this)">Yearly <span class="billing-save">Save 30%</span></button>
+  </div>
+</section>
+
+<!-- PLANS -->
+<section class="plans-section">
+  <div class="plans-grid">
+
+    <!-- FREE -->
+    <div class="plan-card">
+      <div class="plan-name">Free</div>
+      <div class="plan-tagline">Everything you need to start building pattern intelligence.</div>
+      <div class="plan-price">
+        <span class="currency">₹</span>
+        <span class="amount">0</span>
+        <span class="period">/ forever</span>
+      </div>
+      <div class="plan-billed">&nbsp;</div>
+      <a href="login.html" class="plan-btn plan-btn-free">Get Started Free</a>
+      <div class="plan-divider"></div>
+      <div class="plan-features-label">What's included</div>
+      <ul class="plan-features">
+        <li><span class="chk chk-free">✓</span> 500 practice questions / day</li>
+        <li><span class="chk chk-free">✓</span> All 6 pattern types</li>
+        <li><span class="chk chk-free">✓</span> Basic analytics</li>
+        <li><span class="chk chk-free">✓</span> 1 full mock test / month</li>
+        <li><span class="chk chk-free feat-muted">–</span> <span class="feat-muted">Detailed explanations</span></li>
+        <li><span class="chk chk-free feat-muted">–</span> <span class="feat-muted">Performance tracking</span></li>
+        <li><span class="chk chk-free feat-muted">–</span> <span class="feat-muted">Mindset sessions</span></li>
+      </ul>
+    </div>
+
+    <!-- PRO (FEATURED) -->
+    <div class="plan-card featured">
+      <div class="plan-popular">Most Popular</div>
+      <div class="plan-name">Pro</div>
+      <div class="plan-tagline">The full NEETMINDS™ experience. Built for serious aspirants.</div>
+      <div class="plan-price">
+        <span class="currency">₹</span>
+        <span class="amount" id="pro-price">499</span>
+        <span class="period">/ month</span>
+      </div>
+      <div class="plan-billed" id="pro-billed" style="color:#9C8A78;">Billed monthly · Cancel anytime</div>
+      <a href="login.html?plan=pro" class="plan-btn plan-btn-pro" id="pro-btn">Start Pro →</a>
+      <div class="plan-divider"></div>
+      <div class="plan-features-label" style="color:#9C8A78;">Everything in Free, plus:</div>
+      <ul class="plan-features">
+        <li><span class="chk chk-pro">✓</span> Unlimited practice questions</li>
+        <li><span class="chk chk-pro">✓</span> Unlimited mock tests</li>
+        <li><span class="chk chk-pro">✓</span> Full NCERT explanations</li>
+        <li><span class="chk chk-pro">✓</span> Deep performance analytics</li>
+        <li><span class="chk chk-pro">✓</span> Mindset + meditation sessions</li>
+        <li><span class="chk chk-pro">✓</span> Pattern weakness reports</li>
+        <li><span class="chk chk-pro">✓</span> Priority support</li>
+      </ul>
+    </div>
+
+    <!-- ELITE -->
+    <div class="plan-card">
+      <div class="plan-name">Elite</div>
+      <div class="plan-tagline">For the student who wants AIR 1. Maximum tools, maximum edge.</div>
+      <div class="plan-price">
+        <span class="currency">₹</span>
+        <span class="amount" id="elite-price">999</span>
+        <span class="period">/ month</span>
+      </div>
+      <div class="plan-billed" id="elite-billed">Billed monthly · Cancel anytime</div>
+      <a href="login.html?plan=elite" class="plan-btn plan-btn-elite" id="elite-btn">Go Elite →</a>
+      <div class="plan-divider"></div>
+      <div class="plan-features-label">Everything in Pro, plus:</div>
+      <ul class="plan-features">
+        <li><span class="chk chk-elite">✓</span> 1-on-1 doubt sessions (2/mo)</span></li>
+        <li><span class="chk chk-elite">✓</span> Personalised study plan</li>
+        <li><span class="chk chk-elite">✓</span> Previous year paper analysis</li>
+        <li><span class="chk chk-elite">✓</span> Rank predictor tool</li>
+        <li><span class="chk chk-elite">✓</span> Chapter-wise mastery tracker</li>
+        <li><span class="chk chk-elite">✓</span> WhatsApp support</li>
+        <li><span class="chk chk-elite">✓</span> Early access to new features</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq-section">
+  <h2>Common Questions</h2>
+
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q">Can I switch plans later? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Yes — upgrade or downgrade anytime. If you upgrade mid-cycle, you're only charged the difference. Downgrades take effect at the next billing date.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q">Is the Free plan really free forever? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Yes. No credit card required. The Free plan gives you real access to the question bank and pattern system — enough to understand whether NEETMINDS™ works for you.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q">What payment methods are accepted? <span class="faq-icon">+</span></div>
+    <div class="faq-a">We accept UPI, all major debit/credit cards, and net banking via Razorpay. All payments are 256-bit SSL encrypted.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q">What is your refund policy? <span class="faq-icon">+</span></div>
+    <div class="faq-a">If you're not satisfied within 7 days of your first paid subscription, write to myneetminds@gmail.com and we'll refund you. No questions asked.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q">How many questions are in the question bank? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Over 7,350 NEET-pattern questions across Physics, Chemistry, and Biology — all tagged by subject, chapter, difficulty, and one of the 6 NEET question patterns. Updated regularly.</div>
+  </div>
+  <div class="faq-item" onclick="toggleFAQ(this)">
+    <div class="faq-q">Can I use NEETMINDS™ on mobile? <span class="faq-icon">+</span></div>
+    <div class="faq-a">Yes — the platform is fully responsive and works on all devices. A dedicated mobile app is coming soon.</div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="pricing-cta">
+  <h2>Start free.<br/>Upgrade when it clicks.</h2>
+  <p>7,350+ questions. 6 patterns. One goal — AIR 1.</p>
+  <a href="login.html">Create Free Account →</a>
+</div>
+
+<!-- FOOTER -->
+<footer class="neeto-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+      </div>
+      <p class="footer-tagline">Pattern intelligence for NEET. Master the patterns. Master the exam.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="practice.html">Practice Questions</a></li>
+        <li><a href="mock.html">Mock Tests</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="mindset.html">Mindset</a></li>
+        <li><a href="login.html">Login / Register</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="methodology.html">Our Method</a></li>
+        <li><a href="about.html">About NEETMINDS™</a></li>
+        <li><a href="pricing.html">Pricing</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Service</a></li>
+        <li><a href="#">Refund Policy</a></li>
+        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 NEETMINDS™ · For educational use only.</span>
+    <div class="footer-legal">
+      <a href="#">Privacy</a>
+      <a href="#">Terms</a>
+      <a href="mailto:myneetminds@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+var billing = 'monthly';
+var prices = {
+  monthly: { pro: '499', elite: '999', proBilled: 'Billed monthly · Cancel anytime', eliteBilled: 'Billed monthly · Cancel anytime' },
+  yearly:  { pro: '349', elite: '699', proBilled: '₹4,188/year · Save ₹1,800', eliteBilled: '₹8,388/year · Save ₹3,600' }
+};
+
+function setBilling(type, btn) {
+  billing = type;
+  document.querySelectorAll('.billing-opt').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  var p = prices[type];
+  document.getElementById('pro-price').textContent   = p.pro;
+  document.getElementById('elite-price').textContent = p.elite;
+  document.getElementById('pro-billed').textContent   = p.proBilled;
+  document.getElementById('elite-billed').textContent = p.eliteBilled;
+  document.getElementById('pro-btn').href   = 'login.html?plan=pro&billing=' + type;
+  document.getElementById('elite-btn').href = 'login.html?plan=elite&billing=' + type;
+}
+
+function toggleFAQ(el) {
+  var isOpen = el.classList.contains('open');
+  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
+  if (!isOpen) el.classList.add('open');
+}
+</script>
+<script>
+(function(){
+  var nav = document.querySelector('nav.navbar');
+  if(!nav) return;
+  window.addEventListener('scroll', function(){
+    nav.classList.toggle('scrolled', window.scrollY > 10);
+  }, {passive:true});
+})();
+</script>
+</body>
+</html>
