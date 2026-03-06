@@ -288,7 +288,55 @@
       display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
     }
     @media(max-width:820px){ .rank-usp-inner { grid-template-columns: 1fr; gap: 36px; } }
-    .rank-usp-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #FF6B1A; display: block; margin-bottom: 14px; }
+    .rank-usp-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 22px;
+    }
+    .rank-usp-eyebrow-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #CC3300;
+      border-radius: 8px;
+      padding: 6px 14px 6px 10px;
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #fff;
+    }
+    .rank-usp-eyebrow-badge .usp-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #FF8C4A;
+      animation: uspPulse 1.8s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes uspPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.7)} }
+    .rank-usp-banner-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 900; color: #fff;
+      line-height: 0.95; letter-spacing: -0.04em;
+      text-transform: uppercase;
+      display: block; margin-bottom: 0;
+      /* Stroke outline effect */
+      -webkit-text-stroke: 0px;
+    }
+    .rank-usp-banner-title .rp-word-rank { color: #FF6B1A; }
+    .rank-usp-banner-title .rp-word-predictor { color: #fff; }
+    .rank-usp-banner-wrap {
+      margin-bottom: 20px;
+      padding: 16px 20px;
+      border: 1.5px solid rgba(255,107,26,0.3);
+      border-radius: 12px;
+      background: rgba(255,107,26,0.06);
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+    .rank-usp-banner-wrap::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, #FF6B1A, #CC3300);
+      border-radius: 12px 0 0 12px;
+    }
+    .rank-usp-banner-sub {
+      font-size: 0.75rem; color: #C8B89A; font-weight: 500;
+      letter-spacing: 0.04em; margin-top: 5px; display: block;
+    }
     .rank-usp-h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 900; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px; }
     .rank-usp-body { font-size: 0.93rem; color: #C8B89A; line-height: 1.75; margin-bottom: 22px; }
     .rank-usp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
@@ -416,7 +464,15 @@
 <section class="rank-usp-section">
   <div class="rank-usp-inner">
     <div class="rank-usp-left">
-      <span class="rank-usp-eyebrow">🎯 Free Tool — Our #1 USP</span>
+      <div class="rank-usp-banner-wrap">
+        <div class="rank-usp-eyebrow">
+          <span class="rank-usp-eyebrow-badge"><span class="usp-dot"></span>Our #1 USP · Free Tool</span>
+        </div>
+        <span class="rank-usp-banner-title">
+          <span class="rp-word-rank">Rank</span><br/><span class="rp-word-predictor">Predictor</span>
+        </span>
+        <span class="rank-usp-banner-sub">NTA 2021–2025 Data · 17 AIIMS Campuses · Takes 5 seconds</span>
+      </div>
       <h2 class="rank-usp-h2">Know Your Rank.<br/>See Your AIIMS Chances.<br/>Right Now.</h2>
       <p class="rank-usp-body">Enter your mock score and category. The engine uses 5 years of NTA official data to estimate your All India Rank and show exactly which AIIMS campuses are reachable — including quota-wise seat availability.</p>
       <div class="rank-usp-pills">
