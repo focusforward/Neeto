@@ -108,8 +108,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 .plan-btn-free:hover { background: #E8DDD0; }
 .plan-btn-pro { background: #CC3300; color: #fff; box-shadow: 0 4px 18px rgba(204,51,0,0.3); }
 .plan-btn-pro:hover { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(204,51,0,0.4); }
-.plan-btn-elite { background: #fff; color: #1A1208; border: 1.5px solid #E8DDD0; }
-.plan-btn-elite:hover { border-color: #CC3300; color: #CC3300; }
+
 
 .plan-divider { height: 1px; background: #F0E8DE; margin-bottom: 20px; }
 .plan-card.featured .plan-divider { background: rgba(255,255,255,0.1); }
@@ -130,7 +129,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 }
 .chk-free  { background: rgba(107,92,69,0.15); color: #6B5C45; }
 .chk-pro   { background: #CC3300; color: #fff; }
-.chk-elite { background: #FF6B1A; color: #fff; }
+
 .feat-muted { color: #C8B89A !important; }
 .plan-card.featured .feat-muted { color: rgba(200,184,154,0.5) !important; }
 
@@ -219,7 +218,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 <section class="pricing-hero">
   <div class="pricing-eyebrow">Simple Pricing</div>
   <h1>One platform.<br/><em>Three ways in.</em></h1>
-  <p>Start free. Upgrade when you're ready. No hidden fees. Cancel anytime.</p>
+  <p>Start free. Upgrade when you're ready. No hidden fees. Commitment to your NEET journey.</p>
 
   <div class="billing-toggle">
     <button class="billing-opt active" onclick="setBilling('monthly',this)">Monthly</button>
@@ -259,13 +258,13 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
     <div class="plan-card featured">
       <div class="plan-popular">Most Popular</div>
       <div class="plan-name">Pro</div>
-      <div class="plan-tagline">The full NEETMINDS™ experience. Built for serious aspirants.</div>
+      <div class="plan-tagline">The full NEETMINDS™ experience — including our proprietary <strong>Rank Predictor</strong>. Built for serious aspirants.</div>
       <div class="plan-price">
         <span class="currency">₹</span>
-        <span class="amount" id="pro-price">499</span>
+        <span class="amount" id="pro-price">799</span>
         <span class="period">/ month</span>
       </div>
-      <div class="plan-billed" id="pro-billed" style="color:#9C8A78;">Billed monthly · Cancel anytime</div>
+      <div class="plan-billed" id="pro-billed" style="color:#9C8A78;">Billed monthly · No refunds</div>
       <a href="login.html?plan=pro" class="plan-btn plan-btn-pro" id="pro-btn">Start Pro →</a>
       <div class="plan-divider"></div>
       <div class="plan-features-label" style="color:#9C8A78;">Everything in Free, plus:</div>
@@ -276,31 +275,8 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
         <li><span class="chk chk-pro">✓</span> Deep performance analytics</li>
         <li><span class="chk chk-pro">✓</span> Mindset + meditation sessions</li>
         <li><span class="chk chk-pro">✓</span> Pattern weakness reports</li>
+        <li><span class="chk chk-pro">✓</span> 🎯 <strong>Rank Predictor</strong> — All 17 AIIMS + Govt MBBS outlook (Proprietary)</li>
         <li><span class="chk chk-pro">✓</span> Priority support</li>
-      </ul>
-    </div>
-
-    <!-- ELITE -->
-    <div class="plan-card">
-      <div class="plan-name">Elite</div>
-      <div class="plan-tagline">For the student who wants AIR 1. Maximum tools, maximum edge.</div>
-      <div class="plan-price">
-        <span class="currency">₹</span>
-        <span class="amount" id="elite-price">999</span>
-        <span class="period">/ month</span>
-      </div>
-      <div class="plan-billed" id="elite-billed">Billed monthly · Cancel anytime</div>
-      <a href="login.html?plan=elite" class="plan-btn plan-btn-elite" id="elite-btn">Go Elite →</a>
-      <div class="plan-divider"></div>
-      <div class="plan-features-label">Everything in Pro, plus:</div>
-      <ul class="plan-features">
-        <li><span class="chk chk-elite">✓</span> 1-on-1 doubt sessions (2/mo)</span></li>
-        <li><span class="chk chk-elite">✓</span> Personalised study plan</li>
-        <li><span class="chk chk-elite">✓</span> Previous year paper analysis</li>
-        <li><span class="chk chk-elite">✓</span> Rank predictor tool</li>
-        <li><span class="chk chk-elite">✓</span> Chapter-wise mastery tracker</li>
-        <li><span class="chk chk-elite">✓</span> WhatsApp support</li>
-        <li><span class="chk chk-elite">✓</span> Early access to new features</li>
       </ul>
     </div>
 
@@ -313,7 +289,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">Can I switch plans later? <span class="faq-icon">+</span></div>
-    <div class="faq-a">Yes — upgrade or downgrade anytime. If you upgrade mid-cycle, you're only charged the difference. Downgrades take effect at the next billing date.</div>
+    <div class="faq-a">You can upgrade from Free to Pro at any time. Pro subscriptions are billed monthly and are non-refundable — please try the Free plan thoroughly before upgrading.</div>
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">Is the Free plan really free forever? <span class="faq-icon">+</span></div>
@@ -325,7 +301,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">What is your refund policy? <span class="faq-icon">+</span></div>
-    <div class="faq-a">If you're not satisfied within 7 days of your first paid subscription, write to myneetminds@gmail.com and we'll refund you. No questions asked.</div>
+    <div class="faq-a"><strong>All payments are final and non-refundable.</strong> NEETMINDS™ Pro gives you immediate access to our full question bank, rank predictor, analytics, and AIIMS data. Because you receive full value from day one, we do not offer refunds or partial-month credits. Please use the Free plan to evaluate the platform before upgrading.</div>
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">How many questions are in the question bank? <span class="faq-icon">+</span></div>
@@ -377,8 +353,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
       <ul>
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Refund Policy</a></li>
-        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+                <li><a href="/cdn-cgi/l/email-protection#214c584f4444554c484f455261464c40484d0f424e4c">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -387,16 +362,16 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
     <div class="footer-legal">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="mailto:myneetminds@gmail.com">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#34594d5a515140595d5a5047745359555d581a575b59">Contact</a>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var billing = 'monthly';
 var prices = {
-  monthly: { pro: '499', elite: '999', proBilled: 'Billed monthly · Cancel anytime', eliteBilled: 'Billed monthly · Cancel anytime' },
-  yearly:  { pro: '349', elite: '699', proBilled: '₹4,188/year · Save ₹1,800', eliteBilled: '₹8,388/year · Save ₹3,600' }
+  monthly: { pro: '799', proBilled: 'Billed monthly · No refunds' },
+  yearly:  { pro: '349', proBilled: '₹7,188/year · Save ₹2,400' }
 };
 
 function setBilling(type, btn) {
@@ -404,28 +379,11 @@ function setBilling(type, btn) {
   document.querySelectorAll('.billing-opt').forEach(function(b){ b.classList.remove('active'); });
   btn.classList.add('active');
   var p = prices[type];
-  document.getElementById('pro-price').textContent   = p.pro;
-  document.getElementById('elite-price').textContent = p.elite;
-  document.getElementById('pro-billed').textContent   = p.proBilled;
-  document.getElementById('elite-billed').textContent = p.eliteBilled;
-  document.getElementById('pro-btn').href   = 'login.html?plan=pro&billing=' + type;
-  document.getElementById('elite-btn').href = 'login.html?plan=elite&billing=' + type;
+  document.getElementById('pro-price').textContent  = p.pro;
+  document.getElementById('pro-billed').textContent = p.proBilled;
+  document.getElementById('pro-btn').href = 'login.html?plan=pro&billing=' + type;
 }
 
 function toggleFAQ(el) {
   var isOpen = el.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remove('open'); });
-  if (!isOpen) el.classList.add('open');
-}
-</script>
-<script>
-(function(){
-  var nav = document.querySelector('nav.navbar');
-  if(!nav) return;
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, {passive:true});
-})();
-</script>
-</body>
-</html>
+  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remov

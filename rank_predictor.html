@@ -187,6 +187,80 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
 .fade-up{animation:fadeUp .4s ease both;}
 .fade-up-2{animation:fadeUp .4s .1s ease both;}
 .fade-up-3{animation:fadeUp .4s .2s ease both;}
+
+/* ── PRO PAYWALL OVERLAY ── */
+.aiims-locked-wrap {
+  position: relative; margin-top: 8px;
+}
+.aiims-free-row {
+  /* first campus (Delhi) — always visible */
+}
+.aiims-blur-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
+  filter: blur(5px); user-select: none; pointer-events: none;
+  opacity: 0.55; margin-top: 10px;
+}
+@media(max-width:500px){ .aiims-blur-grid { grid-template-columns: 1fr; } }
+.aiims-paywall {
+  position: absolute; inset: 0;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: rgba(255,253,249,0.0); cursor: pointer; z-index: 10;
+  border-radius: 14px;
+}
+.aiims-paywall-inner {
+  background: #1A1208; color: #fff; border-radius: 18px;
+  padding: 22px 28px; text-align: center; max-width: 300px;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.45);
+  animation: payPop 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes payPop { from{transform:scale(0.85);opacity:0} to{transform:scale(1);opacity:1} }
+.paywall-lock { font-size: 2rem; margin-bottom: 8px; }
+.paywall-title { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 900; margin-bottom: 6px; color: #fff; }
+.paywall-sub { font-size: 0.78rem; color: rgba(255,255,255,0.65); margin-bottom: 16px; line-height: 1.5; }
+.paywall-btn {
+  display: inline-block; background: #CC3300; color: #fff;
+  padding: 11px 22px; border-radius: 100px;
+  font-weight: 700; font-size: 0.88rem; text-decoration: none;
+  box-shadow: 0 4px 18px rgba(204,51,0,0.45);
+  transition: all 0.2s; white-space: nowrap;
+  border: none; cursor: pointer; font-family: inherit;
+}
+.paywall-btn:hover { background: #AA2800; transform: translateY(-1px); }
+.paywall-note { font-size: 0.68rem; color: rgba(255,255,255,0.4); margin-top: 10px; }
+
+/* Full-screen paywall modal (fires on click) */
+.pro-modal-overlay {
+  display: none; position: fixed; inset: 0; z-index: 9999;
+  background: rgba(26,18,8,0.85); backdrop-filter: blur(6px);
+  align-items: center; justify-content: center; padding: 20px;
+}
+.pro-modal-overlay.open { display: flex; }
+.pro-modal {
+  background: #fff; border-radius: 24px; max-width: 420px; width: 100%;
+  overflow: hidden; box-shadow: 0 32px 80px rgba(0,0,0,0.4);
+  animation: modalIn 0.3s cubic-bezier(0.175,0.885,0.32,1.275);
+}
+@keyframes modalIn { from{transform:translateY(40px);opacity:0} to{transform:translateY(0);opacity:1} }
+.pro-modal-bar { height: 5px; background: linear-gradient(90deg,#CC3300,#FF6B1A); }
+.pro-modal-body { padding: 32px 30px 28px; text-align: center; }
+.pro-modal-icon { font-size: 2.6rem; margin-bottom: 12px; }
+.pro-modal-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; color: #1A1208; margin-bottom: 8px; }
+.pro-modal-sub { font-size: 0.85rem; color: #6B5C45; margin-bottom: 22px; line-height: 1.65; }
+.pro-modal-features { text-align: left; margin-bottom: 22px; }
+.pro-modal-features li { font-size: 0.82rem; color: #1A1208; padding: 5px 0; display: flex; align-items: flex-start; gap: 8px; border-bottom: 1px solid #F0E8DE; }
+.pro-modal-features li:last-child { border-bottom: none; }
+.pro-modal-cta {
+  display: block; width: 100%; padding: 14px;
+  background: #CC3300; color: #fff; border: none; border-radius: 12px;
+  font-family: inherit; font-size: 1rem; font-weight: 700;
+  cursor: pointer; box-shadow: 0 4px 20px rgba(204,51,0,0.3);
+  text-decoration: none; transition: all 0.2s;
+}
+.pro-modal-cta:hover { background: #AA2800; transform: translateY(-1px); }
+.pro-modal-dismiss { font-size: 0.75rem; color: #9C8A78; margin-top: 12px; cursor: pointer; display: block; }
+.pro-modal-dismiss:hover { color: #CC3300; }
+.pro-modal-price { font-family: 'Fraunces', serif; font-size: 1.8rem; font-weight: 900; color: #CC3300; }
+.pro-modal-price small { font-size: 0.7rem; font-weight: 500; color: #9C8A78; }
 </style>
 </head>
 <body>
@@ -745,9 +819,10 @@ function runPrediction() {
   }).length;
   document.getElementById('ctx-aiims').textContent = highCount > 0 ? highCount + ' reachable' : '0 reachable';
 
-  // ── AIIMS grid ──
-  var aimsHtml = '';
-  AIIMS_CAMPUSES.forEach(function(campus) {
+  // ── AIIMS grid — AIIMS Delhi free, all others behind Pro paywall ──
+  var freeCard = '';
+  var blurCards = '';
+  AIIMS_CAMPUSES.forEach(function(campus, idx) {
     var chance = getAIIMSChance(result.centralRank, campus, cat);
     var catData = campus.closingRanks[cat] || campus.closingRanks['General'];
     var avgRank = catData.avg;
@@ -756,14 +831,30 @@ function runPrediction() {
                    : chance === 'Moderate Chance' ? 'chance-mod'
                    : chance === 'Low Chance'       ? 'chance-low'
                    : 'chance-unlikely';
-    aimsHtml += '<div class="aiims-card">'
+    var card = '<div class="aiims-card">'
       + '<div><div class="aiims-name">' + campus.name + '</div>'
       + '<div class="aiims-rank">' + campus.location + ' · Avg closing ~' + formatRank(avgRank) + ' (' + cat + ', ±' + spreadPct + '%)</div>'
       + '</div>'
       + '<span class="chance-badge ' + badgeClass + '">' + chance + '</span>'
       + '</div>';
+    if (idx === 0) { freeCard = card; } else { blurCards += card; }
   });
+  var aimsHtml = '<div class="aiims-free-row">' + freeCard + '</div>'
+    + '<div class="aiims-locked-wrap">'
+    + '<div class="aiims-blur-grid">' + blurCards + '</div>'
+    + '<div class="aiims-paywall" onclick="openProModal()">'
+    + '<div class="aiims-paywall-inner">'
+    + '<div class="paywall-lock">🔒</div>'
+    + '<div class="paywall-title">16 More AIIMS Campuses</div>'
+    + '<div class="paywall-sub">Rishikesh, Jodhpur, Bhopal, Patna &amp; 12 more — category-wise closing ranks, year-on-year trend data.</div>'
+    + '<button class="paywall-btn">Unlock with Pro — ₹799/mo →</button>'
+    + '<div class="paywall-note">AIIMS Delhi shown free above</div>'
+    + '</div></div>'
+    + '</div>';
   document.getElementById('aiims-grid').innerHTML = aimsHtml;
+
+  // ── Store for paywall link ──
+  window._lastResult = { score: score, cat: cat };
 
   // ── Show results ──
   var resultsEl = document.getElementById('results');
@@ -829,6 +920,53 @@ function copyResult() {
     setTimeout(runPrediction, 300);
   }
 })();
+</script>
+
+<!-- ── PRO PAYWALL MODAL ── -->
+<div class="pro-modal-overlay" id="pro-modal-overlay" onclick="closeProModal(event)">
+  <div class="pro-modal">
+    <div class="pro-modal-bar"></div>
+    <div class="pro-modal-body">
+      <div class="pro-modal-icon">🏥</div>
+      <div class="pro-modal-title">Full AIIMS Report is Pro-Only</div>
+      <div class="pro-modal-sub">
+        You're seeing AIIMS Delhi (free). Unlock all 17 AIIMS campuses, category-wise closing ranks, and year-on-year trend data.
+      </div>
+      <div class="pro-modal-price">₹799 <small>/ month</small></div>
+      <ul class="pro-modal-features" style="list-style:none;padding:0;margin-top:14px;">
+        <li>🎯 <strong>Rank Predictor</strong> — All 17 AIIMS campuses</li>
+        <li>📊 Category-wise AIR + closing rank trends</li>
+        <li>🏥 Govt MBBS outlook by state &amp; quota</li>
+        <li>📚 Unlimited practice + Full NCERT explanations</li>
+        <li>🧠 Pattern weakness reports + Analytics</li>
+        <li>🚫 <strong>All sales final — no refunds</strong></li>
+      </ul>
+      <a href="login.html?plan=pro" class="pro-modal-cta" id="pro-modal-cta">Unlock Pro — ₹799/month →</a>
+      <span class="pro-modal-dismiss" onclick="closeProModal()">Continue with free (AIIMS Delhi only)</span>
+    </div>
+  </div>
+</div>
+
+<script>
+/* ── PRO PAYWALL for AIIMS full report ── */
+function openProModal() {
+  /* Pass score+cat to the CTA link so login page pre-fills */
+  var cta = document.getElementById('pro-modal-cta');
+  if (cta && window._lastResult) {
+    cta.href = 'login.html?plan=pro&from=rank_predictor&score='
+      + window._lastResult.score + '&cat=' + window._lastResult.cat;
+  }
+  document.getElementById('pro-modal-overlay').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeProModal(e) {
+  if (e && e.target !== document.getElementById('pro-modal-overlay') && e.target !== e.currentTarget) return;
+  document.getElementById('pro-modal-overlay').classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', function(e) {
+  if (e.key === 'Escape') closeProModal();
+});
 </script>
 </body>
 </html>

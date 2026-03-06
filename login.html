@@ -235,7 +235,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   <a href="mock.html">Mock Test</a>
   <a href="methodology.html">Our Method</a>
   <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing — Free &amp; ₹499/mo</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing — Free &amp; ₹799/mo</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 
@@ -361,8 +361,8 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
             <input type="radio" name="plan" value="pro"/>
             <span class="plan-badge pro">⭐ Popular</span>
             <div class="plan-opt-name">Pro</div>
-            <div class="plan-opt-price">₹499 <small>/ month</small></div>
-            <div class="plan-opt-feats">Unlimited · Rank Predictor · AIIMS chances</div>
+            <div class="plan-opt-price">₹799 <small>/ month</small></div>
+            <div class="plan-opt-feats">Unlimited · 🎯 Rank Predictor · All 17 AIIMS</div>
           </label>
         </div>
 
@@ -370,8 +370,8 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
         <div class="pay-block" id="pay-block">
           <div class="pay-block-title">🔒 Secure Checkout via Razorpay</div>
           <div class="pay-summary">
-            You're subscribing to <strong>NEETMINDS™ Pro — ₹499/month</strong>.<br/>
-            Razorpay accepts UPI, Cards, Net Banking &amp; Wallets. Cancel anytime.
+            You're subscribing to <strong>NEETMINDS™ Pro — ₹799/month</strong>.<br/>
+            Razorpay accepts UPI, Cards, Net Banking &amp; Wallets. <strong>All sales are final — no refunds.</strong>
           </div>
           <button class="btn-rzp" id="rzp-btn" onclick="handleSignup()">
             <!-- Razorpay wordmark SVG -->
@@ -379,7 +379,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
               <rect width="512" height="512" rx="80" fill="#072654"/>
               <path d="M162 356l52-168h48l-28 90 94-90h60l-98 96 40 72h-56l-28-54-28 54H162z" fill="#3395FF"/>
             </svg>
-            Pay ₹499 with Razorpay
+            Pay ₹799 with Razorpay
             <span class="rzp-badge">UPI · Card · Net Banking</span>
           </button>
           <div class="secure-note">🔒 256-bit SSL · PCI-DSS compliant · Powered by Razorpay</div>
@@ -424,15 +424,15 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
       Create a key pair. Copy the KEY ID (starts with rzp_live_…).
       Set RAZORPAY_KEY below.
 
-   2. For subscription payments (recurring ₹499/month):
-      - Create a Razorpay Plan in the dashboard (₹499 monthly)
+   2. For subscription payments (recurring ₹799/month):
+      - Create a Razorpay Plan in the dashboard (₹799 monthly)
       - Copy the Plan ID into RAZORPAY_PLAN_ID below
       - The code already calls subscriptions.create — just uncomment
         the subscription block and comment out the one-time order block.
 
    3. STRONGLY RECOMMENDED for production:
       - Create a Razorpay Order on your backend before opening checkout
-        POST { amount:49900, currency:'INR', receipt:'order_xyz' }
+        POST { amount:79900, currency:'INR', receipt:'order_xyz' }
         → returns { id: 'order_XYZ' }
       - Pass that order_id to options.order_id
       - After payment, verify signature on backend:
@@ -584,7 +584,7 @@ function showSuccess(plan, name) {
 function launchRazorpay(name, email, phone) {
   var options = {
     key:         RAZORPAY_KEY,
-    amount:      49900,        // ₹499 in paise — one-time or first month
+    amount:      79900,        // ₹799 in paise — one-time or first month
     currency:    'INR',
     name:        'NEETMINDS™',
     description: 'Pro Plan — Unlimited NEET Preparation',
@@ -705,7 +705,7 @@ function handleLogin() {
 /* ─────────────────────────────────────────
    SIGNUP HANDLER
    Called by both "Create Free Account" button
-   and "Pay ₹499 with Razorpay" button
+   and "Pay ₹799 with Razorpay" button
 ───────────────────────────────────────── */
 function handleSignup() {
   clearAlert();
