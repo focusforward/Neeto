@@ -376,19 +376,60 @@
     .demo-placeholder { display: flex; align-items: center; justify-content: center; padding: 24px 16px; color: #C4A882; font-size: 0.84rem; text-align: center; border: 1.5px dashed #F0E8DE; border-radius: 11px; }
 
     /* ── PRICING STRIP ── */
-    .pricing-strip { background: var(--c-surface,#fff); border-top: 1.5px solid var(--c-border,#F0E8DE); border-bottom: 1.5px solid var(--c-border,#F0E8DE); padding: 28px 20px; }
-    .pricing-strip-inner { max-width: 1000px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
-    .ps-eyebrow { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #CC3300; display: block; margin-bottom: 4px; }
-    .ps-heading { font-family: 'Fraunces', serif; font-size: 1.2rem; font-weight: 900; color: var(--c-ink,#1A1208); }
-    .ps-tiers { display: flex; gap: 12px; flex-wrap: wrap; }
-    .ps-tier { border: 1.5px solid var(--c-border,#F0E8DE); border-radius: 12px; padding: 13px 18px; min-width: 148px; background: var(--c-bg,#FAFAF8); }
-    .ps-tier-name { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #8B6F4E; margin-bottom: 3px; }
-    .ps-tier-price { font-family: 'Fraunces', serif; font-size: 1.4rem; font-weight: 900; color: var(--c-ink,#1A1208); }
-    .ps-tier-desc { font-size: 0.72rem; color: #8B6F4E; margin-top: 3px; line-height: 1.4; }
-    .ps-featured { border-color: #CC3300 !important; background: #FFF5F0 !important; }
-    .ps-featured .ps-tier-price { color: #CC3300; }
-    .ps-cta { background: #CC3300; color: #fff; padding: 11px 22px; border-radius: 100px; font-weight: 700; font-size: 0.87rem; text-decoration: none; white-space: nowrap; box-shadow: 0 4px 14px rgba(204,51,0,0.3); transition: all .2s; }
-    .ps-cta:hover { background: #AA2800; transform: translateY(-1px); }
+    /* ── PRICING SECTION ── */
+    .pricing-strip { background: var(--c-bg,#FAFAF8); padding: 72px 20px 80px; }
+    .pricing-strip-inner { max-width: 960px; margin: 0 auto; }
+    .ps-top { text-align: center; margin-bottom: 48px; }
+    .ps-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #CC3300; background: rgba(204,51,0,0.08); border-radius: 100px; padding: 5px 14px; display: inline-block; margin-bottom: 14px; }
+    .ps-heading { font-family: 'Fraunces', serif; font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; color: var(--c-ink,#1A1208); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 10px; }
+    .ps-sub { font-size: 0.95rem; color: #6B5C45; max-width: 480px; margin: 0 auto; line-height: 1.65; }
+
+    .ps-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 20px; overflow: hidden; border: 1.5px solid #E8DDD0; box-shadow: 0 12px 48px rgba(26,18,8,0.07); }
+    @media(max-width:700px){ .ps-cards { grid-template-columns: 1fr; border-radius: 16px; } }
+
+    .ps-card { background: #fff; padding: 36px 36px 40px; display: flex; flex-direction: column; }
+    .ps-card + .ps-card { border-left: 1.5px solid #E8DDD0; }
+    @media(max-width:700px){ .ps-card + .ps-card { border-left: none; border-top: 1.5px solid #E8DDD0; } }
+    .ps-card.ps-featured { background: #1A1208; }
+
+    .ps-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+    .ps-plan-name { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; color: #1A1208; }
+    .ps-card.ps-featured .ps-plan-name { color: #fff; }
+    .ps-price-block { text-align: right; }
+    .ps-price { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: #1A1208; line-height: 1; }
+    .ps-price .ps-currency { font-size: 1.1rem; vertical-align: super; line-height: 0; font-weight: 700; }
+    .ps-price .ps-period { font-size: 0.72rem; font-weight: 500; color: #8B6F4E; display: block; margin-top: 3px; }
+    .ps-card.ps-featured .ps-price { color: #FF6B1A; }
+    .ps-card.ps-featured .ps-price .ps-period { color: #9C8A78; }
+    .ps-free-badge { background: #F0E8DE; color: #6B5C45; font-size: 0.72rem; font-weight: 700; padding: 5px 12px; border-radius: 100px; white-space: nowrap; margin-top: 6px; display: inline-block; }
+
+    .ps-divider { height: 1px; background: #F0E8DE; margin: 20px 0; }
+    .ps-card.ps-featured .ps-divider { background: rgba(255,255,255,0.1); }
+
+    .ps-tagline { font-size: 0.88rem; color: #6B5C45; line-height: 1.6; margin-bottom: 22px; }
+    .ps-card.ps-featured .ps-tagline { color: #C8B89A; }
+
+    .ps-btn { display: block; width: 100%; padding: 13px 20px; border-radius: 10px; font-family: inherit; font-size: 0.9rem; font-weight: 700; text-align: center; text-decoration: none; transition: all .18s; cursor: pointer; border: none; margin-bottom: 28px; }
+    .ps-btn-free { background: #F0E8DE; color: #1A1208; border: 1.5px solid #E0D4C6; }
+    .ps-btn-free:hover { background: #E8DDD0; }
+    .ps-btn-pro { background: #CC3300; color: #fff; box-shadow: 0 4px 18px rgba(204,51,0,0.3); }
+    .ps-btn-pro:hover { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(204,51,0,0.4); }
+
+    .ps-feat-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9C8A78; margin-bottom: 14px; }
+    .ps-features { list-style: none; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+    .ps-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #1A1208; line-height: 1.5; }
+    .ps-card.ps-featured .ps-features li { color: #E8DDD0; }
+    .ps-chk { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 700; }
+    .ps-chk-free { background: rgba(107,92,69,0.12); color: #6B5C45; }
+    .ps-chk-pro { background: #CC3300; color: #fff; }
+    .ps-chk-dim { background: rgba(107,92,69,0.06); color: #C8B89A; }
+    .ps-feat-dim { color: #C8B89A !important; }
+    .ps-feat-highlight { color: #FF6B1A !important; font-weight: 600; }
+    .ps-card.ps-featured .ps-feat-highlight { color: #FF8C4A !important; }
+
+    .ps-bottom-cta { text-align: center; margin-top: 28px; }
+    .ps-bottom-link { font-size: 0.82rem; color: #8B6F4E; text-decoration: none; }
+    .ps-bottom-link:hover { color: #CC3300; }
   </style>
 </head>
 <body>
@@ -527,23 +568,72 @@
 <!-- ── PRICING STRIP — two tiers ── -->
 <section class="pricing-strip">
   <div class="pricing-strip-inner">
-    <div class="ps-left">
+
+    <div class="ps-top">
       <span class="ps-eyebrow">Simple Pricing</span>
       <h3 class="ps-heading">Start Free. Upgrade When Ready.</h3>
+      <p class="ps-sub">No hidden fees. Full value from day one.</p>
     </div>
-    <div class="ps-tiers">
-      <div class="ps-tier">
-        <div class="ps-tier-name">Free</div>
-        <div class="ps-tier-price">₹0</div>
-        <div class="ps-tier-desc">10 explanations/day · Practice · Mock tests</div>
+
+    <div class="ps-cards">
+
+      <!-- FREE -->
+      <div class="ps-card">
+        <div class="ps-card-top">
+          <div class="ps-plan-name">Free</div>
+          <div class="ps-price-block">
+            <div class="ps-price"><span class="ps-currency">₹</span>0</div>
+            <span class="ps-free-badge">Forever free</span>
+          </div>
+        </div>
+        <div class="ps-divider"></div>
+        <p class="ps-tagline">Everything you need to start building pattern intelligence and test your NEET readiness.</p>
+        <a href="login.html" class="ps-btn ps-btn-free">Get Started Free</a>
+        <div class="ps-feat-label">What's included</div>
+        <ul class="ps-features">
+          <li><span class="ps-chk ps-chk-free">✓</span> 500 practice questions / day</li>
+          <li><span class="ps-chk ps-chk-free">✓</span> All 6 NEET question patterns</li>
+          <li><span class="ps-chk ps-chk-free">✓</span> Basic analytics dashboard</li>
+          <li><span class="ps-chk ps-chk-free">✓</span> 1 full mock test / month</li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">Detailed NCERT explanations</span></li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">Rank Predictor</span></li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">AIIMS + JIPMER chances</span></li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">Mindset sessions</span></li>
+        </ul>
       </div>
-      <div class="ps-tier ps-featured">
-        <div class="ps-tier-name">⭐ Pro</div>
-        <div class="ps-tier-price">₹799<span style="font-size:0.75rem;font-weight:500;">/mo</span></div>
-        <div class="ps-tier-desc">Unlimited · 🎯 Rank Predictor (All 17 AIIMS) · AIIMS chances</div>
+
+      <!-- PRO -->
+      <div class="ps-card ps-featured">
+        <div class="ps-card-top">
+          <div class="ps-plan-name">Pro</div>
+          <div class="ps-price-block">
+            <div class="ps-price"><span class="ps-currency">₹</span>799<span class="ps-period">/ month · No refunds</span></div>
+          </div>
+        </div>
+        <div class="ps-divider"></div>
+        <p class="ps-tagline">The full NEETMINDS™ experience — including our proprietary Rank Predictor. Built for serious aspirants.</p>
+        <a href="pricing.html" class="ps-btn ps-btn-pro">Start Pro →</a>
+        <div class="ps-feat-label" style="color:#9C8A78;">Everything in Free, plus:</div>
+        <ul class="ps-features">
+          <li><span class="ps-chk ps-chk-pro">✓</span> Unlimited practice questions</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Unlimited mock tests</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Full NCERT explanations</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Deep performance analytics</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Pattern weakness reports</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> <span class="ps-feat-highlight">🎯 Rank Predictor — All India Rank estimate</span></li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> <span class="ps-feat-highlight">🏥 All 17 AIIMS · Category-wise closing ranks</span></li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> <span class="ps-feat-highlight">🏛️ JIPMER Puducherry &amp; Karaikal · Round-wise data</span></li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Mindset + meditation sessions</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Priority support</li>
+        </ul>
       </div>
+
     </div>
-    <a href="pricing.html" class="ps-cta">See Full Pricing →</a>
+
+    <div class="ps-bottom-cta">
+      <a href="pricing.html" class="ps-bottom-link">View full pricing details &amp; FAQ →</a>
+    </div>
+
   </div>
 </section>
 
