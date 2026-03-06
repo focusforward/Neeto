@@ -146,35 +146,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEET2025_PHY_013",
-      "subject": "Physics",
-      "unit_code": "UNIT19_ElectronicDevices",
-      "chapter": "Semiconductor Electronics",
-      "topic": "",
-      "question": "The output (Y) of the given logic implementation is similar to the output of a:",
-      "options": {
-        "A": "NOR",
-        "B": "AND",
-        "C": "NAND",
-        "D": "OR"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEET2025_PHY_014",
       "subject": "Physics",
       "unit_code": "UNIT11_Electrostatics",
@@ -204,35 +175,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEET2025_PHY_017",
-      "subject": "Physics",
-      "unit_code": "UNIT12_CurrentElectricity",
-      "chapter": "Current Electricity",
-      "topic": "",
-      "question": "Which of the following options represent the variation of photoelectric current with the property of light shown on the x-axis?",
-      "options": {
-        "A": "B and D",
-        "B": "A only",
-        "C": "A and C",
-        "D": "A and D"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEET2025_PHY_018",
       "subject": "Physics",
       "unit_code": "UNIT18_AtomsNuclei",
@@ -257,35 +199,6 @@
       "verified": true,
       "tags": [],
       "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
-      "id": "NEET2025_PHY_019",
-      "subject": "Physics",
-      "unit_code": "UNIT12_CoordinationCompounds",
-      "chapter": "Kinematics",
-      "topic": "",
-      "question": "A bob of heavy mass m is suspended by a light string of length l. The bob is given a horizontal velocity v₀. If the string gets slack at some point P making an angle θ from the horizontal, the ratio of the speed v of the bob at point P to its initial speed v₀ is:",
-      "options": {
-        "A": "(sinθ/(2+3sinθ))^(1/2)",
-        "B": "(sinθ)^(1/2)",
-        "C": "(1/(2+3sinθ))^(1/2)",
-        "D": "(cosθ/(2+3sinθ))^(1/2)"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "HIGH"
@@ -407,35 +320,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEET2025_PHY_035",
-      "subject": "Physics",
-      "unit_code": "UNIT10_OscillationsWaves",
-      "chapter": "Waves",
-      "topic": "",
-      "question": "In an oscillating spring mass system, a spring is connected to a box filled with sand. As the box oscillates, sand leaks slowly out of the box vertically so that the average frequency ω(t) and average amplitude A(t) of the system change with time t. Which option schematically depicts these changes correctly?",
-      "options": {
-        "A": "(1)",
-        "B": "(2)",
-        "C": "(3)",
-        "D": "(4)"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEET2025_PHY_036",
       "subject": "Physics",
       "unit_code": "UNIT13_MagneticEffectsCurrentMagnetism",
@@ -547,35 +431,6 @@
       "verified": true,
       "tags": [],
       "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "HIGH"
-    },
-    {
-      "id": "NEET2025_PHY_045",
-      "subject": "Physics",
-      "unit_code": "UNIT5_RotationalMotion",
-      "chapter": "Laws of Motion",
-      "topic": "",
-      "question": "A sphere of radius R is cut from a larger solid sphere of radius 2R. The ratio of the moment of inertia of the smaller sphere to that of the rest part of the sphere about the Y-axis is:",
-      "options": {
-        "A": "7/64",
-        "B": "7/8",
-        "C": "7/40",
-        "D": "7/57"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "HIGH"
@@ -3069,118 +2924,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_NEET_UPLOAD_Q0163",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Match List I with List II",
-      "options": {
-        "A": "А-II, В-IV, C-I, D-III",
-        "B": "A-I, B-III, C-II, D-IV",
-        "C": "A-II, B-IV, C-I, D-III",
-        "D": "А-ІІІ, В-II, C-IV, D-I"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Expiratory capacity",
-            "col2": "I. Expiratory reserve volume + Tidal volume + Inspiratory reserve volume"
-          },
-          {
-            "col1": "B. Functional residual capacity",
-            "col2": "II. Tidal volume + Expiratory reserve volume"
-          },
-          {
-            "col1": "C. Vital capacity",
-            "col2": "III. Tidal volume + Inspiratory reserve volume"
-          },
-          {
-            "col1": "D. Inspiratory capacity",
-            "col2": "IV. Expiratory reserve volume + Residual volume"
-          }
-        ]
-      }
-    },
-    {
-      "id": "NEET_UPLOAD_Q0168",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Match List I with List II",
-      "options": {
-        "A": "A-III, B-IV, C-I, D-II",
-        "B": "A-II, B-IV, C-I, D-III",
-        "C": "A-II, B-I, C-IV, D-III",
-        "D": "А-III, В-I, C-II, D-IV"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. α-1 antitrypsin",
-            "col2": "I. Cotton bollworm"
-          },
-          {
-            "col1": "B. Cry IAb",
-            "col2": "II. ADA deficiency"
-          },
-          {
-            "col1": "C. Cry IAc",
-            "col2": "III. Emphysema"
-          },
-          {
-            "col1": "D. Enzyme replacement therapy",
-            "col2": "IV. Corn borer"
-          }
-        ]
-      }
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0172",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -3212,62 +2955,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "NEET_UPLOAD_Q0174",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "System of Particles and Rotational Motion",
-      "topic": "",
-      "question": "Match List I with List II",
-      "options": {
-        "A": "A-II, В-III, C-I, D-IV",
-        "B": "A-III, В-I, C-IV, D-II",
-        "C": "A-IV, B-II, C-III, D-I",
-        "D": "A-I, B-III, C-II, D-IV"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Fibrous joints",
-            "col2": "I. Adjacent vertebrae, limited movement"
-          },
-          {
-            "col1": "B. Cartilaginous joints",
-            "col2": "II. Humerus and pectoral girdle, rotational movement"
-          },
-          {
-            "col1": "C. Hinge",
-            "col2": "III. Skull, don't allow any movement"
-          },
-          {
-            "col1": "D. Ball and socket joints",
-            "col2": "IV. Knee, help in locomotion"
-          }
-        ]
-      }
     },
     {
       "id": "PHY_NEET_UPLOAD_Q0186",
@@ -3809,62 +3496,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0028",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Physical World and Measurement",
-      "topic": "",
-      "question": "The errors in the measurement which arise due to unpredictable fluctuations in temperature and voltage supply are",
-      "options": {
-        "A": "Instrumental errors",
-        "B": "Personal errors",
-        "C": "Least count errors",
-        "D": "Random errors"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "The errors in the measurement which arise due to unpredictable fluctuations in temperature and voltage supply are",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "a. Iron",
-            "col2": "i. Synthesis of indole acetic acid (auxin)"
-          },
-          {
-            "col1": "b. Zinc",
-            "col2": "ii. Component of nitrogenase"
-          },
-          {
-            "col1": "c. Copper",
-            "col2": "iii. Cell elongation and differentiation"
-          },
-          {
-            "col1": "d. Boron",
-            "col2": "iv. Component of cytochrome oxidase"
-          }
-        ]
-      }
     },
     {
       "id": "PHY_NEET_UPLOAD_Q0030",
@@ -4670,62 +4301,6 @@
       ]
     },
     {
-      "id": "PHY_unclassified_b5d3b9d1d7",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match List I (Vasectomy, Coitus interruptus, Cervical caps, Saheli) with List II (Oral method, Barrier method, Surgical method, Natural method).",
-      "options": {
-        "A": "A-III, B-I, C-IV, D-II",
-        "B": "A-III, B-IV, C-II, D-I",
-        "C": "A-II, B-III, C-I, D-IV",
-        "D": "A-IV, B-II, C-I, D-III"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Vasectomy",
-            "col2": "I. Oral method"
-          },
-          {
-            "col1": "B. Coitus interruptus",
-            "col2": "II. Barrier method"
-          },
-          {
-            "col1": "C. Cervical caps",
-            "col2": "III. Surgical method"
-          },
-          {
-            "col1": "D. Saheli",
-            "col2": "IV. Natural method"
-          }
-        ]
-      }
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0152",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -4792,62 +4367,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_NEET_UPLOAD_Q0157",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Match List I (Cartilaginous Joint, Ball and Socket Joint, Fibrous Joint, Saddle Joint) with List II (Found between: Between flat skull bones, Between adjacent vertebrae, Between carpal and metacarpal of thumb, Between Humerus and Pectoral girdle).",
-      "options": {
-        "A": "A-III, B-I, C-II, D-IV",
-        "B": "A-II, B-IV, C-I, D-III",
-        "C": "A-I, B-IV, C-III, D-II",
-        "D": "A-II, B-IV, C-III, D-I"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Cartilaginous Joint",
-            "col2": "I. Between flat skull bones"
-          },
-          {
-            "col1": "B. Ball and Socket Joint",
-            "col2": "II. Between adjacent vertebrae"
-          },
-          {
-            "col1": "C. Fibrous Joint",
-            "col2": "III. Between carpal and metacarpal of thumb"
-          },
-          {
-            "col1": "D. Saddle Joint",
-            "col2": "IV. Between Humerus and Pectoral girdle"
-          }
-        ]
-      }
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0158",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -4879,62 +4398,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0165",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Match List I (Taenia, Paramoecium, Periplaneta, Pheretima) with List II (Nephridia, Contractile vacuole, Flame cells, Urecose gland).",
-      "options": {
-        "A": "A-I, B-II, C-III, D-IV",
-        "B": "A-I, B-II, C-IV, D-III",
-        "C": "A-III, B-II, C-IV, D-I",
-        "D": "A-II, B-I, C-IV, D-III"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Taenia",
-            "col2": "I. Nephridia"
-          },
-          {
-            "col1": "B. Paramoecium",
-            "col2": "II. Contractile vacuole"
-          },
-          {
-            "col1": "C. Periplaneta",
-            "col2": "III. Flame cells"
-          },
-          {
-            "col1": "D. Pheretima",
-            "col2": "IV. Urecose gland"
-          }
-        ]
-      }
     },
     {
       "id": "PHY_unclassified_7349956b66",
@@ -6295,62 +5758,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0142",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Which of the following occurs due to the presence of autosome linked dominant trait ?",
-      "options": {
-        "A": "Thalessemia",
-        "B": "Sickle cell anaemia",
-        "C": "Myotonic dystrophy",
-        "D": "Haemophilia"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Which of the following occurs due to the presence of autosome linked dominant trait ?",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Cohesion",
-            "col2": "I. More attraction in liquid phase than vapour"
-          },
-          {
-            "col1": "B. Adhesion",
-            "col2": "II. Mutual attraction among water molecules"
-          },
-          {
-            "col1": "C. Surface tension",
-            "col2": "III. Water loss in liquid phase"
-          },
-          {
-            "col1": "D. Guttation",
-            "col2": "IV. Attraction towards polar surfaces"
-          }
-        ]
-      }
     },
     {
       "id": "PHY_unclassified_f344e82e5f",
@@ -7927,62 +7334,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_NEET_UPLOAD_Q0130",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "UNCLASSIFIED",
-      "topic": "",
-      "question": "Match the following and identify the correct option",
-      "options": {
-        "A": "(a)-(iii), (b)-(i), (c)-(ii), (d)-(iv)",
-        "B": "(a)-(iii), (b)-(ii), (c)-(i), (d)-(iv)",
-        "C": "(a)-(iii), (b)-(iv), (c)-(ii), (d)-(i)",
-        "D": "(a)-(i), (b)-(iii), (c)-(ii), (d)-(iv)"
-      },
-      "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match the following and identify the correct option",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "a. CO(g) + H₂(g)",
-            "col2": "i. CaSO₄ dissolved in water"
-          },
-          {
-            "col1": "b. Temporary hardness of water",
-            "col2": "ii. NaHCO₃ + tartaric acid"
-          },
-          {
-            "col1": "c. Permanent hardness of water",
-            "col2": "iii. Water gas"
-          },
-          {
-            "col1": "d. Baking powder",
-            "col2": "iv. Ca(HCO₃)₂ dissolved in water"
-          }
-        ]
-      }
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0136",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -8344,62 +7695,6 @@
       "trap_patterns": [],
       "accuracy_flag": "ok",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0161",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Wave Optics",
-      "topic": "",
-      "question": "A wire of length L, area of cross section A is hanging from a fixed support. The length of the wire changes to L₁ when mass M is suspended from its free end. The expression for Young's modulus is:",
-      "options": {
-        "A": "ALMgL1",
-        "B": "ALMg(L₁−L)",
-        "C": "AL1MgL",
-        "D": "A(L₁−L)MgL"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "A wire of length L, area of cross section A is hanging from a fixed support. The length of the wire changes to L₁ when mass M is suspended from its free en",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. CCK",
-            "col2": "I. Kidney"
-          },
-          {
-            "col1": "B. GIP",
-            "col2": "II. Heart"
-          },
-          {
-            "col1": "C. ANF",
-            "col2": "III. Gastric gland"
-          },
-          {
-            "col1": "D. ADH",
-            "col2": "IV. Pancreas"
-          }
-        ]
-      }
     },
     {
       "id": "PHY_atoms_d44e021138",
@@ -11970,35 +11265,6 @@
       "confidence": "HIGH"
     },
     {
-      "id": "NEET2025_PHY_020",
-      "subject": "Physics",
-      "unit_code": "UNIT19_ElectronicDevices",
-      "chapter": "Semiconductor Electronics",
-      "topic": "",
-      "question": "A full wave rectifier circuit with diodes D₁ and D₂ is shown. If input supply voltage Vin=220sin(100πt) volt, then at t=15 msec:",
-      "options": {
-        "A": "D₁ and D₂ both are reverse biased",
-        "B": "D₁ is forward biased, D₂ is reverse biased",
-        "C": "D₁ is reverse biased, D₂ is forward biased",
-        "D": "D₁ and D₂ both are forward biased"
-      },
-      "correct_answer": "C",
-      "explanation": "Official NEET 2025 answer",
-      "ncert_ref": "",
-      "ncert_line": "To be added — use this question as pattern template",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
-      "trap_patterns": [],
-      "accuracy_flag": "verified",
-      "confidence": "HIGH"
-    },
-    {
       "id": "NEET2025_PHY_022",
       "subject": "Physics",
       "unit_code": "UNIT16_Optics",
@@ -12255,35 +11521,6 @@
       "verified": true,
       "tags": [],
       "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "verified",
-      "confidence": "HIGH"
-    },
-    {
-      "id": "NEET2025_PHY_034",
-      "subject": "Physics",
-      "unit_code": "UNIT12_CurrentElectricity",
-      "chapter": "Current Electricity",
-      "topic": "",
-      "question": "AB is a part of an electrical circuit. The potential difference VA-VB at the instant when current i=2A and is increasing at a rate of 1 amp/second is:",
-      "options": {
-        "A": "10 volt",
-        "B": "5 volt",
-        "C": "6 volt",
-        "D": "9 volt"
-      },
-      "correct_answer": "A",
-      "explanation": "Official NEET 2025 answer",
-      "ncert_ref": "",
-      "ncert_line": "To be added — use this question as pattern template",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L1",
-      "year": "2025",
-      "source": "NEET2025_official",
-      "verified": true,
-      "tags": [],
-      "diagram_required": true,
       "trap_patterns": [],
       "accuracy_flag": "verified",
       "confidence": "HIGH"
@@ -13230,118 +12467,6 @@
       "trap_patterns": [],
       "accuracy_flag": "unverified",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_atoms_cab45ba9d1",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Atoms",
-      "topic": "",
-      "question": "Match List I with List II. List-I (Molecule): A. ethane, B. ethene, C. carbon molecule, C₂, D. ethyne List-II (Number and types of bond/s between two carbon atoms): I. one σ-bond and two π-bonds, II. two π-bonds, III. one σ-bond, IV. one σ-bond and one π-bond",
-      "options": {
-        "A": "A-III, B-IV, C-II, D-I",
-        "B": "A-III, B-IV, C-I, D-II",
-        "C": "A-I, B-IV, C-II, D-III",
-        "D": "A-IV, B-III, C-II, D-I"
-      },
-      "correct_answer": "A",
-      "explanation": "Official NEET answer: A",
-      "ncert_ref": "",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "unverified",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "Match",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. ethane",
-            "col2": "I. one σ-bond and two π-bonds"
-          },
-          {
-            "col1": "B. ethene",
-            "col2": "II. two π-bonds"
-          },
-          {
-            "col1": "C. carbon molecule, C₂",
-            "col2": "III. one σ-bond"
-          },
-          {
-            "col1": "D. ethyne",
-            "col2": "IV. one σ-bond and one π-bond"
-          }
-        ]
-      }
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0086",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Atoms",
-      "topic": "",
-      "question": "A compound X contains 32% of A, 20% of B and remaing percentage of C. Then, the empirical formula of X is: (Given atomic masses of A=64; B=40 C=32u)",
-      "options": {
-        "A": "AB2C2",
-        "B": "ABC4",
-        "C": "A2BC2",
-        "D": "ABC3"
-      },
-      "correct_answer": "D",
-      "explanation": "Official NEET answer: D",
-      "ncert_ref": "",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "unverified",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "A compound X contains 32% of A, 20% of B and remaing percentage of",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Peroxodisulphuric acid",
-            "col2": "I. Contains S–O–O–S bond"
-          },
-          {
-            "col1": "B. Sulphuric acid",
-            "col2": "II. Contains S–O–S bond"
-          },
-          {
-            "col1": "C. Pyrosulphuric acid",
-            "col2": "III. Contains only S–OH bonds"
-          },
-          {
-            "col1": "D. Sulphurous acid",
-            "col2": "IV. Contains no S=O (peroxy) bond"
-          }
-        ]
-      }
     },
     {
       "id": "PHY_NEET_UPLOAD_Q0095",
@@ -15126,62 +14251,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_NEET_UPLOAD_Q0147",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Waves",
-      "topic": "",
-      "question": "In a guitar, two strings A and B made of same material are slightly out of tune and produce beats of frequency 6 Hz. When tension in B is slightly decreased, the beat frequency increases to 7 Hz. If the frequency of A is 530 Hz, the original frequency of B will be:",
-      "options": {
-        "A": "523 Hz",
-        "B": "524 Hz",
-        "C": "536 Hz",
-        "D": "537 Hz"
-      },
-      "correct_answer": "B",
-      "explanation": "Official NEET answer: B",
-      "ncert_ref": "",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "unverified",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "In a guitar, two strings A and B made of same material are slightly out of tune and produce beats of frequency 6 Hz. When tension in B is slightly decreased, the beat frequency increases to 7 Hz. If the frequency of A is 530 Hz, the original frequency of B will be:",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Mutualism",
-            "col2": "I. +, 0"
-          },
-          {
-            "col1": "B. Commensalism",
-            "col2": "II. -, 0"
-          },
-          {
-            "col1": "C. Amensalism",
-            "col2": "III. +, -"
-          },
-          {
-            "col1": "D. Parasitism",
-            "col2": "IV. +, +"
-          }
-        ]
-      }
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0148",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -15543,62 +14612,6 @@
       "trap_patterns": [],
       "accuracy_flag": "unverified",
       "confidence": "medium"
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0178",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Mechanical Properties of Fluids",
-      "topic": "",
-      "question": "A capillary tube of radius r is immersed in water and water rises in it to a height h. The mass of the water in the capillary is 5 g. Another capillary tube of radius 2r is immersed in water. The mass of water that will rise in this tube is:",
-      "options": {
-        "A": "2.5 g",
-        "B": "5.0 g",
-        "C": "10.0 g",
-        "D": "20.0 g"
-      },
-      "correct_answer": "C",
-      "explanation": "Official NEET answer: C",
-      "ncert_ref": "",
-      "ncert_line": "",
-      "pattern": "speed_breaker",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "unverified",
-      "confidence": "medium",
-      "match_table": {
-        "question_stem": "A capillary tube of radius r is immersed in water and water rises in it to a height h. The mass of the water in the capillary is 5 g. Another capillary tube of radius 2r is immersed in water. The mass of water that will rise in this tube is:",
-        "col1_header": "Column I",
-        "col2_header": "Column II",
-        "rows": [
-          {
-            "col1": "A. Peptic cells",
-            "col2": "I. Mucus"
-          },
-          {
-            "col1": "B. Goblet cells",
-            "col2": "II. Bile juice"
-          },
-          {
-            "col1": "C. Oxyntic cells",
-            "col2": "III. Proenzyme pepsinogen"
-          },
-          {
-            "col1": "D. Hepatic cells",
-            "col2": "IV. HCl / intrinsic factor"
-          }
-        ]
-      }
     },
     {
       "id": "P7_001",
