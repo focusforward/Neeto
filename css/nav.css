@@ -412,3 +412,27 @@ nav.navbar.scrolled {
   font-size: 0.8rem !important;
   color: #6B5C45 !important;
 }
+
+/* ── DARK MODE — nav & mobile menu ─────────────────────── */
+[data-theme="dark"] nav.navbar {
+  background: rgba(15,14,12,0.95) !important;
+  border-bottom-color: #2E2920 !important;
+}
+[data-theme="dark"] .nav-links a { color: #A08060 !important; }
+[data-theme="dark"] .nav-links a:hover { color: #FF6B1A !important; background: rgba(255,107,26,0.08) !important; }
+[data-theme="dark"] .nav-links a.active { color: #FF6B1A !important; background: rgba(255,107,26,0.1) !important; }
+[data-theme="dark"] .nav-login { border-color: #3A2E22 !important; color: #C8B89A !important; }
+[data-theme="dark"] .nav-login:hover { border-color: #FF6B1A !important; color: #FF6B1A !important; }
+[data-theme="dark"] .nav-hamburger { border-color: #3A2E22 !important; }
+[data-theme="dark"] .nav-hamburger span { background: #C8B89A !important; }
+[data-theme="dark"] .theme-toggle { border-color: #3A2E22 !important; color: #C8B89A !important; }
+
+[data-theme="dark"] .nav-mobile-menu {
+  background: #1C1A16 !important;
+  border-bottom-color: #2E2920 !important;
+}
+[data-theme="dark"] .nav-mobile-menu a { color: #C8B89A !important; border-bottom-color: #2E2920 !important; }
+[data-theme="dark"] .nav-mobile-menu a:hover { color: #FF6B1A !important; }
+[data-theme="dark"] .mob-theme-row { border-bottom-color: #2E2920 !important; }
+[data-theme="dark"] .mob-theme-label { color: #A08060 !important; }
+[data-theme="dark"] .mob-login-btn { border-color: #CC3300 !important; color: #FF6B1A !important; border-bottom-color: #CC3300 !important; }
