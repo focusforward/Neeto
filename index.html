@@ -830,15 +830,37 @@ function runDemoPredict() {
   if (isNaN(score) || score < 0 || score > 720) {
     if (ph) ph.style.display='flex'; if (res) res.style.display='none'; return;
   }
+
+  var cat = _demoCat;
+
+  /* AIR is the same number regardless of category — it's All India rank.
+     But what that rank MEANS for seats differs per category quota. */
   var rank = _demoRank(score);
-  var cat  = _demoCat;
+
+  /* AIIMS Delhi category-wise closing rank (weighted avg, 2023-2025) */
   var dClose = _AIIMS_DELHI[cat];
-  var aiims = rank <= dClose*0.8 ? '✅ High' : rank <= dClose ? '⚡ Moderate' : rank <= dClose*1.3 ? '⚠️ Low' : '❌ Unlikely';
-  var mbbs  = rank <= 20000 ? '✅ Strong' : rank <= 69503 ? '⚡ Possible' : rank <= 150000 ? '⚠️ Difficult' : '❌ Hard';
-  document.getElementById('demo-air').textContent   = 'AIR ~'+_fmt(rank);
-  document.getElementById('demo-air').style.color   = score >= _CUTOFFS[cat] ? '#CC3300' : '#EF4444';
+  var aiims = rank <= dClose*0.8  ? '✅ High'
+            : rank <= dClose       ? '⚡ Moderate'
+            : rank <= dClose*1.35  ? '⚠️ Low'
+            : '❌ Unlikely';
+
+  /* Govt MBBS last AIQ rank per category (approx 2025 data)
+     General: ~69,503  OBC: ~1,20,000  SC: ~2,20,000  ST: ~2,80,000 */
+  var mbbsLast = {General:69503, OBC:120000, SC:220000, ST:280000};
+  var ml = mbbsLast[cat];
+  var mbbs = rank <= ml*0.25 ? '✅ Strong'
+           : rank <= ml*0.60 ? '⚡ Likely'
+           : rank <= ml       ? '⚠️ Possible'
+           : '❌ Unlikely';
+
+  /* Qualified check uses category cutoff */
+  var qualified = score >= _CUTOFFS[cat];
+
+  document.getElementById('demo-air').textContent  = 'AIR ~'+_fmt(rank);
+  document.getElementById('demo-air').style.color  = qualified ? '#CC3300' : '#EF4444';
   document.getElementById('demo-aiims').textContent = aiims;
   document.getElementById('demo-mbbs').textContent  = mbbs;
+
   var fl = document.getElementById('demo-full-link');
   if (fl) fl.href = 'rank_predictor.html?score='+score+'&cat='+cat;
   if (ph) ph.style.display='none'; if (res) res.style.display='block';
