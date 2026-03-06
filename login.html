@@ -9,212 +9,197 @@
 <link rel="stylesheet" href="css/nav.css"/>
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-body {
-  font-family: 'DM Sans', sans-serif;
-  background: #FFFDF9;
-  color: #1A1208;
-  min-height: 100vh;
-}
+body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; min-height: 100vh; }
 
-/* ── AUTH PAGE WRAPPER ── */
+/* ── PAGE ── */
 .auth-page {
   min-height: calc(100vh - 68px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  display: flex; align-items: center; justify-content: center;
   padding: 48px 20px;
   background: linear-gradient(160deg, #FFFDF9 0%, #FFF0E6 60%, #FFFDF9 100%);
   position: relative;
 }
 .auth-page::before {
-  content: '';
-  position: absolute; inset: 0;
-  background: radial-gradient(ellipse 700px 500px at 70% 30%, rgba(204,51,0,0.05) 0%, transparent 65%);
-  pointer-events: none;
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 700px 500px at 75% 25%, rgba(204,51,0,0.05) 0%, transparent 65%),
+    radial-gradient(ellipse 500px 400px at 15% 75%, rgba(255,107,26,0.05) 0%, transparent 65%);
 }
 
-/* ── CENTERED CARD ── */
+/* ── CARD ── */
 .auth-card {
-  width: 100%;
-  max-width: 480px;
-  background: #fff;
-  border-radius: 24px;
-  border: 1.5px solid #F0E8DE;
+  width: 100%; max-width: 480px; background: #fff;
+  border-radius: 24px; border: 1.5px solid #F0E8DE;
   box-shadow: 0 8px 48px rgba(26,18,8,0.09);
-  overflow: hidden;
-  position: relative;
-  z-index: 1;
+  overflow: hidden; position: relative; z-index: 1;
 }
-
-/* Top accent bar */
-.auth-card::before {
-  content: '';
-  display: block;
+.auth-card-bar {
   height: 4px;
-  background: linear-gradient(90deg, #CC3300, #FF6B1A);
+  background: linear-gradient(90deg, #CC3300 0%, #FF6B1A 50%, #CC3300 100%);
+  background-size: 200%; animation: barSlide 3s linear infinite;
 }
+@keyframes barSlide { 0%{background-position:0%} 100%{background-position:200%} }
+.auth-card-inner { padding: 36px 40px 32px; }
+@media(max-width:520px){ .auth-card-inner { padding: 24px 22px 24px; } }
 
-.auth-card-inner { padding: 40px 40px 36px; }
-@media(max-width:520px){ .auth-card-inner { padding: 28px 24px 28px; } }
-
-/* Brand mark inside card */
-.auth-brand {
-  display: flex; align-items: center; justify-content: center; gap: 8px;
-  margin-bottom: 28px;
-}
-.auth-brand-word {
-  font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em;
-  font-size: 1.3rem; display: inline-flex; align-items: baseline;
-}
+/* Brand */
+.auth-brand { display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 22px; }
+.auth-brand img { width: 26px; height: 26px; object-fit: contain; }
+.auth-brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; font-size: 1.25rem; display: inline-flex; align-items: baseline; }
 .auth-brand-neet  { color: #CC3300; }
 .auth-brand-minds { color: #FF6B1A; }
-.auth-brand-tm    { color: #CC3300; font-size: 0.38em; position: relative; top: -1.5em; margin-left: 1px; vertical-align: baseline; line-height: 0; }
+.auth-brand-tm    { color: #CC3300; font-size: 0.38em; position: relative; top: -1.5em; margin-left: 1px; line-height: 0; }
 
 /* Tabs */
-.auth-tabs {
-  display: flex; gap: 0; margin-bottom: 32px;
-  background: #F5EFE8; border-radius: 12px; padding: 4px;
-}
+.auth-tabs { display: flex; margin-bottom: 26px; background: #F5EFE8; border-radius: 12px; padding: 4px; }
 .auth-tab {
   flex: 1; padding: 10px; text-align: center; border-radius: 9px;
-  font-size: 0.88rem; font-weight: 600; cursor: pointer;
+  font-size: 0.87rem; font-weight: 600; cursor: pointer;
   transition: all 0.2s; color: #9C8A78; border: none; background: none; font-family: inherit;
 }
-.auth-tab.active {
-  background: #fff; color: #1A1208;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-}
+.auth-tab.active { background: #fff; color: #1A1208; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
 
 /* Heading */
-.auth-heading {
-  font-family: 'Fraunces', serif; font-size: 1.6rem; font-weight: 900;
-  letter-spacing: -0.02em; color: #1A1208; margin-bottom: 4px; text-align: center;
-}
-.auth-sub { font-size: 0.83rem; color: #6B5C45; margin-bottom: 28px; text-align: center; }
+.auth-heading { font-family: 'Fraunces', serif; font-size: 1.55rem; font-weight: 900; letter-spacing: -0.02em; color: #1A1208; margin-bottom: 4px; text-align: center; }
+.auth-sub { font-size: 0.82rem; color: #6B5C45; margin-bottom: 22px; text-align: center; }
 
-/* Google button */
+/* Alert banner */
+.auth-alert { display: none; padding: 10px 14px; border-radius: 10px; font-size: 0.82rem; font-weight: 600; margin-bottom: 16px; align-items: center; gap: 8px; }
+.auth-alert.show { display: flex; }
+.auth-alert.success { background: #F0FDF4; border: 1.5px solid rgba(34,197,94,0.3); color: #15803D; }
+.auth-alert.error   { background: #FEF2F2; border: 1.5px solid rgba(239,68,68,0.25); color: #DC2626; }
+.auth-alert.info    { background: #FFF7F0; border: 1.5px solid rgba(255,107,26,0.25); color: #CC3300; }
+
+/* Google */
 .btn-google {
-  width: 100%; padding: 13px; border-radius: 10px;
+  width: 100%; padding: 12px; border-radius: 10px;
   border: 1.5px solid #E8DDD0; background: #fff;
-  font-family: inherit; font-size: 0.9rem; font-weight: 600; color: #1A1208;
+  font-family: inherit; font-size: 0.89rem; font-weight: 600; color: #1A1208;
   cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 10px;
-  transition: all 0.15s; margin-bottom: 20px;
+  transition: all 0.15s; margin-bottom: 18px;
 }
 .btn-google:hover { border-color: #CC3300; background: #FFF7F4; }
 
 /* Divider */
-.divider {
-  display: flex; align-items: center; gap: 12px; margin-bottom: 20px;
-}
+.divider { display: flex; align-items: center; gap: 12px; margin-bottom: 18px; }
 .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #E8DDD0; }
-.divider span { font-size: 0.73rem; color: #B8A898; font-weight: 500; white-space: nowrap; }
+.divider span { font-size: 0.72rem; color: #B8A898; font-weight: 500; white-space: nowrap; }
 
 /* Form */
-.form-group { margin-bottom: 16px; }
-.form-label {
-  font-size: 0.74rem; font-weight: 700; color: #5C4A30;
-  display: block; margin-bottom: 6px;
-  text-transform: uppercase; letter-spacing: 0.06em;
-}
+.form-group { margin-bottom: 14px; }
+.form-label { font-size: 0.72rem; font-weight: 700; color: #5C4A30; display: block; margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.06em; }
 .form-input {
-  width: 100%; padding: 12px 14px; border-radius: 10px;
+  width: 100%; padding: 11px 13px; border-radius: 10px;
   border: 1.5px solid #E8DDD0; background: #FFFDF9;
-  font-family: inherit; font-size: 0.92rem; color: #1A1208;
+  font-family: inherit; font-size: 0.91rem; color: #1A1208;
   transition: border-color 0.15s, box-shadow 0.15s; outline: none;
 }
 .form-input:focus { border-color: #CC3300; box-shadow: 0 0 0 3px rgba(204,51,0,0.1); background: #fff; }
 .form-input::placeholder { color: #C8B89A; }
-select.form-input { cursor: pointer; }
+.form-input.err { border-color: #EF4444 !important; box-shadow: 0 0 0 3px rgba(239,68,68,0.1) !important; }
+.field-err { font-size: 0.7rem; color: #DC2626; margin-top: 4px; display: none; }
+.field-err.show { display: block; }
 
 .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
 @media(max-width:420px){ .form-row { grid-template-columns: 1fr; } }
 
-/* Forgot password */
-.forgot-link {
-  display: block; text-align: right; margin-top: -8px; margin-bottom: 16px;
-  font-size: 0.76rem; color: #CC3300; font-weight: 600; text-decoration: none;
-}
+/* Password wrapper */
+.pw-wrap { position: relative; }
+.pw-wrap .form-input { padding-right: 40px; }
+.pw-eye { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); background: none; border: none; cursor: pointer; font-size: 0.9rem; color: #9C8A78; padding: 0; line-height: 1; }
+.pw-eye:hover { color: #CC3300; }
+
+.forgot-link { display: block; text-align: right; margin-top: -6px; margin-bottom: 14px; font-size: 0.75rem; color: #CC3300; font-weight: 600; text-decoration: none; }
 .forgot-link:hover { text-decoration: underline; }
 
-/* Submit button */
+/* Auth button */
 .btn-auth {
   width: 100%; padding: 14px; border-radius: 12px; border: none;
   background: #CC3300; color: #fff; font-family: inherit;
   font-size: 1rem; font-weight: 700; cursor: pointer;
   box-shadow: 0 4px 20px rgba(204,51,0,0.28);
   transition: all 0.2s; margin-top: 4px; letter-spacing: 0.01em;
+  display: flex; align-items: center; justify-content: center; gap: 8px;
 }
-.btn-auth:hover { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(204,51,0,0.38); }
+.btn-auth:hover:not(:disabled) { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 28px rgba(204,51,0,0.38); }
+.btn-auth:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
+.spinner {
+  width: 15px; height: 15px; border: 2px solid rgba(255,255,255,0.35);
+  border-top-color: #fff; border-radius: 50%;
+  animation: spin 0.65s linear infinite; display: none; flex-shrink: 0;
+}
+.btn-auth.loading .spinner { display: block; }
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.auth-switch {
-  font-size: 0.78rem; color: #9C8A78; text-align: center; margin-top: 18px;
-}
+.auth-switch { font-size: 0.77rem; color: #9C8A78; text-align: center; margin-top: 16px; }
 .auth-switch a { color: #CC3300; font-weight: 600; text-decoration: none; }
 .auth-switch a:hover { text-decoration: underline; }
 
 /* Plan selector */
-.plan-label { font-size: 0.74rem; font-weight: 700; color: #5C4A30; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; display: block; }
-.plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 20px; }
-
-.plan-card {
-  border: 1.5px solid #E8DDD0; border-radius: 14px; padding: 16px 14px;
+.plan-label { font-size: 0.72rem; font-weight: 700; color: #5C4A30; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 10px; display: block; }
+.plan-selector { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 18px; }
+.plan-opt {
+  border: 1.5px solid #E8DDD0; border-radius: 14px; padding: 14px 12px;
   cursor: pointer; transition: all 0.15s; position: relative;
-  background: #FFFDF9; text-align: left;
-  display: block;
+  background: #FFFDF9; text-align: left; display: block;
 }
-.plan-card:hover { border-color: #CC3300; }
-.plan-card.selected { border-color: #CC3300; background: #FFF7F4; box-shadow: 0 0 0 3px rgba(204,51,0,0.08); }
-.plan-card input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
-.plan-tag {
-  display: inline-block; background: #CC3300; color: #fff;
-  font-size: 0.58rem; font-weight: 700; padding: 2px 8px;
-  border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em;
-  margin-bottom: 8px;
+.plan-opt:hover { border-color: #CC3300; }
+.plan-opt.selected { border-color: #CC3300; background: #FFF7F4; box-shadow: 0 0 0 3px rgba(204,51,0,0.08); }
+.plan-opt input[type=radio] { position: absolute; opacity: 0; pointer-events: none; }
+.plan-badge {
+  display: inline-block; font-size: 0.58rem; font-weight: 700; padding: 2px 8px;
+  border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 7px;
 }
-.plan-tag.free-tag { background: #E8DDD0; color: #6B5C45; }
-.plan-name { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1rem; color: #1A1208; margin-bottom: 2px; }
-.plan-price { font-size: 1.2rem; font-weight: 700; color: #CC3300; line-height: 1.1; }
-.plan-price small { font-size: 0.68rem; font-weight: 500; color: #9C8A78; display: block; }
-.plan-features { font-size: 0.71rem; color: #6B5C45; margin-top: 6px; line-height: 1.55; }
+.plan-badge.free  { background: #E8DDD0; color: #6B5C45; }
+.plan-badge.pro   { background: #CC3300; color: #fff; }
+.plan-opt-name  { font-family: 'Fraunces', serif; font-weight: 900; font-size: 1rem; color: #1A1208; margin-bottom: 2px; }
+.plan-opt-price { font-size: 1.1rem; font-weight: 700; color: #CC3300; line-height: 1.15; }
+.plan-opt-price small { font-size: 0.67rem; font-weight: 500; color: #9C8A78; display: block; }
+.plan-opt-feats { font-size: 0.69rem; color: #6B5C45; margin-top: 5px; line-height: 1.5; }
 
 /* Payment block */
-.payment-block {
-  background: #FFF7F0; border: 1.5px solid rgba(204,51,0,0.14);
-  border-radius: 14px; padding: 20px 18px; margin-bottom: 18px;
-  display: none;
+.pay-block {
+  background: #FFF7F0; border: 1.5px solid rgba(204,51,0,0.18);
+  border-radius: 14px; padding: 18px 16px; margin-bottom: 16px;
+  display: none; animation: slideIn 0.22s ease;
 }
-.payment-block.visible { display: block; }
-.payment-block-title {
-  font-size: 0.72rem; font-weight: 700; color: #CC3300;
-  text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 14px;
-  display: flex; align-items: center; gap: 6px;
-}
+.pay-block.show { display: block; }
+@keyframes slideIn { from{opacity:0;transform:translateY(-6px)} to{opacity:1;transform:translateY(0)} }
+.pay-block-title { font-size: 0.7rem; font-weight: 800; color: #CC3300; text-transform: uppercase; letter-spacing: 0.09em; margin-bottom: 6px; }
+.pay-summary { font-size: 0.8rem; color: #6B5C45; line-height: 1.55; margin-bottom: 14px; }
+.pay-summary strong { color: #1A1208; }
 
-/* Pay method tabs */
-.pay-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
-.pay-tab {
-  flex: 1; padding: 7px 4px; border: 1.5px solid #E8DDD0; border-radius: 8px;
-  font-size: 0.72rem; font-weight: 600; color: #6B5C45; cursor: pointer;
-  text-align: center; transition: all 0.15s; background: #fff;
-  font-family: inherit; white-space: nowrap;
+/* Razorpay launch button */
+.btn-rzp {
+  width: 100%; padding: 13px 16px; border-radius: 11px; border: none;
+  background: #072654; color: #fff; font-family: inherit;
+  font-size: 0.92rem; font-weight: 700; cursor: pointer;
+  display: flex; align-items: center; justify-content: center; gap: 10px;
+  transition: all 0.2s;
 }
-.pay-tab.active { border-color: #CC3300; color: #CC3300; background: #FFF7F4; }
-.pay-panel { display: none; }
-.pay-panel.active { display: block; }
-
-.card-row { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-
-.secure-badge {
-  display: flex; align-items: center; gap: 6px; justify-content: center;
-  font-size: 0.7rem; color: #9C8A78; margin-top: 12px;
-}
-.secure-badge::before {
-  content: '🔒'; font-size: 0.65rem;
-}
+.btn-rzp:hover { background: #0a3070; transform: translateY(-1px); box-shadow: 0 4px 16px rgba(7,38,84,0.28); }
+.rzp-badge { font-size: 0.68rem; color: rgba(255,255,255,0.6); font-weight: 500; }
+.secure-note { display: flex; align-items: center; justify-content: center; gap: 5px; font-size: 0.67rem; color: #9C8A78; margin-top: 10px; }
 
 /* Panel visibility */
 .auth-panel { display: none; }
 .auth-panel.active { display: block; }
+
+/* Success state */
+.auth-success { display: none; text-align: center; padding: 16px 0 8px; }
+.auth-success.show { display: block; }
+.success-icon { font-size: 3rem; animation: popIn 0.5s cubic-bezier(0.175,0.885,0.32,1.275); margin-bottom: 12px; }
+@keyframes popIn { from{transform:scale(0)} to{transform:scale(1)} }
+.success-title { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; color: #1A1208; margin-bottom: 8px; }
+.success-sub { font-size: 0.84rem; color: #6B5C45; margin-bottom: 22px; line-height: 1.65; }
+.btn-continue {
+  display: inline-block; background: #CC3300; color: #fff;
+  padding: 13px 30px; border-radius: 12px; font-weight: 700;
+  font-size: 0.95rem; text-decoration: none;
+  box-shadow: 0 4px 16px rgba(204,51,0,0.3); transition: all 0.2s;
+}
+.btn-continue:hover { background: #AA2800; transform: translateY(-1px); }
+.redirect-note { font-size: 0.72rem; color: #B8A898; margin-top: 12px; }
 </style>
 </head>
 <body>
@@ -226,13 +211,14 @@ select.form-input { cursor: pointer; }
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
-    <a href="index.html" class="active">Home</a>
+    <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock Test</a>
     <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
   </div>
   <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
     <a href="login.html" class="nav-login">Login / Register</a>
   </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
@@ -244,39 +230,44 @@ select.form-input { cursor: pointer; }
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
     <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
-    <a href="index.html" class="active">Home</a>
-    <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="methodology.html">Our Method</a>
-    <a href="analytics.html">Analytics</a>
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing — Free &amp; ₹499/mo</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 
 <!-- AUTH PAGE -->
 <div class="auth-page">
   <div class="auth-card">
+    <div class="auth-card-bar"></div>
     <div class="auth-card-inner">
 
       <!-- Brand -->
       <div class="auth-brand">
-        <img src="neetminds-logo.png" alt="" style="width:28px;height:28px;object-fit:contain;"/>
+        <img src="neetminds-logo.png" alt=""/>
         <span class="auth-brand-word">
           <span class="auth-brand-neet">NEET</span><span class="auth-brand-minds">MINDS</span><span class="auth-brand-tm">™</span>
         </span>
       </div>
 
+      <!-- Alert -->
+      <div class="auth-alert" id="auth-alert"></div>
+
       <!-- Tabs -->
-      <div class="auth-tabs">
-        <button class="auth-tab active" onclick="switchTab('login')">Log In</button>
-        <button class="auth-tab" onclick="switchTab('signup')">Sign Up</button>
+      <div class="auth-tabs" id="auth-tabs">
+        <button class="auth-tab active" id="tab-login"  onclick="switchTab('login')">Log In</button>
+        <button class="auth-tab"        id="tab-signup" onclick="switchTab('signup')">Sign Up</button>
       </div>
 
-      <!-- ── LOGIN PANEL ── -->
+      <!-- ══════════ LOGIN PANEL ══════════ -->
       <div class="auth-panel active" id="panel-login">
         <div class="auth-heading">Welcome back.</div>
         <div class="auth-sub">Continue your pattern training.</div>
 
-        <button class="btn-google" onclick="handleGoogle()">
+        <button class="btn-google" onclick="handleGoogle('login')">
           <svg width="18" height="18" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -289,25 +280,33 @@ select.form-input { cursor: pointer; }
         <div class="divider"><span>or log in with email</span></div>
 
         <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="you@example.com"/>
+          <label class="form-label" for="l-email">Email</label>
+          <input class="form-input" type="email" id="l-email" placeholder="you@example.com" autocomplete="email"/>
+          <div class="field-err" id="l-email-err">Please enter a valid email.</div>
         </div>
         <div class="form-group">
-          <label class="form-label">Password</label>
-          <input class="form-input" type="password" placeholder="••••••••"/>
+          <label class="form-label" for="l-pw">Password</label>
+          <div class="pw-wrap">
+            <input class="form-input" type="password" id="l-pw" placeholder="••••••••" autocomplete="current-password"/>
+            <button class="pw-eye" type="button" onclick="togglePw('l-pw',this)" tabindex="-1">👁</button>
+          </div>
+          <div class="field-err" id="l-pw-err">Please enter your password.</div>
         </div>
-        <a href="#" class="forgot-link">Forgot password?</a>
+        <a href="#" class="forgot-link" onclick="handleForgot();return false;">Forgot password?</a>
 
-        <button class="btn-auth">Log In →</button>
-        <p class="auth-switch">Don't have an account? <a href="#" onclick="switchTab('signup');return false;">Sign up free</a></p>
+        <button class="btn-auth" id="login-btn" onclick="handleLogin()">
+          <span class="spinner"></span>
+          <span id="login-btn-txt">Log In →</span>
+        </button>
+        <p class="auth-switch">No account? <a href="#" onclick="switchTab('signup');return false;">Sign up free</a></p>
       </div>
 
-      <!-- ── SIGN UP PANEL ── -->
+      <!-- ══════════ SIGN UP PANEL ══════════ -->
       <div class="auth-panel" id="panel-signup">
         <div class="auth-heading">Start training.</div>
-        <div class="auth-sub">Free account. No credit card needed.</div>
+        <div class="auth-sub">Free forever. No credit card needed for free plan.</div>
 
-        <button class="btn-google" onclick="handleGoogle()">
+        <button class="btn-google" onclick="handleGoogle('signup')">
           <svg width="18" height="18" viewBox="0 0 24 24">
             <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" fill="#4285F4"/>
             <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -321,150 +320,510 @@ select.form-input { cursor: pointer; }
 
         <div class="form-row">
           <div class="form-group">
-            <label class="form-label">First Name</label>
-            <input class="form-input" type="text" placeholder="Arjun"/>
+            <label class="form-label" for="s-fname">First Name</label>
+            <input class="form-input" type="text" id="s-fname" placeholder="Arjun" autocomplete="given-name"/>
+            <div class="field-err" id="s-fname-err">First name required.</div>
           </div>
           <div class="form-group">
-            <label class="form-label">Last Name</label>
-            <input class="form-input" type="text" placeholder="Sharma"/>
+            <label class="form-label" for="s-lname">Last Name</label>
+            <input class="form-input" type="text" id="s-lname" placeholder="Sharma" autocomplete="family-name"/>
           </div>
         </div>
         <div class="form-group">
-          <label class="form-label">Email</label>
-          <input class="form-input" type="email" placeholder="you@example.com"/>
+          <label class="form-label" for="s-email">Email</label>
+          <input class="form-input" type="email" id="s-email" placeholder="you@example.com" autocomplete="email"/>
+          <div class="field-err" id="s-email-err">Enter a valid email address.</div>
         </div>
         <div class="form-group">
-          <label class="form-label">Password</label>
-          <input class="form-input" type="password" placeholder="Min. 8 characters"/>
+          <label class="form-label" for="s-phone">Phone (optional — for Razorpay prefill)</label>
+          <input class="form-input" type="tel" id="s-phone" placeholder="9876543210" autocomplete="tel"/>
+        </div>
+        <div class="form-group">
+          <label class="form-label" for="s-pw">Password</label>
+          <div class="pw-wrap">
+            <input class="form-input" type="password" id="s-pw" placeholder="Min. 8 characters" autocomplete="new-password"/>
+            <button class="pw-eye" type="button" onclick="togglePw('s-pw',this)" tabindex="-1">👁</button>
+          </div>
+          <div class="field-err" id="s-pw-err">Password must be at least 8 characters.</div>
         </div>
 
         <!-- Plan chooser -->
-        <span class="plan-label">Choose Plan</span>
+        <span class="plan-label">Choose your plan</span>
         <div class="plan-selector">
-          <label class="plan-card selected" id="plan-free" onclick="selectPlan('free')">
+          <label class="plan-opt selected" id="plan-free" onclick="selectPlan('free')">
             <input type="radio" name="plan" value="free" checked/>
-            <span class="plan-tag free-tag">Free</span>
-            <div class="plan-name">Starter</div>
-            <div class="plan-price">₹0 <small>forever</small></div>
-            <div class="plan-features">6,154 questions · Mock tests · Analytics</div>
+            <span class="plan-badge free">Free</span>
+            <div class="plan-opt-name">Starter</div>
+            <div class="plan-opt-price">₹0 <small>forever</small></div>
+            <div class="plan-opt-feats">10 explanations/day · Practice · Mock tests</div>
           </label>
-          <label class="plan-card" id="plan-pro" onclick="selectPlan('pro')">
+          <label class="plan-opt" id="plan-pro" onclick="selectPlan('pro')">
             <input type="radio" name="plan" value="pro"/>
-            <span class="plan-tag">Most Popular</span>
-            <div class="plan-name">Pro</div>
-            <div class="plan-price">₹499 <small>/ month</small></div>
-            <div class="plan-features">Everything + detailed explanations · Priority support</div>
+            <span class="plan-badge pro">⭐ Popular</span>
+            <div class="plan-opt-name">Pro</div>
+            <div class="plan-opt-price">₹499 <small>/ month</small></div>
+            <div class="plan-opt-feats">Unlimited · Rank Predictor · AIIMS chances</div>
           </label>
         </div>
 
-        <!-- Payment block — appears when Pro selected -->
-        <div class="payment-block" id="payment-block">
-          <div class="payment-block-title">Secure Payment</div>
-          <div class="pay-tabs">
-            <button class="pay-tab active" onclick="switchPayTab(this,'pay-card')">💳 Card</button>
-            <button class="pay-tab" onclick="switchPayTab(this,'pay-upi')">📱 UPI</button>
-            <button class="pay-tab" onclick="switchPayTab(this,'pay-nb')">🏦 Net Banking</button>
+        <!-- Payment block — visible only when Pro is selected -->
+        <div class="pay-block" id="pay-block">
+          <div class="pay-block-title">🔒 Secure Checkout via Razorpay</div>
+          <div class="pay-summary">
+            You're subscribing to <strong>NEETMINDS™ Pro — ₹499/month</strong>.<br/>
+            Razorpay accepts UPI, Cards, Net Banking &amp; Wallets. Cancel anytime.
           </div>
-
-          <div class="pay-panel active" id="pay-card">
-            <div class="form-group">
-              <label class="form-label">Card Number</label>
-              <input class="form-input" type="text" placeholder="1234 5678 9012 3456" maxlength="19" oninput="fmtCard(this)"/>
-            </div>
-            <div class="card-row">
-              <div class="form-group" style="margin-bottom:0">
-                <label class="form-label">Expiry</label>
-                <input class="form-input" type="text" placeholder="MM / YY" maxlength="7"/>
-              </div>
-              <div class="form-group" style="margin-bottom:0">
-                <label class="form-label">CVV</label>
-                <input class="form-input" type="password" placeholder="•••" maxlength="3"/>
-              </div>
-            </div>
-            <div class="form-group" style="margin-top:12px;margin-bottom:0;">
-              <label class="form-label">Name on Card</label>
-              <input class="form-input" type="text" placeholder="ARJUN SHARMA"/>
-            </div>
-          </div>
-
-          <div class="pay-panel" id="pay-upi">
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label">UPI ID</label>
-              <input class="form-input" type="text" placeholder="yourname@upi"/>
-            </div>
-          </div>
-
-          <div class="pay-panel" id="pay-nb">
-            <div class="form-group" style="margin-bottom:0;">
-              <label class="form-label">Select Bank</label>
-              <select class="form-input">
-                <option value="">Choose your bank</option>
-                <option>State Bank of India</option>
-                <option>HDFC Bank</option>
-                <option>ICICI Bank</option>
-                <option>Axis Bank</option>
-                <option>Kotak Mahindra Bank</option>
-                <option>Punjab National Bank</option>
-                <option>Bank of Baroda</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="secure-badge">256-bit SSL · Powered by Razorpay · Cancel anytime</div>
+          <button class="btn-rzp" id="rzp-btn" onclick="handleSignup()">
+            <!-- Razorpay wordmark SVG -->
+            <svg width="22" height="22" viewBox="0 0 512 512" fill="none">
+              <rect width="512" height="512" rx="80" fill="#072654"/>
+              <path d="M162 356l52-168h48l-28 90 94-90h60l-98 96 40 72h-56l-28-54-28 54H162z" fill="#3395FF"/>
+            </svg>
+            Pay ₹499 with Razorpay
+            <span class="rzp-badge">UPI · Card · Net Banking</span>
+          </button>
+          <div class="secure-note">🔒 256-bit SSL · PCI-DSS compliant · Powered by Razorpay</div>
         </div>
 
-        <button class="btn-auth" id="signup-btn" onclick="handleSignup()">Create Free Account →</button>
-        <p class="auth-switch" style="margin-top:14px;">
-          Already have an account? <a href="#" onclick="switchTab('login');return false;">Log in</a>
-        </p>
-        <p class="auth-switch" style="margin-top:6px;">
-          By signing up you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a>
-        </p>
+        <!-- Submit button — only for Free plan; hidden when Pro is selected -->
+        <button class="btn-auth" id="signup-btn" onclick="handleSignup()">
+          <span class="spinner"></span>
+          <span id="signup-btn-txt">Create Free Account →</span>
+        </button>
+
+        <p class="auth-switch" style="margin-top:14px;">Already have an account? <a href="#" onclick="switchTab('login');return false;">Log in</a></p>
+        <p class="auth-switch" style="margin-top:6px;font-size:0.72rem;">By signing up you agree to our <a href="#">Terms</a> &amp; <a href="#">Privacy Policy</a></p>
+      </div>
+
+      <!-- ══════════ SUCCESS STATE ══════════ -->
+      <div class="auth-success" id="auth-success">
+        <div class="success-icon" id="success-icon">🎉</div>
+        <div class="success-title" id="success-title">You're in!</div>
+        <div class="success-sub" id="success-sub">Your account is ready.</div>
+        <a href="practice.html" class="btn-continue" id="success-cta">Start Practising →</a>
+        <p class="redirect-note">Redirecting automatically in 3 seconds…</p>
       </div>
 
     </div>
   </div>
 </div>
 
+<!-- ══════════════════════════════════════════════
+     RAZORPAY CHECKOUT SDK
+     ══════════════════════════════════════════════ -->
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
 <script>
+/* ══════════════════════════════════════════════════════════════════
+   NEETMINDS™  login.html  —  auth + Razorpay integration
+   ══════════════════════════════════════════════════════════════════
+
+   HOW TO GO LIVE WITH RAZORPAY
+   ─────────────────────────────
+   1. Go to https://dashboard.razorpay.com/app/keys
+      Create a key pair. Copy the KEY ID (starts with rzp_live_…).
+      Set RAZORPAY_KEY below.
+
+   2. For subscription payments (recurring ₹499/month):
+      - Create a Razorpay Plan in the dashboard (₹499 monthly)
+      - Copy the Plan ID into RAZORPAY_PLAN_ID below
+      - The code already calls subscriptions.create — just uncomment
+        the subscription block and comment out the one-time order block.
+
+   3. STRONGLY RECOMMENDED for production:
+      - Create a Razorpay Order on your backend before opening checkout
+        POST { amount:49900, currency:'INR', receipt:'order_xyz' }
+        → returns { id: 'order_XYZ' }
+      - Pass that order_id to options.order_id
+      - After payment, verify signature on backend:
+        HMAC-SHA256(order_id + '|' + payment_id, key_secret)
+
+   4. Google Sign-In: wire up Firebase Auth.
+      Replace handleGoogle() body with:
+        const provider = new firebase.auth.GoogleAuthProvider();
+        firebase.auth().signInWithPopup(provider).then(result => { ... });
+
+   SESSION KEYS WRITTEN (used by app.js / practice page gate):
+     nm_user        → JSON { name, email, plan, payment_id?, paid_at? }
+     nm_plan        → 'free' | 'pro'
+     neeto_plan     → 'free' | 'pro'    (app.js compatibility)
+     neetUserPlan   → 'free' | 'paid'   (practice gate compatibility)
+══════════════════════════════════════════════════════════════════ */
+
+/* ── CONFIG — replace these two values ── */
+var RAZORPAY_KEY     = 'YOUR_RAZORPAY_KEY_ID';   // rzp_live_XXXXXXXX
+var RAZORPAY_PLAN_ID = '';                         // plan_XXXXXXXX  (for subscriptions)
+
+/* ── STATE ── */
+var _plan = 'free';
+
+/* ─────────────────────────────────────────
+   TAB SWITCHING
+───────────────────────────────────────── */
 function switchTab(tab) {
-  document.querySelectorAll('.auth-tab').forEach((t,i) => {
-    t.classList.toggle('active', (tab==='login'&&i===0)||(tab==='signup'&&i===1));
-  });
-  document.getElementById('panel-login').classList.toggle('active', tab==='login');
-  document.getElementById('panel-signup').classList.toggle('active', tab==='signup');
+  document.getElementById('tab-login').classList.toggle('active',  tab === 'login');
+  document.getElementById('tab-signup').classList.toggle('active', tab === 'signup');
+  document.getElementById('panel-login').classList.toggle('active',  tab === 'login');
+  document.getElementById('panel-signup').classList.toggle('active', tab === 'signup');
+  clearAlert();
 }
 
+/* ─────────────────────────────────────────
+   PLAN SELECTION
+───────────────────────────────────────── */
 function selectPlan(plan) {
-  document.getElementById('plan-free').classList.toggle('selected', plan==='free');
-  document.getElementById('plan-pro').classList.toggle('selected', plan==='pro');
-  var pb = document.getElementById('payment-block');
-  pb.classList.toggle('visible', plan==='pro');
-  document.getElementById('signup-btn').textContent =
-    plan==='pro' ? 'Start Pro — ₹499/mo →' : 'Create Free Account →';
-}
+  _plan = plan;
+  document.getElementById('plan-free').classList.toggle('selected', plan === 'free');
+  document.getElementById('plan-pro').classList.toggle('selected',  plan === 'pro');
 
-function switchPayTab(btn, panelId) {
-  btn.closest('.payment-block').querySelectorAll('.pay-tab').forEach(t => t.classList.remove('active'));
-  btn.classList.add('active');
-  btn.closest('.payment-block').querySelectorAll('.pay-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById(panelId).classList.add('active');
-}
+  var payBlock  = document.getElementById('pay-block');
+  var signupBtn = document.getElementById('signup-btn');
+  var btnTxt    = document.getElementById('signup-btn-txt');
 
-function fmtCard(el) {
-  var v = el.value.replace(/\D/g,'').substring(0,16);
-  el.value = v.replace(/(.{4})/g,'$1 ').trim();
-}
-
-function handleGoogle() { alert('Google Sign-In via Firebase Auth / Google OAuth.'); }
-function handleSignup() {
-  if (document.getElementById('plan-pro').classList.contains('selected')) {
-    alert('Razorpay payment would process here.');
+  if (plan === 'pro') {
+    payBlock.classList.add('show');
+    signupBtn.style.display = 'none';   // Razorpay button inside pay-block is the CTA
   } else {
-    window.location.href = 'practice.html';
+    payBlock.classList.remove('show');
+    signupBtn.style.display = 'flex';
+    btnTxt.textContent = 'Create Free Account →';
   }
 }
 
+/* ─────────────────────────────────────────
+   UTILITIES
+───────────────────────────────────────── */
+function isEmail(v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); }
+
+function fieldErr(inputId, errId, msg) {
+  var el = document.getElementById(inputId);
+  var er = document.getElementById(errId);
+  if (el) el.classList.add('err');
+  if (er) { er.textContent = msg; er.classList.add('show'); }
+}
+function clearField(inputId, errId) {
+  var el = document.getElementById(inputId);
+  var er = document.getElementById(errId);
+  if (el) el.classList.remove('err');
+  if (er) er.classList.remove('show');
+}
+
+function showAlert(type, msg) {
+  var el = document.getElementById('auth-alert');
+  el.className = 'auth-alert ' + type + ' show';
+  el.textContent = msg;
+}
+function clearAlert() {
+  document.getElementById('auth-alert').className = 'auth-alert';
+}
+
+function setLoading(btnId, on) {
+  var btn = document.getElementById(btnId);
+  if (!btn) return;
+  btn.disabled = on;
+  btn.classList.toggle('loading', on);
+}
+
+function togglePw(id, btn) {
+  var el = document.getElementById(id);
+  if (!el) return;
+  el.type = el.type === 'password' ? 'text' : 'password';
+  btn.textContent = el.type === 'password' ? '👁' : '🙈';
+}
+
+/* ─────────────────────────────────────────
+   SESSION  (localStorage)
+   In production: validate server-side.
+   localStorage is used here to persist plan
+   status across pages so practice/mock/analytics
+   can gate appropriately.
+───────────────────────────────────────── */
+function saveSession(user) {
+  try {
+    localStorage.setItem('nm_user',       JSON.stringify(user));
+    localStorage.setItem('nm_plan',       user.plan);
+    localStorage.setItem('neeto_plan',    user.plan);              // app.js key
+    localStorage.setItem('neetUserPlan',  user.plan === 'pro' ? 'paid' : 'free');
+    localStorage.setItem('nm_login_ts',   String(Date.now()));
+  } catch(e) {}
+}
+
+/* ─────────────────────────────────────────
+   SUCCESS STATE
+───────────────────────────────────────── */
+function showSuccess(plan, name) {
+  document.getElementById('auth-tabs').style.display      = 'none';
+  document.getElementById('panel-login').classList.remove('active');
+  document.getElementById('panel-signup').classList.remove('active');
+  clearAlert();
+
+  var icon  = document.getElementById('success-icon');
+  var title = document.getElementById('success-title');
+  var sub   = document.getElementById('success-sub');
+  var cta   = document.getElementById('success-cta');
+
+  if (plan === 'pro') {
+    icon.textContent  = '🚀';
+    title.textContent = 'Pro unlocked!';
+    sub.innerHTML     = 'Welcome to <strong>NEETMINDS™ Pro</strong>, ' + (name||'student') + '!<br/>Unlimited practice, full Rank Predictor, and AIIMS analytics are now yours.';
+    cta.textContent   = 'Start Practising →';
+  } else {
+    icon.textContent  = '🎉';
+    title.textContent = 'Account created!';
+    sub.innerHTML     = 'Welcome, <strong>' + (name||'student') + '</strong>!<br/>You have <strong>10 free explanations per day</strong>. Upgrade to Pro anytime.';
+    cta.textContent   = 'Start Practising Free →';
+  }
+
+  document.getElementById('auth-success').classList.add('show');
+  setTimeout(function() { window.location.href = 'practice.html'; }, 3000);
+}
+
+/* ─────────────────────────────────────────
+   RAZORPAY CHECKOUT
+───────────────────────────────────────── */
+function launchRazorpay(name, email, phone) {
+  var options = {
+    key:         RAZORPAY_KEY,
+    amount:      49900,        // ₹499 in paise — one-time or first month
+    currency:    'INR',
+    name:        'NEETMINDS™',
+    description: 'Pro Plan — Unlimited NEET Preparation',
+    image:       'neetminds-logo.png',
+
+    /* ── FOR RECURRING SUBSCRIPTIONS:
+       Replace the amount + order flow above with:
+       subscription_id: '<id from backend after calling razorpay.subscriptions.create>',
+       recurring: 1,
+       ── */
+
+    /* ── FOR SERVER-SIDE ORDER (recommended):
+       order_id: '<order_id from your backend>',
+       ── */
+
+    prefill: {
+      name:    name  || '',
+      email:   email || '',
+      contact: phone || ''
+    },
+
+    notes: {
+      plan:   'pro',
+      source: 'login_page'
+    },
+
+    theme: {
+      color:       '#CC3300',
+      hide_topbar: false
+    },
+
+    modal: {
+      escape:         false,
+      backdropclose:  false,
+      ondismiss: function() {
+        showAlert('info', 'Payment cancelled. You can try again anytime.');
+        document.getElementById('rzp-btn').disabled = false;
+      }
+    },
+
+    handler: function(response) {
+      /*  response.razorpay_payment_id  — VERIFY THIS ON YOUR BACKEND
+          response.razorpay_order_id    — (if order_id was passed)
+          response.razorpay_signature   — HMAC to verify on backend
+
+          Production flow:
+          POST /api/verify-payment { payment_id, order_id, signature }
+          → backend verifies → returns { ok: true }
+          → then call saveSession + showSuccess
+
+          For now we proceed client-side: */
+
+      console.log('[Razorpay] Payment ID:', response.razorpay_payment_id);
+
+      saveSession({
+        name:       name,
+        email:      email,
+        plan:       'pro',
+        payment_id: response.razorpay_payment_id,
+        paid_at:    Date.now()
+      });
+
+      showSuccess('pro', name.split(' ')[0]);
+    }
+  };
+
+  var rzp = new Razorpay(options);
+
+  rzp.on('payment.failed', function(resp) {
+    console.error('[Razorpay] Failed:', resp.error);
+    showAlert('error',
+      'Payment failed — ' + (resp.error.description || 'please try again.') +
+      ' (' + resp.error.code + ')'
+    );
+    document.getElementById('rzp-btn').disabled = false;
+  });
+
+  rzp.open();
+}
+
+/* ─────────────────────────────────────────
+   LOGIN HANDLER
+───────────────────────────────────────── */
+function handleLogin() {
+  clearAlert();
+  var emailEl = document.getElementById('l-email');
+  var pwEl    = document.getElementById('l-pw');
+  var ok = true;
+
+  clearField('l-email','l-email-err');
+  clearField('l-pw',   'l-pw-err');
+
+  if (!isEmail(emailEl.value)) { fieldErr('l-email','l-email-err','Enter a valid email.'); ok = false; }
+  if (!pwEl.value.trim())      { fieldErr('l-pw',   'l-pw-err',  'Password is required.'); ok = false; }
+  if (!ok) return;
+
+  setLoading('login-btn', true);
+
+  /* ── Replace this timeout with your real auth call:
+     fetch('/api/auth/login', { method:'POST', headers:{'Content-Type':'application/json'},
+       body: JSON.stringify({ email: emailEl.value, password: pwEl.value }) })
+     .then(r => r.json())
+     .then(data => {
+       if (data.ok) { saveSession(data.user); showSuccess(data.user.plan, data.user.name); }
+       else { showAlert('error', data.message); setLoading('login-btn', false); }
+     });
+  ── */
+  setTimeout(function() {
+    setLoading('login-btn', false);
+    var existing = null;
+    try { existing = JSON.parse(localStorage.getItem('nm_user')); } catch(e) {}
+    var plan = existing && existing.plan === 'pro' ? 'pro' : 'free';
+    saveSession({ name: emailEl.value.split('@')[0], email: emailEl.value.trim(), plan: plan });
+    showSuccess(plan, emailEl.value.split('@')[0]);
+  }, 1000);
+}
+
+/* ─────────────────────────────────────────
+   SIGNUP HANDLER
+   Called by both "Create Free Account" button
+   and "Pay ₹499 with Razorpay" button
+───────────────────────────────────────── */
+function handleSignup() {
+  clearAlert();
+
+  var fname = document.getElementById('s-fname');
+  var email = document.getElementById('s-email');
+  var phone = document.getElementById('s-phone');
+  var pw    = document.getElementById('s-pw');
+  var ok = true;
+
+  clearField('s-fname','s-fname-err');
+  clearField('s-email','s-email-err');
+  clearField('s-pw',   's-pw-err');
+
+  if (!fname.value.trim())   { fieldErr('s-fname','s-fname-err','First name is required.'); ok = false; }
+  if (!isEmail(email.value)) { fieldErr('s-email','s-email-err','Enter a valid email.'); ok = false; }
+  if (pw.value.length < 8)   { fieldErr('s-pw',   's-pw-err',  'Password must be at least 8 characters.'); ok = false; }
+  if (!ok) return;
+
+  var fullName = fname.value.trim() + (document.getElementById('s-lname').value.trim() ? ' ' + document.getElementById('s-lname').value.trim() : '');
+
+  if (_plan === 'pro') {
+    /* ── PRO: open Razorpay ── */
+    document.getElementById('rzp-btn').disabled = true;
+    launchRazorpay(fullName, email.value.trim(), phone.value.trim());
+
+  } else {
+    /* ── FREE: create account ──
+       Replace this timeout with:
+       fetch('/api/auth/register', { method:'POST', body: JSON.stringify({ name, email, password }) })
+       .then(r=>r.json()).then(data => { ... });
+    ── */
+    setLoading('signup-btn', true);
+    setTimeout(function() {
+      setLoading('signup-btn', false);
+      saveSession({ name: fullName, email: email.value.trim(), plan: 'free' });
+      showSuccess('free', fname.value.trim());
+    }, 900);
+  }
+}
+
+/* ─────────────────────────────────────────
+   GOOGLE SIGN IN
+   Replace alert() with Firebase or OAuth call.
+
+   Firebase example:
+     var provider = new firebase.auth.GoogleAuthProvider();
+     firebase.auth().signInWithPopup(provider)
+       .then(function(result) {
+         var user = result.user;
+         saveSession({ name: user.displayName, email: user.email, plan: 'free' });
+         showSuccess('free', user.displayName);
+       })
+       .catch(function(err) { showAlert('error', err.message); });
+───────────────────────────────────────── */
+function handleGoogle(mode) {
+  showAlert('info', 'Connect Firebase Auth or Google OAuth to enable Google Sign-In.');
+}
+
+/* ─────────────────────────────────────────
+   FORGOT PASSWORD
+───────────────────────────────────────── */
+function handleForgot() {
+  var email = document.getElementById('l-email').value.trim();
+  if (!isEmail(email)) {
+    showAlert('info', 'Enter your email address first, then click Forgot Password.');
+    document.getElementById('l-email').focus();
+    return;
+  }
+  /* Replace with: fetch('/api/auth/forgot-password', { method:'POST', body: JSON.stringify({email}) }) */
+  showAlert('success', 'If that email is registered, a reset link has been sent.');
+}
+
+/* ─────────────────────────────────────────
+   URL PARAMS — pre-select plan
+   Called from pricing.html → login.html?plan=pro
+───────────────────────────────────────── */
+(function() {
+  var p = new URLSearchParams(window.location.search);
+  if (p.get('plan') === 'pro') {
+    switchTab('signup');
+    selectPlan('pro');
+    setTimeout(function() {
+      var el = document.getElementById('plan-pro');
+      if (el) el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }, 150);
+  }
+})();
+
+/* ─────────────────────────────────────────
+   ENTER KEY → submit active panel
+───────────────────────────────────────── */
+document.addEventListener('keydown', function(e) {
+  if (e.key !== 'Enter') return;
+  var tag = document.activeElement ? document.activeElement.tagName : '';
+  if (tag === 'BUTTON') return; // let the button handle it
+  if (document.getElementById('panel-login').classList.contains('active')) handleLogin();
+  else handleSignup();
+});
+
+/* ─────────────────────────────────────────
+   NAV: theme toggle + outside-click close
+───────────────────────────────────────── */
+function updateThemeUI() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
+    var el = document.getElementById(id); if (el) el.textContent = isDark ? '☀️' : '🌙';
+  });
+  var lbl = document.getElementById('mob-theme-label');
+  if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+}
+function toggleTheme() {
+  var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  try { localStorage.setItem('nm_theme', next); } catch(e) {}
+  updateThemeUI();
+}
+document.addEventListener('DOMContentLoaded', updateThemeUI);
 document.addEventListener('click', function(e) {
   var m = document.getElementById('mmenu');
   var b = document.querySelector('.nav-hamburger');
@@ -474,76 +833,14 @@ document.addEventListener('click', function(e) {
 </script>
 
 <script>
-// Sticky nav shadow on scroll
 (function(){
   var nav = document.querySelector('nav.navbar');
-  if(!nav) return;
+  if (!nav) return;
   window.addEventListener('scroll', function(){
     nav.classList.toggle('scrolled', window.scrollY > 10);
   }, {passive:true});
 })();
 </script>
 
-<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-<script>
-// ── Read URL params to pre-select plan ──────────────────────────────
-(function(){
-  var params = new URLSearchParams(window.location.search);
-  var plan    = params.get('plan');    // 'pro' or 'elite'
-  var billing = params.get('billing'); // 'monthly' or 'yearly'
-  if (plan === 'pro' || plan === 'elite') {
-    // Switch to signup tab
-    switchTab('signup');
-    selectPlan(plan);
-  }
-})();
-
-// ── Razorpay payment handler ─────────────────────────────────────────
-function launchRazorpay(planName, amountPaise) {
-  var options = {
-    key: 'YOUR_RAZORPAY_KEY_ID',   // ← Replace with your Razorpay Key ID
-    amount: amountPaise,            // Amount in paise (₹499 = 49900)
-    currency: 'INR',
-    name: 'NEETMINDS™',
-    description: planName + ' Plan — NEET Preparation',
-    image: 'neetminds-logo.png',
-    handler: function(response) {
-      // Payment successful — send payment_id to your backend to verify
-      console.log('Payment ID:', response.razorpay_payment_id);
-      alert('Payment successful! Welcome to NEETMINDS™ ' + planName + '.');
-      window.location.href = 'practice.html';
-    },
-    prefill: {
-      name: '',   // pre-fill from form if available
-      email: (document.querySelector('input[type=email]') || {}).value || '',
-      contact: ''
-    },
-    theme: { color: '#CC3300' },
-    modal: {
-      ondismiss: function() { console.log('Payment cancelled'); }
-    }
-  };
-  var rzp = new Razorpay(options);
-  rzp.on('payment.failed', function(response){
-    alert('Payment failed: ' + response.error.description);
-  });
-  rzp.open();
-}
-
-// ── Override handleSignup to use Razorpay ────────────────────────────
-function handleSignup() {
-  var isPro   = document.getElementById('plan-pro')   && document.getElementById('plan-pro').classList.contains('selected');
-  var isElite = document.getElementById('plan-elite') && document.getElementById('plan-elite').classList.contains('selected');
-
-  if (isPro) {
-    launchRazorpay('Pro', 49900);       // ₹499
-  } else if (isElite) {
-    launchRazorpay('Elite', 99900);     // ₹999
-  } else {
-    alert('Free account created! Redirecting to practice...');
-    window.location.href = 'practice.html';
-  }
-}
-</script>
 </body>
 </html>
