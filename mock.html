@@ -347,14 +347,39 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 </head>
 <body>
 
-<!-- ══ NAV ══════════════════════════════════════════════════════ -->
-
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html">Practice</a>
+    <a href="mock.html" class="active">Mock Test</a>
+    <a href="methodology.html">Our Method</a>
+    <a href="analytics.html">Analytics</a>
+  </div>
+  <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
+    <a href="login.html" class="nav-login">Login / Register</a>
+  </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html" class="active">Mock</a>
-  <a href="methodology.html">Methodology</a>
-  <a href="about.html">About</a>
-  <a href="practice.html" class="nav-cta">Start Practising →</a>
+  <a href="mock.html" class="active">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 
 <!-- ══ START SCREEN ══════════════════════════════════════════════ -->
@@ -418,12 +443,19 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
   </div>
 </div>
 
-<footer class="neeto-footer">
-  <div class="footer-brand">
+<footer class="neeto-footer" style="text-align:center;padding:28px 20px 24px;border-top:1.5px solid rgba(255,255,255,0.07);">
+  <div class="footer-brand" style="justify-content:center;margin-bottom:10px;">
     <img src="neetminds-logo.png" style="height:28px;object-fit:contain;border-radius:0;" alt="NEETMINDS"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
-  <p>© 2026 NEETMINDS™. All rights reserved.</p>
+  <p style="font-size:0.72rem;color:#5C4A30;margin-bottom:10px;">© 2026 NEETMINDS™ · For educational use only · Not affiliated with NTA or MCC.</p>
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
+    <a href="privacy.html" style="font-size:0.72rem;color:#5C4A30;text-decoration:none;">Privacy</a>
+    <a href="terms.html" style="font-size:0.72rem;color:#5C4A30;text-decoration:none;">Terms</a>
+    <a href="terms.html#refund" style="font-size:0.72rem;color:#5C4A30;text-decoration:none;">Refunds</a>
+    <a href="disclaimer.html" style="font-size:0.72rem;color:#5C4A30;text-decoration:none;">Disclaimer</a>
+    <a href="mailto:myneetminds@gmail.com" style="font-size:0.72rem;color:#5C4A30;text-decoration:none;">Contact</a>
+  </div>
 </footer>
 
 <script>

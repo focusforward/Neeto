@@ -226,6 +226,10 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -233,14 +237,6 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   <a href="analytics.html">Analytics</a>
   <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
   <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
-</div>
-  <a href="index.html">Home</a>
-  <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
-  <a href="methodology.html">Our Method</a>
-  <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing — Free &amp; ₹799/mo</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 
@@ -846,6 +842,17 @@ document.addEventListener('click', function(e) {
   }, {passive:true});
 })();
 </script>
+
+<footer style="text-align:center;padding:24px 20px;border-top:1px solid #F0E8DE;margin-top:40px;">
+  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:8px;">
+    <a href="privacy.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Privacy Policy</a>
+    <a href="terms.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Terms &amp; Conditions</a>
+    <a href="terms.html#refund" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Refund Policy</a>
+    <a href="disclaimer.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Student Disclaimer</a>
+    <a href="mailto:myneetminds@gmail.com" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Contact</a>
+  </div>
+  <p style="font-size:0.7rem;color:#C8B89A;">© 2026 NEETMINDS™ · For educational use only.</p>
+</footer>
 
 </body>
 </html>
