@@ -1097,4 +1097,14 @@ async function startMock(){
   }catch(e){
     console.error('Mock build error:',e);
     document.getElementById('mock-q-area').innerHTML=
-      '<div style="text-align:center;padding:60px;color:#EF4444;font-weight:600;">⚠�
+      '<div style="text-align:center;padding:60px;color:#EF4444;font-weight:600;">⚠️ Could not load questions. Please refresh.</div>';
+    return;
+  }
+
+  buildPalette();
+  startTimer();
+  renderQuestion(0);
+}
+</script>
+</body>
+</html>
