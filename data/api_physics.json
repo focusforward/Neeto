@@ -2999,7 +2999,7 @@
       "options": {
         "A": "A-III, B-IV, C-II, D-I",
         "B": "A-III, B-IV, C-I, D-II",
-        "C": "A-I, В-III, C-II, D-IV",
+        "C": "A-I, B-III, C-II, D-IV",
         "D": "A-IV, B-II, C-I, D-III"
       },
       "correct_answer": "B",
@@ -3053,10 +3053,10 @@
       "topic": "",
       "question": "Match List I with List II: List-I",
       "options": {
-        "A": "A-II, В-III, C-I, D-IV",
+        "A": "A-II, B-III, C-I, D-IV",
         "B": "A-IV, B-II, C-I, D-III",
         "C": "A-I, B-III, C-IV, D-II",
-        "D": "А-III, В-II, C-IV, D-I"
+        "D": "A-III, B-II, C-IV, D-I"
       },
       "correct_answer": "D",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -12394,7 +12394,7 @@
       "options": {
         "A": "B, A, C, D, E",
         "B": "E, D, C, B, A",
-        "C": "E, A, D, C, В",
+        "C": "E, A, D, C, B",
         "D": "A, E, B, D, C"
       },
       "correct_answer": "C",

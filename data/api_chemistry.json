@@ -2833,7 +2833,7 @@
       "options": {
         "A": "A-III, B-I, C-IV, D-II",
         "B": "A-IV, B-I, C-III, D-II",
-        "C": "A-III, В-I, C-II, D-IV",
+        "C": "A-III, B-I, C-II, D-IV",
         "D": "A-II, B-IV, C-III, D-I"
       },
       "correct_answer": "A",
@@ -3006,7 +3006,7 @@
       "options": {
         "A": "A-II, B-IV, C-I, D-III",
         "B": "A-IV, B-I, C-III, D-II",
-        "C": "A-IV, B-II, С-III, D-I",
+        "C": "A-IV, B-II, C-III, D-I",
         "D": "A-III, B-II, C-I, D-IV"
       },
       "correct_answer": "A",
@@ -3199,16 +3199,16 @@
     },
     {
       "id": "CHE_NEET_UPLOAD_Q0182",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Equilibrium",
+      "subject": "Biology",
+      "unit_code": "ANIMAL_KINGDOM",
+      "chapter": "Animal Kingdom",
       "topic": "",
       "question": "Match List I with List II",
       "options": {
         "A": "A-IV, B-I, C-II, D-III",
-        "B": "A-III, В-II, C-I, D-IV",
+        "B": "A-III, B-II, C-I, D-IV",
         "C": "A-II, B-I, C-III, D-IV",
-        "D": "А-III, В-I, C-II, D-IV"
+        "D": "A-III, B-I, C-II, D-IV"
       },
       "correct_answer": "D",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -3261,10 +3261,10 @@
       "topic": "",
       "question": "Match List I with List II",
       "options": {
-        "A": "А-I, В-II, C-IV, D-III",
+        "A": "A-I, B-II, C-IV, D-III",
         "B": "A-III, B-I, C-IV, D-II",
         "C": "A-II, B-I, C-III, D-IV",
-        "D": "А-III, В-I, C-II, D-IV"
+        "D": "A-III, B-I, C-II, D-IV"
       },
       "correct_answer": "B",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
@@ -4390,39 +4390,6 @@
         "D": "dicyanidosilver(I) diaquaargentate(I)"
       },
       "correct_answer": "A",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Chemistry",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Chemistry",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "CHE_alcoholsphen_51458d9e4f",
-      "subject": "Chemistry",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alcohols, Phenols and Ethers",
-      "topic": "",
-      "question": "Which of the following sequence of reactions is suitable to synthesize chlorobenzene?",
-      "options": {
-        "A": "Aniline, HCl, Heating",
-        "B": "Benzene, Cl₂, anhydrous FeCl3",
-        "C": "Phenol, NaNO2, HCl, CuCl",
-        "D": "(4) (Not specified in text)"
-      },
-      "correct_answer": "B",
       "explanation": "Refer to NCERT for the complete explanation of this concept.",
       "ncert_ref": "NCERT Chemistry",
       "ncert_line": "",
