@@ -131,6 +131,45 @@ nav.navbar.scrolled {
   background: rgba(204,51,0,0.04) !important;
 }
 
+/* ── NAV PRICING PILL ───────────────────────────────── */
+.nav-pricing {
+  display: inline-flex !important;
+  align-items: center !important;
+  font-family: 'DM Sans', sans-serif !important;
+  font-size: 0.82rem !important;
+  font-weight: 700 !important;
+  color: #CC3300 !important;
+  text-decoration: none !important;
+  padding: 7px 16px !important;
+  border: 1.5px solid rgba(204,51,0,0.35) !important;
+  border-radius: 100px !important;
+  white-space: nowrap !important;
+  letter-spacing: 0.01em !important;
+  transition: all 0.15s !important;
+  background: rgba(204,51,0,0.04) !important;
+}
+.nav-pricing:hover {
+  background: rgba(204,51,0,0.1) !important;
+  border-color: #CC3300 !important;
+  color: #AA2200 !important;
+  transform: translateY(-1px) !important;
+}
+.nav-pricing.active {
+  background: #CC3300 !important;
+  color: #fff !important;
+  border-color: #CC3300 !important;
+}
+
+[data-theme="dark"] .nav-pricing {
+  color: #FF6B1A !important;
+  border-color: rgba(255,107,26,0.35) !important;
+  background: rgba(255,107,26,0.06) !important;
+}
+[data-theme="dark"] .nav-pricing:hover {
+  background: rgba(255,107,26,0.14) !important;
+  border-color: #FF6B1A !important;
+}
+
 /* Kept for compatibility but no longer in main nav */
 .nav-cta, .nav-links .nav-cta {
   background: #CC3300 !important;
@@ -382,7 +421,7 @@ nav.navbar.scrolled {
 
 .footer-copy {
   font-size: 0.75rem;
-  color: #5C4A30;
+  color: #9C8A78;
 }
 
 .footer-legal {
@@ -392,7 +431,7 @@ nav.navbar.scrolled {
 
 .footer-legal a {
   font-size: 0.75rem;
-  color: #5C4A30;
+  color: #9C8A78;
   text-decoration: none;
   transition: color 0.15s;
 }
