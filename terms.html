@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Terms & Conditions — NEETMINDS™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/nav.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#FFFDF9;color:#1A1208;line-height:1.7;}
+
+.legal-hero{background:linear-gradient(135deg,#1A1208 0%,#2D2010 100%);padding:64px 20px 48px;text-align:center;position:relative;overflow:hidden;}
+.legal-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 300px at 50% 100%,rgba(204,51,0,0.18) 0%,transparent 60%);pointer-events:none;}
+.legal-eyebrow{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#FF6B1A;margin-bottom:14px;display:block;position:relative;z-index:1;}
+.legal-hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.8rem);font-weight:900;color:#fff;letter-spacing:-0.03em;margin-bottom:12px;position:relative;z-index:1;}
+.legal-hero p{font-size:0.9rem;color:rgba(255,255,255,0.55);position:relative;z-index:1;}
+.legal-updated{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.08);border:1px solid rgba(255,255,255,0.12);border-radius:100px;padding:5px 14px;font-size:0.72rem;color:rgba(255,255,255,0.5);margin-top:14px;position:relative;z-index:1;}
+
+.legal-body{max-width:780px;margin:0 auto;padding:56px 24px 80px;}
+
+/* TOC */
+.legal-toc{background:#FFF5F0;border:1.5px solid #FFD4C0;border-radius:14px;padding:22px 26px;margin-bottom:48px;}
+.legal-toc h3{font-size:0.72rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#CC3300;margin-bottom:14px;}
+.legal-toc ol{padding-left:20px;display:flex;flex-direction:column;gap:6px;}
+.legal-toc li a{font-size:0.85rem;color:#CC3300;text-decoration:none;font-weight:500;}
+.legal-toc li a:hover{text-decoration:underline;}
+
+.legal-section{margin-bottom:44px;scroll-margin-top:80px;}
+.legal-section h2{font-family:'Fraunces',serif;font-size:1.25rem;font-weight:900;color:#1A1208;margin-bottom:16px;padding-bottom:12px;border-bottom:2px solid #F0E8DE;}
+.legal-section h3{font-size:0.95rem;font-weight:700;color:#1A1208;margin:18px 0 10px;}
+.legal-section p{font-size:0.92rem;color:#3D2E1A;margin-bottom:14px;line-height:1.8;}
+.legal-section ul,
+.legal-section ol{padding-left:22px;margin-bottom:14px;display:flex;flex-direction:column;gap:8px;}
+.legal-section li{font-size:0.92rem;color:#3D2E1A;line-height:1.7;}
+.legal-section strong{color:#1A1208;}
+
+.highlight-box{background:#FFF5F0;border-left:3px solid #CC3300;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0;}
+.highlight-box p{margin-bottom:0;font-size:0.88rem;}
+.warning-box{background:#FFFBEB;border-left:3px solid #D97706;border-radius:0 10px 10px 0;padding:16px 20px;margin:18px 0;}
+.warning-box p{margin-bottom:0;font-size:0.88rem;color:#92400E;}
+
+.contact-box{background:#F0F9FF;border:1.5px solid #BAE6FD;border-radius:14px;padding:22px 26px;margin-top:32px;}
+.contact-box h3{font-size:0.85rem;font-weight:700;color:#1D4ED8;margin-bottom:10px;}
+.contact-box p{font-size:0.88rem;color:#1E40AF;margin-bottom:6px;}
+.contact-box a{color:#1D4ED8;font-weight:600;}
+
+/* Footer — same across all pages */
+.neeto-footer{background:#1A1208;padding:48px 5% 28px;margin-top:0;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 36px;}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand-col{}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.footer-brand img{height:28px;object-fit:contain;}
+.brand-word{font-family:'Fraunces',serif;font-weight:900;font-size:1.2rem;letter-spacing:-0.04em;display:inline-flex;align-items:baseline;}
+.brand-neet{color:#CC3300;}.brand-minds{color:#FF6B1A;}.brand-tm{font-size:0.5em;vertical-align:super;margin-left:1px;color:#CC3300;}
+.footer-tagline{font-size:0.78rem;color:#8B7355;line-height:1.6;max-width:240px;}
+.footer-col h4{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6B5C45;margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.footer-col a{font-size:0.82rem;color:#8B7355;text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:#FF6B1A;}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07);}
+.footer-copy{font-size:0.72rem;color:#5C4A35;}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{font-size:0.72rem;color:#5C4A35;text-decoration:none;}
+.footer-legal a:hover{color:#FF6B1A;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="pricing.html" class="nav-cta">Unlock Pro →</a>
+  </div>
+</nav>
+
+<div class="legal-hero">
+  <span class="legal-eyebrow">Legal</span>
+  <h1>Terms &amp; Conditions</h1>
+  <p>Please read these terms carefully before using the NEETMINDS™ platform.</p>
+  <span class="legal-updated">Last updated: March 2026</span>
+</div>
+
+<div class="legal-body">
+
+  <div class="legal-toc">
+    <h3>Contents</h3>
+    <ol>
+      <li><a href="#acceptance">Acceptance of Terms</a></li>
+      <li><a href="#platform">Nature of the Platform</a></li>
+      <li><a href="#account">Account &amp; Eligibility</a></li>
+      <li><a href="#subscription">Subscription &amp; Payment</a></li>
+      <li><a href="#refund">Refund Policy</a></li>
+      <li><a href="#content">Content &amp; Intellectual Property</a></li>
+      <li><a href="#privacy">Privacy &amp; Data</a></li>
+      <li><a href="#disclaimer">Disclaimer of Warranties</a></li>
+      <li><a href="#liability">Limitation of Liability</a></li>
+      <li><a href="#conduct">User Conduct</a></li>
+      <li><a href="#termination">Termination</a></li>
+      <li><a href="#governing">Governing Law</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ol>
+  </div>
+
+  <!-- 1 -->
+  <div class="legal-section" id="acceptance">
+    <h2>1. Acceptance of Terms</h2>
+    <p>By accessing or using the NEETMINDS™ platform at <strong>neetminds.com</strong> (the "Platform"), you agree to be bound by these Terms &amp; Conditions ("Terms"). If you do not agree to these Terms in their entirety, you must not use the Platform.</p>
+    <p>These Terms apply to all visitors, users, and paying subscribers. NEETMINDS™ reserves the right to update these Terms at any time. Continued use of the Platform after any modification constitutes acceptance of the updated Terms.</p>
+  </div>
+
+  <!-- 2 -->
+  <div class="legal-section" id="platform">
+    <h2>2. Nature of the Platform</h2>
+    <div class="highlight-box">
+      <p><strong>Important:</strong> NEETMINDS™ is a <strong>pattern-training and exam preparation tool</strong>. It is not a comprehensive question bank of all possible NEET questions, nor is it a substitute for NCERT textbooks, full-length mock tests, or formal coaching.</p>
+    </div>
+    <p>The Platform is designed to help students recognise and master the recurring structural patterns that appear in the NEET examination. Our goal is to improve problem-solving speed and accuracy for unfamiliar questions — not to provide exhaustive topic coverage.</p>
+    <p>Some content on the Platform is generated with the assistance of automated tools and compiled from multiple sources. While we make every effort to ensure accuracy, <strong>minor errors or inconsistencies may occasionally occur</strong>. These do not materially affect the primary objective of the Platform.</p>
+    <div class="warning-box">
+      <p>⚠️ <strong>Students should cross-verify all concepts with standard NCERT textbooks</strong> and use NEETMINDS™ as a <em>training tool alongside</em> their broader preparation — not as a sole resource.</p>
+    </div>
+    <p>Rank predictions, AIIMS and JIPMER cutoff data, and admission probability estimates are based on historical NTA and MCC published data and are provided for <strong>planning and reference purposes only</strong>. They do not constitute guarantees of admission or any specific outcome.</p>
+  </div>
+
+  <!-- 3 -->
+  <div class="legal-section" id="account">
+    <h2>3. Account &amp; Eligibility</h2>
+    <p>You must be at least 13 years of age to create an account. Users under 18 are presumed to have obtained consent from a parent or legal guardian prior to registration.</p>
+    <p>You are responsible for maintaining the confidentiality of your login credentials and for all activity that occurs under your account. You must not share, sell, or transfer your account to any other person.</p>
+    <p>NEETMINDS™ reserves the right to suspend or terminate any account found to be in violation of these Terms, without prior notice.</p>
+  </div>
+
+  <!-- 4 -->
+  <div class="legal-section" id="subscription">
+    <h2>4. Subscription &amp; Payment</h2>
+    <p>NEETMINDS™ offers a <strong>Free plan</strong> and a <strong>Pro subscription</strong>. Pro is billed on a monthly basis at the price displayed at the time of purchase.</p>
+    <ul>
+      <li>Payments are processed securely via Razorpay and accept UPI, credit/debit cards, net banking, and wallets.</li>
+      <li>Your subscription auto-renews monthly unless cancelled before the next billing date.</li>
+      <li>Prices are inclusive of applicable taxes and displayed in Indian Rupees (₹).</li>
+      <li>NEETMINDS™ reserves the right to modify pricing with reasonable prior notice.</li>
+    </ul>
+  </div>
+
+  <!-- 5 -->
+  <div class="legal-section" id="refund">
+    <h2>5. Refund Policy</h2>
+    <div class="highlight-box">
+      <p><strong>All payments made to NEETMINDS™ are final and non-refundable.</strong></p>
+    </div>
+    <p>When you subscribe to NEETMINDS™ Pro, you receive immediate and full access to all Pro features — including the complete question bank, rank predictor, AIIMS and JIPMER data, analytics, and mindset content. Because full value is delivered from the moment of payment, we do not offer:</p>
+    <ul>
+      <li>Refunds for any subscription period, whether used or unused</li>
+      <li>Partial-month credits or pro-rata refunds</li>
+      <li>Refunds due to change of mind or dissatisfaction</li>
+      <li>Refunds in the event of account suspension for Terms violations</li>
+    </ul>
+    <p>We strongly encourage all prospective subscribers to use the <strong>Free plan thoroughly</strong> before upgrading, to ensure the Platform meets your expectations.</p>
+    <div class="warning-box">
+      <p>⚠️ In the event of a technical failure on our end that prevents access to the Platform for an extended period (&gt;72 hours), we will consider the matter on a case-by-case basis and may, at our sole discretion, offer an account extension or credit. This does not constitute a general refund right.</p>
+    </div>
+    <p>If you believe you have been charged in error, contact us at <a href="mailto:myneetminds@gmail.com" style="color:#CC3300;">myneetminds@gmail.com</a> within 7 days of the charge.</p>
+  </div>
+
+  <!-- 6 -->
+  <div class="legal-section" id="content">
+    <h2>6. Content &amp; Intellectual Property</h2>
+    <p>All content on the Platform — including questions, explanations, pattern analyses, rank predictor data, design elements, and branding — is the exclusive property of NEETMINDS™ or its licensors and is protected under applicable Indian copyright and intellectual property law.</p>
+    <p>You may not copy, reproduce, distribute, modify, sell, or create derivative works from any Platform content without our express written permission. Your subscription grants you a personal, non-transferable, non-exclusive licence to access and use the content for your own private exam preparation only.</p>
+    <p>NEET question content cited from NTA official papers is used for educational reference purposes. NCERT content references are used under the educational fair-use doctrine.</p>
+  </div>
+
+  <!-- 7 -->
+  <div class="legal-section" id="privacy">
+    <h2>7. Privacy &amp; Data</h2>
+    <p>Your use of the Platform is also governed by our <a href="privacy.html" style="color:#CC3300;font-weight:600;">Privacy Policy</a>, which is incorporated into these Terms by reference.</p>
+    <p>We collect only the information necessary to provide the service — including your name, email address, and usage data (questions attempted, accuracy patterns, session duration). We do not sell your personal information to third parties.</p>
+    <p>We use cookies to maintain your session, remember preferences (such as dark mode), and improve the Platform experience. You may disable cookies in your browser settings, though this may affect certain features.</p>
+    <p>All data is stored on servers located in India and processed in accordance with applicable Indian data protection law (IT Act 2000 and rules thereunder).</p>
+  </div>
+
+  <!-- 8 -->
+  <div class="legal-section" id="disclaimer">
+    <h2>8. Disclaimer of Warranties</h2>
+    <p>The Platform is provided on an <strong>"as is" and "as available" basis</strong> without any warranties of any kind, express or implied. NEETMINDS™ does not warrant that:</p>
+    <ul>
+      <li>The Platform will be uninterrupted, error-free, or completely secure</li>
+      <li>Any content is 100% accurate, complete, or up to date</li>
+      <li>Use of the Platform will result in improved exam performance or admission to any institution</li>
+      <li>Rank predictions or cutoff estimates will reflect actual exam outcomes</li>
+    </ul>
+    <p>Educational outcomes depend entirely on the student's own effort, revision, and consistency of practice. NEETMINDS™ is a training tool — not a guarantee of results.</p>
+  </div>
+
+  <!-- 9 -->
+  <div class="legal-section" id="liability">
+    <h2>9. Limitation of Liability</h2>
+    <p>To the fullest extent permitted by applicable law, NEETMINDS™ and its officers, directors, employees, and agents shall not be liable for any:</p>
+    <ul>
+      <li>Indirect, incidental, special, or consequential damages</li>
+      <li>Loss of data, revenue, or profits</li>
+      <li>Damages resulting from reliance on Platform content, predictions, or estimates</li>
+      <li>Damages arising from interruption or unavailability of the Platform</li>
+    </ul>
+    <p>In any event, our total liability to you for any claim arising from use of the Platform shall not exceed the amount you paid us in the three (3) months preceding the claim.</p>
+  </div>
+
+  <!-- 10 -->
+  <div class="legal-section" id="conduct">
+    <h2>10. User Conduct</h2>
+    <p>You agree not to use the Platform to:</p>
+    <ul>
+      <li>Scrape, download, or systematically extract Platform content in bulk</li>
+      <li>Attempt to bypass, circumvent, or tamper with any access controls or paywalls</li>
+      <li>Share your account credentials with others</li>
+      <li>Use automated tools (bots, scripts) to access the Platform</li>
+      <li>Post or transmit any unlawful, harmful, or abusive content</li>
+      <li>Impersonate any person or entity</li>
+    </ul>
+    <p>Violation of these conduct rules may result in immediate account suspension without refund.</p>
+  </div>
+
+  <!-- 11 -->
+  <div class="legal-section" id="termination">
+    <h2>11. Termination</h2>
+    <p>You may cancel your Pro subscription at any time through your account settings. Cancellation takes effect at the end of your current billing period — you will retain Pro access until then, and no further charges will be made.</p>
+    <p>NEETMINDS™ reserves the right to suspend or permanently terminate any account that violates these Terms, at our sole discretion, without prior notice and without refund.</p>
+  </div>
+
+  <!-- 12 -->
+  <div class="legal-section" id="governing">
+    <h2>12. Governing Law &amp; Disputes</h2>
+    <p>These Terms are governed by and construed in accordance with the laws of India. Any disputes arising from or in connection with these Terms shall be subject to the exclusive jurisdiction of the courts in India.</p>
+    <p>We encourage you to contact us first at <a href="mailto:myneetminds@gmail.com" style="color:#CC3300;">myneetminds@gmail.com</a> before initiating any formal dispute. We aim to resolve all issues promptly and fairly.</p>
+  </div>
+
+  <!-- 13 -->
+  <div class="legal-section" id="contact">
+    <h2>13. Contact Us</h2>
+    <div class="contact-box">
+      <h3>📬 Get in Touch</h3>
+      <p>For questions about these Terms, your subscription, or any Platform-related matter:</p>
+      <p><strong>Email:</strong> <a href="mailto:myneetminds@gmail.com">myneetminds@gmail.com</a></p>
+      <p><strong>Website:</strong> <a href="https://neetminds.com">neetminds.com</a></p>
+      <p style="margin-top:10px;font-size:0.82rem;color:#3B82F6;">We typically respond within 2–3 business days.</p>
+    </div>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="neeto-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+      </div>
+      <p class="footer-tagline">Pattern intelligence for NEET. Master the patterns. Master the exam.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="practice.html">Practice Questions</a></li>
+        <li><a href="mock.html">Mock Tests</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="pricing.html" style="color:#FF6B1A;font-weight:700;">Pricing →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="methodology.html">Our Method</a></li>
+        <li><a href="about.html">About NEETMINDS™</a></li>
+        <li><a href="rank_predictor.html" style="color:#FF6B1A;">🎯 Rank Predictor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html" style="color:#FF6B1A;">Terms &amp; Conditions</a></li>
+        <li><a href="terms.html#refund">Refund Policy</a></li>
+        <li><a href="disclaimer.html">Student Disclaimer</a></li>
+        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 NEETMINDS™ · For educational use only · Not affiliated with NTA or MCC.</span>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="terms.html#refund">Refunds</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="mailto:myneetminds@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

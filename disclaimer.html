@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>A Note to Students — NEETMINDS™</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"/>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,700;0,900;1,400&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/nav.css"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:#FFFDF9;color:#1A1208;line-height:1.7;}
+
+.hero{background:linear-gradient(135deg,#1A1208 0%,#2D2010 100%);padding:64px 20px 48px;text-align:center;position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 600px 300px at 50% 100%,rgba(204,51,0,0.18) 0%,transparent 60%);pointer-events:none;}
+.eyebrow{font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.14em;color:#FF6B1A;margin-bottom:14px;display:block;position:relative;z-index:1;}
+.hero h1{font-family:'Fraunces',serif;font-size:clamp(1.8rem,4vw,2.6rem);font-weight:900;color:#fff;letter-spacing:-0.03em;margin-bottom:12px;position:relative;z-index:1;line-height:1.2;}
+.hero h1 em{color:#FF6B1A;font-style:italic;}
+.hero-sub{font-size:0.92rem;color:rgba(255,255,255,0.55);max-width:520px;margin:0 auto;position:relative;z-index:1;}
+
+.page{max-width:740px;margin:0 auto;padding:56px 24px 80px;}
+
+.intro-card{background:linear-gradient(135deg,#FFF5F0,#FFFDF9);border:2px solid #FFD4C0;border-radius:20px;padding:32px 36px;margin-bottom:40px;text-align:center;}
+.intro-card .karate-icon{font-size:3rem;margin-bottom:16px;display:block;}
+.intro-card h2{font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;color:#1A1208;margin-bottom:12px;line-height:1.3;}
+.intro-card p{font-size:0.92rem;color:#3D2E1A;line-height:1.8;}
+.intro-card p strong{color:#CC3300;}
+
+.section{margin-bottom:40px;}
+.section h2{font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:#1A1208;margin-bottom:14px;display:flex;align-items:center;gap:10px;}
+.section h2 .s-num{width:30px;height:30px;background:#CC3300;color:#fff;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:0.78rem;font-weight:800;flex-shrink:0;}
+.section p{font-size:0.92rem;color:#3D2E1A;margin-bottom:12px;line-height:1.8;}
+.section ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:10px;margin-bottom:12px;}
+.section li{font-size:0.92rem;color:#3D2E1A;line-height:1.7;display:flex;align-items:flex-start;gap:10px;}
+.section li::before{content:'→';color:#CC3300;font-weight:700;flex-shrink:0;margin-top:1px;}
+.section strong{color:#1A1208;}
+
+.quote-block{background:#1A1208;border-radius:16px;padding:28px 32px;margin:32px 0;position:relative;overflow:hidden;}
+.quote-block::before{content:'"';position:absolute;top:-10px;left:20px;font-family:'Fraunces',serif;font-size:8rem;color:rgba(255,107,26,0.12);line-height:1;pointer-events:none;}
+.quote-block p{font-family:'Fraunces',serif;font-size:1.05rem;font-style:italic;color:#F5EDE0;line-height:1.7;position:relative;z-index:1;}
+.quote-block .quote-attr{font-size:0.75rem;color:#8B7355;margin-top:10px;font-style:normal;font-family:'DM Sans',sans-serif;position:relative;z-index:1;}
+
+.do-dont{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin:28px 0;}
+@media(max-width:560px){.do-dont{grid-template-columns:1fr;}}
+.do-box,.dont-box{border-radius:14px;padding:20px 22px;}
+.do-box{background:#F0FDF4;border:1.5px solid #BBF7D0;}
+.dont-box{background:#FEF2F2;border:1.5px solid #FECACA;}
+.do-box h3{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#15803D;margin-bottom:12px;}
+.dont-box h3{font-size:0.78rem;font-weight:800;text-transform:uppercase;letter-spacing:0.08em;color:#DC2626;margin-bottom:12px;}
+.do-box ul,.dont-box ul{padding-left:0;list-style:none;display:flex;flex-direction:column;gap:8px;}
+.do-box li,.dont-box li{font-size:0.82rem;line-height:1.55;display:flex;gap:8px;align-items:flex-start;}
+.do-box li{color:#15803D;} .dont-box li{color:#991B1B;}
+.do-box li::before{content:'✓';font-weight:800;flex-shrink:0;margin-top:1px;}
+.dont-box li::before{content:'✗';font-weight:800;flex-shrink:0;margin-top:1px;}
+
+.accuracy-note{background:#FFFBEB;border:1.5px solid #FCD34D;border-radius:14px;padding:20px 24px;margin:28px 0;}
+.accuracy-note h3{font-size:0.82rem;font-weight:700;color:#92400E;margin-bottom:8px;}
+.accuracy-note p{font-size:0.88rem;color:#78350F;line-height:1.7;margin-bottom:8px;}
+.accuracy-note p:last-child{margin-bottom:0;}
+
+.cta-bar{background:linear-gradient(135deg,#CC3300,#E85500);border-radius:16px;padding:28px 32px;text-align:center;margin-top:40px;}
+.cta-bar h3{font-family:'Fraunces',serif;font-size:1.2rem;font-weight:900;color:#fff;margin-bottom:8px;}
+.cta-bar p{font-size:0.88rem;color:rgba(255,255,255,0.75);margin-bottom:18px;}
+.cta-bar a{display:inline-block;background:#fff;color:#CC3300;font-weight:700;font-size:0.9rem;padding:12px 28px;border-radius:100px;text-decoration:none;box-shadow:0 4px 16px rgba(0,0,0,0.2);transition:all .2s;}
+.cta-bar a:hover{transform:translateY(-2px);}
+
+/* Footer */
+.neeto-footer{background:#1A1208;padding:48px 5% 28px;margin-top:0;}
+.footer-top{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;max-width:1100px;margin:0 auto 36px;}
+@media(max-width:768px){.footer-top{grid-template-columns:1fr 1fr;}}
+@media(max-width:480px){.footer-top{grid-template-columns:1fr;}}
+.footer-brand{display:flex;align-items:center;gap:10px;margin-bottom:12px;}
+.footer-brand img{height:28px;object-fit:contain;}
+.brand-word{font-family:'Fraunces',serif;font-weight:900;font-size:1.2rem;letter-spacing:-0.04em;display:inline-flex;align-items:baseline;}
+.brand-neet{color:#CC3300;}.brand-minds{color:#FF6B1A;}.brand-tm{font-size:0.5em;vertical-align:super;margin-left:1px;color:#CC3300;}
+.footer-tagline{font-size:0.78rem;color:#8B7355;line-height:1.6;max-width:240px;}
+.footer-col h4{font-size:0.68rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:#6B5C45;margin-bottom:14px;}
+.footer-col ul{list-style:none;display:flex;flex-direction:column;gap:8px;}
+.footer-col a{font-size:0.82rem;color:#8B7355;text-decoration:none;transition:color .2s;}
+.footer-col a:hover{color:#FF6B1A;}
+.footer-bottom{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:12px;padding-top:24px;border-top:1px solid rgba(255,255,255,0.07);}
+.footer-copy{font-size:0.72rem;color:#5C4A35;}
+.footer-legal{display:flex;gap:16px;}
+.footer-legal a{font-size:0.72rem;color:#5C4A35;text-decoration:none;}
+.footer-legal a:hover{color:#FF6B1A;}
+</style>
+</head>
+<body>
+
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="pricing.html">Pricing</a>
+    <a href="pricing.html" class="nav-cta">Unlock Pro →</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <span class="eyebrow">Before You Begin</span>
+  <h1>A Note to Students —<br/><em>What NEETMINDS™ Is</em></h1>
+  <p class="hero-sub">Understanding how to use this platform will help you get the most out of it. Please read this before you start.</p>
+</div>
+
+<div class="page">
+
+  <div class="intro-card">
+    <span class="karate-icon">🥋</span>
+    <h2>NEETMINDS™ is not a question bank.<br/>It is a <strong>pattern dojo.</strong></h2>
+    <p>Think of it like learning the <strong>core moves in martial arts</strong>. Instead of memorising hundreds of techniques, mastering a few fundamental patterns lets you respond effectively to many different situations — including ones you've never seen before.</p>
+    <p style="margin-top:12px;">That's exactly what NEETMINDS™ trains you to do. We focus on the <strong>6 recurring structural patterns</strong> that appear in NEET questions — so you can recognise them instantly on exam day, even in unfamiliar topics.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="s-num">1</span> What we are designed to do</h2>
+    <ul>
+      <li>Help you <strong>recognise and master</strong> the core question patterns that repeatedly appear in NEET</li>
+      <li>Build <strong>problem-solving speed and confidence</strong> for unfamiliar questions</li>
+      <li>Train pattern-based thinking that applies across all three subjects</li>
+      <li>Show you which AIIMS campuses and JIPMER are reachable based on your expected rank</li>
+      <li>Provide a focused, structured training environment — not a dumping ground of every possible question</li>
+    </ul>
+  </div>
+
+  <div class="quote-block">
+    <p>Our goal is not to give you thousands of questions. Our goal is to give you the mental framework to solve thousands of questions you've never seen.</p>
+    <div class="quote-attr">— NEETMINDS™ Design Philosophy</div>
+  </div>
+
+  <div class="section">
+    <h2><span class="s-num">2</span> How to use NEETMINDS™ effectively</h2>
+    <div class="do-dont">
+      <div class="do-box">
+        <h3>✓ Do this</h3>
+        <ul>
+          <li>Use NEETMINDS™ to identify which patterns you're weak on</li>
+          <li>Cross-verify every concept with NCERT textbooks</li>
+          <li>Practise full-length mock tests regularly alongside</li>
+          <li>Use the rank predictor as a planning guide, not a guarantee</li>
+          <li>Treat it as a thinking trainer, not a content source</li>
+        </ul>
+      </div>
+      <div class="dont-box">
+        <h3>✗ Avoid this</h3>
+        <ul>
+          <li>Relying on NEETMINDS™ as your only study source</li>
+          <li>Skipping NCERT because you've done questions here</li>
+          <li>Treating rank predictions as guaranteed outcomes</li>
+          <li>Expecting coverage of every possible NEET question</li>
+          <li>Memorising answers without understanding the pattern</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="s-num">3</span> A note on content accuracy</h2>
+    <div class="accuracy-note">
+      <h3>⚠️ About our content</h3>
+      <p>Some content on NEETMINDS™ is generated with the assistance of automated tools and compiled from multiple sources — including NTA official papers, NCERT textbooks, and curated question banks. While we review and validate content carefully, <strong>minor errors or inconsistencies may occasionally occur</strong>.</p>
+      <p>These errors do not materially affect the primary purpose of the platform — training pattern recognition — but you should <strong>always cross-verify factual claims and scientific concepts with your NCERT textbook</strong> before treating them as authoritative.</p>
+      <p>If you spot an error, please report it via the feedback button. We take accuracy seriously and update content continuously.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2><span class="s-num">4</span> Rank predictions &amp; cutoff data</h2>
+    <p>The Rank Predictor and AIIMS/JIPMER cutoff data are based on historical NTA published results and MCC official counselling data (2021–2025). They are provided as <strong>planning and reference tools only</strong>.</p>
+    <ul>
+      <li>Actual exam difficulty varies year to year — 2025 was unusually hard, 2024 unusually easy</li>
+      <li>Rank predictions carry inherent uncertainty — treat the range, not the exact number</li>
+      <li>AIIMS and JIPMER closing ranks fluctuate year to year — use trends, not single data points</li>
+      <li>State quota seats, PwD quotas, and institutional quota seats are not included in predictions</li>
+    </ul>
+    <p>No rank prediction, however accurate historically, can guarantee an outcome. <strong>Consistent effort, NCERT mastery, and repeated mock test practice</strong> are what determine your actual result.</p>
+  </div>
+
+  <div class="section">
+    <h2><span class="s-num">5</span> Our recommendation for best results</h2>
+    <ul>
+      <li>Use NEETMINDS™ for <strong>pattern training</strong> (2–3 sessions per week)</li>
+      <li>Complement with <strong>daily NCERT reading</strong> in all three subjects</li>
+      <li>Take <strong>at least 2–3 full mock tests per month</strong> under timed conditions</li>
+      <li>Review previous year NEET papers alongside platform practice</li>
+      <li>Use the analytics dashboard to identify which chapters and patterns need more work</li>
+    </ul>
+  </div>
+
+  <div class="cta-bar">
+    <h3>Ready to start training?</h3>
+    <p>You now understand what NEETMINDS™ is and how to use it effectively. Let's get to work.</p>
+    <a href="practice.html">Start Practising →</a>
+  </div>
+
+</div>
+
+<!-- FOOTER -->
+<footer class="neeto-footer">
+  <div class="footer-top">
+    <div class="footer-brand-col">
+      <div class="footer-brand">
+        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+      </div>
+      <p class="footer-tagline">Pattern intelligence for NEET. Master the patterns. Master the exam.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Platform</h4>
+      <ul>
+        <li><a href="practice.html">Practice Questions</a></li>
+        <li><a href="mock.html">Mock Tests</a></li>
+        <li><a href="analytics.html">Analytics</a></li>
+        <li><a href="pricing.html" style="color:#FF6B1A;font-weight:700;">Pricing →</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Learn</h4>
+      <ul>
+        <li><a href="methodology.html">Our Method</a></li>
+        <li><a href="about.html">About NEETMINDS™</a></li>
+        <li><a href="rank_predictor.html" style="color:#FF6B1A;">🎯 Rank Predictor</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+        <li><a href="terms.html#refund">Refund Policy</a></li>
+        <li><a href="disclaimer.html" style="color:#FF6B1A;">Student Disclaimer</a></li>
+        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span class="footer-copy">© 2026 NEETMINDS™ · For educational use only · Not affiliated with NTA or MCC.</span>
+    <div class="footer-legal">
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="terms.html#refund">Refunds</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="mailto:myneetminds@gmail.com">Contact</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

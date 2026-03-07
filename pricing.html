@@ -133,6 +133,13 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 .feat-muted { color: #C8B89A !important; }
 .plan-card.featured .feat-muted { color: rgba(200,184,154,0.5) !important; }
 .feat-highlight { color: #FF6B1A !important; font-weight: 600; }
+.plan-disclaimer-note {
+  font-size: 0.76rem; color: #9C8A78; margin-bottom: 20px; line-height: 1.55;
+  padding: 10px 14px; background: rgba(255,255,255,0.04);
+  border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+}
+.plan-disclaimer-note a { color: #FF8C4A; font-weight: 600; text-decoration: none; }
+.plan-disclaimer-note a:hover { text-decoration: underline; }
 .plan-card.featured .feat-highlight { color: #FF8C4A !important; }
 
 /* FAQ */
@@ -272,11 +279,14 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
           <span class="amount" id="pro-price">799</span>
           <span class="period">/ month</span>
         </div>
-        <div class="plan-billed" id="pro-billed">Billed monthly · No refunds</div>
+        <div class="plan-billed" id="pro-billed">Billed monthly</div>
       </div>
       <div class="plan-divider"></div>
       <div class="plan-tagline">The full NEETMINDS™ experience — including our proprietary <strong style="color:#fff;">Rank Predictor</strong>. Built for serious aspirants.</div>
       <a href="login.html?plan=pro" class="plan-btn plan-btn-pro" id="pro-btn">Start Pro →</a>
+      <div class="plan-disclaimer-note">
+        📖 <a href="disclaimer.html" target="_blank">Read our student note</a> before subscribing — understand what this platform is and isn't.
+      </div>
       <div class="plan-features-label">Everything in Free, plus:</div>
       <ul class="plan-features">
         <li><span class="chk chk-pro">✓</span> Unlimited practice questions</li>
@@ -301,7 +311,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">Can I switch plans later? <span class="faq-icon">+</span></div>
-    <div class="faq-a">You can upgrade from Free to Pro at any time. Pro subscriptions are billed monthly and are non-refundable — please try the Free plan thoroughly before upgrading.</div>
+    <div class="faq-a">You can upgrade from Free to Pro at any time. Pro subscriptions are billed monthly. Please use the Free plan to evaluate the platform thoroughly before upgrading.</div>
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">Is the Free plan really free forever? <span class="faq-icon">+</span></div>
@@ -313,7 +323,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">What is your refund policy? <span class="faq-icon">+</span></div>
-    <div class="faq-a"><strong>All payments are final and non-refundable.</strong> NEETMINDS™ Pro gives you immediate access to our full question bank, rank predictor, analytics, and AIIMS data. Because you receive full value from day one, we do not offer refunds or partial-month credits. Please use the Free plan to evaluate the platform before upgrading.</div>
+    <div class="faq-a">Please read our full <a href="terms.html#refund" style="color:#CC3300;font-weight:600;">Refund Policy</a> before subscribing. We strongly encourage you to use the Free plan thoroughly to evaluate the platform before upgrading to Pro.</div>
   </div>
   <div class="faq-item" onclick="toggleFAQ(this)">
     <div class="faq-q">How many questions are in the question bank? <span class="faq-icon">+</span></div>
@@ -363,18 +373,22 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-                <li><a href="/cdn-cgi/l/email-protection#214c584f4444554c484f455261464c40484d0f424e4c">Contact Us</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+        <li><a href="terms.html#refund">Refund Policy</a></li>
+        <li><a href="disclaimer.html">Student Disclaimer</a></li>
+        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
       </ul>
     </div>
   </div>
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 NEETMINDS™ · For educational use only.</span>
     <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="/cdn-cgi/l/email-protection#34594d5a515140595d5a5047745359555d581a575b59">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="terms.html#refund">Refunds</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="mailto:myneetminds@gmail.com">Contact</a>
     </div>
   </div>
 </footer>
@@ -382,7 +396,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
 <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var billing = 'monthly';
 var prices = {
-  monthly: { pro: '799', proBilled: 'Billed monthly · No refunds' },
+  monthly: { pro: '799', proBilled: 'Billed monthly' },
   yearly:  { pro: '349', proBilled: '₹7,188/year · Save ₹2,400' }
 };
 

@@ -571,7 +571,14 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
 
 </div>
 
-<footer>© 2025 NEETMINDS™. Rank predictions are estimates for planning purposes only. Not affiliated with NTA or MCC.</footer>
+<footer style="text-align:center;padding:32px 20px 24px;border-top:1.5px solid var(--border);color:var(--muted);font-size:0.78rem;line-height:2;">
+  © 2026 NEETMINDS™ · Rank predictions are estimates for planning purposes only · Not affiliated with NTA or MCC<br/>
+  <a href="terms.html" style="color:var(--muted);text-decoration:none;">Terms</a> &nbsp;·&nbsp;
+  <a href="privacy.html" style="color:var(--muted);text-decoration:none;">Privacy</a> &nbsp;·&nbsp;
+  <a href="terms.html#refund" style="color:var(--muted);text-decoration:none;">Refund Policy</a> &nbsp;·&nbsp;
+  <a href="disclaimer.html" style="color:var(--orange);font-weight:600;text-decoration:none;">📖 Student Disclaimer</a> &nbsp;·&nbsp;
+  <a href="mailto:myneetminds@gmail.com" style="color:var(--muted);text-decoration:none;">Contact</a>
+</footer>
 
 <script>
 /* ══════════════════════════════════════════════════════════
@@ -1046,7 +1053,7 @@ function buildShareText() {
     + '🏅 Estimated AIR: ' + formatRank(r.rank.rankLow) + '–' + formatRank(r.rank.rankHigh) + '\n'
     + '🏥 Category: ' + r.cat + '\n'
     + (r.qualified ? '✅ Qualified\n' : '❌ Below cutoff\n')
-    + '\nCheck yours free at neetminds.in/rank_predictor.html';
+    + '\nCheck yours free at neetminds.com/rank_predictor.html';
 }
 
 function shareWhatsApp() {
@@ -1055,7 +1062,7 @@ function shareWhatsApp() {
 function shareTwitter() {
   var txt = 'My NEET 2025 rank prediction: AIR ~'
     + ((_lastResult && _lastResult.rank) ? formatRank(_lastResult.rank.centralRank) : '?')
-    + ' Check yours free → neetminds.in/rank_predictor.html #NEET2025 @NEETMinds';
+    + ' Check yours free → neetminds.com/rank_predictor.html #NEET2025 @NEETMinds';
   window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank');
 }
 function copyResult() {
@@ -1325,9 +1332,9 @@ function switchJIPMERTab(btn, campus) {
         <li>🏥 Govt MBBS outlook by state &amp; quota</li>
         <li>📚 Unlimited practice + Full NCERT explanations</li>
         <li>🧠 Pattern weakness reports + Analytics</li>
-        <li>🚫 <strong>All sales final — no refunds</strong></li>
       </ul>
       <a href="login.html?plan=pro" class="pro-modal-cta" id="pro-modal-cta">Unlock Pro — ₹799/month →</a>
+      <a href="disclaimer.html" target="_blank" style="font-size:0.72rem;color:rgba(255,255,255,0.35);display:block;margin-top:8px;text-decoration:none;">📖 Read our student note before subscribing</a>
       <span class="pro-modal-dismiss" onclick="closeProModal()">Continue with free (AIIMS Delhi only)</span>
     </div>
   </div>
