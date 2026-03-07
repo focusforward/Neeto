@@ -9117,112 +9117,6 @@
       "confidence": "medium"
     },
     {
-      "id": "NEET_UPLOAD_Q0198",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Body Fluids and Circulation",
-      "topic": "",
-      "question": "Which of the following statements are correct?",
-      "options": {
-        "A": "A and B only",
-        "B": "B, C and D only",
-        "C": "A, B and E only",
-        "D": "C, D and E only"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "statements": [
-        {
-          "label": "A",
-          "text": "An excessive loss of body fluid from the body switches off osmoreceptors."
-        },
-        {
-          "label": "B",
-          "text": "ADH facilitates water reabsorption to prevent diuresis."
-        },
-        {
-          "label": "C",
-          "text": "ANF causes vasodilation."
-        },
-        {
-          "label": "D",
-          "text": "ADH causes increase in blood pressure."
-        },
-        {
-          "label": "E",
-          "text": "ADH is responsible for decrease in GFR."
-        }
-      ]
-    },
-    {
-      "id": "NEET_UPLOAD_Q0199",
-      "subject": "Biology",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Locomotion and Movement",
-      "topic": "",
-      "question": "Which of the following statements are correct regarding skeletal muscle?",
-      "options": {
-        "A": "A, B and C only",
-        "B": "B and C only",
-        "C": "A, C and D only",
-        "D": "C and D only"
-      },
-      "correct_answer": "B",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Biology",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Biology",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "statements": [
-        {
-          "label": "A",
-          "text": "Muscle bundles are held together by collagenous connective tissue layer called fascicle."
-        },
-        {
-          "label": "B",
-          "text": "Sarcoplasmic reticulum of muscle fibre is a store house of calcium ions."
-        },
-        {
-          "label": "C",
-          "text": "Striated appearance of skeletal muscle fibre is due to distribution pattern of actin and myosin proteins."
-        },
-        {
-          "label": "D",
-          "text": "M line is considered as functional unit of contraction called sarcomere."
-        }
-      ]
-    },
-    {
       "id": "BIO_celltheunito_22dc8e8167",
       "subject": "Biology",
       "unit_code": "UNCLASSIFIED",
@@ -10870,7 +10764,29 @@
       "diagram_required": false,
       "trap_patterns": [],
       "accuracy_flag": "ok",
-      "confidence": "medium"
+      "confidence": "medium",
+      "match_table": {
+        "col1_header": "Column I",
+        "col2_header": "Column II",
+        "rows": [
+          {
+            "col1": "(a) Fourth trophic level",
+            "col2": "(i) Crow"
+          },
+          {
+            "col1": "(b) Second trophic level",
+            "col2": "(ii) Vulture"
+          },
+          {
+            "col1": "(c) First trophic level",
+            "col2": "(iii) Rabbit"
+          },
+          {
+            "col1": "(d) Third trophic level",
+            "col2": "(iv) Grass"
+          }
+        ]
+      }
     },
     {
       "id": "NEET_UPLOAD_Q0064",
@@ -89664,23 +89580,6 @@
       "year": ""
     },
     {
-      "id": "NEW_BIO_BC_c278d66c",
-      "subject": "Biology",
-      "pattern": "best_choice",
-      "difficulty": "L2",
-      "question": "Match the organism with its use in biotechnology.",
-      "options": {
-        "A": "(a)-(iv), (b)-(iii), (c)-(i), (d)-(ii)",
-        "B": "(a)-(iii), (b)-(ii), (c)-(i), (d)-(iv)",
-        "C": "(a)-(ii), (b)-(i), (c)-(iv), (d)-(iii)",
-        "D": "(a)-(i), (b)-(iv), (c)-(iii), (d)-(ii)"
-      },
-      "correct_answer": "A",
-      "explanation": "Bt produces Cry proteins, Thermus aquaticus gives Taq polymerase, Agrobacterium is cloning vector, Salmonella typhimurium used in first rDNA construction. PART 1: \"Which is MOST correct\" Questions (Evaluating 4 NCERT-Accurate Statements)",
-      "ncert_ref": "NEET 2020,, Q.27",
-      "year": ""
-    },
-    {
       "id": "NEW_BIO_BC_035f4f6d",
       "subject": "Biology",
       "pattern": "best_choice",
@@ -93573,22 +93472,6 @@
       "explanation": "Statements I and IV are correct. The correct forms of II and III are: (II) Photoperiod does affect the reproduction in plants. (III) Binomial nomenclature was given by Carolus Linnaeus. Ernst Mayr gave the definition of biological species. In unicellular organisms, reproduction is indeed synonymous with growth. [Source: NEET 2016, Phase II -, Q04]"
     },
     {
-      "id": "NEW_BIO_BC_ac04762675",
-      "subject": "Biology",
-      "chapter": "General Biology",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Match the items given in Column I with those in Column II and select the correct option: Options:",
-      "options": {
-        "A": "1-(ii), 2-(iv), 3-(i), 4-(iii)",
-        "B": "1-(iii), 2-(ii), 3-(i), 4-(iv)",
-        "C": "1-(ii), 2-(iv), 3-(iii), 4-(i)",
-        "D": "1-(iii), 2-(iv), 3-(i), 4-(ii)"
-      },
-      "correct_answer": "D",
-      "explanation": "Herbarium is a place where dried and pressed plant specimens mounted on sheets are kept. Key is a booklet containing list of characters and their alternates helpful in identification. Museum is an institution where artistic and educational materials are exhibited. Catalogue is a list that enumerates methodically all species found in an area with brief description. Therefore, option (d) is correct. [Source: NEET 2018 -, Q02]"
-    },
-    {
       "id": "NEW_BIO_BC_3eb110aa4f",
       "subject": "Biology",
       "chapter": "Microbiology",
@@ -95061,22 +94944,6 @@
       "explanation": "In gymnosperms like Pinus, the male and female gametophytes do not have an independent free-living existence. They remain within the sporangia, retained on the sporophytes, unlike in bryophytes and pteridophytes. [Source: CBSE AIPMT 2011 -, Q80]"
     },
     {
-      "id": "NEW_BIO_BC_d6734b59a2",
-      "subject": "Biology",
-      "chapter": "Molecular Biology",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Consider the following statements about gametogenesis: Choose the correct answer:",
-      "options": {
-        "A": "B and C are true",
-        "B": "A and B are true",
-        "C": "A and C are true",
-        "D": "B and D are true"
-      },
-      "correct_answer": "B",
-      "explanation": "Statements A and B are true. The first polar body is associated with secondary oocyte formation, not primary oocyte. LH surge leads to ovulation, not endometrial disintegration. Decreased progesterone causes menstruation. [Source: NEET (UG)-2025 (Code-47) -, Q99]"
-    },
-    {
       "id": "NEW_BIO_BC_02569d54fc",
       "subject": "Biology",
       "chapter": "Cell Biology",
@@ -95109,22 +94976,6 @@
       "explanation": "When recombinant DNA is inserted within the coding sequence of β-galactosidase, it causes insertional inactivation. Colonies with insert (recombinants) do not produce colour (white). Non-recombinants produce blue colour with chromogenic substrate. [Source: NEET (UG)-2025 (Code-47) -, Q101]"
     },
     {
-      "id": "NEW_BIO_BC_be27411139",
-      "subject": "Biology",
-      "chapter": "General Biology",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Match List I with List II and select the correct option:",
-      "options": {
-        "A": "A-II, B-III, C-I, D-IV",
-        "B": "A-III, B-IV, C-II, D-I",
-        "C": "A-III, B-II, C-IV, D-I",
-        "D": "A-III, B-II, C-I, D-IV"
-      },
-      "correct_answer": "D",
-      "explanation": "Adenosine is a nucleoside (base + sugar). Adenylic acid is a nucleotide (base + sugar + phosphate). Adenine is a nitrogen base (purine). Alanine is an amino acid. [Source: NEET (UG)-2025 (Code-47) - -3, Q103]"
-    },
-    {
       "id": "NEW_BIO_BC_f6309d0c30",
       "subject": "Biology",
       "chapter": "Molecular Biology",
@@ -95139,22 +94990,6 @@
       },
       "correct_answer": "B",
       "explanation": "Based on the pedigree analysis, the genetic disorder is sex-linked recessive. From consanguineous mating between carrier female (XcX) and affected male (XcY), out of 4 children, only one is carrier, giving probability of 1/4. [Source: NEET (UG)-2025 (Code-47) -, Q104]"
-    },
-    {
-      "id": "NEW_BIO_BC_be1f21a236",
-      "subject": "Biology",
-      "chapter": "Neural and Endocrine",
-      "pattern": "best_choice",
-      "difficulty": "L2",
-      "question": "Consider the following statements regarding function of adrenal medullary hormones: Choose the correct answer:",
-      "options": {
-        "A": "D only",
-        "B": "C and D only",
-        "C": "B, C and D only",
-        "D": "A, C and D only"
-      },
-      "correct_answer": "C",
-      "explanation": "Adrenal medulla secretes adrenaline and noradrenaline. They cause pupillary dilation (not constriction), are hyperglycemic (stimulate glycogen breakdown), cause piloerection, and increase heart contraction strength. [Source: NEET (UG)-2025 (Code-47) - -4, Q105]"
     },
     {
       "id": "NEW_BIO_BC_66345253db",
@@ -95219,22 +95054,6 @@
       },
       "correct_answer": "C",
       "explanation": "Both statements are correct, but the reason does not correctly explain the assertion. The reason describes the mechanism of Golgi function, while the assertion describes its primary function. They are related but not causally linked in the given statements. [Source: NEET (UG)-2025 (Code-47) -, Q113]"
-    },
-    {
-      "id": "NEW_BIO_BC_72e209d602",
-      "subject": "Biology",
-      "chapter": "Neural and Endocrine",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Match List-I with List-II regarding hormones and their sources:",
-      "options": {
-        "A": "A-III, B-II, C-IV, D-I",
-        "B": "A-IV, B-II, C-I, D-III",
-        "C": "A-IV, B-II, C-III, D-I",
-        "D": "A-II, B-IV, C-I, D-III"
-      },
-      "correct_answer": "B",
-      "explanation": "Progesterone is secreted by corpus luteum (IV). Relaxin is secreted by ovaries (II). MSH is released by pars intermedia (I). Catecholamines are released by adrenal medulla (III). [Source: NEET (UG)-2025 (Code-47) - -7, Q115]"
     },
     {
       "id": "NEW_BIO_BC_953e5ce831",
@@ -95347,54 +95166,6 @@
       },
       "correct_answer": "A",
       "explanation": "Primary lymphoid organs (bone marrow and thymus) are where lymphocytes mature. They then migrate to secondary lymphoid organs (spleen, lymph nodes, Peyer's patches) for interaction with antigens. [Source: NEET (UG)-2025 (Code-47) -, Q124]"
-    },
-    {
-      "id": "NEW_BIO_BC_54ebf6e67d",
-      "subject": "Biology",
-      "chapter": "General Biology",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Match List I with List II:",
-      "options": {
-        "A": "A-III, B-II, C-IV, D-I",
-        "B": "A-III, B-II, C-I, D-IV",
-        "C": "A-III, B-I, C-II, D-IV",
-        "D": "A-III, B-IV, C-II, D-I"
-      },
-      "correct_answer": "C",
-      "explanation": "The Evil Quartet refers to causes of biodiversity loss. Ex situ conservation includes cryopreservation. Lantana camara is an alien invasive species. Dodo is an extinct species. [Source: NEET (UG)-2025 (Code-47) -, Q125]"
-    },
-    {
-      "id": "NEW_BIO_BC_fa4783acd8",
-      "subject": "Biology",
-      "chapter": "Plant Morphology",
-      "pattern": "best_choice",
-      "difficulty": "L2",
-      "question": "Read the following statements on plant growth and development: Choose the option with all correct statements:",
-      "options": {
-        "A": "B, D, E only",
-        "B": "A, B, C only",
-        "C": "A, C, E only",
-        "D": "A, D, E only"
-      },
-      "correct_answer": "B",
-      "explanation": "ABA is a growth inhibitor, not promoter. Apical dominance promotes apical bud growth, not lateral buds. Statements A, B, and C are correct. [Source: NEET (UG)-2025 (Code-47) -, Q126]"
-    },
-    {
-      "id": "NEW_BIO_BC_8ad42ad457",
-      "subject": "Biology",
-      "chapter": "General Biology",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Match List-I with List-II:",
-      "options": {
-        "A": "A-IV, B-III, C-II, D-I",
-        "B": "A-III, B-IV, C-II, D-I",
-        "C": "A-IV, B-III, C-I, D-II",
-        "D": "A-III, B-IV, C-I, D-II"
-      },
-      "correct_answer": "C",
-      "explanation": "Salvinia is a pteridophyte, Polytrichum is a bryophyte, Salvia is an angiosperm, and Ginkgo is a gymnosperm. [Source: NEET (UG)-2025 (Code-47) -, Q127]"
     },
     {
       "id": "NEW_BIO_BC_3f68b6c793",
@@ -95539,22 +95310,6 @@
       },
       "correct_answer": "D",
       "explanation": "Solar energy is indeed the primary energy source. However, the rate of production of organic matter during photosynthesis is gross primary productivity (GPP), not NPP. NPP = GPP - respiration losses. [Source: NEET (UG)-2025 (Code-47) -, Q147]"
-    },
-    {
-      "id": "NEW_BIO_BC_f78cae5b10",
-      "subject": "Biology",
-      "chapter": "General Biology",
-      "pattern": "best_choice",
-      "difficulty": "L2",
-      "question": "Match List-I with List-II regarding sperm structure:",
-      "options": {
-        "A": "A-III, B-II, C-I, D-IV",
-        "B": "A-IV, B-III, C-I, D-II",
-        "C": "A-IV, B-III, C-II, D-I",
-        "D": "A-III, B-IV, C-II, D-I"
-      },
-      "correct_answer": "B",
-      "explanation": "Head contains genetic material (IV). Middle piece has mitochondria producing energy (III). Acrosome contains enzymes for fertilization (I). Tail provides motility (II). [Source: NEET (UG)-2025 (Code-47) -, Q150]"
     },
     {
       "id": "NEW_BIO_BC_f747283367",
@@ -95747,22 +95502,6 @@
       },
       "correct_answer": "A",
       "explanation": "In monocot seeds like cereals, the aleurone layer is a protein-rich layer that separates the embryo from the endosperm. It contains enzymes for digestion during germination. [Source: NEET (UG)-2025 (Code-47) -, Q163]"
-    },
-    {
-      "id": "NEW_BIO_BC_6345f10bf5",
-      "subject": "Biology",
-      "chapter": "General Biology",
-      "pattern": "best_choice",
-      "difficulty": "L3",
-      "question": "Match List I with List II regarding pigment colours:",
-      "options": {
-        "A": "A-I, B-IV, C-III, D-II",
-        "B": "A-III, B-IV, C-II, D-I",
-        "C": "A-III, B-I, C-II, D-IV",
-        "D": "A-I, B-II, C-IV, D-III"
-      },
-      "correct_answer": "C",
-      "explanation": "Chromatographic separation shows: Chlorophyll a - blue-green, Chlorophyll b - yellow-green, Xanthophylls - yellow, Carotenoids - yellow to yellow-orange. [Source: NEET (UG)-2025 (Code-47) -, Q164]"
     },
     {
       "id": "NEW_BIO_BC_ac4b5e2978",

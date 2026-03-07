@@ -2924,39 +2924,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_NEET_UPLOAD_Q0172",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Consider the following statements: A. Annelids are true coelomates, B. Poriferans are pseudocoelomates, C. Aschelminithes are acoelomates, D. Platyhelminthes are pseudocoelomates",
-      "options": {
-        "A": "C only",
-        "B": "D only",
-        "C": "B only",
-        "D": "A only"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "memory_test",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0186",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -4433,57 +4400,6 @@
       "confidence": "medium"
     },
     {
-      "id": "PHY_unclassified_a3de975bfb",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Alternating Current",
-      "topic": "",
-      "question": "Which of the following statements are correct regarding female reproductive cycle?",
-      "options": {
-        "A": "A and D only",
-        "B": "A and B only",
-        "C": "A, B and C only",
-        "D": "A, C and D only"
-      },
-      "correct_answer": "D",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "concept_guru",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium",
-      "statements": [
-        {
-          "label": "A",
-          "text": "In non-primate mammals cyclical changes during reproduction are called oestrus cycle."
-        },
-        {
-          "label": "B",
-          "text": "First menstrual cycle begins at puberty and is called menopause."
-        },
-        {
-          "label": "C",
-          "text": "Lack of menstruation may be indicative of pregnancy."
-        },
-        {
-          "label": "D",
-          "text": "Cyclic menstruation extends between menarche and menopause."
-        }
-      ]
-    },
-    {
       "id": "PHY_NEET_UPLOAD_Q0175",
       "subject": "Physics",
       "unit_code": "UNCLASSIFIED",
@@ -4754,39 +4670,6 @@
       "ncert_ref": "NCERT Physics",
       "ncert_line": "",
       "pattern": "concept_guru",
-      "pattern_name": "Memory Test",
-      "difficulty": "L2",
-      "year": null,
-      "source": "NEET_2020_2024_verified",
-      "verified": false,
-      "tags": [
-        "Physics",
-        "NEET_official",
-        "L2"
-      ],
-      "diagram_required": false,
-      "trap_patterns": [],
-      "accuracy_flag": "ok",
-      "confidence": "medium"
-    },
-    {
-      "id": "PHY_NEET_UPLOAD_Q0200",
-      "subject": "Physics",
-      "unit_code": "UNCLASSIFIED",
-      "chapter": "Nuclei",
-      "topic": "",
-      "question": "Which of the following statements are correct? A. Basophils are most abundant cells of the total WBCS B. Basophils secrete histamine, serotonin and heparin C. Basophils are involved in inflammatory response D. Basophils have kidney shaped nucleus E. Basophils are agranulocytes",
-      "options": {
-        "A": "D and E only",
-        "B": "C and E only",
-        "C": "B and C only",
-        "D": "A and B only"
-      },
-      "correct_answer": "C",
-      "explanation": "Refer to NCERT for the complete explanation of this concept.",
-      "ncert_ref": "NCERT Physics",
-      "ncert_line": "",
-      "pattern": "best_choice",
       "pattern_name": "Memory Test",
       "difficulty": "L2",
       "year": null,
