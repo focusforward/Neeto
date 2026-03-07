@@ -347,39 +347,38 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 </head>
 <body>
 
+<!-- ══ NAV ══════════════════════════════════════════════════════ -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
-  </a>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html" class="active">Mock Test</a>
-    <a href="methodology.html">Our Method</a>
-    <a href="analytics.html">Analytics</a>
+    <a href="mock.html" class="active">Mock</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+    <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-<div class="nav-mobile-menu" id="mmenu">
+<div class="nav-mobile-menu" id="nmenu">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html" class="active">Mock Test</a>
-  <a href="methodology.html">Our Method</a>
-  <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
+  <a href="mock.html" class="active">Mock</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="about.html">About</a>
+  <a href="practice.html" class="nav-cta">Start Practising →</a>
 </div>
 
 <!-- ══ START SCREEN ══════════════════════════════════════════════ -->
@@ -395,7 +394,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
       📝 &nbsp;Section A: 35 mandatory &nbsp;·&nbsp; Section B: attempt any 10 of 15
     </div>
   </div>
-  <button class="btn-primary" onclick="startMock()">Start Test →</button>
+  <button class="btn-primary" id="start-mock-btn">Start Test →</button>
 </div>
 
 <!-- ══ TEST SCREEN ═══════════════════════════════════════════════ -->
@@ -423,13 +422,20 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 
 <!-- ══ RESULT SCREEN ═════════════════════════════════════════════ -->
 <div id="result-screen" style="display:none;">
+  <nav class="navbar">
+    <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;">
+      <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
+    </span>
+    <div class="nav-links">
+      <a href="mock.html" class="active">Retake Test</a>
+      <a href="practice.html">Practice</a>
+    </div>
+  </nav>
   <div class="result-hero">
     <div style="color:var(--c-ink-muted,#6B5C45);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Your Score</div>
     <div class="result-score" id="result-score">0</div>
     <div class="result-max">/ 720</div>
   </div>
-  <!-- RANK PREDICTOR PROMPT — populated by JS after score calculated -->
-  <div id="rank-predictor-prompt" style="display:none;padding:0 20px;max-width:900px;margin:0 auto;"></div>
   <div class="result-grid">
     <div class="result-box"><div class="num" style="color:#22C55E;" id="r-correct">0</div><div class="lbl">Correct</div></div>
     <div class="result-box"><div class="num" style="color:#EF4444;" id="r-wrong">0</div><div class="lbl">Wrong</div></div>
@@ -443,22 +449,15 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
   </div>
 </div>
 
-<footer class="neeto-footer" style="text-align:center;padding:28px 20px 24px;border-top:1.5px solid rgba(255,255,255,0.07);">
-  <div class="footer-brand" style="justify-content:center;margin-bottom:10px;">
+<footer class="neeto-footer">
+  <div class="footer-brand">
     <img src="neetminds-logo.png" style="height:28px;object-fit:contain;border-radius:0;" alt="NEETMINDS"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
-  <p style="font-size:0.72rem;color:#9C8A78;margin-bottom:10px;">© 2026 NEETMINDS™ · For educational use only · Not affiliated with NTA or MCC.</p>
-  <div style="display:flex;gap:16px;justify-content:center;flex-wrap:wrap;">
-    <a href="privacy.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Privacy</a>
-    <a href="terms.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Terms</a>
-    <a href="terms.html#refund" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Refunds</a>
-    <a href="disclaimer.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Disclaimer</a>
-    <a href="/cdn-cgi/l/email-protection#b9d4c0d7dcdccdd4d0d7ddcaf9ded4d8d0d597dad6d4" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Contact</a>
-  </div>
+  <p>© 2026 NEETMINDS™. All rights reserved.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 // ═══════════════════════════════════════════════════════════════
 //  NEETMINDS mock.html  v2
 //  • Question-by-question (Prev / Next)
@@ -510,111 +509,81 @@ document.addEventListener('DOMContentLoaded',updateThemeUI);
 
 // ── NAV CLOSE ─────────────────────────────────────────────────
 document.addEventListener('click',function(e){
-  var m=document.getElementById('mmenu');
+  var m=document.getElementById('nmenu');
   var b=document.querySelector('.nav-hamburger');
   if(m&&m.classList.contains('open')&&!m.contains(e.target)&&b&&!b.contains(e.target))
     m.classList.remove('open');
 });
 
 // ═══════════════════════════════════════════════════════════════
-//  QUESTION TEXT FORMATTER  v2
-//  Handles:
+//  QUESTION TEXT FORMATTER
+//  Handles four patterns:
 //    1. Assertion (A): … Reason (R): …
 //    2. Statement I: … Statement II: …
-//    3. Roman numeral list  I. / II. / III. / IV. inline
-//    4. Lettered (a)(b)(c)(d)(e) inline sub-items
-//    5. Lettered sub-items  A. / B. / a) / 1. etc (≥2 items, newline)
-//    6. Plain text (default)
+//    3. Lettered sub-items  A. / B. / a) / 1. etc (≥2 items)
+//    4. Plain text (default)
 // ═══════════════════════════════════════════════════════════════
 function formatQText(raw){
   if(!raw)return '';
   var t=String(raw).trim();
-
-  /* Shared styles */
-  var blockSt='border-radius:10px;padding:.65rem 1rem;margin-bottom:.6rem;font-size:.93rem;line-height:1.65;';
-  var labelSt='font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;display:block;margin-bottom:.3rem;';
+  var arStyle='border-left:3px solid var(--c-brand,#FF6B1A);background:var(--c-bg,#FAFAF8);'
+    +'border-radius:0 8px 8px 0;padding:.6rem 1rem;margin-bottom:.55rem;'
+    +'font-size:.95rem;line-height:1.65;color:var(--c-ink,#1A1208);';
+  var arLbl='font-weight:700;color:var(--c-brand-deep,#E85500);display:block;margin-bottom:.2rem;font-size:.88rem;';
   var stemSt='font-size:1rem;line-height:1.75;color:var(--c-ink,#1A1208);margin-bottom:.6rem;';
-  var rowSt='display:flex;gap:.6rem;align-items:flex-start;margin-bottom:.45rem;font-size:.93rem;line-height:1.6;color:var(--c-ink,#1A1208);';
-  var numLblSt='font-weight:800;color:#CC3300;min-width:1.5rem;flex-shrink:0;font-size:.82rem;padding-top:2px;';
+  var stKey='font-weight:700;color:var(--c-brand-deep,#E85500);min-width:1.6rem;flex-shrink:0;';
+  var stRow='display:flex;gap:.5rem;margin-bottom:.4rem;font-size:.95rem;line-height:1.65;color:var(--c-ink,#1A1208);';
   var out='';
 
-  // ── 1. Assertion / Reason ─────────────────────────────────────
-  var ar=t.match(/^(?:[\s\S]*?[Aa]ssertion\s*(?:\(A\)|A)?\s*[:\-]\s*)([\s\S]*?)\s+[Rr]eason\s*(?:\(R\)|R)?\s*[:\-]\s*([\s\S]+)$/);
+  // ── 1. Assertion (A) / Reason (R) ─────────────────────────
+  var ar=t.match(/^([\s\S]*?)\bAssertion\s*[:(（]?\s*[Aa][)）:]?\s*([\s\S]+?)\bReason\s*[:(（]?\s*[Rr][)）:]?\s*([\s\S]+)$/i);
   if(ar){
-    var ass=ar[1].trim(), rea=ar[2].trim();
-    out+='<div style="'+blockSt+'background:#F3F0FF;border:1.5px solid #C4B5FD;">'
-      +'<span style="'+labelSt+'color:#7C3AED;">Assertion (A)</span>'+esc(ass)+'</div>';
-    out+='<div style="'+blockSt+'background:#F0F9FF;border:1.5px solid #BAE6FD;">'
-      +'<span style="'+labelSt+'color:#0369A1;">Reason (R)</span>'+esc(rea)+'</div>';
+    var pre=ar[1].trim(),ass=ar[2].trim(),rea=ar[3].trim();
+    if(pre)out+='<p style="'+stemSt+'">'+esc(pre)+'</p>';
+    out+='<div style="'+arStyle+'"><span style="'+arLbl+'">Assertion (A)</span>'+esc(ass)+'</div>';
+    out+='<div style="'+arStyle+'"><span style="'+arLbl+'">Reason (R)</span>'+esc(rea)+'</div>';
     return out;
   }
 
-  // ── 2. Statement I / II ────────────────────────────────────────
-  var stParts=t.split(/Statements?\s*[-–]?\s*(I{1,3}|[1-3])\s*[:\-]\s*/i);
+  // ── 2. Statement I / Statement II ─────────────────────────
+  var stParts=t.split(/Statement[\s\-]*(I{1,3}|[1-3])\s*[:\-]?\s*/i);
   if(stParts.length>=5){
-    var pre2=stParts[0].trim().replace(/[\s:,\-]+$/,'').trim();
-    if(pre2)out+='<p style="'+stemSt+'font-style:italic;color:var(--c-ink-muted,#6B5C45);">'+esc(pre2)+'</p>';
+    var pre2=stParts[0].trim();
+    if(pre2)out+='<p style="'+stemSt+'">'+esc(pre2)+'</p>';
     for(var si=1;si<stParts.length-1;si+=2){
       var lbl=stParts[si].trim().toUpperCase();
       var txt=(stParts[si+1]||'').trim();
       if(!txt)continue;
       var label=(lbl==='1'||lbl==='I')?'Statement I':(lbl==='2'||lbl==='II')?'Statement II':'Statement III';
-      var bdrCol=(lbl==='1'||lbl==='I')?'#CC3300':'#FF6B1A';
-      out+='<div style="'+blockSt+'border-left:3px solid '+bdrCol+';background:var(--c-surface-2,#FFF8F3);border-radius:0 8px 8px 0;">'
-        +'<span style="'+labelSt+'color:'+bdrCol+';">'+label+'</span>'+esc(txt)+'</div>';
+      out+='<div style="'+arStyle+'"><span style="'+arLbl+'">'+label+'</span>'+esc(txt)+'</div>';
     }
     if(out)return out;
   }
 
-  // ── 3. Roman numeral inline list  I. II. III. IV. ─────────────
-  var numRe=/\b(I{1,3}|IV|VI{0,3}|IX)\.\s+/g;
-  var numMatches=[], nm;
-  numRe.lastIndex=0;
-  while((nm=numRe.exec(t))!==null) numMatches.push({index:nm.index,numeral:nm[1],end:nm.index+nm[0].length});
-  if(numMatches.length>=2){
-    var stem=t.slice(0,numMatches[0].index).trim();
-    var trailRe=/\s+(Which\b|Select\b|Choose\b|How many\b|The correct\b|Identify\b|Of the above\b|Among\b|From the above\b)/i;
-    var items=[], trailer='';
-    for(var ni=0;ni<numMatches.length;ni++){
-      var iStart=numMatches[ni].end;
-      var iEnd=(ni+1<numMatches.length)?numMatches[ni+1].index:t.length;
-      var iText=t.slice(iStart,iEnd).trim();
-      if(ni===numMatches.length-1){var tr=trailRe.exec(iText);if(tr){trailer=iText.slice(tr.index).trim();iText=iText.slice(0,tr.index).trim();}}
-      items.push({num:numMatches[ni].numeral,text:iText});
+  // ── 3a. Inline lettered list: "stem: A. text; B. text; C. text" ──
+  // Detect pattern: ends in ": A." or "; A." and has "; B." "; C." inline
+  var inlineMatch=t.match(/^(.*?[.?:!])\s*(?:A[.)]\s)([\s\S]+)$/);
+  if(inlineMatch){
+    var inlineStem=inlineMatch[1].trim();
+    var rest=inlineMatch[2];
+    // Split on "; B." "; C." "; D." "; E."
+    var parts=rest.split(/[;,]\s*(?=[A-Ea-e][.)]\s)/);
+    if(parts.length>=2){
+      out+='<p style="'+stemSt+'">'+esc(inlineStem)+'</p>';
+      out+='<div style="margin-bottom:.9rem;">';
+      var letters=['A','B','C','D','E'];
+      parts.forEach(function(p,pi){
+        var pm=p.trim().match(/^([A-Ea-e][.)]\s*)([\s\S]+)/);
+        var key=pm?pm[1].trim():letters[pi]+'.';
+        var val=pm?pm[2].trim():p.trim();
+        if(val)out+='<div style="'+stRow+'"><span style="'+stKey+'">'+esc(key)+'</span><span>'+esc(val)+'</span></div>';
+      });
+      out+='</div>';
+      return out;
     }
-    if(stem)out+='<p style="'+stemSt+'">'+esc(stem)+'</p>';
-    out+='<div style="margin-bottom:.8rem;">';
-    items.forEach(function(it){
-      out+='<div style="'+rowSt+'"><span style="'+numLblSt+'">'+it.num+'.</span><span>'+esc(it.text)+'</span></div>';
-    });
-    out+='</div>';
-    if(trailer)out+='<p style="font-size:.9rem;font-style:italic;color:var(--c-ink-muted,#6B5C45);margin-bottom:.5rem;">'+esc(trailer)+'</p>';
-    return out;
   }
 
-  // ── 4. Lettered (a)(b)(c)(d)(e) inline sub-items ──────────────
-  var abcRe=/\(([a-e])\)\s+/g;
-  var abcMatches=[], am;
-  abcRe.lastIndex=0;
-  while((am=abcRe.exec(t))!==null) abcMatches.push({index:am.index,letter:am[1],end:am.index+am[0].length});
-  if(abcMatches.length>=2){
-    var abcStem=t.slice(0,abcMatches[0].index).trim();
-    var abcItems=[];
-    for(var ai=0;ai<abcMatches.length;ai++){
-      var aStart=abcMatches[ai].end;
-      var aEnd=(ai+1<abcMatches.length)?abcMatches[ai+1].index:t.length;
-      abcItems.push({letter:abcMatches[ai].letter,text:t.slice(aStart,aEnd).trim()});
-    }
-    if(abcStem)out+='<p style="'+stemSt+'">'+esc(abcStem)+'</p>';
-    out+='<div style="margin-bottom:.8rem;">';
-    abcItems.forEach(function(it){
-      out+='<div style="'+rowSt+'"><span style="'+numLblSt+'color:#FF6B1A;">('+it.letter+')</span><span>'+esc(it.text)+'</span></div>';
-    });
-    out+='</div>';
-    return out;
-  }
-
-  // ── 5. Newline-separated lettered list ────────────────────────
+  // ── 3b. Newline-separated lettered list ────────────────────
   var lines=t.replace(/\r\n/g,'\n').split('\n');
   var itemLines=lines.filter(function(l){return /^\s*[A-Da-d1-4][.)]\s+\S/.test(l.trim());});
   if(itemLines.length>=2){
@@ -628,7 +597,7 @@ function formatQText(raw){
     lines.slice(firstIdx).forEach(function(l){
       var lm=l.trim().match(/^([A-Da-d1-4][.)]) +([\s\S]*)/);
       if(lm){
-        out+='<div style="'+rowSt+'"><span style="font-weight:700;color:var(--c-brand-deep,#E85500);min-width:1.6rem;flex-shrink:0;">'+esc(lm[1])+'</span><span>'+esc(lm[2])+'</span></div>';
+        out+='<div style="'+stRow+'"><span style="'+stKey+'">'+esc(lm[1])+'</span><span>'+esc(lm[2])+'</span></div>';
       }else if(l.trim()){
         out+='<div style="font-size:.95rem;line-height:1.6;color:var(--c-ink,#1A1208);padding-left:2.1rem;">'+esc(l.trim())+'</div>';
       }
@@ -637,8 +606,8 @@ function formatQText(raw){
     return out;
   }
 
-  // ── 6. Plain text ──────────────────────────────────────────────
-  return '<p style="font-size:1rem;line-height:1.75;color:var(--c-ink,#1A1208);margin-bottom:.8rem;">'+esc(t)+'</p>';
+  // ── 4. Plain text ──────────────────────────────────────────
+  return '<p class="q-stem">'+esc(t)+'</p>';
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -646,47 +615,50 @@ function formatQText(raw){
 // ═══════════════════════════════════════════════════════════════
 function matchTableHTML(mt){
   if(!mt)return '';
-  var wrapSt='width:100%;border-radius:10px;overflow:hidden;border:1.5px solid #E8DDD0;margin:0 0 1rem;';
-  var headSt='display:grid;grid-template-columns:1fr 1fr;background:#1A1208;color:#fff;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.08em;';
-  var headSpanSt='padding:9px 14px;display:block;';
-  var rowSt='display:grid;grid-template-columns:1fr 1fr;border-top:1px solid #F0E8DE;';
-  var cellSt='padding:10px 14px;font-size:.87rem;line-height:1.5;color:#1A1208;font-weight:500;';
-  var altRowSt=rowSt+'background:#FFF7F0;';
+  var html='<div class="match-table-wrap">';
 
   if(mt.rows&&mt.rows.length){
     var h1=mt.col1_header||'Column I', h2=mt.col2_header||'Column II';
-    var html='<div style="'+wrapSt+'">'
-      +'<div style="'+headSt+'"><span style="'+headSpanSt+'">'+esc(h1)+'</span><span style="'+headSpanSt+'">'+esc(h2)+'</span></div>';
-    mt.rows.forEach(function(row,ri){
+    html+='<div class="match-table-head"><span>'+esc(h1)+'</span><span>'+esc(h2)+'</span></div>';
+    mt.rows.forEach(function(row){
       if(!row.col1&&!row.col2)return;
-      html+='<div style="'+(ri%2===1?altRowSt:rowSt)+'">'
-        +'<div style="'+cellSt+'">'+esc(row.col1||'')+'</div>'
-        +'<div style="'+cellSt+'">'+esc(row.col2||'')+'</div>'
+      html+='<div class="match-table-row">'
+        +'<div class="match-cell">'+esc(row.col1||'')+'</div>'
+        +'<div class="match-cell">'+esc(row.col2||'')+'</div>'
         +'</div>';
     });
+    return html+'</div>';
+  }
+
+  if(mt.col1&&mt.col2){
+    var c1k=Object.keys(mt.col1), c2k=Object.keys(mt.col2);
+    var rc=Math.max(c1k.length,c2k.length);
+    html+='<div class="match-table-head"><span>Column I</span><span>Column II</span></div>';
+    for(var i=0;i<rc;i++){
+      var k1=c1k[i]||'',v1=k1?mt.col1[k1]:'';
+      var k2=c2k[i]||'',v2=k2?mt.col2[k2]:'';
+      html+='<div class="match-table-row">'
+        +'<div class="match-cell"><span class="match-key">'+esc(k1)+'</span>'+esc(v1)+'</div>'
+        +'<div class="match-cell"><span class="match-key">'+esc(k2)+'</span>'+esc(v2)+'</div>'
+        +'</div>';
+    }
     return html+'</div>';
   }
   return '';
 }
 
 // ── DIAGRAM HTML ──────────────────────────────────────────────
-// SAFE: no inline onerror with > chars. Uses two-element pattern:
-// img element + static fallback. img hides fallback on load via onload.
 function diagHTML(q){
   if(q.pattern!=='diagram_dhamaka')return '';
-  var wrapSt='margin:.5rem 0 1.2rem;text-align:center;';
-  var imgSt='max-width:100%;max-height:320px;object-fit:contain;border-radius:10px;border:1.5px solid #F0E8DE;background:#fff;padding:8px;display:block;margin:0 auto;';
-  var fallSt='display:inline-flex;align-items:center;gap:10px;background:#FFF8F3;border:1.5px dashed #F0E8DE;border-radius:10px;padding:14px 16px;font-size:.82rem;color:#6B5C45;margin:0 auto;';
   if(q.image_url){
-    /* onload hides the fallback; onerror hides the img - NO > chars in attribute values */
-    return '<div style="'+wrapSt+'">'
-      +'<img id="dimg-'+esc(q.id||'x')+'" src="'+esc(q.image_url)+'" alt="Diagram" style="'+imgSt+'"'
-      +' onload="var f=document.getElementById(\'dfb-'+esc(q.id||'x')+'\');if(f)f.style.display=\'none\';"'
-      +' onerror="this.style.display=\'none\';">'
-      +'<div id="dfb-'+esc(q.id||'x')+'" style="'+fallSt+'">🖼️ <span>Refer to NCERT or past paper for the diagram.</span></div>'
+    return '<div class="diag-img-wrap">'
+      +'<img src="'+esc(q.image_url)+'" alt="Diagram"'
+      +' onerror="this.parentNode.innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
       +'</div>';
   }
-  return '<div style="'+wrapSt+'"><div style="'+fallSt+'">🖼️ <span>Refer to NCERT or past paper for the diagram.</span></div></div>';
+  return '<div class="diag-placeholder">'
+    +'<span style="font-size:1.3rem;flex-shrink:0;">🖼️</span>'
+    +'<span>Refer to NCERT or past paper for the diagram.</span></div>';
 }
 
 // ═══════════════════════════════════════════════════════════════
@@ -896,26 +868,6 @@ function submitMock(){
   document.getElementById('r-skip').textContent=skip;
   document.getElementById('r-accuracy').textContent=(correct+wrong>0)?Math.round(correct/(correct+wrong)*100)+'%':'0%';
 
-  /* ── RANK PREDICTOR PROMPT ──
-     Appears after every mock test score is generated.
-     Links to rank_predictor.html with score pre-filled as URL param.
-  */
-  var rankPromptEl = document.getElementById('rank-predictor-prompt');
-  if (rankPromptEl) {
-    var predictUrl = 'rank_predictor.html?score=' + score;
-    rankPromptEl.style.display = 'block';
-    rankPromptEl.innerHTML =
-      '<div style="background:linear-gradient(135deg,#1A1208 0%,#2D1F0A 100%);border-radius:16px;padding:20px 24px;margin:20px 0;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">'
-      + '<div>'
-      + '<div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.5);margin-bottom:6px;">📊 Based on your score of ' + score + '/720</div>'
-      + '<div style="font-family:\'Fraunces\',serif;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:4px;">See your estimated NEET rank & AIIMS chances</div>'
-      + '<div style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Free · Uses NTA 2022–2024 official data · Takes 5 seconds</div>'
-      + '</div>'
-      + '<a href="' + predictUrl + '" style="background:#FF6B1A;color:#fff;padding:12px 22px;border-radius:100px;font-weight:700;font-size:0.88rem;text-decoration:none;white-space:nowrap;box-shadow:0 4px 14px rgba(255,107,26,0.4);">Predict My Rank →</a>'
-      + '</div>';
-  }
-
-
   function sBox(lbl,c,w,s,sc){
     return '<div class="result-box">'
       +'<div class="num" style="color:var(--c-brand,#FF6B1A);">'+sc+'</div>'
@@ -1096,4 +1048,29 @@ async function startMock(){
   }catch(e){
     console.error('Mock build error:',e);
     document.getElementById('mock-q-area').innerHTML=
-      '<div style="text-align:center;padding:60px;color:#EF4444;font-weight:600;">⚠�
+      '<div style="text-align:center;padding:60px;color:#EF4444;font-weight:600;">⚠️ Could not load questions. Please refresh.</div>';
+    return;
+  }
+
+  buildPalette();
+  startTimer();
+  renderQuestion(0);
+}
+
+// ── EXPOSE GLOBALS (prevent Cloudflare/CDN mangling) ──────────
+window.startMock      = startMock;
+window.goTo           = goTo;
+window.mockSelect     = mockSelect;
+window.confirmSubmit  = confirmSubmit;
+window.submitMock     = submitMock;
+window.reviewJump     = reviewJump;
+window.toggleTheme    = toggleTheme;
+
+// ── SAFE EVENT BINDING ────────────────────────────────────────
+document.addEventListener('DOMContentLoaded', function(){
+  var btn = document.getElementById('start-mock-btn');
+  if(btn) btn.addEventListener('click', startMock);
+});
+</script>
+</body>
+</html>
