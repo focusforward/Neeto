@@ -259,29 +259,34 @@
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
-    <div class="nav-links">
-    <a href="practice.html">Practice</a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock Test</a>
     <a href="methodology.html">Our Method</a>
-    <a href="about.html">About</a>
-    <a href="practice.html" class="nav-cta">Start Free →</a>
-    <a href="login.html" class="nav-login-btn">Login / Register</a>
+    <a href="analytics.html">Analytics</a>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;">
+  <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
+    <a href="login.html" class="nav-login">Login / Register</a>
+  </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-  </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html" class="active">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -370,7 +375,7 @@
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
         <li><a href="#">Refund Policy</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#f5988c9b909081989c9b9186b59298949c99db969a98">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -380,12 +385,12 @@
     <div class="footer-legal">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#d1bca8bfb4b4a5bcb8bfb5a291b6bcb0b8bdffb2bebc">Contact</a>
     </div>
   </div>
 </footer>
 
-<script src="js/app.js?v=14"></script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/app.js?v=14"></script>
 <script>
   // Color unit-subject tags based on text content after app.js renders them
   function colorSubjectTags() {
@@ -480,12 +485,4 @@ document.addEventListener('click', function(e) {
 <script>
 // Sticky nav shadow on scroll
 (function(){
-  var nav = document.querySelector('nav.navbar');
-  if(!nav) return;
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, {passive:true});
-})();
-</script>
-</body>
-</html>
+  var nav = document.querySelector

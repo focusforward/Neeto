@@ -463,10 +463,15 @@
   </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+  <a href="index.html" class="active">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
     <a href="index.html" class="active">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock Test</a>
@@ -831,7 +836,7 @@
         <li><a href="terms.html">Terms &amp; Conditions</a></li>
         <li><a href="terms.html#refund">Refund Policy</a></li>
         <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#eb8692858e8e9f8682858f98ab8c868a8287c5888486">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -843,13 +848,13 @@
       <a href="terms.html">Terms</a>
       <a href="terms.html#refund">Refunds</a>
       <a href="disclaimer.html">Disclaimer</a>
-      <a href="mailto:myneetminds@gmail.com">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#24495d4a414150494d4a4057644349454d480a474b49">Contact</a>
     </div>
   </div>
 </footer>
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function updateThemeUI() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   var icon = isDark ? '☀️' : '🌙';
@@ -1020,9 +1025,4 @@ function runDemoPredict() {
   document.getElementById('demo-aiims').textContent = aiims;
   document.getElementById('demo-mbbs').textContent  = mbbs;
 
-  var fl = document.getElementById('demo-full-link');
-  if (fl) fl.href = 'rank_predictor.html?score='+score+'&cat='+cat;
-  if (ph) ph.style.display='none'; if (res) res.style.display='block';
-}
-</script>
-</body>
+  var fl = docum

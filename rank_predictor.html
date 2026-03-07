@@ -407,18 +407,34 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
 <!-- NAV -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetmindslogo.png" alt="NEETMINDS™"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
-    <a href="practice.html">Practice</a>
+    <a href="index.html">Home</a>
+    <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock Test</a>
+    <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
-    <a href="pricing.html" class="nav-cta">Unlock Booster Pack →</a>
   </div>
+  <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
+    <a href="login.html" class="nav-login">Login / Register</a>
+  </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-
-<div class="page">
+<div class="nav-mobile-menu" id="mmenu">
+  <a href="index.html">Home</a>
+  <a href="practice.html" class="active">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div><div class="page">
 
   <!-- HERO -->
   <div class="hero fade-up">
@@ -577,10 +593,10 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
   <a href="privacy.html" style="color:var(--muted);text-decoration:none;">Privacy</a> &nbsp;·&nbsp;
   <a href="terms.html#refund" style="color:var(--muted);text-decoration:none;">Refund Policy</a> &nbsp;·&nbsp;
   <a href="disclaimer.html" style="color:var(--orange);font-weight:600;text-decoration:none;">📖 Student Disclaimer</a> &nbsp;·&nbsp;
-  <a href="mailto:myneetminds@gmail.com" style="color:var(--muted);text-decoration:none;">Contact</a>
+  <a href="/cdn-cgi/l/email-protection#462b3f282323322b2f28223506212b272f2a6825292b" style="color:var(--muted);text-decoration:none;">Contact</a>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══════════════════════════════════════════════════════════
    NEETMINDS™ RANK PREDICTOR ENGINE v1
    All data sourced from NTA official publications 2022–2024
@@ -1355,11 +1371,4 @@ function openProModal() {
 function closeProModal(e) {
   if (e && e.target !== document.getElementById('pro-modal-overlay') && e.target !== e.currentTarget) return;
   document.getElementById('pro-modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeProModal();
-});
-</script>
-</body>
-</html>
+  document.

@@ -232,6 +232,7 @@
     <a href="analytics.html">Analytics</a>
   </div>
   <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
     <a href="login.html" class="nav-login">Login / Register</a>
   </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
@@ -239,10 +240,15 @@
   </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html" class="active">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock Test</a>
@@ -511,7 +517,7 @@
         <li><a href="#">Privacy Policy</a></li>
         <li><a href="#">Terms of Service</a></li>
         <li><a href="#">Refund Policy</a></li>
-        <li><a href="#">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#65081c0b000011080c0b0116250208040c094b060a08">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -521,12 +527,12 @@
     <div class="footer-legal">
       <a href="#">Privacy</a>
       <a href="#">Terms</a>
-      <a href="#">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#e78a9e898282938a8e898394a7808a868e8bc984888a">Contact</a>
     </div>
   </div>
 </footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function updateThemeUI() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   var icon = isDark ? '☀️' : '🌙';
@@ -556,12 +562,4 @@ document.addEventListener('click', function(e) {
 <script>
 // Sticky nav shadow on scroll
 (function(){
-  var nav = document.querySelector('nav.navbar');
-  if(!nav) return;
-  window.addEventListener('scroll', function(){
-    nav.classList.toggle('scrolled', window.scrollY > 10);
-  }, {passive:true});
-})();
-</script>
-</body>
-</html>
+  var nav = document.querySelector

@@ -348,31 +348,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 <body>
 
 <!-- ══ NAV ══════════════════════════════════════════════════════ -->
-<nav class="navbar">
-  <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span></a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="practice.html">Practice</a>
-    <a href="mock.html" class="active">Mock</a>
-    <a href="methodology.html">Methodology</a>
-    <a href="about.html">About</a>
-  </div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-      <span id="theme-icon">🌙</span>
-    </button>
-    <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-</nav>
-<div class="nav-mobile-menu" id="nmenu">
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock</a>
@@ -422,15 +398,6 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 
 <!-- ══ RESULT SCREEN ═════════════════════════════════════════════ -->
 <div id="result-screen" style="display:none;">
-  <nav class="navbar">
-    <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;">
-      <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
-    </span>
-    <div class="nav-links">
-      <a href="mock.html" class="active">Retake Test</a>
-      <a href="practice.html">Practice</a>
-    </div>
-  </nav>
   <div class="result-hero">
     <div style="color:var(--c-ink-muted,#6B5C45);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Your Score</div>
     <div class="result-score" id="result-score">0</div>

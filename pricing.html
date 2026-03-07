@@ -206,7 +206,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
     <a href="analytics.html">Analytics</a>
   </div>
   <div class="nav-right">
-    <a href="pricing.html" class="nav-links" style="color:#CC3300;font-weight:700;padding:0 8px;">Pricing</a>
+    <a href="pricing.html" class="nav-pricing" class="active">Pricing</a>
     <a href="login.html" class="nav-login">Login / Register</a>
   </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
@@ -219,7 +219,8 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   <a href="mock.html">Mock Test</a>
   <a href="methodology.html">Our Method</a>
   <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;">Pricing</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;" class="active">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 
@@ -377,7 +378,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
         <li><a href="terms.html">Terms &amp; Conditions</a></li>
         <li><a href="terms.html#refund">Refund Policy</a></li>
         <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#274a5e494242534a4e49435467404a464e4b0944484a">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -388,12 +389,12 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
       <a href="terms.html">Terms</a>
       <a href="terms.html#refund">Refunds</a>
       <a href="disclaimer.html">Disclaimer</a>
-      <a href="mailto:myneetminds@gmail.com">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#bed3c7d0dbdbcad3d7d0dacdfed9d3dfd7d290ddd1d3">Contact</a>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 var billing = 'monthly';
 var prices = {
   monthly: { pro: '799', proBilled: 'Billed monthly' },
@@ -407,9 +408,4 @@ function setBilling(type, btn) {
   var p = prices[type];
   document.getElementById('pro-price').textContent  = p.pro;
   document.getElementById('pro-billed').textContent = p.proBilled;
-  document.getElementById('pro-btn').href = 'login.html?plan=pro&billing=' + type;
-}
-
-function toggleFAQ(el) {
-  var isOpen = el.classList.contains('open');
-  document.querySelectorAll('.faq-item').forEach(function(i){ i.classList.remov
+  document.getElementById('pro-btn').hre
