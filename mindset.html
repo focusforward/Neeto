@@ -3,14 +3,13 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Mindset — NEETMINDS™</title>
+  <title>Mindset — neetminds ™</title>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
   <link rel="stylesheet" href="css/nav.css"/>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { overflow-x: clip !important; overflow-y: auto !important; }
-    body { font-family: 'DM Sans', sans-serif; background: #0A0600; color: #F5EDE0; line-height: 1.6; overflow-x: clip; padding-top: 68px; }
+    body { font-family: 'DM Sans', sans-serif; background: #0A0600; color: #F5EDE0; line-height: 1.6; overflow-x: hidden; }
 
     /* HERO */
     .mind-hero {
@@ -166,63 +165,41 @@
     .mind-cta h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem, 3vw, 2.4rem); font-weight: 900; color: #fff; margin-bottom: 14px; }
     .mind-cta p { color: #C8B89A; margin-bottom: 32px; font-size: 1rem; }
     .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
-
+    .btn-fire { background: #CC3300; color: #fff; padding: 14px 32px; border-radius: 12px; font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
+    .btn-fire:hover { background: #AA2800; transform: translateY(-2px); }
+    .btn-outline { background: transparent; color: #F5EDE0; padding: 14px 32px; border-radius: 12px; font-size: 1rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.15); transition: all 0.2s; }
+    .btn-outline:hover { background: rgba(255,255,255,0.07); }
   </style>
 </head>
 <body>
 
-<style>
-/* MINDSET NAV OVERRIDE — sticky dark nav */
-nav.navbar {
-  position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  width: 100% !important;
-  z-index: 9999 !important;
-  background: #0A0600 !important;
-  border-bottom-color: rgba(255,255,255,0.07) !important;
-}
-nav.navbar .nav-links a { color: #FF6B1A !important; font-weight: 600 !important; }
-nav.navbar .nav-links a:hover { color: #fff !important; background: rgba(255,107,26,0.12) !important; }
-nav.navbar .nav-login { color: #fff !important; border-color: rgba(255,255,255,0.3) !important; }
-nav.navbar .nav-login:hover { background: rgba(255,255,255,0.06) !important; }
-nav.navbar .nav-hamburger { border-color: rgba(255,255,255,0.2) !important; }
-nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
-</style>
-<nav class="navbar">
+<nav class="navbar" style="background:#0A0600 !important; border-bottom-color:rgba(255,255,255,0.07) !important;">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span class="brand-word"><span class="brand-neet">neet</span><span class="brand-minds">minds</span><span class="brand-tm">™</span></span>
   </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
-    <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="methodology.html" class="active">Our Method</a>
-    <a href="analytics.html">Analytics</a>
+    <div class="nav-links">
+    <a href="practice.html" style="color:#C8B89A">Practice</a>
+    <a href="mock.html" style="color:#C8B89A">Mock Test</a>
+    <a href="methodology.html" style="color:#C8B89A">Our Method</a>
+    <a href="analytics.html" style="color:#C8B89A">Analytics</a>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
-  </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu" style="border-color:rgba(255,255,255,0.12)">
+    <span style="background:#F5EDE0"></span><span style="background:#F5EDE0"></span><span style="background:#F5EDE0"></span>
   </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
-  <a href="methodology.html" class="active">Our Method</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html">Our Method</a>
   <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
+  <a href="practice.html" class="nav-cta">Start Practising →</a>
 </div>
 
 <!-- HERO -->
@@ -241,7 +218,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
 <div class="player-section">
   <h2>Pre-Mock Meditation<br/>Music</h2>
   <p class="sub">
-    Play this before every practice session and every mock test. 5–10 minutes of focused listening resets your nervous system and activates the calm-strategic state your brain needs to perform. Music provided by the NEETMINDS™ team.
+    Play this before every practice session and every mock test. 5–10 minutes of focused listening resets your nervous system and activates the calm-strategic state your brain needs to perform. Music provided by the neetminds ™ team.
   </p>
 
   <div class="player-card">
@@ -249,8 +226,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
     <div class="player-title">Focus Flow — Pre-Exam Meditation</div>
     <div class="player-subtitle">Theta binaural beats · Focus &amp; calm · 10 minutes</div>
 
-    
-<div class="waveform" id="waveform">
+    <div class="waveform" id="waveform">
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
@@ -301,7 +277,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
 <!-- PRINCIPLES -->
 <section class="principles-section">
   <div class="principles-inner">
-    <h2>The NEETMINDS™ Mindset Principles</h2>
+    <h2>The neetminds ™ Mindset Principles</h2>
     <div class="principles-list">
       <div class="principle">
         <div class="principle-num">01</div>
@@ -328,7 +304,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
         <div class="principle-num">04</div>
         <div class="principle-text">
           <h3>Comparison is a distraction.</h3>
-          <p>Your classmate's score in today's mock is irrelevant. Your score relative to your score yesterday — that's the only metric that matters. NEETMINDS™ tracks your personal trajectory, not a leaderboard.</p>
+          <p>Your classmate's score in today's mock is irrelevant. Your score relative to your score yesterday — that's the only metric that matters. neetminds ™ tracks your personal trajectory, not a leaderboard.</p>
         </div>
       </div>
       <div class="principle">
@@ -349,78 +325,25 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   </div>
 </section>
 
-<!-- CTA — navigation handled by sticky nav above -->
+<!-- CTA -->
 <div class="mind-cta">
   <h2>Mind is Set.<br/>Let's Get to Work.</h2>
-  <p>The patterns are waiting. Use the navigation above to go to Practice or Mock Test.</p>
+  <p>The patterns are waiting. The mock test is ready.</p>
+  <div class="cta-row">
+    <a href="practice.html" class="btn-fire">Practise Now →</a>
+    <a href="mock.html"     class="btn-outline">Full Mock Test</a>
+  </div>
 </div>
 
-<!-- Done nudge -->
-<div style="text-align:center;padding:32px 20px;color:#5C4A30;font-size:0.85rem;">When you're ready — use the navigation above to go to <a href="practice.html" style="color:#FF6B1A;font-weight:700;text-decoration:none;">Practice</a> or <a href="mock.html" style="color:#FF6B1A;font-weight:700;text-decoration:none;">Mock Test</a>.</div>
-<footer class="neeto-footer" style="background:#0A0600;border-top:1px solid rgba(255,255,255,0.07);">
-  <div class="footer-top">
-    <div class="footer-brand-col">
-      <div class="footer-brand">
-        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
-      </div>
-      <p class="footer-tagline" style="color:#5C4A30;">Pattern intelligence for NEET. Master the patterns. Master the exam.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-btn" aria-label="Instagram">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="YouTube">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="/cdn-cgi/l/email-protection#690410070c0c1d0400070d1a290e04080005470a0604" class="footer-social-btn" aria-label="Email">
-          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
-        </a>
-      </div>
-    </div>
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <ul>
-        <li><a href="practice.html" style="color:#5C4A30;">Practice Questions</a></li>
-        <li><a href="mock.html" style="color:#5C4A30;">Mock Tests</a></li>
-        <li><a href="analytics.html" style="color:#5C4A30;">Analytics</a></li>
-        <li><a href="mindset.html" style="color:#FF6B1A;">Mindset</a></li>
-        <li><a href="login.html" style="color:#5C4A30;">Login / Register</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Learn</h4>
-      <ul>
-        <li><a href="methodology.html" style="color:#5C4A30;">Our Method</a></li>
-        <li><a href="about.html" style="color:#5C4A30;">About NEETMINDS™</a></li>
-        <li><a href="practice.html?subject=biology" style="color:#5C4A30;">Biology Questions</a></li>
-        <li><a href="practice.html?subject=physics" style="color:#5C4A30;">Physics Questions</a></li>
-        <li><a href="practice.html?subject=chemistry" style="color:#5C4A30;">Chemistry Questions</a></li>
-      </ul>
-    </div>
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html" style="color:#5C4A30;">Privacy Policy</a></li>
-        <li><a href="terms.html" style="color:#5C4A30;">Terms &amp; Conditions</a></li>
-        <li><a href="terms.html#refund" style="color:#5C4A30;">Refund Policy</a></li>
-        <li><a href="disclaimer.html" style="color:#5C4A30;">Student Disclaimer</a></li>
-        <li><a href="mailto:myneetminds@gmail.com" style="color:#5C4A30;">Contact Us</a></li>
-      </ul>
-    </div>
+<footer class="neeto-footer" style="background:#0A0600;border-top-color:rgba(255,255,255,0.07);color:#6B5C45">
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" alt="neetminds logo"/>
+    <span><span style="color:#CC3300">neet</span><span style="color:#FF6B1A">minds</span><span style="color:#CC3300;font-size:0.6rem;vertical-align:super;">™</span></span>
   </div>
-  <div class="footer-bottom" style="border-top:1px solid rgba(255,255,255,0.06);">
-    <span class="footer-copy" style="color:#3A2E20;">© 2026 NEETMINDS™ · For educational use only.</span>
-    <div class="footer-legal">
-      <a href="privacy.html" style="color:#3A2E20;">Privacy</a>
-      <a href="terms.html" style="color:#3A2E20;">Terms</a>
-      <a href="terms.html#refund" style="color:#3A2E20;">Refunds</a>
-      <a href="disclaimer.html" style="color:#3A2E20;">Disclaimer</a>
-      <a href="mailto:myneetminds@gmail.com" style="color:#3A2E20;">Contact</a>
-    </div>
-  </div>
+  <p>A neetminds ™ product · Built by cognitive performance scientists, doctors, engineers &amp; teachers.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
   // Toggle waveform when audio plays
   var audio = document.querySelector('audio');
   var waveform = document.getElementById('waveform');
@@ -432,7 +355,5 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   }
 </script>
 
-
-<script>
-// Sticky nav shadow on scroll
-(fu
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Our Method — NEETMINDS™ | Pattern Intelligence System</title>
+  <title>Methodology — NEETMINDS™ | Pattern Intelligence System</title>
   <meta name="description" content="NEETMINDS™ teaches the 6 question patterns that cover 100% of NEET. Stop memorising everything. Start recognising the examiner's playbook."/>
   <link rel="preconnect" href="https://fonts.googleapis.com"/>
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,700;0,9..144,900;1,9..144,700&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet"/>
@@ -147,13 +147,6 @@
     .pc-nc .p-example { border-color: #EF4444; }
     .pc-sb .p-example { border-color: #14B8A6; }
     .pc-dd .p-example { border-color: #A855F7; }
-    .p-strategy {
-      font-size: 0.82rem; padding: 10px 14px; border-radius: 10px;
-      line-height: 1.65; color: #1A1208; margin-top: 10px;
-      background: #F0FDF4; border-left: 3px solid #16A34A;
-    }
-    .p-strategy strong { color: #15803D; }
-    .p-example { margin-bottom: 0; }
 
     /* ── HOW IT WORKS ───────────────────────────────────── */
     .how-section { background: #FFF7F0; padding: 80px 20px; }
@@ -227,36 +220,40 @@
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
+    <a href="mock.html">Mock</a>
     <a href="methodology.html" class="active">Our Method</a>
     <a href="analytics.html">Analytics</a>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
+  <a href="mock.html">Mock</a>
   <a href="methodology.html" class="active">Our Method</a>
   <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
+  <a href="practice.html" class="nav-cta">Start Practising →</a>
+</div>
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html" class="active">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
 </div>
 
 <!-- ── HERO ── -->
 <div class="method-hero">
-  <div class="eyebrow">Our Method</div>
+  <div class="eyebrow">The NEETMINDS™ System</div>
   <h1>Stop Memorising Everything.<br/><em>Start Reading the Examiner.</em></h1>
   <p>
     NEET is not a test of how much you know. It's a test of how the examiner thinks.
@@ -294,86 +291,74 @@
   <div class="patterns-inner">
     <span class="section-label">The Pattern Library</span>
     <h2>The 6 Patterns Behind Every NEET Question</h2>
-    <p class="sub-p">Every question in NEET fits one of these six patterns. Spot the pattern first — then apply the right strategy. That's the NEETMINDS™ system.</p>
+    <p class="sub-p">Every question you've ever seen in NEET fits into one of these six categories. Know the pattern before you read the options.</p>
 
     <div class="pattern-grid">
 
-      <!-- 01 MEMORY TEST -->
       <div class="pattern-card pc-et">
         <div class="p-num">01</div>
-        <div class="p-icon">🎯</div>
+        <div class="p-icon">🎭</div>
         <div class="p-badge">~45% of NEET</div>
-        <div class="p-name">Memory Test</div>
+        <div class="p-name">The Exception Trap</div>
         <div class="p-desc">
-          "Straight from NCERT" — the most common pattern. Question asks exactly what you've read. No traps, no flips. Just recall.
+          "Which of the following is NOT correct?" The examiner lists 3 true statements and 1 subtly false one. The trap is reading too fast and confirming the truths without checking the exception.
         </div>
-        <div class="p-example">"Respiratory quotient for fatty acid is:" — you either remember it's &lt;1 or you don't.</div>
-        <div class="p-strategy"><strong>Strategy:</strong> Pure recall. If you've read NCERT, you get it right. No elimination needed. Master this pattern first — it's almost half the paper.</div>
+        <div class="p-example">"All of the following are correct about mitosis EXCEPT…" — Read every option with suspicion.</div>
       </div>
 
-      <!-- 02 BEST CHOICE -->
-      <div class="pattern-card pc-bc">
-        <div class="p-num">02</div>
-        <div class="p-icon">🔽</div>
-        <div class="p-badge">~14% of NEET</div>
-        <div class="p-name">Best Choice</div>
-        <div class="p-desc">
-          "Most appropriate / most likely / best describes" — no single option is obviously right. Two options will be close. This is an elimination tournament, not a memory test.
-        </div>
-        <div class="p-example">"Which of the following best describes the role of oxytocin in parturition?" — two will be true, one is most complete.</div>
-        <div class="p-strategy"><strong>Strategy:</strong> Eliminate the two clearly wrong options first. Then compare the final two on a single axis: which is more complete, more accurate, or more directly answering the question stem?</div>
-      </div>
-
-      <!-- 03 CONCEPT GURU -->
       <div class="pattern-card pc-cg">
-        <div class="p-num">03</div>
-        <div class="p-icon">🌀</div>
-        <div class="p-badge">~9% of NEET</div>
-        <div class="p-name">Concept Guru</div>
+        <div class="p-num">02</div>
+        <div class="p-icon">🔗</div>
+        <div class="p-badge">~20% of NEET</div>
+        <div class="p-name">The Cause-Gets-Garbled</div>
         <div class="p-desc">
-          Assertion-Reason questions where the Reason is factually correct — but doesn't actually explain the Assertion. Students who don't check the logical link fall every time.
+          An Assertion-Reason question where the Reason is factually correct — but doesn't actually explain the Assertion. Students who don't check the logical link fall for it every time.
         </div>
-        <div class="p-example">Assertion: Both statements are correct. Reason: The reason correctly explains the assertion.</div>
-        <div class="p-strategy"><strong>Strategy:</strong> Check the logical link, not just truth value. Both A and R can be true — but if R doesn't explain A, the answer is "Both true but R NOT correct explanation."</div>
+        <div class="p-example">A is true, R is true, but R does not explain A. Answer is immediately (A) without second-guessing.</div>
       </div>
 
-      <!-- 04 NEGATIVE CHARGE -->
+      <div class="pattern-card pc-bc">
+        <div class="p-num">03</div>
+        <div class="p-icon">🧩</div>
+        <div class="p-badge">~14% of NEET</div>
+        <div class="p-name">The Boundary Confusion</div>
+        <div class="p-desc">
+          Questions that test whether you know the exact boundary of a concept — where one definition ends and another begins. These punish vague understanding.
+        </div>
+        <div class="p-example">"Which of the following is a gymnosperm but NOT a conifer?" — the boundary between overlapping categories.</div>
+      </div>
+
       <div class="pattern-card pc-nc">
         <div class="p-num">04</div>
-        <div class="p-icon">⚡</div>
+        <div class="p-icon">🔢</div>
         <div class="p-badge">~10% of NEET</div>
-        <div class="p-name">Negative Charge</div>
+        <div class="p-name">The Number Confusion</div>
         <div class="p-desc">
-          "Which of the following is NOT correct / EXCEPT / INCORRECT?" — the question flips your entire mental model. Students lose marks here by answering the right question to the wrong question.
+          Specific numbers — chromosomes, stages, days, equations — are swapped or slightly altered. One digit off and you lose a mark. These are pure precision tests.
         </div>
-        <div class="p-example">"All of the following are true about meiosis EXCEPT:" — your job is to find the false one.</div>
-        <div class="p-strategy"><strong>Strategy:</strong> Underline NOT/EXCEPT/INCORRECT the moment you see it. Read options as "true or false" statements. Your job is to find the one that's FALSE — not what's correct.</div>
+        <div class="p-example">"The number of chromosomes in a human secondary oocyte at metaphase II is…" — exact numbers only.</div>
       </div>
 
-      <!-- 05 SPEED BREAKER -->
       <div class="pattern-card pc-sb">
         <div class="p-num">05</div>
-        <div class="p-icon">⛔</div>
+        <div class="p-icon">🚦</div>
         <div class="p-badge">~8% of NEET</div>
-        <div class="p-name">Speed Breaker</div>
+        <div class="p-name">The Speed Breaker</div>
         <div class="p-desc">
-          Match-the-column, correct-sequence, and correct-order questions. Designed to eat 3+ minutes of your time if you approach them without a system.
+          Long, intimidating question stems designed to slow you down. The actual content being tested is simple — but the framing creates cognitive overload.
         </div>
-        <div class="p-example">"Match Column I with Column II and select the correct option:"</div>
-        <div class="p-strategy"><strong>Strategy:</strong> Start with the pairing you're most confident about. Eliminate options where that pairing is wrong. Often leaves 1–2 options. One more check closes it. Never verify all pairs.</div>
+        <div class="p-example">Three-line scenario about a patient, a diagram, and a lab result — asking something you learned in Class 11.</div>
       </div>
 
-      <!-- 06 DIAGRAM DHAMAKA -->
       <div class="pattern-card pc-dd">
         <div class="p-num">06</div>
-        <div class="p-icon">🖼️</div>
+        <div class="p-icon">🔁</div>
         <div class="p-badge">~4% of NEET</div>
-        <div class="p-name">Diagram Dhamaka</div>
+        <div class="p-name">The Definition Drift</div>
         <div class="p-desc">
-          Figure-based questions — label the diagram, identify the structure, interpret the graph. Your NCERT diagrams are your answer key here.
+          NCERT uses a specific word in a specific context. The examiner rephrases it slightly. Students who paraphrased during revision select the "almost correct" answer.
         </div>
-        <div class="p-example">"Identify the structure marked X in the given diagram of nephron:"</div>
-        <div class="p-strategy"><strong>Strategy:</strong> When studying, don't just read diagrams — draw them. Label them from memory. The 4% it represents is fully claimable if you've actively practised visual recall over passive reading.</div>
+        <div class="p-example">"The process by which…" — NCERT's exact wording matters more than your paraphrase.</div>
       </div>
 
     </div>
@@ -390,14 +375,14 @@
         <div class="step-num">1</div>
         <div class="step-body">
           <h3>Identify the Pattern Before Reading Options</h3>
-          <p>Every question in NEETMINDS™ is tagged to one of the 6 patterns. Before you answer, you learn to ask: <strong>Is this a Memory Test? A Negative Charge? A Concept Guru?</strong> Pattern recognition switches the cognitive load from memory to strategy.</p>
+          <p>Every question in NEETMINDS™ is tagged to one of the 6 patterns. Before you answer, you learn to ask: <strong>Is this an Exception Trap? A Speed Breaker? A Boundary Confusion?</strong> Pattern recognition switches the cognitive load from memory to strategy.</p>
         </div>
       </div>
       <div class="step">
         <div class="step-num">2</div>
         <div class="step-body">
           <h3>Answer with the Pattern's Decision Rule</h3>
-          <p>Each pattern has a specific decision process. Negative Charge? Read every option for the false statement. Concept Guru? Check the logical link — not just the truth value. <strong>You stop guessing. You start executing a system.</strong></p>
+          <p>Each pattern has a specific decision process. Exception Trap? Read every option for the false statement. Cause-Gets-Garbled? Check the logical link, not just the truth value. <strong>You stop guessing. You start executing a system.</strong></p>
         </div>
       </div>
       <div class="step">
@@ -457,82 +442,15 @@
 </section>
 
 <footer class="neeto-footer">
-  <div class="footer-top">
-    <!-- Brand col -->
-    <div class="footer-brand-col">
-      <div class="footer-brand">
-        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
-      </div>
-      <p class="footer-tagline">Pattern intelligence for NEET. Built by doctors, engineers &amp; cognitive scientists. Master the patterns. Master the exam.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-btn" aria-label="Instagram">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="YouTube">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="Twitter / X">
-          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="WhatsApp">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Platform col -->
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <ul>
-        <li><a href="practice.html">Practice Questions</a></li>
-        <li><a href="mock.html">Mock Tests</a></li>
-        <li><a href="analytics.html">Analytics</a></li>
-        <li><a href="mindset.html">Mindset</a></li>
-        <li><a href="units.html">Units</a></li>
-        <li><a href="login.html">Login / Register</a></li>
-      </ul>
-    </div>
-
-    <!-- Learn col -->
-    <div class="footer-col">
-      <h4>Learn</h4>
-      <ul>
-        <li><a href="methodology.html">Our Method</a></li>
-        <li><a href="pattern_intelligence.html">Pattern Intelligence</a></li>
-        <li><a href="about.html">About NEETMINDS™</a></li>
-        <li><a href="practice.html?subject=biology">Biology Questions</a></li>
-        <li><a href="practice.html?subject=physics">Physics Questions</a></li>
-        <li><a href="practice.html?subject=chemistry">Chemistry Questions</a></li>
-      </ul>
-    </div>
-
-    <!-- Legal col -->
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms &amp; Conditions</a></li>
-        <li><a href="terms.html#refund">Refund Policy</a></li>
-        <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
-      </ul>
-    </div>
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
-
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 NEETMINDS™ · Built by cognitive performance scientists, doctors, engineers &amp; teachers · For educational use only.</span>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="terms.html#refund">Refunds</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="mailto:myneetminds@gmail.com">Contact</a>
-    </div>
-  </div>
+  <p>A NEETMINDS™ product · Pattern Intelligence for NEET · Built by doctors, engineers &amp; cognitive scientists.</p>
+  <p style="margin-top:6px;opacity:0.55;font-size:0.73rem;">Questions sourced from NCERT &amp; past NEET papers · For educational use only.</p>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function updateThemeUI() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   var icon = isDark ? '☀️' : '🌙';
@@ -558,8 +476,5 @@ document.addEventListener('click', function(e) {
 });
 </script>
 
-
-<script>
-// Sticky nav shadow on scroll
-(function(){
-  var nav = document.querySelector
+</body>
+</html>
