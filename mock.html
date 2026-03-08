@@ -67,7 +67,7 @@ html,body{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 5%;height:56px;
   background:var(--c-surface,#fff);border-bottom:1px solid var(--c-border,#F0E8DE);
-  position:sticky;top:0;z-index:50;gap:1rem;
+  position:sticky;top:68px;z-index:40;gap:1rem;
   transition:background .2s,border-color .2s;
 }
 #section-label{
@@ -240,7 +240,7 @@ html,body{
 .mock-palette{
   width:210px;flex-shrink:0;padding:1.4rem 1.1rem;
   background:var(--c-surface,#fff);border-left:1px solid var(--c-border,#F0E8DE);
-  overflow-y:auto;position:sticky;top:56px;max-height:calc(100vh - 56px);
+  overflow-y:auto;position:sticky;top:124px;max-height:calc(100vh - 124px);
   transition:background .2s,border-color .2s;
 }
 .mock-palette h3{
@@ -265,6 +265,19 @@ html,body{
 .pb.pb-grey{background:var(--c-border,#F0E8DE);color:var(--c-ink-muted,#6B5C45);}
 .pb.pb-answered{background:rgba(255,107,26,.1);border-color:var(--c-brand,#FF6B1A);color:var(--c-brand-deep,#E85500);}
 .pb.pb-cur{border-color:var(--c-brand,#FF6B1A);background:var(--c-surface-2,#FFF8F3);color:var(--c-brand-deep,#E85500);}
+
+/* RESULT NAV — simple bar, not a full navbar */
+.result-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 5%;height:52px;
+  background:var(--c-surface,#fff);border-bottom:1px solid var(--c-border,#F0E8DE);
+  transition:background .2s,border-color .2s;
+}
+[data-theme="dark"] .result-nav{background:var(--c-surface);border-color:var(--c-border);}
+
+/* Hide main navbar when result screen is active */
+body.result-active nav.navbar,
+body.result-active .nav-mobile-menu{display:none!important;}
 
 /* RESULT SCREEN */
 #result-screen{background:var(--c-bg,#FAFAF8);min-height:100vh;transition:background .2s;}
@@ -350,13 +363,12 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 <!-- ══ NAV ══════════════════════════════════════════════════════ -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span></a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html" class="active">Mock</a>
-    <a href="methodology.html">Methodology</a>
+    <a href="methodology.html">Our Method</a>
     <a href="about.html">About</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
@@ -376,7 +388,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock</a>
-  <a href="methodology.html">Methodology</a>
+  <a href="methodology.html">Our Method</a>
   <a href="about.html">About</a>
   <a href="practice.html" class="nav-cta">Start Practising →</a>
 </div>
@@ -422,19 +434,54 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 
 <!-- ══ RESULT SCREEN ═════════════════════════════════════════════ -->
 <div id="result-screen" style="display:none;">
-  <nav class="navbar">
+  <div class="result-nav">
     <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;">
       <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
     </span>
-    <div class="nav-links">
-      <a href="mock.html" class="active">Retake Test</a>
-      <a href="practice.html">Practice</a>
+    <div style="display:flex;gap:1rem;align-items:center;">
+      <a href="mock.html" style="font-size:.9rem;font-weight:700;color:var(--c-brand,#FF6B1A);text-decoration:none;padding:.4rem .9rem;border:1.5px solid var(--c-brand,#FF6B1A);border-radius:100px;">Retake Test</a>
+      <a href="practice.html" style="font-size:.9rem;font-weight:600;color:var(--c-ink-muted,#6B5C45);text-decoration:none;">Practice</a>
     </div>
-  </nav>
+  </div>
   <div class="result-hero">
-    <div style="color:var(--c-ink-muted,#6B5C45);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Your Score</div>
-    <div class="result-score" id="result-score">0</div>
-    <div class="result-max">/ 720</div>
+    <div style="display:flex;align-items:center;justify-content:center;gap:2.5rem;flex-wrap:wrap;">
+      <!-- Score -->
+      <div style="text-align:center;">
+        <div style="color:var(--c-ink-muted,#6B5C45);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Your Score</div>
+        <div class="result-score" id="result-score">0</div>
+        <div class="result-max">/ 720</div>
+      </div>
+      <!-- Rank Predictor Card -->
+      <div id="rank-predictor-card" style="
+        background:var(--c-surface,#fff);
+        border:1.5px solid var(--c-border,#F0E8DE);
+        border-radius:20px;
+        padding:1.6rem 2rem;
+        text-align:center;
+        min-width:260px;
+        max-width:320px;
+        box-shadow:0 4px 24px rgba(255,107,26,.08);
+      ">
+        <div style="font-size:1.6rem;margin-bottom:.4rem;">🎯</div>
+        <div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:var(--c-ink);letter-spacing:-.02em;margin-bottom:.3rem;">What's your NEET Rank?</div>
+        <div style="font-size:.82rem;color:var(--c-ink-muted,#6B5C45);line-height:1.5;margin-bottom:1.1rem;">Find your estimated rank &amp; admission chances at top medical colleges based on this score.</div>
+        <a id="rank-predict-btn" href="rank_predictor.html" style="
+          display:inline-block;
+          background:var(--c-brand,#FF6B1A);
+          color:#fff;
+          font-family:'DM Sans',sans-serif;
+          font-weight:700;
+          font-size:.9rem;
+          padding:.65rem 1.6rem;
+          border-radius:100px;
+          text-decoration:none;
+          box-shadow:0 4px 16px rgba(255,107,26,.3);
+          transition:all .2s;
+        " onmouseover="this.style.background='#E85500'" onmouseout="this.style.background='var(--c-brand,#FF6B1A)'">
+          Predict My Rank →
+        </a>
+      </div>
+    </div>
   </div>
   <div class="result-grid">
     <div class="result-box"><div class="num" style="color:#22C55E;" id="r-correct">0</div><div class="lbl">Correct</div></div>
@@ -651,9 +698,11 @@ function matchTableHTML(mt){
 function diagHTML(q){
   if(q.pattern!=='diagram_dhamaka')return '';
   if(q.image_url){
-    return '<div class="diag-img-wrap">'
-      +'<img src="'+esc(q.image_url)+'" alt="Diagram"'
-      +' onerror="this.parentNode.innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
+    var uid='diag-'+(Math.random().toString(36).slice(2));
+    return '<div class="diag-img-wrap" id="'+uid+'">'
+      +'<img src="'+esc(q.image_url)+'" alt="Diagram" class="diag-img-el" '
+      +'onload="this.style.display=\'block\'" '
+      +'onerror="document.getElementById(\''+uid+'\').innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;flex-shrink:0;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
       +'</div>';
   }
   return '<div class="diag-placeholder">'
@@ -862,7 +911,10 @@ function submitMock(){
 
   document.getElementById('test-screen').style.display='none';
   document.getElementById('result-screen').style.display='block';
+  document.body.classList.add('result-active');
   document.getElementById('result-score').textContent=score;
+  var rpBtn=document.getElementById('rank-predict-btn');
+  if(rpBtn)rpBtn.href='rank_predictor.html?score='+score;
   document.getElementById('r-correct').textContent=correct;
   document.getElementById('r-wrong').textContent=wrong;
   document.getElementById('r-skip').textContent=skip;
@@ -926,6 +978,7 @@ function submitMock(){
 
 function reviewJump(idx){
   document.getElementById('result-screen').style.display='none';
+  document.body.classList.remove('result-active');
   document.getElementById('test-screen').style.display='block';
   renderQuestion(idx);
 }
