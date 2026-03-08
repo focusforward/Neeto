@@ -130,25 +130,24 @@
 
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
-  <div class="nav-links">
-    <a href="index.html">Home</a>
+    <div class="nav-links">
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock Test</a>
-    <a href="pattern_intelligence.html">Our Method</a>
-    <a href="analytics.html" class="active">Analytics</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
-  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
+  </div>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
+
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
     <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
@@ -156,14 +155,27 @@
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
-  <a href="pattern_intelligence.html">Our Method</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="about.html">About</a>
+  <a href="units.html">Units</a>
+  <a href="mindset.html">Mindset</a>
   <a href="analytics.html" class="active">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
+  <a href="practice.html" class="nav-cta">Start Practising Free →</a>
 </div>
 
-<!-- DAYS TO NEET -->
+<div class="page">
+<div style="margin-bottom:1.2rem;">
+  <a href="practice.html" style="display:inline-flex;align-items:center;gap:6px;font-size:0.85rem;font-weight:600;color:#FF6B1A;text-decoration:none;font-family:'DM Sans',sans-serif;">
+    ← Back to Practice
+  </a>
+</div>
+
+  <div class="hero">
+    <h1>Your <span>Progress</span></h1>
+    <p>Everything you've done on NEETMINDS, tracked locally on this device.</p>
+  </div>
+
+  <!-- DAYS TO NEET -->
   <div class="countdown-bar" id="countdown-bar">
     <div>
       <div class="days" id="days-left">—</div>
@@ -464,80 +476,13 @@
 })();
 </script>
 <footer class="neeto-footer">
-  <div class="footer-top">
-    <!-- Brand col -->
-    <div class="footer-brand-col">
-      <div class="footer-brand">
-        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
-      </div>
-      <p class="footer-tagline">Pattern intelligence for NEET. Built by doctors, engineers &amp; cognitive scientists. Master the patterns. Master the exam.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-btn" aria-label="Instagram">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="YouTube">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="Twitter / X">
-          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="WhatsApp">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Platform col -->
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <ul>
-        <li><a href="practice.html">Practice Questions</a></li>
-        <li><a href="mock.html">Mock Tests</a></li>
-        <li><a href="analytics.html">Analytics</a></li>
-        <li><a href="mindset.html">Mindset</a></li>
-        <li><a href="units.html">Units</a></li>
-        <li><a href="login.html">Login / Register</a></li>
-      </ul>
-    </div>
-
-    <!-- Learn col -->
-    <div class="footer-col">
-      <h4>Learn</h4>
-      <ul>
-        <li><a href="pattern_intelligence.html">Our Method</a></li>
-        <li><a href="about.html">About NEETMINDS™</a></li>
-        <li><a href="practice.html?subject=biology">Biology Questions</a></li>
-        <li><a href="practice.html?subject=physics">Physics Questions</a></li>
-        <li><a href="practice.html?subject=chemistry">Chemistry Questions</a></li>
-      </ul>
-    </div>
-
-    <!-- Legal col -->
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms &amp; Conditions</a></li>
-        <li><a href="terms.html#refund">Refund Policy</a></li>
-        <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#4a2733242f2f3e2723242e390a2d272b232664292527">Contact Us</a></li>
-      </ul>
-    </div>
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" style="object-fit:contain;border-radius:0;" alt="NEETMINDS">
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
-
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 NEETMINDS™ · Built by cognitive performance scientists, doctors, engineers &amp; teachers · For educational use only.</span>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="terms.html#refund">Refunds</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="/cdn-cgi/l/email-protection#5c312532393928313532382f1c3b313d3530723f3331">Contact</a>
-    </div>
-  </div>
+  <p>© 2026 neetminds. All rights reserved.</p>
 </footer>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
 function toggleNav() {
   document.getElementById('mob-nav').classList.toggle('open');
 }
@@ -574,4 +519,10 @@ document.addEventListener('DOMContentLoaded', updateThemeUI);
 document.addEventListener('click', function(e) {
   var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
   var b = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('op
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+</script>
+
+</body>
+</html>

@@ -10,7 +10,6 @@
 <meta name="twitter:card" content="summary_large_image"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;0,9..144,900;1,9..144,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
 <link rel="stylesheet" href="css/theme-override.css">
-<link rel="icon" href="neetminds-logo.png" type="image/png">
 <link rel="stylesheet" href="css/nav.css">
 
 <!-- ── THEME INIT: runs before first paint ── -->
@@ -68,7 +67,7 @@ html,body{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 5%;height:56px;
   background:var(--c-surface,#fff);border-bottom:1px solid var(--c-border,#F0E8DE);
-  position:sticky;top:68px;z-index:50;gap:1rem;
+  position:sticky;top:0;z-index:50;gap:1rem;
   transition:background .2s,border-color .2s;
 }
 #section-label{
@@ -180,8 +179,7 @@ html,body{
   background: #1E3A8A;
   color: #BFDBFE;
 }
-.opt-key{font-weight:700;color:var(--c-brand,#FF6B1A);min-width:2rem;flex-shrink:0;}
-.opt-val{flex:1;text-align:left;}
+.opt-key{font-weight:700;color:var(--c-brand,#FF6B1A);min-width:1.4rem;flex-shrink:0;}
 
 /* EXPLANATION */
 .mock-exp{
@@ -358,14 +356,14 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html" class="active">Mock</a>
-    <a href="pattern_intelligence.html">Methodology</a>
+    <a href="methodology.html">Methodology</a>
     <a href="about.html">About</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
       <span id="theme-icon">🌙</span>
     </button>
-    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <button class="nav-hamburger" onclick="document.getElementById('nmenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -378,7 +376,7 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock</a>
-  <a href="pattern_intelligence.html">Methodology</a>
+  <a href="methodology.html">Methodology</a>
   <a href="about.html">About</a>
   <a href="practice.html" class="nav-cta">Start Practising →</a>
 </div>
@@ -424,7 +422,15 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 
 <!-- ══ RESULT SCREEN ═════════════════════════════════════════════ -->
 <div id="result-screen" style="display:none;">
-  <div id="rank-predictor-prompt" style="display:none;padding:20px 20px 0;max-width:900px;margin:0 auto;"></div>
+  <nav class="navbar">
+    <span class="brand-word" style="font-family:'Fraunces',serif;font-size:1.4rem;font-weight:900;">
+      <span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span>
+    </span>
+    <div class="nav-links">
+      <a href="mock.html" class="active">Retake Test</a>
+      <a href="practice.html">Practice</a>
+    </div>
+  </nav>
   <div class="result-hero">
     <div style="color:var(--c-ink-muted,#6B5C45);font-size:.85rem;font-weight:600;text-transform:uppercase;letter-spacing:.1em;margin-bottom:.5rem;">Your Score</div>
     <div class="result-score" id="result-score">0</div>
@@ -503,7 +509,7 @@ document.addEventListener('DOMContentLoaded',updateThemeUI);
 
 // ── NAV CLOSE ─────────────────────────────────────────────────
 document.addEventListener('click',function(e){
-  var m=document.getElementById('mmenu');
+  var m=document.getElementById('nmenu');
   var b=document.querySelector('.nav-hamburger');
   if(m&&m.classList.contains('open')&&!m.contains(e.target)&&b&&!b.contains(e.target))
     m.classList.remove('open');
@@ -646,11 +652,12 @@ function diagHTML(q){
   if(q.pattern!=='diagram_dhamaka')return '';
   if(q.image_url){
     return '<div class="diag-img-wrap">'
-      +'<img src="'+esc(q.image_url)+'" alt="Diagram" class="diag-img">'
+      +'<img src="'+esc(q.image_url)+'" alt="Diagram"'
+      +' onerror="this.parentNode.innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
       +'</div>';
   }
   return '<div class="diag-placeholder">'
-    +'<span style="font-size:1.3rem;flex-shrink:0;">&#x1F5BC;&#xFE0F;</span>'
+    +'<span style="font-size:1.3rem;flex-shrink:0;">🖼️</span>'
     +'<span>Refer to NCERT or past paper for the diagram.</span></div>';
 }
 
@@ -697,7 +704,7 @@ function renderQuestion(idx){
     var dis=testDone?'disabled':'';
     optsHTML+='<button class="'+cls+'" id="opt-'+idx+'-'+k+'"'
       +' data-key="'+k+'" '+dis
-      +' onclick="mockSelect('+idx+',\''+k+'\')">'      +'<span class="opt-key">'+k+'.</span><span class="opt-val">'+esc(val)+'</span>'
+      +' onclick="mockSelect('+idx+',\''+k+'\')">'      +'<span class="opt-key">'+k+'.</span> '+esc(val)
       +'</button>';
   });
 
@@ -860,22 +867,6 @@ function submitMock(){
   document.getElementById('r-wrong').textContent=wrong;
   document.getElementById('r-skip').textContent=skip;
   document.getElementById('r-accuracy').textContent=(correct+wrong>0)?Math.round(correct/(correct+wrong)*100)+'%':'0%';
-
-  // ── RANK PREDICTOR PROMPT ──────────────────────────────────────
-  var rankEl=document.getElementById('rank-predictor-prompt');
-  if(rankEl){
-    var pUrl='rank_predictor.html?score='+score;
-    rankEl.style.display='block';
-    rankEl.innerHTML=
-      '<div style="background:linear-gradient(135deg,#1A1208 0%,#2D1F0A 100%);border-radius:16px;padding:20px 24px;margin:0 0 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;">'
-      +'<div>'
-      +'<div style="font-size:0.7rem;font-weight:700;text-transform:uppercase;letter-spacing:0.1em;color:rgba(255,255,255,0.5);margin-bottom:6px;">&#x1F4CA; Based on your score of '+score+'/720</div>'
-      +'<div style="font-family:'Fraunces',serif;font-size:1.1rem;font-weight:900;color:#fff;margin-bottom:4px;">See your estimated NEET rank &amp; AIIMS chances</div>'
-      +'<div style="font-size:0.8rem;color:rgba(255,255,255,0.6);">Free &middot; Uses NTA 2022&ndash;2024 official data &middot; Takes 5 seconds</div>'
-      +'</div>'
-      +'<a href="'+pUrl+'" style="background:#FF6B1A;color:#fff;padding:12px 22px;border-radius:100px;font-weight:700;font-size:0.88rem;text-decoration:none;white-space:nowrap;box-shadow:0 4px 14px rgba(255,107,26,0.4);">Predict My Rank &#x2192;</a>'
-      +'</div>';
-  }
 
   function sBox(lbl,c,w,s,sc){
     return '<div class="result-box">'

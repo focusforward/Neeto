@@ -206,7 +206,7 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
     <a href="analytics.html">Analytics</a>
   </div>
   <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing" class="active">Pricing</a>
+    <a href="pricing.html" class="nav-pricing active">Pricing</a>
     <a href="login.html" class="nav-login">Login / Register</a>
   </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
@@ -214,10 +214,15 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="pattern_intelligence.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">&#x1F3AF; Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -411,4 +416,9 @@ function setBilling(type, btn) {
   var p = prices[type];
   document.getElementById('pro-price').textContent  = p.pro;
   document.getElementById('pro-billed').textContent = p.proBilled;
-  document.getElementById('pro-btn').hre
+  document.getElementById('pro-btn').href = 'pricing.html?plan=pro&billing='+type;
+}
+</script>
+
+</body>
+</html>
