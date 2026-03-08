@@ -428,19 +428,22 @@ html, body {
 <!-- NAV -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™">
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock</a>
-    <a href="methodology.html">Our Method</a>
-    <a href="analytics.html">Analytics</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
     <a href="mock.html" class="nav-cta">Take Mock →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
-    <button class="nav-hamburger" onclick="document.getElementById('mob-nav').classList.toggle('open')" aria-label="Menu">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
   </div>
@@ -449,9 +452,18 @@ html, body {
 <div class="nav-mobile-menu" id="mob-nav">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;">
+      <span id="mob-theme-icon2">🌙</span>
+    </button>
   </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html" class="active">Practice</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="about.html">About</a>
+  <a href="mock.html" class="nav-cta">Take Mock →</a>
 </div>
+
 <!-- PAGE HEADER -->
 <div class="page-header">
   <h1>Practice Questions</h1>
