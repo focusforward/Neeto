@@ -189,8 +189,8 @@ html, body {
 
 /* QUESTIONS AREA */
 #questions-container {
-  max-width: 720px; width: 100%;
-  margin: 0 auto; padding: 20px 20px 80px;
+  max-width: 760px; width: 100%;
+  margin: 0 auto; padding: 28px 24px 100px;
 }
 
 /* QUESTION CARD */
@@ -200,7 +200,12 @@ html, body {
   border-radius: var(--r-lg) !important;
   color: var(--qcard-text) !important;
   box-shadow: var(--shadow-xs) !important;
+  padding: 28px 32px !important;
+  margin-bottom: 0 !important;
   transition: background .3s, border-color .3s, transform .2s, box-shadow .2s !important;
+}
+@media (max-width: 600px) {
+  .q-card, [id^="qc-"] { padding: 20px 20px !important; }
 }
 .q-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md) !important; }
 
@@ -218,8 +223,8 @@ html, body {
   font-family: inherit;
   display: flex;
   align-items: flex-start;
-  gap: 0;
-  margin-bottom: 8px;
+  gap: 12px;
+  margin-bottom: 10px;
   transition: all .15s;
   font-weight: 400;
   opacity: 1;
@@ -448,7 +453,7 @@ html, body {
 ════════════════════════════════════════════════════ */
 
 /* ── Progress bar ── */
-.q-progress-wrap { margin-bottom: 16px; }
+.q-progress-wrap { margin-bottom: 20px; }
 .q-progress-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:0.78rem; color:var(--c-ink-muted,#6B5C45); font-weight:500; }
 .q-progress-track { height:4px; background:#F0E8DE; border-radius:100px; overflow:hidden; }
 .q-progress-fill  { height:100%; background:#FF6B1A; border-radius:100px; transition:width 0.3s; }
@@ -462,13 +467,13 @@ html, body {
 [data-theme="dark"] .q-year-tag { color:#A08060; }
 
 /* ── Subject line ── */
-.q-subject-line { font-size:0.72rem; font-weight:600; color:var(--c-ink-muted,#6B5C45); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:12px; }
+.q-subject-line { font-size:0.72rem; font-weight:600; color:var(--c-ink-muted,#6B5C45); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px; }
 
 /* ── Question body container ── */
-.q-body { margin-bottom:14px; }
+.q-body { margin-bottom:20px; }
 
 /* ── Plain text ── */
-.q-text { font-size:1rem; font-weight:500; line-height:1.65; color:var(--qcard-text,#1A1208); margin:0; }
+.q-text { font-size:1.05rem; font-weight:500; line-height:1.7; color:var(--qcard-text,#1A1208); margin:0; }
 [data-theme="dark"] .q-text { color: #E8DDD0; }
 
 /* ── Preamble (intro text before statements/numbered list) ── */
@@ -587,7 +592,7 @@ html, body {
 .diag-missing { display:flex; align-items:center; gap:10px; background:#FFF8F3; border:1.5px dashed #F0E8DE; border-radius:10px; padding:14px 16px; font-size:0.82rem; color:#6B5C45; margin:10px 0 14px; }
 
 /* ── Nav row (skip + difficulty) ── */
-.q-nav-row { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:4px; }
+.q-nav-row { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:20px; }
 .q-btn-skip { background:var(--opt-bg,#fff); border:1.5px solid #F0E8DE; color:#6B5C45; padding:9px 22px; border-radius:100px; font-size:0.85rem; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s; }
 .q-btn-skip:hover { border-color:#FF6B1A; color:#FF6B1A; }
 [data-theme="dark"] .q-btn-skip { background:#1C1A16; border-color:#2E2920; color:#A08060; }
@@ -771,7 +776,7 @@ html, body {
         <li><a href="terms.html">Terms &amp; Conditions</a></li>
         <li><a href="terms.html#refund">Refund Policy</a></li>
         <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#90fde9fef5f5e4fdf9fef4e3d0f7fdf1f9fcbef3fffd">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -783,7 +788,7 @@ html, body {
       <a href="terms.html">Terms</a>
       <a href="terms.html#refund">Refunds</a>
       <a href="disclaimer.html">Disclaimer</a>
-      <a href="mailto:myneetminds@gmail.com">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#5d302433383829303433392e1d3a303c3431733e3230">Contact</a>
     </div>
   </div>
 </footer>
@@ -833,9 +838,4 @@ function setPattern(val) {
   if (sel) { sel.value = val; sel.dispatchEvent(new Event('change')); }
 
   // Update active pill — use data-pattern attribute
-  document.querySelectorAll('.pattern-pill').forEach(function(btn) {
-    btn.classList.toggle('active', btn.getAttribute('data-pattern') === val);
-  });
-
-  // Scroll to questions
-  var container = document.getElementById('questions-c
+  document.querySelectorAll('.pattern
