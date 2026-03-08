@@ -11,7 +11,7 @@
 (function(){
 'use strict';
 
-var CACHE_VERSION='v14';
+var CACHE_VERSION='v16';
 var CACHE_TTL=24*60*60*1000;
 var MAX_ATTEMPTS=2000;
 var SUBJECTS=['Biology','Chemistry','Physics'];
@@ -201,7 +201,7 @@ function initPracticePage(){
     var optsHtml=['A','B','C','D'].map(function(k){
       var val=q.options&&q.options[k]?q.options[k]:'';
       if(!val)return'';
-      return'<button class="neeto-opt" data-key="'+k+'" onclick="window._neetAnswer(this)"><span class="opt-label">'+k+'</span>'+esc(val)+'</button>';
+      return'<button class="neeto-opt" data-key="'+k+'" onclick="window._neetAnswer(this)"><span class="opt-key">'+k+'.</span><span class="opt-val">'+esc(val)+'</span></button>';
     }).join('');
 
     var patTag=q.pattern&&PATTERN_LABELS[q.pattern]?'<span class="q-pat-tag">'+PATTERN_LABELS[q.pattern]+'</span>':'';
