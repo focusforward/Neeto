@@ -143,8 +143,12 @@ function matchTableHTML(mt){
 /* ── DIAGRAM ── */
 function diagHTML(q){
   if(q.pattern!=='diagram_dhamaka')return'';
-  if(q.image_url){return'<div class="diag-wrap"><img src="'+q.image_url+'" alt="Diagram" class="diag-img" onerror="this.parentNode.innerHTML=\'<div class=\\\"diag-missing\\\">🖼️ Figure could not load. Refer to NCERT book.</div>\'"></div>';}
-  return'<div class="diag-missing">🖼️ <strong>Figure referenced</strong> — refer to NCERT book or past paper.</div>';
+  if(q.image_url){
+    return'<div class="diag-wrap">'
+      +'<img src="'+esc(q.image_url)+'" alt="Diagram" class="diag-img">'
+      +'</div>';
+  }
+  return'<div class="diag-wrap"><div class="diag-missing">Refer to NCERT or past paper for the diagram.</div></div>';
 }
 
 /* ══════════════════════════════════════════════════
