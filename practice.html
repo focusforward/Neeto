@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Practice Questions — NEETMINDS™ | Train by Pattern & Chapter</title>
+<meta name="description" content="Filter NEET questions by subject, pattern type, and difficulty. Practice Memory Test, Negative Charge, Concept Guru and more — one question at a time.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:wght@700;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/nav.css">
+
+<!-- ── THEME INIT: run before paint to avoid flash ── -->
+<script>
+(function(){
+  var saved = localStorage.getItem('nm_theme');
+  if (saved) { document.documentElement.setAttribute('data-theme', saved); return; }
+  var h = new Date().getHours();
+  // Dark between 18:00 and 06:00, also respect system preference
+  var timeBasedDark = (h >= 18 || h < 6);
+  var sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+  if (timeBasedDark || sysDark) document.documentElement.setAttribute('data-theme','dark');
+  else document.documentElement.setAttribute('data-theme','light');
+})();
+</script>
+
+<style>
+/* ── LIGHT TOKENS (default) ─────────────────────────────────── */
+:root {
+  --c-brand:#CC3300; --c-brand-dark:#AA2800; --c-brand-mid:#FF6B1A; --c-brand-pale:#FFF0E6;
+  --c-ink:#1A1208; --c-ink-muted:#6B5C45; --c-ink-faint:#9CA3AF;
+  --c-bg:#FFFDF9; --c-bg-alt:#FAFAF8; --c-surface:#FFFFFF; --c-surface-2:#FFF8F3;
+  --c-border:#F0E8DE; --c-border-mid:#E8DDD0; --c-border-sys:#E2E8F0;
+  --c-success:#16A34A; --c-success-bg:#F0FDF4; --c-success-bdr:#22C55E;
+  --c-error:#DC2626; --c-error-bg:#FEF2F2; --c-error-bdr:#EF4444;
+  --c-amber:#D97706; --c-purple:#7C3AED; --c-blue:#2563EB; --c-blue-bg:#EFF6FF; --c-blue-dark:#1D4ED8;
+  --nav-bg:rgba(255,255,255,0.97); --nav-border:#F0E8DE; --nav-link:#6B5C45; --nav-hover:#FF6B1A;
+  --qcard-bg:#FFFFFF; --qcard-border:#F0E8DE; --qcard-text:#1A1208;
+  --opt-bg:#FFFFFF; --opt-border:#E8DDD0; --opt-hover-bg:#FFF0E6; --opt-hover-bdr:#FF6B1A; --opt-hover-clr:#E85500;
+  --expl-bg:#FFF7F0; --expl-border:rgba(255,107,26,0.2);
+  --header-bg:linear-gradient(135deg,#FFF0E6 0%,#fff8f3 100%);
+  --filters-bg:#FFFFFF; --sel-bg:#FAFAF8; --shortcuts-bg:#FFF8F3; --qcount-bg:#FFFFFF;
+  --footer-bg:#FFFFFF; --footer-text:#6B5C45;
+  --toggle-bg:#F0E8DE;
+  --fs-display:clamp(2.4rem,6vw,3.6rem); --fs-h1:clamp(1.9rem,4vw,2.6rem);
+  --fs-h2:clamp(1.5rem,3vw,2rem); --fs-h3:clamp(1.15rem,2vw,1.4rem);
+  --fs-body:1.0625rem; --fs-sm:0.9375rem; --fs-caption:0.875rem; --fs-label:0.8125rem;
+  --fw-black:900; --fw-bold:700; --fw-semi:600; --fw-medium:500; --fw-base:400;
+  --r-sm:8px; --r-md:12px; --r-lg:18px; --r-full:9999px;
+  --shadow-xs:0 1px 3px rgba(0,0,0,.07); --shadow-sm:0 2px 8px rgba(0,0,0,.08);
+  --shadow-md:0 4px 20px rgba(0,0,0,.10); --shadow-cta:0 4px 20px rgba(204,51,0,.28);
+}
+
+/* ═══ DARK TOKENS ═══════════════════════════════════════════ */
+[data-theme="dark"] {
+  --c-ink:#F5EDE0; --c-ink-muted:#C8B89A; --c-ink-faint:#6B5C45;
+  --c-bg:#0F0A04; --c-bg-alt:#150D05; --c-surface:#1A1005; --c-surface-2:#201408;
+  --c-border:rgba(255,107,26,0.15); --c-border-mid:rgba(255,107,26,0.25); --c-border-sys:rgba(255,255,255,0.10);
+  --c-success-bg:rgba(22,163,74,0.15); --c-error-bg:rgba(220,38,38,0.15);
+  --c-blue-bg:rgba(37,99,235,0.15); --c-blue-dark:#60A5FA;
+  --nav-bg:rgba(15,10,4,0.97); --nav-border:rgba(255,107,26,0.2); --nav-link:#C8B89A;
+  --qcard-bg:#1A1005; --qcard-border:rgba(255,107,26,0.2); --qcard-text:#F5EDE0;
+  --opt-bg:#201408; --opt-border:rgba(255,107,26,0.2); --opt-hover-bg:rgba(255,107,26,0.12); --opt-hover-bdr:#FF6B1A; --opt-hover-clr:#FFB380;
+  --expl-bg:rgba(255,107,26,0.08); --expl-border:rgba(255,107,26,0.25);
+  --header-bg:linear-gradient(135deg,#1A0D04 0%,#0F0A04 100%);
+  --filters-bg:#150D05; --sel-bg:#1A1005; --shortcuts-bg:#150D05; --qcount-bg:#150D05;
+  --footer-bg:#0F0A04; --footer-text:#9CA3AF;
+  --toggle-bg:rgba(255,107,26,0.25);
+  --shadow-cta:0 4px 20px rgba(204,51,0,.45);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html, body {
+  font-family: 'DM Sans', sans-serif;
+  background: var(--c-bg,#FAFAF8);
+  color: var(--c-ink,#1A1208);
+  min-height: 100vh; width: 100%; max-width: 100%; overflow-x: hidden;
+  transition: background .2s, color .2s;
+}
+
+/* PAGE HEADER */
+.page-header {
+  background: var(--header-bg);
+  border-bottom: 1.5px solid var(--c-border);
+  padding: 2rem 20px 1.6rem;
+  transition: background .3s, border-color .3s;
+}
+.page-header h1 {
+  font-family: 'Fraunces', serif;
+  font-size: clamp(1.5rem, 4vw, 2.2rem);
+  font-weight: 900; letter-spacing: -0.02em;
+  color: var(--c-ink);
+}
+.page-header p { margin-top: 4px; color: var(--c-ink-muted); font-size: 0.88rem; }
+
+/* RECOMMENDED CARD */
+.recommended-card {
+  background: var(--c-surface);
+  border-bottom: 1.5px solid var(--c-border);
+  padding: 14px 20px;
+  transition: background .3s, border-color .3s;
+}
+.rec-inner {
+  max-width: 720px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+.rec-badge {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(204,51,0,0.1); border: 1px solid rgba(204,51,0,0.2);
+  border-radius: 100px; padding: 3px 10px;
+  font-size: 0.7rem; font-weight: 800; color: var(--c-brand);
+  text-transform: uppercase; letter-spacing: 0.08em;
+  white-space: nowrap; flex-shrink: 0; margin-top: 2px;
+}
+.rec-badge .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--c-brand); display: inline-block; }
+.rec-text { font-size: 0.85rem; color: var(--c-ink-muted); line-height: 1.5; }
+.rec-text strong { color: var(--c-ink); }
+
+/* FILTERS */
+.filters {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  padding: 14px 20px;
+  background: var(--filters-bg);
+  border-bottom: 1.5px solid var(--c-border);
+  width: 100%;
+  transition: background .3s, border-color .3s;
+}
+.filters select {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.85rem; font-weight: 500;
+  color: var(--c-ink);
+  background: var(--sel-bg);
+  border: 1.5px solid var(--c-border);
+  border-radius: 100px;
+  padding: 8px 32px 8px 14px;
+  cursor: pointer; outline: none;
+  appearance: none; -webkit-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%236B5C45' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat; background-position: right 12px center;
+  transition: border-color .15s, background .3s, color .3s;
+  max-width: 100%;
+}
+.filters select:hover, .filters select:focus { border-color: var(--c-brand-mid); }
+[data-theme="dark"] .filters select {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M1 1l4 4 4-4' stroke='%23C8B89A' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+}
+/* Force select options to be readable in dark mode */
+.filters select option { background: var(--c-surface); color: var(--c-ink); }
+
+/* PATTERN SHORTCUTS */
+.pattern-shortcuts {
+  display: flex; flex-wrap: wrap; gap: 6px;
+  padding: 10px 20px;
+  background: var(--shortcuts-bg);
+  border-bottom: 1.5px solid var(--c-border);
+  align-items: center;
+  transition: background .3s, border-color .3s;
+}
+.pattern-shortcuts .ps-label {
+  font-size: 0.72rem; font-weight: 700;
+  color: var(--c-ink-muted);
+  text-transform: uppercase; letter-spacing: 0.06em;
+  margin-right: 4px; flex-shrink: 0;
+}
+.pattern-pill {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 0.75rem; font-weight: 700;
+  padding: 5px 13px; border-radius: 100px;
+  border: 1.5px solid var(--c-border);
+  background: var(--c-surface);
+  color: var(--c-ink-muted);
+  cursor: pointer; transition: all .15s;
+  white-space: nowrap;
+}
+.pattern-pill:hover { border-color: var(--c-brand-mid); color: var(--c-brand-mid); background: var(--c-surface-2); }
+.pattern-pill.active { background: var(--c-brand); color: #fff; border-color: var(--c-brand); }
+
+/* Q-COUNT */
+.q-count-bar {
+  padding: 10px 20px;
+  background: var(--qcount-bg);
+  border-bottom: 1.5px solid var(--c-border);
+  font-size: 0.8rem; color: var(--c-ink-muted); font-weight: 500;
+  transition: background .3s, border-color .3s;
+}
+
+/* QUESTIONS AREA */
+#questions-container {
+  max-width: 720px; width: 100%;
+  margin: 0 auto; padding: 20px 20px 80px;
+}
+
+/* QUESTION CARD */
+.q-card, [id^="qc-"] {
+  background: var(--qcard-bg) !important;
+  border: 1.5px solid var(--qcard-border) !important;
+  border-radius: var(--r-lg) !important;
+  color: var(--qcard-text) !important;
+  box-shadow: var(--shadow-xs) !important;
+  transition: background .3s, border-color .3s, transform .2s, box-shadow .2s !important;
+}
+.q-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md) !important; }
+
+/* OPTION BUTTONS — base + all states */
+.neeto-opt {
+  background: var(--opt-bg);
+  border: 1.5px solid var(--opt-border);
+  color: var(--c-ink);
+  border-radius: var(--r-sm);
+  padding: 14px 18px;
+  width: 100%;
+  text-align: left;
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  font-family: inherit;
+  display: block;
+  margin-bottom: 8px;
+  transition: all .15s;
+  font-weight: 400;
+  opacity: 1;
+}
+
+.neeto-opt:hover {
+  border-color: var(--opt-hover-bdr);
+  background: var(--opt-hover-bg);
+  color: var(--opt-hover-clr);
+}
+
+/* SELECTED — blue (during test) */
+.neeto-opt.mo-selected,
+.neeto-opt.neeto-selected {
+  border-color: #3B82F6 !important;
+  background: #EFF6FF !important;
+  color: #1E40AF !important;
+  font-weight: 600 !important;
+}
+
+/* CORRECT — green */
+.neeto-opt.mo-correct,
+.neeto-opt.neeto-correct {
+  background: var(--c-success-bg) !important;
+  border: 1.5px solid var(--c-success-bdr) !important;
+  color: var(--c-success) !important;
+  font-weight: 600 !important;
+  pointer-events: none !important;
+}
+
+/* WRONG — red */
+.neeto-opt.mo-wrong,
+.neeto-opt.neeto-wrong {
+  background: var(--c-error-bg) !important;
+  border: 1.5px solid var(--c-error-bdr) !important;
+  color: var(--c-error) !important;
+  pointer-events: none !important;
+}
+
+/* DIMMED — unchosen options after answer */
+.neeto-opt.mo-dim,
+.neeto-opt.neeto-dim {
+  opacity: .35 !important;
+  pointer-events: none !important;
+}
+
+/* Option key (A., B., etc.) */
+.opt-key {
+  font-weight: 700;
+  color: var(--c-brand);
+  min-width: 1.4rem;
+  flex-shrink: 0;
+  margin-right: 8px;
+}
+
+/* Dark mode overrides for options */
+[data-theme="dark"] .neeto-opt {
+  background: var(--opt-bg);
+  border-color: var(--opt-border);
+  color: var(--c-ink);
+}
+
+[data-theme="dark"] .neeto-opt:hover {
+  border-color: var(--opt-hover-bdr);
+  background: var(--opt-hover-bg);
+  color: var(--opt-hover-clr);
+}
+
+[data-theme="dark"] .neeto-opt.mo-selected,
+[data-theme="dark"] .neeto-opt.neeto-selected {
+  border-color: #60A5FA !important;
+  background: #1E3A8A !important;
+  color: #BFDBFE !important;
+}
+
+[data-theme="dark"] .neeto-opt.mo-correct,
+[data-theme="dark"] .neeto-opt.neeto-correct {
+  background: #0A2010!important;
+  color: #4ADE80!important;
+  border-color: #22C55E!important;
+}
+
+[data-theme="dark"] .neeto-opt.mo-wrong,
+[data-theme="dark"] .neeto-opt.neeto-wrong {
+  background: #1F0808!important;
+  color: #F87171!important;
+  border-color: #EF4444!important;
+}
+
+/* Explanation block */
+.explanation, #exp-0 {
+  background: var(--expl-bg) !important;
+  border: 1px solid var(--expl-border) !important;
+  border-radius: var(--r-md) !important;
+  color: var(--c-ink) !important;
+  padding: 1rem 1.2rem;
+  margin-top: 1rem;
+  font-size: .875rem;
+  line-height: 1.65;
+}
+
+/* Show Answer button */
+#show-ans-btn {
+  background: none !important;
+  border: 1.5px solid var(--c-border) !important;
+  color: var(--c-ink-muted) !important;
+  padding: .55rem 1.3rem;
+  border-radius: 100px;
+  font-size: .88rem;
+  font-weight: 600;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: all .15s;
+}
+#show-ans-btn:hover { border-color: var(--c-brand); color: var(--c-brand); }
+
+/* Progress bar track */
+.prog-track { background: var(--c-border) !important; }
+
+/* Diagram image */
+.diag-img {
+  max-width: 100%; max-height: 320px; object-fit: contain;
+  border-radius: 10px;
+  border: 1.5px solid var(--c-border);
+  background: var(--c-surface);
+  padding: 8px;
+  display: block; margin: 0 auto 1rem;
+}
+
+/* Dark-mode image contrast enhancement */
+[data-theme="dark"] .diag-img { filter: brightness(0.92) contrast(1.05); }
+
+@media (max-width: 680px) {
+  .page-header { padding: 1.4rem 16px 1.2rem; }
+  .filters { padding: 10px 16px; gap: 6px; }
+  .filters select { font-size: 0.8rem; padding: 7px 28px 7px 12px; }
+  .q-count-bar { padding: 8px 16px; }
+  .pattern-shortcuts { padding: 8px 16px; gap: 5px; }
+  .pattern-pill { font-size: 0.72rem; padding: 4px 10px; }
+  #questions-container { padding: 16px 16px 80px; }
+  .recommended-card { padding: 12px 16px; }
+}
+
+.brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; display: inline-flex; align-items: baseline; }
+.brand-neet  { color: #CC3300; }
+.brand-minds { color: #FF6B1A; }
+.brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav class="navbar">
+  <a href="index.html" class="nav-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS™">
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="practice.html" class="active">Practice</a>
+    <a href="mock.html">Mock</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+    <a href="mock.html" class="nav-cta">Take Mock →</a>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<div class="nav-mobile-menu" id="mob-nav">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;">
+      <span id="mob-theme-icon2">🌙</span>
+    </button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html" class="active">Practice</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="about.html">About</a>
+  <a href="mock.html" class="nav-cta">Take Mock →</a>
+</div>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <h1>Practice Questions</h1>
+  <p>Filter by pattern, subject or difficulty — each question shows you the strategy after you answer</p>
+</div>
+
+<!-- RECOMMENDED CARD -->
+<div class="recommended-card">
+  <div class="rec-inner">
+    <span class="rec-badge"><span class="dot"></span> Recommended</span>
+    <span class="rec-text">Start with <strong>Memory Test</strong> — it's ~45% of the exam. Get these right first.</span>
+  </div>
+</div>
+
+<!-- FILTERS -->
+<div class="filters">
+  <select id="filter-subject">
+    <option value="">🔬 All Subjects</option>
+    <option value="Biology">🌿 Biology</option>
+    <option value="Chemistry">🧪 Chemistry</option>
+    <option value="Physics">⚛️ Physics</option>
+  </select>
+  <select id="filter-pattern">
+    <option value="">📚 All Patterns</option>
+    <option value="memory_test">🎯 Memory Test</option>
+    <option value="negative_charge">⚡ Negative Charge (NOT/EXCEPT)</option>
+    <option value="concept_guru">🌀 Concept Guru (Assertion-Reason)</option>
+    <option value="diagram_dhamaka">🖼️ Diagram Dhamaka</option>
+    <option value="speed_breaker">⛔ Speed Breaker (Match/Order)</option>
+    <option value="best_choice">🔽 Best Choice (Eliminate)</option>
+  </select>
+  <select id="filter-diff">
+    <option value="">All Levels</option>
+    <option value="L1">L1 — Easy</option>
+    <option value="L2">L2 — Medium</option>
+    <option value="L3">L3 — Hard</option>
+  </select>
+</div>
+
+<!-- PATTERN SHORTCUT PILLS -->
+<div class="pattern-shortcuts">
+  <span class="ps-label">Jump to:</span>
+  <button class="pattern-pill active" data-pattern="" onclick="setPattern('')">All</button>
+  <button class="pattern-pill" data-pattern="memory_test" onclick="setPattern('memory_test')">🎯 Memory Test</button>
+  <button class="pattern-pill" data-pattern="negative_charge" onclick="setPattern('negative_charge')">⚡ Negative</button>
+  <button class="pattern-pill" data-pattern="concept_guru" onclick="setPattern('concept_guru')">🌀 Concept Guru</button>
+  <button class="pattern-pill" data-pattern="best_choice" onclick="setPattern('best_choice')">🔽 Best Choice</button>
+  <button class="pattern-pill" data-pattern="speed_breaker" onclick="setPattern('speed_breaker')">⛔ Speed Breaker</button>
+  <button class="pattern-pill" data-pattern="diagram_dhamaka" onclick="setPattern('diagram_dhamaka')">🖼️ Diagram</button>
+</div>
+
+<div class="q-count-bar" id="q-count">Loading...</div>
+<div id="questions-container">
+  <p style="text-align:center;padding:60px 0;color:var(--c-ink-muted);">Loading questions...</p>
+</div>
+
+<footer class="neeto-footer">
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS">
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </div>
+  <p>© 2026 NEETMINDS™. All rights reserved.</p>
+</footer>
+
+<script src="js/app.js?v=14"></script>
+<script>
+// ── THEME SYSTEM ─────────────────────────────────────────────────
+function updateThemeUI() {
+  var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
+  var icon = isDark ? '☀️' : '🌙';
+  var el = document.getElementById('theme-icon');
+  var el2 = document.getElementById('mob-theme-icon');
+  var el3 = document.getElementById('mob-theme-icon2');
+  var lbl = document.getElementById('mob-theme-label');
+  if (el)  el.textContent  = icon;
+  if (el2) el2.textContent = icon;
+  if (el3) el3.textContent = icon;
+  if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
+}
+
+function toggleTheme() {
+  var current = document.documentElement.getAttribute('data-theme');
+  var next = (current === 'dark') ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('nm_theme', next);
+  updateThemeUI();
+}
+
+// Update icon on page load
+document.addEventListener('DOMContentLoaded', updateThemeUI);
+
+// ── NAV ───────────────────────────────────────────────────────────
+function toggleNav() {
+  document.getElementById('mob-nav').classList.toggle('open');
+}
+document.addEventListener('click', function(e) {
+  var m = document.getElementById('mob-nav');
+  var b = document.querySelector('.nav-hamburger');
+  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
+    m.classList.remove('open');
+});
+
+// ── PATTERN PILLS ────────────────────────────────────────────────
+function setPattern(val) {
+  // Update dropdown
+  var sel = document.getElementById('filter-pattern');
+  if (sel) { sel.value = val; sel.dispatchEvent(new Event('change')); }
+
+  // Update active pill — use data-pattern attribute
+  document.querySelectorAll('.pattern-pill').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-pattern') === val);
+  });
+
+  // Scroll to questions
+  var container = document.getElementById('questions-container');
+  if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>
