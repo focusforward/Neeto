@@ -16,12 +16,12 @@
 <!-- ── THEME INIT: runs before first paint ── -->
 <script>
 (function(){
-  var s = localStorage.getItem('nm_theme');
-  if (s) { document.documentElement.setAttribute('data-theme', s); return; }
+  var s = 
+  if (s) {  return; }
   var h = new Date().getHours();
   if (h>=18||h<6||(window.matchMedia&&window.matchMedia('(prefers-color-scheme:dark)').matches))
-    document.documentElement.setAttribute('data-theme','dark');
-  else document.documentElement.setAttribute('data-theme','light');
+    
+  else 
 })();
 </script>
 
@@ -168,18 +168,10 @@ html,body{
 .mock-opt.mo-correct{border-color:#22C55E!important;background:#F0FDF4!important;color:#15803D!important;}
 .mock-opt.mo-wrong{border-color:#EF4444!important;background:#FEF2F2!important;color:#B91C1C!important;}
 .mock-opt.mo-dim{opacity:.38;}
-[data-theme="dark"] .mock-opt.mo-selected {
-  border-color: #60A5FA !important;
-  background: #1E3A8A !important;
-  color: #BFDBFE !important;
-}
-[data-theme="dark"] .mock-opt.mo-correct{background:#0A2010!important;color:#4ADE80!important;}
-[data-theme="dark"] .mock-opt.mo-wrong{background:#1F0808!important;color:#F87171!important;}
-[data-theme="dark"] .mock-opt:not([disabled]):hover {
-  border-color: #60A5FA;
-  background: #1E3A8A;
-  color: #BFDBFE;
-}
+
+
+
+
 .opt-key{font-weight:700;color:var(--c-brand,#FF6B1A);min-width:2rem;flex-shrink:0;}
 .opt-val{flex:1;text-align:left;}
 
@@ -308,38 +300,22 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 .mock-opt:focus-visible { outline: 2px solid var(--c-brand, #FF6B1A); }
 
 /* ── DARK MODE MOCK-SPECIFIC OVERRIDES ── */
-[data-theme="dark"] #start-screen {
-  background: linear-gradient(160deg, var(--c-surface-2) 0%, var(--c-bg) 50%);
-}
-[data-theme="dark"] .start-info-card {
-  background: var(--c-surface); border-color: var(--c-border);
-}
-[data-theme="dark"] .mock-header {
-  background: var(--c-surface); border-color: var(--c-border);
-}
-[data-theme="dark"] .timer {
-  background: var(--c-surface-2); color: var(--c-brand);
-}
-[data-theme="dark"] .mock-q-card {
-  background: var(--c-surface); border-color: var(--c-border);
-}
-[data-theme="dark"] .mock-opt {
-  background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink);
-}
-[data-theme="dark"] .mock-exp { background: var(--c-surface-2); }
-[data-theme="dark"] .mock-palette {
-  background: var(--c-surface); border-color: var(--c-border);
-}
-[data-theme="dark"] .pb { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
-[data-theme="dark"] .result-hero {
-  background: linear-gradient(135deg, var(--c-surface-2) 0%, var(--c-surface) 100%);
-}
-[data-theme="dark"] .result-box { background: var(--c-surface); }
-[data-theme="dark"] .result-box:hover { background: var(--c-surface-2); }
-[data-theme="dark"] .nav-btn { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
-[data-theme="dark"] footer { background: var(--c-surface); border-color: var(--c-border); color: var(--c-ink-muted); }
-[data-theme="dark"] .q-block { background: var(--c-surface-2); }
-[data-theme="dark"] .secb-pill { background: var(--c-surface-2); }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     .brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; display: inline-flex; align-items: baseline; }
     .brand-neet  { color: #CC3300; }
@@ -353,28 +329,33 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span></a>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+  </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html" class="active">Mock</a>
-    <a href="pattern_intelligence.html">Methodology</a>
-    <a href="about.html">About</a>
+    <a href="mock.html" class="active">Mock Test</a>
+    <a href="pattern_intelligence.html">Our Method</a>
+    <a href="analytics.html">Analytics</a>
   </div>
-  <div style="display:flex;align-items:center;gap:8px;">
-    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
-      <span id="theme-icon">🌙</span>
-    </button>
-    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
+  <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
+    <a href="login.html" class="nav-login">Login / Register</a>
   </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-<div class="nav-mobile-menu" id="nmenu">
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+<div class="nav-mobile-menu" id="mmenu">
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html" class="active">Mock Test</a>
+  <a href="pattern_intelligence.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">&#x1F3AF; Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock</a>
@@ -486,17 +467,11 @@ function shuffle(arr){
 function updateThemeUI(){
   var dark=document.documentElement.getAttribute('data-theme')==='dark';
   var icon=dark?'☀️':'🌙';
-  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
-    var el=document.getElementById(id);if(el)el.textContent=icon;
+  if(el)el.textContent=icon;
   });
-  var lbl=document.getElementById('mob-theme-label');
-  if(lbl)lbl.textContent=dark?'Switch to Light Mode':'Switch to Dark Mode';
-}
-function toggleTheme(){
-  var cur=document.documentElement.getAttribute('data-theme');
-  var next=cur==='dark'?'light':'dark';
-  document.documentElement.setAttribute('data-theme',next);
-  try{localStorage.setItem('nm_theme',next);}catch(e){}
+  
+  
+catch(e){}
   updateThemeUI();
 }
 document.addEventListener('DOMContentLoaded',updateThemeUI);

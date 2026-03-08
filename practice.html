@@ -189,8 +189,8 @@ html, body {
 
 /* QUESTIONS AREA */
 #questions-container {
-  max-width: 760px; width: 100%;
-  margin: 0 auto; padding: 28px 24px 100px;
+  max-width: 720px; width: 100%;
+  margin: 0 auto; padding: 20px 20px 80px;
 }
 
 /* QUESTION CARD */
@@ -200,12 +200,7 @@ html, body {
   border-radius: var(--r-lg) !important;
   color: var(--qcard-text) !important;
   box-shadow: var(--shadow-xs) !important;
-  padding: 28px 32px !important;
-  margin-bottom: 0 !important;
   transition: background .3s, border-color .3s, transform .2s, box-shadow .2s !important;
-}
-@media (max-width: 600px) {
-  .q-card, [id^="qc-"] { padding: 20px 20px !important; }
 }
 .q-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md) !important; }
 
@@ -221,10 +216,8 @@ html, body {
   font-size: var(--fs-sm);
   cursor: pointer;
   font-family: inherit;
-  display: flex;
-  align-items: flex-start;
-  gap: 12px;
-  margin-bottom: 10px;
+  display: block;
+  margin-bottom: 8px;
   transition: all .15s;
   font-weight: 400;
   opacity: 1;
@@ -275,13 +268,9 @@ html, body {
 .opt-key {
   font-weight: 700;
   color: var(--c-brand);
-  min-width: 2rem;
+  min-width: 1.4rem;
   flex-shrink: 0;
-  margin-right: 4px;
-}
-.opt-val {
-  flex: 1;
-  text-align: left;
+  margin-right: 8px;
 }
 
 /* Dark mode overrides for options */
@@ -375,290 +364,48 @@ html, body {
 .brand-word { font-family: 'Fraunces', serif; font-weight: 900; letter-spacing: -0.04em; display: inline-flex; align-items: baseline; }
 .brand-neet  { color: #CC3300; }
 .brand-minds { color: #FF6B1A; }
-.brand-tm    { color: #CC3300; font-size: 0.38em; position: relative; top: -1.5em; margin-left: 1px; vertical-align: baseline; line-height: 0; }
-
-    /* Match question notice */
-    .match-notice {
-      background: #FFF7E6; border: 1.5px solid #F59E0B;
-      border-radius: 10px; padding: 10px 14px;
-      font-size: 0.82rem; font-weight: 600; color: #92400E;
-      margin-bottom: 10px;
-    }
-    /* Match table locked styles */
-    .match-table-wrap {
-      width: 100%; border-radius: 10px; overflow: hidden;
-      border: 1.5px solid #E8DDD0; margin-bottom: 14px;
-    }
-    .match-table-head {
-      display: grid; grid-template-columns: 1fr 1fr;
-      background: #1A1208; color: #fff;
-      font-size: 0.75rem; font-weight: 700;
-      text-transform: uppercase; letter-spacing: 0.08em;
-    }
-    .match-table-head span { padding: 8px 14px; }
-    .match-table-row {
-      display: grid; grid-template-columns: 1fr 1fr;
-      border-top: 1px solid #F0E8DE;
-    }
-    .match-table-row:nth-child(even) { background: #FFF7F0; }
-    .match-cell { padding: 10px 14px; font-size: 0.87rem; line-height: 1.5; color: #1A1208; }
-    .match-key { font-weight: 700; color: #CC3300; margin-right: 6px; }
-  
-/* ── SKIP / PREV BUTTONS — LOCKED DESIGN ─────────────────── */
-.skip-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 10px 22px;
-  border-radius: 100px;
-  font-family: 'DM Sans', sans-serif;
-  font-size: 0.88rem;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.18s;
-  white-space: nowrap;
-  border: none;
-  background: #FF6B1A;
-  color: #fff;
-  box-shadow: 0 4px 14px rgba(255,107,26,0.28);
-  letter-spacing: 0.01em;
-}
-.skip-btn:hover {
-  background: #CC3300;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(204,51,0,0.32);
-}
-.skip-btn:active {
-  transform: translateY(0);
-}
-/* Prev button — outlined variant */
-.skip-btn.prev-btn,
-.skip-btn:first-child {
-  background: none;
-  color: #6B5C45;
-  border: 1.5px solid #E8DDD0;
-  box-shadow: none;
-}
-.skip-btn.prev-btn:hover,
-.skip-btn:first-child:hover {
-  border-color: #CC3300;
-  color: #CC3300;
-  background: rgba(204,51,0,0.05);
-  transform: translateY(-1px);
-  box-shadow: none;
-}
-
-/* ════════════════════════════════════════════════════
-   QUESTION TYPE RENDERERS  (app.js v4)
-════════════════════════════════════════════════════ */
-
-/* ── Progress bar ── */
-.q-progress-wrap { margin-bottom: 20px; }
-.q-progress-meta { display:flex; justify-content:space-between; align-items:center; margin-bottom:6px; font-size:0.78rem; color:var(--c-ink-muted,#6B5C45); font-weight:500; }
-.q-progress-track { height:4px; background:#F0E8DE; border-radius:100px; overflow:hidden; }
-.q-progress-fill  { height:100%; background:#FF6B1A; border-radius:100px; transition:width 0.3s; }
-[data-theme="dark"] .q-progress-track { background: #2E2920; }
-
-/* ── Tag row ── */
-.q-tags { display:flex; align-items:center; gap:8px; flex-wrap:wrap; margin-bottom:8px; min-height:24px; }
-.q-pat-tag { display:inline-block; font-size:0.72rem; font-weight:700; background:#FFF0E6; color:#E85500; padding:3px 10px; border-radius:100px; }
-.q-year-tag { font-size:0.72rem; color:#6B5C45; }
-[data-theme="dark"] .q-pat-tag { background:rgba(255,107,26,0.12); color:#FF8A3D; }
-[data-theme="dark"] .q-year-tag { color:#A08060; }
-
-/* ── Subject line ── */
-.q-subject-line { font-size:0.72rem; font-weight:600; color:var(--c-ink-muted,#6B5C45); text-transform:uppercase; letter-spacing:0.06em; margin-bottom:16px; }
-
-/* ── Question body container ── */
-.q-body { margin-bottom:20px; }
-
-/* ── Plain text ── */
-.q-text { font-size:1.05rem; font-weight:500; line-height:1.7; color:var(--qcard-text,#1A1208); margin:0; }
-[data-theme="dark"] .q-text { color: #E8DDD0; }
-
-/* ── Preamble (intro text before statements/numbered list) ── */
-.q-preamble { font-size:0.9rem; font-weight:500; line-height:1.6; color:var(--c-ink-muted,#6B5C45); margin:0 0 12px; font-style:italic; }
-[data-theme="dark"] .q-preamble { color:#A08060; }
-
-/* ── Assertion / Reason blocks ── */
-.q-ar-block {
-  border-radius: 10px;
-  padding: 12px 16px;
-  margin-bottom: 10px;
-  border: 1.5px solid;
-}
-.q-a-block { background:#F3F0FF; border-color:#C4B5FD; }
-.q-r-block  { background:#F0F9FF; border-color:#BAE6FD; }
-[data-theme="dark"] .q-a-block { background:rgba(167,139,250,0.08); border-color:rgba(167,139,250,0.3); }
-[data-theme="dark"] .q-r-block  { background:rgba(56,189,248,0.08);  border-color:rgba(56,189,248,0.3);  }
-
-.q-ar-label {
-  font-size: 0.68rem;
-  font-weight: 800;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  margin-bottom: 6px;
-}
-.q-a-block .q-ar-label { color: #7C3AED; }
-.q-r-block  .q-ar-label { color: #0369A1; }
-[data-theme="dark"] .q-a-block .q-ar-label { color:#A78BFA; }
-[data-theme="dark"] .q-r-block  .q-ar-label { color:#38BDF8; }
-
-.q-ar-body { font-size:0.92rem; font-weight:500; line-height:1.6; color:var(--qcard-text,#1A1208); }
-[data-theme="dark"] .q-ar-body { color:#E8DDD0; }
-
-/* ── Statement I / II blocks ── */
-.q-stmt-block {
-  border-left: 3px solid;
-  padding: 10px 14px;
-  margin-bottom: 10px;
-  border-radius: 0 8px 8px 0;
-  background: #FAFAF9;
-}
-.q-stmt1 { border-color: #CC3300; background:#FFF8F5; }
-.q-stmt2 { border-color: #FF6B1A; background:#FFFAF7; }
-[data-theme="dark"] .q-stmt-block { background: #1C1A16; }
-[data-theme="dark"] .q-stmt1 { border-color:#CC3300; background:#1A1208; }
-[data-theme="dark"] .q-stmt2 { border-color:#FF6B1A; background:#1A1208; }
-
-.q-stmt-label {
-  font-size: 0.65rem;
-  font-weight: 800;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  margin-bottom: 4px;
-  color: #CC3300;
-}
-.q-stmt2 .q-stmt-label { color: #FF6B1A; }
-.q-stmt-body { font-size:0.92rem; font-weight:500; line-height:1.6; color:var(--qcard-text,#1A1208); }
-[data-theme="dark"] .q-stmt-body { color:#E8DDD0; }
-
-/* ── Numbered list I. II. III. IV. ── */
-.q-num-list { display:flex; flex-direction:column; gap:8px; margin:4px 0 12px; }
-.q-num-item {
-  display: flex;
-  gap: 10px;
-  align-items: flex-start;
-  padding: 9px 12px;
-  background: #FFF8F3;
-  border-radius: 8px;
-  border: 1px solid #F0E8DE;
-}
-[data-theme="dark"] .q-num-item { background:#1C1A16; border-color:#2E2920; }
-
-.q-num-roman {
-  font-size: 0.78rem;
-  font-weight: 800;
-  color: #CC3300;
-  min-width: 22px;
-  padding-top: 1px;
-  flex-shrink: 0;
-}
-.q-num-text { font-size:0.9rem; font-weight:500; line-height:1.55; color:var(--qcard-text,#1A1208); }
-[data-theme="dark"] .q-num-text { color:#E8DDD0; }
-
-.q-trailer { font-size:0.9rem; font-weight:600; line-height:1.55; color:var(--c-ink-muted,#6B5C45); margin:8px 0 0; font-style:italic; }
-[data-theme="dark"] .q-trailer { color:#A08060; }
-
-/* ── Match table (new class names from app.js v4) ── */
-.match-table { width:100%; border-radius:10px; overflow:hidden; border:1.5px solid #E8DDD0; margin-bottom:14px; }
-.match-head {
-  display: grid; grid-template-columns: 1fr 1fr;
-  background: #1A1208; color: #fff;
-  font-size: 0.72rem; font-weight: 700;
-  text-transform: uppercase; letter-spacing: 0.08em;
-}
-.match-head span { padding: 9px 14px; }
-.match-row {
-  display: grid; grid-template-columns: 1fr 1fr;
-  border-top: 1px solid #F0E8DE;
-}
-.match-row:nth-child(odd) { background: #fff; }
-.match-row:nth-child(even) { background: #FFF7F0; }
-.match-cell { padding: 10px 14px; font-size: 0.87rem; line-height: 1.5; color: #1A1208; font-weight:500; }
-[data-theme="dark"] .match-table  { border-color:#2E2920; }
-[data-theme="dark"] .match-head   { background:#0F0E0C; }
-[data-theme="dark"] .match-row:nth-child(odd)  { background:#1A1208; }
-[data-theme="dark"] .match-row:nth-child(even) { background:#1C1A16; }
-[data-theme="dark"] .match-row    { border-top-color:#2E2920; }
-[data-theme="dark"] .match-cell   { color:#E8DDD0; }
-
-/* ── Match table wrapper ── */
-.q-match-wrap { margin-bottom: 4px; }
-
-/* ── Diagram ── */
-.diag-wrap { margin:10px 0 14px; text-align:center; }
-.diag-img  { max-width:100%; max-height:340px; object-fit:contain; border-radius:10px; border:1.5px solid #F0E8DE; background:#fff; padding:10px; display:block; margin:0 auto; }
-.diag-missing { display:flex; align-items:center; gap:10px; background:#FFF8F3; border:1.5px dashed #F0E8DE; border-radius:10px; padding:14px 16px; font-size:0.82rem; color:#6B5C45; margin:10px 0 14px; }
-
-/* ── Nav row (skip + difficulty) ── */
-.q-nav-row { display:flex; justify-content:space-between; align-items:center; gap:10px; flex-wrap:wrap; margin-top:20px; }
-.q-btn-skip { background:var(--opt-bg,#fff); border:1.5px solid #F0E8DE; color:#6B5C45; padding:9px 22px; border-radius:100px; font-size:0.85rem; font-weight:600; cursor:pointer; font-family:inherit; transition:all 0.15s; }
-.q-btn-skip:hover { border-color:#FF6B1A; color:#FF6B1A; }
-[data-theme="dark"] .q-btn-skip { background:#1C1A16; border-color:#2E2920; color:#A08060; }
-[data-theme="dark"] .q-btn-skip:hover { border-color:#FF6B1A; color:#FF6B1A; }
-
-/* ── Difficulty badges ── */
-.q-diff { font-size:0.78rem; }
-.q-diff-easy { color:#16A34A; }
-.q-diff-med  { color:#D97706; }
-.q-diff-hard { color:#DC2626; }
-
-/* ── Explanation ── */
-.q-explanation { margin-top:1rem; padding:1rem 1.2rem; background:var(--exp-bg,#FFFAF6); border:1.5px solid #F0E8DE; border-radius:12px; }
-.exp-title { font-size:0.78rem; font-weight:700; color:#E85500; margin:0 0 6px; }
-.exp-body  { font-size:0.88rem; line-height:1.6; color:var(--c-ink,#1A1208); margin:0 0 4px; }
-.exp-ref   { font-size:0.72rem; color:#6B5C45; margin:8px 0 0; }
-[data-theme="dark"] .q-explanation { background:#1C1A16; border-color:#2E2920; }
-[data-theme="dark"] .exp-body  { color:#E8DDD0; }
-[data-theme="dark"] .exp-ref   { color:#A08060; }
-
-/* ── Next button ── */
-.q-next-wrap { margin-top:12px; text-align:center; }
-.q-btn-next  { background:#FF6B1A; color:#fff; border:none; padding:10px 32px; border-radius:100px; font-size:0.9rem; font-weight:700; cursor:pointer; font-family:inherit; box-shadow:0 4px 14px rgba(255,107,26,0.3); transition:background 0.15s,transform 0.15s; }
-.q-btn-next:hover { background:#CC3300; transform:translateY(-1px); }
-
-/* ── Set complete ── */
-.q-set-done { text-align:center; padding:40px 20px; background:#F0FDF4; border-radius:18px; border:1.5px solid #22C55E; margin-bottom:20px; }
-
-  </style>
+.brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
+</style>
 </head>
 <body>
 
 <!-- NAV -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™">
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html" class="active">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="methodology.html">Our Method</a>
-    <a href="analytics.html">Analytics</a>
+    <a href="mock.html">Mock</a>
+    <a href="methodology.html">Methodology</a>
+    <a href="about.html">About</a>
+    <a href="mock.html" class="nav-cta">Take Mock →</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle dark mode" title="Toggle dark/light mode">
+      <span id="theme-icon">🌙</span>
+    </button>
+    <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
-<div class="nav-mobile-menu" id="mmenu">
+
+<div class="nav-mobile-menu" id="mob-nav">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;">
+      <span id="mob-theme-icon2">🌙</span>
+    </button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html" class="active">Practice</a>
-  <a href="mock.html">Mock Test</a>
-  <a href="methodology.html">Our Method</a>
-  <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html">Methodology</a>
+  <a href="about.html">About</a>
+  <a href="mock.html" class="nav-cta">Take Mock →</a>
 </div>
 
 <!-- PAGE HEADER -->
@@ -718,82 +465,14 @@ html, body {
 </div>
 
 <footer class="neeto-footer">
-  <div class="footer-top">
-    <!-- Brand col -->
-    <div class="footer-brand-col">
-      <div class="footer-brand">
-        <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-        <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
-      </div>
-      <p class="footer-tagline">Pattern intelligence for NEET. Built by doctors, engineers &amp; cognitive scientists. Master the patterns. Master the exam.</p>
-      <div class="footer-socials">
-        <a href="#" class="footer-social-btn" aria-label="Instagram">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="YouTube">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="Twitter / X">
-          <svg width="15" height="15" fill="currentColor" viewBox="0 0 24 24"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
-        </a>
-        <a href="#" class="footer-social-btn" aria-label="WhatsApp">
-          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-        </a>
-      </div>
-    </div>
-
-    <!-- Platform col -->
-    <div class="footer-col">
-      <h4>Platform</h4>
-      <ul>
-        <li><a href="practice.html">Practice Questions</a></li>
-        <li><a href="mock.html">Mock Tests</a></li>
-        <li><a href="analytics.html">Analytics</a></li>
-        <li><a href="mindset.html">Mindset</a></li>
-        <li><a href="units.html">Units</a></li>
-        <li><a href="login.html">Login / Register</a></li>
-      </ul>
-    </div>
-
-    <!-- Learn col -->
-    <div class="footer-col">
-      <h4>Learn</h4>
-      <ul>
-        <li><a href="methodology.html">Our Method</a></li>
-        <li><a href="pattern_intelligence.html">Pattern Intelligence</a></li>
-        <li><a href="about.html">About NEETMINDS™</a></li>
-        <li><a href="practice.html?subject=biology">Biology Questions</a></li>
-        <li><a href="practice.html?subject=physics">Physics Questions</a></li>
-        <li><a href="practice.html?subject=chemistry">Chemistry Questions</a></li>
-      </ul>
-    </div>
-
-    <!-- Legal col -->
-    <div class="footer-col">
-      <h4>Legal</h4>
-      <ul>
-        <li><a href="privacy.html">Privacy Policy</a></li>
-        <li><a href="terms.html">Terms &amp; Conditions</a></li>
-        <li><a href="terms.html#refund">Refund Policy</a></li>
-        <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#90fde9fef5f5e4fdf9fef4e3d0f7fdf1f9fcbef3fffd">Contact Us</a></li>
-      </ul>
-    </div>
+  <div class="footer-brand">
+    <img src="neetminds-logo.png" alt="NEETMINDS">
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </div>
-
-  <div class="footer-bottom">
-    <span class="footer-copy">© 2026 NEETMINDS™ · Built by cognitive performance scientists, doctors, engineers &amp; teachers · For educational use only.</span>
-    <div class="footer-legal">
-      <a href="privacy.html">Privacy</a>
-      <a href="terms.html">Terms</a>
-      <a href="terms.html#refund">Refunds</a>
-      <a href="disclaimer.html">Disclaimer</a>
-      <a href="/cdn-cgi/l/email-protection#5d302433383829303433392e1d3a303c3431733e3230">Contact</a>
-    </div>
-  </div>
+  <p>© 2026 NEETMINDS™. All rights reserved.</p>
 </footer>
 
-<script src="js/app.js?v=16"></script>
+<script src="js/app.js?v=14"></script>
 <script>
 // ── THEME SYSTEM ─────────────────────────────────────────────────
 function updateThemeUI() {
@@ -838,4 +517,15 @@ function setPattern(val) {
   if (sel) { sel.value = val; sel.dispatchEvent(new Event('change')); }
 
   // Update active pill — use data-pattern attribute
-  document.querySelectorAll('.pattern
+  document.querySelectorAll('.pattern-pill').forEach(function(btn) {
+    btn.classList.toggle('active', btn.getAttribute('data-pattern') === val);
+  });
+
+  // Scroll to questions
+  var container = document.getElementById('questions-container');
+  if (container) container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+</script>
+
+</body>
+</html>

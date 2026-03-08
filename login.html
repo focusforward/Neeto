@@ -226,10 +226,15 @@ body { font-family: 'DM Sans', sans-serif; background: #FFFDF9; color: #1A1208; 
   </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
-  <div class="mob-theme-row">
-    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
-  </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="pattern_intelligence.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">&#x1F3AF; Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html">Mock Test</a>
@@ -812,15 +817,11 @@ document.addEventListener('keydown', function(e) {
 ───────────────────────────────────────── */
 function updateThemeUI() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-  ['theme-icon','mob-theme-icon','mob-theme-icon2'].forEach(function(id){
     var el = document.getElementById(id); if (el) el.textContent = isDark ? '☀️' : '🌙';
   });
-  var lbl = document.getElementById('mob-theme-label');
-  if (lbl) lbl.textContent = isDark ? 'Switch to Light Mode' : 'Switch to Dark Mode';
 }
 function toggleTheme() {
   var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  document.documentElement.setAttribute('data-theme', next);
   try { localStorage.setItem('nm_theme', next); } catch(e) {}
   updateThemeUI();
 }
@@ -851,4 +852,8 @@ document.addEventListener('click', function(e) {
     <a href="disclaimer.html" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Student Disclaimer</a>
     <a href="/cdn-cgi/l/email-protection#b6dbcfd8d3d3c2dbdfd8d2c5f6d1dbd7dfda98d5d9db" style="font-size:0.72rem;color:#9C8A78;text-decoration:none;">Contact</a>
   </div>
-  <p style="font-size:0.7rem;color:#C8B89A;">© 2026 NEETMINDS™ · For education
+  <p style="font-size:0.7rem;color:#C8B89A;">© 2026 NEETMINDS™ · For educationonal use only</p>
+</footer>
+
+</body>
+</html>
