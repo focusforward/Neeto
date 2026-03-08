@@ -135,28 +135,33 @@
 <body>
 
 <!-- NAV -->
-<nav class="neeto-nav" role="navigation">
+<nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETminds Logo">
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">minds</span></span>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
+    <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="units.html">Units</a>
-    <a href="pattern_intelligence.html" class="active">Pattern Intelligence</a>
+    <a href="mock.html">Mock</a>
+    <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
-  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
-  <nav class="nav-mobile-menu" id="mob-nav">
-    <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="units.html">Units</a>
-    <a href="pattern_intelligence.html" class="active">Pattern Intelligence</a>
-    <a href="analytics.html">Analytics</a>
-  </nav>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+<div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
+</div>
+</div>
+</div>
 </nav>
 
 <!-- HERO -->
