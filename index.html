@@ -268,6 +268,175 @@
     .ps-label { font-size: 0.83rem; color: #C8B89A; margin-top: 8px; line-height: 1.55; }
     .proof-cta { display: inline-flex; align-items: center; gap: 10px; margin-top: 52px; background: #CC3300; color: #fff; padding: 16px 36px; border-radius: 12px; font-size: 1rem; font-weight: 700; text-decoration: none; transition: all 0.2s; }
     .proof-cta:hover { background: #AA2800; transform: translateY(-2px); }
+
+    /* ── NAV PRICING PILL ── */
+    .nav-pricing {
+      font-size: 0.82rem; font-weight: 700; color: #CC3300;
+      text-decoration: none; padding: 7px 14px;
+      border: 1.5px solid rgba(204,51,0,0.3); border-radius: 100px;
+      white-space: nowrap; transition: all 0.15s;
+    }
+    .nav-pricing:hover { background: rgba(204,51,0,0.06); border-color: #CC3300; }
+
+    /* ── RANK PREDICTOR USP SECTION ── */
+    .rank-usp-section {
+      background: linear-gradient(135deg,#1A1208 0%,#2D1A08 60%,#1A1208 100%);
+      padding: 72px 20px;
+    }
+    .rank-usp-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 56px; align-items: center;
+    }
+    @media(max-width:820px){ .rank-usp-inner { grid-template-columns: 1fr; gap: 36px; } }
+    .rank-usp-eyebrow {
+      display: inline-flex; align-items: center; gap: 10px;
+      margin-bottom: 22px;
+    }
+    .rank-usp-eyebrow-badge {
+      display: inline-flex; align-items: center; gap: 8px;
+      background: #CC3300;
+      border-radius: 8px;
+      padding: 6px 14px 6px 10px;
+      font-size: 0.62rem; font-weight: 800; letter-spacing: 0.14em;
+      text-transform: uppercase; color: #fff;
+    }
+    .rank-usp-eyebrow-badge .usp-dot {
+      width: 7px; height: 7px; border-radius: 50%; background: #FF8C4A;
+      animation: uspPulse 1.8s ease-in-out infinite; flex-shrink: 0;
+    }
+    @keyframes uspPulse { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:0.4;transform:scale(1.7)} }
+    .rank-usp-banner-title {
+      font-family: 'Fraunces', serif;
+      font-size: clamp(2rem, 4.5vw, 3.4rem);
+      font-weight: 900; color: #fff;
+      line-height: 0.95; letter-spacing: -0.04em;
+      text-transform: uppercase;
+      display: block; margin-bottom: 0;
+      /* Stroke outline effect */
+      -webkit-text-stroke: 0px;
+    }
+    .rank-usp-banner-title .rp-word-rank { color: #FF6B1A; }
+    .rank-usp-banner-title .rp-word-predictor { color: #fff; }
+    .rank-usp-banner-wrap {
+      margin-bottom: 20px;
+      padding: 16px 20px;
+      border: 1.5px solid rgba(255,107,26,0.3);
+      border-radius: 12px;
+      background: rgba(255,107,26,0.06);
+      display: inline-block;
+      position: relative;
+      overflow: hidden;
+    }
+    .rank-usp-banner-wrap::before {
+      content: '';
+      position: absolute; left: 0; top: 0; bottom: 0; width: 4px;
+      background: linear-gradient(180deg, #FF6B1A, #CC3300);
+      border-radius: 12px 0 0 12px;
+    }
+    .rank-usp-banner-sub {
+      font-size: 0.75rem; color: #C8B89A; font-weight: 500;
+      letter-spacing: 0.04em; margin-top: 5px; display: block;
+    }
+    .rank-usp-h2 { font-family: 'Fraunces', serif; font-size: clamp(1.8rem,3vw,2.5rem); font-weight: 900; color: #fff; line-height: 1.15; letter-spacing: -0.02em; margin-bottom: 14px; }
+    .rank-usp-body { font-size: 0.93rem; color: #C8B89A; line-height: 1.75; margin-bottom: 22px; }
+    .rank-usp-pills { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 26px; }
+    .rusp-pill { padding: 5px 12px; border-radius: 100px; font-size: 0.74rem; font-weight: 700; }
+    .rusp-green  { background: rgba(21,128,61,0.2);  color: #4ADE80; border: 1px solid rgba(21,128,61,0.3); }
+    .rusp-blue   { background: rgba(37,99,235,0.2);  color: #93C5FD; border: 1px solid rgba(37,99,235,0.3); }
+    .rusp-orange { background: rgba(255,107,26,0.2); color: #FCA061; border: 1px solid rgba(255,107,26,0.3); }
+    .rusp-purple { background: rgba(168,85,247,0.2); color: #C4B5FD; border: 1px solid rgba(168,85,247,0.3); }
+    .rank-usp-cta { display: inline-block; background: #CC3300; color: #fff; padding: 13px 26px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; text-decoration: none; box-shadow: 0 6px 20px rgba(204,51,0,0.4); transition: all .2s; }
+    .rank-usp-cta:hover { background: #AA2800; transform: translateY(-2px); }
+    .rank-usp-note { font-size: 0.74rem; color: #6B5C45; margin-top: 10px; }
+
+    /* Demo card */
+    .rank-demo-card { background: #FFFDF9; border-radius: 20px; padding: 26px; border: 1.5px solid rgba(255,107,26,0.2); box-shadow: 0 24px 60px rgba(0,0,0,0.3); }
+    .rank-demo-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .rank-demo-badge { background: #FF6B1A; color: #fff; font-size: 0.7rem; font-weight: 800; padding: 4px 11px; border-radius: 100px; text-transform: uppercase; letter-spacing: 0.06em; }
+    .rank-demo-sub { font-size: 0.77rem; color: #8B6F4E; }
+    .rank-demo-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 16px; }
+    @media(max-width:480px){ .rank-demo-inputs { grid-template-columns: 1fr; } }
+    .rank-demo-field label { display: block; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #8B6F4E; margin-bottom: 7px; }
+    .rank-score-wrap { position: relative; }
+    .rank-score-wrap input { width: 100%; padding: 10px 42px 10px 13px; border: 2px solid #F0E8DE; border-radius: 10px; font-size: 1.25rem; font-weight: 700; font-family: 'Fraunces', serif; color: #1A1208; background: #FAFAF8; outline: none; transition: border-color .2s; -moz-appearance: textfield; }
+    .rank-score-wrap input::-webkit-outer-spin-button,
+    .rank-score-wrap input::-webkit-inner-spin-button { -webkit-appearance: none; }
+    .rank-score-wrap input:focus { border-color: #FF6B1A; }
+    .rank-score-max { position: absolute; right: 11px; top: 50%; transform: translateY(-50%); font-size: 0.73rem; color: #8B6F4E; font-weight: 600; }
+    .rank-demo-cats { display: grid; grid-template-columns: 1fr 1fr; gap: 5px; }
+    .rdcat { padding: 8px 4px; border: 1.5px solid #F0E8DE; border-radius: 8px; background: #FAFAF8; font-size: 0.77rem; font-weight: 700; color: #8B6F4E; cursor: pointer; transition: all .18s; font-family: 'DM Sans', sans-serif; }
+    .rdcat:hover { border-color: #FF6B1A; color: #1A1208; }
+    .rdcat.active { border-color: #CC3300; background: #FFF0E6; color: #CC3300; }
+    .demo-rank-row { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-bottom: 14px; }
+    .demo-rank-box { background: #FAFAF8; border: 1.5px solid #F0E8DE; border-radius: 11px; padding: 11px 8px; text-align: center; }
+    .demo-rank-lbl { font-size: 0.63rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: #8B6F4E; margin-bottom: 5px; }
+    .demo-rank-val { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 900; color: #CC3300; }
+    .demo-full-btn { display: block; text-align: center; background: linear-gradient(135deg,#CC3300,#E85500); color: #fff; padding: 11px; border-radius: 10px; font-weight: 700; font-size: 0.84rem; text-decoration: none; transition: all .2s; }
+    .demo-full-btn:hover { transform: translateY(-1px); box-shadow: 0 6px 20px rgba(204,51,0,0.35); }
+    .demo-placeholder { display: flex; align-items: center; justify-content: center; padding: 24px 16px; color: #C4A882; font-size: 0.84rem; text-align: center; border: 1.5px dashed #F0E8DE; border-radius: 11px; }
+
+    /* ── PRICING STRIP ── */
+    /* ── PRICING SECTION ── */
+    .pricing-strip { background: var(--c-bg,#FAFAF8); padding: 72px 20px 80px; }
+    .pricing-strip-inner { max-width: 960px; margin: 0 auto; }
+    .ps-top { text-align: center; margin-bottom: 48px; }
+    .ps-eyebrow { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #CC3300; background: rgba(204,51,0,0.08); border-radius: 100px; padding: 5px 14px; display: inline-block; margin-bottom: 14px; }
+    .ps-heading { font-family: 'Fraunces', serif; font-size: clamp(1.8rem,3.5vw,2.6rem); font-weight: 900; color: var(--c-ink,#1A1208); letter-spacing: -0.03em; line-height: 1.15; margin-bottom: 10px; }
+    .ps-sub { font-size: 0.95rem; color: #6B5C45; max-width: 480px; margin: 0 auto; line-height: 1.65; }
+
+    .ps-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border-radius: 20px; overflow: hidden; border: 1.5px solid #E8DDD0; box-shadow: 0 12px 48px rgba(26,18,8,0.07); }
+    @media(max-width:700px){ .ps-cards { grid-template-columns: 1fr; border-radius: 16px; } }
+
+    .ps-card { background: #fff; padding: 36px 36px 40px; display: flex; flex-direction: column; }
+    .ps-card + .ps-card { border-left: 1.5px solid #E8DDD0; }
+    @media(max-width:700px){ .ps-card + .ps-card { border-left: none; border-top: 1.5px solid #E8DDD0; } }
+    .ps-card.ps-featured { background: #1A1208; }
+
+    .ps-card-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; margin-bottom: 6px; }
+    .ps-plan-name { font-family: 'Fraunces', serif; font-size: 1.5rem; font-weight: 900; color: #1A1208; }
+    .ps-card.ps-featured .ps-plan-name { color: #fff; }
+    .ps-price-block { text-align: right; }
+    .ps-price { font-family: 'Fraunces', serif; font-size: 2rem; font-weight: 900; color: #1A1208; line-height: 1; }
+    .ps-price .ps-currency { font-size: 1.1rem; vertical-align: super; line-height: 0; font-weight: 700; }
+    .ps-price .ps-period { font-size: 0.72rem; font-weight: 500; color: #8B6F4E; display: block; margin-top: 3px; }
+    .ps-card.ps-featured .ps-price { color: #FF6B1A; }
+    .ps-card.ps-featured .ps-price .ps-period { color: #9C8A78; }
+    .ps-free-badge { background: #F0E8DE; color: #6B5C45; font-size: 0.72rem; font-weight: 700; padding: 5px 12px; border-radius: 100px; white-space: nowrap; margin-top: 6px; display: inline-block; }
+
+    .ps-divider { height: 1px; background: #F0E8DE; margin: 20px 0; }
+    .ps-card.ps-featured .ps-divider { background: rgba(255,255,255,0.1); }
+
+    .ps-tagline { font-size: 0.88rem; color: #6B5C45; line-height: 1.6; margin-bottom: 22px; }
+    .ps-card.ps-featured .ps-tagline { color: #C8B89A; }
+
+    .ps-btn { display: block; width: 100%; padding: 13px 20px; border-radius: 10px; font-family: inherit; font-size: 0.9rem; font-weight: 700; text-align: center; text-decoration: none; transition: all .18s; cursor: pointer; border: none; margin-bottom: 28px; }
+    .ps-btn-free { background: #F0E8DE; color: #1A1208; border: 1.5px solid #E0D4C6; }
+    .ps-btn-free:hover { background: #E8DDD0; }
+    .ps-btn-pro { background: #CC3300; color: #fff; box-shadow: 0 4px 18px rgba(204,51,0,0.3); }
+    .ps-btn-pro:hover { background: #AA2800; transform: translateY(-1px); box-shadow: 0 6px 24px rgba(204,51,0,0.4); }
+
+    .ps-feat-label { font-size: 0.68rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #9C8A78; margin-bottom: 14px; }
+    .ps-features { list-style: none; display: flex; flex-direction: column; gap: 11px; flex: 1; }
+    .ps-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 0.85rem; color: #1A1208; line-height: 1.5; }
+    .ps-card.ps-featured .ps-features li { color: #E8DDD0; }
+    .ps-chk { width: 18px; height: 18px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; font-size: 0.62rem; font-weight: 700; }
+    .ps-chk-free { background: rgba(107,92,69,0.12); color: #6B5C45; }
+    .ps-chk-pro { background: #CC3300; color: #fff; }
+    .ps-chk-dim { background: rgba(107,92,69,0.06); color: #C8B89A; }
+    .ps-feat-dim { color: #C8B89A !important; }
+    .ps-feat-highlight { color: #FF6B1A !important; font-weight: 600; }
+    .ps-card.ps-featured .ps-feat-highlight { color: #FF8C4A !important; }
+
+    .ps-bottom-cta { text-align: center; margin-top: 28px; }
+    .ps-bottom-link { font-size: 0.82rem; color: #8B6F4E; text-decoration: none; }
+    .ps-disclaimer-note {
+      font-size: 0.76rem; color: #9C8A78; margin-bottom: 18px; line-height: 1.5;
+      padding: 9px 13px; background: rgba(255,255,255,0.04);
+      border-radius: 8px; border: 1px solid rgba(255,255,255,0.08);
+    }
+    .ps-disclaimer-note a { color: #FF8C4A; font-weight: 600; text-decoration: none; }
+    .ps-disclaimer-note a:hover { text-decoration: underline; }
+    .ps-bottom-link:hover { color: #CC3300; }
   </style>
 </head>
 <body>
@@ -286,6 +455,7 @@
     <a href="analytics.html">Analytics</a>
   </div>
   <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
     <a href="login.html" class="nav-login">Login / Register</a>
   </div>
   <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
@@ -297,18 +467,20 @@
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
     <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
-    <a href="index.html" class="active">Home</a>
-    <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="methodology.html">Our Method</a>
-    <a href="analytics.html">Analytics</a>
+  <a href="index.html" class="active">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 
 <!-- ── HERO ─────────────────────────────────────────────────────── -->
 <section class="hero">
   <div class="hero-eyebrow"><span class="dot"></span> India's Most Competitive Medical Entrance</div>
-  <h1 class="hero-h1">TARGET TOP 100 RANKS</h1>
+  <h1 class="hero-h1">TARGET TOP <span style="color:#CC3300;">100</span> RANKS</h1>
   <p class="hero-tagline">NEET Patterns Decoded</p>
   <p class="hero-punchline">720 is Not Impossible</p>
   <!-- RANK COUNTER -->
@@ -329,12 +501,151 @@
 
 <!-- STATS -->
 <div class="stats-bar">
-  <div class="stat-item"><div class="stat-num">3,491</div><div class="stat-label">Biology Questions</div></div>
-  <div class="stat-item"><div class="stat-num">2,151</div><div class="stat-label">Physics Questions</div></div>
-  <div class="stat-item"><div class="stat-num">1,680</div><div class="stat-label">Chemistry Questions</div></div>
-  <div class="stat-item"><div class="stat-num">6,154</div><div class="stat-label">Total Questions</div></div>
+  <div class="stat-item"><div class="stat-num">3,429</div><div class="stat-label">Biology Questions</div></div>
+  <div class="stat-item"><div class="stat-num">2,154</div><div class="stat-label">Physics Questions</div></div>
+  <div class="stat-item"><div class="stat-num">1,655</div><div class="stat-label">Chemistry Questions</div></div>
+  <div class="stat-item"><div class="stat-num">7,238</div><div class="stat-label">Total Questions</div></div>
   <div class="stat-item"><div class="stat-num">6</div><div class="stat-label">Question Patterns</div></div>
 </div>
+
+<!-- ── RANK PREDICTOR USP ── our #1 USP, shown immediately below stats -->
+<section class="rank-usp-section">
+  <div class="rank-usp-inner">
+    <div class="rank-usp-left">
+      <div class="rank-usp-banner-wrap">
+        <div class="rank-usp-eyebrow">
+          <span class="rank-usp-eyebrow-badge"><span class="usp-dot"></span>Our #1 USP · Free Tool</span>
+        </div>
+        <span class="rank-usp-banner-title">
+          <span class="rp-word-rank">Rank</span><br/><span class="rp-word-predictor">Predictor</span>
+        </span>
+        <span class="rank-usp-banner-sub">NTA 2021–2025 Data · 17 AIIMS Campuses · Takes 5 seconds</span>
+      </div>
+      <h2 class="rank-usp-h2">Know Your Rank.<br/>See Your AIIMS Chances.<br/>Right Now.</h2>
+      <p class="rank-usp-body">Enter your mock score and category. The engine uses 5 years of NTA official data to estimate your All India Rank and show exactly which AIIMS campuses are reachable — including quota-wise seat availability.</p>
+      <div class="rank-usp-pills">
+        <span class="rusp-pill rusp-green">✅ AIR Range Estimate</span>
+        <span class="rusp-pill rusp-blue">🏥 17 AIIMS Campuses</span>
+        <span class="rusp-pill rusp-orange">📊 Category-wise Ranks</span>
+        <span class="rusp-pill rusp-purple">🎓 Govt MBBS Outlook</span>
+      </div>
+      <a href="rank_predictor.html" class="rank-usp-cta">Predict My Rank — Free →</a>
+      <p class="rank-usp-note">No login required · NTA 2021–2025 data · Takes 5 seconds</p>
+    </div>
+    <div class="rank-usp-right">
+      <div class="rank-demo-card">
+        <div class="rank-demo-header">
+          <span class="rank-demo-badge">⚡ Live Preview</span>
+          <span class="rank-demo-sub">Enter any score</span>
+        </div>
+        <div class="rank-demo-inputs">
+          <div class="rank-demo-field">
+            <label>Your Score</label>
+            <div class="rank-score-wrap">
+              <input type="number" id="demo-score" min="0" max="720" placeholder="e.g. 560" oninput="runDemoPredict()"/>
+              <span class="rank-score-max">/ 720</span>
+            </div>
+          </div>
+          <div class="rank-demo-field">
+            <label>Category</label>
+            <div class="rank-demo-cats">
+              <button class="rdcat active" data-cat="General" onclick="selectDemoCat(this)">General</button>
+              <button class="rdcat" data-cat="OBC" onclick="selectDemoCat(this)">OBC</button>
+              <button class="rdcat" data-cat="SC" onclick="selectDemoCat(this)">SC</button>
+              <button class="rdcat" data-cat="ST" onclick="selectDemoCat(this)">ST</button>
+            </div>
+          </div>
+        </div>
+        <div id="demo-result" style="display:none;">
+          <div class="demo-rank-row">
+            <div class="demo-rank-box"><div class="demo-rank-lbl">Est. AIR</div><div class="demo-rank-val" id="demo-air">—</div></div>
+            <div class="demo-rank-box"><div class="demo-rank-lbl">AIIMS Delhi</div><div class="demo-rank-val" id="demo-aiims" style="font-size:1rem;">—</div></div>
+            <div class="demo-rank-box"><div class="demo-rank-lbl">Govt MBBS</div><div class="demo-rank-val" id="demo-mbbs" style="font-size:1rem;">—</div></div>
+          </div>
+          <a id="demo-full-link" href="rank_predictor.html" class="demo-full-btn">See Full Report with All 17 AIIMS →</a>
+        </div>
+        <div id="demo-placeholder" class="demo-placeholder">
+          <span>👆 Enter your score above to see your rank instantly</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── PRICING STRIP — two tiers ── -->
+<section class="pricing-strip">
+  <div class="pricing-strip-inner">
+
+    <div class="ps-top">
+      <span class="ps-eyebrow">Simple Pricing</span>
+      <h3 class="ps-heading">Start Free. Upgrade When Ready.</h3>
+      <p class="ps-sub">No hidden fees. Full value from day one.</p>
+    </div>
+
+    <div class="ps-cards">
+
+      <!-- FREE -->
+      <div class="ps-card">
+        <div class="ps-card-top">
+          <div class="ps-plan-name">Free</div>
+          <div class="ps-price-block">
+            <div class="ps-price"><span class="ps-currency">₹</span>0</div>
+            <span class="ps-free-badge">Forever free</span>
+          </div>
+        </div>
+        <div class="ps-divider"></div>
+        <p class="ps-tagline">Everything you need to start building pattern intelligence and test your NEET readiness.</p>
+        <a href="login.html" class="ps-btn ps-btn-free">Get Started Free</a>
+        <div class="ps-feat-label">What's included</div>
+        <ul class="ps-features">
+          <li><span class="ps-chk ps-chk-free">✓</span> 500 practice questions / day</li>
+          <li><span class="ps-chk ps-chk-free">✓</span> All 6 NEET question patterns</li>
+          <li><span class="ps-chk ps-chk-free">✓</span> Basic analytics dashboard</li>
+          <li><span class="ps-chk ps-chk-free">✓</span> 1 full mock test / month</li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">Detailed NCERT explanations</span></li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">Rank Predictor</span></li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">AIIMS + JIPMER chances</span></li>
+          <li><span class="ps-chk ps-chk-dim">–</span> <span class="ps-feat-dim">Mindset sessions</span></li>
+        </ul>
+      </div>
+
+      <!-- PRO -->
+      <div class="ps-card ps-featured">
+        <div class="ps-card-top">
+          <div class="ps-plan-name">Pro</div>
+          <div class="ps-price-block">
+            <div class="ps-price"><span class="ps-currency">₹</span>799<span class="ps-period">/ month</span></div>
+          </div>
+        </div>
+        <div class="ps-divider"></div>
+        <p class="ps-tagline">The full NEETMINDS™ experience — including our proprietary Rank Predictor. Built for serious aspirants.</p>
+        <a href="pricing.html" class="ps-btn ps-btn-pro">Start Pro →</a>
+        <div class="ps-disclaimer-note">
+          📖 <a href="disclaimer.html" target="_blank">What is NEETMINDS™?</a> — Read before subscribing.
+        </div>
+        <div class="ps-feat-label" style="color:#9C8A78;">Everything in Free, plus:</div>
+        <ul class="ps-features">
+          <li><span class="ps-chk ps-chk-pro">✓</span> Unlimited practice questions</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Unlimited mock tests</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Full NCERT explanations</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Deep performance analytics</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Pattern weakness reports</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> <span class="ps-feat-highlight">🎯 Rank Predictor — All India Rank estimate</span></li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> <span class="ps-feat-highlight">🏥 All 17 AIIMS · Category-wise closing ranks</span></li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> <span class="ps-feat-highlight">🏛️ JIPMER Puducherry &amp; Karaikal · Round-wise data</span></li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Mindset + meditation sessions</li>
+          <li><span class="ps-chk ps-chk-pro">✓</span> Priority support</li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="ps-bottom-cta">
+      <a href="pricing.html" class="ps-bottom-link">View full pricing details &amp; FAQ →</a>
+    </div>
+
+  </div>
+</section>
 
 <!-- AHA MOMENT — unchanged content, audit fixes on mobile contrast -->
 <section class="aha-section">
@@ -429,19 +740,19 @@
 <!-- SUBJECTS -->
 <section class="subjects-section">
   <span class="section-label">Question Bank</span>
-  <h2>6,154 Questions Mapped<br/>to Real NEET Patterns</h2>
+  <h2>7,238 Questions Mapped<br/>to Real NEET Patterns</h2>
   <div class="subject-grid">
     <a href="practice.html?subject=biology"   class="subject-card bio-card">
       <div class="s-icon">🌿</div><div class="s-name">Biology</div>
-      <div class="s-count">3,491</div><div class="s-label">questions · Botany &amp; Zoology</div>
+      <div class="s-count">3,429</div><div class="s-label">questions · Botany &amp; Zoology</div>
     </a>
     <a href="practice.html?subject=physics"   class="subject-card phys-card">
       <div class="s-icon">⚛️</div><div class="s-name">Physics</div>
-      <div class="s-count">2,151</div><div class="s-label">questions · chapter-weighted</div>
+      <div class="s-count">2,154</div><div class="s-label">questions · chapter-weighted</div>
     </a>
     <a href="practice.html?subject=chemistry" class="subject-card chem-card">
       <div class="s-icon">🧪</div><div class="s-name">Chemistry</div>
-      <div class="s-count">1,680</div><div class="s-label">questions · NCERT aligned</div>
+      <div class="s-count">1,655</div><div class="s-label">questions · NCERT aligned</div>
     </a>
   </div>
 </section>
@@ -493,6 +804,7 @@
         <li><a href="analytics.html">Analytics</a></li>
         <li><a href="mindset.html">Mindset</a></li>
         <li><a href="units.html">Units</a></li>
+        <li><a href="pricing.html" style="color:#FF6B1A;font-weight:700;">Pricing →</a></li>
         <li><a href="login.html">Login / Register</a></li>
       </ul>
     </div>
@@ -504,6 +816,7 @@
         <li><a href="methodology.html">Our Method</a></li>
         <li><a href="pattern_intelligence.html">Pattern Intelligence</a></li>
         <li><a href="about.html">About NEETMINDS™</a></li>
+        <li><a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;">🎯 Rank Predictor</a></li>
         <li><a href="practice.html?subject=biology">Biology Questions</a></li>
         <li><a href="practice.html?subject=physics">Physics Questions</a></li>
         <li><a href="practice.html?subject=chemistry">Chemistry Questions</a></li>
@@ -514,10 +827,11 @@
     <div class="footer-col">
       <h4>Legal</h4>
       <ul>
-        <li><a href="#">Privacy Policy</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Refund Policy</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#2d405443484859404443495e6d4a404c4441034e4240">Contact Us</a></li>
+        <li><a href="privacy.html">Privacy Policy</a></li>
+        <li><a href="terms.html">Terms &amp; Conditions</a></li>
+        <li><a href="terms.html#refund">Refund Policy</a></li>
+        <li><a href="disclaimer.html">Student Disclaimer</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#eb8692858e8e9f8682858f98ab8c868a8287c5888486">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -525,15 +839,17 @@
   <div class="footer-bottom">
     <span class="footer-copy">© 2026 NEETMINDS™ · Built by cognitive performance scientists, doctors, engineers &amp; teachers · For educational use only.</span>
     <div class="footer-legal">
-      <a href="#">Privacy</a>
-      <a href="#">Terms</a>
-      <a href="/cdn-cgi/l/email-protection#3d504453585849505453594e7d5a505c5451135e5250">Contact</a>
+      <a href="privacy.html">Privacy</a>
+      <a href="terms.html">Terms</a>
+      <a href="terms.html#refund">Refunds</a>
+      <a href="disclaimer.html">Disclaimer</a>
+      <a href="/cdn-cgi/l/email-protection#24495d4a414150494d4a4057644349454d480a474b49">Contact</a>
     </div>
   </div>
 </footer>
 
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 function updateThemeUI() {
   var isDark = document.documentElement.getAttribute('data-theme') === 'dark';
   var icon = isDark ? '☀️' : '🌙';
@@ -550,13 +866,9 @@ function toggleTheme() {
   try { localStorage.setItem('nm_theme', next); } catch(e) {}
   updateThemeUI();
 }
-function toggleNav() {
-  var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
-  if (m) m.classList.toggle('open');
-}
 document.addEventListener('DOMContentLoaded', updateThemeUI);
 document.addEventListener('click', function(e) {
-  var m = document.getElementById('mob-nav') || document.getElementById('nmenu');
+  var m = document.getElementById('mmenu');
   var b = document.querySelector('.nav-hamburger');
   if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
     m.classList.remove('open');
@@ -635,5 +947,77 @@ document.addEventListener('click', function(e) {
   setTimeout(runDown, 800);
 })();
 </script>
-</body>
-</html>
+<script>
+/* ── HOMEPAGE MINI RANK PREDICTOR ── */
+var _ANCHORS = [
+  {s:720,r:3},{s:686,r:1},{s:680,r:729},{s:670,r:1260},{s:660,r:1915},
+  {s:650,r:2803},{s:640,r:5045},{s:630,r:7615},{s:620,r:10245},{s:610,r:13375},
+  {s:600,r:18161},{s:590,r:23950},{s:580,r:29700},{s:570,r:35450},{s:560,r:40775},
+  {s:550,r:44937},{s:540,r:53500},{s:530,r:62300},{s:520,r:71800},{s:510,r:85526},
+  {s:500,r:99563},{s:450,r:95846},{s:400,r:150000},{s:300,r:383750},{s:0,r:900000}
+];
+var _AIIMS_DELHI = {General:49,OBC:196,SC:714,ST:1360};
+var _CUTOFFS = {General:144,OBC:113,SC:113,ST:113};
+var _demoCat = 'General';
+
+function selectDemoCat(btn) {
+  document.querySelectorAll('.rdcat').forEach(function(b){ b.classList.remove('active'); });
+  btn.classList.add('active');
+  _demoCat = btn.getAttribute('data-cat');
+  runDemoPredict();
+}
+function _demoRank(score) {
+  var sorted = _ANCHORS.slice().sort(function(a,b){return b.s-a.s;});
+  var up = sorted[0], lo = sorted[sorted.length-1];
+  for (var i=0;i<sorted.length;i++) {
+    if (sorted[i].s >= score) up = sorted[i];
+    if (sorted[i].s <= score) { lo = sorted[i]; break; }
+  }
+  if (up.s === lo.s) return up.r;
+  var t = (score - lo.s) / (up.s - lo.s);
+  return Math.round(up.r + (lo.r - up.r) * (1-t));
+}
+function _fmt(n) {
+  if (n >= 100000) return (n/100000).toFixed(1)+'L';
+  if (n >= 1000)   return (n/1000).toFixed(1)+'K';
+  return String(n);
+}
+function runDemoPredict() {
+  var score = parseInt(document.getElementById('demo-score').value);
+  var ph = document.getElementById('demo-placeholder');
+  var res = document.getElementById('demo-result');
+  if (isNaN(score) || score < 0 || score > 720) {
+    if (ph) ph.style.display='flex'; if (res) res.style.display='none'; return;
+  }
+
+  var cat = _demoCat;
+
+  /* AIR is the same number regardless of category — it's All India rank.
+     But what that rank MEANS for seats differs per category quota. */
+  var rank = _demoRank(score);
+
+  /* AIIMS Delhi category-wise closing rank (weighted avg, 2023-2025) */
+  var dClose = _AIIMS_DELHI[cat];
+  var aiims = rank <= dClose*0.8  ? '✅ High'
+            : rank <= dClose       ? '⚡ Moderate'
+            : rank <= dClose*1.35  ? '⚠️ Low'
+            : '❌ Unlikely';
+
+  /* Govt MBBS last AIQ rank per category (approx 2025 data)
+     General: ~69,503  OBC: ~1,20,000  SC: ~2,20,000  ST: ~2,80,000 */
+  var mbbsLast = {General:69503, OBC:120000, SC:220000, ST:280000};
+  var ml = mbbsLast[cat];
+  var mbbs = rank <= ml*0.25 ? '✅ Strong'
+           : rank <= ml*0.60 ? '⚡ Likely'
+           : rank <= ml       ? '⚠️ Possible'
+           : '❌ Unlikely';
+
+  /* Qualified check uses category cutoff */
+  var qualified = score >= _CUTOFFS[cat];
+
+  document.getElementById('demo-air').textContent  = 'AIR ~'+_fmt(rank);
+  document.getElementById('demo-air').style.color  = qualified ? '#CC3300' : '#EF4444';
+  document.getElementById('demo-aiims').textContent = aiims;
+  document.getElementById('demo-mbbs').textContent  = mbbs;
+
+  var fl = docum
