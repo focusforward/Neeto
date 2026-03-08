@@ -908,6 +908,11 @@ function submitMock(){
 
   document.getElementById('test-screen').style.display='none';
   document.getElementById('result-screen').style.display='block';
+  // Hide main navbar — result screen has its own nav
+  var mainNav=document.querySelector('nav.navbar');
+  if(mainNav)mainNav.style.display='none';
+  var mobileMenu=document.getElementById('nmenu');
+  if(mobileMenu)mobileMenu.style.display='none';
   document.getElementById('result-score').textContent=score;
   var rpBtn=document.getElementById('rank-predict-btn');
   if(rpBtn)rpBtn.href='rank_predictor.html?score='+score;
@@ -974,6 +979,10 @@ function submitMock(){
 
 function reviewJump(idx){
   document.getElementById('result-screen').style.display='none';
+  var mainNav=document.querySelector('nav.navbar');
+  if(mainNav)mainNav.style.display='';
+  var mobileMenu=document.getElementById('nmenu');
+  if(mobileMenu)mobileMenu.style.display='';
   document.getElementById('test-screen').style.display='block';
   renderQuestion(idx);
 }
