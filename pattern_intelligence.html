@@ -135,36 +135,28 @@
 <body>
 
 <!-- NAV -->
-<nav class="navbar">
+<nav class="neeto-nav" role="navigation">
   <a href="index.html" class="nav-brand">
-    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
-    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
+    <img src="neetminds-logo.png" alt="NEETminds Logo">
+    <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">minds</span></span>
   </a>
   <div class="nav-links">
-    <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
     <a href="mock.html">Mock Test</a>
+    <a href="units.html">Units</a>
     <a href="pattern_intelligence.html" class="active">Our Method</a>
     <a href="analytics.html">Analytics</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
-  </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+  <button class="nav-hamburger" onclick="toggleNav()" aria-label="Menu">
     <span></span><span></span><span></span>
   </button>
-</nav>
-<div class="nav-mobile-menu" id="mmenu">
-  <a href="index.html">Home</a>
-  <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
-  <a href="pattern_intelligence.html" class="active">Our Method</a>
-  <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">&#x1F3AF; Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
-</div>
+  <nav class="nav-mobile-menu" id="mob-nav">
+    <a href="practice.html">Practice</a>
+    <a href="mock.html">Mock Test</a>
+    <a href="units.html">Units</a>
+    <a href="pattern_intelligence.html" class="active">Our Method</a>
+    <a href="analytics.html">Analytics</a>
+  </nav>
 </nav>
 
 <!-- HERO -->

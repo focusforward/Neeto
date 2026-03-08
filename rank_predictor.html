@@ -3,9 +3,10 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>NEET Rank Predictor 2025 — NEETMinds™</title>
+<title>NEET Rank Predictor 2025 — AIIMS + JIPMER — NEETMinds™</title>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet"/>
+<link rel="stylesheet" href="css/nav.css">
 <style>
 /* ══════════════════════════════════════════════
    NEETMINDS™ — rank_predictor.html
@@ -182,6 +183,145 @@ body{font-family:'DM Sans',sans-serif;background:var(--bg);color:var(--ink);min-
 /* ── FOOTER ── */
 footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);color:var(--muted);font-size:0.8rem;}
 
+/* ── JIPMER SECTION ── */
+.jipmer-section { margin-top: 32px; }
+.jipmer-header-bar {
+  display: flex; align-items: center; justify-content: space-between;
+  margin-bottom: 16px; flex-wrap: wrap; gap: 10px;
+}
+.jipmer-title-block { display: flex; align-items: center; gap: 10px; }
+.jipmer-icon {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: linear-gradient(135deg, #1D4ED8 0%, #2563EB 100%);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1.1rem; color: #fff; flex-shrink: 0;
+}
+.jipmer-title { font-family: 'Fraunces', serif; font-size: 1.15rem; font-weight: 900; color: var(--ink); }
+.jipmer-subtitle { font-size: 0.72rem; color: var(--muted); font-weight: 500; margin-top: 1px; }
+.jipmer-new-badge {
+  background: linear-gradient(135deg, #1D4ED8, #2563EB);
+  color: #fff; font-size: 0.62rem; font-weight: 800;
+  padding: 3px 9px; border-radius: 100px; text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.jipmer-campus-tabs {
+  display: flex; gap: 8px; margin-bottom: 16px; flex-wrap: wrap;
+}
+.jipmer-tab {
+  padding: 8px 18px; border-radius: 100px; border: 2px solid var(--border);
+  background: var(--bg); font-size: 0.82rem; font-weight: 700;
+  color: var(--muted); cursor: pointer; transition: all .2s;
+}
+.jipmer-tab:hover { border-color: #2563EB; color: #1D4ED8; }
+.jipmer-tab.active {
+  border-color: #2563EB; background: #EFF6FF; color: #1D4ED8;
+}
+[data-theme="dark"] .jipmer-tab.active { background: #0F172A; color: #60A5FA; border-color: #3B82F6; }
+
+.jipmer-campus-panel { display: none; }
+.jipmer-campus-panel.visible { display: block; }
+
+.jipmer-result-card {
+  border: 1.5px solid var(--border); border-radius: 16px; overflow: hidden;
+  margin-bottom: 16px;
+}
+.jipmer-result-head {
+  padding: 18px 22px;
+  background: linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 100%);
+  color: #fff;
+}
+.jipmer-result-head .campus-name {
+  font-family: 'Fraunces', serif; font-size: 1.05rem; font-weight: 900;
+  margin-bottom: 4px;
+}
+.jipmer-result-head .campus-meta { font-size: 0.75rem; opacity: 0.7; }
+.jipmer-result-body { padding: 20px 22px; background: var(--card); }
+
+/* JIPMER probability meter */
+.jipmer-prob-wrap { margin-bottom: 18px; }
+.jipmer-prob-label {
+  font-size: 0.72rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.07em; color: var(--muted); margin-bottom: 8px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.jipmer-prob-track {
+  height: 12px; background: var(--border); border-radius: 100px; overflow: hidden;
+}
+.jipmer-prob-fill {
+  height: 100%; border-radius: 100px;
+  transition: width 1s cubic-bezier(.4,0,.2,1);
+}
+.prob-high   { background: linear-gradient(90deg, #16A34A, #22C55E); }
+.prob-mod    { background: linear-gradient(90deg, #D97706, #F59E0B); }
+.prob-low    { background: linear-gradient(90deg, #EA580C, #F97316); }
+.prob-none   { background: linear-gradient(90deg, #DC2626, #EF4444); }
+
+.jipmer-verdict {
+  display: inline-flex; align-items: center; gap: 6px;
+  padding: 5px 14px; border-radius: 100px;
+  font-size: 0.78rem; font-weight: 800; letter-spacing: 0.03em;
+}
+.jipmer-verdict.high   { background: #DCFCE7; color: #15803D; }
+.jipmer-verdict.mod    { background: #FEF9C3; color: #854D0E; }
+.jipmer-verdict.low    { background: #FFEDD5; color: #9A3412; }
+.jipmer-verdict.none   { background: #FEE2E2; color: #991B1B; }
+[data-theme="dark"] .jipmer-verdict.high  { background:rgba(21,128,61,0.2); color:#4ADE80; }
+[data-theme="dark"] .jipmer-verdict.mod   { background:rgba(234,179,8,0.2); color:#FDE047; }
+[data-theme="dark"] .jipmer-verdict.low   { background:rgba(249,115,22,0.2); color:#FB923C; }
+[data-theme="dark"] .jipmer-verdict.none  { background:rgba(239,68,68,0.15); color:#FCA5A5; }
+
+.jipmer-cutoff-table { width: 100%; border-collapse: collapse; font-size: 0.82rem; margin-top: 14px; }
+.jipmer-cutoff-table th {
+  background: var(--bg); padding: 8px 10px; text-align: left;
+  font-size: 0.7rem; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 0.06em; color: var(--muted); border-bottom: 1.5px solid var(--border);
+}
+.jipmer-cutoff-table td {
+  padding: 9px 10px; border-bottom: 1px solid var(--border);
+  color: var(--ink); vertical-align: middle;
+}
+.jipmer-cutoff-table tr:last-child td { border-bottom: none; }
+.jipmer-cutoff-table tr.your-cat { background: #EFF6FF; }
+[data-theme="dark"] .jipmer-cutoff-table tr.your-cat { background: #0F172A; }
+.jipmer-cutoff-table .cat-highlight { font-weight: 700; color: #1D4ED8; }
+.jipmer-you-marker {
+  display: inline-block; background: #1D4ED8; color: #fff;
+  font-size: 0.62rem; font-weight: 800; padding: 2px 7px;
+  border-radius: 100px; margin-left: 4px;
+}
+
+.jipmer-rounds-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 8px; margin-top: 14px; }
+@media(max-width:480px){ .jipmer-rounds-grid { grid-template-columns: 1fr 1fr; } }
+.jipmer-round-box {
+  background: var(--bg); border: 1.5px solid var(--border);
+  border-radius: 10px; padding: 10px 12px; text-align: center;
+}
+.jipmer-round-box.your-zone { border-color: #2563EB; background: #EFF6FF; }
+[data-theme="dark"] .jipmer-round-box.your-zone { background: #0F172A; border-color: #3B82F6; }
+.round-label { font-size: 0.65rem; font-weight: 700; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
+.round-rank { font-family: 'Fraunces', serif; font-size: 1rem; font-weight: 900; color: var(--ink); }
+.round-score { font-size: 0.7rem; color: var(--muted); margin-top: 1px; }
+
+.jipmer-anomaly-note {
+  background: #FFFBEB; border: 1.5px solid #FCD34D; border-radius: 10px;
+  padding: 10px 14px; font-size: 0.75rem; color: #92400E; margin-top: 14px;
+  display: flex; gap: 8px; align-items: flex-start; line-height: 1.55;
+}
+[data-theme="dark"] .jipmer-anomaly-note { background: #1C1A06; color: #FCD34D; border-color: #78350F; }
+
+.jipmer-historical { margin-top: 14px; }
+.jipmer-hist-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 0; border-bottom: 1px solid var(--border); font-size: 0.82rem;
+}
+.jipmer-hist-row:last-child { border-bottom: none; }
+.hist-year { color: var(--muted); font-weight: 600; min-width: 48px; }
+.hist-bar-wrap { flex: 1; margin: 0 12px; }
+.hist-bar-track { height: 6px; background: var(--border); border-radius: 100px; overflow: hidden; }
+.hist-bar-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg,#1D4ED8,#60A5FA); }
+.hist-val { font-family: 'Fraunces', serif; font-weight: 700; font-size: 0.88rem; color: var(--ink); min-width: 40px; text-align: right; }
+
 /* ── ANIMATION ── */
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px);}to{opacity:1;transform:translateY(0);}}
 .fade-up{animation:fadeUp .4s ease both;}
@@ -268,25 +408,45 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
 <!-- NAV -->
 <nav class="navbar">
   <a href="index.html" class="nav-brand">
-    <img src="neetmindslogo.png" alt="NEETMINDS™"/>
+    <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
   </a>
   <div class="nav-links">
-    <a href="practice.html">Practice</a>
+    <a href="index.html">Home</a>
+    <a href="practice.html" class="active">Practice</a>
     <a href="mock.html">Mock Test</a>
+    <a href="pattern_intelligence.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
-    <a href="pricing.html" class="nav-cta">Unlock Booster Pack →</a>
   </div>
+  <div class="nav-right">
+    <a href="pricing.html" class="nav-pricing">Pricing</a>
+    <a href="login.html" class="nav-login">Login / Register</a>
+  </div>
+  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
 </nav>
-
-<div class="page">
+<div class="nav-mobile-menu" id="mmenu">
+  <div class="mob-theme-row">
+    <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+  </div>
+  <a href="index.html">Home</a>
+  <a href="practice.html" class="active">Practice</a>
+  <a href="mock.html">Mock Test</a>
+  <a href="pattern_intelligence.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="login.html" class="mob-login-btn">Login / Register</a>
+</div><div class="page">
 
   <!-- HERO -->
   <div class="hero fade-up">
     <div class="hero-eyebrow">⚡ Free Tool · NEET 2025</div>
-    <h1>Predict Your <em>NEET Rank</em><br/>& AIIMS Chances</h1>
-    <p class="hero-sub">Enter your expected score and category. The engine uses 3 years of NTA published results to estimate your rank range and AIIMS admission probability.</p>
-    <span class="data-badge">✅ Based on NTA official 2021–2025 data · 5 years calibrated</span>
+    <h1>Predict Your <em>NEET Rank</em><br/>AIIMS &amp; JIPMER Chances</h1>
+    <p class="hero-sub">Enter your expected score and category. The engine uses 3–5 years of NTA published results to estimate your rank range, AIIMS admission probability, and JIPMER Puducherry &amp; Karaikal cutoff comparison.</p>
+    <span class="data-badge">✅ Based on NTA official 2021–2025 · AIIMS + JIPMER 2025 data</span>
   </div>
 
   <!-- INPUT CARD -->
@@ -362,12 +522,40 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
         <div class="context-grid fade-up" id="context-grid">
           <div class="ctx-box"><div class="ctx-val" id="ctx-mbbs">—</div><div class="ctx-lbl">Govt MBBS Outlook</div></div>
           <div class="ctx-box"><div class="ctx-val" id="ctx-percentile">—</div><div class="ctx-lbl">Approx Percentile</div></div>
-          <div class="ctx-box"><div class="ctx-val" id="ctx-aiims">—</div><div class="ctx-lbl">AIIMS Campuses</div></div>
+          <div class="ctx-box"><div class="ctx-val" id="ctx-aiims">—</div><div class="ctx-lbl">AIIMS + JIPMER</div></div>
         </div>
 
         <!-- AIIMS table -->
         <div class="section-head" style="margin-top:24px;">AIIMS Admission Probability</div>
         <div class="aiims-grid" id="aiims-grid"></div>
+
+        <!-- JIPMER Section -->
+        <div class="jipmer-section" id="jipmer-section">
+          <div class="jipmer-header-bar">
+            <div class="jipmer-title-block">
+              <div class="jipmer-icon">🏥</div>
+              <div>
+                <div class="jipmer-title">JIPMER Admission Chances</div>
+                <div class="jipmer-subtitle">Puducherry &amp; Karaikal · 2025 Round-wise Data</div>
+              </div>
+            </div>
+            <span class="jipmer-new-badge">✨ New</span>
+          </div>
+
+          <!-- Campus Tabs -->
+          <div class="jipmer-campus-tabs">
+            <button class="jipmer-tab active" data-campus="puducherry" onclick="switchJIPMERTab(this,'puducherry')">🏛️ Puducherry</button>
+            <button class="jipmer-tab" data-campus="karaikal" onclick="switchJIPMERTab(this,'karaikal')">🏥 Karaikal</button>
+            <button class="jipmer-tab" data-campus="both" onclick="switchJIPMERTab(this,'both')">📊 Both</button>
+          </div>
+
+          <!-- Puducherry Panel -->
+          <div class="jipmer-campus-panel visible" id="panel-puducherry"></div>
+          <!-- Karaikal Panel -->
+          <div class="jipmer-campus-panel" id="panel-karaikal"></div>
+          <!-- Both Panel -->
+          <div class="jipmer-campus-panel" id="panel-both"></div>
+        </div>
 
         <!-- Disclaimer -->
         <div class="disclaimer">
@@ -390,7 +578,6 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
             <h3>Want a chapter-level improvement plan?</h3>
             <p>Booster Pack shows exactly which topics to fix to move up 10,000+ ranks in 4 weeks.</p>
           </div>
-          <a href="pricing.html" class="upgrade-btn">Unlock for ₹799 →</a>
         </div>
 
       </div>
@@ -399,14 +586,21 @@ footer{text-align:center;padding:32px 20px;border-top:1.5px solid var(--border);
 
   <!-- DATA SOURCE NOTE (always visible) -->
   <div class="disclaimer">
-    <p><strong>Data sources:</strong> Score-rank benchmarks from NTA official NEET published results 2021–2025. AIIMS closing ranks from MCC (Medical Counselling Committee) AIQ counselling data 2023–2025. Category cutoffs: 2025 values (General ≥144, OBC/SC/ST ≥113) per NTA gazette. Rank model uses weighted averages: 2025=35%, 2023=30%, 2024=15% (anomalous year), 2022=15%, 2021=5%. AIIMS ranks weighted: 2025=45%, 2024=35%, 2023=20%. <strong>2025 note:</strong> AIR 1 was 686/720 — the hardest NEET paper in recent history. All predictions shown include this as the most heavily weighted year.</p>
+    <p><strong>Data sources:</strong> Score-rank benchmarks from NTA official NEET published results 2021–2025. AIIMS closing ranks from MCC (Medical Counselling Committee) AIQ counselling data 2023–2025. JIPMER Puducherry &amp; Karaikal cutoffs from JIPMER 2025 official counselling results (round 1–3). Category cutoffs: 2025 values (General ≥144, OBC/SC/ST ≥113) per NTA gazette. Rank model uses weighted averages: 2025=35%, 2023=30%, 2024=15% (anomalous year), 2022=15%, 2021=5%. AIIMS ranks weighted: 2025=45%, 2024=35%, 2023=20%. <strong>2025 note:</strong> AIR 1 was 686/720 — the hardest NEET paper in recent history. All predictions shown include this as the most heavily weighted year. <strong>JIPMER 2024 anomaly:</strong> GN closing at score 710 (unusually easy paper) — excluded from trend projections.</p>
   </div>
 
 </div>
 
-<footer>© 2025 NEETMINDS™. Rank predictions are estimates for planning purposes only. Not affiliated with NTA or MCC.</footer>
+<footer style="text-align:center;padding:32px 20px 24px;border-top:1.5px solid var(--border);color:var(--muted);font-size:0.78rem;line-height:2;">
+  © 2026 NEETMINDS™ · Rank predictions are estimates for planning purposes only · Not affiliated with NTA or MCC<br/>
+  <a href="terms.html" style="color:var(--muted);text-decoration:none;">Terms</a> &nbsp;·&nbsp;
+  <a href="privacy.html" style="color:var(--muted);text-decoration:none;">Privacy</a> &nbsp;·&nbsp;
+  <a href="terms.html#refund" style="color:var(--muted);text-decoration:none;">Refund Policy</a> &nbsp;·&nbsp;
+  <a href="disclaimer.html" style="color:var(--orange);font-weight:600;text-decoration:none;">📖 Student Disclaimer</a> &nbsp;·&nbsp;
+  <a href="/cdn-cgi/l/email-protection#462b3f282323322b2f28223506212b272f2a6825292b" style="color:var(--muted);text-decoration:none;">Contact</a>
+</footer>
 
-<script>
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
 /* ══════════════════════════════════════════════════════════
    NEETMINDS™ RANK PREDICTOR ENGINE v1
    All data sourced from NTA official publications 2022–2024
@@ -813,11 +1007,16 @@ function runPrediction() {
   document.getElementById('ctx-mbbs').textContent = mbbs;
   document.getElementById('ctx-percentile').textContent = pct + '%ile';
 
-  // ── AIIMS campuses count ──
+  // ── AIIMS + JIPMER campuses count ──
   var highCount = AIIMS_CAMPUSES.filter(function(c){
     return ['High Chance','Moderate Chance'].indexOf(getAIIMSChance(result.centralRank, c, cat)) > -1;
   }).length;
-  document.getElementById('ctx-aiims').textContent = highCount > 0 ? highCount + ' reachable' : '0 reachable';
+  // Add JIPMER campuses with chance >= mod
+  var jiCount = ['puducherry','karaikal'].filter(function(k){
+    return ['high','mod'].indexOf(getJIPMERChance(result.centralRank, k, cat).level) > -1;
+  }).length;
+  document.getElementById('ctx-aiims').textContent =
+    (highCount + jiCount) > 0 ? (highCount + jiCount) + ' reachable' : '0 reachable';
 
   // ── AIIMS grid — AIIMS Delhi free, all others behind Pro paywall ──
   var freeCard = '';
@@ -856,6 +1055,9 @@ function runPrediction() {
   // ── Store for paywall link ──
   window._lastResult = { score: score, cat: cat };
 
+  // ── Render JIPMER section ──
+  renderJIPMER(result.centralRank, cat);
+
   // ── Show results ──
   var resultsEl = document.getElementById('results');
   resultsEl.style.display = 'block';
@@ -871,7 +1073,7 @@ function buildShareText() {
     + '🏅 Estimated AIR: ' + formatRank(r.rank.rankLow) + '–' + formatRank(r.rank.rankHigh) + '\n'
     + '🏥 Category: ' + r.cat + '\n'
     + (r.qualified ? '✅ Qualified\n' : '❌ Below cutoff\n')
-    + '\nCheck yours free at neetminds.in/rank_predictor.html';
+    + '\nCheck yours free at neetminds.com/rank_predictor.html';
 }
 
 function shareWhatsApp() {
@@ -880,7 +1082,7 @@ function shareWhatsApp() {
 function shareTwitter() {
   var txt = 'My NEET 2025 rank prediction: AIR ~'
     + ((_lastResult && _lastResult.rank) ? formatRank(_lastResult.rank.centralRank) : '?')
-    + ' Check yours free → neetminds.in/rank_predictor.html #NEET2025 @NEETMinds';
+    + ' Check yours free → neetminds.com/rank_predictor.html #NEET2025 @NEETMinds';
   window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(txt), '_blank');
 }
 function copyResult() {
@@ -893,6 +1095,216 @@ function copyResult() {
     ta.select(); document.execCommand('copy');
     document.body.removeChild(ta);
     alert('Result copied!');
+  });
+}
+
+/* ══════════════════════════════════════════════════════════
+   JIPMER DATA — 2025 Official Cutoffs
+   Source: JIPMER MBBS Counselling 2025 published results
+   AIR = All India Rank at closing of each round
+   Score = NEET score at that rank
+══════════════════════════════════════════════════════════ */
+
+var JIPMER_DATA = {
+  puducherry: {
+    name: 'JIPMER Puducherry',
+    location: 'Puducherry (Central Institute)',
+    note: 'Premier central institute — tougher to get than most AIIMS new campuses',
+    /* Cutoff by category: [closing_air, score] at final round */
+    cutoffs: {
+      General: { air: 260,   score: 629 },
+      OBC:     { air: 748,   score: 610 },
+      EWS:     { air: 1624,  score: 596 },
+      SC:      { air: 3877,  score: 578 },
+      ST:      { air: 12503, score: 549 }
+    },
+    /* Round-wise data for General/UR — [round, air, score] */
+    rounds: {
+      General: [ [1, 258, 630], [2, 260, 629] ],
+      OBC:     [ [1, 738, 611], [2, 748, 610] ],
+      EWS:     [ [1, 1362, 600], [2, 1624, 596] ],
+      SC:      [ [1, 3877, 578] ],
+      ST:      [ [1, 6283, 567], [2, 5102, 571], [3, 12503, 549] ]
+    },
+    /* Historical Puducherry GN closing ranks */
+    historical: [
+      { year: 2025, air: 260,  score: 629 },
+      { year: 2024, air: 350,  score: 710, anomaly: true },
+      { year: 2023, air: 269,  score: 700 },
+      { year: 2022, air: 302,  score: 690 },
+      { year: 2021, air: 231,  score: null },
+      { year: 2020, air: 239,  score: null }
+    ]
+  },
+  karaikal: {
+    name: 'JIPMER Karaikal',
+    location: 'Karaikal, Puducherry',
+    note: 'Newer campus — lower cutoffs, similar JIPMER brand',
+    cutoffs: {
+      General: { air: 5731,  score: 569 },
+      OBC:     { air: 7700,  score: 562 },
+      EWS:     { air: 8126,  score: 561 },
+      SC:      { air: 46346, score: 505, scHigh: 120433, scLow: 451 }, /* multiple rounds */
+      ST:      { air: 71488, score: 484 }
+    },
+    rounds: {
+      General: [ [1, 2633, 586], [2, 4203, 576], [3, 5731, 569] ],
+      OBC:     [ [1, 3452, 580], [2, 5727, 569], [3, 7700, 562] ],
+      EWS:     [ [1, 5105, 571], [2, 6616, 565], [3, 8126, 561] ],
+      SC:      [], /* sparse / multiple */
+      ST:      []
+    },
+    historical: [] /* limited data */
+  }
+};
+
+/* ── JIPMER CHANCE ENGINE ──
+   Compares predicted rank vs category-wise cutoff.
+   Uses spread buffer of ±15% for "Moderate" zone.
+*/
+function getJIPMERChance(predictedRank, campusKey, category) {
+  var data = JIPMER_DATA[campusKey];
+  // Map General→UR naming
+  var catKey = category === 'General' ? 'General' : category;
+  var cutoff  = data.cutoffs[catKey] || data.cutoffs['General'];
+  var closingAIR = cutoff.air;
+
+  var buffer = closingAIR * 0.15; // 15% margin
+
+  if (predictedRank <= closingAIR * 0.80)          return { level: 'high',   label: '✅ High Chance',     pct: 88 };
+  if (predictedRank <= closingAIR)                   return { level: 'mod',    label: '⚡ Moderate',        pct: 62 };
+  if (predictedRank <= closingAIR + buffer)          return { level: 'low',    label: '⚠️ Low Chance',      pct: 30 };
+  if (predictedRank <= closingAIR * 1.40)            return { level: 'low',    label: '⚠️ Slim Chance',     pct: 15 };
+  return                                               { level: 'none',  label: '❌ Unlikely',         pct:  3 };
+}
+
+/* ── BUILD ONE CAMPUS CARD ── */
+function buildJIPMERCard(campusKey, predictedRank, category) {
+  var data      = JIPMER_DATA[campusKey];
+  var catKey    = category === 'General' ? 'General' : category;
+  var cutoff    = data.cutoffs[catKey] || data.cutoffs['General'];
+  var chance    = getJIPMERChance(predictedRank, campusKey, category);
+  var rounds    = data.rounds[catKey] || data.rounds['General'] || [];
+  var hist      = data.historical || [];
+  var hasAnomaly = hist.some(function(h){ return h.anomaly; });
+
+  // Prob fill color
+  var fillClass = chance.level === 'high' ? 'prob-high'
+                : chance.level === 'mod'  ? 'prob-mod'
+                : chance.level === 'low'  ? 'prob-low'
+                : 'prob-none';
+
+  // All-category cutoff table
+  var catOrder = ['General','OBC','EWS','SC','ST'];
+  var tableRows = catOrder.map(function(c) {
+    var cd = data.cutoffs[c];
+    if (!cd) return '';
+    var isYou = c === catKey;
+    var scNote = (c === 'SC' && cd.scHigh) ? ' – ' + formatRank(cd.scHigh) : '';
+    return '<tr class="' + (isYou ? 'your-cat' : '') + '">'
+      + '<td class="' + (isYou ? 'cat-highlight' : '') + '">'
+      + c + (isYou ? '<span class="jipmer-you-marker">YOU</span>' : '') + '</td>'
+      + '<td>' + formatRank(cd.air) + (scNote ? scNote : '') + '</td>'
+      + '<td>' + cd.score + (cd.scLow ? '–'+cd.scLow : '') + '</td>'
+      + '</tr>';
+  }).join('');
+
+  // Round boxes
+  var roundBoxes = rounds.length
+    ? rounds.map(function(r) {
+        var r1 = r[0], rAIR = r[1], rScore = r[2];
+        var zone = predictedRank <= rAIR ? 'your-zone' : '';
+        return '<div class="jipmer-round-box ' + zone + '">'
+          + '<div class="round-label">Round ' + r1 + '</div>'
+          + '<div class="round-rank">' + formatRank(rAIR) + '</div>'
+          + '<div class="round-score">' + rScore + ' marks</div>'
+          + '</div>';
+      }).join('')
+    : '<div style="font-size:0.78rem;color:var(--muted);padding:8px 0;">Round-wise data limited for this category</div>';
+
+  // Historical chart (Puducherry GN only)
+  var histHTML = '';
+  if (hist.length) {
+    var maxAIR = Math.max.apply(null, hist.map(function(h){ return h.air; }));
+    histHTML = '<div class="section-head" style="margin-top:16px;">Historical Closing Rank (GN)</div>'
+      + '<div class="jipmer-historical">'
+      + hist.map(function(h) {
+          var barW = Math.round((h.air / maxAIR) * 100);
+          var anomNote = h.anomaly ? ' <span style="font-size:0.65rem;color:#B45309;font-weight:700;">(anomaly)</span>' : '';
+          return '<div class="jipmer-hist-row">'
+            + '<span class="hist-year">' + h.year + '</span>'
+            + '<div class="hist-bar-wrap"><div class="hist-bar-track"><div class="hist-bar-fill" style="width:' + barW + '%;"></div></div></div>'
+            + '<span class="hist-val">AIR ' + h.air + anomNote + '</span>'
+            + '</div>';
+        }).join('')
+      + '</div>';
+  }
+
+  // Anomaly note
+  var anomalyHTML = hasAnomaly
+    ? '<div class="jipmer-anomaly-note">⚠️ <span><strong>2024 data anomaly:</strong> JIPMER 2024 Puducherry GN closing rank was 350 at score 710 — unusually easy paper where many scored 710+. This year is excluded from trend predictions and shown for reference only.</span></div>'
+    : '';
+
+  return '<div class="jipmer-result-card">'
+    + '<div class="jipmer-result-head">'
+    + '<div class="campus-name">' + data.name + '</div>'
+    + '<div class="campus-meta">' + data.location + ' · ' + data.note + '</div>'
+    + '</div>'
+    + '<div class="jipmer-result-body">'
+
+    // Verdict + Probability meter
+    + '<div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px;margin-bottom:14px;">'
+    + '<span class="jipmer-verdict ' + chance.level + '">' + chance.label + '</span>'
+    + '<span style="font-size:0.78rem;color:var(--muted);">'
+    + catKey + ' Cutoff: AIR ' + formatRank(cutoff.air) + ' · Score ' + cutoff.score
+    + '</span></div>'
+
+    + '<div class="jipmer-prob-wrap">'
+    + '<div class="jipmer-prob-label"><span>Admission Probability</span><span>' + chance.pct + '%</span></div>'
+    + '<div class="jipmer-prob-track"><div class="jipmer-prob-fill ' + fillClass + '" style="width:' + chance.pct + '%;"></div></div>'
+    + '</div>'
+
+    // Cutoff table
+    + '<div class="section-head" style="margin-top:4px;">2025 Cutoffs by Category</div>'
+    + '<table class="jipmer-cutoff-table">'
+    + '<thead><tr><th>Category</th><th>Closing AIR</th><th>Score</th></tr></thead>'
+    + '<tbody>' + tableRows + '</tbody>'
+    + '</table>'
+
+    // Round-wise
+    + '<div class="section-head" style="margin-top:18px;">Round-wise Closing Ranks (' + catKey + ')</div>'
+    + '<div class="jipmer-rounds-grid">' + roundBoxes + '</div>'
+
+    + anomalyHTML
+    + histHTML
+    + '</div></div>';
+}
+
+/* ── RENDER JIPMER SECTION ── */
+function renderJIPMER(predictedRank, category) {
+  var pu = buildJIPMERCard('puducherry', predictedRank, category);
+  var ka = buildJIPMERCard('karaikal',   predictedRank, category);
+
+  document.getElementById('panel-puducherry').innerHTML = pu;
+  document.getElementById('panel-karaikal').innerHTML   = ka;
+  document.getElementById('panel-both').innerHTML       = pu + ka;
+
+  // Reset to Puducherry tab
+  document.querySelectorAll('.jipmer-tab').forEach(function(t){ t.classList.remove('active'); });
+  var firstTab = document.querySelector('.jipmer-tab[data-campus="puducherry"]');
+  if (firstTab) firstTab.classList.add('active');
+  ['puducherry','karaikal','both'].forEach(function(p){
+    var panel = document.getElementById('panel-' + p);
+    if (panel) panel.classList.toggle('visible', p === 'puducherry');
+  });
+}
+
+function switchJIPMERTab(btn, campus) {
+  document.querySelectorAll('.jipmer-tab').forEach(function(t){ t.classList.remove('active'); });
+  btn.classList.add('active');
+  ['puducherry','karaikal','both'].forEach(function(p){
+    var panel = document.getElementById('panel-' + p);
+    if (panel) panel.classList.toggle('visible', p === campus);
   });
 }
 
@@ -928,20 +1340,21 @@ function copyResult() {
     <div class="pro-modal-bar"></div>
     <div class="pro-modal-body">
       <div class="pro-modal-icon">🏥</div>
-      <div class="pro-modal-title">Full AIIMS Report is Pro-Only</div>
+      <div class="pro-modal-title">Full AIIMS + JIPMER Report</div>
       <div class="pro-modal-sub">
-        You're seeing AIIMS Delhi (free). Unlock all 17 AIIMS campuses, category-wise closing ranks, and year-on-year trend data.
+        You're seeing AIIMS Delhi (free). Unlock all 17 AIIMS campuses + JIPMER detailed analysis — category-wise closing ranks, round-wise trends, and year-on-year data.
       </div>
       <div class="pro-modal-price">₹799 <small>/ month</small></div>
       <ul class="pro-modal-features" style="list-style:none;padding:0;margin-top:14px;">
         <li>🎯 <strong>Rank Predictor</strong> — All 17 AIIMS campuses</li>
+        <li>🏥 <strong>JIPMER</strong> Puducherry &amp; Karaikal deep analysis</li>
         <li>📊 Category-wise AIR + closing rank trends</li>
         <li>🏥 Govt MBBS outlook by state &amp; quota</li>
         <li>📚 Unlimited practice + Full NCERT explanations</li>
         <li>🧠 Pattern weakness reports + Analytics</li>
-        <li>🚫 <strong>All sales final — no refunds</strong></li>
       </ul>
       <a href="login.html?plan=pro" class="pro-modal-cta" id="pro-modal-cta">Unlock Pro — ₹799/month →</a>
+      <a href="disclaimer.html" target="_blank" style="font-size:0.72rem;color:rgba(255,255,255,0.35);display:block;margin-top:8px;text-decoration:none;">📖 Read our student note before subscribing</a>
       <span class="pro-modal-dismiss" onclick="closeProModal()">Continue with free (AIIMS Delhi only)</span>
     </div>
   </div>
@@ -962,11 +1375,4 @@ function openProModal() {
 function closeProModal(e) {
   if (e && e.target !== document.getElementById('pro-modal-overlay') && e.target !== e.currentTarget) return;
   document.getElementById('pro-modal-overlay').classList.remove('open');
-  document.body.style.overflow = '';
-}
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Escape') closeProModal();
-});
-</script>
-</body>
-</html>
+  document.
