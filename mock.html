@@ -67,7 +67,7 @@ html,body{
   display:flex;align-items:center;justify-content:space-between;
   padding:0 5%;height:56px;
   background:var(--c-surface,#fff);border-bottom:1px solid var(--c-border,#F0E8DE);
-  position:sticky;top:0;z-index:50;gap:1rem;
+  position:sticky;top:68px;z-index:40;gap:1rem;
   transition:background .2s,border-color .2s;
 }
 #section-label{
@@ -240,7 +240,7 @@ html,body{
 .mock-palette{
   width:210px;flex-shrink:0;padding:1.4rem 1.1rem;
   background:var(--c-surface,#fff);border-left:1px solid var(--c-border,#F0E8DE);
-  overflow-y:auto;position:sticky;top:56px;max-height:calc(100vh - 56px);
+  overflow-y:auto;position:sticky;top:124px;max-height:calc(100vh - 124px);
   transition:background .2s,border-color .2s;
 }
 .mock-palette h3{
@@ -651,9 +651,11 @@ function matchTableHTML(mt){
 function diagHTML(q){
   if(q.pattern!=='diagram_dhamaka')return '';
   if(q.image_url){
-    return '<div class="diag-img-wrap">'
-      +'<img src="'+esc(q.image_url)+'" alt="Diagram"'
-      +' onerror="this.parentNode.innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
+    var uid='diag-'+(Math.random().toString(36).slice(2));
+    return '<div class="diag-img-wrap" id="'+uid+'">'
+      +'<img src="'+esc(q.image_url)+'" alt="Diagram" class="diag-img-el" '
+      +'onload="this.style.display=\'block\'" '
+      +'onerror="document.getElementById(\''+uid+'\').innerHTML=\'<div class=\\\"diag-placeholder\\\"><span style=\\\"font-size:1.3rem;flex-shrink:0;\\\">🖼️</span><span>Refer to NCERT or past paper for the diagram.</span></div>\'">'
       +'</div>';
   }
   return '<div class="diag-placeholder">'
