@@ -160,15 +160,8 @@ nav.navbar.scrolled {
   border-color: #CC3300 !important;
 }
 
-[data-theme="dark"] .nav-pricing {
-  color: #FF6B1A !important;
-  border-color: rgba(255,107,26,0.35) !important;
-  background: rgba(255,107,26,0.06) !important;
-}
-[data-theme="dark"] .nav-pricing:hover {
-  background: rgba(255,107,26,0.14) !important;
-  border-color: #FF6B1A !important;
-}
+
+
 
 /* Kept for compatibility but no longer in main nav */
 .nav-cta, .nav-links .nav-cta {
@@ -268,21 +261,7 @@ nav.navbar.scrolled {
   nav.navbar        { padding: 0 16px !important; }
 }
 
-/* ── THEME TOGGLE ───────────────────────────────────────────── */
-.theme-toggle {
-  width: 36px !important;
-  height: 36px !important;
-  border-radius: 8px !important;
-  border: 1.5px solid #E8E0D8 !important;
-  background: none !important;
-  cursor: pointer !important;
-  font-size: 1rem !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  transition: border-color 0.15s !important;
-}
-.theme-toggle:hover { border-color: #FF6B1A !important; }
+
 
 /* ═══════════════════════════════════════════════════════════════
    RICH FOOTER — 4-column layout inspired by reference
@@ -437,44 +416,19 @@ nav.navbar.scrolled {
 }
 .footer-legal a:hover { color: #FF6B1A; }
 
-/* Mob theme row */
-.mob-theme-row {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: space-between !important;
-  padding: 12px 0 !important;
-  border-bottom: 1px solid #F0E8DE !important;
-  margin-bottom: 4px !important;
-}
-.mob-theme-label {
-  font-family: 'DM Sans', sans-serif !important;
-  font-size: 0.8rem !important;
-  color: #6B5C45 !important;
-}
 
-/* ── DARK MODE — nav & mobile menu ─────────────────────── */
-[data-theme="dark"] nav.navbar {
-  background: rgba(15,14,12,0.95) !important;
-  border-bottom-color: #2E2920 !important;
-}
-[data-theme="dark"] .nav-links a { color: #A08060 !important; }
-[data-theme="dark"] .nav-links a:hover { color: #FF6B1A !important; background: rgba(255,107,26,0.08) !important; }
-[data-theme="dark"] .nav-links a.active { color: #FF6B1A !important; background: rgba(255,107,26,0.1) !important; }
-[data-theme="dark"] .nav-login { border-color: #3A2E22 !important; color: #C8B89A !important; }
-[data-theme="dark"] .nav-login:hover { border-color: #FF6B1A !important; color: #FF6B1A !important; }
-[data-theme="dark"] .nav-hamburger { border-color: #3A2E22 !important; }
-[data-theme="dark"] .nav-hamburger span { background: #C8B89A !important; }
-[data-theme="dark"] .theme-toggle { border-color: #3A2E22 !important; color: #C8B89A !important; }
 
-[data-theme="dark"] .nav-mobile-menu {
-  background: #1C1A16 !important;
-  border-bottom-color: #2E2920 !important;
-}
-[data-theme="dark"] .nav-mobile-menu a { color: #C8B89A !important; border-bottom-color: #2E2920 !important; }
-[data-theme="dark"] .nav-mobile-menu a:hover { color: #FF6B1A !important; }
-[data-theme="dark"] .mob-theme-row { border-bottom-color: #2E2920 !important; }
-[data-theme="dark"] .mob-theme-label { color: #A08060 !important; }
-[data-theme="dark"] .mob-login-btn { border-color: #CC3300 !important; color: #FF6B1A !important; border-bottom-color: #CC3300 !important; }
+
+
+
+
+
+
+
+
+
+
+
 
 /* ── MATCH TABLE (shared across mock + practice) ─────────────── */
 .match-table-wrap {
@@ -494,8 +448,8 @@ nav.navbar.scrolled {
 }
 .match-table-row:nth-child(even) { background: #FFF7F0; }
 .match-cell { padding: 10px 14px; font-size: .87rem; line-height: 1.5; color: #1A1208; font-weight: 500; }
-[data-theme="dark"] .match-table-wrap  { border-color: #2E2920; }
-[data-theme="dark"] .match-table-head  { background: #0F0E0C; }
-[data-theme="dark"] .match-table-row   { border-top-color: #2E2920; }
-[data-theme="dark"] .match-table-row:nth-child(even) { background: #1C1A16; }
-[data-theme="dark"] .match-cell        { color: #E8DDD0; }
+
+
+
+
+
