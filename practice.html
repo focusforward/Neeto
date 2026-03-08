@@ -216,7 +216,9 @@ html, body {
   font-size: var(--fs-sm);
   cursor: pointer;
   font-family: inherit;
-  display: block;
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
   margin-bottom: 8px;
   transition: all .15s;
   font-weight: 400;
@@ -268,9 +270,13 @@ html, body {
 .opt-key {
   font-weight: 700;
   color: var(--c-brand);
-  min-width: 1.4rem;
+  min-width: 2rem;
   flex-shrink: 0;
-  margin-right: 8px;
+  margin-right: 4px;
+}
+.opt-val {
+  flex: 1;
+  text-align: left;
 }
 
 /* Dark mode overrides for options */
@@ -765,7 +771,7 @@ html, body {
         <li><a href="terms.html">Terms &amp; Conditions</a></li>
         <li><a href="terms.html#refund">Refund Policy</a></li>
         <li><a href="disclaimer.html">Student Disclaimer</a></li>
-        <li><a href="/cdn-cgi/l/email-protection#c0adb9aea5a5b4ada9aea4b380a7ada1a9aceea3afad">Contact Us</a></li>
+        <li><a href="mailto:myneetminds@gmail.com">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -777,12 +783,12 @@ html, body {
       <a href="terms.html">Terms</a>
       <a href="terms.html#refund">Refunds</a>
       <a href="disclaimer.html">Disclaimer</a>
-      <a href="/cdn-cgi/l/email-protection#8fe2f6e1eaeafbe2e6e1ebfccfe8e2eee6e3a1ece0e2">Contact</a>
+      <a href="mailto:myneetminds@gmail.com">Contact</a>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script src="js/app.js?v=15"></script>
+<script src="js/app.js?v=16"></script>
 <script>
 // ── THEME SYSTEM ─────────────────────────────────────────────────
 function updateThemeUI() {
