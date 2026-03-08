@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════
-   neetminds — app.js  v4
+   neetminds — app.js  v16
    Handles: Practice page + Units page
    Question renderers:
      - Assertion (A) / Reason (R)  → styled blocks
@@ -148,7 +148,7 @@ function diagHTML(q){
       +'<img src="'+esc(q.image_url)+'" alt="Diagram" class="diag-img">'
       +'</div>';
   }
-  return'<div class="diag-wrap"><div class="diag-missing">Refer to NCERT or past paper for the diagram.</div></div>';
+  return'<div class="diag-wrap"><div class="diag-missing">📐 Refer to NCERT or past paper for the diagram.</div></div>';
 }
 
 /* ══════════════════════════════════════════════════
@@ -202,10 +202,14 @@ function initPracticePage(){
     var q=filtered[currentIndex],num=currentIndex+1,tot=filtered.length;
     answered=false;var qStart=Date.now();var pct=Math.round((num/tot)*100);
 
+    /* Options — opt-key + opt-val spans for flex alignment */
     var optsHtml=['A','B','C','D'].map(function(k){
       var val=q.options&&q.options[k]?q.options[k]:'';
       if(!val)return'';
-      return'<button class="neeto-opt" data-key="'+k+'" onclick="window._neetAnswer(this)"><span class="opt-key">'+k+'.</span><span class="opt-val">'+esc(val)+'</span></button>';
+      return'<button class="neeto-opt" data-key="'+k+'" onclick="window._neetAnswer(this)">'
+        +'<span class="opt-key">'+k+'.</span>'
+        +'<span class="opt-val">'+esc(val)+'</span>'
+        +'</button>';
     }).join('');
 
     var patTag=q.pattern&&PATTERN_LABELS[q.pattern]?'<span class="q-pat-tag">'+PATTERN_LABELS[q.pattern]+'</span>':'';
