@@ -229,6 +229,17 @@ html, body {
 .q-year-tag { font-size: 0.72rem; font-weight: 600; padding: 3px 10px; border-radius: 100px; background: var(--c-border); color: var(--c-ink-muted); }
 .q-subject-line { font-size: 0.78rem; color: var(--c-ink-muted); font-weight: 500; margin-bottom: 0.8rem; }
 .q-match-wrap { margin-bottom: 1rem; }
+/* MATCH TABLE — two columns side by side */
+.match-table { border: 1.5px solid var(--c-border); border-radius: 12px; overflow: hidden; margin: 0.8rem 0 1rem; }
+.match-head { display: grid; grid-template-columns: 1fr 1fr; background: var(--c-surface-2, #FFF8F3); border-bottom: 1.5px solid var(--c-border); }
+.match-head span { padding: 0.5rem 1rem; font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; color: var(--c-brand, #FF6B1A); }
+.match-head span:first-child { border-right: 1px solid var(--c-border); }
+.match-row { display: grid; grid-template-columns: 1fr 1fr; border-bottom: 1px solid var(--c-border); }
+.match-row:last-child { border-bottom: none; }
+.match-cell { padding: 0.55rem 1rem; font-size: 0.88rem; line-height: 1.5; color: var(--c-ink); }
+.match-cell:first-child { border-right: 1px solid var(--c-border); font-weight: 600; }
+[data-theme="dark"] .match-head { background: var(--c-surface-2); }
+[data-theme="dark"] .match-table { border-color: var(--c-border); }
 .q-progress-wrap { margin-bottom: 1.2rem; }
 .q-progress-meta { display: flex; justify-content: space-between; font-size: 0.78rem; color: var(--c-ink-muted); font-weight: 500; margin-bottom: 5px; }
 .q-progress-track { height: 4px; background: var(--c-border); border-radius: 100px; overflow: hidden; }
