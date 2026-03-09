@@ -215,11 +215,12 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
     <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
-</div>
-</div>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
-  <a href="login.html" class="mob-login-btn">Login / Register</a>
+  <a href="index.html">Home</a>
+  <a href="practice.html">Practice</a>
+  <a href="mock.html">Mock</a>
+  <a href="methodology.html">Our Method</a>
+  <a href="analytics.html">Analytics</a>
+  <a href="login.html" class="nav-cta">Login / Register</a>
 </div>
 
 <!-- HERO -->
@@ -242,10 +243,11 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   </p>
 
   <!-- TRACK 1: MUSIC -->
-  <div class="player-card" style="margin-bottom:1.5rem;">
-    <div class="player-label">🎵 NEET Mindset Music</div>
-    <div class="player-title">Breath of Stillness</div>
-    <div class="player-subtitle">Ambient focus music · Calm &amp; concentration · Pre-session</div>
+  <!-- GUIDED MEDITATION -->
+  <div class="player-card">
+    <div class="player-label">🧘 NEET Mindset Guided Meditation</div>
+    <div class="player-title">Guided Meditation — Before Practice &amp; Mock</div>
+    <div class="player-subtitle">Guided meditation · Nervous system reset · Pre-session</div>
     <div class="waveform" id="waveform1">
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
@@ -256,49 +258,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
     </div>
     <div class="audio-wrapper">
       <audio id="audio1" controls style="width:100%;border-radius:12px;outline:none;" preload="metadata">
-        <source src="Breath_of_Stillness_2.mp3" type="audio/mpeg"/>
-        Your browser does not support audio playback.
-      </audio>
-    </div>
-  </div>
-
-  <!-- TRACK 2: GUIDED MEDITATION -->
-  <div class="player-card" style="margin-bottom:1.5rem;">
-    <div class="player-label">🧘 NEET Mindset Guided Meditation</div>
-    <div class="player-title">Guided Meditation — Before Practice &amp; Mock</div>
-    <div class="player-subtitle">Guided meditation · Nervous system reset · Pre-session</div>
-    <div class="waveform" id="waveform2">
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-    </div>
-    <div class="audio-wrapper">
-      <audio id="audio2" controls style="width:100%;border-radius:12px;outline:none;" preload="metadata">
         <source src="Guided_Meditation_Before_Practice_and_Mock.mp3" type="audio/mpeg"/>
-        Your browser does not support audio playback.
-      </audio>
-    </div>
-  </div>
-
-  <!-- TRACK 3: PERFORMANCE ZONE -->
-  <div class="player-card">
-    <div class="player-label">⚡ NEET Mindset — Performance Zone</div>
-    <div class="player-title">Mindset Performance Zone</div>
-    <div class="player-subtitle">Mental performance activation · Focus &amp; confidence · Pre-mock</div>
-    <div class="waveform" id="waveform3">
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-      <div class="waveform-bar"></div><div class="waveform-bar"></div>
-    </div>
-    <div class="audio-wrapper">
-      <audio id="audio3" controls style="width:100%;border-radius:12px;outline:none;" preload="metadata">
-        <source src="Mindset_Performance_Zone.mp3" type="audio/mpeg"/>
         Your browser does not support audio playback.
       </audio>
     </div>
@@ -455,19 +415,13 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
 
 <script>
   // Toggle waveform when audio plays
-  [
-    {audioId:'audio1', waveId:'waveform1'},
-    {audioId:'audio2', waveId:'waveform2'},
-    {audioId:'audio3', waveId:'waveform3'}
-  ].forEach(function(pair){
-    var a = document.getElementById(pair.audioId);
-    var w = document.getElementById(pair.waveId);
-    if(a && w){
-      a.addEventListener('play',  function(){ w.classList.remove('paused'); });
-      a.addEventListener('pause', function(){ w.classList.add('paused'); });
-      a.addEventListener('ended', function(){ w.classList.add('paused'); });
-    }
-  });
+  var a = document.getElementById('audio1');
+  var w = document.getElementById('waveform1');
+  if(a && w){
+    a.addEventListener('play',  function(){ w.classList.remove('paused'); });
+    a.addEventListener('pause', function(){ w.classList.add('paused'); });
+    a.addEventListener('ended', function(){ w.classList.add('paused'); });
+  }
 </script>
 </body>
 </html>
