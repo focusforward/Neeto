@@ -442,7 +442,7 @@
 <body>
 
 <!-- ── AUDIT FIX #1: Nav collapsed to 5 primary items + CTA button ── -->
-<nav class="navbar">
+<nav class="navbar" style="position:sticky;top:0;z-index:999;">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
@@ -450,14 +450,14 @@
   <div class="nav-links">
     <a href="index.html" class="active">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock</a>
+    <a href="mock.html">Mock Test</a>
     <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
     <a href="pricing.html" class="nav-pricing-btn" style="font-size:.85rem;font-weight:700;color:#CC3300;border:1.5px solid #CC3300;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;">Pricing</a>
-    <a href="login.html" class="nav-login-btn" style="font-size:.85rem;font-weight:600;color:var(--c-ink,#1A1208);border:1.5px solid var(--c-border,#F0E8DE);border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;">Login / Register</a>
+    <a href="login.html" class="nav-login-btn" style="font-size:.85rem;font-weight:600;color:#F0E8DE;border:1.5px solid #F0E8DE;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;">Login / Register</a>
     <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>
@@ -470,7 +470,7 @@
   </div>
   <a href="index.html" class="active">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock</a>
+  <a href="mock.html">Mock Test</a>
   <a href="methodology.html">Our Method</a>
   <a href="analytics.html">Analytics</a>
   <a href="pricing.html" style="color:#CC3300;font-weight:700;">Pricing</a>
