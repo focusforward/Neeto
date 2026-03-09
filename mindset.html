@@ -198,28 +198,25 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock Test</a>
-    <a href="methodology.html" class="active">Our Method</a>
+    <a href="mock.html">Mock</a>
+    <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
+    <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <a href="login.html" style="font-size:.85rem;font-weight:600;color:var(--c-ink,#1A1208);border:1.5px solid var(--c-border,#F0E8DE);border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;">Login / Register</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
-  <a href="index.html">Home</a>
-  <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock Test</a>
-  <a href="methodology.html" class="active">Our Method</a>
-  <a href="analytics.html">Analytics</a>
+</div>
+</div>
   <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
   <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
@@ -241,16 +238,15 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
 <div class="player-section">
   <h2>Pre-Mock Meditation<br/>Music</h2>
   <p class="sub">
-    Play this before every practice session and every mock test. 5–10 minutes of focused listening resets your nervous system and activates the calm-strategic state your brain needs to perform. Music provided by the NEETMINDS™ team.
+    Play one of these before every practice session or mock test. Music to get into flow state, or a guided meditation to reset your nervous system. Both are curated by the NEETMINDS™ team.
   </p>
 
-  <div class="player-card">
-    <div class="player-label">🎧 Curated for NEET Focus</div>
-    <div class="player-title">Focus Flow — Pre-Exam Meditation</div>
-    <div class="player-subtitle">Theta binaural beats · Focus &amp; calm · 10 minutes</div>
-
-    
-<div class="waveform" id="waveform">
+  <!-- TRACK 1: MUSIC -->
+  <div class="player-card" style="margin-bottom:1.5rem;">
+    <div class="player-label">🎵 NEET Mindset Music</div>
+    <div class="player-title">Breath of Stillness</div>
+    <div class="player-subtitle">Ambient focus music · Calm &amp; concentration · Pre-session</div>
+    <div class="waveform" id="waveform1">
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
@@ -258,19 +254,56 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
       <div class="waveform-bar"></div><div class="waveform-bar"></div>
     </div>
-
-    <!-- Audio player — upload your track to audio/meditation.mp3 -->
-    <div class="audio-wrapper" id="audioWrapper">
-      <div class="audio-placeholder">
-        <p><strong>🎵 Music track coming soon.</strong><br/>
-        Upload your meditation audio file to <code>audio/meditation.mp3</code> and it will appear here as a styled player. The waveform above will activate when playing.</p>
-      </div>
-    </div>
-
-    <div class="coming-badge">
-      ✦ More tracks being added · Focus · Motivation · Post-session calm
+    <div class="audio-wrapper">
+      <audio id="audio1" controls style="width:100%;border-radius:12px;outline:none;" preload="metadata">
+        <source src="Breath_of_Stillness_2.mp3" type="audio/mpeg"/>
+        Your browser does not support audio playback.
+      </audio>
     </div>
   </div>
+
+  <!-- TRACK 2: GUIDED MEDITATION -->
+  <div class="player-card" style="margin-bottom:1.5rem;">
+    <div class="player-label">🧘 NEET Mindset Guided Meditation</div>
+    <div class="player-title">Guided Meditation — Before Practice &amp; Mock</div>
+    <div class="player-subtitle">Guided meditation · Nervous system reset · Pre-session</div>
+    <div class="waveform" id="waveform2">
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+    </div>
+    <div class="audio-wrapper">
+      <audio id="audio2" controls style="width:100%;border-radius:12px;outline:none;" preload="metadata">
+        <source src="Guided_Meditation_Before_Practice_and_Mock.mp3" type="audio/mpeg"/>
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+  </div>
+
+  <!-- TRACK 3: PERFORMANCE ZONE -->
+  <div class="player-card">
+    <div class="player-label">⚡ NEET Mindset — Performance Zone</div>
+    <div class="player-title">Mindset Performance Zone</div>
+    <div class="player-subtitle">Mental performance activation · Focus &amp; confidence · Pre-mock</div>
+    <div class="waveform" id="waveform3">
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+      <div class="waveform-bar"></div><div class="waveform-bar"></div>
+    </div>
+    <div class="audio-wrapper">
+      <audio id="audio3" controls style="width:100%;border-radius:12px;outline:none;" preload="metadata">
+        <source src="Mindset_Performance_Zone.mp3" type="audio/mpeg"/>
+        Your browser does not support audio playback.
+      </audio>
+    </div>
+  </div>
+
 </div>
 
 <!-- SESSION TYPES -->
@@ -404,7 +437,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
         <li><a href="terms.html" style="color:#5C4A30;">Terms &amp; Conditions</a></li>
         <li><a href="terms.html#refund" style="color:#5C4A30;">Refund Policy</a></li>
         <li><a href="disclaimer.html" style="color:#5C4A30;">Student Disclaimer</a></li>
-        <li><a href="mailto:myneetminds@gmail.com" style="color:#5C4A30;">Contact Us</a></li>
+        <li><a href="/cdn-cgi/l/email-protection#93feeafdf6f6e7fefafdf7e0d3f4fef2faffbdf0fcfe" style="color:#5C4A30;">Contact Us</a></li>
       </ul>
     </div>
   </div>
@@ -415,24 +448,26 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
       <a href="terms.html" style="color:#3A2E20;">Terms</a>
       <a href="terms.html#refund" style="color:#3A2E20;">Refunds</a>
       <a href="disclaimer.html" style="color:#3A2E20;">Disclaimer</a>
-      <a href="mailto:myneetminds@gmail.com" style="color:#3A2E20;">Contact</a>
+      <a href="/cdn-cgi/l/email-protection#204d594e4545544d494e445360474d41494c0e434f4d" style="color:#3A2E20;">Contact</a>
     </div>
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
-  // Toggle waveform when audio plays
-  var audio = document.querySelector('audio');
-  var waveform = document.getElementById('waveform');
-  if (audio) {
-    audio.addEventListener('play',  function(){ waveform.classList.remove('paused'); });
-    audio.addEventListener('pause', function(){ waveform.classList.add('paused'); });
-    audio.addEventListener('ended', function(){ waveform.classList.add('paused'); });
-    waveform.classList.add('paused');
-  }
-</script>
-
-
 <script>
-// Sticky nav shadow on scroll
-(fu
+  // Toggle waveform when audio plays
+  [
+    {audioId:'audio1', waveId:'waveform1'},
+    {audioId:'audio2', waveId:'waveform2'},
+    {audioId:'audio3', waveId:'waveform3'}
+  ].forEach(function(pair){
+    var a = document.getElementById(pair.audioId);
+    var w = document.getElementById(pair.waveId);
+    if(a && w){
+      a.addEventListener('play',  function(){ w.classList.remove('paused'); });
+      a.addEventListener('pause', function(){ w.classList.add('paused'); });
+      a.addEventListener('ended', function(){ w.classList.add('paused'); });
+    }
+  });
+</script>
+</body>
+</html>
