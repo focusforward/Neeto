@@ -170,7 +170,7 @@ function initPracticePage(){
   if(subjectEl&&urlSubj)subjectEl.value=urlSubj;
   if(patternEl&&urlPatt)patternEl.value=urlPatt;
 
-  var allQuestions=[],filtered=[],currentIndex=0,answered=false;
+  var allQuestions=[],filtered=[],currentIndex=0,answered=false,history=[];
 
   function applyFilters(){
     var subj=subjectEl?subjectEl.value:urlSubj;
@@ -183,7 +183,7 @@ function initPracticePage(){
       if(urlUnit&&q.unit_code!==urlUnit&&q.chapter!==urlUnit)return false;
       return true;
     });
-    filtered=shuffle(filtered);currentIndex=0;answered=false;
+    filtered=shuffle(filtered);currentIndex=0;answered=false;history=[];
     if(countEl){
       var label=filtered.length+' question'+(filtered.length!==1?'s':'');
       var parts=[];
@@ -201,6 +201,7 @@ function initPracticePage(){
 
     var q=filtered[currentIndex],num=currentIndex+1,tot=filtered.length;
     answered=false;var qStart=Date.now();var pct=Math.round((num/tot)*100);
+    var hasPrev=history.length>0;
 
     /* Options — opt-key + opt-val spans for flex alignment */
     var optsHtml=['A','B','C','D'].map(function(k){
@@ -232,6 +233,7 @@ function initPracticePage(){
         '<div id="explanation-wrap"></div>'+
       '</div>'+
       '<div class="q-nav-row">'+
+        (hasPrev?'<button onclick="window._neetPrev()" class="q-btn-skip">← Prev</button>':'<span></span>')+
         '<button onclick="window._neetSkip()" class="q-btn-skip">Skip →</button>'+
         '<span class="q-diff '+(q.difficulty==='L1'?'q-diff-easy':q.difficulty==='L2'?'q-diff-med':'q-diff-hard')+'">'+
           (q.difficulty==='L1'?'🟢 Easy':q.difficulty==='L2'?'🟡 Medium':'🔴 Hard')+
@@ -263,6 +265,12 @@ function initPracticePage(){
         timeSpentMs:elapsed,year:q.year||'',ts:Date.now()});
     };
 
+    window._neetPrev=function(){
+      if(history.length===0)return;
+      currentIndex=history.pop();
+      renderQuestion();
+    };
+
     window._neetSkip=function(){
       if(!answered)saveAttempt({type:'practice',questionId:q.id||'',subject:q.subject||'',chapter:q.unit_code||'',
         chapterName:q.chapter||'',pattern:q.pattern||'',difficulty:q.difficulty||'',userAnswer:null,
@@ -272,6 +280,7 @@ function initPracticePage(){
     };
 
     window._neetNext=function(){
+      history.push(currentIndex);
       currentIndex++;
       if(currentIndex>=filtered.length){
         filtered=shuffle(filtered);currentIndex=0;
