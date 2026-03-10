@@ -11,7 +11,7 @@
 (function(){
 'use strict';
 
-var CACHE_VERSION='v16';
+var CACHE_VERSION='v17';
 var CACHE_TTL=24*60*60*1000;
 var MAX_ATTEMPTS=2000;
 var SUBJECTS=['Biology','Chemistry','Physics'];
@@ -82,6 +82,8 @@ var AR_RE   = /^(?:[\s\S]*?[Aa]ssertion\s*(?:\(A\)|A)?\s*[:\-]\s*)([\s\S]*?)\s+[
 var S12_RE  = /^([\s\S]*?)Statements?[\s\-]*(I|1)\s*[:\-]\s*([\s\S]*?)\s+Statements?[\s\-]*(II|2)\s*[:\-]\s*([\s\S]+)$/i;
 var NUM_RE  = /\b(I{1,3}|IV|VI{0,3}|IX)\.\s+/g;
 var TRAIL_RE = /\s+(Which\b|Select\b|Choose\b|How many\b|The correct\b|Identify\b|Of the above\b|Among\b|From the above\b|Given the above\b|How\b|Find\b)/i;
+var CONSIDER_RE = /^((?:[Cc]onsider\s+the\s+following\s+statements?[^:]*):)\s*([\s\S]+)$/;
+var ABC_INLINE_RE = /\bA\.\s+/g;
 
 function renderQText(text){
   if(!text)return'';
@@ -127,7 +129,61 @@ function renderQText(text){
     return html;
   }
 
-  /* 4. Plain */
+  /* 4. A. B. C. inline list (e.g. "Consider the following: A. ... B. ... C. ...") */
+  var abcRe=/\b([A-E])\.\s+/g;
+  var abcMatches=[];
+  var am;
+  abcRe.lastIndex=0;
+  while((am=abcRe.exec(text))!==null){
+    /* Only treat as list if letter sequence is A B C ... in order */
+    var expectedLetter=String.fromCharCode(65+abcMatches.length);
+    if(am[1]===expectedLetter){abcMatches.push({index:am.index,letter:am[1],end:am.index+am[0].length});}
+    else{abcMatches=[];abcRe.lastIndex=am.index+1;}
+  }
+  if(abcMatches.length>=2){
+    var abcStem=text.slice(0,abcMatches[0].index).trim();
+    var abcItems=[];
+    var abcTrailer='';
+    for(var ai=0;ai<abcMatches.length;ai++){
+      var aStart=abcMatches[ai].end;
+      var aEnd=(ai+1<abcMatches.length)?abcMatches[ai+1].index:text.length;
+      var aText=text.slice(aStart,aEnd).replace(/[,;]\s*$/,'').trim();
+      if(ai===abcMatches.length-1){var atr=TRAIL_RE.exec(aText);if(atr){abcTrailer=aText.slice(atr.index).trim();aText=aText.slice(0,atr.index).trim();}}
+      abcItems.push({letter:abcMatches[ai].letter,text:aText});
+    }
+    var abcHtml=(abcStem?'<p class="q-preamble">'+esc(abcStem)+'</p>':'')+'<div class="q-num-list">';
+    abcItems.forEach(function(it){abcHtml+='<div class="q-num-item"><span class="q-num-roman">'+it.letter+'.</span><span class="q-num-text">'+esc(it.text)+'</span></div>';});
+    abcHtml+='</div>';
+    if(abcTrailer)abcHtml+='<p class="q-trailer">'+esc(abcTrailer)+'</p>';
+    return abcHtml;
+  }
+
+  /* 5. Consider the following statements — plain sentences → numbered items */
+  m=CONSIDER_RE.exec(text);
+  if(m){
+    var preamble=m[1].trim();
+    var body=m[2].trim();
+    /* Split trailer first */
+    var csTrailer='';
+    var csTr=TRAIL_RE.exec(body);
+    if(csTr){csTrailer=body.slice(csTr.index).trim();body=body.slice(0,csTr.index).trim();}
+    /* Split on sentence boundaries: ". Capital letter" */
+    var sentences=body.split(/\.\s+(?=[A-Z])/);
+    /* Clean up trailing periods */
+    sentences=sentences.map(function(s){return s.replace(/\.\s*$/,'').trim();}).filter(function(s){return s.length>3;});
+    if(sentences.length>=2){
+      var labels=['(a)','(b)','(c)','(d)','(e)','(f)'];
+      var csHtml='<p class="q-preamble">'+esc(preamble)+'</p><div class="q-num-list">';
+      sentences.forEach(function(s,i){
+        csHtml+='<div class="q-num-item"><span class="q-num-roman">'+(labels[i]||'('+(i+1)+')')+'</span><span class="q-num-text">'+esc(s)+'</span></div>';
+      });
+      csHtml+='</div>';
+      if(csTrailer)csHtml+='<p class="q-trailer">'+esc(csTrailer)+'</p>';
+      return csHtml;
+    }
+  }
+
+  /* 6. Plain */
   return'<p class="q-text">'+esc(text)+'</p>';
 }
 
@@ -231,8 +287,8 @@ function initPracticePage(){
         '<div id="options-wrap">'+optsHtml+'</div>'+
         '<div id="explanation-wrap"></div>'+
       '</div>'+
-      '<div class="q-nav-row">'+
-        '<button onclick="window._neetSkip()" class="q-btn-skip">Skip →</button>'+
+      '<div class="q-nav-row" id="q-nav-row">'+
+        '<button onclick="window._neetSkip()" class="q-btn-skip" id="btn-skip">Skip →</button>'+
         '<span class="q-diff '+(q.difficulty==='L1'?'q-diff-easy':q.difficulty==='L2'?'q-diff-med':'q-diff-hard')+'">'+
           (q.difficulty==='L1'?'🟢 Easy':q.difficulty==='L2'?'🟡 Medium':'🔴 Hard')+
         '</span>'+
@@ -248,6 +304,19 @@ function initPracticePage(){
         var k=b.getAttribute('data-key');
         b.classList.add(k===correct?'neeto-correct':k===chosen?'neeto-wrong':'neeto-dim');
       });
+      /* Swap Skip → Prev */
+      var skipBtn=document.getElementById('btn-skip');
+      if(skipBtn)skipBtn.style.display='none';
+      if(_history.length>0){
+        var navRow=document.getElementById('q-nav-row');
+        if(navRow){
+          var prevBtn=document.createElement('button');
+          prevBtn.className='q-btn-skip';
+          prevBtn.textContent='← Prev';
+          prevBtn.onclick=function(){window._neetPrev();};
+          navRow.insertBefore(prevBtn,navRow.firstChild);
+        }
+      }
       var expWrap=document.getElementById('explanation-wrap');
       if(expWrap){
         expWrap.innerHTML=
@@ -263,6 +332,12 @@ function initPracticePage(){
         timeSpentMs:elapsed,year:q.year||'',ts:Date.now()});
     };
 
+    window._neetPrev=function(){
+      if(_history.length===0)return;
+      currentIndex=_history.pop();
+      renderQuestion();
+    };
+
     window._neetSkip=function(){
       if(!answered)saveAttempt({type:'practice',questionId:q.id||'',subject:q.subject||'',chapter:q.unit_code||'',
         chapterName:q.chapter||'',pattern:q.pattern||'',difficulty:q.difficulty||'',userAnswer:null,
@@ -272,6 +347,7 @@ function initPracticePage(){
     };
 
     window._neetNext=function(){
+      _history.push(currentIndex);
       currentIndex++;
       if(currentIndex>=filtered.length){
         filtered=shuffle(filtered);currentIndex=0;
