@@ -11,7 +11,7 @@
 (function(){
 'use strict';
 
-var CACHE_VERSION='v17';
+var CACHE_VERSION='v18';
 var CACHE_TTL=24*60*60*1000;
 var MAX_ATTEMPTS=2000;
 var SUBJECTS=['Biology','Chemistry','Physics'];
