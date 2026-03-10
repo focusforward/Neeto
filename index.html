@@ -22,7 +22,7 @@
 </script>
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    body { font-family: 'DM Sans', sans-serif; background: var(--c-bg,#FFFDF9); color: var(--c-ink,#1A1208); line-height: 1.6; transition: background .3s, color .3s; }
+    body { font-family: 'DM Sans', sans-serif; background: var(--c-bg,#FFFDF9); color: var(--c-ink,#1A1208); line-height: 1.6; transition: background .3s, color .3s; padding-top: 68px; }
 
     
     /* ── HERO v3 — TARGET TOP 100 RANKS ─────────────────────── */
@@ -442,7 +442,7 @@
 <body>
 
 <!-- ── AUDIT FIX #1: Nav collapsed to 5 primary items + CTA button ── -->
-<nav class="navbar" style="position:sticky;top:0;z-index:999;">
+<nav class="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;width:100%;">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
