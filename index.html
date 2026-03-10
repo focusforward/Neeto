@@ -596,7 +596,7 @@
             <div class="demo-rank-box"><div class="demo-rank-lbl">AIIMS Delhi</div><div class="demo-rank-val" id="demo-aiims" style="font-size:1rem;">—</div></div>
             <div class="demo-rank-box"><div class="demo-rank-lbl">Govt MBBS</div><div class="demo-rank-val" id="demo-mbbs" style="font-size:1rem;">—</div></div>
           </div>
-          <a id="demo-full-link" href="rank_predictor.html" class="demo-full-btn">See Full Report with All 17 AIIMS →</a>
+          <a id="demo-full-link" href="pricing.html" class="demo-full-btn">Unlock Full Report — See All 17 AIIMS →</a>
         </div>
         <div id="demo-placeholder" class="demo-placeholder">
           <span>👆 Enter your score above to see your rank instantly</span>
@@ -1048,7 +1048,7 @@ function runDemoPredict() {
   document.getElementById('demo-mbbs').textContent  = mbbs;
 
   var fl = document.getElementById('demo-full-link');
-  if (fl) fl.href = 'rank_predictor.html?score=' + score + '&cat=' + cat;
+  if (fl) fl.href = 'pricing.html?score=' + score + '&cat=' + cat;
 
   if (ph) ph.style.display = 'none';
   if (res) res.style.display = 'block';
