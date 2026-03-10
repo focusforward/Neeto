@@ -234,7 +234,7 @@ function initPracticePage(){
     var diff=diffEl?diffEl.value:'';
     filtered=allQuestions.filter(function(q){
       if(subj&&q.subject!==subj)return false;
-      if(patt&&q.pattern!==patt)return false;
+      if(patt&&q.pattern!==patt&&!(patt==='speed_breaker'&&q.pattern==='match_the_following'))return false;
       if(diff&&q.difficulty!==diff)return false;
       if(urlUnit&&q.unit_code!==urlUnit&&q.chapter!==urlUnit)return false;
       return true;
