@@ -11,11 +11,11 @@
 (function(){
 'use strict';
 
-var CACHE_VERSION='v18';
+var CACHE_VERSION='v19';
 var CACHE_TTL=24*60*60*1000;
 var MAX_ATTEMPTS=2000;
 var SUBJECTS=['Biology','Chemistry','Physics'];
-var DATA_FILES={Biology:'data/api_biology.json',Chemistry:'data/api_chemistry.json',Physics:'data/api_physics.json'};
+var DATA_FILES={Biology:'api_biology.json',Chemistry:'api_chemistry.json',Physics:'api_physics.json'};
 var PATTERN_LABELS={memory_test:'🎯 Memory Test',negative_charge:'⚡ Negative Charge',concept_guru:'🌀 Concept Guru',diagram_dhamaka:'🖼️ Diagram Dhamaka',speed_breaker:'⛔ Speed Breaker',best_choice:'🔽 Best Choice'};
 
 function cacheGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
