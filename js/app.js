@@ -15,7 +15,7 @@ var CACHE_VERSION='v17';
 var CACHE_TTL=24*60*60*1000;
 var MAX_ATTEMPTS=2000;
 var SUBJECTS=['Biology','Chemistry','Physics'];
-var DATA_FILES={Biology:'api_biology.json',Chemistry:'api_chemistry.json',Physics:'api_physics.json'};
+var DATA_FILES={Biology:'data/api_biology.json',Chemistry:'data/api_chemistry.json',Physics:'data/api_physics.json'};
 var PATTERN_LABELS={memory_test:'🎯 Memory Test',negative_charge:'⚡ Negative Charge',concept_guru:'🌀 Concept Guru',diagram_dhamaka:'🖼️ Diagram Dhamaka',speed_breaker:'⛔ Speed Breaker',best_choice:'🔽 Best Choice'};
 
 function cacheGet(k){try{return localStorage.getItem(k);}catch(e){return null;}}
@@ -272,6 +272,9 @@ function initPracticePage(){
     var yearTag=q.year?'<span class="q-year-tag">NEET '+q.year+'</span>':'';
     var hasMT=!!(q.match_table&&q.match_table.rows&&q.match_table.rows.length);
     var mtHtml=hasMT?matchTableHTML(q.match_table):'';
+    /* Strip leaked trailing ": List-I" / ": Oxide" etc from match questions */
+    var qText=q.question||'';
+    if(hasMT)qText=qText.replace(/\s*:\s*\S[\s\S]*$/,'').trim();
 
     container.innerHTML=
       '<div class="q-progress-wrap">'+
@@ -281,7 +284,7 @@ function initPracticePage(){
       '<div class="q-card">'+
         '<div class="q-tags">'+patTag+yearTag+'</div>'+
         '<div class="q-subject-line">'+esc(q.subject||'')+(q.chapter?' · '+esc(q.chapter):'')+'</div>'+
-        '<div class="q-body">'+renderQText(q.question||'')+'</div>'+
+        '<div class="q-body">'+renderQText(qText)+'</div>'+
         (mtHtml?'<div class="q-match-wrap">'+mtHtml+'</div>':'')+
         diagHTML(q)+
         '<div id="options-wrap">'+optsHtml+'</div>'+
@@ -307,15 +310,20 @@ function initPracticePage(){
       /* Swap Skip → Prev */
       var skipBtn=document.getElementById('btn-skip');
       if(skipBtn)skipBtn.style.display='none';
-      if(_history.length>0){
-        var navRow=document.getElementById('q-nav-row');
-        if(navRow){
-          var prevBtn=document.createElement('button');
-          prevBtn.className='q-btn-skip';
+      var navRow=document.getElementById('q-nav-row');
+      if(navRow){
+        var prevBtn=document.createElement('button');
+        prevBtn.className='q-btn-skip';
+        if(_history.length>0){
           prevBtn.textContent='← Prev';
           prevBtn.onclick=function(){window._neetPrev();};
-          navRow.insertBefore(prevBtn,navRow.firstChild);
+        } else {
+          prevBtn.textContent='← Prev';
+          prevBtn.disabled=true;
+          prevBtn.style.opacity='0.35';
+          prevBtn.style.cursor='default';
         }
+        navRow.insertBefore(prevBtn,navRow.firstChild);
       }
       var expWrap=document.getElementById('explanation-wrap');
       if(expWrap){
