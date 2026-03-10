@@ -1375,4 +1375,8 @@ function openProModal() {
 function closeProModal(e) {
   if (e && e.target !== document.getElementById('pro-modal-overlay') && e.target !== e.currentTarget) return;
   document.getElementById('pro-modal-overlay').classList.remove('open');
-  document.
+  document.body.style.overflow = '';
+}
+</script>
+</body>
+</html>
