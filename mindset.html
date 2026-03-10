@@ -169,6 +169,8 @@
 
   
 /* ── NAVBAR FIXED OVERRIDE (overrides nav.css) ── */
+.nav-links .nav-cta { margin-left: 12px !important; }
+
 /* ── HIDE desktop nav buttons on mobile ── */
 @media (max-width: 768px) {
   .nav-desktop-only { display: none !important; }
@@ -455,19 +457,28 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   }
 </script>
 <script>
-/* ── CLOSE MOBILE MENU on outside tap, scroll, or scroll-touch ── */
+/* ── CLOSE MOBILE MENU — tap outside only, not on scroll ── */
 (function(){
-  function closeMenu(e) {
+  var _touchMoved = false;
+  document.addEventListener('touchstart', function(){ _touchMoved = false; }, {passive:true});
+  document.addEventListener('touchmove',  function(){ _touchMoved = true;  }, {passive:true});
+
+  function closeIfOutside(e) {
     var m = document.getElementById('mmenu');
     var b = document.querySelector('.nav-hamburger');
     if (!m || !m.classList.contains('open')) return;
-    // If touch/click is inside the menu or on hamburger, don't close
-    if (e && e.target && (m.contains(e.target) || (b && b.contains(e.target)))) return;
+    if (e.type === 'touchend' && _touchMoved) return; // was a scroll, not a tap
+    if (e.target && (m.contains(e.target) || (b && b.contains(e.target)))) return;
     m.classList.remove('open');
   }
-  document.addEventListener('click',      closeMenu, {passive:true});
-  document.addEventListener('touchstart', closeMenu, {passive:true});
-  window.addEventListener('scroll',       closeMenu, {passive:true});
+
+  document.addEventListener('click',   closeIfOutside, {passive:true});
+  document.addEventListener('touchend', closeIfOutside, {passive:true});
+  // Close on page scroll (when menu is open and user scrolls the page, not inside menu)
+  window.addEventListener('scroll', function() {
+    var m = document.getElementById('mmenu');
+    if (m && m.classList.contains('open')) m.classList.remove('open');
+  }, {passive:true});
 })();
 </script>
 </body>

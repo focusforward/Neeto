@@ -268,8 +268,8 @@ html, body {
   background: var(--opt-bg);
   border: 1.5px solid var(--opt-border);
   color: var(--c-ink);
-  border-radius: var(--r-sm);
-  padding: 14px 18px;
+  border-radius: 10px;
+  padding: 14px 18px 14px 16px;
   width: 100%;
   text-align: left;
   font-size: var(--fs-sm);
@@ -278,10 +278,22 @@ html, body {
   display: flex;
   align-items: center;
   gap: 12px;
-  margin-bottom: 8px;
-  transition: all .15s;
+  margin-bottom: 10px;
+  transition: all .18s cubic-bezier(.4,0,.2,1);
   font-weight: 400;
   opacity: 1;
+  box-shadow: 0 1px 3px rgba(26,18,8,.05);
+  border-left: 3.5px solid var(--opt-border);
+  position: relative;
+}
+
+.neeto-opt:hover {
+  border-color: var(--opt-hover-bdr);
+  border-left-color: var(--opt-hover-bdr);
+  background: var(--opt-hover-bg);
+  color: var(--opt-hover-clr);
+  box-shadow: 0 3px 10px rgba(255,107,26,.12);
+  transform: translateX(2px);
 }
 
 /* Option value text */
@@ -290,19 +302,15 @@ html, body {
   line-height: 1.55;
 }
 
-.neeto-opt:hover {
-  border-color: var(--opt-hover-bdr);
-  background: var(--opt-hover-bg);
-  color: var(--opt-hover-clr);
-}
-
 /* SELECTED — blue (during test) */
 .neeto-opt.mo-selected,
 .neeto-opt.neeto-selected {
   border-color: #3B82F6 !important;
+  border-left-color: #3B82F6 !important;
   background: #EFF6FF !important;
   color: #1E40AF !important;
   font-weight: 600 !important;
+  box-shadow: 0 2px 8px rgba(59,130,246,.15) !important;
 }
 
 /* CORRECT — green */
@@ -310,9 +318,11 @@ html, body {
 .neeto-opt.neeto-correct {
   background: var(--c-success-bg) !important;
   border: 1.5px solid var(--c-success-bdr) !important;
+  border-left: 3.5px solid var(--c-success-bdr) !important;
   color: var(--c-success) !important;
   font-weight: 600 !important;
   pointer-events: none !important;
+  box-shadow: 0 2px 8px rgba(22,163,74,.12) !important;
 }
 
 /* WRONG — red */
@@ -320,8 +330,10 @@ html, body {
 .neeto-opt.neeto-wrong {
   background: var(--c-error-bg) !important;
   border: 1.5px solid var(--c-error-bdr) !important;
+  border-left: 3.5px solid var(--c-error-bdr) !important;
   color: var(--c-error) !important;
   pointer-events: none !important;
+  box-shadow: 0 2px 8px rgba(220,38,38,.1) !important;
 }
 
 /* DIMMED — unchosen options after answer */
@@ -434,6 +446,8 @@ html, body {
 .brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
 
 /* ── NAVBAR FIXED OVERRIDE (overrides nav.css) ── */
+.nav-links .nav-cta { margin-left: 12px !important; }
+
 /* ── HIDE desktop nav buttons on mobile ── */
 @media (max-width: 768px) {
   .nav-desktop-only { display: none !important; }
@@ -616,19 +630,28 @@ function setPattern(val) {
 </script>
 
 <script>
-/* ── CLOSE MOBILE MENU on outside tap, scroll, or scroll-touch ── */
+/* ── CLOSE MOBILE MENU — tap outside only, not on scroll ── */
 (function(){
-  function closeMenu(e) {
+  var _touchMoved = false;
+  document.addEventListener('touchstart', function(){ _touchMoved = false; }, {passive:true});
+  document.addEventListener('touchmove',  function(){ _touchMoved = true;  }, {passive:true});
+
+  function closeIfOutside(e) {
     var m = document.getElementById('mmenu');
     var b = document.querySelector('.nav-hamburger');
     if (!m || !m.classList.contains('open')) return;
-    // If touch/click is inside the menu or on hamburger, don't close
-    if (e && e.target && (m.contains(e.target) || (b && b.contains(e.target)))) return;
+    if (e.type === 'touchend' && _touchMoved) return; // was a scroll, not a tap
+    if (e.target && (m.contains(e.target) || (b && b.contains(e.target)))) return;
     m.classList.remove('open');
   }
-  document.addEventListener('click',      closeMenu, {passive:true});
-  document.addEventListener('touchstart', closeMenu, {passive:true});
-  window.addEventListener('scroll',       closeMenu, {passive:true});
+
+  document.addEventListener('click',   closeIfOutside, {passive:true});
+  document.addEventListener('touchend', closeIfOutside, {passive:true});
+  // Close on page scroll (when menu is open and user scrolls the page, not inside menu)
+  window.addEventListener('scroll', function() {
+    var m = document.getElementById('mmenu');
+    if (m && m.classList.contains('open')) m.classList.remove('open');
+  }, {passive:true});
 })();
 </script>
 </body>
