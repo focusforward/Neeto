@@ -439,6 +439,11 @@
     .ps-bottom-link:hover { color: #CC3300; }
   
 /* ── NAVBAR FIXED OVERRIDE (overrides nav.css) ── */
+/* ── HIDE desktop nav buttons on mobile ── */
+@media (max-width: 768px) {
+  .nav-desktop-only { display: none !important; }
+}
+
 .navbar {
   position: fixed !important;
   top: 0 !important;
@@ -465,8 +470,8 @@
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
-    <a href="pricing.html" class="nav-pricing-btn" style="font-size:.85rem;font-weight:700;color:#CC3300;border:1.5px solid #CC3300;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;">Pricing</a>
-    <a href="login.html" class="nav-login-btn" style="font-size:.85rem;font-weight:600;color:#1A1208;border:1.5px solid #1A1208;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;">Login / Register</a>
+    <a href="pricing.html" class="nav-pricing-btn nav-desktop-only" style="font-size:.85rem;font-weight:700;color:#CC3300;border:1.5px solid #CC3300;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;" class="nav-desktop-only">Pricing</a>
+    <a href="login.html" class="nav-login-btn nav-desktop-only" style="font-size:.85rem;font-weight:600;color:#1A1208;border:1.5px solid #1A1208;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;" class="nav-desktop-only">Login / Register</a>
     <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>

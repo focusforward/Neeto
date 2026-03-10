@@ -348,11 +348,25 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
     .brand-neet  { color: #CC3300; }
     .brand-minds { color: #FF6B1A; }
     .brand-tm    { color: #CC3300; font-size: 0.55em; vertical-align: super; line-height: 0; margin-left: 1px; }
-  </style>
+  
+/* ── NAVBAR FIXED OVERRIDE (overrides nav.css) ── */
+/* ── HIDE desktop nav buttons on mobile ── */
+@media (max-width: 768px) {
+  .nav-desktop-only { display: none !important; }
+}
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+}
+</style>
 </head>
 <body>
 
-<nav class="navbar">
+<nav class="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;width:100%;">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
@@ -363,27 +377,27 @@ footer{border-top:1px solid var(--c-border,#F0E8DE);padding:1.8rem 5%;text-align
     <a href="mock.html" class="active">Mock Test</a>
     <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
+    <a href="practice.html" class="nav-cta">Start Practising →</a>
   </div>
-  <div class="nav-right">
-    <a href="pricing.html" class="nav-pricing">Pricing</a>
-    <a href="login.html" class="nav-login">Login / Register</a>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <a href="login.html" style="font-size:.85rem;font-weight:600;color:#1A1208;border:1.5px solid #1A1208;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;" class="nav-desktop-only">Login / Register</a>
+    <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
-  <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
 </nav>
 <div class="nav-mobile-menu" id="mmenu">
   <div class="mob-theme-row">
     <span class="mob-theme-label" id="mob-theme-label">Switch to Dark Mode</span>
-    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:0.9rem;"><span id="mob-theme-icon2">🌙</span></button>
+    <button class="theme-toggle" onclick="toggleTheme()" style="width:32px;height:32px;font-size:.9rem;"><span id="mob-theme-icon2">🌙</span></button>
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
   <a href="mock.html" class="active">Mock Test</a>
   <a href="methodology.html">Our Method</a>
   <a href="analytics.html">Analytics</a>
-  <a href="pricing.html" style="color:#CC3300;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">Pricing</a>
-  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;border-bottom:1px solid #F0E8DE;padding:13px 0;display:block;">🎯 Rank Predictor</a>
+  <a href="pricing.html" style="color:#CC3300;font-weight:700;">Pricing</a>
+  <a href="rank_predictor.html" style="color:#FF6B1A;font-weight:700;">🎯 Rank Predictor</a>
   <a href="login.html" class="mob-login-btn">Login / Register</a>
 </div>
 

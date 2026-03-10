@@ -130,12 +130,26 @@
     footer.neeto-footer{padding:24px;flex-direction:column;align-items:flex-start;}
     hr.div{margin:0 24px;}
   }
+
+/* ── NAVBAR FIXED OVERRIDE (overrides nav.css) ── */
+/* ── HIDE desktop nav buttons on mobile ── */
+@media (max-width: 768px) {
+  .nav-desktop-only { display: none !important; }
+}
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+}
 </style>
 </head>
 <body>
 
 <!-- NAV -->
-<nav class="navbar">
+<nav class="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;width:100%;">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
@@ -143,12 +157,13 @@
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock</a>
+    <a href="mock.html">Mock Test</a>
     <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
   </div>
   <div style="display:flex;align-items:center;gap:8px;">
+    <a href="login.html" style="font-size:.85rem;font-weight:600;color:#1A1208;border:1.5px solid #1A1208;border-radius:100px;padding:.35rem .9rem;text-decoration:none;white-space:nowrap;" class="nav-desktop-only">Login / Register</a>
     <button class="nav-hamburger" onclick="document.getElementById('mmenu').classList.toggle('open')" aria-label="Menu">
       <span></span><span></span><span></span>
     </button>

@@ -10,7 +10,7 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
     html { overflow-x: clip !important; overflow-y: auto !important; }
-    body { font-family: 'DM Sans', sans-serif; background: #0A0600; color: #F5EDE0; line-height: 1.6; overflow-x: clip; padding-top: 68px; }
+    body { font-family: 'DM Sans', sans-serif; background: #0A0600; color: #F5EDE0; line-height: 1.6; overflow-x: clip; }
 
     /* HERO */
     .mind-hero {
@@ -167,7 +167,21 @@
     .mind-cta p { color: #C8B89A; margin-bottom: 32px; font-size: 1rem; }
     .cta-row { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
 
-  </style>
+  
+/* ── NAVBAR FIXED OVERRIDE (overrides nav.css) ── */
+/* ── HIDE desktop nav buttons on mobile ── */
+@media (max-width: 768px) {
+  .nav-desktop-only { display: none !important; }
+}
+
+.navbar {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  z-index: 9999 !important;
+}
+</style>
 </head>
 <body>
 
@@ -190,7 +204,7 @@ nav.navbar .nav-login:hover { background: rgba(255,255,255,0.06) !important; }
 nav.navbar .nav-hamburger { border-color: rgba(255,255,255,0.2) !important; }
 nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
 </style>
-<nav class="navbar">
+<nav class="navbar" style="position:fixed;top:0;left:0;right:0;z-index:999;width:100%;">
   <a href="index.html" class="nav-brand">
     <img src="neetminds-logo.png" alt="NEETMINDS™"/>
     <span class="brand-word"><span class="brand-neet">NEET</span><span class="brand-minds">MINDS</span><span class="brand-tm">™</span></span>
@@ -198,7 +212,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   <div class="nav-links">
     <a href="index.html">Home</a>
     <a href="practice.html">Practice</a>
-    <a href="mock.html">Mock</a>
+    <a href="mock.html">Mock Test</a>
     <a href="methodology.html">Our Method</a>
     <a href="analytics.html">Analytics</a>
     <a href="practice.html" class="nav-cta">Start Free →</a>
@@ -217,7 +231,7 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
   </div>
   <a href="index.html">Home</a>
   <a href="practice.html">Practice</a>
-  <a href="mock.html">Mock</a>
+  <a href="mock.html">Mock Test</a>
   <a href="methodology.html">Our Method</a>
   <a href="analytics.html">Analytics</a>
   <a href="login.html" class="nav-cta">Login / Register</a>
