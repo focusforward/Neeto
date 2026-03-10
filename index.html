@@ -881,12 +881,6 @@ function toggleTheme() {
   updateThemeUI();
 }
 document.addEventListener('DOMContentLoaded', updateThemeUI);
-document.addEventListener('click', function(e) {
-  var m = document.getElementById('mmenu');
-  var b = document.querySelector('.nav-hamburger');
-  if (m && m.classList.contains('open') && !m.contains(e.target) && b && !b.contains(e.target))
-    m.classList.remove('open');
-});
 </script>
 
 
@@ -1040,6 +1034,22 @@ function runDemoPredict() {
   if (ph) ph.style.display = 'none';
   if (res) res.style.display = 'block';
 }
+</script>
+<script>
+/* ── CLOSE MOBILE MENU on outside tap, scroll, or scroll-touch ── */
+(function(){
+  function closeMenu(e) {
+    var m = document.getElementById('mmenu');
+    var b = document.querySelector('.nav-hamburger');
+    if (!m || !m.classList.contains('open')) return;
+    // If touch/click is inside the menu or on hamburger, don't close
+    if (e && e.target && (m.contains(e.target) || (b && b.contains(e.target)))) return;
+    m.classList.remove('open');
+  }
+  document.addEventListener('click',      closeMenu, {passive:true});
+  document.addEventListener('touchstart', closeMenu, {passive:true});
+  window.addEventListener('scroll',       closeMenu, {passive:true});
+})();
 </script>
 </body>
 </html>

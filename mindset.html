@@ -437,5 +437,21 @@ nav.navbar .nav-hamburger span { background: #FF6B1A !important; }
     a.addEventListener('ended', function(){ w.classList.add('paused'); });
   }
 </script>
+<script>
+/* ── CLOSE MOBILE MENU on outside tap, scroll, or scroll-touch ── */
+(function(){
+  function closeMenu(e) {
+    var m = document.getElementById('mmenu');
+    var b = document.querySelector('.nav-hamburger');
+    if (!m || !m.classList.contains('open')) return;
+    // If touch/click is inside the menu or on hamburger, don't close
+    if (e && e.target && (m.contains(e.target) || (b && b.contains(e.target)))) return;
+    m.classList.remove('open');
+  }
+  document.addEventListener('click',      closeMenu, {passive:true});
+  document.addEventListener('touchstart', closeMenu, {passive:true});
+  window.addEventListener('scroll',       closeMenu, {passive:true});
+})();
+</script>
 </body>
 </html>
